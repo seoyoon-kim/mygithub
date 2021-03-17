@@ -16,7 +16,7 @@
 	<button onclick="location.href='/WebJSP/jsp02_cookie/cookieView.jsp'">쿠키 확인하러 가기</button>
 </body>
 </html>
-<%
+<%   
 	//jsp에서 사용자 컴퓨터에 쿠키값 저장하기
 	//						변수,  		데이터
 	Cookie coo = new Cookie("userid","ghdrlfehd");
