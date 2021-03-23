@@ -1,7 +1,6 @@
-
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager"%>
 <%!
@@ -12,8 +11,7 @@
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			con = DriverManager.getConnection(url, "c##scott", "tiger");
 			}catch(Exception e){
-				System.out.println("데이터베이스 로딩, 연결에러...>"+e.getMessage());
-
+				System.out.println("데이터베이스 로딩, 연결에러...>"+e.getMessage()); 
 			}
 			return con;
 	}
@@ -54,8 +52,8 @@
 	}
 */
 	if(rs.next()){	// 로그인 성공
-		session.setAttribute("logId", rs.getString(2));
 		session.setAttribute("logName", rs.getString(1));
+		session.setAttribute("logId", rs.getString(2));
 		session.setAttribute("logStatus","Y");
 		%>
 			<script>
