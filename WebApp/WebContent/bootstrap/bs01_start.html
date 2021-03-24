@@ -1,0 +1,53 @@
+<!-- 3/12 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!--
+	https://getbootstrap.com/docs/4.6/getting-started/download/
+	버전끼리 호환이 안된다.	
+	4버전으로 다운로드	
+	quick-start	
+	Compiled CSS and JS 다운로드
+
+	1. viewport 설정
+	2. bootstrap 스타일시트 (css 폴더 내 bootstrap.css 파일 lib 폴더에 복사)
+	3. jquery 스크립트
+	4. bootstrap 스크립트 (js 폴더 내 bootstrap.js파일 lib 폴더에 복사)
+	
+	이후 템플릿에 기본 설정하기
+	
+	https://www.w3schools.com/bootstrap4/default.asp
+	부트스트랩에 대한 사용법이 잘 나와있다.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="lib/bootstrap.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="lib/bootstrap.js"></script>
+<style>
+	/*bootstrap에 있는 container클래스를 다시 설정*/
+	img{
+		width:50%;
+	}
+	.container{
+		background-color:pink; /*여기서 padding 설정을 안했으나, bootstrap에 이미 설정이 되어있다.*/
+	
+	}
+	.container-fluid{
+	 background-color:lightblue;/*여기서 padding 설정을 안했으나, bootstrap에 이미 설정이 되어있다.*/
+	}
+</style>
+</head>
+<body>
+<!-- .container 클래스 : 반응형 폭 설정 , fixed-wide
+	 .container-fluid : 폭을 100%로 설정, full-wide
+	 -->
+	<div class="container">
+	<img src="../img/cat.jpg" width="100%"/>
+	</div>
+	<div class="container-fluid">
+	<img src="../img/cat.jpg" width="100%"/>
+	</div>
+</body>
+</html>

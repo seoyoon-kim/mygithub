@@ -1,0 +1,50 @@
+<!-- 3/15 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Collapse & accordion</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="lib/bootstrap.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="lib/bootstrap.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Collapse예</h1>
+		<!-- 버튼을 선택하면 컨텐츠가 보였다가 안보였다가 할 수 있는 기능만들기 -->
+		<button class="btn btn-info" data-target="#view1" data-toggle="collapse">클릭하세요</button>
+		<div id="view1" class="collapse show">
+			<img src="../img/pasta.jpg"/>
+		</div>
+		<hr/>
+		<button class="btn btn-secondary" data-target="#view2" data-toggle="collapse">내용보기/내용닫기</button>
+		<!-- 질문과 답변 형식에서 사용 (답변을 클릭해야 보이게한다) -->
+		<div id="view2" class="collapse show">
+			국제학술지 네이처는 4일 바닷속을 헤엄치는 로봇 물고기와 그 뒤를 따르는 심해 꼼치의 모습을 표지에 실었다. 이 꼼치는 수심 1만900m로 지구상에서 가장 깊은 마리아나 해구에 사는 마리아나 꼼치다. 심해는 수압이 극도로 높아 탐험하기가 매우 어려운 조건이다. 심해 잠수정을 단단한 금속 재질로 만드는 이유다. 하지만 마리아나 꼼치나 해파리처럼 깊은 곳에 사는 심해 생물은 단단한 몸을 가지지 않고서도 압력을 견딜 수 있다.
+		</div>
+		<h1>accordion예</h1><!-- collapse를 하나의 그룹으로 묶는다, border가 생긴다 -->
+		<div id="accordion">
+			<div class="card">
+				<div class="card-header card-link" data-target="#v1" data-toggle="collapse" data-parent="#accordion">아코디온 적용 예제 1</div>
+				<div id="v1" class="collapse">
+					국제학술지 네이처는 4일 바닷속을 헤엄치는 로봇 물고기와 그 뒤를 따르는 심해 꼼치의 모습을 표지에 실었다. 이 꼼치는 수심 1만900m로 지구상에서 가장 깊은 마리아나 해구에 사는 마리아나 꼼치다. 심해는 수압이 극도로 높아 탐험하기가 매우 어려운 조건이다. 심해 잠수정을 단단한 금속 재질로 만드는 이유다. 하지만 마리아나 꼼치나 해파리처럼 깊은 곳에 사는 심해 생물은 단단한 몸을 가지지 않고서도 압력을 견딜 수 있다.
+				</div>
+			</div>
+		</div>
+			<div class="card">
+				<div class="card-header card-link" data-target="#v2" data-toggle="collapse" data-parent="#accordion">아코디온 적용 예제 2</div>
+				<div id="v2" class="collapse show">
+					<img src="../img/car.PNG"/> 
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header card-link" data-target="#v3" data-toggle="collapse" data-parent="#accordion">아코디온 적용 예제 3</div>
+				<div id="v3" class="collapse">
+					국제학술지 네이처는 4일 바닷속을 헤엄치는 로봇 물고기와 그 뒤를 따르는 심해 꼼치의 모습을 표지에 실었다. 이 꼼치는 수심 1만900m로 지구상에서 가장 깊은 마리아나 해구에 사는 마리아나 꼼치다. 심해는 수압이 극도로 높아 탐험하기가 매우 어려운 조건이다. 심해 잠수정을 단단한 금속 재질로 만드는 이유다. 하지만 마리아나 꼼치나 해파리처럼 깊은 곳에 사는 심해 생물은 단단한 몸을 가지지 않고서도 압력을 견딜 수 있다.
+				</div>
+			</div>
+		</div>
+</body>
+</html>

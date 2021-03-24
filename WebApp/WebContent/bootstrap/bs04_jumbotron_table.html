@@ -1,0 +1,122 @@
+<!-- 3/12 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="lib/bootstrap.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="lib/bootstrap.js"></script>
+<style>
+	.jumbotron{
+		padding:20px 10px;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<!--  .jumbotron : padding,  둥근 사각형, 회색배경이 설정된 크래스 -->
+		<div class="jumbotron">
+			넥슨 발(發) 게임 업계 연봉 인상 경쟁에 이어 인재 영입 경쟁에도 불이 붙었다. 넥슨은 신규개발본부에서 대규모 특별 수시 채용을 실시한다고 12일 밝혔다. 오는 15일부터 신작 프로젝트별로 서류 접수를 시작하며, 각 직군 세 자릿수 규모를 뽑는 대규모 채용이다.
+이번 채용에 참여하는 신규 프로젝트는 총 9종으로 '신규 MMORPG' 프로젝트, '독특한 캐릭터 수집 RPG' 프로젝트, '고품질 액션 게임' 프로젝트 등 넥슨의 핵심 개발 역량을 집중한 대형 프로젝트가 다수 포함됐다.
+특히 기존 게임 개발의 경계를 허물고 차세대 인공지능(AI) 기술과 반응형 시스템을 활용한 신개념 놀이 플랫폼 개발에서도 인재를 모집한다. 
+넥슨 관계자는 "지난 2월 우수 인재 확보를 위해 임금체계를 대폭 상향 개편한 바 있으며 오는 상반기 중으로 신입·경력 공채도 진행할 예정"이라고 말했다.
+넥슨에 이어 더블유게임즈도 이날 게임개발 전분야에 걸친 신입·경력 대규모 채용을 실시한다고 밝혔다.
+게임업계는 최근 인재 유출 방지를 위해 연봉 인상을 진행한 바 있다.
+앞서 넥슨은 개발직 신입사원 연봉을 5000만원으로 올리면서 균형을 맞추기 위해 기존 직원들의 연봉도 800만원씩 인상하기로 했다.
+이어 넷마블, 컴투스, 크래프톤, 직방 등은 직원들의 연봉을 800만~2000만원 인상하는 조치를 취했다.
+최근에는 1위 이동통신 사업자 SK텔레콤도 임금 협상 타결 격려금 명목으로 800만원을 일괄 지급했다.
+노정동 한경닷컴 기자 dong2@hankyung.com
+		</div>
+		<!-- 
+			.table : 표에 적용된 line을 컨텐츠 위에 표시한다.
+			.table table-striped : 줄 단위 배경색으로 기본 흰/회색이 교차 설정된다.
+			.table table-bordered : 표에 선을 컨텐츠 전부에 표시한다.
+			.table table-hover : 마우스 오버, 아웃 시 배경색 변경 
+			.table table-dark : 표의 배경을 블랙으로
+		 -->
+		<table class="table table-dark table-hover">
+			<tr>
+				<td>번호</td>
+				<td>이름</td>
+				<td>연락처</td>
+			</tr>
+			<tr>
+				<td>100</td>
+				<td>홍길동</td>
+				<td>010-0000-0000</td>
+			</tr>
+			<tr>
+				<td>200</td>
+				<td>세종대왕</td>
+				<td>010-111-1111</td>
+			</tr>
+			<tr>
+				<td>300</td>
+				<td>장영실</td>
+				<td>010-2222-2222</td>
+			</tr>
+			<tr>
+				<td>400</td>
+				<td>서희</td>
+				<td>010-3333-3333</td>
+			</tr>
+			<tr>
+				<td>500</td>
+				<td>유관순</td>
+				<td>010-4444-4444</td>
+			</tr>
+			<tr>
+				<td colspan="3" > 문의사항은 02-1234-5678로 연락 바랍니다.</td>
+			</tr>
+		</table>
+		
+		<!-- 테이블의 배경색 설정하기 
+			.table-primary  : blue
+			.table-success : green
+			.table-danger : red
+			.table-info : 청록색
+			.table-warning: yellow
+			.table-active : gray
+			.table-secondary : gray
+		-->
+		<table class="table">
+			<tr class="table-primary">
+				<td>번호</td>
+				<td>이름</td>
+				<td>연락처</td>
+			</tr>
+			<tr class="table-success">
+				<td>100</td>
+				<td>홍길동</td>
+				<td>010-0000-0000</td>
+			</tr>
+			<tr class="table-danger">
+				<td>200</td>
+				<td>세종대왕</td>
+				<td>010-111-1111</td>
+			</tr>
+			<tr class="table-info">
+				<td>300</td>
+				<td>장영실</td>
+				<td>010-2222-2222</td>
+			</tr>
+			<tr class = "table-warning">
+				<td>400</td>
+				<td>서희</td>
+				<td>010-3333-3333</td>
+			</tr>
+			<tr class = "table-active">
+				<td>500</td>
+				<td>유관순</td>
+				<td>010-4444-4444</td>
+			</tr>
+			<tr class = "table-secondary">
+				<td colspan="3" > 문의사항은 02-1234-5678로 연락 바랍니다.</td>
+			</tr>
+		</table>
+		
+	</div>
+</body>
+</html>

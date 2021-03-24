@@ -1,0 +1,60 @@
+<!--3/15-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<Title>tooltip 풍선도움말</Title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="lib/bootstrap.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="lib/bootstrap.js"></script>
+<script>
+	$(function(){
+		//tooltip 기능이 적용되기 위해서는 tooptip() 함수를 호출해야 한다
+		$('[data-toggle=tooltip]').tooltip();
+		
+
+		//popover 기능이 적용되기 위해서는 popover() 함수를 호출해야 한다
+		$('[data-toggle=popover]').popover();
+		
+	});
+</script>
+</head>
+<body>
+	<div class="container">
+		<!-- 
+			popper.min.js링크가 필요
+			.tooltip : 풍선 도움말
+			
+			title : 마우스 오버 시 표시할 풍선도움말
+			data-placement : tooltip이 표시되는 위치(top, right, botton, left)
+			//tooltip 기능이 적용되기 위해서는 tooptip() 함수를 호출해야 한다
+		 -->
+		 <div>
+		 	<img src="../img/berry.PNG"/>
+		 </div>
+		 <h1 title="tooltip 풍선도움말" data-toggle="tooltip" data-placement="top">풍선도움말 : tooltip 실행하기</h1>
+		<div title="학술상" data-toggle="tooltip" data-placement="bottom">
+			한국의 여성 경제학자가 1980년대 이후 미국, 영국 등의 급격한 소득 불평등 악화의 원인을 규명해 저명한 학술상을 받았다. 그녀는 애플, 구글 등 특정 대기업의 시장 지배력이 커지는 세계화·ICT의 발전은 소득 불평등을 강화시키며 새로운 기업들의 시장 진입을 이끄는 혁신과 규제 완화가 이를 해소하는 지름길이라는 점을 데이터에 입각해 논리적으로 설명한 점을 인정받았다.	
+		</div>
+		
+		<!-- 
+			popover : 풍선 도움말(제목 : content) 
+			popover 기능이 적용되기 위해서는 popover() 함수를 호출해야 한다 
+			
+			title : 팝오버의 제목
+			data-content : 팝오버의 내용
+			data-placement: 팝오버 위치
+			data-toggle : popover
+			data-trigger="hover" : 마우스 오버 시 popover 보이기<-기본은 클릭해야 popover가 뜬다
+		 -->
+		<div class="list-group">
+			<a href="#" class="list-group-item" title="학술상" data-content="로버트 루카스 주니어 상" data-placement="top" data-toggle="popover" data-trigger="hover">14일 한국과학기술원(KAIST)은 김지희 기술경영학부 교수가 올해 ‘로버트 루카스 주니어 상(Robert E. Lucas Jr. Prize)’의 수상자로 선정됐다고 밝혔다. 김 교수는 2018년 10월 미국 스탠퍼드 대학의 찰스 존스 교수와 함께 미국의 저명한 학술지 ‘정치경제학저널(Journal of Political Economy·JPE)’에 게재했던 논문으로 이번 상을 수상했다.</a>
+			<a href="#" class="list-group-item" title="학술상" data-content="소득 불평등의 변화를 설명하는 이론 모형" data-placement="right" data-toggle="popover" data-trigger="hover">김 교수의 논문은 ‘A Schumpeterian Model of Top Income Inequality(최고 소득 불평등의 슘페터리안 모델)’은 프랑스 경제학자 피케티가 데이터로 보여준 소득 불평등의 변화를 설명하는 이론 모형을 제시한다. 특히 소득 불평등이 왜 1980년대 이후에 미국이나 영국 등에서 급격하게 증가했는지 실증적으로 분석했다.</a>
+			<a href="#" class="list-group-item" title="학술상" data-content="시장 진입에 성공한 기업가들의 성장을 위한 노력이 독점을 강화시켜 불평등을 증가" data-placement="bottom" data-toggle="popover">김 교수는 시장 진입에 성공한 기업가들의 성장을 위한 노력이 독점을 강화시켜 불평등을 증가시킨다고 봤다.</a> 
+			<a href="#" class="list-group-item" title="학술상" data-content="창조적 파괴" data-placement="left" data-toggle="popover">반면 창조적 파괴를 통한 새로운 기업가들의 진입의 경우 불평등을 감소시킨다. 김 교수의 이론 모형에서는 이 둘 사이의 상호작용이 파레토 분포로 나타나는 소득 분포를 결정함을 보인다.</a>
+		</div>
+	</div>
+</body>
+</html>
