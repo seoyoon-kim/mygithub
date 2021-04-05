@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
- <style>
-	footer{background-color:lightgray; text-align:center; height:50px; }
-</style> 
-	<footer>
-		footer
-	</footer> 
-</body>
-</html>
+<!-- 구분 기호로 사용할, 실행 불가능한 글자를 앞뒤로 넣기 -->
+<hr class='down'/>
+${cnt}
+<hr class='down'/>

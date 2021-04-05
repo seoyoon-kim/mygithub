@@ -41,13 +41,13 @@
 	<div>
 		<ul id="page">
 			<c:if test="${pageVO.pageNum>1}"><!-- 이전 페이지가 있을 때 '이전'을 표시한다 -->
-				<li><a href="<%=request.getContextPath()%>/board/list.do?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord !=null && pageVO.searchWord !=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">이전</a></li>
+				<li style="width:50px;"><a href="<%=request.getContextPath()%>/board/list.do?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord !=null && pageVO.searchWord !=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">이전</a></li>
 			</c:if>
 			<!-- 페이지 번호 1~5 or 6~10 or .... -->
 			<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}">
 				<c:if test="${p<=pageVO.totalPage }">
 					<c:if test="${p==pageVO.pageNum }"><!-- 현재 페이지일때 -->
-						<li style="font-weight:bold; color:red; background-color:yellow;"><a href="<%=request.getContextPath()%>/board/list.do?pageNum=${p}<c:if test="${pageVO.searchWord !=null && pageVO.searchWord !=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a></li> 
+						<li style="font-weight:bold; color:red; background-color:pink;"><a href="<%=request.getContextPath()%>/board/list.do?pageNum=${p}<c:if test="${pageVO.searchWord !=null && pageVO.searchWord !=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a></li> 
 					</c:if>
 					<c:if test="${p!=pageVO.pageNum }"><!-- 현재 페이지 아닐때 -->
 						<li><a href="<%=request.getContextPath()%>/board/list.do?pageNum=${p}<c:if test="${pageVO.searchWord !=null && pageVO.searchWord !=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a></li>
@@ -55,7 +55,7 @@
 				</c:if>
 			</c:forEach>
 			<c:if test="${pageVO.pageNum < pageVO.totalPage }">
-				<li><a href="<%=request.getContextPath()%>/board/list.do?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord !=null && pageVO.searchWord !=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">다음</a></li>
+				<li style="width:50px;"><a href="<%=request.getContextPath()%>/board/list.do?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord !=null && pageVO.searchWord !=''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">다음</a></li>
 			</c:if>
 		</ul>
 	</div>
@@ -67,7 +67,7 @@
 				<option value="content">내용</option>
 			</select>
 			<input type="text" name="searchWord" id="searchWord"/>
-			<input type="submit" value="Search"/>
+			<input type="submit" value="Search"/> 
 		</form>
 	</div>
 </div> 

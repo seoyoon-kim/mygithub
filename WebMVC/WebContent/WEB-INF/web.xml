@@ -31,7 +31,7 @@
   	<servlet-class>com.bitcamp.home.ControllerAction</servlet-class>
   	<init-param>
   		<param-name>proConfig</param-name>
-  		<param-value>C:\Users\Public\Downloads\workspace\WebMVC\WebContent\WEB-INF\prop\urlMapping.properties</param-value>
+  		<param-value>C:\Users\Mini-PC\git\mygithub\WebMVC\WebContent\WEB-INF\prop\urlMapping.properties</param-value>
   	</init-param>
   </servlet>
   <servlet-mapping>

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/WebMVC/js_css/login.css"/>
 <script>
 $(function(){
-	$("form").submint(function{
+	$("form").submit(function{
 		if("#userid").val()==""{
 			alert("아이디를 입력하세요");
 			return false;
