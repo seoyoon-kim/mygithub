@@ -1,2 +1,0 @@
-# mygithub
-myhithub
