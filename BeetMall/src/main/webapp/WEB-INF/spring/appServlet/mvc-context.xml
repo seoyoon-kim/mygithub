@@ -14,13 +14,13 @@
 		
 		mvc:interceptor 안에 밑에꺼 넣어서 해야함
 		<mvc:mapping path="/boardDel"/>
-		<bean class="com.bitcamp.home.interceptor.LoginInterceptor"></bean>
+		<bean class="com.beetmall.thing.interceptor.LoginInterceptor"></bean>
 	-->
 	<!-- 
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/claseWriteFormOk"/>
-			<bean class="com.bitcamp.home.interceptor.LoginInterceptor"></bean>
+			<bean class="com.beetmall.thing.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	 -->		
