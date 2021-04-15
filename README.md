@@ -1,2 +1,2 @@
-# BeatMall
-BITCAMP 씽씽하조 / BeatMall Project
+# BeetMall
+BITCAMP 씽씽하조 / BeetMall Project
