@@ -31,17 +31,17 @@
 ## Final Project : BeetMall
 > 임무분장
 ```
-+ 구매자 페이지
- + Kim Yun-Su 
- + Lee Kang-San 
- + Cha Yoon-Joo
- ```
- ```
-+ 판매자 페이지
- + Jang Su-Yeon 
- + Choi Kyung-Sik
-  ```
-  ```
-+ 관리자 페이지
- + Kim Seo-Yoon 
+구매자 페이지
+ - Kim Yun-Su 
+ - Lee Kang-San 
+ - Cha Yoon-Joo
+```
+```
+판매자 페이지
+ - Jang Su-Yeon 
+ - Choi Kyung-Sik
+```
+```
+관리자 페이지
+ - Kim Seo-Yoon 
 ```
