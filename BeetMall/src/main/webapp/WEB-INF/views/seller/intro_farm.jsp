@@ -1,27 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta name="viewport" content="width=dvice-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<link href="<%=request.getContextPath()%>/resources/css/xstyle_section.css" rel="stylesheet"/>
-</head>
-<body>
-<header>
-	<div id="memberInfo_container">
-		<span><a href="">고객센터</a></span>
-		<span><a href="">로그아웃</a></span>
-		<span><a href="">아이디 님</a></span>
-		<span></span>
-		<span><a href="">등급</a></span>
-	</div>
-	<div id="logo_container"><img id="logo_img" src="<%=request.getContextPath()%>/resources/img/xlogo.jpg"/></div>
-</header>
+
 <section>
 	<!-- 사이드바 -->
 	<nav>
@@ -45,7 +24,7 @@
 			</span>
 		</div>
 		
-		<form method="post" action="farmInfo_Edit" id="info_frm">
+		<form method="post" action="farmEdit" id="info_frm">
 			<input type="hidden" name="storenum" value="${storenum}"/>
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="info_container">
