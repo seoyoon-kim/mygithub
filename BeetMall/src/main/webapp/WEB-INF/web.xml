@@ -51,12 +51,12 @@
 	</filter-mapping>
 	<!-- 포스트 접속에 대한 한글 인코딩(UTF-8) end -->
 	
-	<!-- jsp config include 사용할꺼면 사용-->
+	<!-- jsp config include 사용할꺼면 사용
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
 			<include-prelude>\inc\top.jspf</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
-
+	-->
 </web-app>
