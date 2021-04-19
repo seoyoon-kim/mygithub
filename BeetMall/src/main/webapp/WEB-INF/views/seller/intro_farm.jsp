@@ -29,7 +29,7 @@
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="info_container">
 				<div id="profile_box">
-					<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.jpg"/>
+					<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png"/>
 					<div id="farmname" name="farmname">사나없이 사나마나</div>
 					<div>
 						방문자수 : ${farmvisitor }명<br/>

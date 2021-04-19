@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_review.css">
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <section>
 	<!-- 사이드바 -->
 	<nav>
@@ -21,7 +27,7 @@
 		<!-- 검색창 -->
 		<div id="search_container">
 			<span id="search_box">
-				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/xsearch_icon.png"/></a>
+				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
 			</span>
 		</div>
 		
@@ -129,4 +135,84 @@
 			<!-- 리뷰 출력 끝 -->
 		</div>
 	</article><!-- 본문 끝 -->
+	
+	<div id="popup">
+		<div class="wrapContainer_Edit1">
+			<form method="" action="">
+				<div class="wrapTitle">리뷰</div>
+				<ul id="reivewManagement">
+					<li>
+						<b>구매상품</b>
+						<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png" id="repMenu_img"/>
+						<div>싸고 맛있는 빵빠레빵빠빵</div>
+					</li>
+					<li>
+						<b>등록자</b>
+						tkaudeotk00
+					</li>
+					<li>
+						<b>등록일</b>
+						2021.05.02
+					</li>
+					<li>
+						<b>평점</b>
+						<div>★★★★★</div>
+						<img src="<%=request.getContextPath() %>/resources/img/xgood.png" id="good_img"/> : 2
+					</li>
+				</ul>
+				<div>
+					<br/><b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br/>
+					<div id="reviewContent">
+						<p> 이제 드디어 대저 토마토 먹을 수 있네요 대저 토마토 처음 먹어봤는데요 너무 맛있어요</p>
+						<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img"/>
+					</div>
+				</div>
+				
+				<!-- 섬머노트 -->
+			  	<div id="summernote"><p></p></div>
+				  <script>
+				    $(document).ready(function() {
+				        $('#summernote').summernote({
+				        	placeholder: '300자 이내로 입력해주세요',
+				        	tabsize: 2,
+				            height: 150
+				        });
+				    });
+				  </script>
+				<div id="popupBtnContainer">
+					<input type="submit" name="popupOk" value="확인"/>
+					<input type="submit" name="popupClose" value="닫기"/>
+					<input type="submit" name="popupDeclaration" value="신고">
+				</div>
+			</form>  	  
+		</div>
+	</div><!-- 리뷰 보기 팝업 끝 -->
+	
+	<!-- 신고하기 -->
+	<div id="declaration">
+		<div class="wrapContainer_Edit1">
+			<div class="wrapTitle">신고하기</div>
+			<form method="" action="" id="declarationFrm">
+				<div>2021/03/26</div>
+				<div>
+					신고 대상 리뷰 : 21.03.02<br/>
+					신고 대상 아이디 : tkaudeotk02<br/>
+					구매품명: 대저짭짤이 토마토(10Kg)
+				</div>
+				<div>
+					<select>
+						<option>신고 사유</option>
+						<option>비방/욕설</option>
+						<option>허위</option>
+						<option>성희롱</option>
+						<option>기타</option>
+					</select>
+				</div>
+				<div>
+					<input type="text" width="200px" placeholder="300자 이내로 작성">
+					<input type="submit" value="보내기"/>
+				</div>
+			</form>
+		</div>
+	</div>
 </section>
