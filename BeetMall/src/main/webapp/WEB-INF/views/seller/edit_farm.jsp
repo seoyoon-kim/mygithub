@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
 <section>
 	<!-- 사이드바 -->
 	<nav>
@@ -29,7 +29,7 @@
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="info_container">
 				<div id="profile_box">
-					<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.jpg"/><br/>
+					<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png"/><br/>
 					<input type="text" id="farmname" name="farmname" style="width:100px;height:25px"/>
 					<div>
 						방문자수 : ${farmvisitor }명<br/>
@@ -73,8 +73,3 @@
 		</form>
 	</article>
 </section>
-<footer>
-footerfooterfooterfooterfooterfooterfooterfooterfooterfooterfooterfooterfooterfooter
-</footer>
-</body>
-</html>
