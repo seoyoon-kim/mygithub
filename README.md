@@ -34,7 +34,7 @@
 구매자 페이지
  - Kim Yun-Su 
  - Lee Kang-San 
- - Cha Yoon-Joo
+ - Cha Yoon-Ju
 ```
 ```
 판매자 페이지
