@@ -50,59 +50,57 @@
 			<!-- 리뷰 검색 -->
 			<div class="wrapContainer">
 				<div class="wrapTitle">리뷰 검색</div>
-				<div class="categoryContainer">
-					<div id="categoryList">
-						<strong>&nbsp;&nbsp;카테고리</strong>
-						
-						<div id="categoryListMiddle">
-							<ul id="category">
-								<li>견과류<span>&gt;</span></li>
-								<li>건과류<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								<li>채소<span>&gt;</span></li>
-								
-							</ul>
-							<ul id="mcategory">
-								<li>땅콩</li>
-							</ul>
-						</div>
-						
-						<form method="" action="" id="">
-							<ul id="categoryManagement">
-								<li>채소&gt;가지<span>⊠</span></li>
-								<li>채소&gt;가지<span>⊠</span></li>
-								<li>채소&gt;가지<span>⊠</span></li>
-								<li>채소&gt;가지<span>⊠</span></li>
-								<li>채소&gt;가지<span>⊠</span></li>
-								<li>채소&gt;가지<span>⊠</span></li>
-								<li>채소&gt;가지<span>⊠</span></li>
-							</ul>
+				<div id="categoryList">
+					<strong>&nbsp;&nbsp;카테고리</strong>
+					
+					<div id="categoryListMiddle">
+						<ul id="category">
+							<li>견과류<span>&gt;</span></li>
+							<li>건과류<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
+							<li>채소<span>&gt;</span></li>
 							
-							<div id="categorySearch_container">
-								<select class="categorySearch_container_child" id="categoryDate" name="categoryDate">
-									<option>년별</option>
-									<option selected="월별">월별</option>
-									<option>일별</option>
-								</select>
-								<input class="categorySearch_container_child" type="month" id="categoryCalendar_start" required/>
-								<input class="categorySearch_container_child" type="month" id="categoryCalendar_end" required/>
-								<select class="categorySearch_container_child" id="subject" name="subject">
-									<option>상품명</option>
-									<option>리뷰 내용</option>
-									<option>등록자</option>
-								</select>
-								<input class="categorySearch_container_child" type="text" id="searchKey" name="searchKey" placeholder="검색어를 입력해주세요"/>
-								<input class="categorySearch_container_child" type="submit" value="검색"/>
-							</div>
-						</form>
-					</div><!-- categoryList 끝 -->
-				</div><!-- categoryContainer 끝 -->
+						</ul>
+						<ul id="mcategory">
+							<li>땅콩</li>
+						</ul>
+					</div>
+					
+					<form method="" action="" id="">
+						<ul id="categoryManagement">
+							<li>채소&gt;가지<span>⊠</span></li>
+							<li>채소&gt;가지<span>⊠</span></li>
+							<li>채소&gt;가지<span>⊠</span></li>
+							<li>채소&gt;가지<span>⊠</span></li>
+							<li>채소&gt;가지<span>⊠</span></li>
+							<li>채소&gt;가지<span>⊠</span></li>
+							<li>채소&gt;가지<span>⊠</span></li>
+						</ul>
+						
+						<div id="categorySearch_container">
+							<select class="categorySearch_container_child" id="categoryDate" name="categoryDate">
+								<option>년별</option>
+								<option selected="월별">월별</option>
+								<option>일별</option>
+							</select>
+							<input class="categorySearch_container_child" type="month" id="categoryCalendar_start" required/>
+							<input class="categorySearch_container_child" type="month" id="categoryCalendar_end" required/>
+							<select class="categorySearch_container_child" id="subject" name="subject">
+								<option>상품명</option>
+								<option>리뷰 내용</option>
+								<option>등록자</option>
+							</select>
+							<input class="categorySearch_container_child" type="text" id="searchKey" name="searchKey" placeholder="검색어를 입력해주세요"/>
+							<input class="categorySearch_container_child" type="submit" value="검색"/>
+						</div>
+					</form>
+				</div><!-- categoryList 끝 -->
 			</div><!-- 리뷰 검색 끝 -->
 			
 			<!-- 리뷰 출력 -->

@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+/*================ 본문 시작 =================*/
+/* 공통분모 설정 */
+.wrap{
+	width: 90%;
+	margin: 0 auto;
+}
+
+.wrapContainer{
+	width: 100%;
+	border: 1px solid #ccc;
+	margin-bottom: 30px;
+}
+
+.wrapTitle{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	text-indent: 0.4em;
+	background-color: rgb(224,102,102);
+}
+
+/* 리뷰 검색 */
+#categoryList{
+	width: 90%;
+	margin: 20px auto;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+}
+
+#categoryList>strong{
+	text-indent: 0.4em;
+}
+
+#categoryListMiddle{
+	width: 100%;
+	height: 170px;
+	display: flex;
+	flex-basis: 1;
+	margin-bottom: 10px;
+}
+
+#categoryListMiddle ul{
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	overflow: auto;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	
+}
+
+#category{
+	border-right: 1px solid #aaa;
+}
+
+
+#categoryListMiddle li{
+	width: 100%;
+	text-indent: 0.4em;
+	display: flex;
+}
+
+#categoryListMiddle span{
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+#categoryManagement{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#categoryManagement li{
+	text-indent: 0.4em;
+	margin-right: 5px;
+}
+
+#categorySearch_container{
+	margin-top: 10px;
+}
