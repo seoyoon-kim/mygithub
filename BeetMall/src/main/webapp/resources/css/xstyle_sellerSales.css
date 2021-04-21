@@ -81,4 +81,42 @@
 
 #categorySearch_container{
 	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#categoryDate{
+	height: 26px;
+	margin-left: 5px;
+}
+/* 수익 매출분석 */
+#chartContainer{
+	width: 95%;
+	margin: 0 auto;
+}
+
+/* 카테고리별 매출분석*/
+#excelContainer{
+	width: 95%;
+	margin: 0 auto;
+}
+#excelList{
+	width: 100%;
+	display: flex;
+	flex-flow: wrap;
+}
+
+#excelList li{
+	flex-basis: 18%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+#excelList li:nth-child(n+1):nth-child(-n+6){
+	background-color: #bbb;
+}
+
+#excelList li:nth-child(6n+1){
+	flex-basis: 10%
 }
