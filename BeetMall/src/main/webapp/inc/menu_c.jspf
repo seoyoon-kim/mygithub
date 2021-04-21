@@ -245,18 +245,18 @@
 			<!-- 상단메뉴 목록 부분 -->
 			<div class="section">
 				<ul id="menuListUl">
-					<li><span><img src="<%=request.getContextPath()%>/img/dmenu1.png" id="menuImg" />카테고리</span></li>
+					<li><span><img src="/sshj/img/dmenu1.png" id="menuImg" />카테고리</span></li>
 					<li><a href="">신상품</a></li>
 					<li><a href="">베스트</a></li>
 					<li><a href="">못난이할인</a></li>
 					<li><a href="">비트네</a></li>
 				</ul>
 				<div id="menuImgs">
-					<a href="지도아이콘"><img src="<%=request.getContextPath()%>/img/dmapBtn.png" /></a>
-					<a href="카트아이콘"><img src="<%=request.getContextPath()%>/img/dcartBtn.png" /></a>
+					<a href="지도아이콘"><img src="/sshj/img/dmapBtn.png" /></a>
+					<a href="카트아이콘"><img src="/sshj/img/dcartBtn.png" /></a>
 					<div id="searchbar">
 						<input type="text" placeholder="원하시는 상품을 검색해보세요!" id="searchInputbox"/>
-						<img src="<%=request.getContextPath()%>/img/dzoomBtn.png">
+						<img src="/sshj/img/dzoomBtn.png">
 					</div>
 				</div>
 			</div>
