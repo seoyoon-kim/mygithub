@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page errorPage="error" %>
+<!-- 에러페이지 출력 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +34,10 @@
 		line-height:150px;
 		height:150px;
 	}
-	
+	#menu a:active, #menu a:hover, #menu a:visited, #menu a:link{
+		color:black;
+		text-decoration:none;
+	}
 </style>
 <script>
 	$(function(){
@@ -56,7 +59,7 @@
 	
 	<div class="loginButtons">	<!-- 로그인 후 -->
 		<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
-		김비트님 <span id="usermypage">▼</span>
+		<a href="마이페이지">김비트님</a> <span id="usermypage">▼</span>
 		<input type="button" value="로그아웃" class="menuButtons"/>
 		<input type="button" value="고객센터" class="menuButtons"/>
 	</div>
