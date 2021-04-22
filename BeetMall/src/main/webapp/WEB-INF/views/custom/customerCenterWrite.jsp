@@ -17,41 +17,53 @@
    		list-style-type:none;
    }
    #WriteMain{
-   		margin-top : 50px;
    		/* border: 1px solid black; */
    }
    #WriteMain>ul{
     	padding-left: 0px;  		
    }
    #title{
-   		width:80%;
+   		width:95%;
    }
    #filefile{
    		margin-top: 10px;
    		margin-bottom: 10px;
    		width:100%;
-   		border: 1px solid black;
    }
    #buttonsss{
    		text-align:right;
    }
+   #Maintitle{
+   		padding-top:20px;
+   		padding-bottom:20px;
+   }
+   .buybutton{
+		width:70px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		margin:1px;
+		padding:0px;
+		border: none;
+		background-color:#e06666;
+		color:white;
+		border-radius: 5px;
+	}
 </style>
 <div class="section">
 	<form method="post" action="/jdbc/upload1" enctype="multipart/form-data">
 		<div id="WriteMain">
-			<ul>
-				<li>제목 : <input type="text" id="title"/></li>
-				<li>내용
-					<textarea id="summernote" name="editordata"></textarea>
-				</li>
-			</ul>
+			<div>
+				<div id="Maintitle">제목 : <input type="text" id="title"/></div>
+				<textarea id="summernote" name="editordata"></textarea>
+			</div>
 		</div>
 		<div id="filefile">
 			<input type="file" name="filename1"/>
 		</div>
 		<div id="buttonsss">
-			<input type="submit" value="문의하기">
-			<input type="button" value="취소">
+			<input type="submit" value="문의하기" class="buybutton">
+			<input type="button" value="취소" class="buybutton">
 		</div>
 	</form>
 </div>

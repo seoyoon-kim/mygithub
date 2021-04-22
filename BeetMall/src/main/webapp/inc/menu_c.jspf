@@ -158,6 +158,9 @@
 		float:left;
 	}
 	/* 여기서부터내꺼 */
+	#kmiddelname{
+		border-bottom: 1px solid #e06666;
+	}
     #kcategoryMain{
         width:200px;
         margin-left:20px;
@@ -176,7 +179,10 @@
         font-size: larger;
         font-weight: bold;
     }
-    #leftMenu a { text-decoration: none; color: black; }
+    #leftMenu a:active, #leftMenu a:link, #leftMenu a:visited, #leftMenu a:hover{
+    	text-decoration: none;
+		color:black;
+	}
     #menuList{
        position:relative;
     }
@@ -185,30 +191,32 @@
        left:-250px;
        top:100px;
        display: none;
-       background-color:#e06666;
+    }
+    #kareaMenu{
+    	padding-left: 30px;
     }
     
     /* 공지사항 */
-    #NoticeleftMenu a { text-decoration: none; color: black; }
     #NoticeleftMenu{
-       position: absolute;
-       left:-250px;
-       top:100px;
-       display: none;
-       background-color:#e06666;
+    	position: absolute;
+    	left:-200px;
+    	top:35px;
+    	display: none;
+    	width:200px;
+    	height:480px;
+    	color:black;
+    	background-color:white;
+    	text-align:center;
+    	padding-left:20px;
+    	padding-right:20px;
     }
-    #kNoticeCategoryMain{
-        width:200px;
-        margin-left:20px;
+    #NoticeleftMenu>div{
+    	padding-top:15px;
+    	border-bottom:1px solid #e06666;
     }
-    #kNoticecategory{
-        padding-bottom: 70px;
-        font-size: xx-large;
-        color: orange;
-    }
-    #kNoticeMain{
-        padding-bottom: 40px;
-    }
+    #NoticeleftMenu a:active, #NoticeleftMenu a:link, #NoticeleftMenu a:visited, #NoticeleftMenu a:hover{
+		color:black;
+	}
 </style>
 <script>
 	$(function(){
@@ -269,13 +277,13 @@
 			<div class="section">
 				<ul id="menuListUl">
 					<li><span><img src="/sshj/img/dmenu1.png" id="menuImg" />카테고리</span></li>
-					<li><a href="">신상품</a></li>
-					<li><a href="">베스트</a></li>
-					<li><a href="">못난이할인</a></li>
-					<li><a href="">비트네</a></li>
+					<li><a href="kangsan">신상품</a></li>
+					<li><a href="kangsan">베스트</a></li>
+					<li><a href="kangsan2">못난이할인</a></li>
+					<li><a href="kangsan">비트네</a></li>
 				</ul>
 				<div id="menuImgs">
-					<a href="지도아이콘"><img src="/sshj/img/dmapBtn.png" /></a>
+					<a href="mapping"><img src="/sshj/img/dmapBtn.png" /></a>
 					<a href="카트아이콘"><img src="/sshj/img/dcartBtn.png" /></a>
 					<div id="searchbar">
 						<input type="text" placeholder="원하시는 상품을 검색해보세요!" id="searchInputbox"/>
@@ -288,7 +296,7 @@
 				<div><a href="">장바구니</a></div>
 				<div><a href="">구매내역</a></div>
 				<div><a href="mypoint">마이포인트</a></div>
-				<div><a href="">즐겨찾는농장</a></div>
+				<div><a href="myfavoriForm">즐겨찾는농장</a></div>
 				<div><a href="">마이레시피</a></div>
 				<div><a href="">1:1대화</a></div>
 				<div><a href="">문의내역</a></div>
@@ -301,38 +309,34 @@
          <!-- 여기부터 상품카테고리부분시작 -->
          <div id="leftMenu">
             <div id="kcategoryMain">
-               <div id="kNoticecategory">카테고리</div>
                <div id="kCateMain">
                   <div id="kmiddelname">상품 품목별</div>
-                  <hr/>
-                  <div><a href="#">전체</a></div>
-                  <div><a href="#">과일</a></div>
-                  <div><a href="#">채소</a></div>
-                  <div><a href="#">쌀/잡곡</a></div>
+                  <div><a href="kangsan">전체</a></div>
+                  <div><a href="kangsan">과일</a></div>
+                  <div><a href="kangsan">채소</a></div>
+                  <div><a href="kangsan">쌀/잡곡</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">지역별</div>
-                  <hr />
-                  <div id="karea">-지역별보기</div>
+                  <div id="karea"><a href="#">-지역별보기</a></div>
                   <div style="display: none;" id="kareaMenu">
-                     <div><a href="#">전체</a></div>
-                     <div><a href="#">수도권</a></div>
-                     <div><a href="#">강원도</a></div>
-                     <div><a href="#">충청도</a></div>
-                     <div><a href="#">경상도</a></div>
-                     <div><a href="#">전라도</a></div>
-                     <div><a href="#">제주도</a></div>
+                     <div><a href="kangsan3">전체</a></div>
+                     <div><a href="kangsan3">수도권</a></div>
+                     <div><a href="kangsan3">강원도</a></div>
+                     <div><a href="kangsan3">충청도</a></div>
+                     <div><a href="kangsan3">경상도</a></div>
+                     <div><a href="kangsan3">전라도</a></div>
+                     <div><a href="kangsan3">제주도</a></div>
                   </div>
                   <br/>
-                  <div><a href="#">-지도로찾는 동네농장</a></div>
+                  <div><a href="mapping">-지도로찾는 동네농장</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">가격대별</div>
-                  <hr />
-                  <div><a href="#">5,000원이하</a></div>
-                  <div><a href="#">10,000원 이하</a></div>
-                  <div><a href="#">50,000원 이하</a></div>
-                  <div><a href="#">50,000원 이상</a></div>
+                  <div><a href="kangsan4">5,000원이하</a></div>
+                  <div><a href="kangsan4">10,000원 이하</a></div>
+                  <div><a href="kangsan4">50,000원 이하</a></div>
+                  <div><a href="kangsan4">50,000원 이상</a></div>
                </div>
             </div>
          </div>
@@ -352,6 +356,11 @@
                </div>
             </div>
          </div>
+         <div id="NoticeleftMenu">
+				<div><a href="noticeMain">공지사항</a></div>
+				<div><a href="FAQBoard">자주 묻는 질문</a></div>
+				<div><a href="customerCenter">1:1 문의</a></div>
+			</div>
          <!-- 고객센터왼쪽부분끝 -->
 		</div>
 	</div>

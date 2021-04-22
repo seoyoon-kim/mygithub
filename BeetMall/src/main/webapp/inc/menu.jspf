@@ -41,6 +41,9 @@
 		$("input[value=회원가입]").click(function(){
 			location.href="register";
 		})
+		$("input[value=고객센터]").click(function(){
+			location.href="kcenter";
+		})
 		
 	});
 </script>

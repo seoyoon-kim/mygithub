@@ -8,6 +8,7 @@
 	.page_wrap {
 		text-align:center;
 		font-size:0;
+		padding-bottom: 30px;
 	}
 	.page_nation {
 		display:inline-block;
@@ -78,7 +79,7 @@
         height:230px;
     }
     #productDiv>ul>li>img{
-		width:198px;
+		width:197px;
 	}
     #kAareaMain>div, #kAreamMall>div{
         float:left;
@@ -623,151 +624,151 @@
 			<input type="text" id="searchid" placeholder="검색"/>
 		</form>
 	    <div id="productMain">
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k002.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k003.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k004.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k005.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k006.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k007.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k008.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k009.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k010.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k011.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k012.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k013.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k014.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k015.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	        <div id="productDiv">
-	            <ul>
-	                <li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
-	                <li>28,000원</li>
-	                <li>제목제목제목제목제목제목</li>
-	                <li>리뷰 50,000|4.8/5</li>
-	                <li>판매지역 이강산</li>
-	            </ul>
-	        </div>
-	    </div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="/sshj/img/pi.gif"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+		</div>
 	    <div class="page_wrap">
 	        <div class="page_nation">
 	            <a class="arrow pprev" href="#"></a>

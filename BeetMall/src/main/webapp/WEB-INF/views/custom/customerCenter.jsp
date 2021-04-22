@@ -22,16 +22,31 @@
 	    top: 290px;
 	    left: 1400px;
    }
-   
+   .buybutton{
+		width:70px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		margin:1px;
+		padding:0px;
+		border: none;
+		background-color:#e06666;
+		color:white;
+		border-radius: 5px;
+	}
 </style>
 <script>
-
+$(function(){
+	$("input[value=문의하기]").click(function(){
+		location.href="customerCenterWrite";
+	})
+});
 </script>
 <div class="section">
 	<div id="Main">
 		<h1>1:1 문의</h1>
 	</div>
-	<div id="Inquiry"><input type="button" value="문의하기"/></div>
+	<div id="Inquiry"><input type="button" value="문의하기" class="buybutton"/></div>
 	<div id="noticeMainn">
 		<ul id="boardList">
 			<li>번호</li>

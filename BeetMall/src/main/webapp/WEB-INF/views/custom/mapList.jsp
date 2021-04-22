@@ -4,6 +4,56 @@
 
 <style>
 	*{margin:0px; padding:0px; list-style-type :none;}
+	/* 페이징처리부분 */
+	.page_wrap {
+		text-align:center;
+		font-size:0;
+		padding-bottom: 30px;
+	}
+	.page_nation {
+		display:inline-block;
+	}
+	.page_nation .none {
+		display:none;
+	}
+	.page_nation a {
+		display:block;
+		margin:0 3px;
+		float:left;
+		border:1px solid #e6e6e6;
+		width:35px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		background-color:#fff;
+		font-size:13px;
+		color:#999999;
+		text-decoration:none;
+	}
+	.page_nation .arrow {
+		border:1px solid #ccc;
+	}
+	.page_nation .pprev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
+		margin-left:0;
+	}
+	.page_nation .prev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
+		margin-right:7px;
+	}
+	.page_nation .next {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
+		margin-left:7px;
+	}
+	.page_nation .nnext {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
+		margin-right:0;
+	}
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
 	#leftMenu{
 		display:block;
 	}
@@ -64,7 +114,7 @@
 		border: 1px solid black;
 	}
 	#productDiv>ul>li>img{
-		width:200px;
+		width:198px;
 	}
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=675d2e2b842e770a2d48d54759ba1d32&libraries=services,clusterer,drawing"></script>
@@ -80,7 +130,7 @@
 		<div id="productMain">
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -89,7 +139,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k002.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -98,7 +148,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k003.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -107,7 +157,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k004.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -116,7 +166,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k005.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -125,7 +175,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k006.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -134,7 +184,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k007.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -143,7 +193,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k008.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -152,7 +202,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k009.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -161,7 +211,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k010.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -170,7 +220,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k011.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -179,7 +229,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k012.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -188,7 +238,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k013.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -197,7 +247,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k014.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -206,7 +256,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k015.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -215,7 +265,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>

@@ -188,7 +188,7 @@
 		<div id="productMain">
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -197,7 +197,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k002.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -206,7 +206,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k003.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -215,7 +215,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k004.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -224,7 +224,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k005.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -233,7 +233,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k006.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -242,7 +242,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k007.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -251,7 +251,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k008.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -260,7 +260,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k009.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -269,7 +269,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k010.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -278,7 +278,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k011.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -287,7 +287,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k012.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -296,7 +296,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k013.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -305,7 +305,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k014.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -314,7 +314,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k015.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -323,7 +323,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
+					<li><img src="/sshj/img/pi.gif"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
