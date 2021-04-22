@@ -19,7 +19,6 @@
    }
 </style>
 <script>
-
 </script>
 <div class="section">
 	<div id="Main"><h1>자주 묻는 질문</h1></div>

@@ -22,7 +22,6 @@
 	    top: 290px;
 	    left: 1400px;
    }
-<<<<<<< HEAD
    .buybutton{
 		width:70px;
 		height:35px;
@@ -48,18 +47,6 @@ $(function(){
 		<h1>1:1 문의</h1>
 	</div>
 	<div id="Inquiry"><input type="button" value="문의하기" class="buybutton"/></div>
-=======
-   
-</style>
-<script>
-
-</script>
-<div class="section">
-	<div id="Main">
-		<h1>1:1 문의</h1>
-	</div>
-	<div id="Inquiry"><input type="button" value="문의하기"/></div>
->>>>>>> refs/remotes/origin/feature/main_#19
 	<div id="noticeMainn">
 		<ul id="boardList">
 			<li>번호</li>

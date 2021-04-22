@@ -4,7 +4,6 @@
 
 <style>
 	*{margin:0px; padding:0px; list-style-type :none;}
-<<<<<<< HEAD
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
@@ -267,220 +266,6 @@
 			<div id="productDiv">
 				<ul>
 					<li><img src="/sshj/img/pi.gif"></li>
-=======
-	#leftMenu{
-		display:block;
-	}
-	#searchBtn{
-		left:0px;
-		top:0px;
-	}
-	
-	/* 지도부분 */
-	.info {position:relative;top:5px;left:5px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;font-size:12px;padding:5px;background:#fff;list-style:none;margin:0;} 
-	.info:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
-	.info .label {display:inline-block;width:50px;}
-	.number {font-weight:bold;color:#00a0e9;} 
-	/* 지도부분끝 */
-	
-	/* 밑에 div부분 */
-	#mainName{
-		text-align: left;
-		margin-bottom: 20px;
-		padding-top :60px;
-	}
-	.main{
-		width:1080px;
-	}
-	#search{
-		text-align:right;
-		padding-bottom: 40px;
-	}
-	#searchid {
-		width: 130px;
-		box-sizing: border-box;
-		border: 2px solid #ccc;
-		border-radius: 4px;
-		font-size: 16px;
-		background-color: white;
-		background-image: url('<%=request.getContextPath()%>/img/kzoom.png');
-		background-position: 10px 10px; 
-		background-repeat: no-repeat;
-		padding: 12px 20px 12px 40px;
-		transition: width 0.4s ease-in-out;
-	}
-	#searchid:focus {
-		width: 300px;
-	}
-	#productMain{
-		width: 1100px;
-		overflow:auto;
-		padding-left: 100px;
-	}
-	#productMain div{
-		text-align: left;
-		margin-right: 30px;
-		margin-bottom: 30px;
-	}
-	#productDiv{
-		width:200px;
-		float: left;
-		border: 1px solid black;
-	}
-	#productDiv>ul>li>img{
-		width:200px;
-	}
-</style>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=675d2e2b842e770a2d48d54759ba1d32&libraries=services,clusterer,drawing"></script>
-
-<div class="section">
-	<div id="mainName"><h1>지도로 찾는 동네 농장</h1></div>
-	<div id="idididididididiidididi" style="height:400px;"></div>
-	<div class="main">
-			<hr/>
-			<form id="search">
-				<input type="text" id="searchid" placeholder="검색"/>
-			</form>
-		<div id="productMain">
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k002.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k003.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k004.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k005.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k006.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k007.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k008.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k009.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k010.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k011.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k012.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k013.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k014.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k015.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
->>>>>>> refs/remotes/origin/feature/main_#19
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -526,7 +311,6 @@
 	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
 	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
 	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
@@ -845,7 +629,6 @@
                position : new kakao.maps.LatLng(position.lat, position.lng)
            });
        });
-
        // 클러스터러에 마커들을 추가합니다
        clusterer.addMarkers(markers);
     });

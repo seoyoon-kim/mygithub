@@ -99,7 +99,6 @@
 		float: left;
 		border: 1px solid black;
 	}
-
 	#Sequence{
 		margin-left:20px;
 		width: 100px;
@@ -136,11 +135,9 @@
 		padding: 12px 20px 12px 40px;
 		transition: width 0.4s ease-in-out;
 	}
-
 	#searchid:focus {
 		width: 300px;
 	}
-
 	#productDiv>ul>li>img{
 		width:198px;
 	}
@@ -168,7 +165,6 @@
 		left:0px;
 		top:0px;
 	}
-
 </style>
 <script>
 	$(function(){

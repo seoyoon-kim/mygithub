@@ -34,19 +34,19 @@
 		border:1px solid #ccc;
 	}
 	.page_nation .pprev {
-		background:#f8f8f8 url('sshj/img/kpage_pprev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
 	}
 	.page_nation .prev {
-		background:#f8f8f8 url('sshj/img/kpage_prev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
 		margin-right:7px;
 	}
 	.page_nation .next {
-		background:#f8f8f8 url('sshj/img/kpage_next.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
 	}
 	.page_nation .nnext {
-		background:#f8f8f8 url('sshj/img/kpage_nnext.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
 	.page_nation a.active {
@@ -111,7 +111,7 @@
 		padding: .8em .5em;
 		border: 1px solid #999;
 		font-family: inherit;
-		background: url('sshj/img/karrow.jpg') no-repeat 95% 50%/30px;
+		background: url('<%=request.getContextPath()%>/img/karrow.jpg') no-repeat 95% 50%/30px;
 		border-radius: 0px;
 		-webkit-appearance: none;
 		-moz-appearance: none;
@@ -128,13 +128,12 @@
 		border-radius: 4px;
 		font-size: 16px;
 		background-color: white;
-		background-image: url('sshj/img/kzoom.png');
+		background-image: url('<%=request.getContextPath()%>/img/kzoom.png');
 		background-position: 10px 10px; 
 		background-repeat: no-repeat;
 		padding: 12px 20px 12px 40px;
 		transition: width 0.4s ease-in-out;
 	}
-
 	#searchid:focus {
 		width: 300px;
 	}
@@ -286,18 +285,15 @@
                 }
             }
         });
-
         $("#kAreamMall").children().children().click(function(){
             var name= $(this).text();
             $(this).css("color","red");
             $("#kContent").append(name+"&times;"+"&nbsp;&nbsp;");
         });
-
         $("#kContent").click(function(){
             kangsan();
         });
     });
-
     function kangsan(){
         //삭제아직 진행못함
     };

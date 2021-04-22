@@ -17,7 +17,6 @@
    		list-style-type:none;
    }
    #WriteMain{
-<<<<<<< HEAD
    		/* border: 1px solid black; */
    }
    #WriteMain>ul{
@@ -65,43 +64,6 @@
 		<div id="buttonsss">
 			<input type="submit" value="문의하기" class="buybutton">
 			<input type="button" value="취소" class="buybutton">
-=======
-   		margin-top : 50px;
-   		/* border: 1px solid black; */
-   }
-   #WriteMain>ul{
-    	padding-left: 0px;  		
-   }
-   #title{
-   		width:80%;
-   }
-   #filefile{
-   		margin-top: 10px;
-   		margin-bottom: 10px;
-   		width:100%;
-   		border: 1px solid black;
-   }
-   #buttonsss{
-   		text-align:right;
-   }
-</style>
-<div class="section">
-	<form method="post" action="/jdbc/upload1" enctype="multipart/form-data">
-		<div id="WriteMain">
-			<ul>
-				<li>제목 : <input type="text" id="title"/></li>
-				<li>내용
-					<textarea id="summernote" name="editordata"></textarea>
-				</li>
-			</ul>
-		</div>
-		<div id="filefile">
-			<input type="file" name="filename1"/>
-		</div>
-		<div id="buttonsss">
-			<input type="submit" value="문의하기">
-			<input type="button" value="취소">
->>>>>>> refs/remotes/origin/feature/main_#19
 		</div>
 	</form>
 </div>

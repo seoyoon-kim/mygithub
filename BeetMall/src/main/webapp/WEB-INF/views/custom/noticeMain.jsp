@@ -19,7 +19,6 @@
    }
 </style>
 <script>
-
 </script>
 <div class="section">
 	<div id="Main"><h1>공지사항</h1></div>
