@@ -23,18 +23,18 @@
 		width:30px;
 		height:30px;
 		background-repeat:no-repeat;
-		top:250px;
+		top:200px;
 		position:absolute;
-		z-index:5;
+		z-index:3;
 		background-color:white;
 		background-position:-1px -1px;
 	}
 	#prevBtn{
 		left:10px;
-		background-image:url(/sshj/img/dleft-arrow2.png);
+		background-image:url(/home/img/dleft-arrow2.png);
 	}
 	#nextBtn{
-		background-image:url(/sshj/img/dright-arrow2.png);
+		background-image:url(/home/img/dright-arrow2.png);
 		left:1038px;
 	}
 	.nextBtn, .prevBtn{
@@ -43,17 +43,17 @@
 		top : 140px;
 		background-repeat:no-repeat;
 		position:absolute;
-		z-index:5;
+		z-index:3;
 		background-color:white;
 		background-position:-1px -1px;
 	}
 	.nextBtn{
-		background-image:url(/sshj/img/dright-arrow2.png);
+		background-image:url(/home/img/dright-arrow2.png);
 		left:1008px;
 	}
 	.prevBtn{
-		background-image:url(/sshj/img/dleft-arrow2.png);
-		left:40px;	
+		background-image:url(/home/img/dleft-arrow2.png);
+		left:40px;
 	}
 	#banner{
 		position:relative;
@@ -161,10 +161,10 @@
 		top:2px;
 	}
 	.like{
-		background-image:url(/sshj/img/dlike.png);
+		background-image:url(/home/img/dlike.png);
 	}
 	.unlike{
-		background-image:url(/sshj/img/dunlike.png);
+		background-image:url(/home/img/dunlike.png);
 	}
 	.reciptList>div>div{
 		float:left;
@@ -357,12 +357,16 @@
 	});
 </script>
 <div class="section">
+	<div style="height:100px;width:1080px;">
+		<h5><a href="mybuyList">구매내역</a></h5>
+		<h5><a href="myChatList">채팅</a></h5>
+	</div>
 	<div id="banner">
 		<div id="prevBtn" class="roundImg"></div>
 		<div class="slider">
 			<div></div>
 			<div>
-				<a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dleaves.jpg"/></a><a href="error/errorPage.jsp"><img src="/sshj/img/dcherry-blossom.jpg"/></a><a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dmelon.jpg"/></a>
+				<a href="/home/inc/errorPage.jsp"><img src="/home/img/dleaves.jpg"/></a><a href="error/errorPage.jsp"><img src="/home/img/dcherry-blossom.jpg"/></a><a href="/home/inc/errorPage.jsp"><img src="/home/img/dmelon.jpg"/></a>
 			</div>
 		</div>
 		<div id="nextBtn" class="roundImg"></div>
@@ -373,14 +377,14 @@
 		<div class="prevBtn roundImg" id="todayPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="todayProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="todayNext"></div>
@@ -388,9 +392,9 @@
 	<div>
 	<h2>오늘의 제철 레시피</h2>
 		<div class="todayRecipt">
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/home/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/home/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/home/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
 		</div>
 	</div>
 	</div>
@@ -401,7 +405,7 @@
 			<div id="bSpices">강원도 노지감자</div>
 			<div id="bSaleInfo"><span>30,000원</span><span>20,000원</span><span>50,000원</span></div>
 			<div id="bNotice">망설이면 늦어요!</div>
-			<div id="bInfo"><img src="/sshj/img/pi.gif" id="bInfoImg"/>
+			<div id="bInfo"><img src="/home/img/pi.gif" id="bInfoImg"/>
 					<div id="bInfoTitle">강원도 노지감자</div>
 					<div id="bInfoTime">06:48:17 남음</div>
 			</div>
@@ -417,14 +421,14 @@
 		<div class="prevBtn roundImg" id="newProductPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="newProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="newProductNext"></div>
@@ -436,24 +440,23 @@
 		<div class="prevBtn roundImg" id="bestProductPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="bestProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/home/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="bestProductNext"></div>
 	</div>
 		<h2>비트의 레시피</h2>
 		<div class="todayRecipt">
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/home/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/home/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/home/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
 		</div>
 	</div>
 </div>
-
