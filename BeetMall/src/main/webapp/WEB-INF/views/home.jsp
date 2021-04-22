@@ -360,6 +360,7 @@
 	<div style="height:100px;width:1080px;">
 		<h5><a href="mybuyList">구매내역</a></h5>
 		<h5><a href="myChatList">채팅</a></h5>
+		<!-- 링크걸면서확인 -->
 	</div>
 	<div id="banner">
 		<div id="prevBtn" class="roundImg"></div>

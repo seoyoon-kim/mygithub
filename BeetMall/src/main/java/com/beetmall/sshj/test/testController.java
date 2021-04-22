@@ -59,4 +59,23 @@ public class testController {
 	public String myfavoriForm() {
 		return "mypages/myfavoriForm";
 	}
+	
+	
+//	윤주///////////////////////////////////////////////////////////////
+	
+	@RequestMapping("recipeHome")
+	public String recipeHome() {
+		return "custom/recipeHome";
+	}
+	
+	@RequestMapping("recipeView")
+	public String recipeView() {
+		return "custom/recipeView";
+	}
+	
+	@RequestMapping("recipeWrite")
+	public String recipeWrite() {
+		return "custom/recipeWrite";
+	}
+	
 }
