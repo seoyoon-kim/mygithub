@@ -23,9 +23,9 @@
 		width:30px;
 		height:30px;
 		background-repeat:no-repeat;
-		top:250px;
+		top:200px;
 		position:absolute;
-		z-index:5;
+		z-index:3;
 		background-color:white;
 		background-position:-1px -1px;
 	}
@@ -43,7 +43,7 @@
 		top : 140px;
 		background-repeat:no-repeat;
 		position:absolute;
-		z-index:5;
+		z-index:3;
 		background-color:white;
 		background-position:-1px -1px;
 	}
@@ -53,7 +53,7 @@
 	}
 	.prevBtn{
 		background-image:url(/sshj/img/dleft-arrow2.png);
-		left:40px;	
+		left:40px;
 	}
 	#banner{
 		position:relative;
@@ -357,6 +357,10 @@
 	});
 </script>
 <div class="section">
+	<div style="height:100px;width:1080px;">
+		<h5><a href="mybuyList">구매내역</a></h5>
+		<h5><a href="myChatList">채팅</a></h5>
+	</div>
 	<div id="banner">
 		<div id="prevBtn" class="roundImg"></div>
 		<div class="slider">
@@ -456,4 +460,3 @@
 		</div>
 	</div>
 </div>
-

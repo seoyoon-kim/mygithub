@@ -214,9 +214,118 @@
     	padding-top:15px;
     	border-bottom:1px solid #e06666;
     }
+<<<<<<< HEAD
     #NoticeleftMenu a:active, #NoticeleftMenu a:link, #NoticeleftMenu a:visited, #NoticeleftMenu a:hover{
 		color:black;
 	}
+=======
+    #kNoticecategory{
+        padding-bottom: 70px;
+        font-size: xx-large;
+        color: orange;
+    }
+    #kNoticeMain{
+        padding-bottom: 40px;
+    }
+    /* 마이페이지 왼쪽 */
+    #cMyPageLeft{
+    	position: absolute;
+    	left:-200px;
+    	top:35px;
+    	display: none;
+    	width:200px;
+    	height:480px;
+    	color:black;
+    	background-color:white;
+    	text-align:center;
+    	padding-left:20px;
+    	padding-right:20px;
+    }
+    #cMyPageLeft>div{
+    	padding-top:15px;
+    	border-bottom:1px solid #e06666;
+    }
+    #cMyPageLeft a:active, #cMyPageLeft a:link, #cMyPageLeft a:visited, #cMyPageLeft a:hover{
+		color:black;
+	}
+	#menuImgs img{
+		height:32px;
+		width:32px;
+		float:left;
+		margin-top:4px;
+		margin-right:5px;
+	}
+	#menuImgs {
+		line-height:40px;
+		position: relative;
+	}
+	#searchbar{
+		position:absolute;
+		left:730px;
+	}
+	#menuListUl img:first-child {
+		padding-right:5px;
+		margin-top:-5px;
+	}
+	#searchbar img{
+		position:absolute;
+		left:300px;
+		background-color: #e06666;
+		border-radius: 5px;
+	}
+	#categoriSelect{
+		display:none;
+		position:absolute;
+		z-index:10;
+		top:40px;
+		width:450px;
+	}
+	.cateMidCate{
+		height:60px;
+		width:150px;
+		background-color: #e06666;
+		text-align:center;
+		text-overflow:inherit;
+		font-size:0.9em;
+	}
+	.cateTopCate a:link, .cateTopCate a:visited, .cateTopCate a:hover, .cateTopCate a:active{
+		text-decoration:none;
+		color:yellow;
+	}
+	.cateMidCate a:active, .cateMidCate a:link, .cateMidCate a:visited, .cateMidCate a:hover{
+		text-decoration:none;
+		color:white;
+	}
+	.cateTopCate{
+		height:60px;
+		width:150px;
+		background-color: #e06666;
+		text-align:center;
+	}
+	#cateUl, #cateUl ul{
+		padding:0;
+		margin:0;
+	}
+	#cateUl>ul{
+		float:left;
+	}
+	/* 리모콘 시작 */
+	#rightNav{
+		width:100px;
+		height:400px;
+		position: absolute;
+		left:1100px;
+		top:300px;
+	}
+	#reghtNav{
+		position: relative;
+	}
+	#reghtNav>a>img{
+		height:400px;
+		width:100px;
+	}
+	
+>>>>>>> refs/remotes/origin/feature/main_#19
 </style>
 <script>
 	$(function(){
@@ -362,5 +471,27 @@
 				<div><a href="customerCenter">1:1 문의</a></div>
 			</div>
          <!-- 고객센터왼쪽부분끝 -->
+         <!-- 마이페이지 왼쪽  -->
+         <div id="cMyPageLeft">
+				<div><a href="">정보수정</a></div>
+				<div><a href="">장바구니</a></div>
+				<div><a href="">구매내역</a></div>
+				<div><a href="mypoint">마이포인트</a></div>
+				<div><a href="">즐겨찾는농장</a></div>
+				<div><a href="">마이레시피</a></div>
+				<div><a href="">1:1대화</a></div>
+				<div><a href="">문의내역</a></div>
+				<div><a href="">회원탈퇴</a></div>
+			</div>
+			<!-- 카테고리 선택 -->
+			<div id="categoriSelect">
+				<ul id="cateUl"></ul>
+			</div>
+			<!-- 오른쪽 배너광고 -->
+			<div id="rightNav">
+        		<div id="reghtNav">
+	        		<a href=""><img src="<%=request.getContextPath()%>/img/pi.gif"/></a>
+        		</div>
+         	</div>
 		</div>
 	</div>

@@ -141,6 +141,7 @@
 	}
 
 	#productDiv>ul>li>img{
+<<<<<<< HEAD
 		width:198px;
 	}
 	#categorySubmenu{
@@ -424,6 +425,291 @@
 			<div id="productDiv">
 				<ul>
 					<li><img src="/sshj/img/pi.gif"></li>
+=======
+		width:200px;
+	}
+	#categorySubmenu{
+		margin-top: 150px;
+	}
+	#categorySubmenu> #pickupMain, #Sequence{
+		position:relative;
+		height:50px;
+	}
+	#category2{
+		position:absolute;
+		left:550px;
+		top: 480px;
+		width:830px;
+		height:21px;
+		overflow:hidden;
+	}
+	#category2>span>div>a{
+		text-align: center;
+		padding:20px;
+	}
+	
+	#searchBtn{
+		left:0px;
+		top:0px;
+	}
+
+</style>
+<script>
+	$(function(){
+		$("#categoryAll").click(function(){
+			$("#category2Left").css("display", "none");
+			$("#category2Right").css("display", "none");
+			$("#categoryAll2").css("display", "block");
+			$("#categoryFruit2").css("display", "none");
+			$("#categoryVege2").css("display", "none");
+			$("#categorySall2").css("display", "none");
+		});
+		$("#categoryFruit").click(function(){
+			$("#category2Left").css("display", "none");
+			$("#category2Right").css("display", "none");
+			$("#category2Left").css("display", "contents");
+			$("#category2Right").css("display", "contents");
+			$("#categoryAll2").css("display", "none");
+			$("#categoryFruit2").css("display", "block");
+			$("#categoryVege2").css("display", "none");
+			$("#categorySall2").css("display", "none");
+		});
+		$("#categoryVege").click(function(){
+			$("#category2Left").css("display", "contents");
+			$("#category2Right").css("display", "contents");
+			$("#categoryAll2").css("display", "none");
+			$("#categoryFruit2").css("display", "none");
+			$("#categoryVege2").css("display", "block");
+			$("#categorySall2").css("display", "none");
+		});
+		$("#categorySall").click(function(){
+			$("#category2Left").css("display", "none");
+			$("#category2Right").css("display", "none");
+			$("#categoryAll2").css("display", "none");
+			$("#categoryFruit2").css("display", "none");
+			$("#categoryVege2").css("display", "none");
+			$("#categorySall2").css("display", "block");
+		});
+		$("#category2Right").click(function(){
+			$("#categoryVege2>div").first().appendTo('#categoryVege2');
+			$("#categoryFruit2>div").first().appendTo('#categoryFruit2');
+		});
+		$("#category2Left").click(function(){
+			$("#categoryVege2>div").last().prependTo('#categoryVege2');
+			$("#categoryFruit2>div").last().prependTo('#categoryFruit2');
+		});
+	});
+</script>
+<div class="section">
+	<div class="main">
+		<div id="mainName"><h1>못난이 할인</h1></div>
+			<ul id="category">
+				<li><sqan id="categoryAll"><img src="<%=request.getContextPath()%>/img/k001.png"><br/>전체</sqan></li>
+				<li><sqan id="categoryFruit"><img src="<%=request.getContextPath()%>/img/k003.png"><br/>과일</sqan></li>
+				<li><sqan id="categoryVege"><img src="<%=request.getContextPath()%>/img/k004.png"><br/>채소</sqan></li>
+				<li><sqan id="categorySall"><img src="<%=request.getContextPath()%>/img/k005.png"><br/>쌀/잡곡</sqan></li>
+			</ul>
+			<div id="categorySubmenu">
+			<hr/>
+				<select id="Sequence">
+					<option value="평점순" selected="selected">평점순</option>
+					<option value="가격순">가격순</option>
+					<option value="조회수순">조회수순</option>
+				</select>
+				<a id="category2Left" style="display: none">◀</a>
+				<div id="category2">
+					<span id="categoryAll2" style="display: none;">전체</span>
+					<span id="categoryFruit2" style="display: none;">
+						<div>
+							<a>전체</a>
+							<a>감/홍시/곶감</a>
+							<a>감귤/한라봉/천혜향</a>
+							<a>딸기/베리</a>
+							<a>매실/산수유/오미자</a>
+							<a>배</a>
+							<a>사과</a>
+						</div>
+						<div>
+							<a>수박/참외/멜론/키위</a>
+							<a>자두/복숭아/포도</a>
+							<a>토마토</a>
+							<a>기타과일</a>
+						</div>
+					</span>
+					<span id="categoryVege2" style="display: none;">
+						<div>
+							<a>전체</a>
+							<a>감자/옥수수</a>
+							<a>견과/밤/잣/콩/대추</a>
+							<a>고구마</a>
+							<a>나물/건나물</a>
+							<a>당근/연근/우엉/마</a>
+						</div>
+						<div>
+							<a>마늘/생강/양파/파</a>
+							<a>배추/상추/쌈채소</a>
+							<a>버섯</a>
+							<a>양초/도라지/삼/더덕</a>
+							<a>피망/파프리카/고추</a>
+						</div>
+						<div>
+							<a>호박/아스파라거스</a>
+							<a>기타채소</a>
+						</div>
+					</span>
+					<span id="categorySall2" style="display: none;">
+						<a>전체</a>
+						<a>쌀/찹쌀/흑미/현미</a>
+						<a>수수/보리/팥/콩</a>
+						<a>깨/기타잡곡</a>
+					</span>
+				</div>
+				<span id="pickupMain"><a id="category2Right" style="display: none">▶&nbsp;</a><input type="checkbox" id="pickup" value="pickup"/>&nbsp;픽업여부</span>
+			<hr/>
+			</div>
+			<form id="search">
+				<input type="text" id="searchid" placeholder="검색"/>
+			</form>
+		<div id="productMain">
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k002.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k003.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k004.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k005.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k006.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k007.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k008.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k009.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k010.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k011.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k012.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k013.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k014.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k015.png"></li>
+					<li>28,000원</li>
+					<li>제목제목제목제목제목제목</li>
+					<li>리뷰 50,000|4.8/5</li>
+					<li>판매지역 이강산</li>
+				</ul>
+			</div>
+			<div id="productDiv">
+				<ul>
+					<li><img src="<%=request.getContextPath()%>/img/k001.png"></li>
+>>>>>>> refs/remotes/origin/feature/main_#19
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
