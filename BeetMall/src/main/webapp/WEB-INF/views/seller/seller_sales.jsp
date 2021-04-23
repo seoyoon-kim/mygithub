@@ -81,7 +81,28 @@
 		
 	}
 	
+	// 대분류 카테고리 클릭시 데이터 베이스로 불러왔던 중분류 카테고리를 대분류 카테고리 종류에 따라 넣는다
 	$(()=>{
+		$(document).on('click',"#category>li",function(){
+			// 선택된 카테고리 넘버를 변수에 넣어둔다.
+			let cateNum = $(this).val();
+			// 태그를 이용해 선택된 카테고리의 중분류 카테고리를 담는 변수를 생성한다.
+			let tag ="";
+			
+			// 카테고리 리스트가 널이 아닐경우
+			<c:if test="${cateList!=null }">
+				//  카테고리 넘버가 무엇인지에 따라서 불러온다, 카테고리 넘버가 1이면 중분류 카테고리 1번의 값들을 불러온다.
+				<c:forEach var="mcateList" items="${cateList}">
+					if(${mcateList.catenum}==cateNum){
+						tag += "<li value='${mcateList.catename}'>${mcateList.mcatename}</li>";
+					}
+				</c:forEach>
+				$('#mcategory').html(tag);
+			</c:if>
+	
+			
+
+		});
 		
 	})
 </script>
@@ -118,37 +139,30 @@
 					<strong>&nbsp;&nbsp;카테고리</strong>
 					
 					<div id="categoryListMiddle">
+						<!-- 대분류 카테고리!!!! -->
 						<ul id="category"><!-- 카테고리 리스트에서 대분류 카테고리만 받아오기 -->
 							<c:if test="${cateList!=null}">
 								<!-- 변수 i를 선언해주고 -->
 								<c:set var="i" value="1"/>
-									<c:forEach var="categoryList" items="${cateList}">
-										<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
+								<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
 											i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
+									<c:forEach var="categoryList" items="${cateList}">
 										<c:if test="${categoryList.catenum==i}">
-											<li>${categoryList.catename}<span>&gt;</span></li>
+											<li value="${categoryList.catenum}">${categoryList.catename}<span>&gt;</span></li>
 											<c:set var="i" value="${i+1 }"/>
 										</c:if>
 									</c:forEach>
 								<c:remove var="i"/>
 							</c:if>
 						</ul>
+						
+						<!-- 중분류 카테고리!!!!! -->
 						<ul id="mcategory">
-							<li>땅콩</li>
-							<li>11</li>
-							<li>22</li>
-							<li>33</li>
 						</ul>
 					</div>
 					
-					
-					<ul id="categoryManagement">
-						<li>채소&gt;땅콩<span>⊠</span></li>
-						<li>채소&gt;11<span>⊠</span></li>
-						<li>채소&gt;22<span>⊠</span></li>
-						<li>채소&gt;33<span>⊠</span></li>
-						
-					</ul>
+					<!-- 중분류 카테고리 선택하면 선택된 사항이 들어가는 공간이다!!!! -->
+					<ul id="categoryManagement"></ul>
 					
 					<div id="categorySearch_container">
 						<select class="categorySearch_container_child" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
@@ -203,20 +217,8 @@
 					});
 					
 					
-					
-					
-					// li 개수 구하기 함수
-					function lengthCheck(){
-						let liLength = $('#categoryManagement>li').length;
-						if(liLength>=10){
-							alert('최대 10개의 품목만 선택 가능합니다.');
-							return false;
-						}
-						return liLength;
-					}
 					//차트 추가하기
-					function addData(chart, label, data) {
-					    //chart.data.labels.push(label);
+					function addData(chart, data) {
 					    chart.data.datasets.push(data);
 					    chart.update();
 					}
@@ -239,14 +241,19 @@
 					///////////////////////////////////////////////////////////////////////// 카테고리, 차트, 엑셀
 					$(function(){
 						// 중분류 카테고리 선택시 추가하는 기능 categoryManagement
-						$('#mcategory>li').click(function(){
+						$(document).on('click', '#mcategory>li', function(){
 							/*========================  category에 포함  ==========================*/
 							
-							// li 개수 구하기
-							let liLength = lengthCheck();
+							// li 개수 구하여 10개 이상은 고르지 못하도록 막는다
+							let liLength = $('#categoryManagement>li').length;
+							if(liLength>=10){
+								return alert('최대 10개의 품목만 선택 가능합니다.');
+								
+							}
 							
 							// 목록 선택 한 것이 무엇인가?
 							let selectItem = $(this).text();
+							
 							
 							// li에 존재하는 품목 이름이 있으면 걸러야 한다.
 							for(let i=0; i<liLength; i++){
@@ -262,7 +269,7 @@
 							
 							
 							// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
-							let tag = "<li>"+"채소"+"&gt;"+selectItem+"<span>⊠</span></li>";
+							let tag = "<li>"+$(this).attr('value')+"&gt;"+selectItem+"<span>⊠</span></li>";
 							$('#categoryManagement').append(tag);
 							
 							
@@ -274,13 +281,13 @@
 							
 							// datasets에 들어갈 data 세팅
 							let data = {
-								label: "땅콩",
+								label: selectItem,
 								data: [10000, 25302, 12347, 73946],
 								borderColor: 'rgb('+color1+','+color2+','+color3+')'
 							};
 							
 							// 차트 추가 함수
-							addData(myChart, 'test', data)
+							addData(myChart, data);
 						})
 						
 						
@@ -292,7 +299,7 @@
 							
 							// 삭제하기 위해서는 어떤 것이 선택되었는지?
 							// 그리고 삭제하는 데이터가 추가 된 것 중에 몇번째에 있는지 알 수 있어야 한다.
-							let liLength = lengthCheck();
+							let liLength = $('#categoryManagement>li').length;
 							
 							// 삭제할 선택된 아이템
 							let selectItem = $(this).text();
@@ -312,7 +319,6 @@
 								
 								// result와 selectItemResult가 맞는 차트데이터를 삭제한다
 								if(result===selectItemResult){
-									alert("result="+result+", "+"selectItemResult="+selectItemResult);
 									removeData(myChart, i);
 								}
 								
