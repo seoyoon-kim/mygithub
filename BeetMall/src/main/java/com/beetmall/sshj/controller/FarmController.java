@@ -1,11 +1,14 @@
 package com.beetmall.sshj.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.service.FarmService;
+import com.beetmall.sshj.vo.FarmVO;
 
 @Controller
 public class FarmController {
@@ -38,9 +41,13 @@ public class FarmController {
 	}
 	
 	@RequestMapping("/getListData") // seller_sales 페이지에서 차트와 엑셀 데이터 가져오는 dao
-	public String getListData() {
+	public String getListData(FarmVO vo,HttpSession session) {
+		vo.setUserid((String)session.getAttribute("logId"));
 		// 제한사항
 		// 날짜의 데이터가 넘어오지 않을경우 DB 조회를 하지 않는다
+		System.out.println(vo.getResultData()[0]);
+		System.out.println(vo.getStartCalendarDataValue());
+		System.out.println(vo.getEndCalendarDataValue());
 		
 		return "seller/seller_sales";
 	}

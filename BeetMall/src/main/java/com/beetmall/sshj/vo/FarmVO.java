@@ -21,8 +21,25 @@ public class FarmVO {
 	private int orderprice; // 구매한 가격
 	private String userid; // 유저아이디
 	
+	// 날짜 데이터 저장할 변수
+	private String startCalendarDataValue;
+	private String endCalendarDataValue;
 	
 	
+	
+	
+	public String getStartCalendarDataValue() {
+		return startCalendarDataValue;
+	}
+	public void setStartCalendarDataValue(String startCalendarDataValue) {
+		this.startCalendarDataValue = startCalendarDataValue;
+	}
+	public String getEndCalendarDataValue() {
+		return endCalendarDataValue;
+	}
+	public void setEndCalendarDataValue(String endCalendarDataValue) {
+		this.endCalendarDataValue = endCalendarDataValue;
+	}
 	public int[] getResultData() {
 		return resultData;
 	}
