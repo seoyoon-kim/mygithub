@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
+<!-- font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
-	*{margin:0px; padding:0px; list-style-type :none;}
+	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#leftMenu{ display:block;}
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
 		font-size:0;
+		padding-bottom: 30px;
 	}
 	.page_nation {
 		display:inline-block;
@@ -54,6 +58,31 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	/* 상품페이지 부분 */
+	#productMain{
+		width: 1100px;
+		overflow:auto;
+		padding-left: 40px;
+	}
+	#productMain div{
+		text-align: left;
+		margin-right: 65px;
+		margin-bottom: 30px;
+	}
+	#productDiv{
+		width:200px;
+		float: left;
+	}
+	#productDiv>ul>li>img{
+		width:198px;
+	}
+	#productDiv>ul>li:nth-child(5n+2){
+	    font-size: xx-large;
+	    font-weight: bold;
+	}
+	
+	/* 상품페이지 부분 css끝 */	
+	
 	.main{
 		width:1080px;
 	}
@@ -73,35 +102,16 @@
 		padding-left : 90px;
 		padding-right : 10px;
 	}
-	#search{
-		text-align:right;
-		padding-bottom: 40px;
-	}
 	#pickupMain{
 		float: right;
 		vertical-align: middle;
 		padding-top: 15px;
    		font-size: large;
 	}
-	#productMain{
-		width: 1100px;
-		overflow:auto;
-		padding-left: 100px;
-	}
-	#productMain div{
-		text-align: left;
-		margin-right: 30px;
-		margin-bottom: 30px;
-	}
-	#productDiv{
-		width:200px;
-		float: left;
-		border: 1px solid black;
-	}
 	#Sequence{
 		margin-left:20px;
 		width: 100px;
-		padding: .8em .5em;
+		padding: .5em;
 		border: 1px solid #999;
 		font-family: inherit;
 		background: url('<%=request.getContextPath()%>/img/karrow.jpg') no-repeat 95% 50%/30px;
@@ -114,38 +124,12 @@
 		width: 17px;
     	height: 17px;
 	}
-	#img-button{
-		background: url("<%=request.getContextPath()%>/img/kzoom.png") no-repeat;
-        border: none;
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
-	}
-	#searchid {
-		width: 130px;
-		box-sizing: border-box;
-		border: 2px solid #ccc;
-		border-radius: 4px;
-		font-size: 16px;
-		background-color: white;
-		background-image: url('<%=request.getContextPath()%>/img/kzoom.png');
-		background-position: 10px 10px; 
-		background-repeat: no-repeat;
-		padding: 12px 20px 12px 40px;
-		transition: width 0.4s ease-in-out;
-	}
-	#searchid:focus {
-		width: 300px;
-	}
-	#productDiv>ul>li>img{
-		width:198px;
-	}
 	#categorySubmenu{
 		margin-top: 150px;
 	}
 	#categorySubmenu> #pickupMain, #Sequence{
 		position:relative;
-		height:50px;
+		height:40px;
 	}
 	#category2{
 		position:absolute;
@@ -278,9 +262,6 @@
 				<span id="pickupMain"><a id="category2Right" style="display: none">▶&nbsp;</a><input type="checkbox" id="pickup" value="pickup"/>&nbsp;픽업여부</span>
 			<hr/>
 			</div>
-			<form id="search">
-				<input type="text" id="searchid" placeholder="검색"/>
-			</form>
 		<div id="productMain">
 			<div id="productDiv">
 				<ul>

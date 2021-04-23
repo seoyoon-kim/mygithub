@@ -9,7 +9,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<!-- font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
+	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#NoticeleftMenu{
    		display:block;
    }
@@ -49,6 +53,9 @@
 		color:white;
 		border-radius: 5px;
 	}
+	a:hover, a:active, a:visited, a:link {
+   		color: black;
+   }
 </style>
 <div class="section">
 	<form method="post" action="/jdbc/upload1" enctype="multipart/form-data">

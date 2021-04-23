@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
+<!-- font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
+	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#boardList{list-style-type:none;}
    #boardList li{width:20%; height:40%; line-height:40px; border-bottom:1px solid gray; float:left;}
    #boardList li:nth-child(3n+2){width:60%;}
@@ -16,6 +20,9 @@
    }
    #NoticeleftMenu{
    	display:block;
+   }
+   a:hover, a:active, a:visited, a:link {
+   		color: black;
    }
 </style>
 <script>
