@@ -20,7 +20,7 @@
 	<article>
 		<div id="search_container">
 			<span id="search_box">
-				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/xsearch_icon.png"/></a>
+				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
 			</span>
 		</div>
 		

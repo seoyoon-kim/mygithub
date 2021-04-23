@@ -1,14 +1,23 @@
 package com.beetmall.sshj.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.service.FarmService;
+
 @Controller
 public class FarmController {
+	@Autowired
+	FarmService service;
+	
 	@RequestMapping("/seller_sales")
 	public ModelAndView seller_sales() {
 		ModelAndView mav = new ModelAndView();
+		
+		// 카테고리 리스트를 불러와서 리스트에 담는다
+		mav.addObject("cateList",service.allCategoryList());		
 		mav.setViewName("seller/seller_sales");
 		return mav;
 	}

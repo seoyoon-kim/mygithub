@@ -24,33 +24,6 @@
 	<context:component-scan base-package="com.beetmall.sshj" />
 	
 	
-	
-	
-	<!-- 오라클 서버위치, 아이디, 비번, 드라이브등-->
-	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></beans:property>
-		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></beans:property>
-		<beans:property name="username" value="c##scott"></beans:property>
-		<beans:property name="password" value="tiger"></beans:property>
-	</beans:bean>
-	
-	<!-- Mybatis Factory 객체 생성 -->
-	<beans:bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<beans:property name="dataSource" ref="dataSource"></beans:property>
-		<beans:property name="mapperLocations">
-			<beans:list>
-				<beans:value>classpath:com/beetmall/sshj/mapper/*.xml</beans:value>
-			</beans:list>
-		</beans:property>
-	</beans:bean>
-	<!-- 객체 생성 -->
-	<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
-	</beans:bean>
-	
-	<!-- 순서는 이렇다. oracle db를 mybatis factory에 넣고 mybatis factory를 객체로 만드는 DI 과정이다 -->
-	
-	
 	<!-- 트랜잭션 객체 생성 -->
 	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:constructor-arg name="dataSource" ref="dataSource"></beans:constructor-arg>
