@@ -3,6 +3,7 @@
 <%-- <%@ include file="/inc/menu.jspf"%> 맨 윗줄에 이거 추가해주시믄 됩니다잉--%> 
 
 <style>
+	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	.wordcut{
 		overflow: hidden;
 		text-overflow: ellipsis;
