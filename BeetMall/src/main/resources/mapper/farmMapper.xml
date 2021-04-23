@@ -2,6 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.beetmall.sshj.dao.FarmDAO">
-  
-  </mapper>
+<mapper namespace="com.beetmall.sshj.dao.FarmDAO">
+	<select id="allCategoryList" resultType="com.beetmall.sshj.vo.FarmVO">
+		select a.catenum catenum, catename, catesort, cateimg, mcatenum, mcatename, mcatesort 
+		from category a join mcategory b on a.catenum = b.catenum order by catesort, mcatesort
+	</select>
+</mapper>

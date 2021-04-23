@@ -15,11 +15,11 @@
 			<li><a href="#">상품 등록</a></li>
 			<li><a href="#">주문 관리</a></li>
 			<li><a href="#">판매 관리</a></li>
-			<li><a href="#">매출 관리</a></li>
+			<li><a href="seller_sales">매출 관리</a></li>
 			<li><a href="#">정산 관리</a></li>
 			<li><a href="#">배송 관리</a></li>
-			<li><a href="#">리뷰/문의 관리</a></li>
-			<li><a href="#">회원정보수정</a></li>
+			<li><a href="seller_review">리뷰/문의 관리</a></li>
+			<li><a href="intro_farm">회원정보수정</a></li>
 		</ul>
 	</nav>
 	<!-- 본문 시작 -->

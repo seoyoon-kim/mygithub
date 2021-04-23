@@ -54,7 +54,7 @@
 	<!-- jsp config include 사용할꺼면 사용-->
 	<jsp-config>
 		<jsp-property-group>
-			<url-pattern>*.jsp</url-pattern>
+			<url-pattern>/seller/*.jsp</url-pattern>
 			<page-encoding>UTF-8</page-encoding>
 			<include-prelude>/WEB-INF/views/inc/header.jspf</include-prelude>
 			<include-coda>/WEB-INF/views/inc/footer.jspf</include-coda>

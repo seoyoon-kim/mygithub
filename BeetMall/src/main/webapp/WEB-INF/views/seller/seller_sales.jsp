@@ -11,8 +11,9 @@
 <c:set var='yearCheck'><fmt:formatDate value="${today }" pattern="yyyy"/></c:set>
 
 <script>
-	// 날짜 변경 yearCheck하는 것 
+	// 날짜 변경 yearCheck하는 변수 선언
 	let yearCheck="";
+	// 날짜를 년별, 월별, 일별을 바꿀 경우 그 조건에 맞게 input 박스를 change 한다.
 	function typeChange(e){
 		let optionCheck = $(e).val();
 		
@@ -79,6 +80,10 @@
 		}
 		
 	}
+	
+	$(()=>{
+		
+	})
 </script>
 <section>
 	<!-- 사이드바 -->
@@ -113,18 +118,20 @@
 					<strong>&nbsp;&nbsp;카테고리</strong>
 					
 					<div id="categoryListMiddle">
-						<ul id="category">
-							<li>견과류<span>&gt;</span></li>
-							<li>건과류<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							<li>채소<span>&gt;</span></li>
-							
+						<ul id="category"><!-- 카테고리 리스트에서 대분류 카테고리만 받아오기 -->
+							<c:if test="${cateList!=null}">
+								<!-- 변수 i를 선언해주고 -->
+								<c:set var="i" value="1"/>
+									<c:forEach var="categoryList" items="${cateList}">
+										<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
+											i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
+										<c:if test="${categoryList.catenum==i}">
+											<li>${categoryList.catename}<span>&gt;</span></li>
+											<c:set var="i" value="${i+1 }"/>
+										</c:if>
+									</c:forEach>
+								<c:remove var="i"/>
+							</c:if>
 						</ul>
 						<ul id="mcategory">
 							<li>땅콩</li>
