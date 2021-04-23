@@ -414,7 +414,6 @@
 			<div id="categoriSelect">
 				<ul id="cateUl"></ul>
 			</div>
-			<!-- 여기서부터내꺼 -->
          <!-- 여기부터 상품카테고리부분시작 -->
          <div id="leftMenu">
             <div id="kcategoryMain">

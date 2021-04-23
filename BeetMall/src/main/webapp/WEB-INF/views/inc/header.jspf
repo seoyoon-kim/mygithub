@@ -65,6 +65,6 @@
 	</div>
 	
 	<div id="logoImg">			<!-- 사이트 로고 부분 -->
-		<a href="/home"><img src="<%=request.getContextPath()%>/img/logo2.PNG"></a>
+		<a href="/sshj"><img src="<%=request.getContextPath()%>/img/logo2.PNG"></a>
 	</div>
 	</div>

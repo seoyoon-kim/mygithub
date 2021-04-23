@@ -120,7 +120,7 @@
 				
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>
-					<img src="/home/img/pi.gif">
+					<img src="/sshj/img/pi.gif">
 					<span class="pointtitle wordcut">맛깔나는귤</span><br/>
 					<span class="pointdetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
@@ -131,7 +131,7 @@
 				
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>
-					<img src="/home/img/pi.gif">
+					<img src="/sshj/img/pi.gif">
 					<span class="pointtitle wordcut">맛깔나는귤</span><br/>
 					<span class="pointdetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
@@ -142,7 +142,7 @@
 				
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>
-					<img src="/home/img/pi.gif">
+					<img src="/sshj/img/pi.gif">
 					<span class="pointtitle wordcut">맛깔나는귤</span><br/>
 					<span class="pointdetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
@@ -153,7 +153,7 @@
 				
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>
-					<img src="/home/img/pi.gif">
+					<img src="/sshj/img/pi.gif">
 					<span class="pointtitle wordcut">맛깔나는귤</span><br/>
 					<span class="pointdetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>

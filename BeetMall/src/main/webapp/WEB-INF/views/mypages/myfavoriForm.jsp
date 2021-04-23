@@ -130,7 +130,7 @@
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>12345678</li>
 				<li>
-				<img src="/home/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
+				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>배송중</li>
@@ -140,7 +140,7 @@
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>12345678</li>
 				<li>
-				<img src="/home/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
+				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>배송완료</li>
@@ -150,7 +150,7 @@
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>12345678</li>
 				<li>
-				<img src="/home/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
+				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>취소</li>
@@ -160,7 +160,7 @@
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>12345678</li>
 				<li>
-				<img src="/home/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
+				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>환불</li>
@@ -170,7 +170,7 @@
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>12345678</li>
 				<li>
-				<img src="/home/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
+				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>준비중</li>

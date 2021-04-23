@@ -77,5 +77,37 @@ public class testController {
 	public String recipeWrite() {
 		return "custom/recipeWrite";
 	}
-	
+// 윤수///////////////////////////////////////////////////////////////
+	@RequestMapping("error")	// 에러페이지
+	public String errer() {
+		return "etc/error";
+	}
+	@RequestMapping("register")	// 회원가입페이지
+	public String register() {
+		return "login/register";
+	}
+	@RequestMapping("cregister")
+	public String cResigter() {	// 구매자 회원가입
+		return "login/cRegister";
+	}
+	@RequestMapping("sregister")
+	public String sRegister() {	// 판매자 회원가입
+		return "login/sRegister";	
+	}
+	@RequestMapping("infoView")
+	public String infoView() {	// 약관조회
+		return "info/infoView";
+	}
+	@RequestMapping("mypoint")
+	public String myPoint() {	// 마이포인트
+		return "mypages/mypoint";
+	}
+	@RequestMapping("mybuyList")
+	public String myBuyList() {	// 구매내역
+		return "mypages/mybuyList";
+	}
+	@RequestMapping("myChatList")
+	public String myChatList() {	// 구매내역
+		return "mypages/myChatList";
+	}
 }

@@ -52,11 +52,11 @@
 	<h4 style="text-align:center;margin-bottom:50px;">회원가입하신 후 비트몰의 다양한 서비스를 이용해보세요.</h4>
 	<div id="what_Type">
 		<div id="costomer">
-			<img src="/home/img/pi.gif" style="height:300px;width:300px" class="regiImg"/>
+			<img src="/sshj/img/pi.gif" style="height:300px;width:300px" class="regiImg"/>
 			<div class="regiLink"><div id="costomerbutton">구매자 회원가입</div></div>
 		</div>
 		<div id="seller">
-			<img src="/home/img/pi.gif" style="height:300px;width:300px" class="regiImg"/>
+			<img src="/sshj/img/pi.gif" style="height:300px;width:300px" class="regiImg"/>
 			<div class="regiLink"><div id="sellerbutton">판매자 회원가입</div></div>
 		</div>
 	</div>

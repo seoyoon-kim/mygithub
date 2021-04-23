@@ -226,7 +226,7 @@
 				<!-- 구분용 -->
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
 				<li>
-				<img src="/home/img/pi.gif"><span class="chatttitle wordcut">작은농부</span><span class="chatdetail wordcut">마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.</span>
+				<img src="/sshj/img/pi.gif"><span class="chatttitle wordcut">작은농부</span><span class="chatdetail wordcut">마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.</span>
 				</li>
 				<li><input type="button" class="chatbutton" value="조회"/><input type="button" class="chatbutton" value="삭제"/></li>
 			</ul>
