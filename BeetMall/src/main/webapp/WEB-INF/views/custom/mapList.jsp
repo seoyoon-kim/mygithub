@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
-
+<!-- font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
-	*{margin:0px; padding:0px; list-style-type :none;}
+	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
+	#leftMenu{ display:block;}
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
@@ -54,79 +57,51 @@
 		color:#fff;
 		border:1px solid #42454c;
 	}
-	#leftMenu{
-		display:block;
-	}
-	#searchBtn{
-		left:0px;
-		top:0px;
-	}
-	
-	/* 지도부분 */
-	.info {position:relative;top:5px;left:5px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;font-size:12px;padding:5px;background:#fff;list-style:none;margin:0;} 
-	.info:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
-	.info .label {display:inline-block;width:50px;}
-	.number {font-weight:bold;color:#00a0e9;} 
-	/* 지도부분끝 */
-	
-	/* 밑에 div부분 */
-	#mainName{
-		text-align: left;
-		margin-bottom: 20px;
-		padding-top :60px;
-	}
-	.main{
-		width:1080px;
-	}
-	#search{
-		text-align:right;
-		padding-bottom: 40px;
-	}
-	#searchid {
-		width: 130px;
-		box-sizing: border-box;
-		border: 2px solid #ccc;
-		border-radius: 4px;
-		font-size: 16px;
-		background-color: white;
-		background-image: url('<%=request.getContextPath()%>/img/kzoom.png');
-		background-position: 10px 10px; 
-		background-repeat: no-repeat;
-		padding: 12px 20px 12px 40px;
-		transition: width 0.4s ease-in-out;
-	}
-	#searchid:focus {
-		width: 300px;
-	}
+	/* 페이징처리끝 */
+	/* 상품페이지 부분 */
 	#productMain{
 		width: 1100px;
 		overflow:auto;
-		padding-left: 100px;
+		padding-left: 40px;
 	}
 	#productMain div{
 		text-align: left;
-		margin-right: 30px;
+		margin-right: 65px;
 		margin-bottom: 30px;
 	}
 	#productDiv{
 		width:200px;
 		float: left;
-		border: 1px solid black;
 	}
 	#productDiv>ul>li>img{
 		width:198px;
 	}
+	#productDiv>ul>li:nth-child(5n+2){
+	    font-size: xx-large;
+	    font-weight: bold;
+	}
+	
+	/* 상품페이지 부분 css끝 */	
+	#mainName{
+		padding-bottom: 20px;
+	}
+	/* 지도부분 */
+	.info {position:relative;top:5px;left:5px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;font-size:12px;padding:5px;background:#fff;list-style:none;margin:0;} 
+	.info:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+	.info .label {display:inline-block;width:50px; color:black;}
+	.number {font-weight:bold;color:#00a0e9;} 
+	/* 지도부분끝 */
+	
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=675d2e2b842e770a2d48d54759ba1d32&libraries=services,clusterer,drawing"></script>
 
 <div class="section">
 	<div id="mainName"><h1>지도로 찾는 동네 농장</h1></div>
 	<div id="idididididididiidididi" style="height:400px;"></div>
+	<div>※실제 위치와 상이할수 있습니다.</div>
+	<div>※자신의 위치에서 마우스 왼쪽버튼을 누른후 목적지에서 오른쪽버튼을 누르면 직선거리가 표시됩니다.</div> 
 	<div class="main">
 			<hr/>
-			<form id="search">
-				<input type="text" id="searchid" placeholder="검색"/>
-			</form>
 		<div id="productMain">
 			<div id="productDiv">
 				<ul>
