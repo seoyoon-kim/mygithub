@@ -81,6 +81,7 @@
 		
 	}
 	
+	
 	// 대분류 카테고리 클릭시 데이터 베이스로 불러왔던 중분류 카테고리를 대분류 카테고리 종류에 따라 넣는다
 	$(()=>{
 		$(document).on('click',"#category>li",function(){
@@ -94,7 +95,9 @@
 				//  카테고리 넘버가 무엇인지에 따라서 불러온다, 카테고리 넘버가 1이면 중분류 카테고리 1번의 값들을 불러온다.
 				<c:forEach var="mcateList" items="${cateList}">
 					if(${mcateList.catenum}==cateNum){
-						tag += "<li value='${mcateList.catename}'>${mcateList.mcatename}</li>";
+						tag += "<li value='${mcateList.catename}'>"
+								+"<input type='hidden' name='mcatenum' value='${mcateList.mcatenum}'/>"
+								+"${mcateList.mcatename}</li>";
 					}
 				</c:forEach>
 				$('#mcategory').html(tag);
@@ -217,6 +220,148 @@
 					});
 					
 					
+					let start_calendar_category_linkData = "";
+					let end_calendar_category_linkData = "";
+					
+					//////////////////// 수익 매출분석에 들어갈 labels 시작 /////////////////////
+					// 날짜 적용 버튼 클릭시,, labels 추가
+					$('#calendarApply').click(function(){
+						// 월별 일별에 사용될 스플릿 값 저장할 전역변수 생성!
+						let startSplit = null;
+						let endSplit = null;
+
+						// 차이값에 대한 계산 결과를 저장하는데 사용할 전역변수 생성!
+						let gapResult = 0;
+						
+						// startDate, endDate 선택된 값을 가져온다.
+						let startDateCheck = $('#categoryCalendar_start').val();
+						let endDateCheck = $('#categoryCalendar_end').val();
+						
+						
+						//=======================제한사항 걸러내기 3가지 ===========================//
+						// 날짜 시작, 종료를 입력하지 않을 경우 걸러낸다.
+						if(startDateCheck == '' ||endDateCheck == ''){
+							alert('검색할 시작 날짜와 종료 날짜를 반드시 선택해야 합니다.');
+							return false;
+						}
+						
+						// 날짜 시작, 종료의 기준일을 반대로 누르는 사람 있으면 걸러야 한다..
+						if(startDateCheck > endDateCheck){
+							alert('검색 시작 날짜를 종료 날짜보다 미래로 지정 할 수 없습니다.');
+							return false;
+						}
+						
+						// 최대 선택 가능 날짜의 차이는 6개월 이다. 일수로 치면 180일 이고,
+						// 년도 기준과 6개월 이상, 180일 이상은 차트만 기입되고 엑셀이 기입되지 않도록 한다.
+						// 왜냐? 데이터가 너무 많아질 경우 오히려 서비스 저하가 발생 할 수 있기 때문이다.
+						
+						//========================제한사항 걸러내기 끝 ===============================//
+						// 년도, 월별, 일별 어떤 조건인지 확인하고 이동한다.!!!
+						let dateCheck = $('#categoryDate>option:selected').val();
+						
+						
+						if(dateCheck != "년별"){ // 년별이 아닐경우 스플릿 변전역변수를 스플릿 해준다!
+							// 날짜 - 표시 스플릿해서 없애기
+							startSplit = startDateCheck.split("-");
+							endSplit = endDateCheck.split("-");
+						}
+						
+						// 차트에 새로운 값 업데이트 하기 전에 모두 지운다.
+						// 지우는건 제한사항으로 걸러 낸 다음에 한다.
+						let labelsLength = parseInt(Object.keys(myChart.data.labels).length);
+						myChart.data.labels.splice(0,labelsLength);
+						myChart.update();
+						
+						/* 생각하자..................
+						1. 년도, 월, 일 을 기준으로 endDate와 startDate의 차이를 비교해서 
+							년 차이가 있을 경우는 2가지다 ( 같은 년도가 같을 경우, 시작 년도가 작을경우)
+							월은 1월 12월 기준으로 변화된 값에 대한 계산
+							일은 해당 월의 일이 언제까지인지 계산해서 차이를 계산해야한다.
+						2. 해당 차이 값(날짜)을 구해서 차트 labels에 넣어주어야 한다.
+						3. "일". 그러니까 해당 월의 마지막 날을 구하는 것은 lastday가 언제인지 식으로 구해야한다.
+						//const startCheck = new Date(startDateCheck);
+						//const endCheck = new Date(endDateCheck).getFullYear();
+						//const gapCheck = new Date(startSplit[0], startSplit[1], 0).getDate();
+					
+						*/
+						
+						
+						// 월별, 년별, 일별 그리고 지정한 날짜에 따라 차트에 들어가지는 값이 달라진다.
+						if(dateCheck=="월별"){
+							// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
+							startSplit[0] = parseInt(startSplit[0],10);
+							startSplit[1] = parseInt(startSplit[1],10);
+							
+							// 날짜의 차이(년)을 구한다.
+							if( startSplit[0] < endSplit[0] ){// 년도 차이가 있다! 
+								gapResult = endSplit[1] - startSplit[1] +12; // "월" 계산된 값에 + 12를 해준다.
+								for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
+									myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
+									if(startSplit[1]!=12){
+										startSplit[1] += 1;
+									} else { //startSplit[1]이 12월이 되면 년도와 월을 바꿔서 대입 해줘야 한다.
+										startSplit[0] += 1;
+										startSplit[1] = 1;
+									}
+								}
+							} else { // 년도 차이가 없다!
+								gapResult = endSplit[1] - startSplit[1];
+								for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
+									
+									myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
+									startSplit[1] += 1;
+								}
+							}
+							
+						} else if(dateCheck=="일별"){
+							// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
+							startSplit[0] = parseInt(startSplit[0],10);
+							startSplit[1] = parseInt(startSplit[1],10);
+							startSplit[2] = parseInt(startSplit[2],10);
+							
+							let startInstance = new Date(startDateCheck).getTime();
+							let endInstance = new Date(endDateCheck).getTime();
+							
+							// 시간으로 바꾼 날짜의 차이를 구한다. 밀리초는 1초를 1000으로 나눈것 + 60초 + 60분 + 24시간을 나누면 1일이 구해진다
+							let resultDate = (endInstance-startInstance)/1000/60/60/24;
+							
+							/* 
+								일별에 대해 구하기 위해서는
+								1. 년도 차이가 있는지 확인
+									--> 년도 차이가 있으면 월과 일의 마지막 날에 변화가 되어야 하고
+								2. 월 차이가 있는지 확인
+									--> 월의 차이가 있을 경우 일의 마지막 날에 변화가 되어야 한다.
+								
+								------------ 위에것은 취소!
+								아래와 같이 date + 1만으로 년, 월 일 변화를 확인 할 수 있다.
+							*/
+							
+							// 날짜를 객체화 한다.
+							let dateCheck = new Date(startSplit);
+							
+							// 차트에 +1을 하며 넣어준다.
+							for(let i = 0; i <= resultDate; i++){
+								
+								myChart.data.labels.push(dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate());
+								
+								dateCheck.setDate(dateCheck.getDate()+1);
+							}
+						} else if(dateCheck=="년별"){
+							gapResult = endDateCheck-startDateCheck;
+							
+							for(let i = 0; i <= gapResult; i++){
+								myChart.data.labels.push(startDateCheck);
+								startDateCheck++;
+							}
+							
+						}
+						//myChart에 담긴 것을 업데이트한다.
+						myChart.update();
+					})
+					//////////////////// 수익 매출분석에 들어갈 labels 끝 /////////////////////
+					
+					
+					
 					//차트 추가하기
 					function addData(chart, data) {
 					    chart.data.datasets.push(data);
@@ -225,9 +370,6 @@
 
 					//차트 삭제하기
 					function removeData(chart,delData) {
-					    //chart.data.labels.pop();
-					    //alert(chart.data.datasets[1].label);
-					    //chart.data.datasets.splice(1,1)
 					    chart.data.datasets.splice(delData,1);
 					    chart.update();
 					}
@@ -237,12 +379,18 @@
 						
 					}
 					
+					// 존재하는 품목이 없는것으로 확인되었을 경우 resultData[] 배열에 넣어서 데이터 산출 하는데 사용되어야 한다.
+					let resultData = new Array();
 					
 					///////////////////////////////////////////////////////////////////////// 카테고리, 차트, 엑셀
 					$(function(){
 						// 중분류 카테고리 선택시 추가하는 기능 categoryManagement
 						$(document).on('click', '#mcategory>li', function(){
 							/*========================  category에 포함  ==========================*/
+							
+							// 선택한 목록의 중분류 이름, 번호를 구한다.
+							let selectName = $(this).text();
+							let selectNum = $(this).children().val();
 							
 							// li 개수 구하여 10개 이상은 고르지 못하도록 막는다
 							let liLength = $('#categoryManagement>li').length;
@@ -251,26 +399,54 @@
 								
 							}
 							
-							// 목록 선택 한 것이 무엇인가?
-							let selectItem = $(this).text();
 							
-							
-							// li에 존재하는 품목 이름이 있으면 걸러야 한다.
+							// li에 존재하는 품목 이름이 있으면 추가하지 못하도록 제한해야 한다.
 							for(let i=0; i<liLength; i++){
 								let getSelect = $('#categoryManagement>li:nth-child('+(i+1)+')').text();
 								let gtPosition = getSelect.indexOf(">")+1;
 								let boxPosition = getSelect.indexOf("⊠");
 								let result = getSelect.substring(gtPosition,boxPosition);
-								
-								if(result===selectItem){
+								if(result===selectName){
 									return alert("선택되어 있는 품목은 추가 할 수 없습니다.");	
 								}
 							}
 							
-							
 							// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
-							let tag = "<li>"+$(this).attr('value')+"&gt;"+selectItem+"<span>⊠</span></li>";
+							let tag = "<li>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></li>";
 							$('#categoryManagement').append(tag);
+							
+							// append 된 selectName을 배열에 넣어준다.
+							resultData.push(selectNum);
+							console.log(resultData);
+							
+							
+							//계산은 언제 발동하는가?
+							// 중분류 카테고리가 눌렸을 때,
+							// 중분류 카테고리 삭제할 때
+							   // 이 두가지는 값이 들어왔을 때마다 리스트의 값을 받아서 확인하고 쿼리문을 돌리는 방식으로..?
+							// 날짜 적용 눌렀을 때
+							   // -> 날짜를 몇일부터 ~ 몇일까지 골랐는지 알아야 함
+							   // -> 그 날짜의 갯수가 몇개인지 알아야 함
+							
+							// 계산은 어떻게 해야하나?
+							// 월 단위인지, 년 단위인지, 일 단위인지에 따라서 계산되는 값이 달라져야 한다
+							// 미쳤다.
+							
+							$.ajax({
+								type: "POST",
+								url: "getListData",
+								data: resultData,
+								success: function(){
+									console.log("성공인가요?");
+								}, error: function(e){
+									console.log(e);
+								}
+							})
+							
+							
+							
+							
+							<!--
 							
 							
 							/*========================  chart추가  ==========================*/
@@ -281,14 +457,16 @@
 							
 							// datasets에 들어갈 data 세팅
 							let data = {
-								label: selectItem,
+								label: selectName,
 								data: [10000, 25302, 12347, 73946],
 								borderColor: 'rgb('+color1+','+color2+','+color3+')'
 							};
 							
 							// 차트 추가 함수
 							addData(myChart, data);
-						})
+							
+							-->
+						})// 추가함수 끝
 						
 						
 						
@@ -301,169 +479,47 @@
 							// 그리고 삭제하는 데이터가 추가 된 것 중에 몇번째에 있는지 알 수 있어야 한다.
 							let liLength = $('#categoryManagement>li').length;
 							
-							// 삭제할 선택된 아이템
-							let selectItem = $(this).text();
+							// 선택된 목록의 이름과 번호를 구한다.
+							let selectName = $(this).text();
+							let selectNum = $(this).children().val();
+							
 							
 							// 선택된 아이템의 텍스트를 걸러야 한다.
-							let selectGtPosition = selectItem.indexOf(">")+1;
-							let selectBoxPosition = selectItem.indexOf("⊠");
-							let selectItemResult = selectItem.substring(selectGtPosition,selectBoxPosition);
+							let selectGtPosition = selectName.indexOf(">")+1;
+							let selectBoxPosition = selectName.indexOf("⊠");
+							let selectNameResult = selectName.substring(selectGtPosition,selectBoxPosition);
 							
 							///////////////////////////////차트 데이터 삭제
-							// li에 존재하는 품목 이름이 있으면 걸러야 한다.
+							// li에 존재하는 품목 이름을 찾아서 삭제한다.
 							for(let i=0; i<liLength; i++){
 								let getSelect = $('#categoryManagement>li:nth-child('+(i+1)+')').text();
 								let gtPosition = getSelect.indexOf(">")+1;
 								let boxPosition = getSelect.indexOf("⊠");
 								let result = getSelect.substring(gtPosition,boxPosition);
 								
-								// result와 selectItemResult가 맞는 차트데이터를 삭제한다
-								if(result===selectItemResult){
+								// result와 selectNameResult가 맞는 차트데이터를 삭제한다
+								if(result===selectNameResult){
+									// result 데이터에 데이터도 삭제한다.
+									resultData.splice(i,1);
+									console.log(resultData);
+									// 차트에 들어가있는 데이터를 삭제한다
 									removeData(myChart, i);
 								}
 								
 							}
 							// 이건 선택되서 아래에 내려온것들 클릭했을때 지워주는거 ex) 채소>땅콩
 							$(this).remove();
-						})
+						})// 삭제 함수 끝
 						
 						
 						
-						//////////////////// 수익 매출분석에 들어갈 labels 시작 /////////////////////
-						// 날짜 적용 버튼 클릭시,, labels 추가
-						$('#calendarApply').click(function(){
-							// 월별 일별에 사용될 스플릿 값 저장할 전역변수 생성!
-							let startSplit = null;
-							let endSplit = null;
+						
+						
+						
+						
+						
+						
 
-							// 차이값에 대한 계산 결과를 저장하는데 사용할 전역변수 생성!
-							let gapResult = 0;
-							
-							// startDate, endDate 선택된 값을 가져온다.
-							let startDateCheck = $('#categoryCalendar_start').val();
-							let endDateCheck = $('#categoryCalendar_end').val();
-							
-							
-							//=======================제한사항 걸러내기 3가지 ===========================//
-							// 날짜 시작, 종료를 입력하지 않을 경우 걸러낸다.
-							if(startDateCheck == '' ||endDateCheck == ''){
-								alert('검색할 시작 날짜와 종료 날짜를 반드시 선택해야 합니다.');
-								return false;
-							}
-							
-							// 날짜 시작, 종료의 기준일을 반대로 누르는 사람 있으면 걸러야 한다..
-							if(startDateCheck > endDateCheck){
-								alert('검색 시작 날짜를 종료 날짜보다 미래로 지정 할 수 없습니다.');
-								return false;
-							}
-							
-							// 최대 선택 가능 날짜의 차이는 6개월 이다. 일수로 치면 180일 이고,
-							// 년도 기준과 6개월 이상, 180일 이상은 차트만 기입되고 엑셀이 기입되지 않도록 한다.
-							// 왜냐? 데이터가 너무 많아질 경우 오히려 서비스 저하가 발생 할 수 있기 때문이다.
-							
-							//========================제한사항 걸러내기 끝 ===============================//
-							// 년도, 월별, 일별 어떤 조건인지 확인하고 이동한다.!!!
-							let dateCheck = $('#categoryDate>option:selected').val();
-							
-							
-							if(dateCheck != "년별"){ // 년별이 아닐경우 스플릿 변전역변수를 스플릿 해준다!
-								// 날짜 - 표시 스플릿해서 없애기
-								startSplit = startDateCheck.split("-");
-								endSplit = endDateCheck.split("-");
-							}
-							
-							// 차트에 새로운 값 업데이트 하기 전에 모두 지운다.
-							// 지우는건 제한사항으로 걸러 낸 다음에 한다.
-							let labelsLength = parseInt(Object.keys(myChart.data.labels).length);
-							myChart.data.labels.splice(0,labelsLength);
-							myChart.update();
-							
-							/* 생각하자..................
-							1. 년도, 월, 일 을 기준으로 endDate와 startDate의 차이를 비교해서 
-								년 차이가 있을 경우는 2가지다 ( 같은 년도가 같을 경우, 시작 년도가 작을경우)
-								월은 1월 12월 기준으로 변화된 값에 대한 계산
-								일은 해당 월의 일이 언제까지인지 계산해서 차이를 계산해야한다.
-							2. 해당 차이 값(날짜)을 구해서 차트 labels에 넣어주어야 한다.
-							3. "일". 그러니까 해당 월의 마지막 날을 구하는 것은 lastday가 언제인지 식으로 구해야한다.
-							//const startCheck = new Date(startDateCheck);
-							//const endCheck = new Date(endDateCheck).getFullYear();
-							//const gapCheck = new Date(startSplit[0], startSplit[1], 0).getDate();
-						
-							*/
-							
-							
-							// 월별, 년별, 일별 그리고 지정한 날짜에 따라 차트에 들어가지는 값이 달라진다.
-							if(dateCheck=="월별"){
-								// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
-								startSplit[0] = parseInt(startSplit[0],10);
-								startSplit[1] = parseInt(startSplit[1],10);
-								
-								// 날짜의 차이(년)을 구한다.
-								if( startSplit[0] < endSplit[0] ){// 년도 차이가 있다! 
-									gapResult = endSplit[1] - startSplit[1] +12; // "월" 계산된 값에 + 12를 해준다.
-									for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
-										myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
-										if(startSplit[1]!=12){
-											startSplit[1] += 1;
-										} else { //startSplit[1]이 12월이 되면 년도와 월을 바꿔서 대입 해줘야 한다.
-											startSplit[0] += 1;
-											startSplit[1] = 1;
-										}
-									}
-								} else { // 년도 차이가 없다!
-									gapResult = endSplit[1] - startSplit[1];
-									for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
-										myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
-										startSplit[1] += 1;
-									}
-								}
-								
-							} else if(dateCheck=="일별"){
-								// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
-								startSplit[0] = parseInt(startSplit[0],10);
-								startSplit[1] = parseInt(startSplit[1],10);
-								startSplit[2] = parseInt(startSplit[2],10);
-								
-								let startInstance = new Date(startDateCheck).getTime();
-								let endInstance = new Date(endDateCheck).getTime();
-								
-								// 시간으로 바꾼 날짜의 차이를 구한다. 밀리초는 1초를 1000으로 나눈것 + 60초 + 60분 + 24시간을 나누면 1일이 구해진다
-								let resultDate = (endInstance-startInstance)/1000/60/60/24;
-								
-								/* 
-									일별에 대해 구하기 위해서는
-									1. 년도 차이가 있는지 확인
-										--> 년도 차이가 있으면 월과 일의 마지막 날에 변화가 되어야 하고
-									2. 월 차이가 있는지 확인
-										--> 월의 차이가 있을 경우 일의 마지막 날에 변화가 되어야 한다.
-									
-									------------ 위에것은 취소!
-									아래와 같이 date + 1만으로 년, 월 일 변화를 확인 할 수 있다.
-								*/
-								
-								// 날짜를 객체화 한다.
-								let dateCheck = new Date(startSplit);
-								
-								// 차트에 +1을 하며 넣어준다.
-								for(let i = 0; i <= resultDate; i++){
-									
-									myChart.data.labels.push(dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate());
-									
-									dateCheck.setDate(dateCheck.getDate()+1);
-								}
-							} else if(dateCheck=="년별"){
-								gapResult = endDateCheck-startDateCheck;
-								
-								for(let i = 0; i <= gapResult; i++){
-									myChart.data.labels.push(startDateCheck);
-									startDateCheck++;
-								}
-								
-							}
-							//myChart에 담긴 것을 업데이트한다.
-							myChart.update();
-						})
-						//////////////////// 수익 매출분석에 들어갈 labels 끝 /////////////////////
 						
 						
 						

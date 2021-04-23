@@ -2,18 +2,70 @@ package com.beetmall.sshj.vo;
 
 public class FarmVO {
 	// 카테고리 대분류
-	private int catenum;
-	private String catename;
-	private int catesort;
-	private String cateimg;
+	private int catenum; // 대분류 번호
+	private String catename; // 대분류 이름
+	private int catesort; // 대분류 정렬기준
+	private String cateimg; // 대분류 사진
 	
 	// 카테고리 중분류
-	private int mcatenum;
-	private String mcatename;
-	private int mcatesort;
+	private int mcatenum; // 중분류 번호
+	private String mcatename; // 중분류 이름
+	private int mcatesort; // 중분류 정렬기준
+	
+	// 차트에 들어갈 데이터?
+	private int[] resultData; // 뷰단에 존재하는 가져와야 할 데이터 목록[배열]
+	private int ordernum; // 주문번호
+	private int productnum; // 상품번호 
+	private int orderquantity; // 수량
+	private String orderconfirm; // 구매확정일자
+	private int orderprice; // 구매한 가격
+	private String userid; // 유저아이디
 	
 	
 	
+	public int[] getResultData() {
+		return resultData;
+	}
+	public void setResultData(int[] resultData) {
+		this.resultData = resultData;
+	}
+	public int getOrdernum() {
+		return ordernum;
+	}
+	public void setOrdernum(int ordernum) {
+		this.ordernum = ordernum;
+	}
+	public int getProductnum() {
+		return productnum;
+	}
+	public void setProductnum(int productnum) {
+		this.productnum = productnum;
+	}
+	public int getOrderquantity() {
+		return orderquantity;
+	}
+	public void setOrderquantity(int orderquantity) {
+		this.orderquantity = orderquantity;
+	}
+	public String getOrderconfirm() {
+		return orderconfirm;
+	}
+	public void setOrderconfirm(String orderconfirm) {
+		this.orderconfirm = orderconfirm;
+	}
+	public int getOrderprice() {
+		return orderprice;
+	}
+	public void setOrderprice(int orderprice) {
+		this.orderprice = orderprice;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	//////////////////차트, 엑셀에 들어갈 데이터..////////////////////////
 	public int getCatenum() {
 		return catenum;
 	}
