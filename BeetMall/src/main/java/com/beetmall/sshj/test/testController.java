@@ -77,6 +77,28 @@ public class testController {
 	public String recipeWrite() {
 		return "custom/recipeWrite";
 	}
+	
+	@RequestMapping("/custominfo")
+	public String customInfo() {
+		return "custom/custominfo";
+	}
+
+	@RequestMapping("/customWish")
+	public String customWish() {
+		return "custom/customWish";
+	}
+	
+	@RequestMapping("/customBuyConfirm")
+	public String customBuyConfirm() {
+		return "custom/customBuyConfirm";
+	}
+
+	@RequestMapping("/customMyrecipe")
+	public String customMyrecipe() {
+		return "custom/customMyrecipe";
+	}
+
+
 // 윤수///////////////////////////////////////////////////////////////
 	@RequestMapping("error")	// 에러페이지
 	public String errer() {
