@@ -5,6 +5,7 @@ header{
 	margin: 0 auto;
 	height: 200px;
 }
+
 section{
 	width: 1080px;
 	margin: 0 auto;
@@ -12,19 +13,32 @@ section{
 	display: flex;
 	flex-direction: row;
 }
+
 footer{
 	width: 1080px;
 	margin: 0 auto;
 }
+
 ul,li{
 	padding: 0;
 	margin: 0;
 	list-style-type: none;
 }
+
 .font_bold{
 	font-weight: bold;
 }
-a:hover,a:active,a:visited,a:link{text-decoration: none; color: white;}
+
+.default_font{
+	font-family: 'Nanum Gothic', sans-serif;
+	font-size:16px;	
+}
+
+a:hover,a:active,a:visited,a:link{
+	text-decoration: none; 
+	color: white;
+}
+
 /*================ 기본 설정 끝 =================*/
 
 /*================ 헤드 시작 ===================*/
@@ -69,7 +83,7 @@ a:hover,a:active,a:visited,a:link{text-decoration: none; color: white;}
 nav{
 	width: 180px;
 	padding: 0 10px;
-	background-color: rgb(224,102,102);
+	background-color: #f1c40f;
 }
 nav li{
 	padding: 15px;
@@ -106,7 +120,7 @@ article{
 	width: 27px;
 	height: 27px;
 	
-	filter: invert(86%) sepia(34%) saturate(7117%) hue-rotate(311deg) brightness(90%) contrast(103%);
+	filter: invert(89%) sepia(17%) saturate(7050%) hue-rotate(359deg) brightness(103%) contrast(89%);
 	float: right;
 }
 

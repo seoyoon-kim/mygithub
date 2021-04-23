@@ -48,7 +48,7 @@
 		$("input[value=회원가입]").click(function(){
 			location.href="register";
 		})
-		
+
 	});
 </script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -64,14 +64,14 @@
 		<input type="button" value="로그인" class="menuButtons"/>
 		<input type="button" value="고객센터" class="menuButtons"/>
 	</div>
-	
+
 	<div class="loginButtons">	<!-- 로그인 후 -->
 		<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
 		<a href="마이페이지">김비트님</a> <span id="usermypage">▼</span>
 		<input type="button" value="로그아웃" class="menuButtons"/>
 		<input type="button" value="고객센터" class="menuButtons"/>
 	</div>
-	
+
 	<div id="logoImg">			<!-- 사이트 로고 부분 -->
 		<a href="/sshj"><img src="<%=request.getContextPath()%>/img/logo2.PNG"></a>
 	</div>
