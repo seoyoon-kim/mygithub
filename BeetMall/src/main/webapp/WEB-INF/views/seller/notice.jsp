@@ -16,31 +16,21 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
-		<!-- font-family: 'NanumSquare', sans-serif !important; -->
+		<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
 </head>
 <style>
-	body{width:1920px; padding:0; margin:0;  font-family: 'Nanum Gothic', sans-serif}
-	.main{width:1080px; }
-	.wrapTitle{
-	   width: 100%;
-	   height: 60px;
-	   line-height: 60px;
-	   color: #fff;
-	   font-weight:bold;
-	   font-size:2em;
-	   text-indent: 0.4em;
-	   background-color: rgb(224,102,102);
-	   margin-bottom:30px;
-	}
 	ul, li, a{
 		list-style: none; padding:0; margin:0;
 	}
-
+	
 	/*표*/
 	table{
+		width:90%;	
 		border-spacing: 0;
 		text-indent: initial;
+		margin:50px 0 50px 50px;	
+		border-top:2px solid lightgray;
+		border-bottom:2px solid lightgray;
 	}
 	th{
 		height:50px;
@@ -68,24 +58,17 @@
 		color:black;
 		cursor: pointer;
 	}
-	/*페이징*/
-	.paging,th{
+	th{
 		margin-top:30px;
 		text-align:center;
 	}
-	.wrap_paging, .option_change, table, fieldset, .paging{
+	.option_change{
 		width:100%;
 	}
-	.paging a{
-		display: inline-block;
-	    height: 23px;
-	    width:23px;
-	    line-height: 22px;
-	    border: 1px solid #ccc;
-	    background-color: #fff;
-	    text-decoration: none;
-	    vertical-align: top;
-	    overflow: hidden;
+
+	/* 검색하기 */
+
+
 	}
 </style>
 <script>
@@ -94,7 +77,25 @@
 </script>
 <body>
 	<div class="main">
-		<div class="wrapTitle">공지사항</div>
+	<!-- 고객센터 사이드바 -->
+	<nav class="cs_nav" style="margin-rignt:0">
+		<ul class="cs_ul">
+			<li><span class="cs_title">고객센터</span></li>
+			<li><a href="<%=request.getContextPath() %>/notice">공지사항</a></li>
+			<li><a href="<%=request.getContextPath() %>/faq">자주묻는질문</a></li>
+			<li><a href="<%=request.getContextPath() %>/ask_admin">문의하기</a></li>
+		</ul>
+	</nav>
+	<!-- 가운데 메인 div -->
+	<div id="article">
+		
+		<div class="cs_wrapTitle">공지사항</div>
+	<!-- 검색하기 -->
+		<div id="search_container">
+			<span id="search_box">
+				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
+			</span>
+		</div>
 		<fieldset>
 		<table>
 			<thead>
@@ -107,7 +108,7 @@
 			<tbody>
 				<tr>
 					<td>1</td>
-					<td><a href="javascript:showHideFaq()"><strong>코로나19로 인한 픽업 서비스 중단 안내</strong></a></td>
+					<td><a href="<%=request.getContextPath() %>/notice_view"><strong>코로나19로 인한 픽업 서비스 중단 안내</strong></a></td>
 					<td>21/04/21</td>
 				</tr>
 				
@@ -130,14 +131,27 @@
 			</tbody>
 			
 		</table>
-		<div class="wrap_paging">
-			<div class="paging">
-				<a href="#" title="" class=""><span style="cursor:pointer;">&#10094;</span></a>
-				<a href="#" title="" class=""><span style="cursor:pointer;">1</span></a>
-				<a href="#" title="" class=""><span style="cursor:pointer;">&#10095;</span></a>
+		<!-- 페이징 by kangsan -->
+		<div class="page_wrap">
+			<div class="page_nation">
+			   <a class="arrow pprev" href="#"></a>
+			   <a class="arrow prev" href="#"></a>
+			   <a href="#" class="active">1</a>
+			   <a href="#">2</a>
+			   <a href="#">3</a>
+			   <a href="#">4</a>
+			   <a href="#">5</a>
+			   <a href="#">6</a>
+			   <a href="#">7</a>
+			   <a href="#">8</a>
+			   <a href="#">9</a>
+			   <a href="#">10</a>
+			   <a class="arrow next" href="#"></a>
+			   <a class="arrow nnext" href="#"></a>
 			</div>
-		</div>
+		 </div>
 		</fieldset>
+		</div>
 	</div>
 </body>
 </html>

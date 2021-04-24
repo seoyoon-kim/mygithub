@@ -36,4 +36,12 @@ public class FarmController {
 	public String edit_farm() {
 		return "seller/edit_farm";
 	}
+	@RequestMapping("/notice")
+	public String notice() {
+		return "seller/notice";
+	}
+	@RequestMapping("/notice_view")
+	public String noticeView() {
+		return "seller/notice_view";
+	}
 }
