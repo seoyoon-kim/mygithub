@@ -49,7 +49,6 @@
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	
 }
 
 #category{
@@ -61,6 +60,7 @@
 	width: 100%;
 	text-indent: 0.4em;
 	display: flex;
+	margin-top:5px;
 }
 
 #categoryListMiddle span{
@@ -96,7 +96,7 @@
 
 /* 카테고리별 매출분석*/
 #excelContainer{
-	width: 95%;
+	width: 100%;
 	margin: 0 auto;
 }
 #excelList{
@@ -111,6 +111,9 @@
 	line-height: 40px;
 	text-align: center;
 	border: 1px solid #ddd;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 #excelList li:nth-child(n+1):nth-child(-n+6){
@@ -118,5 +121,42 @@
 }
 
 #excelList li:nth-child(6n+1){
-	flex-basis: 10%
+	flex-basis: 10%;
 }
+
+		/* 페이징처리부분 */
+	.page_wrap {
+		text-align:center;
+		font-size:0;
+		padding-bottom: 30px;
+	}
+	.page_nation {
+		display:inline-block;
+	}
+	.page_nation .none {
+		display:none;
+	}
+	.page_nation a {
+		display:block;
+		margin:0 3px;
+		float:left;
+		border:1px solid #e6e6e6;
+		width:35px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		background-color:#fff;
+		font-size:13px;
+		color:#999999;
+		text-decoration:none;
+	}
+	.page_nation .arrow {
+		border:1px solid #ccc;
+	}
+
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/* 페이징처리끝 */

@@ -19,4 +19,9 @@ public class FarmServiceImp implements FarmService {
 		return dao.allCategoryList();
 	}
 
+	@Override
+	public List<FarmVO> salesDataList(FarmVO vo) {
+		return dao.salesDataList(vo);
+	}
+
 }

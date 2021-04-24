@@ -44,4 +44,22 @@ public class FarmController {
 	public String noticeView() {
 		return "seller/notice_view";
 	}
+	
+	@RequestMapping("/getListData") // seller_sales 페이지에서 차트와 엑셀 데이터 가져오는 dao
+	@ResponseBody
+	public List<FarmVO> getListData(FarmVO vo,HttpSession session) {
+		vo.setUserid((String)session.getAttribute("logId"));
+		
+		System.out.println(vo.getResultData()[0]==1);
+		System.out.println(vo.getStartCalendarDataValue());
+		System.out.println(vo.getEndCalendarDataValue());
+		
+		
+//		List<FarmVO> vo2 = service.salesDataList(vo);
+//		System.out.println(vo2.get(0).getOrderprice());
+//		mav.addObject("salesDataList", );
+//		mav.setViewName("seller/seller_sales");
+//		
+		return service.salesDataList(vo);
+	}
 }
