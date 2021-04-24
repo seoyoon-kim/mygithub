@@ -56,16 +56,6 @@ public class FarmController {
 	public List<FarmVO> getListData(FarmVO vo,HttpSession session) {
 		vo.setUserid((String)session.getAttribute("logId"));
 		
-		System.out.println(vo.getResultData()[0]==1);
-		System.out.println(vo.getStartCalendarDataValue());
-		System.out.println(vo.getEndCalendarDataValue());
-		
-		
-//		List<FarmVO> vo2 = service.salesDataList(vo);
-//		System.out.println(vo2.get(0).getOrderprice());
-//		mav.addObject("salesDataList", );
-//		mav.setViewName("seller/seller_sales");
-//		
 		return service.salesDataList(vo);
 	}
 }

@@ -324,12 +324,12 @@
 							// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
 							startSplit[0] = parseInt(startSplit[0],10);
 							startSplit[1] = parseInt(startSplit[1],10);
-							
 							// 마지막 날짜 구하기
-							let lastDay = new Date(endSplit[0],endSplit[1]+2,0).getDate();
+							let lastDay = new Date(endSplit[0],endSplit[1],0).getDate();
 							
 							// 날짜의 차이(년)을 구한다.
 							if( startSplit[0] < endSplit[0] ){// 년도 차이가 있다! 
+								
 								gapResult = endSplit[1] - startSplit[1] +12; // "월" 계산된 값에 + 12를 해준다.
 								for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
 									// 차트에 넣는다
@@ -356,6 +356,7 @@
 									}
 								}
 							} else { // 년도 차이가 없다!
+								
 								gapResult = endSplit[1] - startSplit[1];
 								for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
 									//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
@@ -444,9 +445,6 @@
 						}
 						//myChart에 담긴 것을 업데이트한다.
 						myChart.update();
-
-						console.log(startCalendarDataValue);									
-						console.log(endCalendarDataValue);	
 					})
 					//////////////////// 수익 매출분석에 들어갈 labels 끝 /////////////////////
 					
@@ -486,7 +484,7 @@
 							}
 							
 							// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
-							let tag = "<li>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></li>";
+							let tag = "<li value="+selectNum+">"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></li>";
 							$('#categoryManagement').append(tag);
 							
 							// append 된 selectName을 배열에 넣어준다.
@@ -507,7 +505,14 @@
 							
 							// datasets에 들어갈 data 배열 선언
 							let orderpriceData = [];
-							   
+							// 년, 월 일때 합계를 계산하기 위해 저장할 맵
+							// ex) 년별을 골랐을때, 2018년 1월 01일 부터 ~ 2018년 12월 31일까지
+							// ex) 월별을 골랐을때, 2018년 03월 01일 부터 ~ 2018년 04월 41일까지
+							let map = new Map();
+							// 데이터의 날짜를 계산하기 위한 객체화  
+							let minDate = new Date(startCalendarDataValue);
+							
+							
 							$.ajax({
 								type: "POST",
 								url: "getListData",
@@ -528,56 +533,146 @@
 									let $result = $(result);
 									$result.each(function(idx,vo){
 										tag += "<li>" + vo.ordernum + "</li>";
-										tag += "<li>" + vo.orderconfirm + "</li>";
+										tag += "<li value=" + vo.mcatenum + ">" + vo.orderconfirm + "</li>";
 										tag += "<li>" + vo.productname + "</li>";
 										tag += "<li>" + vo.orderquantity + "</li>";
 										tag += "<li>" + vo.orderprice + "</li>";
 										tag += "<li>" + (vo.orderquantity * vo.orderprice) + "</li>";
 										
-										// 년별, 월별, 일별에 따라서 차트에 들어가는 데이터가 달라진다.
-										if(dateCheck=="월별"){
-											//1월이면 1월 01일보다 크고 1월 31일보다 작은 모든 데이터
-											for(let i = 0; i < 
-													startCalendarDataValue 
-										} else if(dateCheck=="년별"){
-											
-										} else if(dateCheck=="일별"){
-											
-										}
-												gapResult
-										console.log(vo.orderconfirm<"2020-10-10");
-										if(vo.orderconfirm)
 									});
 									$('#excelList').html(tag);
+									
+									
+									
+									// 선택한 첫달의 1일보다 이상 ~ 선택한 다음달의 1일보다 작은 날짜 안에 있는 값을 다 구하고 다음달로 넘어가면 다음달 데이터를 구한다. 
+									let maxDate = new Date(minDate);
+									maxDate.setMonth(maxDate.getMonth()+1);// maxDate는 minDate의 1달 뒤로 설정
+
+									// 구해진 매출금액의 데이터 개수를 구해서 반복한다.
+									for(let i = 0; i < $('#excelList li:nth-child(6n+12)').length; i++){
+										let orderconfirm = new Date($('#excelList li:nth-child('+(8+(i*6))+')').text());
+										let mcatenum = $('#excelList li:nth-child('+(8+(i*6))+')').attr('value');
+										
+										// orderconfirm이 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
+										if(maxDate <= orderconfirm){
+											minDate.setMonth(minDate.getMonth()+1);
+											maxDate.setMonth(maxDate.getMonth()+1);
+											//월 단위로 매출금액을 계산해야 하기 때문에 map도 초기화 해준다.
+											map.clear();
+										}
+										
+										//  ex) 1일보다 크고 ~ 31일보다 작은 값들
+										if(minDate <= orderconfirm && orderconfirm < maxDate){
+											// 각 값 마다의 매출금액을 넣어 더해서 저장해준다. ex) map(감자, 20000) ----> map(감자, 20000) + 10000 = map(감자,30000)
+											if(map.has(mcatenum)){// map에 key가 있으면 있던 값에 더해서 저장한다 
+												let value = map.get(mcatenum);
+												map.set(mcatenum, value+$('#excelList li:nth-child(6n+'+(12+(i*6))+')').text());
+												console.log("value=>"+value);
+												console.log("매출금액=>"+$('#excelList li:nth-child(6n+'+(12+(i*6))+')').text());
+											} else {// map에 key가 없으면
+												map.set(mcatenum, $('#excelList li:nth-child(6n+'+(12+(i*6))+')').text()); 
+											}
+											// map에 데이터를 orderpriceData에 넣는다.
+											orderpriceData.push(map.get(orderconfirm));
+											//console.log(map.get("1"));
+										}
+										
+										// 몇번째 데이터냐에 따라서 데이터를 추가한다.
+										// li에 존재하는 품목의 productnum과 동일하면 추가한다.
+										for(let i=0; i<$('#categoryManagement>li').length; i++){
+											console.log(map.keys());
+											if(result===$('#categoryManagement>li:nth-child('+(i+1)+')').attr('value')){
+												console.log('존재하는지 확인');
+											}
+										}
+										
+										//myChart.data.datasets[].data(map.get(productnum));
+										
+										
+									}
+									//console.log(excelLiLength);
+									/*
+									/*========================  chart추가  ==========================
+									// borderColor random
+									let color1 = Math.floor(Math.random() * 256); 
+									let color2 = Math.floor(Math.random() * 256);
+									let color3 = Math.floor(Math.random() * 256);
+									
+									// datasets에 들어갈 data 세팅
+									let data = {
+										label: selectName,
+										data: [10000, 25302, 12347, 73946],
+										borderColor: 'rgb('+color1+','+color2+','+color3+')'
+									};
+									
+									
+									// vo.orderconfirm이 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
+									if(maxDate <= vo.orderconfirm){
+										minDate.setMonth(minDate.getMonth()+1);
+										maxDate.setMonth(maxDate.getMonth()+1);
+										//월 단위로 매출금액을 계산해야 하기 때문에 map도 초기화 해준다.
+										map.clear();
+									}
+									
+									// 1일보다 크고 ~ 31일보다 작은
+									if(minDate <= orderconfirm && orderconfirm < maxDate){
+										// 각 값 마다의 매출금액을 넣어 더해서 저장해준다. ex) map(감자, 20000) ----> map(감자, 20000) + 10000 = map(감자,30000)
+										if(map.has(vo.productnum)){// map에 key가 있으면 
+											let value = map.get(vo.productnum);
+											map.set(vo.productnum, value+(vo.orderquantity * vo.orderprice));
+										} else {// map에 key가 없으면
+											map.set(vo.productnum, (vo.orderquantity * vo.orderprice)); 
+										}
+										console.log(map.entries())
+										// map에 계산된 데이터를 제거하고 ! 계산된 값을 넣는다.
+										orderpriceData.push(map.get(vo.productnum));
+									}
+									
+								
+									
+									//이건 일별에 사용 minDate의 "월"의 마지막 날을 구해서 orderconfirm이 그 날짜 안에 있는 값을 더한다
+									//let dataLastDay = new Date(minDate.getFullYear(),(minDate.getMonth()+1),0);
+									
+									
+									// 년별, 월별, 일별에 따라서 차트에 들어가는 데이터가 달라진다.
+									if(dateCheck=="월별"){
+										
+										if(minDate<=vo.orderconfirm)
+										
+										sumData += vo.orderprice;
+										//1월이면 1월 01일보다 크고 1월 31일보다 작은 모든 데이터
+										for(let i = 0; i <gapResult; i++){ 
+											
+											minDate.setDate((minDate.getMonth()+1)+1); 
+										}
+									} else if(dateCheck=="년별"){
+										
+									} else if(dateCheck=="일별"){
+										// 1일보다 크고 ~ 31일보다 작은
+										if(minDate <= orderconfirm){
+											// 각 값 마다의 매출금액을 넣어 더해서 저장해준다. ex) map(감자, 20000) ----> map(감자, 20000) + 10000 = map(감자,30000)
+											if(map.has(vo.productnum)){// map에 key가 있으면 
+												let value = map.get(vo.productnum);
+												map.set(vo.productnum, value+(vo.orderquantity * vo.orderprice));
+											} else {// map에 key가 없으면
+												map.set(vo.productnum, (vo.orderquantity * vo.orderprice)); 
+											}
+											console.log(map.entries())
+											// map에 계산된 데이터를 제거하고 ! 계산된 값을 넣는다.
+											orderpriceData.push(map.get(vo.productnum));
+										}
+									}
+									*/
 									
 								}, error: function(e){
 									console.log(e);
 								}
-							})
-							
-							console.log(startCalendarDataValue);
-							
-							
-							<!--
-							
-							
-							/*========================  chart추가  ==========================*/
-							// borderColor random
-							let color1 = Math.floor(Math.random() * 256); 
-							let color2 = Math.floor(Math.random() * 256);
-							let color3 = Math.floor(Math.random() * 256);
-							
-							// datasets에 들어갈 data 세팅
-							let data = {
-								label: selectName,
-								data: [10000, 25302, 12347, 73946],
-								borderColor: 'rgb('+color1+','+color2+','+color3+')'
-							};
-							
+							});// ajax 끝 
+							/*
+							orderpriceData.push()
 							// 차트 추가 함수
 							addData(myChart, data);
-							
-							-->
+							*/
 						})// 데이터 추가함수 끝
 						
 						
