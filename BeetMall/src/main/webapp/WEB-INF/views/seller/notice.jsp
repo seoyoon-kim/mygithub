@@ -58,25 +58,14 @@
 		color:black;
 		cursor: pointer;
 	}
-	/*페이징*/
-	.paging,th{
+	th{
 		margin-top:30px;
 		text-align:center;
 	}
-	.wrap_paging, .option_change,.paging{
+	.option_change{
 		width:100%;
 	}
-	.paging a{
-		display: inline-block;
-	    height: 23px;
-	    width:23px;
-	    line-height: 22px;
-	    border: 1px solid #ccc;
-	    background-color: #fff;
-	    text-decoration: none;
-	    vertical-align: top;
-	    overflow: hidden;
-	}
+
 	/* 검색하기 */
 
 
@@ -142,13 +131,25 @@
 			</tbody>
 			
 		</table>
-		<div class="wrap_paging">
-			<div class="paging">
-				<a href="#" title="" class=""><span style="cursor:pointer;">&#10094;</span></a>
-				<a href="#" title="" class=""><span style="cursor:pointer;">1</span></a>
-				<a href="#" title="" class=""><span style="cursor:pointer;">&#10095;</span></a>
+		<!-- 페이징 by kangsan -->
+		<div class="page_wrap">
+			<div class="page_nation">
+			   <a class="arrow pprev" href="#"></a>
+			   <a class="arrow prev" href="#"></a>
+			   <a href="#" class="active">1</a>
+			   <a href="#">2</a>
+			   <a href="#">3</a>
+			   <a href="#">4</a>
+			   <a href="#">5</a>
+			   <a href="#">6</a>
+			   <a href="#">7</a>
+			   <a href="#">8</a>
+			   <a href="#">9</a>
+			   <a href="#">10</a>
+			   <a class="arrow next" href="#"></a>
+			   <a class="arrow nnext" href="#"></a>
 			</div>
-		</div>
+		 </div>
 		</fieldset>
 		</div>
 	</div>
