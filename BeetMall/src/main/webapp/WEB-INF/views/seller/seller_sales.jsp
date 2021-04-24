@@ -10,7 +10,7 @@
 <c:set var='datePtn'><fmt:formatDate value="${today }" pattern="yyyy-MM-dd"/></c:set>
 <c:set var='yearCheck'><fmt:formatDate value="${today }" pattern="yyyy"/></c:set>
 
-<script> // 차트와 엑셀에 데이터가 들어가는데 도움은 주지만 관여는 하지 않는 기능들 모아놓은 스크립트
+<script> // 차트와 엑셀에 데이터가 들어가는데 필요한 기능에게 변화되는 도움만 주고 관여는 하지 않는 기능들 모아놓은 스크립트
 
 	// 날짜 변경 yearCheck하는 변수 선언
 	let yearCheck="";
@@ -516,8 +516,40 @@
 									"resultData":resultData,
 									"startCalendarDataValue":startCalendarDataValue,
 									"endCalendarDataValue":endCalendarDataValue
-								}, success: function(){
-									console.log("성공인가요?");
+								}, success: function(result){
+									// 엑셀 리스트를 초기화 시킨다.
+									let tag = "<li>No</li>"
+											+ "<li>매출일자</li>"
+									  	    + "<li>상품명</li>"
+										    + "<li>수량</li>"
+										    + "<li>단가</li>"
+									        + "<li>매출금액</li>";
+									// 엑셀 리스트에 산출된 데이터 값을 넣는다.
+									let $result = $(result);
+									$result.each(function(idx,vo){
+										tag += "<li>" + vo.ordernum + "</li>";
+										tag += "<li>" + vo.orderconfirm + "</li>";
+										tag += "<li>" + vo.productname + "</li>";
+										tag += "<li>" + vo.orderquantity + "</li>";
+										tag += "<li>" + vo.orderprice + "</li>";
+										tag += "<li>" + (vo.orderquantity * vo.orderprice) + "</li>";
+										
+										// 년별, 월별, 일별에 따라서 차트에 들어가는 데이터가 달라진다.
+										if(dateCheck=="월별"){
+											//1월이면 1월 01일보다 크고 1월 31일보다 작은 모든 데이터
+											for(let i = 0; i < 
+													startCalendarDataValue 
+										} else if(dateCheck=="년별"){
+											
+										} else if(dateCheck=="일별"){
+											
+										}
+												gapResult
+										console.log(vo.orderconfirm<"2020-10-10");
+										if(vo.orderconfirm)
+									});
+									$('#excelList').html(tag);
+									
 								}, error: function(e){
 									console.log(e);
 								}
@@ -546,7 +578,7 @@
 							addData(myChart, data);
 							
 							-->
-						})// 추가함수 끝
+						})// 데이터 추가함수 끝
 						
 						
 						
@@ -610,15 +642,28 @@
 						<li>수량</li>
 						<li>단가</li>
 						<li>매출금액</li>
-						
-						<li>No</li>
-						<li>매출일자</li>
-						<li>상품명</li>
-						<li>수량</li>
-						<li>단가</li>
-						<li>매출금액</li>
 					</ul>
 				</div>
+				
+				<!--------------페이징 표시-------------------->
+				<div class="page_wrap">
+					<div class="page_nation">
+					   <a class="arrow pprev" href="#"></a>
+					   <a class="arrow prev" href="#"></a>
+					   <a href="#" class="active">1</a>
+					   <a href="#">2</a>
+					   <a href="#">3</a>
+					   <a href="#">4</a>
+					   <a href="#">5</a>
+					   <a href="#">6</a>
+					   <a href="#">7</a>
+					   <a href="#">8</a>
+					   <a href="#">9</a>
+					   <a href="#">10</a>
+					   <a class="arrow next" href="#"></a>
+					   <a class="arrow nnext" href="#"></a>
+					</div>
+				 </div>
 			</div>
 			
 		</div>

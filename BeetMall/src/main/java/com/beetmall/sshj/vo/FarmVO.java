@@ -15,6 +15,7 @@ public class FarmVO {
 	// 차트에 들어갈 데이터?
 	private int[] resultData; // 뷰단에 존재하는 가져와야 할 데이터 목록[배열]
 	private int ordernum; // 주문번호
+	private String productname; // 상품이름(제목)
 	private int productnum; // 상품번호 
 	private int orderquantity; // 수량
 	private String orderconfirm; // 구매확정일자
@@ -25,9 +26,20 @@ public class FarmVO {
 	private String startCalendarDataValue;
 	private String endCalendarDataValue;
 	
+	public FarmVO() {};
+
 	
 	
-	
+	public String getProductname() {
+		return productname;
+	}
+
+
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+
+
 	public String getStartCalendarDataValue() {
 		return startCalendarDataValue;
 	}
