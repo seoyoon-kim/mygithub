@@ -97,6 +97,11 @@ public class testController {
 	public String customMyrecipe() {
 		return "custom/customMyrecipe";
 	}
+	
+	@RequestMapping("/customproduct")
+	public String customproduct() {
+		return "custom/customproduct";
+	}
 
 
 // 윤수///////////////////////////////////////////////////////////////
