@@ -69,7 +69,7 @@
 		<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
 		<a href="마이페이지">김비트님</a> <span id="usermypage">▼</span>
 		<input type="button" value="로그아웃" class="menuButtons"/>
-		<input type="button" value="고객센터" class="menuButtons"/>
+		<input type="button" value="고객센터" class="menuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
 	</div>
 
 	<div id="logoImg">			<!-- 사이트 로고 부분 -->

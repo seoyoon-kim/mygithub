@@ -1,3 +1,4 @@
+<!-- 문의사항 작성 페이지 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,6 +13,9 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
@@ -20,7 +24,15 @@
 		<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
 </head>
 <style>
-
+	.cs_message{
+		margin: 0 auto;
+		font-size:15px;
+		width:90%;
+		margin-bottom:20px;	
+	}
+	
+	#link, #notice{color: gray;}
+	#notice{font-size:12px}
 	/*표*/
 	table{
 		width:90%;	
@@ -29,16 +41,20 @@
 		margin:0 0 20px 50px;	
 		border-top:2px solid lightgray;
 		border-bottom:2px solid lightgray;
+		font-size:15px;
 	}
 	th, .th{
+		height:40px;
+		font-size:15px;
+		width:80px; text-align:center;
 		display: table-cell;
 	    vertical-align: inherit;
 	    font-weight: bold;
 	    text-align: -internal-center;
-   		background-color:#f6f6f6;;
+   		background-color:#f6f6f6;
    		/*#fcfcfc*/
 	}
-	thead{
+	thead, .answer_content, .td{
 		border-bottom: 2px solid #ccc;
 	    border-top: 2px solid #ccc;
 	    width:100%;
@@ -47,25 +63,28 @@
 		display: table-row;
 	    vertical-align: inherit;
 	    border-color: inherit;
-	    height:50px;
+	    height:40px;
 	}
 	.td, .content{
 		padding-left:20px;
+		
 	}
 	.content{
-		padding: 20px 0 20px;
+		margin: 20px 0 20px;
+	}
+	td, .td{
+		height:40px;
 	}
 	.tr_head{
 		font-weight:bold;
 	}
 	.tr_head li{
-		float:left; padding:0; width:150px; height:50px;
+		float:left;
 	}
-	.menu, .th{
-		width:150px; text-align:center;
+	.td, .th{ line-height:40px;}
+	.td{
+		width:30%; line-height:40px;
 	}
-	.td, .th{ line-height:50px;}
-	td{border-bottom: 2px solid #ccc; padding:0;}
 	/*이전글, 다음글*/
 	.prev_next_wrap{
 		width:90%;
@@ -81,11 +100,18 @@
 		color: black;
 	}
 	.next{margin-bottom:30px}
-
+	a{color:black;}
+	answer_line{width:100%; 	background-color:#f6f6f6; height:20px; }
+	input, select{border:none;}
+	input{width:300px; color:lightgray;}
+	#write_btn{width:150px; margin-left:20px;}
+	a{color:black;}
 </style>
 <script>
-//테이블 collapse
-  //showHideFaq
+$(document).ready(function() {
+	  $('#summernote').summernote();
+	
+	});
 </script>
 <body>
 	<div class="main">
@@ -100,50 +126,48 @@
 	</nav>
 	<!-- 가운데 메인 div -->
 	<div id="article">
-		<div class="cs_wrapTitle">공지사항</div>
-		
-		<fieldset>
+		<div class="cs_wrapTitle">문의하기</div>
+		<!-- 문의하기 상단 메세지 -->	
+		<div class="cs_message">
+			질문 전 자주묻는 질문을 먼저 확인해주세요. <br/>
+			<a href="<%=request.getContextPath() %>/faq"><span id="link">자주묻는질문 바로가기 </span></a><br/>
+			<br/>
+			무엇을 도와드릴까요?<br/>
+			<span id="notice">고객님께서 작성하신 질문은 관리자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
+		</div>
+			
+		<form method="post" action="">
 		<table>
 			<tbody>
+				<tr>
+					<th colspan="4">문의 작성</th>
+				</tr>
 				<tr class="tr_head">
-					<th class="menu">제목</th>
-					<td class="td"><span>코로나19로 인한 픽업 서비스 중단 안내</span></td>
+					<th class="menu" >제목</th>
+					<td class="td" colspan="3"><input type="text" name="" id="" placeholder="문의사항 제목을 입력해주세요."/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span>Beetmall</span></td>
+					<td  class="td"><span>로그인한 아이디</span></td>
+					<th class="menu">이메일</th>
+					<td  class="td"><span><input type="text" name="" id="" placeholder="예 : beetmall@beetmall.com"></span></td>
 				</tr>
-				<tr class="tr_head">
-				<td colspan="2">
-					<ul>
-						<li class="th">작성일</li>
-						<li class="td" style="padding-left:20px">21/04/21</li>
-						<li class="th">조회수</li>
-						<li class="td" style="padding-left:20px">21</li>
-					</ul>
-				</tr>
-			
 				<tr>
-					<td colspan="2">
-						<span class="content" >
-						
-						고객님 안녕하세요.
-						코로나19로 인한 픽업 서비스 중단 안내드립니다.
-						2021.04.21 부터 어쩌구 저쩌구 
-						저쩌구
-					
-						</span>
+					<th colspan="4">문의 내용</th>
+				</tr>
+				<tr>
+					<td class="question_content" colspan="4">
+						<textarea id="summernote" name="editordata" placeholder="문의내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
-		<div class="prev_next_wrap">
-			<ul class="prev_next_ul">
-				<li class="prev"><strong>&#9651;이전글</strong><a href="">이전글이 없습니다.</a></li>
-				<li class="next"><strong>&#9661;다음글</strong><a href="">다음글이 없습니다.</a></li>
-			</ul>
-		</div>
-		</fieldset>
+			<div style="text-align:center; margin-bottom:10px ">
+				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+				<input type="submit" value="문의하기" class="btn" id="write_btn"/>				
+			</div>
+	
+		</form>
 		</div>
 	</div>
 </body>
