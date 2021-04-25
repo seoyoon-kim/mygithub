@@ -102,8 +102,9 @@
 	.next{margin-bottom:30px}
 	a{color:black;}
 	answer_line{width:100%; 	background-color:#f6f6f6; height:20px; }
-	input, select{border:none;}
-	input{width:300px; color:lightgray;}
+	#subject, #email, select{border:none;}
+	#subject, #email{width:300px; color:lightgray;}
+	#subject{width:500px}
 	#write_btn{width:150px; margin-left:20px;}
 	a{color:black;}
 </style>
@@ -144,13 +145,13 @@ $(document).ready(function() {
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >제목</th>
-					<td class="td" colspan="3"><input type="text" name="" id="" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<td class="td" colspan="3"><input type="text" name="" id="subject" placeholder="문의사항 제목을 입력해주세요."/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
 					<td  class="td"><span>로그인한 아이디</span></td>
 					<th class="menu">이메일</th>
-					<td  class="td"><span><input type="text" name="" id="" placeholder="예 : beetmall@beetmall.com"></span></td>
+					<td  class="td"><span><input type="text" name="" id="email" placeholder="예 : beetmall@beetmall.com"></span></td>
 				</tr>
 				<tr>
 					<th colspan="4">문의 내용</th>
