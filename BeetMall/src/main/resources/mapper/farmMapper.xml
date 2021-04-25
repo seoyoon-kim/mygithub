@@ -8,12 +8,13 @@
 		from category a join mcategory b on a.catenum = b.catenum order by catesort, mcatesort
 	</select>
 	<select id="salesDataList" resultType="com.beetmall.sshj.vo.FarmVO">
-		select ordernum, od.productnum productnum, mcatenum, productname, orderquantity, to_char(orderconfirm, 'YYYY-MM-DD') orderconfirm, orderprice 
-		from (select ordernum, productnum, orderquantity, orderconfirm, orderprice from orderdetail) od
-		join product pd on od.productnum = pd.productnum 
-		where userid='ghdrlfehd' 
+		select ordernum, od.productnum productnum, productname, mc.mcatenum mcatenum, orderquantity, 
+		to_char(orderconfirm, 'YYYY-MM-DD') orderconfirm, orderprice, mc.mcatename mcatename
+		from (select ordernum, a.productnum, productname, b.mcatenum, orderquantity, orderconfirm, orderprice, userid
+		from (select ordernum,productnum,orderquantity,orderconfirm,orderprice from orderdetail) a join product b on a.productnum = b.productnum )
+		od join mcategory mc on od.mcatenum = mc.mcatenum where userid='ghdrlfehd'
 		<if test="#{resultData}!=''">
-			and pd.productnum in 
+			and od.productnum in 
 			<foreach collection="resultData" item="item" index="index" open="(" separator="," close=")" > 
 				${item} 
 			</foreach> 

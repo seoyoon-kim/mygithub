@@ -47,7 +47,6 @@
 		}else if(optionCheck=="월별"){
 			// 년별을 눌렀었을 경우에는 태그가 변경 되었기 때문에 다시 치환해줘야 한다.
 			if(yearCheck=="년별"){
-				console.log("test");
 				let start = "<input class='categorySearch_container_child' ";
 					start+= " type='month' min='2018-01' max='${monthPtn }' id='categoryCalendar_start'/>";
 					
@@ -503,15 +502,13 @@
 							// 월 단위인지, 년 단위인지, 일 단위인지에 따라서 계산되는 값이 달라져야 한다
 							
 							
-							// datasets에 들어갈 data 배열 선언
-							let orderpriceData = [];
 							// 년, 월 일때 합계를 계산하기 위해 저장할 맵
 							// ex) 년별을 골랐을때, 2018년 1월 01일 부터 ~ 2018년 12월 31일까지
 							// ex) 월별을 골랐을때, 2018년 03월 01일 부터 ~ 2018년 04월 41일까지
 							let map = new Map();
+							map.clear();// 두번째 실행할 경우 데이터가 들어있기 때문에 초기화 시켜준다
 							// 데이터의 날짜를 계산하기 위한 객체화  
 							let minDate = new Date(startCalendarDataValue);
-							
 							
 							$.ajax({
 								type: "POST",
@@ -534,7 +531,7 @@
 									$result.each(function(idx,vo){
 										tag += "<li>" + vo.ordernum + "</li>";
 										tag += "<li value=" + vo.mcatenum + ">" + vo.orderconfirm + "</li>";
-										tag += "<li>" + vo.productname + "</li>";
+										tag += "<li value=" + vo.mcatename + ">" + vo.productname + "</li>";
 										tag += "<li>" + vo.orderquantity + "</li>";
 										tag += "<li>" + vo.orderprice + "</li>";
 										tag += "<li>" + (vo.orderquantity * vo.orderprice) + "</li>";
@@ -552,9 +549,24 @@
 									for(let i = 0; i < $('#excelList li:nth-child(6n+12)').length; i++){
 										let orderconfirm = new Date($('#excelList li:nth-child('+(8+(i*6))+')').text());
 										let mcatenum = $('#excelList li:nth-child('+(8+(i*6))+')').attr('value');
+										// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
 										
-										// orderconfirm이 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
+										
+										
 										if(maxDate <= orderconfirm){
+											
+											// 몇번째 데이터냐에 따라서 데이터를 추가한다.
+											// li에 존재하는 품목의 productnum과 동일하면 추가한다.
+											for(let i=0; i<$('#categoryManagement>li').length; i++){
+												for(let mcate of map.keys()){
+													console.log(map.keys());
+													if(mcate===$('#categoryManagement>li:nth-child('+(i+1)+')').attr('value')){
+														
+														
+													}
+												}
+											}
+											
 											minDate.setMonth(minDate.getMonth()+1);
 											maxDate.setMonth(maxDate.getMonth()+1);
 											//월 단위로 매출금액을 계산해야 하기 때문에 map도 초기화 해준다.
@@ -565,31 +577,44 @@
 										if(minDate <= orderconfirm && orderconfirm < maxDate){
 											// 각 값 마다의 매출금액을 넣어 더해서 저장해준다. ex) map(감자, 20000) ----> map(감자, 20000) + 10000 = map(감자,30000)
 											if(map.has(mcatenum)){// map에 key가 있으면 있던 값에 더해서 저장한다 
-												let value = map.get(mcatenum);
-												map.set(mcatenum, value+$('#excelList li:nth-child(6n+'+(12+(i*6))+')').text());
-												console.log("value=>"+value);
-												console.log("매출금액=>"+$('#excelList li:nth-child(6n+'+(12+(i*6))+')').text());
+												let value = parseInt(map.get(mcatenum),10);
+												map.set(mcatenum, (value + parseInt($('#excelList li:nth-child('+(12+(i*6))+')').text(), 10)) );
+												
 											} else {// map에 key가 없으면
-												map.set(mcatenum, $('#excelList li:nth-child(6n+'+(12+(i*6))+')').text()); 
+												map.set(mcatenum, parseInt($('#excelList li:nth-child('+(12+(i*6))+')').text()), 10 ); 
+												//console.log(map.get("1"));
 											}
+											
 											// map에 데이터를 orderpriceData에 넣는다.
-											orderpriceData.push(map.get(orderconfirm));
-											//console.log(map.get("1"));
+											//orderpriceData.push(map.get(mcatenum));
+											//console.log(orderpriceData);
 										}
 										
-										// 몇번째 데이터냐에 따라서 데이터를 추가한다.
-										// li에 존재하는 품목의 productnum과 동일하면 추가한다.
-										for(let i=0; i<$('#categoryManagement>li').length; i++){
-											console.log(map.keys());
-											if(result===$('#categoryManagement>li:nth-child('+(i+1)+')').attr('value')){
-												console.log('존재하는지 확인');
+										// map에 데이터를 넣었다.
+										// 그렇다면 어떻게 해야 chart에 데이터를 넣을 수 있을까 ?
+										// key 값 + 월별 데이터값
+										// 즉, 월별 데이터 값이 다 완성된 상태에서 넣어야 한다.
+										// 그렇다면 월이 끝났는지는 어떻게 알지?
+										
+										//마지막 데이터면 바로 넣어준다.
+										if($('#excelList li:nth-child(6n+12)').length-1==i){
+											// 몇번째 데이터냐에 따라서 데이터를 추가한다.
+											// li에 존재하는 품목의 productnum과 동일하면 추가한다.
+											for(let i=0; i<$('#categoryManagement>li').length; i++){
+												for(let mcate of map.keys()){
+													console.log(map.keys());
+													if(mcate===$('#categoryManagement>li:nth-child('+(i+1)+')').attr('value')){
+														
+														
+													}
+												}
 											}
 										}
 										
 										//myChart.data.datasets[].data(map.get(productnum));
 										
-										
 									}
+									console.log('실행 끝-------------------------------');
 									//console.log(excelLiLength);
 									/*
 									/*========================  chart추가  ==========================
@@ -597,6 +622,8 @@
 									let color1 = Math.floor(Math.random() * 256); 
 									let color2 = Math.floor(Math.random() * 256);
 									let color3 = Math.floor(Math.random() * 256);
+									
+									
 									
 									// datasets에 들어갈 data 세팅
 									let data = {
