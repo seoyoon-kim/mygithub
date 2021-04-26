@@ -246,6 +246,52 @@
 	#buyProduct img{
 		height:100px;
 		width:100px;
+		float:left;
+	}
+	#buyProduct>div{
+		width:480px;
+		float:left;
+	}
+	.buyListleftMenu{
+		width:100px;
+		float:left;
+		font-size:20px;
+		line-height: 100px;
+	}
+	#reviewStars{
+		width:150px;
+		height:100px;
+		line-height:100px;
+	}
+	#buyProductStar>span:last-child{
+		width:430px;
+		height: 100px;
+		line-height: 100px;
+	}
+	#buyProductImg>input{
+		width:578px;
+		height:100px;
+		line-height: 90px;
+	}
+	#buyProductStar>div:first-child, #reviewStars{
+		float:left;
+	}
+	#buyProductImg>input{
+		float:left;
+	}
+	
+	#reviewcontent{
+		width: 660px;
+		height:660px;
+		margin:0 10px;
+	}
+	#reviewSubmit{
+		width:100px;
+		height:60px;
+		background-color:rgb(252,118,45);
+		border:none;
+		margin:20px 290px;
+		color:white;
 	}
 </style>
 <script>
@@ -421,24 +467,24 @@
 		
 		<div class="buyListDiv" id="buyReviewWrite">
 			<div class="buyListBar" style="font-size:21px;">상품리뷰 작성하기</div><div class="buyListBarClose">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:700px;">
+			<div class="buyListContent" style="padding-top:60px; height:1160px;">
 			<div id="buyProduct">
-				<span>구매상품</span>
+				<span class="buyListleftMenu">구매상품</span>
 				<img src="/sshj/img/dsweetpotato2.jpg"/>
 				<div>[매당 약 190원]KF94 대형 100매 국산원재료 지퍼형 5매입</div>
 				<div>[옵션]1개</div>
 			</div>
 			<div id="buyProductStar">
-				<span>상품평가</span>
-				<div>별별별별별</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
+				<span class="buyListleftMenu">상품평가</span>
+				<div id="reviewStars">별별별별별</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
 			</div>
 			<div id="buyProductImg">
-				<span>첨부이미지</span>
-				<input type="file" name="filename"/>&nbsp;
+				<span class="buyListleftMenu" style="float:left">첨부이미지</span><input type="file" name="filename"/>&nbsp;
 			</div>
-			<textarea name="content">
+			<textarea name="reviewcontent" id="reviewcontent">
 				서머노트 사용해야 할 부분
 			</textarea>
+			<input type="button" value="작성하기" id="reviewSubmit"/>
 			</div>
 		</div>
 		
