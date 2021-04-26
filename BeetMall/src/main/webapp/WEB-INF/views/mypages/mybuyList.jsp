@@ -6,12 +6,14 @@
 		display: block;
 	}
 	#mypointList{
-		height:1080px;
+		height:3500px;
+		overflow:auto;
+		position: relative;
 	}
 	.Pbuttons{
 		height:40px;
 		width:80px;
-		background-color: #e06666;
+		background-color: rgb(252,118,45);
 		color:white;
 		line-height:40px;
 		text-align:center;
@@ -40,7 +42,7 @@
 		text-align:center;
 	}
 	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4), #pointUl>li:nth-child(5), #pointUl>li:nth-child(6){
-		border-bottom:1px solid #e06666;
+		border-bottom:1px solid rgb(252,118,45);
 		
 	}
 	#pointUl>li:nth-child(6n){
@@ -87,7 +89,7 @@
 		margin:1px;
 		padding:0px;
 		border: none;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		color:white;
 		border-radius: 5px;
 	}
@@ -99,13 +101,171 @@
 		margin:1px;
 		padding:0px;
 		border: none;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		color:white;
 		border-radius: 5px;
 		opacity:60%;
 	}
+	.buyListDiv{
+		position:absolute;
+		top:500px;
+		background-color: white;
+	}
+	.buyListDiv, .buyListBar, .buyListContent{
+		width:680px;
+	}
+	.buyListBar{		
+		height:50px;
+		background-color: rgb(252,118,45);
+		position:absolute;
+		color:white;
+		text-align: center;
+		line-height: 50px;
+	}
+	.buyListBarClose{
+		height:50px;
+		width:50px;
+		background-color: white;
+		position:absolute;
+		font-size:40px;
+		line-height:40px;
+		text-align:center;
+		border:1px solid rgb(252,118,45);
+		left:630px;
+	}
+	.buyListContent{
+		height:700px;
+		border:1px solid rgb(252,118,45);
+	}
+	.buyListBtn{
+		position:absolute;
+		width:100px;
+		height: 50px;
+		top:600px;
+		left:290px;
+		background-color:rgb(252,118,45);
+		color:white;
+		border:none;
+	}
+	#buyListdeliverySearch{	 /* 배송조회 클릭시 */
+		display: none;
+	}
+	#buyCommit{	/* 구매확정 클릭시 */
+		display: none;
+	}
+	#buyReturnInput{	/* 반품 클릭시 */
+		font-size:21px;
+		line-height:40px;
+		display: none;
+	}
+	#buyCancelNotice{	/* 취소 클릭시 */
+		display: none;
+	}
 	
+	#buyCancelRollBack{		/* 취소를 클릭했지만 배송중인 상품이 있을 때 */
+		display: none;
+	}
+	#buyReviewView{
+		display: none;		/* 후기 보기 */
+	}
+	
+	
+	.warningInfo{
+		color:red;
+	}
+	.addInput{
+		height:30px;
+		width:675px;
+	}
+	.thumbsupYes{
+		background-image: url("/sshj/img/dthumbsupYes.png");
+		background-repeat:no-repeat;
+		background-size:contain;
+		height:28px;
+		width:28px;
+		float:left;
+		transition-duration:1s;
+		margin-right: 7px;
+	}
+	.thumbsupNo{
+		background-image: url("/sshj/img/dthumbsupNo.png");
+		background-repeat:no-repeat;
+		background-size:contain;
+		height:28px;
+		width:28px;
+		float:left;
+		transition-duration:1s;
+		margin-right: 7px;
+	}
+	
+	.buyListContent>ul>li:nth-child(2n+1){
+		float:left;
+		width:226px;
+		text-align: center;
+		font-size:17px;
+		line-height:28px;
+		height:30px;
+		margin-bottom:1px;
+	}
+	.buyListContent>ul>li:nth-child(2n){
+		float:left;
+		width:452px;
+		font-size:17px;
+		line-height:28px;
+		height:30px;
+		margin-bottom:1px;
+	}
+	.buyListContent>ul{
+		margin-bottom: 10px;
+	}
+	#buyReviewtxt{
+		width:610px;
+		height:400px;
+		overflow:auto;
+		margin-left:36px;
+		margin-right:36px;
+		background-color: white;
+		font-size: 18px;
+		padding:5px;
+	}
+	#reviewWrite{
+		width:610px;
+		height:400px;
+		overflow:auto;
+		margin-left:36px;
+		margin-right:36px;
+		background-color: white;
+		font-size: 18px;
+		padding:5px;
+		border:1px solid red;
+	}
+	#buyProduct{
+		float:left;
+		width:680px;
+	}
+	#buyProduct img{
+		height:100px;
+		width:100px;
+	}
 </style>
+<script>
+	$(function(){
+		$(".buyListBtn").click(function(){
+			$(this).parent().parent().css('display',"none");
+		})
+		$(".buyListBarClose").click(function(){
+			$(this).parent().css("display","none");
+		})
+		$(".thumbsupNo").click(function(){
+			$(this).toggleClass("thumbsupNo");
+			$(this).toggleClass("thumbsupYes");
+		})
+		$(".thumbsupYes").click(function(){
+			$(this).toggleClass("thumbsupNo");
+			$(this).toggleClass("thumbsupYes");
+		})
+	})
+</script>
 <div class="section">
 	<div id="mypointList">
 		<h2>구매내역</h2>
@@ -177,5 +337,111 @@
 				<li><input type="button" class="buybutton" value="취소하기"/><input type="button" class="buybutton" value="문의작성"/></li>
 			</ul>
 		</div>
+		
+		<div class="buyListDiv" id="buyListdeliverySearch">
+			<div class="buyListBar" style="font-size:21px;">배송 조회</div><div class="buyListBarClose">&times;</div>
+			<div class="buyListContent" style="text-align:center;padding-top:100px;">
+				<div>배송조회 iframe</div>
+				<input type="button" value="확인" class="buyListBtn"/>
+			</div>
+		</div>
+		
+		<div class="buyListDiv" id="buyCommit">
+			<div class="buyListBar" style="font-size:21px;">구매 확정</div><div class="buyListBarClose">&times;</div>
+			<div class="buyListContent" style="text-align: center;padding-top:100px; height:300px;">
+				<h3>구매확정 하시겠습니까?</h3>
+				<h3>배송완료 후 구매확정이 가능합니다.</h3>				
+				<input type="button" value="확인" class="buyListBtn" style="top:220px;" />
+			</div>
+		</div>
+		
+		<div class="buyListDiv" id="buyReturnInput">
+			<div class="buyListBar" style="font-size:21px;">반품 신청</div><div class="buyListBarClose">&times;</div>
+			<div class="buyListContent" style="height:600px;">
+				<h3 style="text-align: center">해당 제품을 반품하시겠습니까?</h3>
+				<select name="whyReturn">
+					<option value="단순변심" >단순변심</option>
+					<option value="상품의 상태가 이상해서" >상품의 상태가 이상해서</option>
+					<option value="사진과 너무 달라서" >사진과 너무 달라서</option>
+					<option value="상품이 손상 또는 파손되어서" >상품이 손상 또는 파손되어서</option>
+				</select>
+				<div>
+					<span class="warningInfo">제품 반품시 발생하는 배송비는 소비자 부담입니다.<br/></span>
+					<span class="warningInfo">단, 상품의 변질, 파손으로 인해 발생된 반품 및 교환은 판매자가 부담합니다.</span>
+				</div>
+				이미지도 첨부해주세요
+				<input type="file" name="filename">
+				<div id="companyDiv">
+				<input type="radio" name="companyRadio" value="기존 택배사 이용"/>기존택배사 이용<br/>
+					<input type="text" name="address" class="addInput" placeholder="주소를 입력해주세요"/><br/>
+				<input type="radio" name="companyRadio" value="기타 택배사 이용"/>기타 택배사 이용<br/>
+					<select>
+						<option>우체국 택배</option>
+						<option>CJ대한통운</option>
+					</select><br/>
+					<input type="text" name="address" class="addInput" placeholder="주소를 입력해주세요"/>			
+				</div>	
+				<input type="button" value="확인" class="buyListBtn" style="top:520px;"/>
+			</div>
+		</div>
+		
+		<div class="buyListDiv" id="buyCancelNotice">
+			<div class="buyListBar" style="font-size:21px;">배송 취소</div><div class="buyListBarClose">&times;</div>
+			<div class="buyListContent" style="text-align:center;padding-top:100px; height:300px;">
+				<h2>선택하신 주문을 취소하시겠습니까?</h2>
+				<input type="button" value="확인" class="buyListBtn" style="top:220px"/>
+			</div>
+		</div>
+		
+		<div class="buyListDiv" id="buyCancelRollBack">
+			<div class="buyListBar" style="font-size:21px;">취소 실패</div><div class="buyListBarClose">&times;</div>
+			<div class="buyListContent" style="text-align: center;padding-top:100px; height:340px;">
+				<h2>배송중 / 배송완료 상품은 취소할 수 없습니다.</h2>
+				<h2>판매자에게 문의해주세요</h2>
+				<input type="button" value="확인" class="buyListBtn" style="top:240px"/>
+			</div>
+		</div>
+		
+		<div class="buyListDiv" id="buyReviewView">
+			<div class="buyListBar" style="font-size:21px;">상품리뷰 보기</div><div class="buyListBarClose">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:700px;background-color: #ddd;">
+				<ul>
+					<li>번호</li> 	<li>100</li>
+					<li>작성자</li> 	<li>rabbit123</li>
+					<li>작성일</li>	<li>2021-04-02</li>
+					<li>추천</li>	<li>4<div class="thumbsupYes"></div></li>
+				</ul>
+				<div id="buyReviewtxt">
+					굉장히 긴 문장
+				</div>
+				<input type="button" value="확인" class="buyListBtn" style="top:630px;"/>
+			</div>
+		</div>
+		
+		
+		<div class="buyListDiv" id="buyReviewWrite">
+			<div class="buyListBar" style="font-size:21px;">상품리뷰 작성하기</div><div class="buyListBarClose">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:700px;">
+			<div id="buyProduct">
+				<span>구매상품</span>
+				<img src="/sshj/img/dsweetpotato2.jpg"/>
+				<div>[매당 약 190원]KF94 대형 100매 국산원재료 지퍼형 5매입</div>
+				<div>[옵션]1개</div>
+			</div>
+			<div id="buyProductStar">
+				<span>상품평가</span>
+				<div>별별별별별</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
+			</div>
+			<div id="buyProductImg">
+				<span>첨부이미지</span>
+				<input type="file" name="filename"/>&nbsp;
+			</div>
+			<textarea name="content">
+				서머노트 사용해야 할 부분
+			</textarea>
+			</div>
+		</div>
+		
+		
 	</div>
 </div>
