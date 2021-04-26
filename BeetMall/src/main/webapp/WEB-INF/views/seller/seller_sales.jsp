@@ -557,10 +557,6 @@
 										myChart.update();
 									}
 									
-									console.log(startDate);
-									console.log(endDate);
-									console.log(endDate.getMonth()-startDate.getMonth());
-									
 									
 									// 월별 차트 추가하기
 									if(dateCheck=="월별"){
@@ -584,6 +580,30 @@
 											let color2 = Math.floor(Math.random() * 256);
 											let color3 = Math.floor(Math.random() * 256);
 											
+											// 현재 있는 데이터의 첫 시작 날짜가 minDate보다 2이상 차이 날 경우에 데이터 0을 미리 다 넣어놓고 시작해야 한다.
+											let firstDateCheck = new Date($('#excelList li:nth-child(8)').text());
+											
+											if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) || 1 < (firstDateCheck.getMonth() - minDate.getMonth()) )  {
+												
+												// year가 다르면 year 먼저 맞출 수 있도록 한다.
+												if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) ){
+													do{
+														minDate.setMonth( minDate.getMonth()+1 );
+														maxDate.setMonth( maxDate.getMonth()+1 );
+														resultArr.push(0);
+													}while( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) )
+												}
+												
+												do{
+													// 1만 차이 날때까지 날짜를 더해주고 resultArr 에 0을 넣어준다.
+													if( 1 < (firstDateCheck.getMonth() - minDate.getMonth()) ){
+														minDate.setMonth( minDate.getMonth()+1 );
+														maxDate.setMonth( maxDate.getMonth()+1 );
+														resultArr.push(0);
+													}
+												}while(0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) || 1 < (firstDateCheck.getMonth() - minDate.getMonth()))
+											}
+											
 											
 											if(startDate.getFullYear() == endDate.getFullYear() && startDate.getMonth() == endDate.getMonth()){// 만약에 .... 시작날짜, 종료날짜를 같은 "월"을 선택했을 경우...
 												//언제까지? 날짜가 끝날때까지
@@ -595,9 +615,12 @@
 																										
 													// orderconfirm이 maxDate보다 낮을때까지
 													// mcatenum과 liNum의 값이 같을때 포함해서 값을 저장한다.
-													if(maxDate > orderconfirm && mcatenum == liNum){
-														//계산된 값을 계속해서 저장해준다.
-														resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+													if(minDate.getMonth() == orderconfirm.getMonth()){
+														// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 더해준다.
+														if(mcatenum == liNum){
+															//계산된 값을 계속해서 저장해준다.
+															resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+														}
 													}
 													
 													
@@ -606,7 +629,7 @@
 													if(j==$('#excelList li:nth-child(6n+12)').length-1){
 														let data = {
 															label: mcatename, // 품목명을 넣는다
-															data: [resultsum], // 데이터를 넣고
+															data: [resultsum], // 같은 월은 데이터 하나만 넣는다.
 															borderColor: 'rgb('+color1+','+color2+','+color3+')'
 														};
 														addData(myChart, data);
@@ -622,21 +645,7 @@
 													let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
 													// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
 													let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
-													
-													// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
-													// mcatenum과 liNum의 값이 같을때 포함
-													console.log(orderconfirm-maxDate);
-													console.log(maxDate);
-													console.log(orderconfirm);
-													
-													// 날짜 차이가 -1이 아니면 -1까지 반복한다
-													//if(maxDate.getMonth() < orderconfirm.getMonth()){
-														//for(let test=0; test < $('#excelList li:nth-child(6n+12)').length; test++){
-															
-														//}
-													//}
-													
-													
+																										
 													if(maxDate < orderconfirm && mcatenum == liNum){
 														//배열에 넣는다.
 														resultArr.push(resultsum);
@@ -692,6 +701,23 @@
 											let color2 = Math.floor(Math.random() * 256);
 											let color3 = Math.floor(Math.random() * 256);
 											
+											// 현재 있는 데이터의 첫 시작 날짜가 minDate보다 2이상 차이 날 경우에 데이터 0을 미리 다 넣어놓고 시작해야 한다.
+											let firstDateCheck = new Date($('#excelList li:nth-child(8)').text());
+											
+											//만약... 데이터 첫 시작 날짜가 다를 경우의 조건
+											if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) )  {
+												
+												// year가 다르면 year 먼저 맞출 수 있도록 한다.
+												if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) ){
+													do{
+														minDate.setFullYear( minDate.getFullYear()+1 );
+														maxDate.setFullYear( maxDate.getFullYear()+1 );
+														resultArr.push(0);
+													}while( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) )
+												}
+											}
+											
+											
 											//언제까지? 날짜가 끝날때까지
 											for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
 												// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
@@ -706,8 +732,6 @@
 												
 												// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
 												if(maxDate < orderconfirm && mcatenum == liNum){
-													console.log(j+'번째');
-													console.log('test');
 													//배열에 넣는다.
 													resultArr.push(resultsum);
 													minDate.setFullYear(minDate.getFullYear()+1);
@@ -743,12 +767,105 @@
 												}
 												
 											}
-										}
-											// 년별 차트 출력 끝 //
+										}// 년별 차트 출력 끝 //
+											
 									} else if(dateCheck=="일별"){
-										
-										
-										// 일별 차트 출력 끝 //
+										// li에 들어있는 값만큼 반복한다
+										for(let i=0; i < $('#categoryManagement>li').length; i++ ){
+											// 선택된 값의 중분류 값이 무엇이냐
+											let liNum = $('#categoryManagement>li:nth-child('+(i+1)+')').attr('value');
+											// mcatename : 숨겨져있는 값을 가져온다.
+											let mcatename = $('#categoryManagement>li:nth-child('+(i+1)+')').children().val();
+											
+											//minDate 다시 초기화
+											let minDate = new Date(startCalendarDataValue);
+											//선택한 일의 다음일을 구한다.
+											let maxDate = new Date(minDate);
+											maxDate.setDate(maxDate.getDate()+1);// maxDate는 minDate의 하루 뒤로 설정
+
+											//========================  chart추가  ==========================
+											// borderColor random
+											let color1 = Math.floor(Math.random() * 256); 
+											let color2 = Math.floor(Math.random() * 256);
+											let color3 = Math.floor(Math.random() * 256);
+											
+											// 현재 있는 데이터의 첫 시작 날짜가 minDate보다 2이상 차이 날 경우에 데이터 0을 미리 다 넣어놓고 시작해야 한다.
+											let firstDateCheck = new Date($('#excelList li:nth-child(8)').text());
+											
+											console.log(minDate);
+											console.log(maxDate);
+											console.log(firstDateCheck);
+											//만약... 데이터 첫 시작 날짜가 다를 경우의 조건
+											if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) || 1 < (firstDateCheck.getMonth() - minDate.getMonth()) )  {
+												
+												// year가 다르면 year 먼저 맞출 수 있도록 한다.
+												if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) ){
+													do{
+														console.log('year');
+														minDate.setDate( minDate.getDate()+1 );
+														maxDate.setDate( maxDate.getDate()+1 );
+														resultArr.push(0);
+													}while( 0 < (firstDateCheck.getDate() - minDate.getDate()) )
+												}
+												
+												// 월이 다르면 더해주고 resultArr 에 0을 넣어준다.
+												if(0 < (firstDateCheck.getMonth() - minDate.getMonth()) ){
+													do{
+														console.log(' month');
+														minDate.setDate( minDate.getDate()+1 );
+														maxDate.setDate( maxDate.getDate()+1 );
+														resultArr.push(0);
+													}while( 0 < (firstDateCheck.getMonth() - minDate.getMonth()) )
+												}
+												
+												// 빈날짜가 있으면 0으로 채워준다.
+												if(0 < (firstDateCheck.getTime() - minDate-getTime())/1000/60/60/24 ){
+													do{
+														console.log('date');
+														minDate.setDate( minDate.getDate()+1 );
+														maxDate.setDate( maxDate.getDate()+1 );
+														resultArr.push(0);
+													}while( 1 < (firstDateCheck.getDate() - minDate-getDate()) )
+												}
+											}
+											
+											
+											//언제까지? 날짜가 끝날때까지
+											for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
+												// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
+												let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+												
+												// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
+												let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
+												
+												if(minDate.getDate() == orderconfirm.getDate()){
+													minDate.setDate(minDate.getDate()+1);
+													maxDate.setDate(maxDate.getDate()+1);
+													// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 배열에 넣어준다.
+													if(mcatenum == liNum){
+														resultArr.push( parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10) );
+													} else {
+														resultArr.push(0);
+													}
+												}
+												console.log(orderconfirm);
+												console.log(mcatenum);
+												
+												// 만약, length 마지막이면 resultArr에 저장한 데이터를 반복문을 넣는다.
+												if(j==$('#excelList li:nth-child(6n+12)').length-1){
+													let data = {
+														label: mcatename, // 품목명을 넣는다
+														data: resultArr, // 데이터를 넣고
+														borderColor: 'rgb('+color1+','+color2+','+color3+')'
+													};
+													addData(myChart, data);
+													//초기화 시켜준다
+													resultArr = [];
+													resultsum = 0;
+												}
+												
+											}
+										}// 일별 차트 출력 끝 //
 									}
 										
 									
