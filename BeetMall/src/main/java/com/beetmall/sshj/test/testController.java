@@ -13,16 +13,16 @@ public class testController {
 	
 	@RequestMapping("/kcenter")
 	public String kcenter() {
-		return "custom/noticeMain";
+		return "custom/customerCenter/noticeMain";
 	}
 	@RequestMapping("/noticeMain")
 	public String kcenter2() {
-		return "custom/noticeMain";
+		return "custom/customerCenter/noticeMain";
 	}
 	
 	@RequestMapping("/customerCenter")
 	public String customerCenter() {
-		return "custom/customerCenter";
+		return "custom/customerCenter/customerCenter";
 	}
 	
 	@RequestMapping("/FAQBoard")
@@ -32,7 +32,7 @@ public class testController {
 	
 	@RequestMapping("/customerCenterWrite")
 	public String customerCenterWrite() {
-		return "custom/customerCenterWrite";
+		return "custom/customerCenter/customerCenterWrite";
 	}
 	
 	@RequestMapping("/mapping")
@@ -61,22 +61,20 @@ public class testController {
 	}
 	@RequestMapping("notice_view2")
 	public String notice_view2() {
-		return "custom/notice_view";
+		return "custom/customerCenter/notice_view";
 	}
 	@RequestMapping("knotice_view")
 	public String knotice_view() {
-		return "custom/notice_view";
+		return "custom/customerCenter/notice_view";
+	}
+	@RequestMapping("customerCenterView")
+	public String customerCenterView() {
+		return "custom/customerCenter/customerCenterView";
 	}
 	
-	//수연누나 notice
-	@RequestMapping("notice")
-	public String notice() {
-		return "seller/notice";
-	}
-	
-	@RequestMapping("notice_view")
-	public String notice_view() {
-		return "seller/notice_view";
+	@RequestMapping("customerCenterEdit")
+	public String customerCenterEdit() {
+		return "custom/customerCenter/customerCenterEdit";
 	}
 	
 	

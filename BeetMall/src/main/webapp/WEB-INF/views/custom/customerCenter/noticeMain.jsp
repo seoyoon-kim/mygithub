@@ -6,14 +6,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
-   #NoticeleftMenu{
-   		display:block;
-   }
-	a:hover, a:active, a:visited, a:link {
-   		color: black;
-   }
-   .wrapTitle{
+	.wrapTitle{
 	   margin-top: 50px;
+	   width: 100%;
 	   height: 60px;
 	   line-height: 60px;
 	   /* color: #fff; */
@@ -59,11 +54,6 @@
 		color:black;
 		cursor: pointer;
 	}
-	#kwrite{
-		float:right;
-		margin-right:5px;
-		margin-bottom:10px;
-	}
 	/*페이징*/
 	.paging,th{
 		margin-top:30px;
@@ -83,22 +73,47 @@
 	    vertical-align: top;
 	    overflow: hidden;
 	}
+   
+   a:hover, a:active, a:visited, a:link {
+   		color: black;
+   }
+   #NoticeleftMenu{
+   		display:block;
+   }
 </style>
 <script>
 $(function(){
-	$("input[value=문의하기]").click(function(){
-		location.href="customerCenterWrite";
-	})
-});
+	//선택한 faq tr열고 닫히기	 
+	//수정할 것: this만 열리도록 고치기
+	  	  	$(".faq_td").click(function(){ 
+	  	  		status = $(".answer").css("display"); 
+	  	  		if (status == "none") { 
+	  	  			$(".answer").css("display", ""); 
+	  	  		} else { 
+	  	  			$(".answer").css("display", "none"); 
+	  	  		} 
+	  	  	});
+	//선택한 select option별로 보기
+	//수정할 것 나머지 option선택에 대한 script 추가하기
+	  		
+	  		$('#sel').change(function(){
+	  			var option = $(this).val();
+	  			console.log(option);
+	  			if(option=='total'){ //전체
+	  				$('tr').css('display','');
+	  			}	
+	  		});
+
+	 
+	 });
 
 function showHideFaq(){
-	location.href="knotice_view";
+	location.href="notice_view2";
 }
 </script>
 <div class="section">
 	<div class="main">
-		<div class="wrapTitle">1:1문의</div>
-		<div id="kwrite"><input type="button" value="문의하기"/></div>
+		<div class="wrapTitle">공지사항</div>
 		<fieldset>
 		<table>
 			<thead>

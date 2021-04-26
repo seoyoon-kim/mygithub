@@ -5,7 +5,7 @@ package com.beetmall.sshj.custom.vo;
 public class CenterVO {
 	private int qmnum;
 	private String userid;
-	private String content;
+	private String qmcontent;
 	private String qmtitle;
 	private String qmdate;
 	private String qmanswer;
@@ -31,11 +31,11 @@ public class CenterVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getContent() {
-		return content;
+	public String getQmcontent() {
+		return qmcontent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setQmcontent(String qmcontent) {
+		this.qmcontent = qmcontent;
 	}
 	public String getQmdate() {
 		return qmdate;
