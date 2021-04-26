@@ -59,6 +59,25 @@ public class testController {
 	public String myfavoriForm() {
 		return "mypages/myfavoriForm";
 	}
+	@RequestMapping("notice_view2")
+	public String notice_view2() {
+		return "custom/notice_view";
+	}
+	@RequestMapping("knotice_view")
+	public String knotice_view() {
+		return "custom/notice_view";
+	}
+	
+	//수연누나 notice
+	@RequestMapping("notice")
+	public String notice() {
+		return "seller/notice";
+	}
+	
+	@RequestMapping("notice_view")
+	public String notice_view() {
+		return "seller/notice_view";
+	}
 	
 	
 //	윤주///////////////////////////////////////////////////////////////

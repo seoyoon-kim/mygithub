@@ -215,11 +215,9 @@
     	padding-top:15px;
     	border-bottom:1px solid #e06666;
     }
-<<<<<<< HEAD
     #NoticeleftMenu a:active, #NoticeleftMenu a:link, #NoticeleftMenu a:visited, #NoticeleftMenu a:hover{
 		color:black;
 	}
-=======
     #kNoticecategory{
         padding-bottom: 70px;
         font-size: xx-large;
@@ -325,15 +323,15 @@
 		height:400px;
 		width:100px;
 	}
-	
->>>>>>> refs/remotes/origin/feature/main_#19
 </style>
 <script>
 	$(function(){
 		$("input[value=회원가입]").click(function(){
 			location.href="register";
 		})
-		
+		$("input[value=고겍센터]").click(function(){
+			location.href="kcenter";
+		})
 	});
 	$(function(){
         $("#karea").click(function(){

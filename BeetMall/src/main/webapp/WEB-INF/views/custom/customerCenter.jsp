@@ -6,41 +6,83 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
-	#boardList{list-style-type:none;}
-   #boardList li{width:20%; height:40%; line-height:40px; border-bottom:1px solid gray; float:left;}
-   #boardList li:nth-child(3n+2){width:60%;}
-   #boardList li:nth-child(3n+3){width:20%;}
-   .wordcut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-   #noticeMainn{
-   		overflow: auto;
-   }
-   #Main{
-	   	margin:30px;
-	   	text-align: center;
-   }
    #NoticeleftMenu{
    		display:block;
    }
-   #Inquiry{
-   		position: absolute;
-	    top: 290px;
-	    left: 1400px;
-   }
-   .buybutton{
-		width:70px;
-		height:35px;
-		line-height:35px;
-		text-align:center;
-		margin:1px;
-		padding:0px;
-		border: none;
-		background-color:#e06666;
-		color:white;
-		border-radius: 5px;
-	}
 	a:hover, a:active, a:visited, a:link {
    		color: black;
    }
+   .wrapTitle{
+	   margin-top: 50px;
+	   height: 60px;
+	   line-height: 60px;
+	   /* color: #fff; */
+	   color:black;
+	   font-weight:bold;
+	   font-size:2em;
+	   text-indent: 0.4em;
+	   /* background-color: rgb(224,102,102); */
+	   margin-bottom:30px;
+	}
+	ul, li, a{
+		list-style: none; padding:0; margin:0;
+	}
+
+	/*표*/
+	table{
+		border-spacing: 0;
+		text-indent: initial;
+	}
+	th{
+		height:50px;
+		display: table-cell;
+	    vertical-align: inherit;
+	    font-weight: bold;
+	    text-align: -internal-center;
+	    border-bottom: 2px solid #ccc;
+	    border-top: 2px solid #ccc;
+   		background-color: #fcfcfc;
+   		font-size: 16px;
+	}
+	td{
+		height:50px;
+		border-bottom:1px solid lightgray;
+	}
+	td:nth-child(1), td:nth-child(3){
+		text-align:center;
+		width:100px;
+	}
+	td:nth-child(2){
+		padding-left:30px;
+	}
+	td:nth-child(2) a, a{
+		color:black;
+		cursor: pointer;
+	}
+	#kwrite{
+		float:right;
+		margin-right:5px;
+		margin-bottom:10px;
+	}
+	/*페이징*/
+	.paging,th{
+		margin-top:30px;
+		text-align:center;
+	}
+	.wrap_paging, .option_change, table, fieldset, .paging{
+		width:100%;
+	}
+	.paging a{
+		display: inline-block;
+	    height: 23px;
+	    width:23px;
+	    line-height: 22px;
+	    border: 1px solid #ccc;
+	    background-color: #fff;
+	    text-decoration: none;
+	    vertical-align: top;
+	    overflow: hidden;
+	}
 </style>
 <script>
 $(function(){
@@ -48,53 +90,64 @@ $(function(){
 		location.href="customerCenterWrite";
 	})
 });
+
+function showHideFaq(){
+	location.href="knotice_view";
+}
 </script>
 <div class="section">
-	<div id="Main">
-		<h1>1:1 문의</h1>
-	</div>
-	<div id="Inquiry"><input type="button" value="문의하기" class="buybutton"/></div>
-	<div id="noticeMainn">
-		<ul id="boardList">
-			<li>번호</li>
-			<li>제목</li>
-			<li>등록일</li>
+	<div class="main">
+		<div class="wrapTitle">1:1문의</div>
+		<div id="kwrite"><input type="button" value="문의하기"/></div>
+		<fieldset>
+		<table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>등록일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td><a href="javascript:showHideFaq()"><strong>코로나19로 인한 픽업 서비스 중단 안내</strong></a></td>
+					<td>21/04/21</td>
+				</tr>
+				
+				<!-- 임시로 넣은 정보 -->
+				<tr>
+					<td>2</td>
+					<td><a href="">개인정보 처리방침 개정안내</a></td>
+					<td>21/04/21</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td><a href="">개인정보 처리방침 개정안내</a></td>
+					<td>21/04/21</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td><a href="">개인정보 처리방침 개정안내</a></td>
+					<td>21/04/21</td>
+				</tr>
+			</tbody>
 			
-			<%-- <c:forEach var="data" items="${list }"> --%>
-	        <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <li>번호</li>
-	        <li class="wordcut">제목</li>
-	        <li>등록일</li>
-	         <%-- </c:forEach>  --%>
-		</ul>
+		</table>
+		<div class="wrap_paging">
+			<div class="paging">
+				<a href="#" title="" class=""><span style="cursor:pointer;">&#10094;</span></a>
+				<a href="#" title="" class=""><span style="cursor:pointer;">1</span></a>
+				<a href="#" title="" class=""><span style="cursor:pointer;">&#10095;</span></a>
+			</div>
+		</div>
+		</fieldset>
+		<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
 	</div>
 </div>
