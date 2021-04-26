@@ -12,7 +12,7 @@
 
 <script> // 차트와 엑셀에 데이터가 들어가는데 필요한 기능에게 변화되는 도움만 주고 관여는 하지 않는 기능들 모아놓은 스크립트
 
-	// 날짜 변경 yearCheck하는 변수 선언
+	// 날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
 	let yearCheck="";
 	
 	// 날짜를 년별, 월별, 일별을 바꿀 경우 그 조건에 맞게 input 박스를 change 한다.
@@ -198,15 +198,7 @@
 							    'March',
 							    'April','April'
 							],
-							datasets: [{
-								label: '채소',
-								data: [10000, 25302, 12347, 73946],
-								borderColor: 'rgb(255, 99, 132)',
-							},{
-								label: '가지',
-								data: [29477, 83924, 39463, 80736],
-								borderColor: 'rgb(54, 162, 235)',
-							}]
+							datasets: []
 						},
 						options: {
 							scales:{
@@ -225,8 +217,8 @@
 					
 					// 존재하는 품목이 없는것으로 확인되었을 경우 resultData[] 배열에 넣어서 데이터 산출 하는데 사용되어야 한다.
 					let resultData = new Array();
-					
-					
+					// 년별, 월별, 일별인지 체크하기 위한 변수 선언
+					let dateCheck = "";
 					
 					/////////////////////////////// 공통 분모로 사용 가능한 함수 /////////////////////////////
 					//차트 추가하기
@@ -289,7 +281,7 @@
 						
 						
 						// 년도, 월별, 일별 어떤 조건인지 확인하고 이동한다.!!!
-						let dateCheck = $('#categoryDate>option:selected').val();
+						dateCheck = $('#categoryDate>option:selected').val();
 						
 						
 						if(dateCheck != "년별"){ // 년별이 아닐경우 스플릿 전역변수를 스플릿 해준다!
@@ -483,10 +475,12 @@
 							}
 							
 							// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
-							let tag = "<li value="+selectNum+">"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></li>";
+							let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></li>";
 							$('#categoryManagement').append(tag);
 							
-							// append 된 selectName을 배열에 넣어준다.
+							// append 된 selectName을 배열에 넣어서 저장해놓는다.
+							// 1. DB 에서 데이터 구할때 쓰이고
+							// 2. 나중에 지울때 써야한다.
 							resultData.push(selectNum);
 							console.log(resultData);
 							
@@ -505,8 +499,8 @@
 							// 년, 월 일때 합계를 계산하기 위해 저장할 맵
 							// ex) 년별을 골랐을때, 2018년 1월 01일 부터 ~ 2018년 12월 31일까지
 							// ex) 월별을 골랐을때, 2018년 03월 01일 부터 ~ 2018년 04월 41일까지
-							let map = new Map();
-							map.clear();// 두번째 실행할 경우 데이터가 들어있기 때문에 초기화 시켜준다
+							//let map = new Map();
+							//map.clear();// 두번째 실행할 경우 데이터가 들어있기 때문에 초기화 시켜준다
 							// 데이터의 날짜를 계산하기 위한 객체화  
 							let minDate = new Date(startCalendarDataValue);
 							
@@ -526,7 +520,7 @@
 										    + "<li>수량</li>"
 										    + "<li>단가</li>"
 									        + "<li>매출금액</li>";
-									// 엑셀 리스트에 산출된 데이터 값을 넣는다.
+									// 엑셀 리스트 li에 산출된 데이터 값을 넣는다.
 									let $result = $(result);
 									$result.each(function(idx,vo){
 										tag += "<li>" + vo.ordernum + "</li>";
@@ -541,29 +535,285 @@
 									
 									
 									
-									// 선택한 첫달의 1일보다 이상 ~ 선택한 다음달의 1일보다 작은 날짜 안에 있는 값을 다 구하고 다음달로 넘어가면 다음달 데이터를 구한다. 
-									let maxDate = new Date(minDate);
-									maxDate.setMonth(maxDate.getMonth()+1);// maxDate는 minDate의 1달 뒤로 설정
+									
+									// 데이터를 저장해서 넘겨줄 값
+									let resultArr = [];
+									// resultArr에 저장해줄 값을 계산하는 변수
+									let resultsum = 0;
+									
+									// 같은 년, 같은 월, 같은 일을 골랐을 때
+									let startDate = new Date(startCalendarDataValue);
+									let endDate = new Date(endCalendarDataValue);
+									
+									
+									// borderColor random 차트 추가할 랜덤 색상
+									let color1 = Math.floor(Math.random() * 256); 
+									let color2 = Math.floor(Math.random() * 256);
+									let color3 = Math.floor(Math.random() * 256);
+									// 차트에 새로운 값 업데이트 하기 전에 저장되어 있던 모든 데이터를 지운다.
+									if($('#categoryManagement>li').length!=null){
+										let datasetsLength = parseInt($('#categoryManagement>li').length);
+										myChart.data.datasets.splice(0,datasetsLength);
+										myChart.update();
+									}
+									
+									console.log(startDate);
+									console.log(endDate);
+									console.log(endDate.getMonth()-startDate.getMonth());
+									
+									
+									// 월별 차트 추가하기
+									if(dateCheck=="월별"){
+										// li에 들어있는 값만큼 반복한다
+										for(let i=0; i < $('#categoryManagement>li').length; i++ ){
+											// 선택된 값의 중분류 값이 무엇이냐
+											let liNum = $('#categoryManagement>li:nth-child('+(i+1)+')').attr('value');
+											
+											// mcatename : 숨겨져있는 값을 가져온다.
+											let mcatename = $('#categoryManagement>li:nth-child('+(i+1)+')').children().val();
+											
+											//minDate 다시 초기화
+											let minDate = new Date(startCalendarDataValue);
+											//선택한 첫달의 1일보다 이상 ~ 선택한 다음달의 1일보다 작은 날짜 안에 있는 값을 다 구하고 다음달로 넘어가면 다음달 데이터를 구한다. 
+											let maxDate = new Date(minDate);
+											maxDate.setMonth(maxDate.getMonth()+1);// maxDate는 minDate의 1달 뒤로 설정
+											
+											//========================  chart추가  ==========================
+											// borderColor random
+											let color1 = Math.floor(Math.random() * 256); 
+											let color2 = Math.floor(Math.random() * 256);
+											let color3 = Math.floor(Math.random() * 256);
+											
+											
+											if(startDate.getFullYear() == endDate.getFullYear() && startDate.getMonth() == endDate.getMonth()){// 만약에 .... 시작날짜, 종료날짜를 같은 "월"을 선택했을 경우...
+												//언제까지? 날짜가 끝날때까지
+												for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
+													// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
+													let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+													// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
+													let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
+																										
+													// orderconfirm이 maxDate보다 낮을때까지
+													// mcatenum과 liNum의 값이 같을때 포함해서 값을 저장한다.
+													if(maxDate > orderconfirm && mcatenum == liNum){
+														//계산된 값을 계속해서 저장해준다.
+														resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+													}
+													
+													
+													
+													// 만약, length 마지막이면 resultArr에 저장한 데이터를 차트에 넣는다.
+													if(j==$('#excelList li:nth-child(6n+12)').length-1){
+														let data = {
+															label: mcatename, // 품목명을 넣는다
+															data: [resultsum], // 데이터를 넣고
+															borderColor: 'rgb('+color1+','+color2+','+color3+')'
+														};
+														addData(myChart, data);
+														//초기화 시켜준다
+														resultArr = [];
+														resultsum = 0;
+													}
+												}
+											}else { // "월" 수 차이가 있게 했을 경우
+												//언제까지? 날짜가 끝날때까지
+												for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
+													// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
+													let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+													// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
+													let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
+													
+													// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
+													// mcatenum과 liNum의 값이 같을때 포함
+													console.log(orderconfirm-maxDate);
+													console.log(maxDate);
+													console.log(orderconfirm);
+													
+													// 날짜 차이가 -1이 아니면 -1까지 반복한다
+													//if(maxDate.getMonth() < orderconfirm.getMonth()){
+														//for(let test=0; test < $('#excelList li:nth-child(6n+12)').length; test++){
+															
+														//}
+													//}
+													
+													
+													if(maxDate < orderconfirm && mcatenum == liNum){
+														//배열에 넣는다.
+														resultArr.push(resultsum);
+														minDate.setMonth(minDate.getMonth()+1);
+														maxDate.setMonth(maxDate.getMonth()+1);
+														resultsum = 0;
+													}
 
+													if(minDate.getMonth() == orderconfirm.getMonth()){
+														// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 더해준다.
+														if(mcatenum == liNum){
+															//계산된 값을 계속해서 저장해준다.
+															resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+														}
+													}
+													
+													// 만약, length 마지막이면 resultArr에 저장한 데이터를 반복문을 넣는다.
+													if(j==$('#excelList li:nth-child(6n+12)').length-1){
+														
+														resultArr.push(resultsum);
+														console.log("mcatename = "+mcatename + " resultArr= "+resultArr)
+														let data = {
+															label: mcatename, // 품목명을 넣는다
+															data: resultArr, // 데이터를 넣고
+															borderColor: 'rgb('+color1+','+color2+','+color3+')'
+														};
+														addData(myChart, data);
+														//초기화 시켜준다
+														resultArr = [];
+														resultsum = 0;
+													}
+												}
+											}
+										}// 월별 차트 출력 끝 //
+										
+									} else if(dateCheck=="년별"){
+										// li에 들어있는 값만큼 반복한다
+										for(let i=0; i < $('#categoryManagement>li').length; i++ ){
+											// 선택된 값의 중분류 값이 무엇이냐
+											let liNum = $('#categoryManagement>li:nth-child('+(i+1)+')').attr('value');
+											// mcatename : 숨겨져있는 값을 가져온다.
+											let mcatename = $('#categoryManagement>li:nth-child('+(i+1)+')').children().val();
+											
+											//minDate 다시 초기화
+											let minDate = new Date(startCalendarDataValue);
+											//선택한 년도의 다음년도를 구한다.
+											let maxDate = new Date(minDate);
+											maxDate.setFullYear(maxDate.getFullYear()+1);// maxDate는 minDate의 1년 뒤로 설정
+
+											//========================  chart추가  ==========================
+											// borderColor random
+											let color1 = Math.floor(Math.random() * 256); 
+											let color2 = Math.floor(Math.random() * 256);
+											let color3 = Math.floor(Math.random() * 256);
+											
+											//언제까지? 날짜가 끝날때까지
+											for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
+												// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
+												let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+												// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
+												let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
+												// 합계를 낼 시작날짜
+												let startSumDate = new Date(orderconfirm.getFullYear(),1,1);
+												// 합계를 낼 마지막 날짜
+												let endSumDate = new Date(orderconfirm.getFullYear(),12,31);
+												
+												
+												// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
+												if(maxDate < orderconfirm && mcatenum == liNum){
+													console.log(j+'번째');
+													console.log('test');
+													//배열에 넣는다.
+													resultArr.push(resultsum);
+													minDate.setFullYear(minDate.getFullYear()+1);
+													maxDate.setFullYear(maxDate.getFullYear()+1);
+													resultsum = 0;
+												}
+												
+												// 시작 날짜값과 엑셀리스트 날짜값이 같으면 계산을 한다.
+												
+												if(minDate.getFullYear() == orderconfirm.getFullYear()){
+													console.log(minDate.getFullYear());
+													console.log(orderconfirm.getFullYear());
+													// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 더해준다.
+													if(mcatenum == liNum){
+														//계산된 값을 계속해서 저장해준다.
+														resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+													}
+												}
+												
+												// 만약, length 마지막이면 resultArr에 저장한 데이터를 반복문을 넣는다.
+												if(j==$('#excelList li:nth-child(6n+12)').length-1){
+													console.log("mcatename = "+mcatename + " resultsum= "+resultsum)
+													resultArr.push(resultsum);
+													let data = {
+														label: mcatename, // 품목명을 넣는다
+														data: resultArr, // 데이터를 넣고
+														borderColor: 'rgb('+color1+','+color2+','+color3+')'
+													};
+													addData(myChart, data);
+													//초기화 시켜준다
+													resultArr = [];
+													resultsum = 0;
+												}
+												
+											}
+										}
+											// 년별 차트 출력 끝 //
+									} else if(dateCheck=="일별"){
+										
+										
+										// 일별 차트 출력 끝 //
+									}
+										
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									/*
+									
+									///////////////////////////////////////////////////////////////////////////////
+										
+										
 									// 구해진 매출금액의 데이터 개수를 구해서 반복한다.
 									for(let i = 0; i < $('#excelList li:nth-child(6n+12)').length; i++){
 										let orderconfirm = new Date($('#excelList li:nth-child('+(8+(i*6))+')').text());
 										let mcatenum = $('#excelList li:nth-child('+(8+(i*6))+')').attr('value');
+										
+										//========================  chart추가  ==========================
+										// borderColor random
+										let color1 = Math.floor(Math.random() * 256); 
+										let color2 = Math.floor(Math.random() * 256);
+										let color3 = Math.floor(Math.random() * 256);
+										
 										// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
-										
-										
-										
 										if(maxDate <= orderconfirm){
-											
+											let j = 0;
 											// 몇번째 데이터냐에 따라서 데이터를 추가한다.
 											// li에 존재하는 품목의 productnum과 동일하면 추가한다.
-											for(let i=0; i<$('#categoryManagement>li').length; i++){
-												for(let mcate of map.keys()){
-													console.log(map.keys());
-													if(mcate===$('#categoryManagement>li:nth-child('+(i+1)+')').attr('value')){
-														
-														
-													}
+											// 월이 바뀌면 월동안 계산한 모든 데이터를 mychart datasets.data에 넣는다.
+											
+											for(let mcate of map.entries()){
+												let pushData = {
+														label : mcate[0],
+														borderColor: rgb(color1, color2, color3),
+												}
+												console.log(mcate[0]);
+												console.log(mcate[1]);
+												console.log($('#categoryManagement>li:nth-child('+(j+1)+')').attr('value'));
+												
+												if(mcate[0]===$('#categoryManagement>li:nth-child('+(j+1)+')').attr('value')){
+													
+													mychart.data.datasets.data.push(mcate[]);
+													
 												}
 											}
 											
@@ -614,14 +864,10 @@
 										//myChart.data.datasets[].data(map.get(productnum));
 										
 									}
-									console.log('실행 끝-------------------------------');
+									console.log('실행 끝-------------------------------');*/
 									//console.log(excelLiLength);
 									/*
-									/*========================  chart추가  ==========================
-									// borderColor random
-									let color1 = Math.floor(Math.random() * 256); 
-									let color2 = Math.floor(Math.random() * 256);
-									let color3 = Math.floor(Math.random() * 256);
+									
 									
 									
 									
@@ -695,11 +941,9 @@
 									console.log(e);
 								}
 							});// ajax 끝 
-							/*
-							orderpriceData.push()
-							// 차트 추가 함수
-							addData(myChart, data);
-							*/
+							
+							
+							
 						})// 데이터 추가함수 끝
 						
 						
@@ -735,7 +979,6 @@
 								if(result===selectNameResult){
 									// result 데이터에 데이터도 삭제한다.
 									resultData.splice(i,1);
-									console.log(resultData);
 									// 차트에 들어가있는 데이터를 삭제한다
 									removeData(myChart, i);
 								}
