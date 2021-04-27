@@ -32,10 +32,6 @@
 	
 }
 
-#searchBtn{
-top:0px;
-left:0px;
-}
 
 	#cMyPageLeft{
 		display: block;
@@ -46,6 +42,11 @@ a:active,a:link,a:visited,a:hover{
       text-decoration: none;
       color:black;
    }
+   
+#section{
+font-size:17px;
+}
+
  /* ------------------페이징처리부분-------------------- */
 	.page_wrap {
 		text-align:center;
@@ -105,15 +106,16 @@ a:active,a:link,a:visited,a:hover{
 float:left;
 width:100%;
 height:20px;
-margin-top:10px;
+margin-top:40px;
 font-weight:bold;
-margin-bottom:30px;
+margin-bottom:40px;
 }
 
 
 .infobtn{
-float:right;
+float:left;
 margin-bottom:4%;
+padding-left:80%;
 width:100%;
 }
 
@@ -140,7 +142,7 @@ padding-left:0px;
     float:left;
 	width: 100%;
 	padding-left:0px;
-	margin-bottom:10px;
+	margin-bottom:30px;
 }
 
 
@@ -242,7 +244,7 @@ margin-bottom:15px;
 
 <body>
 
-<div class="section">
+<div class="section" id="section">
 
  <!-- ----------------문의 상단------------------------ -->
   <div id="infoTitle">*******의 문의내역 입니다.</div>
@@ -293,6 +295,15 @@ margin-bottom:15px;
 	    <li>2020-03-28 13:00</li>
 	    <li>답변완료</li>
 	    <li><input type="button" value="확인하기" id="infobutton"/></li>
+	    
+	    
+	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
+	    <li>123</li>
+	    <li><a href="">너무 맛이 없어요</a></li>
+	    <li>2020-03-28 13:00</li>
+	    <li>답변완료</li>
+	    <li><input type="button" value="확인하기" id="infobutton"/></li>
+	    
 	  </ul>
   </div>
   

@@ -17,12 +17,14 @@
 width:180px;
 padding:20px;
 float:left;
-
+font-size:17px;
+position:absolute;
+display:block;
 }
 
 #menutext{
 color:rgb(224,102,102);
-
+font-size:18px;
 }
 
 #mypageMenubar>ul{
@@ -40,7 +42,7 @@ margin-left:3px;
 <body>
 
 <div id="mypageMenubar">
-  <h5 id="menutext"><b>비트네 레시피</b></h5>
+  <div id="menutext"><b>비트네 레시피</b></div>
   <hr/>
   <ul>
    <li><b>홈</b></li>

@@ -123,6 +123,11 @@ public class testController {
 	public String customproduct() {
 		return "custom/customproduct";
 	}
+	
+	@RequestMapping("/custompay")
+	public String custompay() {
+		return "custom/custompay";
+	}
 
 
 // 윤수///////////////////////////////////////////////////////////////
