@@ -28,9 +28,8 @@
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-	font-family: 'Nanum Gothic', sans-serif;
-	
 }
+
 
 #searchBtn{
 top:0px;
@@ -152,6 +151,7 @@ border-bottom:2px solid #ddd;
 <body>
 
 <div class="section">
+ <div class-"section2">
 
  <!-- ----------------문의 상단------------------------ -->
   <h3>*******의 문의내역 입니다.</h3>
@@ -213,7 +213,7 @@ border-bottom:2px solid #ddd;
 	</div>
  
  <div style="clear:both;"></div>
- 
+  </div>
 </div>
 
 </body>
