@@ -76,6 +76,10 @@ public class testController {
 	public String customerCenterEdit() {
 		return "custom/customerCenter/customerCenterEdit";
 	}
+	@RequestMapping("chargeAPI")
+	public String chargeAPI() {
+		return "mypages/chargeAPI";
+	}
 	
 	
 //	윤주///////////////////////////////////////////////////////////////
