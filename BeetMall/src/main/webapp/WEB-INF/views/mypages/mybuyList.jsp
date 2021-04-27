@@ -288,8 +288,37 @@
 		height:60px;
 		background-color:rgb(252,118,45);
 		border:none;
-		margin:20px 290px;
 		color:white;
+	}
+	.btnSubmit{
+		margin:20px 290px;
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+		margin:0 3px;
+	}
+	/*버튼*/
+	.btn:hover, .btnSubmit:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
 	}
 </style>
 <script>
@@ -324,12 +353,12 @@
 	<div id="mypointList">
 		<h2>구매내역</h2>
 		<div id="pointSelect">
-			<div class="Pbuttons">전체</div>
+			<div class="btn">전체</div>
 		</div>
 		<div id="pointSelectDate">
-			<div class="Pbuttons">3개월</div>
-			<div class="Pbuttons">6개월</div>
-			<div class="Pbuttons">1년</div>
+			<div class="btn">3개월</div>
+			<div class="btn">6개월</div>
+			<div class="btn">1년</div>
 		</div>
 		<div>
 			<ul id="pointUl">
@@ -348,7 +377,7 @@
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>배송중</li>
-				<li><input type="button" class="buybutton" value="배송조회"/><input type="button" class="buybutton" value="문의작성"/><input type="button" class="buybuttonNo" value="취소"/></li>
+				<li><input type="button" class="btn" value="배송조회"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="취소"/></li>
 				
 				<!-- 구분용 -->
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
@@ -358,7 +387,7 @@
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>배송완료</li>
-				<li><input type="button" class="buybutton" value="구매확정"/><input type="button" class="buybutton" value="문의작성"/><input type="button" class="buybutton" value="반품신청"/></li>
+				<li><input type="button" class="btn" value="구매확정"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="반품신청"/></li>
 				
 				<!-- 구분용 -->
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
@@ -378,7 +407,7 @@
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>환불</li>
-				<li><input type="button" class="buybutton" value="뭐넣지?"/><input type="button" class="buybuttonNo" value="환불확정"/></li>
+				<li><input type="button" class="btn" value="뭐넣지?"/><input type="button" class="btn" value="환불확정"/></li>
 				
 				<!-- 구분용 -->
 				<li><span class="pointdate">2021-03-25 13:00</span></li>
@@ -388,7 +417,7 @@
 				</li>
 				<li><span class="pointprice">17,980</span>원</li>
 				<li>준비중</li>
-				<li><input type="button" class="buybutton" value="취소하기"/><input type="button" class="buybutton" value="문의작성"/></li>
+				<li><input type="button" class="btn" value="취소하기"/><input type="button" class="btn" value="문의작성"/></li>
 			</ul>
 		</div>
 		
@@ -396,7 +425,7 @@
 			<div class="buyListBar" style="font-size:21px;">배송 조회</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align:center;padding-top:100px;">
 				<div>배송조회 iframe</div>
-				<input type="button" value="확인" class="buyListBtn"/>
+				<input type="button" value="확인" class="btn"/>
 			</div>
 		</div>
 		
@@ -405,7 +434,7 @@
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:300px;">
 				<h3>구매확정 하시겠습니까?</h3>
 				<h3>배송완료 후 구매확정이 가능합니다.</h3>				
-				<input type="button" value="확인" class="buyListBtn" style="top:220px;" />
+				<input type="button" value="확인" class="btn" style="top:220px;" />
 			</div>
 		</div>
 		
@@ -435,7 +464,7 @@
 					</select><br/>
 					<input type="text" name="address" class="addInput" placeholder="주소를 입력해주세요"/>			
 				</div>	
-				<input type="button" value="확인" class="buyListBtn" style="top:520px;"/>
+				<input type="button" value="확인" class="btn" style="top:520px;"/>
 			</div>
 		</div>
 		
@@ -443,7 +472,7 @@
 			<div class="buyListBar" style="font-size:21px;">배송 취소</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align:center;padding-top:100px; height:300px;">
 				<h2>선택하신 주문을 취소하시겠습니까?</h2>
-				<input type="button" value="확인" class="buyListBtn" style="top:220px"/>
+				<input type="button" value="확인" class="btn" style="top:220px"/>
 			</div>
 		</div>
 		
@@ -452,7 +481,7 @@
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:340px;">
 				<h2>배송중 / 배송완료 상품은 취소할 수 없습니다.</h2>
 				<h2>판매자에게 문의해주세요</h2>
-				<input type="button" value="확인" class="buyListBtn" style="top:240px"/>
+				<input type="button" value="확인" class="btn" style="top:240px"/>
 			</div>
 		</div>
 		
@@ -468,7 +497,7 @@
 				<div id="buyReviewtxt">
 					굉장히 긴 문장
 				</div>
-				<input type="button" value="확인" class="buyListBtn" style="top:630px;"/>
+				<input type="button" value="확인" class="btn" style="top:630px;"/>
 			</div>
 		</div>
 		
@@ -492,7 +521,7 @@
 			<textarea name="reviewcontent" id="summernote">
 				서머노트 사용해야 할 부분
 			</textarea>
-			<input type="button" value="작성하기" id="reviewSubmit"/>
+			<input type="button" value="작성하기" class="btnSubmit"/>
 			</div>
 		</div>
 		

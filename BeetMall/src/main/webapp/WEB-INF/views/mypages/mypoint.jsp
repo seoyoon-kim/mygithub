@@ -88,7 +88,28 @@
 		width:58px;
 		float:left;
 	}
-	
+	/*버튼*/
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+		height:40px;
+		width:80px;
+		line-height:34px;
+		font-size:18px;
+	}
+	/*버튼*/
+	.btn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
 </style>
 <div class="section">
 	<div id="mypointList">
@@ -101,14 +122,14 @@
 			포인트 사용기준 설명<br/>
 		</div>
 		<div id="pointSelect">
-			<div class="Pbuttons">전체</div>
-			<div class="Pbuttons">적립</div>
-			<div class="Pbuttons">소비</div>
+			<div class="btn">전체</div>
+			<div class="btn">적립</div>
+			<div class="btn">소비</div>
 		</div>
 		<div id="pointSelectDate">
-			<div class="Pbuttons">3개월</div>
-			<div class="Pbuttons">6개월</div>
-			<div class="Pbuttons">1년</div>
+			<div class="btn">3개월</div>
+			<div class="btn">6개월</div>
+			<div class="btn">1년</div>
 		</div>
 		<div>
 			<ul id="pointUl">
