@@ -137,6 +137,22 @@ public class testController {
 	public String sRegister() {	// 판매자 회원가입
 		return "login/sRegister";	
 	}
+	@RequestMapping("regiFinish")
+	public String regiFinish() {	// 회원가입 완료
+		return "login/registerFinish";	
+	}
+	@RequestMapping("searchId")
+	public String searchId() {	// 아이디 찾기
+		return "login/idSearch";	
+	}
+	@RequestMapping("searchPwd")
+	public String searchPwd() {	// 비밀번호 찾기
+		return "login/pwdSearch";	
+	}
+	@RequestMapping("login")
+	public String login() {	// 회원가입 완료
+		return "login/login";	
+	}
 	@RequestMapping("infoView")
 	public String infoView() {	// 약관조회
 		return "info/infoView";
@@ -145,12 +161,24 @@ public class testController {
 	public String myPoint() {	// 마이포인트
 		return "mypages/mypoint";
 	}
+	@RequestMapping("myinfoEdit")
+	public String myInfoEdit() {	// 내 정보
+		return "mypages/myInfoEdit";
+	}
 	@RequestMapping("mybuyList")
 	public String myBuyList() {	// 구매내역
 		return "mypages/mybuyList";
 	}
 	@RequestMapping("myChatList")
-	public String myChatList() {	// 구매내역
+	public String myChatList() {	// 채팅내역
 		return "mypages/myChatList";
+	}
+	@RequestMapping("leaveMember")
+	public String leaveMember() {	// 회원탈퇴
+		return "mypages/leaveMember";
+	}
+	@RequestMapping("leaveMemberOk")
+	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
+		return "mypages/leaveMemberSuccess";
 	}
 }

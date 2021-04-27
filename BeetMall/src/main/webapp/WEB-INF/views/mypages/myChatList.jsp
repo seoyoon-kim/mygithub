@@ -13,7 +13,7 @@
 	.Pbuttons{
 		height:40px;
 		width:80px;
-		background-color: #e06666;
+		background-color: rgb(252,118,45);
 		color:white;
 		line-height:40px;
 		text-align:center;
@@ -39,7 +39,7 @@
 		text-align:center;
 	}
 	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3){
-		border-bottom:1px solid #e06666;
+		border-bottom:1px solid rgb(252,118,45);
 		font-size:20px;
 	}
 	#pointUl>li:nth-child(3n){
@@ -86,7 +86,7 @@
 		margin:1px;
 		padding:0px;
 		border: none;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		color:white;
 		border-radius: 5px;
 	}
@@ -98,7 +98,7 @@
 		margin:1px;
 		padding:0px;
 		border: none;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		color:white;
 		border-radius: 5px;
 		opacity:60%;
@@ -110,11 +110,11 @@
 	}
 	/* 채팅창 설정부분 */
 	.chatDiv{
-		height:700px;
+		height:540px;
 		width:500px;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		position:absolute;
-		border:1px solid #e06666; 
+		border:1px solid rgb(252,118,45); 
 	}
 	.chatDivBar{
 		height:10px;
@@ -126,12 +126,12 @@
 		background-color:white;
 		text-align:center;
 		line-height:30px;
-		border-bottom:1px solid #e06666; 
+		border-bottom:1px solid rgb(252,118,45); 
 	}
 	.chatDivcontent{
-		height:559px;
+		height:400px;
 		width:498px;
-		background-color:white;
+		background-color:#ddd;
 	}
 	.chatDivInputBox{
 		height:101px;
@@ -143,16 +143,24 @@
 		float:left;
 	}
 	.chatInput>textarea{
-		border: 3px solid #e06666;
+		border: 3px solid rgb(252,118,45);
 	}
-	.chatSendBtn, .chatSendBtn>input{
+	.chatSendBtn{
 		width:97px;
 		height:100px;
-		background-color: #e06666;
+		background-color: rgb(252,118,45);
 		float:left;
 		border:none;
 		color:white;
-		opacity: 90%;
+	}
+	.chatSendBtn>input{
+		background-image: url(/sshj/img/dpaper-plane.png);
+		background-repeat:no-repeat;
+		background-size:cover;
+		width:97px;
+		height:100px;
+		float:left;
+		border:none;
 	}
 	.chatPrint{
 		position: relative;
@@ -166,15 +174,17 @@
 		width:300px;
 		position: absolute;
 		line-height:40px;
+		border-radius: 10px;
+		background-color: white;
 	}
 	.myChat{
 		left:180px;
-		background-color:#c2ffc0;
 		text-align:right;
+		padding-right:10px;
 	}
 	.theyChat{
 		left:10px;
-		background-color:#51d8cf;
+		padding-left:10px;
 	}
 	.myChatTime, .theyChatTime{
 		height:20px;
@@ -245,7 +255,7 @@
 				</div>
 				<div class="chatDivInputBox">
 					<div class="chatInput"><textarea></textarea></div>
-					<div class="chatSendBtn"><input type="button" value="전송"/></div>
+					<div class="chatSendBtn"><input type="button"/></div>
 				</div>
 			</div>
 		</div>

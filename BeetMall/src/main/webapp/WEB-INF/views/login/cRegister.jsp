@@ -36,14 +36,14 @@
 	#infoView, #infoView2{
 		width:1080px;
 		height:50px;
-		background-color:rgb(224,102,102);
+		background-color:rgb(252,118,45);
 		color:white;
 		line-height:50px;
 		font-size:25px;
 		padding-left:10px;
 	}
 	.btnClass{
-		background-color:rgb(224,102,102);
+		background-color:rgb(252,118,45);
 		color:white;
 		border:none;
 		border-radius:5%;
@@ -55,15 +55,18 @@
 	#infosubmit{
 		margin-left:490px;
 	}
+	.radiusClass{
+		border-radius:5px;
+	}
 </style>
 <script>
 	$(function(){
 		$("#infoView").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(224,102,102)").css("color","black").css("transition", "0.5s");
+			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
 			$(this).html("약관내용 주우욱~~~ 나오는 부분");
 		});
 		$("#infoView2").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(224,102,102)").css("color","black").css("transition", "0.5s");
+			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
 			$(this).html("약관내용 주우욱~~~ 나오는 부분");
 		});
 		$("#infocheck1").click(function(){
@@ -91,7 +94,7 @@
 				alert("약관에 동의해주세요!");
 				return false;
 			}
-			location.href="/sshj";
+			location.href="regiFinish";
 			return true;
 		})
 	});
@@ -114,14 +117,14 @@
 				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" style="margin-right:5px;"/><input type="button" value="인증하기""/></li>			
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><input type="text" name="userphone"/></li>			
 				<li><span class="spanstar">*</span>주소</li>			<li><input type="button" name="userzipcode" value="우편번호 검색" style="margin-right:5px;"/><input type="text" name="useraddr" readonly/><br/><input type="text" name="userdetailaddr" style="margin-top:5px; width:302px;"></li>			
-				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="text" name="birthday"/></li>		
+				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday"/></li>		
 			</ul>
 		</form>
 		</div>
 		<div id="infoCheckDiv">
-			<div id="infoView">▼위치기반 서비스 이용약관</div>
+			<div id="infoView"class="radiusClass">▼위치기반 서비스 이용약관</div>
 			<input type="checkbox" id="infocheck1" value="infocheck1" />&nbsp;동의합니다.<br/>
-			<div id="infoView2">▼서비스, 개인수집 및 이용약관</div>
+			<div id="infoView2"class="radiusClass">▼서비스, 개인수집 및 이용약관</div>
 			<input type="checkbox" id="infocheck2" value="infocheck2"/>&nbsp;동의합니다. <br/>
 			<input type="checkbox" id="infocheck3" value="infocheck3"/>본인은 만 14세 이상입니다.
 			<div style="margin-bottom:20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
