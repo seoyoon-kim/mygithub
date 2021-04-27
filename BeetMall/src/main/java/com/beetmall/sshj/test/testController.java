@@ -13,16 +13,16 @@ public class testController {
 	
 	@RequestMapping("/kcenter")
 	public String kcenter() {
-		return "custom/noticeMain";
+		return "custom/customerCenter/noticeMain";
 	}
 	@RequestMapping("/noticeMain")
 	public String kcenter2() {
-		return "custom/noticeMain";
+		return "custom/customerCenter/noticeMain";
 	}
 	
 	@RequestMapping("/customerCenter")
 	public String customerCenter() {
-		return "custom/customerCenter";
+		return "custom/customerCenter/customerCenter";
 	}
 	
 	@RequestMapping("/FAQBoard")
@@ -32,7 +32,7 @@ public class testController {
 	
 	@RequestMapping("/customerCenterWrite")
 	public String customerCenterWrite() {
-		return "custom/customerCenterWrite";
+		return "custom/customerCenter/customerCenterWrite";
 	}
 	
 	@RequestMapping("/mapping")
@@ -58,6 +58,27 @@ public class testController {
 	@RequestMapping("myfavoriForm")
 	public String myfavoriForm() {
 		return "mypages/myfavoriForm";
+	}
+	@RequestMapping("notice_view2")
+	public String notice_view2() {
+		return "custom/customerCenter/notice_view";
+	}
+	@RequestMapping("knotice_view")
+	public String knotice_view() {
+		return "custom/customerCenter/notice_view";
+	}
+	@RequestMapping("customerCenterView")
+	public String customerCenterView() {
+		return "custom/customerCenter/customerCenterView";
+	}
+	
+	@RequestMapping("customerCenterEdit")
+	public String customerCenterEdit() {
+		return "custom/customerCenter/customerCenterEdit";
+	}
+	@RequestMapping("chargeAPI")
+	public String chargeAPI() {
+		return "mypages/chargeAPI";
 	}
 	
 	
