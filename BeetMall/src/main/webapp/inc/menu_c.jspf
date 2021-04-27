@@ -78,13 +78,14 @@
 	/* 여기서부터내꺼 */
 	#kmiddelname{
 		border-bottom: 1px solid #e06666;
+		margin-bottom: 10px;
 	}
     #kcategoryMain{
-        width:200px;
         margin-left:20px;
     }
     #kcategory{
-        padding-bottom: 70px;
+        margin-bottom: 70px;
+    	border-bottom: 1px solid #e06666;
         font-size: xx-large;
         color: orange;
     }
@@ -94,7 +95,7 @@
     }
 
     #kmiddelname{
-        font-size: larger;
+        font-size: 21px;
         font-weight: bold;
     }
     #leftMenu a:active, #leftMenu a:link, #leftMenu a:visited, #leftMenu a:hover{
@@ -106,9 +107,12 @@
     }
     #leftMenu{
        position: absolute;
-       left:-250px;
+       left:-200px;
        top:100px;
        display: none;
+       width:180px;
+       padding-left:10px;
+       padding-right:10px;
     }
     #kareaMenu{
     	padding-left: 30px;
@@ -120,17 +124,16 @@
     	left:-200px;
     	top:35px;
     	display: none;
-    	width:200px;
+    	width:180px;
     	height:480px;
     	color:black;
     	background-color:white;
     	text-align:center;
-    	padding-left:20px;
-    	padding-right:20px;
+    	padding-left:10px;
+    	padding-right:10px;
     }
     #NoticeleftMenu>div{
     	padding-top:15px;
-    	border-bottom:1px solid #e06666;
     }
     #NoticeleftMenu a:active, #NoticeleftMenu a:link, #NoticeleftMenu a:visited, #NoticeleftMenu a:hover{
 		color:black;
@@ -146,7 +149,7 @@
     /* 마이페이지 왼쪽 */
     #cMyPageLeft{
     	position: absolute;
-    	left:-180px;
+    	left:-200px;
     	top:35px;
     	display: none;
     	width:180px;
@@ -154,8 +157,8 @@
     	color:black;
     	background-color:white;
     	text-align:center;
-    	padding-left:20px;
-    	padding-right:20px;
+    	padding-left:10px;
+    	padding-right:10px;
     	font-size:21px;
     	line-height: 40px;
     }
@@ -269,13 +272,39 @@
 		margin-top:4px;
 		margin-right:5px;
 	}
+	#kCateMain>div>a{
+		font-size:18px;
+	}
+	/* 레시피*/
+    #mypageMenubar{
+    	position: absolute;
+    	left:-200px;
+    	top:35px;
+    	display: none;
+    	width:180px;
+    	height:480px;
+    	color:black;
+    	background-color:white;
+    	text-align:center;
+    	padding-left:10px;
+    	padding-right:10px;
+    }
+	#menutext{
+        margin-bottom: 70px;
+    	border-bottom: 1px solid #e06666;
+        font-size: 21px;
+        color: orange;
+    }
+	#repcipevview{
+        padding-bottom: 40px;
+    }
 </style>
 <script>
 	$(function(){
 		$("input[value=회원가입]").click(function(){
 			location.href="register";
 		})
-		$("input[value=고겍센터]").click(function(){
+		$("input[value=고객센터]").click(function(){
 			location.href="kcenter";
 		})
 	});
@@ -373,7 +402,7 @@
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">지역별</div>
-                  <div id="karea"><a href="#">-지역별보기</a></div>
+                  <div id="karea"><a href="#">지역별보기</a></div>
                   <div style="display: none;" id="kareaMenu">
                      <div><a href="kangsan3">전체</a></div>
                      <div><a href="kangsan3">수도권</a></div>
@@ -384,7 +413,7 @@
                      <div><a href="kangsan3">제주도</a></div>
                   </div>
                   <br/>
-                  <div><a href="mapping">-지도로찾는 동네농장</a></div>
+                  <div><a href="mapping">지도로찾는 동네농장</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">가격대별</div>
@@ -411,21 +440,30 @@
                </div>
             </div>
          </div>
-         <div id="NoticeleftMenu">
-				<div><a href="noticeMain">공지사항</a></div>
-				<div><a href="FAQBoard">자주 묻는 질문</a></div>
-				<div><a href="customerCenter">1:1 문의</a></div>
-			</div>
          <!-- 고객센터왼쪽부분끝 -->
-			<!-- 카테고리 선택 -->
-			<div id="categoriSelect">
-				<ul id="cateUl"></ul>
-			</div>
-			<!-- 오른쪽 배너광고 -->
-			<div id="rightNav">
-        		<div id="reghtNav">
-	        		<a href=""><img src="<%=request.getContextPath()%>/img/dtomato.jpg"/></a>
-        		</div>
-         	</div>
+		 <!-- 카테고리 선택 -->
+		 <div id="categoriSelect">
+			<ul id="cateUl"></ul>
+		 </div>
+		 <!-- 오른쪽 배너광고 -->
+		 <div id="rightNav">
+       		<div id="reghtNav">
+        		<a href=""><img src="<%=request.getContextPath()%>/img/dtomato.jpg"/></a>
+       		</div>
+       	</div>
+       	<div id="mypageMenubar">
+            <div>
+               <div id="menutext">비트네 레시피</div>
+               <div id="repcipevview">
+                  <div><a href="recipeHome">홈</a></div>
+               </div>
+               <div id="repcipevview">
+                  <div><a href="customMyrecipe">마이레시피</a></div>
+               </div>
+               <div id="repcipevview">
+                  <div><a href="recipeWrite">글쓰기</a></div>
+               </div>
+            </div>
+         </div>
 		</div>
 	</div>
