@@ -3,7 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_sellerSales.css">
+<!-- 차트 라이브러리 chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+<!-- 아래 4개의 파일은 html -> pdf 파일로 변환해주는 라이브러리 html2pdf.js다 -->
+<script src="<%=request.getContextPath() %>/lib/html2canvas.min.js"></script>
+<script src="<%=request.getContextPath() %>/lib/html2pdf.min.js"></script>
+
 <!-- 오늘의 날짜를 계산해서 오늘 기준으로 년도, 월, 일이 언제인지를 기준으로 값이 입력 될 수 있도록 한다. -->
 <c:set var='today' value="<%=new java.util.Date() %>"/>
 <c:set var='monthPtn'><fmt:formatDate value="${today }" pattern="yyyy-MM"/></c:set>
@@ -107,6 +112,30 @@
 		});
 		
 	})
+	
+	
+	$( () => {
+		$('#pdfDown').click( () => {
+			console.log('test');
+			// 차트 PDF 다운로드
+			var element = document.getElementById('#myChart');
+			var opt = {
+			  margin:       1,
+			  filename:     'myfile.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+			
+			// New Promise-based usage:
+			html2pdf().set(opt).from(element).save();
+			
+			// Old monolithic-style usage:
+			html2pdf(element, opt);
+		})
+		
+	})
+	
 </script>
 <section>
 	<!-- 사이드바 -->
@@ -182,7 +211,7 @@
 			
 			<!-- 수익 매출 분석 -->
 			<div class="wrapContainer">
-				<div class="wrapTitle">수익 매출분석</div>
+				<div class="wrapTitle">수익 매출분석<button id="pdfDown">PDF 저장</button></div>
 				<div id="chartContainer">
 					<canvas id="myChart" style="width:400px;height:200px;"></canvas>
 					
@@ -192,18 +221,13 @@
 					let myChart = new Chart(ctx, {
 						type: 'line',
 						data:{
-							labels: [
-								'January',
-							    'February',
-							    'March',
-							    'April','April'
-							],
-							datasets: []
+							labels: [], // 몇년 몇월 몇일 표시하는 데이터
+							datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
 						},
 						options: {
 							scales:{
 								y:{
-									beginAtZero: true
+									beginAtZero: true // 차트 숫자는 0부터 표시
 								}
 								
 							}
@@ -239,7 +263,7 @@
 					}
 					
 					
-					
+					$(function(){
 					//////////////////// 수익 매출분석에 들어갈 labels 시작 /////////////////////
 					// 날짜 적용 버튼 클릭시,, labels 추가
 					$('#calendarApply').click(function(){
@@ -436,6 +460,14 @@
 						}
 						//myChart에 담긴 것을 업데이트한다.
 						myChart.update();
+						
+						if($('#categoryManagement>li').length != 0){
+	
+							//데이터 컨트롤러 실행, 차트, 엑셀 재설정
+							dataController();	
+						
+						}
+						
 					})
 					//////////////////// 수익 매출분석에 들어갈 labels 끝 /////////////////////
 					
@@ -446,7 +478,7 @@
 					
 					
 					///////////////////////////////////////////////////////////////////////// 카테고리, 차트, 엑셀
-					$(function(){
+					
 						// 중분류 카테고리 선택시 추가하는 기능 categoryManagement
 						$(document).on('click', '#mcategory>li', function(){
 							/*========================  category에 포함  ==========================*/
@@ -482,9 +514,15 @@
 							// 1. DB 에서 데이터 구할때 쓰이고
 							// 2. 나중에 지울때 써야한다.
 							resultData.push(selectNum);
-							console.log(resultData);
+							// 데이터 컨트롤러 실행
+							dataController();
 							
-							
+						});
+						
+					
+					
+							//////////////////////////////////////////////////// 가장 중요한 데이터 차트, 엑셀 컨트롤러 ////////////////////////////////////////
+						function dataController(){
 							//계산은 언제 발동하는가?
 							// 중분류 카테고리가 눌렸을 때,
 							// 중분류 카테고리 삭제할 때
@@ -672,7 +710,6 @@
 													if(j==$('#excelList li:nth-child(6n+12)').length-1){
 														
 														resultArr.push(resultsum);
-														console.log("mcatename = "+mcatename + " resultArr= "+resultArr)
 														let data = {
 															label: mcatename, // 품목명을 넣는다
 															data: resultArr, // 데이터를 넣고
@@ -748,8 +785,6 @@
 												// 시작 날짜값과 엑셀리스트 날짜값이 같으면 계산을 한다.
 												
 												if(minDate.getFullYear() == orderconfirm.getFullYear()){
-													console.log(minDate.getFullYear());
-													console.log(orderconfirm.getFullYear());
 													// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 더해준다.
 													if(mcatenum == liNum){
 														//계산된 값을 계속해서 저장해준다.
@@ -759,7 +794,6 @@
 												
 												// 만약, length 마지막이면 resultArr에 저장한 데이터를 반복문을 넣는다.
 												if(j==$('#excelList li:nth-child(6n+12)').length-1){
-													console.log("mcatename = "+mcatename + " resultsum= "+resultsum)
 													resultArr.push(resultsum);
 													let data = {
 														label: mcatename, // 품목명을 넣는다
@@ -803,7 +837,6 @@
 												// year가 다르면 year 먼저 맞출 수 있도록 한다.
 												if( firstDateCheck.getFullYear() != minDate.getFullYear() ){
 													do{
-														console.log('year');
 														minDate.setDate( minDate.getDate()+1 );
 														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
@@ -813,7 +846,6 @@
 												// 월이 다르면 더해주고 resultArr 에 0을 넣어준다.
 												if( firstDateCheck.getMonth() != minDate.getMonth() ){
 													do{
-														console.log(' month');
 														minDate.setDate( minDate.getDate()+1 );
 														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
@@ -823,7 +855,6 @@
 												// 빈날짜가 있으면 0으로 채워준다.
 												if(1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) ){
 													do{
-														console.log('date');
 														minDate.setDate( minDate.getDate()+1 );
 														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
@@ -843,10 +874,6 @@
 											// 시작일부터 종료일까지 반복하는데,  매출일자와 상품명이 맞으면 값을 넣고 아닐경우 0을 넣는다.
 											// 매출일자와 상품명이 맞으면 +1 을 통해 산출된 데이터 개수만큼 확인한다.
 											for(let t=0; t <= testGap; t++ ){
-												console.log("testGap------------------------------------>"+testGap);
-												
-												
-												
 												
 												// 시작일부터 종료일까지 반복문을 실행한다.
 												// 1. 만약, 2021 03 01 + mcatenum이 같으면. 데이터를 넣는다.
@@ -854,17 +881,10 @@
 												//    - 다르면 push(0) 하고, 다음 데이터를 받아내서 mcatenum == linum인 데이터를 찾아낼때까지 반복한다.
 												// 4. 다음 데이터도 1번과 동일한 방법으로 한다.
 												
-												//console.log(mcatenum);
-												//console.log(liNum);
-												//console.log(minDate.getDate());
-												//console.log(orderconfirm.getDate());
-												
-												
 												if( mcatenum == liNum ){
-													console.log("minDate-->"+minDate.getDate());
-													console.log("order-->"+orderconfirm.getDate())
 													
 													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+														
 														resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
 														testVal++;
 														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
@@ -875,11 +895,11 @@
 													}
 													
 													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
-														console.log('들어왔나?');
+
 														while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
 																
 															if( mcatenum == liNum ){
-																
+
 																let saveData = resultArr[resultArr.length-1];
 																resultArr.pop();	
 																resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
@@ -921,19 +941,19 @@
 										}// 일별 차트 출력 끝 //
 									}
 									
-									
 								}, error: function(e){
 									console.log(e);
 								}
 							});// ajax 끝 
 							
-							
-							
-						})// 데이터 추가함수 끝
+						}// 데이터 추가함수 끝
 						
 						
 						
-						// 중분류 삭제 할 때 사용할 기능
+						
+						
+						
+						/////////////////////////////////////// 중분류 삭제 할 때 사용할 기능
 						//append로 값을 동적으로 추가해줄 경우 새로 html이 실행 된 것이 아니기 때문에 html에서는 그 값을 읽지 못한다.
 						// 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제한다고 생각하면 된다.
 						$(document).on('click','#categoryManagement>li',function(){
@@ -971,6 +991,24 @@
 							}
 							// 이건 선택되서 아래에 내려온것들 클릭했을때 지워주는거 ex) 채소>땅콩
 							$(this).remove();
+							
+							
+							if($('#categoryManagement>li').length != 0){
+								
+								//데이터 컨트롤러 실행, 차트, 엑셀 재설정
+								dataController();	
+							
+							} else {
+								// 엑셀 리스트를 초기화 시킨다.
+								let tag = "<li>No</li>"
+										+ "<li>매출일자</li>"
+								  	    + "<li>상품명</li>"
+									    + "<li>수량</li>"
+									    + "<li>단가</li>"
+								        + "<li>매출금액</li>";
+								
+								$('#excelList').html(tag);
+							}
 						})// 삭제 함수 끝
 						
 						
@@ -983,7 +1021,7 @@
 			</div><!-- 수익 매출분석 끝 -->
 			
 			<div class="wrapContainer">
-				<div class="wrapTitle">카테고리별 매출분석</div>
+				<div class="wrapTitle">카테고리별 매출분석<button id="excelDown">엑셀 저장</button></div>
 				<div id="excelContainer">
 					<ul id="excelList">
 						<li>No</li>
