@@ -205,6 +205,28 @@
 		left:301px;
 		text-align:left;
 	}
+	/*버튼*/
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+		width:70px;
+		height:35px;
+		line-height:29px;
+		font-size:16px;
+	}
+	/*버튼*/
+	.btn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
 </style>
 <script>
 	$(function(){
@@ -223,9 +245,9 @@
 	<div id="mypointList">
 		<h2>김토끼님의 1:1대화 내역입니다. </h2>
 		<div id="pointSelectDate">
-			<div class="Pbuttons">3개월</div>
-			<div class="Pbuttons">6개월</div>
-			<div class="Pbuttons">1년</div>
+			<div class="btn">3개월</div>
+			<div class="btn">6개월</div>
+			<div class="btn">1년</div>
 		</div>
 		<div>
 			<ul id="pointUl">
@@ -238,7 +260,7 @@
 				<li>
 				<img src="/sshj/img/pi.gif"><span class="chatttitle wordcut">작은농부</span><span class="chatdetail wordcut">마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.</span>
 				</li>
-				<li><input type="button" class="chatbutton" value="조회"/><input type="button" class="chatbutton" value="삭제"/></li>
+				<li><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/></li>
 			</ul>
 		</div>
 		<div class="chatDiv">
