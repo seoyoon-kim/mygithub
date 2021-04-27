@@ -152,4 +152,12 @@ public class testController {
 	public String myChatList() {	// 채팅내역
 		return "mypages/myChatList";
 	}
+	@RequestMapping("leaveMember")
+	public String leaveMember() {	// 회원탈퇴
+		return "mypages/leaveMember";
+	}
+	@RequestMapping("leaveMemberOk")
+	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
+		return "mypages/leaveMemberSuccess";
+	}
 }

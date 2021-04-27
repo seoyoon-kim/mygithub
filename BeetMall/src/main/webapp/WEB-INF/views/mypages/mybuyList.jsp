@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <style>
 	#cMyPageLeft{
 		display: block;
@@ -280,11 +283,6 @@
 		float:left;
 	}
 	
-	#reviewcontent{
-		width: 660px;
-		height:660px;
-		margin:0 10px;
-	}
 	#reviewSubmit{
 		width:100px;
 		height:60px;
@@ -311,6 +309,16 @@
 			$(this).toggleClass("thumbsupYes");
 		})
 	})
+	$(document).ready(function(){
+		$("#summernote").summernote({
+			height:660,
+			minHeight:660,
+			maxHeight:660,
+			focus:true,
+			lang:"ko-KR",
+			placeholder:'리뷰를 작성해주세요'
+		});
+	});
 </script>
 <div class="section">
 	<div id="mypointList">
@@ -467,7 +475,7 @@
 		
 		<div class="buyListDiv" id="buyReviewWrite">
 			<div class="buyListBar" style="font-size:21px;">상품리뷰 작성하기</div><div class="buyListBarClose">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:1160px;">
+			<div class="buyListContent" style="padding-top:60px; height:1200px;">
 			<div id="buyProduct">
 				<span class="buyListleftMenu">구매상품</span>
 				<img src="/sshj/img/dsweetpotato2.jpg"/>
@@ -481,7 +489,7 @@
 			<div id="buyProductImg">
 				<span class="buyListleftMenu" style="float:left">첨부이미지</span><input type="file" name="filename"/>&nbsp;
 			</div>
-			<textarea name="reviewcontent" id="reviewcontent">
+			<textarea name="reviewcontent" id="summernote">
 				서머노트 사용해야 할 부분
 			</textarea>
 			<input type="button" value="작성하기" id="reviewSubmit"/>
