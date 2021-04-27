@@ -1,18 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/inc/recipeMypageMenu.jspf"%>    
 <%@ include file="/inc/menu_c.jspf"%>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" />
-
+<link rel="stylesheet"	href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 
 
 
 <style>
 /*  기본설정----------------------------------------------                 */
 
+a:hover, a:active, a:visited, a:link {
+    text-decoration: none;
+    color: black;
+}
+#mypageMenubar{
+	display:block;
+}
 
 #section{
 background-color:white;

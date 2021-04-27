@@ -16,13 +16,42 @@
 	font-family: 'Nanum Gothic', sans-serif;
 	
 }
+#section{
+font-size:17px;
+}
+
 /*  기본설정----------------------------------------------                 */
 #deliverinfoBox{
 width:100%;
 float:left;
 }
-#title1{
 
+#title1,#title2,#title3{
+float:left;
+width:100%;
+height:30px;
+border-bottom:1px solid #ddd;
+margin-top:40px;
+margin-bottom:40px;
+padding-left:10px;
+}
+/*  배송지정보----------------------------------------------                 */
+
+#infoul{
+width:100%;
+float:left;
+padding-left:10px;
+height:500px;
+}
+
+#infoul>li:nth-child(14n+1){
+float:left;
+width:200px;
+}
+
+#infoul>li:nth-child(14n+2),#infoul>li:nth-child(14n+2)>input{
+float:left;
+width:300px;
 }
 
 </style>
@@ -30,12 +59,12 @@ float:left;
 
 <body>
 
-<div class="section">
+<div class="section" id="section">
 
     <div id="payBox">
         <div id="deliverinfoBox">
            <div id="title1">배송지정보</div>
-              <ul>
+              <ul id="infoul">
 	               <li>배송지명</li>   <li><input type="text" name="adrr2" id="adrr2"/></li>
 	               <li>받는분</li>    <li><input type="text" name="adrr2" id="adrr2"/></li>  <li><input type="checkbox" name="boardCheckBox" value=""/></li>
 	               <li>휴대폰</li>    <li></li>
@@ -48,13 +77,13 @@ float:left;
         
         
         <div id="deliveraskBox">
-           <div>배송요청사항</div>
+           <div id="title2">배송요청사항</div>
            <div><input type="text" name="deliverMsg" id="deliverMsg"/></div>
         </div>
         
         
         <div id="productBox">
-           <div>구매상품</div>
+           <div id="title3">구매상품</div>
            <ul>
               <li>상품</li>
               <li>판매가</li>
