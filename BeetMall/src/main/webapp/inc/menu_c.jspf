@@ -349,13 +349,13 @@
 		<div id="menuList">
 			<div id="cMyPageLeft">
 				<div><a href="myinfoEdit">정보수정</a></div>
-				<div><a href="">장바구니</a></div>
+				<div><a href="customWish">장바구니</a></div>
 				<div><a href="mybuyList">구매내역</a></div>
 				<div><a href="mypoint">마이포인트</a></div>
 				<div><a href="myfavoriForm">즐겨찾는농장</a></div>
-				<div><a href="">마이레시피</a></div>
+				<div><a href="customMyrecipe">마이레시피</a></div>
 				<div><a href="myChatList">1:1대화</a></div>
-				<div><a href="">문의내역</a></div>
+				<div><a href="custominfo">문의내역</a></div>
 				<div><a href="leaveMember">회원탈퇴</a></div>
 			</div>
 			<div id="categoriSelect">

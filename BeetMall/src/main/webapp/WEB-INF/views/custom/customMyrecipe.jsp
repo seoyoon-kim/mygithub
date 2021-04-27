@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@ include file="/inc/recipeMypageMenu.jspf"%>
 <%@ include file="/inc/menu_c.jspf"%>    
 
 
@@ -37,6 +36,11 @@
 top:0px;
 left:0px;
 }
+
+	#cMyPageLeft{
+		display: block;
+	}
+
 
 
 /* ------------------페이징처리부분-------------------- */
@@ -99,17 +103,27 @@ height:30px;
  
  
  #reciTitle{
- width:100%;
  float:left;
+ width:100%;
+ color:rgb(252,118,45);
+ height:20px;
+ margin-top:10px;
+ margin-bottom:15px;
+ font-size:1em;
+ height:30px;
  }
  
  #myrecipeTop{
- float:left; width:55%;
+ float:left; width:620px;
  }
  
- ##myrecipeTop2{
+ #myrecipeTop2{
  float:right;
- width:60%
+ width:430px;
+ }
+ 
+ #myrecipeTop2>li{
+ padding-right:10px;
  }
 
 
@@ -117,24 +131,89 @@ height:30px;
    /*------------------------하단 게시판메뉴-----------------------------------*/
   
 #recimainbox{
-		width: 1100px;
-		overflow:auto;
-		padding-left: 100px;
+     float:left;
+		width:100%;
+		padding-left: 10px;
+		
 	}  
 	
   
 #recipebox{
+        padding-top:10px;
+        padding-bottom:10px;
 		width:30%;
 		float: left;
 	}
 
 
-#recipebox>ul>li>img{
+#recipebox>ul>li>a>img{
 		width:270px;
 		height:170px;
+		border-radius: 3px;
+		
 	}
+	
+#recipebox>ul>li:nth-child(5n+1) {
+	width:100%;
+}
+
+#recipebox>ul>li:nth-child(5n+2){
+ width:100%;
+ font-weight:bold;
+ margin-top:5px;
+}
+
+#recipebox>ul>li:nth-child(5n+3){
+width:100%;
+}
+
+#recipebox>ul>li:nth-child(5n+4){
+width:90%;
+font-size:0.5em;
+}
+
+#recipebox>ul>li:nth-child(5n+5){
+width:10%;
+}
 
 
+/*-------------------------------------------*/
+/*버튼*/
+	#myrbtn,#goodrbtn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 5px;
+		background:#fff;
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	
+	#norebtn{
+	padding: 3px 10px;
+	color: #fff;
+	border-radius: 5px;
+	background: gray;
+	text-decoration: none;
+	display: inline-block;
+	border:none;
+	height:25px;
+	font-size:0.5em;
+	}
+	
+	/*버튼*/
+	#myrbtn:hover,#goodrbtn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
+	
+	#myrbtn:active,#goodrbtn:active{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
  
  
  
@@ -143,13 +222,13 @@ height:30px;
 <body>
 <div class="section">
 
-  <h3 id="reciTitle">마이레시피</h3>
+  <div id="reciTitle"><b>마이레시피</b></div>
   
 <!--------------상단 메뉴바들-------------------->  
   <div id="recitb">
         <div id="myrecipeTop">
-		  	<input type="button" value="나의 레시피"/>
-			<input type="button" value="즐겨찾기 레시피"/>
+		  	<input type="button" id="myrbtn" value="나의 레시피"/>
+			<input type="button" id="goodrbtn" value="즐겨찾기 레시피"/>
 		</div>  
 		  
        <ul id="myrecipeTop2">
@@ -158,7 +237,7 @@ height:30px;
 		                   <option>추천순</option>
 		                   <option>조회수순</option>	                  
 		    </select></li>
-		  <li><input type="button" value="선택즐겨찾기제거"/></li>
+		  <li><input type="button" id="norebtn" value="선택즐겨찾기제거"/></li>
 		  <li><input type="text" id="search" name="search" placeholder="검색하기"></li>
 	  </ul>
 </div>
@@ -167,8 +246,8 @@ height:30px;
 <div id="recimainbox">
            <div id="recipebox">
 				<ul>
-					<li><img src="img/cr3.jfif"></li>
-					<li>멋진토마토 레시피 만들기</li>
+					<li><a href=""><img src="img/cr3.jfif"></a></li>
+					<li><a href="">멋진토마토 레시피 만들기</a></li>
 					<li>닉네임</li>
 					<li>★★★★★(15) 조회수 25</li>
 					<li><input type="checkbox" name="recipeCheckBox" value=""/></li>
@@ -176,37 +255,43 @@ height:30px;
 			</div>
 			
 			
-			<div id="recipebox">	
+			
+		    <div id="recipebox">
 				<ul>
-					<li><img src="img/cr3.jfif"></li>
-					<li>멋진토마토 레시피 만들기</li>
+					<li><a href=""><img src="img/cr3.jfif"></a></li>
+					<li><a href="">멋진토마토 레시피 만들기</a></li>
 					<li>닉네임</li>
 					<li>★★★★★(15) 조회수 25</li>
 					<li><input type="checkbox" name="recipeCheckBox" value=""/></li>
-				</ul>			
+				</ul>
 			</div>
 			
 			
-		   <div id="recipebox">	
+			
+			<div id="recipebox">
 				<ul>
-					<li><img src="img/cr3.jfif"></li>
-					<li>멋진토마토 레시피 만들기</li>
+					<li><a href=""><img src="img/cr3.jfif"></a></li>
+					<li><a href="">멋진토마토 레시피 만들기</a></li>
 					<li>닉네임</li>
 					<li>★★★★★(15) 조회수 25</li>
 					<li><input type="checkbox" name="recipeCheckBox" value=""/></li>
-				</ul>				
+				</ul>
 			</div>
 			
 			
-			<div id="recipebox">	
+			
+		    <div id="recipebox">
 				<ul>
-					<li><img src="img/cr3.jfif"></li>
-					<li>멋진토마토 레시피 만들기</li>
+					<li><a href=""><img src="img/cr3.jfif"></a></li>
+					<li><a href="">멋진토마토 레시피 만들기</a></li>
 					<li>닉네임</li>
 					<li>★★★★★(15) 조회수 25</li>
 					<li><input type="checkbox" name="recipeCheckBox" value=""/></li>
-				</ul>				
+				</ul>
 			</div>
+			
+			
+			
 </div>
 <!--------------페이징 표시-------------------->
 

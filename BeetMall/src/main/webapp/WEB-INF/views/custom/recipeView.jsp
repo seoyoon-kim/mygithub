@@ -19,6 +19,7 @@
 		<!-- font-family: 'Nanum Gothic', sans-serif; -->
 		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 		<!-- font-family: 'NanumSquare', sans-serif !important; -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
 
 <script>
 
@@ -105,29 +106,54 @@ ul>li {
 	margin: 0px;
 }
 
+#recipettile>b{
+float:left;
+width:100%;
+color:rgb(252,118,45);
+height:20px;
+margin-top:10px;
+}
+
 /*  큰제목----------------------------------------------                 */
 
 #recit {
 	width: 300px;
 	padding: 0px;
 	margin: 0px;
-	color:rgb(224,102,102);
+	color:rgb(252,118,45);
 }
 
 /*  게시글 리스트----------------------------------------------                 */
 
-#reciList {
-	width: 100%;
-	margin-bottom: 5%;
+#slist{
+width:100%;
+height:150px;
+margin-bottom:100px;
 }
 
-#reciList>li {
+#reciListT{
+padding:0px;
+margin-top:10px;
+border-bottom:1px solid #ddd;
+}
+
+#reciList,#reciListT {
+	width: 100%;
+}
+
+#reciList>li,#reciListT>li {
 	width: 10%;
 	float: left;
-	border-bottom: 1px solid #ddd;
+	height:30px;
+	line-height:30px;
 }
 
-#reciList>li:nth-child(6n+2) {
+#reciList>li{
+border-bottom:1px solid #ddd;
+margin-bottom:5px;
+}
+
+#reciList>li:nth-child(6n+2),#reciListT>li:nth-child(6n+2) {
 	width: 50%;
 }
 
@@ -137,6 +163,7 @@ ul>li {
 	width: 100%;
 	height:40px;
 	background-color:#eee;
+	border-bottom:1px solid #ddd;
 }
 
 #reciContenView>li {
@@ -155,7 +182,7 @@ ul>li {
 	float: left;
 	padding: 5%;
 	width: 100%;
-	background-color: #EBDFE2;
+  text-align:center;
 }
 
 
@@ -163,7 +190,9 @@ ul>li {
 
 #recivb {
 	width: 100%;
-	margin-bottom: 10%;
+	padding-top:10px;
+	margin-bottom: 15px;
+	border-top:1px solid #ddd;
 }
 
 #recivb>li {
@@ -184,13 +213,40 @@ ul>li {
  width:20px;
 }
 
+#recivb>li>a>img{
+ width:20px;
+}
+
 
 /*  검색표시----------------------------------------------                 */
 
 #searchbox {
 	text-align: center;
+	margin-bottom:30px;
+	margin-top:10px;
+	}
+
+#searchbtn{
+height:30px; width:69px;
 }
 
+#searchbtn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	/*버튼*/
+	#searchbtn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
 
 </style>
 
@@ -199,25 +255,28 @@ ul>li {
 <div class="section">
 
     <!-- ------------------------큰제목----------------------------------- -->
-      <h5 id="recit" ><b>레시피</b></h5>
+      <div id="recipettile" ><b>레시피</b></div>
      <!-- ------------------------게시글 리스트----------------------------------- -->  
-      <div id="slist">
+      <div>
         
         <select name="selectOrder" style="float:right">
 	                   <option>최신순</option>
 	                   <option>추천순</option>
 	                   <option>조회수순</option>	                  
-	    </select><br/>   
-	    <hr/> 
-	     
-	      <ul id="reciList">
+	    </select>  
+	    
+	   
+	   <div id="slist">
+	      <ul id="reciListT">   
 		         <li><b>번호</b></li>
 		         <li><b>제목</b></li>
 		         <li><b>작성자</b></li> 
 		         <li><b>추천수</b></li>
 		         <li><b>조회수</b></li>
 		         <li><b>작성일</b></li>  
+		   </ul>
 		         
+		   <ul id="reciList">      
 		         <li>123</li>
 		         <li>맛있는 요리!</li>
 		         <li>작성자</li> 
@@ -247,9 +306,9 @@ ul>li {
 		         <li>${data.recipehit}</li>
 		         <li>${data.recipewritedate}</li> 	
 		    <!--   </c:forEach>        -->
-	     
+	      
 	      </ul>      
-	     
+	</div> <!-- slist -->
 	      
 	    
 	      
@@ -291,8 +350,12 @@ ul>li {
 	  </ul>
 
 	  
-	  <div id="rcontent">글내용 :  
-			  베트남 피자 반짱느엉 만들기
+	  <div id="rcontent">글내용 
+	  
+	  
+	    <img src="img/cr3.jfif" style="width:50%; margin-right:50%;">
+	     
+		베트남 피자 반짱느엉 만들기
 		
 		돼지고기 볶아주기 갈은 돼지고기에 소금과 후추 마늘을 넣고 볶아주세요.
 		
@@ -351,19 +414,19 @@ ul>li {
 	  
 	<!-- ------------------------하단 표시들----------------------------------- --> 
 	  <ul id="recivb">
-	  <li>추천해요</li>
-	  <li>레시피즐겨찾기</li>
-	  <li><img src="img/cicon01.png"></li>
-	  <li><img src="img/cicon02.png"></li>
-	  <li><img src="img/cicon03.png"></li>
-	  <li><img src="img/cicon02.png"></li>
+	  <li>추천해요<img src="img/cstar.png"></li>
+	  <li>레시피즐겨찾기<img src="img/ccart.png"></li>
+	  <li><a href=""><img src="img/cicon01.png"></a></li>
+	  <li><a href=""><img src="img/cicon02.png"></a></li>
+	  <li><a href=""><img src="img/cicon03.png"></a></li>
+	  <li><a href=""><img src="img/cicon05.png"></a></li>
 	  </ul>
 	  
 	  
 	 <!-- ------------------------검색 기능----------------------------------- -->  
 	 <div id="searchbox">
-	  <input type="text" name="search" placeholder="검색어를 입력하세요"/>
-	  <input type="submit" value="Search"/>
+	  <input type="text" name="search"  placeholder="검색어를 입력하세요"/>
+	  <input type="submit" id="searchbtn" value="Search"/>
 	 </div> 
 	  
 

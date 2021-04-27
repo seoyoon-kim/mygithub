@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<%@ include file="/inc/recipeMypageMenu.jspf"%>    
+  
 <%@ include file="/inc/menu_c.jspf"%>    
     
 <!DOCTYPE html>
@@ -28,14 +28,24 @@
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
+	font-family: 'Nanum Gothic', sans-serif;
+	
 }
-
 
 #searchBtn{
 top:0px;
 left:0px;
 }
 
+	#cMyPageLeft{
+		display: block;
+	}
+
+
+a:active,a:link,a:visited,a:hover{
+      text-decoration: none;
+      color:black;
+   }
  /* ------------------페이징처리부분-------------------- */
 	.page_wrap {
 		text-align:center;
@@ -91,6 +101,16 @@ left:0px;
 
 /*  문의상단----------------------------------------------                 */
 
+#infoTitle{
+float:left;
+width:100%;
+height:20px;
+margin-top:10px;
+font-weight:bold;
+margin-bottom:30px;
+}
+
+
 .infobtn{
 float:right;
 margin-bottom:4%;
@@ -101,14 +121,26 @@ width:100%;
 /*  게시판----------------------------------------------                 */
 
 
+#infolistbox{
+width:100%;
+float:left;
+border-bottom:1px solid #eee;
+margin-bottom:40px;
+}
+
 
 .infoListTitle{
+float: left;
 width: 100%;
 border-bottom:2px solid #ddd;
+padding-left:0px;
 }
 
 .infoList{
+    float:left;
 	width: 100%;
+	padding-left:0px;
+	margin-bottom:10px;
 }
 
 
@@ -116,32 +148,92 @@ border-bottom:2px solid #ddd;
 	width: 10%;
 	float: left;
 	line-height:40px;
+	height:40px;
 }
 
-.infoList>li:nth-child(6n+1),.infoListTitle>li:nth-child(6n+1) {
-	width: 5%;
+.infoListTitle>li:nth-child(5n+1){
+width:10%;
+margin-left:10%;
 }
 
-.infoList>li:nth-child(6n+3),.infoListTitle>li:nth-child(6n+3) {
-	width: 45%;
+.infoListTitle>li:nth-child(5n+2){
+width:40%;
 }
 
-.infoList>li:nth-child(6n+4),.infoListTitle>li:nth-child(6n+4) {
+.infoListTitle>li:nth-child(5n+3){
+width:15%;
+}
+
+.infoListTitle>li:nth-child(5n+4){
+width:15%;
+}
+
+
+
+.infoList>li:nth-child(6n+1){
+	width: 10%;
+	padding-left:80px;
+}
+
+.infoList>li:nth-child(6n+3){
+	width: 35%;
+}
+
+.infoList>li:nth-child(6n+4){
+	width: 20%;
+}
+
+.infoList>li:nth-child(6n+6){
 	width: 15%;
-}
-
-.infoList>li:nth-child(6n+6),.infoListTitle>li:nth-child(6n+6) {
-	width: 15%;
+	text-align:center;
 }
 
 /* ------게시판 버튼-----------*/
 
+/*버튼*/
+	#infowrbtn,#infodebtn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	/*버튼*/
+	#infowrbtn:hover,#infodebtn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
+
 #infobutton{
- color:white;
- background-color:rgb(224,102,102);
- border-radius:10px;
- border:1px solid #ddd;
- line-height: 30px;
+       padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+        line-height: 20px;
+        height:25px;
+}
+
+#infobutton:hover{
+background-color:#eee;
+color:red;
+display: inline-block;
+}
+
+
+.infobtn{
+width:100%;
+float:left;
+margin-bottom:15px;
 }
 
 </style>
@@ -151,20 +243,19 @@ border-bottom:2px solid #ddd;
 <body>
 
 <div class="section">
- <div class-"section2">
 
  <!-- ----------------문의 상단------------------------ -->
-  <h3>*******의 문의내역 입니다.</h3>
+  <div id="infoTitle">*******의 문의내역 입니다.</div>
   
   <div class="infobtn">
-  <input type="submit" value="문의 작성"/>
-  <input type="submit" value="문의 삭제"/>
+  <input type="submit" id="infowrbtn" value="문의 작성"/>
+  <input type="submit" id="infodebtn" value="문의 삭제"/>
   </div>
   
  <!-- ----------------게시판------------------------ -->
-  <div class="infolistbox">
+ 
+  <div id="infolistbox">
 	  <ul class="infoListTitle">
-	    <li></li>
 	    <li><b>번호</b></li>
 	    <li><b>내용</b></li>
 	    <li><b>일시</b></li>
@@ -177,16 +268,30 @@ border-bottom:2px solid #ddd;
 	   
 	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
 	    <li>123</li>
-	    <li>너무 맛이 없어요</li>
+	    <li><a href="">너무 맛이 없어요</a></li>
 	    <li>2020-03-28 13:00</li>
 	    <li>확인중</li>
 	    <li><input type="button" value="확인하기" id="infobutton"/></li>
 	    
 	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
 	    <li>123</li>
-	    <li>너무 맛이 없어요</li>
+	    <li><a href="">너무 맛이 없어요</a></li>
 	    <li>2020-03-28 13:00</li>
 	    <li>확인중</li>
+	    <li><input type="button" value="확인하기" id="infobutton"/></li>
+	    
+	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
+	    <li>123</li>
+	    <li><a href="">너무 맛이 없어요</a></li>
+	    <li>2020-03-28 13:00</li>
+	    <li>확인중</li>
+	    <li><input type="button" value="확인하기" id="infobutton"/></li>
+	    
+	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
+	    <li>123</li>
+	    <li><a href="">너무 맛이 없어요</a></li>
+	    <li>2020-03-28 13:00</li>
+	    <li>답변완료</li>
 	    <li><input type="button" value="확인하기" id="infobutton"/></li>
 	  </ul>
   </div>
@@ -213,7 +318,7 @@ border-bottom:2px solid #ddd;
 	</div>
  
  <div style="clear:both;"></div>
-  </div>
+ 
 </div>
 
 </body>

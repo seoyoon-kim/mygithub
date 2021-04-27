@@ -71,7 +71,7 @@ $(document).ready(function() {
 }
 
 
-.section>h5{
+.section>h6{
 float:left;
 width:100%;
 }
@@ -79,6 +79,69 @@ width:100%;
 ul>li {
 	list-style: none;
 }
+
+#recipettile>b{
+float:left;
+width:100%;
+color:rgb(252,118,45);
+height:20px;
+margin-top:10px;
+margin-bottom:30px;
+}
+
+<!------------------------------------->
+#writebox{
+width:100%;
+}
+
+#writebox>div{
+width:100%;
+}
+
+#filename,#subject{
+width:50%;
+}
+
+
+#writebox>div:nth-child(7n+5),#writebox>div:nth-child(7n+6){
+width:50%;
+color:red;
+font-size:0.5em;
+}
+
+#writebox>div:nth-child(7n+7){
+margin-top:10px;
+}
+
+#btnbox{
+text-align:center;
+margin-top:10px;
+margin-bottom:10px;
+}
+
+#btnbox>input{
+margin:6px auto;
+width:80px;
+}
+
+#btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	/*버튼*/
+	#btn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
+
 </style>
 
 
@@ -88,20 +151,27 @@ ul>li {
 <body>
 	<div class="section">
 
-		<h5 style="color: rgb(224, 102, 102)">
-			<b>레시피 작성하기</b>
-		</h5>
+			<div id="recipettile"><b>레시피 작성하기</b></div>
 
 
 
 
-
-		제목:<input type="text" name="subject" /><br /> 글내용:
-		<textarea id="summernote" name="content"> </textarea>
-
-
-		<br /> <input type="submit" value="글등록" />
-
+     <div id="writebox">
+		<div>글 제목</div>
+		<div><input type="text" name="subject" id="subject"/></div>
+		<div>대표이미지</div>
+		<div><input type="text" name="filename" id="filename" /><input type="submit" value="파일첨부" id="btn"/></div>
+		<div>미첨부시 텍스트만 적용됩니다.</div>
+		<div>이미지는 jpg.png.jpgf만 업로드해주세요</div>
+		<div><textarea id="summernote" name="content"> </textarea></div>
+    </div>
+    
+    
+<div id="btnbox">
+		<input type="submit" value="글등록" id="btn" />
+		<input type="submit" value="다시쓰기" id="btn"/>
+		<input type="submit" value="삭제" id="btn"/>
+</div>
 
 
 

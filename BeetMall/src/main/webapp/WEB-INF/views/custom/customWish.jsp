@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<%@ include file="/inc/recipeMypageMenu.jspf"%>
+
 <%@ include file="/inc/menu_c.jspf"%>   
+
+
     
 <!DOCTYPE html>
 <html>
@@ -40,8 +42,19 @@ left:0px;
 	
 }
 
-/*--------------------게시판+타이틀---------------------------*/
+	#cMyPageLeft{
+		display: block;
+	}
 
+/*--------------------게시판+타이틀---------------------------*/
+#wisht{
+float:left;
+width:100%;
+height:20px;
+margin-top:10px;
+font-weight:bold;
+margin-bottom:30px;
+}
 
 .wishListTitle{
 width: 100%;
@@ -59,12 +72,12 @@ line-height:40px;
 }
 
 .wishListTitle>li:nth-child(4n+1){
-width:45%;
-text-align:center;
+width:57%;
+padding-left:20%;
 }
 
 .wishListTitle>li:nth-child(4n+2){
-width:10%;
+width:15%;
 }
 
 .wishListTitle>li:nth-child(4n+3){
@@ -72,8 +85,7 @@ width:5%;
 }
 
 .wishListTitle>li:nth-child(4n+4){
-text-align:center;
-width:40%;
+width:23%;
 }
 
 /*--------------------게시판 리스트들---------------------------*/
@@ -91,21 +103,24 @@ margin-left:2%;
 	
 }
 
-.wishList>li:nth-child(7n+1){
+.wishList>li:nth-child(7n+1),.wishList>li:nth-child(7n+1)>a{
  width:15%;
  
 }
 
 
 
-.wishList>li:nth-child(7n+2){
- width:30%;
+.wishList>li:nth-child(7n+2),.wishList>li:nth-child(7n+2)>a{
+ width:40%;
 
 }
 
+.wishList>li:nth-child(7n+3){
+width:15%;
+}
 
 .wishList>li:nth-child(7n+4){
- width:20%;
+ width:5%;
 
 }
 
@@ -116,8 +131,9 @@ margin-left:2%;
 }
 
 
-.wishList>li>img{
-width:50px;
+.wishList>li>a>img{
+width:60px;
+height:50px;
 border-radius:5px;
 }
 
@@ -126,22 +142,76 @@ border-radius:5px;
 #nogetbutton{
 line-height:20px;
 float:right;
-border:1px solid #ddd;
+color: #fff;
+    border-radius: 5px;
+    background: gray;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    height: 25px;
+    font-size: 0.5em;
 }
 
-#getbutton,#getAllbutton{
-line-height:30px;
-border-radius:10px;
-border:1px solid #ddd;
+#nogetbutton:hover{
+color:red;
 }
+
 
 #wishCenterButton{
+width:100%;
 text-align:center;
 }
 
 #wishPriceTitle{
+padding-left:80%;
 float:right;
+width:100%;
+margin-bottom:50px;
 }
+
+
+
+/*버튼----------------------------------------------------------------*/
+	#swishbtn,#twishbtn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	/*버튼*/
+	#swishbtn:hover,#twishbtn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
+
+#getbutton{
+       padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+        line-height: 20px;
+        height:25px;
+}
+
+#getbutton:hover{
+background-color:#eee;
+color:red;
+display: inline-block;
+}
+
+
+
 
 </style>
 
@@ -152,7 +222,7 @@ float:right;
 <div class="section">
    <!-- 큰제목 ---------------------------------------------->
    
-   <b> <h3>*********의 장바구니 입니다.</h3></b>
+   <div id="wisht"><b>*********의 장바구니 입니다.</b></div>
    
    <input type="button" value="선택상품제거" id="nogetbutton"/>
 
@@ -168,8 +238,8 @@ float:right;
 	   
 	   
 	  <ul class="wishList">
-	    <li><img src="img/cr3.jfif"></li>
-	    <li>맛있는오렌지</li>
+	    <li><a href=""><img src="img/cr3.jfif"></a></li>
+	    <li><a href="">맛있는오렌지</a></li>
 	    <li>17,900</li>
 	    <li>
 	      <select name="selectwish">
@@ -183,8 +253,26 @@ float:right;
 	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
 	    
 	    
-	    <li><img src="img/cr3.jfif"></li>
-	    <li>맛있는오렌지</li>
+	    
+	    <li><a href=""><img src="img/cr3.jfif"></a></li>
+	    <li><a href="">맛있는오렌지</a></li>
+	    <li>17,900</li>
+	    <li>
+	      <select name="selectwish">
+	                   <option>1</option>
+	                   <option>2</option>
+	                   <option>3</option>	                  
+	       </select>
+	    </li>
+	    <li>17,900</li>	    
+	    <li><input type="button" value="구매하기" id="getbutton"/></li>
+	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
+
+
+
+	    
+	    <li><a href=""><img src="img/cr3.jfif"></a></li>
+	    <li><a href="">맛있는오렌지</a></li>
 	    <li>17,900</li>
 	    <li>
 	      <select name="selectwish">
@@ -203,8 +291,8 @@ float:right;
 <!-- ----------------게시판 밑에 버튼------------------------ -->
 
 <div id="wishCenterButton">
-<input type="button" value="선택주문" id="getbutton"/>
-<input type="button" value="전체주문" id="getAllbutton"/>
+<input type="button" value="선택주문" id="swishbtn"/>
+<input type="button" value="전체주문" id="twishbtn"/>
 </div>
 
 <!-- ----------------게시판 밑에 총가격------------------------ -->

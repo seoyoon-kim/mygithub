@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ include file="/inc/recipeMypageMenu.jspf"%>
 <%@ include file="/inc/menu_c.jspf"%>    
 
 
@@ -27,7 +28,7 @@
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-	font-size:1.5em;
+	font-family: 'Nanum Gothic', sans-serif;
 	
 }
 
@@ -108,7 +109,7 @@ width:25%;
 
 }
 
-#sharicon>li>img{
+#sharicon>li>a>img{
 width:25px;
 }
 
@@ -180,7 +181,7 @@ height:50px;
 line-height:50px;
 }
 
-#simg>img{
+#simg>a>img{
 width:50px;
 line-height:50px;
 }
@@ -197,6 +198,16 @@ float:left;
 width:50%;
 height:30px;
 line-height:30px;
+
+}
+
+#mapbtn{
+border:none;
+margin-left:10px;
+font-size:0.5em;
+width:100px;
+height:25px;
+line-height:15px;
 }
 
 #productPrBox>ul>li>#ppbtn,#productPrBox>ul>li>#pmbtn{
@@ -496,6 +507,8 @@ float:left;
 	}
 	
  /* ---------------페이징 처리끝-------------------- */
+
+ 
   /* ---------------상세정보박스2끝-------------------- */
   /* ---------------상세정보박스3시잗-------------------- */
   
@@ -546,11 +559,36 @@ width:20px;
 height:20px;
 }
 
+<!--문의 후기 버튼 -->
+
+#reviewWriteBtn{
+
+ }
+ 
+ #reviewWriteBtn>input{
+ float:right;
+ width:80px;
+ height:25px;
+ line-height:20px;
+ }
+ 
+ #qnaWriteBtn{
+ 
+ }
+ 
+ #qnaWriteBtn>input{
+ float:right;
+ width:80px;
+ height:25px;
+ line-height:20px;
+ }
+ 
+ 
 
 </style>
 <script>
 
-
+/*
 
   $(document).ready(function(){
 	 
@@ -578,7 +616,7 @@ height:20px;
 	
   })
  
-
+*/
 
 
 
@@ -618,10 +656,10 @@ height:20px;
 		    
 <!-- ---------------------------------공유 아이콘 정렬------------------------------------------------------------ -->
 		<ul id=sharicon>
-		      <li><img src="img/cicon01.png"></li>
-			  <li><img src="img/cicon02.png"></li>
-			  <li><img src="img/cicon03.png"></li>
-			  <li><img src="img/cicon02.png"></li>		
+		      <li><a href="#"><img src="img/cicon01.png"></a></li>
+			  <li><a href="#"><img src="img/cicon02.png"></a></li>
+			  <li><a href="#"><img src="img/cicon03.png"></a></li>
+			  <li><a href="#"><img src="img/cicon02.png"></a></li>		
 		</ul>		    
 
 <!-- ------------------------------상품 박스--------------------------------------------------------------- -->
@@ -637,14 +675,14 @@ height:20px;
             
             <div id=pbox>
 	                <div id=productMainTiltle><b>국산 100% 볶음참깨 160g 80g 볶음참깨 당일생산 당일 배송!!</b></div>
-	                <div id=productPrice>8,900</div>  <div id="sprofile">경북예천 홍길동</div>  <div id="simg"><img src="img/cprofile.png"></div>
+	                <div id=productPrice>8,900</div>  <div id="sprofile"><a href="#">경북예천 홍길동</a></div>  <div id="simg"><a href="#"><img src="img/cprofile.png"></a></div>
 	                
 	              
 	                <div id=productPrBox>
 	                    <ul>
 	                        <li>판매단위</li>  <li>1통</li>
 	                        <li>중량/용량</li> <li>160g</li>
-	                        <li>배송구분</li>  <li>픽업/배송</li>
+	                        <li>배송구분</li>  <li>픽업/배송<input type="button" id="mapbtn" value="픽업위치확인하기"/></li>
 	                        <li>원산지</li>    <li>국산</li>
 	                        <li>포장타입</li>  <li>냉장/종이포장</li>
 	                        <li>안내사항</li>  <li>어쩌구저쩌구</li>
@@ -681,7 +719,7 @@ height:20px;
        
 <!-- -------------------------------------상세정보박스1-------------------------------------------------------- -->    
  
-<div id="productInfoPage" onload="mainset()">
+<div id="productInfoPage">
 <div id="productInfoPage1" >
    <div>해당 상품의 관련 상품들입니다.</div>
 
@@ -737,7 +775,7 @@ height:20px;
 <!-- -------------------------------------상세정보박스2  시작-------------------------------------------------------- --> 
  
 <div id="productInfoPage">
-    <div id="productInfoPage2" style="display:none;">
+    <div id="productInfoPage2">
 	    <div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다. </div>
 	    
 	     <ul id="reviewTitle">
@@ -783,6 +821,9 @@ height:20px;
 		         <li>2020.01.23</li>
 		         <li>4</li>		            
 	      </ul>         
+	      
+	             <div id="reviewWriteBtn"><input type="button" value="후기 작성"/></div>
+	      
 			    <!-- 페이징 표시--------- -->
 		              <div class="page_wrap">
 					<div class="page_nation">
@@ -792,17 +833,12 @@ height:20px;
 					   <a href="#">2</a>
 					   <a href="#">3</a>
 					   <a href="#">4</a>
-					   <a href="#">5</a>
-					   <a href="#">6</a>
-					   <a href="#">7</a>
-					   <a href="#">8</a>
-					   <a href="#">9</a>
-					   <a href="#">10</a>
 					   <a class="arrow next" href="#"></a>
 					   <a class="arrow nnext" href="#"></a>
 					</div>
 				 </div><!-- 페이징 표시--------- -->
-		    
+		       
+		     
     </div><!-- productInfoPage2 -->
  </div><!-- productInfoPage -->
 
@@ -810,7 +846,7 @@ height:20px;
 
 <!-- -------------------------------------상세정보박스3  시작-------------------------------------------------------- --> 
 <div id="productInfoPage">
-    <div id="productInfoPage3" style="display:none;">
+    <div id="productInfoPage3">
 
 	    <div id="qtitle">상품에 대한 문의를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다. </div>
 	    
@@ -824,31 +860,38 @@ height:20px;
 		  
 		  <ul id="qnaList">      
 		         <li>123</li>
-		         <li>비공개 처리된 게시글 입니다.</li>
-		         <li>goguma123</li> 
-		         <li>2020.01.23</li>
-		         <li><img src="img/ciconlock2.png"></li>		
-		         
-		         <li>123</li>
-		         <li>비공개 처리된 게시글 입니다.</li>
+		         <li><a href="#">비공개 처리된 게시글 입니다.</a></li>
 		         <li>goguma123</li> 
 		         <li>2020.01.23</li>
 		         <li><img src="img/ciconlock2.png"></li>	
 		         
-		         <li>123</li>
-		         <li>비공개 처리된 게시글 입니다.</li>
+		           <li>123</li>
+		         <li><a href="#">비공개 처리된 게시글 입니다.</a></li>
+		         <li>goguma123</li> 
+		         <li>2020.01.23</li>
+		         <li><img src="img/ciconlock2.png"></li>
+		         
+		           <li>123</li>
+		         <li><a href="#">비공개 처리된 게시글 입니다.</a></li>
+		         <li>goguma123</li> 
+		         <li>2020.01.23</li>
+		         <li><img src="img/ciconlock2.png"></li>
+		         
+		           <li>123</li>
+		         <li><a href="#">비공개 처리된 게시글 입니다.</a></li>
+		         <li>goguma123</li> 
+		         <li>2020.01.23</li>
+		         <li><img src="img/ciconlock2.png"></li>
+		         
+		           <li>123</li>
+		         <li><a href="#">비공개 처리된 게시글 입니다.</a></li>
 		         <li>goguma123</li> 
 		         <li>2020.01.23</li>
 		         <li><img src="img/ciconlock2.png"></li>	
-		         
-		         <li>123</li>
-		         <li>비공개 처리된 게시글 입니다.</li>
-		         <li>goguma123</li> 
-		         <li>2020.01.23</li>
-		         <li><img src="img/ciconlock2.png"></li>	            
+		                  
 	      </ul>
 	      
-	      
+	       <div id="qnaWriteBtn"><input type="button" value="문의 작성"/></div>
 	         
 			    <!-- 페이징 표시--------- -->
 	              <div class="page_wrap">
@@ -858,13 +901,7 @@ height:20px;
 					   <a href="#" class="active">1</a>
 					   <a href="#">2</a>
 					   <a href="#">3</a>
-					   <a href="#">4</a>
-					   <a href="#">5</a>
-					   <a href="#">6</a>
-					   <a href="#">7</a>
-					   <a href="#">8</a>
-					   <a href="#">9</a>
-					   <a href="#">10</a>
+					   <a href="#">4</a>			
 					   <a class="arrow next" href="#"></a>
 					   <a class="arrow nnext" href="#"></a>
 					</div>
