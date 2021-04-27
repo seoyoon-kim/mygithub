@@ -888,7 +888,8 @@
 																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
 															
 															} else {
-																resultArr.push(0);
+																
+																break;
 															}
 															
 														}
