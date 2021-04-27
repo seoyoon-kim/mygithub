@@ -557,6 +557,12 @@
 										myChart.update();
 									}
 									
+									// 처음에 날짜 데이터가 있는지 없는지 확인한다.
+									let existenceCheck = new Date($('#excelList li:nth-child(8)').text());
+									if(existenceCheck=='Invalid Date'){
+										alert('검색된 데이터가 없습니다.');
+										return false;
+									}
 									
 									// 월별 차트 추가하기
 									if(dateCheck=="월별"){
@@ -792,267 +798,128 @@
 											// 현재 있는 데이터의 첫 시작 날짜가 minDate보다 2이상 차이 날 경우에 데이터 0을 미리 다 넣어놓고 시작해야 한다.
 											let firstDateCheck = new Date($('#excelList li:nth-child(8)').text());
 											
-											console.log(minDate);
-											console.log(maxDate);
-											console.log(firstDateCheck);
 											//만약... 데이터 첫 시작 날짜가 다를 경우의 조건
-											if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) || 1 < (firstDateCheck.getMonth() - minDate.getMonth()) )  {
-												
+											if( firstDateCheck.getFullYear() != minDate.getFullYear() || firstDateCheck.getMonth() != minDate.getMonth() || 0 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) )  {
 												// year가 다르면 year 먼저 맞출 수 있도록 한다.
-												if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) ){
+												if( firstDateCheck.getFullYear() != minDate.getFullYear() ){
 													do{
 														console.log('year');
 														minDate.setDate( minDate.getDate()+1 );
 														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
-													}while( 0 < (firstDateCheck.getDate() - minDate.getDate()) )
+													}while( firstDateCheck.getDate() != minDate.getDate() )
 												}
 												
 												// 월이 다르면 더해주고 resultArr 에 0을 넣어준다.
-												if(0 < (firstDateCheck.getMonth() - minDate.getMonth()) ){
+												if( firstDateCheck.getMonth() != minDate.getMonth() ){
 													do{
 														console.log(' month');
 														minDate.setDate( minDate.getDate()+1 );
 														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
-													}while( 0 < (firstDateCheck.getMonth() - minDate.getMonth()) )
+													}while( firstDateCheck.getMonth() != minDate.getMonth() )
 												}
 												
 												// 빈날짜가 있으면 0으로 채워준다.
-												if(0 < (firstDateCheck.getTime() - minDate-getTime())/1000/60/60/24 ){
+												if(1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) ){
 													do{
 														console.log('date');
 														minDate.setDate( minDate.getDate()+1 );
 														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
-													}while( 1 < (firstDateCheck.getDate() - minDate-getDate()) )
+													}while( 1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) )
 												}
 											}
 											
 											
-											//언제까지? 날짜가 끝날때까지
-											for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
-												// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
-												let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+											
+											// 시작일부터 종료날까지 반복한다.
+											let testGap = (endDate.getTime()/ 1000/ 60/ 60/ 24)-(minDate.getTime()/1000/60/60/24);
+											// 엑셀리스트에 처음에 적혀있는 날짜를 구한다.
+											let orderconfirm = new Date($('#excelList li:nth-child(8)').text());
+											// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
+											let mcatenum = $('#excelList li:nth-child(8)').attr('value');
+											let testVal = 0;
+											// 시작일부터 종료일까지 반복하는데,  매출일자와 상품명이 맞으면 값을 넣고 아닐경우 0을 넣는다.
+											// 매출일자와 상품명이 맞으면 +1 을 통해 산출된 데이터 개수만큼 확인한다.
+											for(let t=0; t <= testGap; t++ ){
+												console.log("testGap------------------------------------>"+testGap);
 												
-												// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
-												let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
 												
-												if(minDate.getDate() == orderconfirm.getDate()){
-													minDate.setDate(minDate.getDate()+1);
-													maxDate.setDate(maxDate.getDate()+1);
-													// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 배열에 넣어준다.
-													if(mcatenum == liNum){
-														resultArr.push( parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10) );
+												
+												
+												// 시작일부터 종료일까지 반복문을 실행한다.
+												// 1. 만약, 2021 03 01 + mcatenum이 같으면. 데이터를 넣는다.
+												// 2. 다음 데이터를 받아내고 mcatenum이 linum과 같은지 확인하고
+												//    - 다르면 push(0) 하고, 다음 데이터를 받아내서 mcatenum == linum인 데이터를 찾아낼때까지 반복한다.
+												// 4. 다음 데이터도 1번과 동일한 방법으로 한다.
+												
+												//console.log(mcatenum);
+												//console.log(liNum);
+												//console.log(minDate.getDate());
+												//console.log(orderconfirm.getDate());
+												
+												
+												if( mcatenum == liNum ){
+													console.log("minDate-->"+minDate.getDate());
+													console.log("order-->"+orderconfirm.getDate())
+													
+													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+														resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+														testVal++;
+														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+														
 													} else {
 														resultArr.push(0);
 													}
-												}
-												console.log(orderconfirm);
-												console.log(mcatenum);
+													
+													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+														console.log('들어왔나?');
+														while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+																
+															if( mcatenum == liNum ){
+																
+																let saveData = resultArr[resultArr.length-1];
+																resultArr.pop();	
+																resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+																testVal++;
+																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+															
+															} else {
+																resultArr.push(0);
+															}
+															
+														}
+														
+													} 
+													
+												} else {
+													resultArr.push(0);
+													testVal++;
+													orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+													mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+												} 
+												minDate.setDate(minDate.getDate()+1);
 												
-												// 만약, length 마지막이면 resultArr에 저장한 데이터를 반복문을 넣는다.
-												if(j==$('#excelList li:nth-child(6n+12)').length-1){
-													let data = {
-														label: mcatename, // 품목명을 넣는다
-														data: resultArr, // 데이터를 넣고
-														borderColor: 'rgb('+color1+','+color2+','+color3+')'
-													};
-													addData(myChart, data);
-													//초기화 시켜준다
-													resultArr = [];
-													resultsum = 0;
-												}
 												
 											}
+
+												
+											
+											let data = {
+													label: mcatename, // 품목명을 넣는다
+													data: resultArr, // 데이터를 넣고
+													borderColor: 'rgb('+color1+','+color2+','+color3+')'
+											};
+											addData(myChart, data);
+											//초기화 시켜준다
+											resultArr = [];
+											resultsum = 0;
 										}// 일별 차트 출력 끝 //
 									}
-										
 									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									/*
-									
-									///////////////////////////////////////////////////////////////////////////////
-										
-										
-									// 구해진 매출금액의 데이터 개수를 구해서 반복한다.
-									for(let i = 0; i < $('#excelList li:nth-child(6n+12)').length; i++){
-										let orderconfirm = new Date($('#excelList li:nth-child('+(8+(i*6))+')').text());
-										let mcatenum = $('#excelList li:nth-child('+(8+(i*6))+')').attr('value');
-										
-										//========================  chart추가  ==========================
-										// borderColor random
-										let color1 = Math.floor(Math.random() * 256); 
-										let color2 = Math.floor(Math.random() * 256);
-										let color3 = Math.floor(Math.random() * 256);
-										
-										// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
-										if(maxDate <= orderconfirm){
-											let j = 0;
-											// 몇번째 데이터냐에 따라서 데이터를 추가한다.
-											// li에 존재하는 품목의 productnum과 동일하면 추가한다.
-											// 월이 바뀌면 월동안 계산한 모든 데이터를 mychart datasets.data에 넣는다.
-											
-											for(let mcate of map.entries()){
-												let pushData = {
-														label : mcate[0],
-														borderColor: rgb(color1, color2, color3),
-												}
-												console.log(mcate[0]);
-												console.log(mcate[1]);
-												console.log($('#categoryManagement>li:nth-child('+(j+1)+')').attr('value'));
-												
-												if(mcate[0]===$('#categoryManagement>li:nth-child('+(j+1)+')').attr('value')){
-													
-													mychart.data.datasets.data.push(mcate[]);
-													
-												}
-											}
-											
-											minDate.setMonth(minDate.getMonth()+1);
-											maxDate.setMonth(maxDate.getMonth()+1);
-											//월 단위로 매출금액을 계산해야 하기 때문에 map도 초기화 해준다.
-											map.clear();
-										}
-										
-										//  ex) 1일보다 크고 ~ 31일보다 작은 값들
-										if(minDate <= orderconfirm && orderconfirm < maxDate){
-											// 각 값 마다의 매출금액을 넣어 더해서 저장해준다. ex) map(감자, 20000) ----> map(감자, 20000) + 10000 = map(감자,30000)
-											if(map.has(mcatenum)){// map에 key가 있으면 있던 값에 더해서 저장한다 
-												let value = parseInt(map.get(mcatenum),10);
-												map.set(mcatenum, (value + parseInt($('#excelList li:nth-child('+(12+(i*6))+')').text(), 10)) );
-												
-											} else {// map에 key가 없으면
-												map.set(mcatenum, parseInt($('#excelList li:nth-child('+(12+(i*6))+')').text()), 10 ); 
-												//console.log(map.get("1"));
-											}
-											
-											// map에 데이터를 orderpriceData에 넣는다.
-											//orderpriceData.push(map.get(mcatenum));
-											//console.log(orderpriceData);
-										}
-										
-										// map에 데이터를 넣었다.
-										// 그렇다면 어떻게 해야 chart에 데이터를 넣을 수 있을까 ?
-										// key 값 + 월별 데이터값
-										// 즉, 월별 데이터 값이 다 완성된 상태에서 넣어야 한다.
-										// 그렇다면 월이 끝났는지는 어떻게 알지?
-										
-										//마지막 데이터면 바로 넣어준다.
-										if($('#excelList li:nth-child(6n+12)').length-1==i){
-											// 몇번째 데이터냐에 따라서 데이터를 추가한다.
-											// li에 존재하는 품목의 productnum과 동일하면 추가한다.
-											for(let i=0; i<$('#categoryManagement>li').length; i++){
-												for(let mcate of map.keys()){
-													console.log(map.keys());
-													if(mcate===$('#categoryManagement>li:nth-child('+(i+1)+')').attr('value')){
-														
-														
-													}
-												}
-											}
-										}
-										
-										//myChart.data.datasets[].data(map.get(productnum));
-										
-									}
-									console.log('실행 끝-------------------------------');*/
-									//console.log(excelLiLength);
-									/*
-									
-									
-									
-									
-									// datasets에 들어갈 data 세팅
-									let data = {
-										label: selectName,
-										data: [10000, 25302, 12347, 73946],
-										borderColor: 'rgb('+color1+','+color2+','+color3+')'
-									};
-									
-									
-									// vo.orderconfirm이 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
-									if(maxDate <= vo.orderconfirm){
-										minDate.setMonth(minDate.getMonth()+1);
-										maxDate.setMonth(maxDate.getMonth()+1);
-										//월 단위로 매출금액을 계산해야 하기 때문에 map도 초기화 해준다.
-										map.clear();
-									}
-									
-									// 1일보다 크고 ~ 31일보다 작은
-									if(minDate <= orderconfirm && orderconfirm < maxDate){
-										// 각 값 마다의 매출금액을 넣어 더해서 저장해준다. ex) map(감자, 20000) ----> map(감자, 20000) + 10000 = map(감자,30000)
-										if(map.has(vo.productnum)){// map에 key가 있으면 
-											let value = map.get(vo.productnum);
-											map.set(vo.productnum, value+(vo.orderquantity * vo.orderprice));
-										} else {// map에 key가 없으면
-											map.set(vo.productnum, (vo.orderquantity * vo.orderprice)); 
-										}
-										console.log(map.entries())
-										// map에 계산된 데이터를 제거하고 ! 계산된 값을 넣는다.
-										orderpriceData.push(map.get(vo.productnum));
-									}
-									
-								
-									
-									//이건 일별에 사용 minDate의 "월"의 마지막 날을 구해서 orderconfirm이 그 날짜 안에 있는 값을 더한다
-									//let dataLastDay = new Date(minDate.getFullYear(),(minDate.getMonth()+1),0);
-									
-									
-									// 년별, 월별, 일별에 따라서 차트에 들어가는 데이터가 달라진다.
-									if(dateCheck=="월별"){
-										
-										if(minDate<=vo.orderconfirm)
-										
-										sumData += vo.orderprice;
-										//1월이면 1월 01일보다 크고 1월 31일보다 작은 모든 데이터
-										for(let i = 0; i <gapResult; i++){ 
-											
-											minDate.setDate((minDate.getMonth()+1)+1); 
-										}
-									} else if(dateCheck=="년별"){
-										
-									} else if(dateCheck=="일별"){
-										// 1일보다 크고 ~ 31일보다 작은
-										if(minDate <= orderconfirm){
-											// 각 값 마다의 매출금액을 넣어 더해서 저장해준다. ex) map(감자, 20000) ----> map(감자, 20000) + 10000 = map(감자,30000)
-											if(map.has(vo.productnum)){// map에 key가 있으면 
-												let value = map.get(vo.productnum);
-												map.set(vo.productnum, value+(vo.orderquantity * vo.orderprice));
-											} else {// map에 key가 없으면
-												map.set(vo.productnum, (vo.orderquantity * vo.orderprice)); 
-											}
-											console.log(map.entries())
-											// map에 계산된 데이터를 제거하고 ! 계산된 값을 넣는다.
-											orderpriceData.push(map.get(vo.productnum));
-										}
-									}
-									*/
 									
 								}, error: function(e){
 									console.log(e);
