@@ -6,9 +6,9 @@
 <!-- 차트 라이브러리 chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
 <!-- 아래 4개의 파일은 html -> pdf 파일로 변환해주는 라이브러리 html2pdf.js다 -->
-<script src="<%=request.getContextPath() %>/lib/html2canvas.min.js"></script>
+<%-- <script src="<%=request.getContextPath() %>/lib/html2canvas.min.js"></script>
 <script src="<%=request.getContextPath() %>/lib/html2pdf.min.js"></script>
-
+ --%>
 <!-- 오늘의 날짜를 계산해서 오늘 기준으로 년도, 월, 일이 언제인지를 기준으로 값이 입력 될 수 있도록 한다. -->
 <c:set var='today' value="<%=new java.util.Date() %>"/>
 <c:set var='monthPtn'><fmt:formatDate value="${today }" pattern="yyyy-MM"/></c:set>
@@ -819,9 +819,6 @@
 											
 											//minDate 다시 초기화
 											let minDate = new Date(startCalendarDataValue);
-											//선택한 일의 다음일을 구한다.
-											let maxDate = new Date(minDate);
-											maxDate.setDate(maxDate.getDate()+1);// maxDate는 minDate의 하루 뒤로 설정
 
 											//========================  chart추가  ==========================
 											// borderColor random
@@ -838,7 +835,6 @@
 												if( firstDateCheck.getFullYear() != minDate.getFullYear() ){
 													do{
 														minDate.setDate( minDate.getDate()+1 );
-														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
 													}while( firstDateCheck.getDate() != minDate.getDate() )
 												}
@@ -847,7 +843,6 @@
 												if( firstDateCheck.getMonth() != minDate.getMonth() ){
 													do{
 														minDate.setDate( minDate.getDate()+1 );
-														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
 													}while( firstDateCheck.getMonth() != minDate.getMonth() )
 												}
@@ -855,8 +850,9 @@
 												// 빈날짜가 있으면 0으로 채워준다.
 												if(1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) ){
 													do{
+														console.log(minDate.getMonth());
+														console.log(minDate.getDate());
 														minDate.setDate( minDate.getDate()+1 );
-														maxDate.setDate( maxDate.getDate()+1 );
 														resultArr.push(0);
 													}while( 1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) )
 												}
@@ -881,50 +877,95 @@
 												//    - 다르면 push(0) 하고, 다음 데이터를 받아내서 mcatenum == linum인 데이터를 찾아낼때까지 반복한다.
 												// 4. 다음 데이터도 1번과 동일한 방법으로 한다.
 												
-												if( mcatenum == liNum ){
-													
-													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+												// mcatenum이 비교해서 같지 않으면 실행
+												if( mcatenum != liNum ){ 
+													let testCode = 0;
+													do{
 														
-														resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+														if(mcatenum == liNum){
+															resultArr.pop();
+															resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+															testCode = 1;
+														}else {
+															if(testCode == 1){
+																resultArr.pop();
+																testCode == 0;
+															}
+															resultArr.push(0);
+														}
+														//다음 데이터의 매출일자가 동일한지 확인해야 한다.
 														testVal++;
 														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
 														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-														
-													} else {
+													}while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() )
+													
+														/* 
 														resultArr.push(0);
-													}
-													
-													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
 
-														while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
-																
-															if( mcatenum == liNum ){
-
-																let saveData = resultArr[resultArr.length-1];
-																resultArr.pop();	
-																resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-																testVal++;
-																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-															
-															} else {
-																
-																break;
-															}
-															
-														}
-														
-													} 
-													
-												} else {
-													resultArr.push(0);
+													//다음 데이터의 매출일자가 동일한지 확인해야 한다.
 													testVal++;
 													orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
 													mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-												} 
+													
+													
+													//확인했을때, 동일한 매출일자이면 
+													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+														//num을 비교해서 맞다면 마지막에 넣은 데이터를 삭제하고 이번에 나온 데이터를 넣고
+														if(mcatenum == liNum){
+															resultArr.pop();
+															resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+															do{
+																testVal++;
+																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+															}while(같은 일자면 또 반복?)
+														}
+														
+														do {
+															// 만약, 두개의 번호가 다르다. 그러면? 우선 0 데이터를 넣고
+															resultArr.push(0);
+															// 또 확인해야 한다. 다음 데이터가 같은지 다른지
+															testVal++;
+															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+														}while(minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() && mcatenum != liNum)
+													} */
+												}
+												
+												// 다음 데이터의 날짜가 동일하면 번호를 비교해서
+												// 같으면 데이터를 넣고 아니면 0을 넣는다.
+												if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+													
+													resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+													testVal++;
+													orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+													mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+													
+												} else {
+													resultArr.push(0);
+												}
+												// 또 비교했을때 데이터가 날짜가 맞으면 반복해서 확인한다.
+												while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+													// mcatenum과 liNum이 같으면 save Data를 활용해 데이터를 저장하고
+													// 배열에 들어있는 마지막 데이터를 삭제 후
+													// 지금 넣을 데이터와 + 전에 있던 데이터와 합하여 넣는다.
+													if( mcatenum == liNum ){
+														let saveData = resultArr[resultArr.length-1];
+														resultArr.pop();	
+														resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+														testVal++;
+														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+													
+													} else {
+														
+														break;
+													}
+													
+												}
+												
+												// 현재 확인하고 있는 날짜를 ++ 해준다.
 												minDate.setDate(minDate.getDate()+1);
-												
-												
 											}
 
 												
