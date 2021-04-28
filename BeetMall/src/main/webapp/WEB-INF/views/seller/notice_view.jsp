@@ -26,7 +26,7 @@
 		width:90%;	
 		border-spacing: 0;
 		text-indent: initial;
-		margin:50px 0 50px 50px;	
+		margin:0 0 20px 50px;	
 		border-top:2px solid lightgray;
 		border-bottom:2px solid lightgray;
 	}
@@ -55,22 +55,17 @@
 	.content{
 		padding: 20px 0 20px;
 	}
-	td, .td,{
-		height:50px;
-	}
 	.tr_head{
 		font-weight:bold;
 	}
 	.tr_head li{
-		float:left;
+		float:left; padding:0; width:150px; height:50px;
 	}
 	.menu, .th{
 		width:150px; text-align:center;
 	}
 	.td, .th{ line-height:50px;}
-	.td{
-		width:30%; line-height:50px;
-	}
+	td{border-bottom: 2px solid #ccc; padding:0;}
 	/*이전글, 다음글*/
 	.prev_next_wrap{
 		width:90%;
@@ -86,7 +81,7 @@
 		color: black;
 	}
 	.next{margin-bottom:30px}
-	a{color:black;}
+
 </style>
 <script>
 //테이블 collapse
@@ -100,7 +95,7 @@
 			<li><span class="cs_title">고객센터</span></li>
 			<li><a href="<%=request.getContextPath() %>/notice">공지사항</a></li>
 			<li><a href="<%=request.getContextPath() %>/faq">자주묻는질문</a></li>
-			<li><a href="<%=request.getContextPath() %>/ask_admin">문의하기</a></li>
+			<li><a href="<%=request.getContextPath() %>/ask_admin_list">문의하기</a></li>
 		</ul>
 	</nav>
 	<!-- 가운데 메인 div -->
@@ -112,19 +107,19 @@
 			<tbody>
 				<tr class="tr_head">
 					<th class="menu">제목</th>
-					<td ><span class="td">코로나19로 인한 픽업 서비스 중단 안내</span></td>
+					<td class="td"><span>코로나19로 인한 픽업 서비스 중단 안내</span></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td ><span class="td">Beetmall</span></td>
+					<td  class="td"><span>Beetmall</span></td>
 				</tr>
 				<tr class="tr_head">
 				<td colspan="2">
 					<ul>
 						<li class="th">작성일</li>
-						<li class="td">21/04/21</li>
+						<li class="td" style="padding-left:20px">21/04/21</li>
 						<li class="th">조회수</li>
-						<li class="td">21</li>
+						<li class="td" style="padding-left:20px">21</li>
 					</ul>
 				</tr>
 			

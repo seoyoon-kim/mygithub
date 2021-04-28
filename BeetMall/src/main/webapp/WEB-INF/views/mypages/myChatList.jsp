@@ -13,7 +13,7 @@
 	.Pbuttons{
 		height:40px;
 		width:80px;
-		background-color: #e06666;
+		background-color: rgb(252,118,45);
 		color:white;
 		line-height:40px;
 		text-align:center;
@@ -39,7 +39,7 @@
 		text-align:center;
 	}
 	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3){
-		border-bottom:1px solid #e06666;
+		border-bottom:1px solid rgb(252,118,45);
 		font-size:20px;
 	}
 	#pointUl>li:nth-child(3n){
@@ -86,7 +86,7 @@
 		margin:1px;
 		padding:0px;
 		border: none;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		color:white;
 		border-radius: 5px;
 	}
@@ -98,7 +98,7 @@
 		margin:1px;
 		padding:0px;
 		border: none;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		color:white;
 		border-radius: 5px;
 		opacity:60%;
@@ -110,11 +110,11 @@
 	}
 	/* 채팅창 설정부분 */
 	.chatDiv{
-		height:700px;
+		height:540px;
 		width:500px;
-		background-color:#e06666;
+		background-color:rgb(252,118,45);
 		position:absolute;
-		border:1px solid #e06666; 
+		border:1px solid rgb(252,118,45); 
 	}
 	.chatDivBar{
 		height:10px;
@@ -126,12 +126,12 @@
 		background-color:white;
 		text-align:center;
 		line-height:30px;
-		border-bottom:1px solid #e06666; 
+		border-bottom:1px solid rgb(252,118,45); 
 	}
 	.chatDivcontent{
-		height:559px;
+		height:400px;
 		width:498px;
-		background-color:white;
+		background-color:#ddd;
 	}
 	.chatDivInputBox{
 		height:101px;
@@ -143,16 +143,24 @@
 		float:left;
 	}
 	.chatInput>textarea{
-		border: 3px solid #e06666;
+		border: 3px solid rgb(252,118,45);
 	}
-	.chatSendBtn, .chatSendBtn>input{
+	.chatSendBtn{
 		width:97px;
 		height:100px;
-		background-color: #e06666;
+		background-color: rgb(252,118,45);
 		float:left;
 		border:none;
 		color:white;
-		opacity: 90%;
+	}
+	.chatSendBtn>input{
+		background-image: url(/sshj/img/dpaper-plane.png);
+		background-repeat:no-repeat;
+		background-size:cover;
+		width:97px;
+		height:100px;
+		float:left;
+		border:none;
 	}
 	.chatPrint{
 		position: relative;
@@ -166,15 +174,17 @@
 		width:300px;
 		position: absolute;
 		line-height:40px;
+		border-radius: 10px;
+		background-color: white;
 	}
 	.myChat{
 		left:180px;
-		background-color:#c2ffc0;
 		text-align:right;
+		padding-right:10px;
 	}
 	.theyChat{
 		left:10px;
-		background-color:#51d8cf;
+		padding-left:10px;
 	}
 	.myChatTime, .theyChatTime{
 		height:20px;
@@ -195,6 +205,28 @@
 		left:301px;
 		text-align:left;
 	}
+	/*버튼*/
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+		width:70px;
+		height:35px;
+		line-height:29px;
+		font-size:16px;
+	}
+	/*버튼*/
+	.btn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
 </style>
 <script>
 	$(function(){
@@ -213,9 +245,9 @@
 	<div id="mypointList">
 		<h2>김토끼님의 1:1대화 내역입니다. </h2>
 		<div id="pointSelectDate">
-			<div class="Pbuttons">3개월</div>
-			<div class="Pbuttons">6개월</div>
-			<div class="Pbuttons">1년</div>
+			<div class="btn">3개월</div>
+			<div class="btn">6개월</div>
+			<div class="btn">1년</div>
 		</div>
 		<div>
 			<ul id="pointUl">
@@ -228,7 +260,7 @@
 				<li>
 				<img src="/sshj/img/pi.gif"><span class="chatttitle wordcut">작은농부</span><span class="chatdetail wordcut">마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.</span>
 				</li>
-				<li><input type="button" class="chatbutton" value="조회"/><input type="button" class="chatbutton" value="삭제"/></li>
+				<li><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/></li>
 			</ul>
 		</div>
 		<div class="chatDiv">
@@ -245,7 +277,7 @@
 				</div>
 				<div class="chatDivInputBox">
 					<div class="chatInput"><textarea></textarea></div>
-					<div class="chatSendBtn"><input type="button" value="전송"/></div>
+					<div class="chatSendBtn"><input type="button"/></div>
 				</div>
 			</div>
 		</div>

@@ -120,7 +120,7 @@
 		border:1px solid #ccc;
 	}
 	.page_nation .pprev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
+		background:#f8f8f8 url('sshj/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
 	}
 	.page_nation .prev {
@@ -140,4 +140,3 @@
 		color:#fff;
 		border:1px solid #42454c;
 	}
-	/* 페이징처리끝 */
