@@ -74,4 +74,12 @@ public class CenterController {
 		
 		return jsonObject;
 	}
+	// 회원가입
+	@RequestMapping(value="/regiFinish", method=RequestMethod.POST)
+	public ModelAndView regiFinishiOk() {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		return mav;
+	}
 }
