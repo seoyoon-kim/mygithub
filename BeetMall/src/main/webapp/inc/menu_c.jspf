@@ -362,7 +362,7 @@
 					<li><a href="kangsan">신상품</a></li>
 					<li><a href="kangsan">베스트</a></li>
 					<li><a href="kangsan2">못난이할인</a></li>
-					<li><a href="kangsan">비트네</a></li>
+					<li><a href="recipeHome">비트네</a></li>
 				</ul>
 				<div id="menuImgs">
 					<a href="mapping"><img src="/sshj/img/dmapBtn.png" class="menuImg" /></a>
@@ -461,6 +461,9 @@
                   <div><a href="customMyrecipe">마이레시피</a></div>
                </div>
                <div id="repcipevview">
+                  <div><a href="recipeView">게시판보기</a></div>
+               </div>
+                <div id="repcipevview">
                   <div><a href="recipeWrite">글쓰기</a></div>
                </div>
             </div>

@@ -24,7 +24,7 @@ a:hover, a:active, a:visited, a:link {
 background-color:white;
 margin:0 auto;
 font-family: 'Nanum Gothic', sans-serif;
-
+width:1080px;
 }
 
 ul>li{
@@ -155,7 +155,7 @@ margin-right:20px;
 height:30px; width:69px;
 }
 
-#top10>a,#new10>a{color:black; font-weight:bold; margin-bottom:20px;}
+#top10,#new10{color:black; font-weight:bold; margin-bottom:20px;}
 
 #searchbtn,#writebtn{
 		padding: 3px 10px;
@@ -265,6 +265,9 @@ $(function(){
 	  
 });
 
+
+
+
 </script>
 
 <body>
@@ -292,8 +295,8 @@ $(function(){
 	                   <option>조화수순</option>
 	                   <option>최신순</option>
 	                </select></li>
-	     <li id="top10"><a href="#">TOP10</a></li>
-	     <li id="new10"><a href="#">NEW10</a></li>
+	     <li id="top10" onclick="">TOP10</li>
+	     <li id="new10" onclick="">NEW10</li>
 	    </ul>
 	    
 	    <div id="searchLine2">
@@ -314,31 +317,15 @@ $(function(){
 	    <div class="recipeList">
 	    
    
-		            
+		         <c:forEach var="data" items="${list}">   
 		             <ul id="recipeListul">
-		              <li><a href="#"><img src="img/cr5.jfif"></a></li>
-		              <li><a href="#">맛있는 딸기 케이크</a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr5.jfif"></a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}">맛있는 딸기 케이크</a></li>
 		              <li>goguma1234</li>
-		              <li><a href="#">딸기와 유기농 계란을 이용한 케이크 레시피</a></li>
-		              <li>★추천해요 124 조회수 327 YYYY-MM-DD</li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}">딸기와 유기농 계란을 이용한 케이크 레시피</a></li>
+		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} {data.recipewritedate}</li>
 		            </ul>
-		            
-		              <ul id="recipeListul">
-		              <li><a href="#"><img src="img/cr5.jfif"></a></li>
-		              <li><a href="#">맛있는 딸기 케이크</a></li>
-		              <li>goguma1234</li>
-		              <li><a href="#">딸기와 유기농 계란을 이용한 케이크 레시피</a></li>
-		              <li>★추천해요 124 조회수 327 YYYY-MM-DD</li>
-		            </ul>
-		            
-		              <ul id="recipeListul">
-		              <li><a href="#"><img src="img/cr5.jfif"></a></li>
-		              <li><a href="#">맛있는 딸기 케이크</a></li>
-		              <li>goguma1234</li>
-		              <li><a href="#">딸기와 유기농 계란을 이용한 케이크 레시피</a></li>
-		              <li>★추천해요 124 조회수 327 YYYY-MM-DD</li>
-		            </ul>
-		            
+		         </c:forEach>  
 		           
 	
 	    </div>
