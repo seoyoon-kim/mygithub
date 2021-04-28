@@ -130,22 +130,6 @@ public class testController {
 	public String errer() {
 		return "etc/error";
 	}
-	@RequestMapping("register")	// 회원가입페이지
-	public String register() {
-		return "login/register";
-	}
-	@RequestMapping("cregister")
-	public String cResigter() {	// 구매자 회원가입
-		return "login/cRegister";
-	}
-	@RequestMapping("sregister")
-	public String sRegister() {	// 판매자 회원가입
-		return "login/sRegister";	
-	}
-	@RequestMapping("regiFinish")
-	public String regiFinish() {	// 회원가입 완료
-		return "login/registerFinish";	
-	}
 	@RequestMapping("searchId")
 	public String searchId() {	// 아이디 찾기
 		return "login/idSearch";	

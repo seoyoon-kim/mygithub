@@ -2,6 +2,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
 <style>
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	/*버튼*/
+	.btn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
 	#formUl>li:nth-child(2n+1){
 		width:19%;
 		text-align:right;
@@ -58,6 +75,31 @@
 	.radiusClass{
 		border-radius:5px;
 	}
+	.alertDiv{
+		height:200px;
+		width:400px;
+		background-color:white;
+		border:10px solid rgb(252,118,45);
+		text-align:center;
+		position: absolute;
+		top:50%;
+		left:340px;
+	}
+	#alertDivClose{
+		height:50px;
+		widht:100px;
+	}
+	.idCheckDiv{
+		height:200px;
+		width:400px;
+		background-color:white;
+		border:10px solid rgb(252,118,45);
+		text-align:center;
+		position: absolute;
+		top:50%;
+		left:340px;
+		display:none;
+	}
 </style>
 <script>
 	$(function(){
@@ -81,6 +123,7 @@
 			$(this).prop("checked", true).prop("disabled", true);
 			$("#hinfocheck3").val('Y');
 		});
+		
 		$("#infosubmit").click(function(){
 			if($("#hinfocheck1").val() != "Y") {
 				alert("약관에 동의해주세요!");
@@ -104,6 +147,15 @@
 			return true;
 		});
 		
+		$("#idCheckDibPop").click(function(){
+			$(".idCheckDiv").css("display","block");
+		})
+		
+		$("#idCheck").click(function(){
+			var checkId = $("#userid2").val();
+			location.href="idCheck?useridCheck="+checkId;
+		})
+		
 	});
 	function regCheck(){
 		// 아이디 검사
@@ -126,7 +178,7 @@
 		}
 		// 이메일 검사
 		var emailreg = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
-		if(!emailreg.test(document.getElementById("useremail1").value)){
+		if(!emailreg.test(document.getElementById("useremail").value)){
 			alert("이메일이 잘못 입력되었습니다.");
 			return false;			
 		}
@@ -146,22 +198,22 @@
 	}
 </script>
 <div class="section">
-	<div id="register">
+	<div id="register" style="position: relative;">
 		<div id="userinputDiv">
 		<h2>회원가입</h2><span class="spanstar">*</span>표시는 필수입력항목입니다
 		<hr/>
-		<form method="post" action="regiFinish" id="regiFrm">
+		<form method="post" action="cregiFinish" id="regiFrm">
 		<input type="hidden" name="idcheck" value="N"/>		
 		<input type="hidden" id="hinfocheck1" value="N"/>		
 		<input type="hidden" id="hinfocheck2" value="N"/>		
 		<input type="hidden" id="hinfocheck3" value="N"/>		
 			<ul id="formUl">
-				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" value="tester"/><input type="button" value="중복검사"/></li>
+				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" value="tester" disabled/><input type="button" value="중복검사" class="btn" id="idCheckDibPop"/></li>
 				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd" value="1234!!"/></li>	
 				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left" value="1234!!"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
 				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username" value="테스터"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail1" id="useremail1" style="margin-right:5px;" value="tester@tester.com"/><input type="button" value="인증번호 전송"/></li>
-				<li></li>												<li><input type="text" name="useremail2" id="useremail2" style="margin-right:5px;" value="123456"/><input type="button" value="인증하기"/></li>
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="tester@tester.com"/><input type="button" value="인증번호 전송" class="btn"/></li>
+				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;" value="123456"/><input type="button" value="인증하기" class="btn"/></li>
 							
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
 																			<option value="010">010</option>
@@ -185,7 +237,7 @@
 																			</select> -
 																			<input type="text" name="userphone2" id="userphone2" value="1234" style="width:80px;" maxlength="4"/> -
 																			<input type="text" name="userphone3" id="userphone3" value="1234" style="width:80px;" maxlength="4"/></li>
-				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;"/>
+				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
 																		<input type="text" name="userzipcode" id="userzipcode"  value="13579" readonly  style="width:100px;"/>
 																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:302px;" value="마포구 백범로 ">
 																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:540px;" value="신수로 51"></li>			
@@ -200,6 +252,27 @@
 			<input type="checkbox" id="infocheck2" value="infocheck2"/>&nbsp;동의합니다. <br/>
 			<input type="checkbox" id="infocheck3" value="infocheck3"/>본인은 만 14세 이상입니다.
 			<div style="margin-bottom:20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
+		</div>
+		<c:if test="${result != null && result !=''}">
+			<c:if test="${result==NO}">
+				<div class="alertDiv">
+					<h3>회원가입 실패</h3>
+					<h4>내부에 오류가 있는 것 같습니다..<br/> 잠시후 다시 시도해주세요..</h4>
+					<input type = "button" id="alertDivClose" class="btn" value="닫기"/>
+				</div>
+			</c:if>
+		</c:if>
+		<div class="idCheckDiv">
+			<c:if test="${overlap == 'Y'}">
+				<h5>${userid}은(는) 사용이 가능한 아이디입니다</h5>
+				<input type = "button" id="idCheck" class="btn" value="사용하기"/>
+			</c:if>
+			<c:if test="${overlap == 'N'}">
+				<h5>${userid}은(는) <span class="spanstar">사용이 가능불가능한 아이디</span>입니다</h5>
+				<h5>다른 아이디를 입력해주세요</h5>
+			</c:if>
+			<input type="text" name="userid2" id="userid2" style="margin-right:5px;" value="tester"/>
+			<input type="button" value="중복검사" class="btn" id="idCheck"/>
 		</div>
 	</div>
 </div>
