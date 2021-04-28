@@ -13,4 +13,8 @@ public class ProductController {
 	public String order_management() {
 		return "seller/order_management";
 	}
+	@RequestMapping("/seller_management")
+	public String seller_management() {
+		return "seller/seller_management";
+	}
 }
