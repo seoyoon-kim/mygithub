@@ -7,4 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			insert into qmboard(qmnum, userid, qmtitle, qmContent, qmdate, qmanswer, qmoption)
   			values(qmboardsq.nextval, 'qwer', #{qmtitle}, #{qmcontent}, sysdate, null, 1)
 	</insert>
+	<select id="centerAllRecord" resultType="com.beetmall.sshj.custom.vo.CenterVO">
+		select qmnum, userid, qmtitle, qmcontent, to_char(qmdate,'MM-DD HH:MI') as qmdate, qmanswer, qmoption from qmboard order by qmnum desc
+	</select>
 </mapper>

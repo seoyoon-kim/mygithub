@@ -20,14 +20,9 @@ public class testController {
 		return "custom/customerCenter/noticeMain";
 	}
 	
-	@RequestMapping("/customerCenter")
-	public String customerCenter() {
-		return "custom/customerCenter/customerCenter";
-	}
-	
 	@RequestMapping("/FAQBoard")
 	public String FAQBoard() {
-		return "custom/FAQBoard";
+		return "custom/customerCenter/FAQBoard";
 	}
 	
 	@RequestMapping("/customerCenterWrite")

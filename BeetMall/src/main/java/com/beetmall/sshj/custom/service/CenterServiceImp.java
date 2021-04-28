@@ -1,5 +1,7 @@
 package com.beetmall.sshj.custom.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,11 @@ public class CenterServiceImp implements CenterService{
 	@Override
 	public int centerWrite(CenterVO vo) {
 		return centerDAO.centerWrite(vo);
+	}
+
+	public List<CenterVO> centerAllRecord() {
+		
+		return centerDAO.centerAllRecord();
 	}
 
 }

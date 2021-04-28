@@ -228,31 +228,14 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="data" items="${list}">
 				<tr>
-					<td class="number">1</td>
-					<td class=><a href="<%=request.getContextPath()%>/customerCenterView">상품등록했는데 등록이 안됐어요</a></td>
-					<td>등록일</td>
+					<td class="number">${data.qmnum}</td>
+					<td class=><a href="<%=request.getContextPath()%>/customerCenterView">${data.qmtitle}</a></td>
+					<td>${data.qmdate}</td>
 					<td><span class="answer_span" id="answer">답변완료</span></td>				
 				</tr>
-				<!-- 임시로 넣은 정보 -->
-				<tr>
-					<td>2</td>
-					<td><a href="">질문1</a></td>
-					<td>등록일</td>
-					<td><span  class="answer_span" id="no_answer">답변대기중</span></td>				
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="">질문2</a></td>
-					<td>등록일</td>
-					<td><span  class="answer_span" id="answer">답변완료</span></td>					
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="">질문3</a></td>
-					<td>등록일</td>
-					<td><span  class="answer_span" id="no_answer">답변대기중</span></td>			
-				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<div  id="select_container">
