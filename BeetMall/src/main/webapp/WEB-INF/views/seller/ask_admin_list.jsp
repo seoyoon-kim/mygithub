@@ -20,12 +20,7 @@
 		<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
 </head>
 <style>
-	.cs_message{
-		margin: 0 auto;
-		font-size:15px;
-		width:90%;
-		margin-bottom:20px;	
-	}
+
 	
 	#link{color: gray;}
 	/*표*/
@@ -102,8 +97,7 @@
 	$(document).ready(function(){
 		$('#sel').change(function(){
 			var option = $(this).val();
-			console.log(option);
-			
+
 			if(option=='answer'){ //답변완료
 				$('td:contains("답변완료")').parents('tr').css('display','');
 				$('td:contains("답변대기중")').parents('tr').css('display','none');

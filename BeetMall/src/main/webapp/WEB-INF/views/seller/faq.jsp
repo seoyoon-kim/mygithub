@@ -27,8 +27,9 @@
 	table{
 		border-spacing: 0;
 		text-indent: initial;
-		margin:0 15px 0 15px ;
+		margin:0 auto;
 		margin-bottom:30px;
+		width:95%;
 	}
 	th{
 		height:50px;
@@ -41,7 +42,6 @@
    		background-color: #fcfcfc;
    		font-size: 16px;
 	}
-	th:nth-child(1), td:nth-child(2){width:100px;}
 	td{
 		height:50px;
 		border-bottom:1px solid lightgray;
@@ -55,7 +55,7 @@
 	}
 	td:nth-child(3) a, a{
 		color:black;
-		cursor: pointer;
+		cursor:pointer;
 	}
 	th{
 		margin-top:30px;
@@ -64,11 +64,11 @@
 	/*답변*/
 	.answer{
 			background-color:#f6f6f6;
-		
+			display:none;	
 	}
 	.answer_td{
-		padding: 20px 0 20px;
-		font-size:13px;
+		padding: 20px 10px 20px 10px;
+		font-size:15px;
 	}
 	.answer_td:nth-child(1){
 		color:red;
@@ -108,7 +108,7 @@
 		height:40px;
 		width:130px;
 		margin-top:30px;
-		margin-left:180px;
+		margin-left:280px;
 		border-radius: 8px 0px 0px 8px;
 	}
 </style>
@@ -117,14 +117,22 @@
  $(function(){
 //선택한 faq tr열고 닫히기	 
 //수정할 것: this만 열리도록 고치기
-  	  	$(".faq_td").click(function(){ 
-  	  		status = $(".answer").css("display"); 
-  	  		if (status == "none") { 
-  	  			$(".answer").css("display", ""); 
-  	  		} else { 
-  	  			$(".answer").css("display", "none"); 
-  	  		} 
-  	  	});
+  	 
+  	  $(function() {
+  		//선택한 faq tr열고 닫히기    
+  		//수정할 것: this만 열리도록 고치기
+  		$(".faq_td").click(function() {
+  			$(this).parent().next().toggle(
+  				function(){
+  					$(this).parent().next().css("display", " "); 
+  				},
+  				function(){
+  					$(this).parent().next().css("display", "hide"); 
+  				}
+  			);
+  		});
+
+  	});
 //선택한 select option별로 보기
 //수정할 것 나머지 option선택에 대한 script 추가하기
   		
@@ -186,7 +194,7 @@
 					<td class="fa1_category">[상품]</td>
 					<td class="faq_td"><strong>상품등록은 어떻게 하나요?</strong></td>
 				</tr>
-				<tr class="answer" style="display:none">
+				<tr class="answer">
 					<td class="answer_td">답변</td>
 					<td class="answer_td" colspan="3" >  
 						보다 자세한 매장의 안내는 아래 오프라인 페이지 이동을 통해 각 매장의 위치 또는 이벤트 진행상황을 확인하실 수 있습니다.<br/> 
@@ -213,7 +221,7 @@
 					<td class="faq_td"><strong>농장 정보를 수정하고 싶어요.</strong></td>
 					
 				</tr>
-				<tr class="answer" style="display:none">
+				<tr class="answer">
 					<td class="answer_td">답변</td>
 					<td class="answer_td" colspan="3" >  
 						레이아웃 확인 display : none 미적용<br/> 
@@ -238,7 +246,6 @@
 			   <a class="arrow prev" href="#"></a>
 			   <a href="#" class="active">1</a>
 			   <a href="#">2</a>
-			   <a href="#">3</a>
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>
