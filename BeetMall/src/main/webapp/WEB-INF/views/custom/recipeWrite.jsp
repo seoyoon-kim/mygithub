@@ -95,7 +95,7 @@
 <div class="section">
 	
 		
-	<form method="post" action="cusomerCenterWriteOk">
+	<form method="post" action="recipeView">
 		<table>
 			<tbody>
 				<tr>

@@ -356,14 +356,14 @@ td, .td,{
 					<li>72</li>
 					<li>2020.01.23</li>
 
-					<!--    <c:forEach var="data" items="${list}">    -->
+					<c:forEach var="data" items="${list}">
 					<li>${data.recipenum}</li>
-					<li><a href="">${data.recipetitle}</a></li>
+					<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
 					<li>${data.userid}</li>
 					<li>${data.reciperecommend}</li>
 					<li>${data.recipehit}</li>
 					<li>${data.recipewritedate}</li>
-					<!--   </c:forEach>        -->
+					</c:forEach>
 
 				</ul>
 			</div>

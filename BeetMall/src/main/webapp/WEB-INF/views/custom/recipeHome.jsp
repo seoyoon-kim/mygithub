@@ -268,9 +268,23 @@ $(function(){
 
 
 
+function top10(){ 
+	  $('#top10').css('color','black');	  	  
+	  $('#new10').css('color','#eee');		  
+}
+
+
+function new10(){ 
+	  var txt1=""; 
+	  $('#new10').css('color','black');	  
+	  $('#top10').css('color','#eee');	  
+}
+
+
+
 </script>
 
-<body>
+<body onload="top10()" >
 
 
   <div class="section" id="section">
@@ -289,14 +303,13 @@ $(function(){
 
 <!-- -------------------------탑서치부분-------------------------------------- -->		    
 	    <ul id="searchLine">
-	    <li><select name="selectOrder">
-	                   <option>인기글순</option>
-	                   <option>추천순</option>
+	    <li><select name="selectOrder" id="selectOrder">
+	                   <option>추천수순</option>
 	                   <option>조화수순</option>
 	                   <option>최신순</option>
 	                </select></li>
-	     <li id="top10" onclick="">TOP10</li>
-	     <li id="new10" onclick="">NEW10</li>
+	     <li id="top10" onclick="top10()">TOP10</li>
+	     <li id="new10" onclick="new10()">NEW10</li>
 	    </ul>
 	    
 	    <div id="searchLine2">
@@ -321,7 +334,7 @@ $(function(){
 		             <ul id="recipeListul">
 		              <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr5.jfif"></a></li>
 		              <li><a href="recipeView?recipenum=${data.recipenum}">맛있는 딸기 케이크</a></li>
-		              <li>goguma1234</li>
+		              <li>${data.userid}</li>
 		              <li><a href="recipeView?recipenum=${data.recipenum}">딸기와 유기농 계란을 이용한 케이크 레시피</a></li>
 		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} {data.recipewritedate}</li>
 		            </ul>
