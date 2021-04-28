@@ -28,7 +28,7 @@
 		width:90%;	
 		border-spacing: 0;
 		text-indent: initial;
-		margin:50px 0 50px 50px;	
+		margin:0px 0 20px 50px;	
 		border-top:2px solid lightgray;
 		border-bottom:2px solid lightgray;
 	}
@@ -45,7 +45,7 @@
 	}
 	td{
 		height:50px;
-		border-bottom:1px solid lightgray;
+		border-bottom: 2px solid #ccc;
 	}
 	td:nth-child(1), td:nth-child(3){
 		text-align:center;
@@ -83,7 +83,7 @@
 			<li><span class="cs_title">고객센터</span></li>
 			<li><a href="<%=request.getContextPath() %>/notice">공지사항</a></li>
 			<li><a href="<%=request.getContextPath() %>/faq">자주묻는질문</a></li>
-			<li><a href="<%=request.getContextPath() %>/ask_admin">문의하기</a></li>
+			<li><a href="<%=request.getContextPath() %>/ask_admin_list">문의하기</a></li>
 		</ul>
 	</nav>
 	<!-- 가운데 메인 div -->

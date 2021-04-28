@@ -30,9 +30,15 @@
 		width:150px;
 		height:50px;
 		line-height:50px;
-		background-color:rgb(224,102,102);
+		background-color:rgb(252,118,45);
 		color:white;
 		margin:auto;
+	}
+	#what_Type{
+		overflow: auto;
+	}
+	.radiusClass{
+		border-radius:5px;
 	}
 </style>
 <script>
@@ -52,12 +58,12 @@
 	<h4 style="text-align:center;margin-bottom:50px;">회원가입하신 후 비트몰의 다양한 서비스를 이용해보세요.</h4>
 	<div id="what_Type">
 		<div id="costomer">
-			<img src="/sshj/img/pi.gif" style="height:300px;width:300px" class="regiImg"/>
-			<div class="regiLink"><div id="costomerbutton">구매자 회원가입</div></div>
+			<img src="/sshj/img/dconsumer.png" style="height:300px;width:300px" class="regiImg"/>
+			<div class="regiLink"><div id="costomerbutton"class="radiusClass">구매자 회원가입</div></div>
 		</div>
 		<div id="seller">
-			<img src="/sshj/img/pi.gif" style="height:300px;width:300px" class="regiImg"/>
-			<div class="regiLink"><div id="sellerbutton">판매자 회원가입</div></div>
+			<img src="/sshj/img/dentrepreneur.png" style="height:300px;width:300px" class="regiImg"/>
+			<div class="regiLink"><div id="sellerbutton"class="radiusClass">판매자 회원가입</div></div>
 		</div>
 	</div>
 	

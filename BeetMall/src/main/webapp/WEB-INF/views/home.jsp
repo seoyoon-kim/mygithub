@@ -40,7 +40,7 @@
 	.nextBtn, .prevBtn{
 		width:30px;
 		height:30px;
-		top : 140px;
+		top : 112px;
 		background-repeat:no-repeat;
 		position:absolute;
 		z-index:3;
@@ -63,13 +63,14 @@
 		opacity:70%;
 	}
 	.productList{
-		padding-left:100px;
-		padding-right:100px;
+		padding-left:50px;
+		padding-right:50px;
 		float:left;
 		width:1080px;
 		height:360px;
 		position:relative;
 		overflow:hidden;
+		margin-bottom:50px;
 	}
 	.product{
 		position:relative;
@@ -79,32 +80,32 @@
 	}
 	
 	.productPanel>div:nth-child(4n+1), .productPanel img{
-		width:195px;
+		width:225px;
 		height:250px;
 	}
 	.productPanel>div:nth-child(4n+2){
-		width:195px;
+		width:225px;
 		height:40px;
 		font-size:1.1em;
 		font-weight:800;
 	}
 	.productPanel>div:nth-child(4n+3){
-		width:195px;
+		width:225px;
 		height:40px;
 		font-size:1.1em;
 		font-weight:800;
 	}
 	.productPanel>div:nth-child(4n){
-		width:195px;
+		width:225px;
 		height:30px;
 		font-size:0.7em;
 		color:#999;		
 	}
 	.productPanel{
-		width:195px;
+		width:225px;
 		height:360px;
-		margin-left:12px;
-		margin-right:12px;
+		margin-left:10px;
+		margin-right:10px;
 	}
 	h2{
 		text-align:center;
@@ -115,38 +116,39 @@
 		text-decoration: none;
 	}
 	.product{
-		width:1752px;
+		width:1960px;
 		height:360px;
 		position:relative;
 	}
 	.productSetWidth{
-		width:876px;
+		width:980px;
 		overflow:hidden;
 	}
 	.todayRecipt{
 		width:1080px;
 		height:360px;
-		margin:0 100px;
+		padding:0 50px;
+		margin-bottom:50px;
 	}
 	.reciptList>div:nth-child(3n+1), .reciptList>div:nth-child(3n+1) img{
-		width:273px;
+		width:306px;
 		height:250px;
 	}
 	.reciptList>div:nth-child(3n+2){
-		width:273px;
+		width:306px;
 		height:40px;
 		font-size:1.3em;
 		font-weight:600;
 		line-height:40px;
 	}
 	.reciptList>div:nth-child(3n){
-		width:273px;
+		width:306px;
 		height:30px;
 		text-align:right;
 		position:relative;
 	}
 	.reciptList{
-		width:273px;
+		width:306px;
 		height:330px;
 		float:left;
 		margin:0 10px;
@@ -157,7 +159,7 @@
 		background-size:20px 20px;
 		float:right;
 		position:absolute;
-		left:210px;
+		left:245px;
 		top:2px;
 	}
 	.like{
@@ -176,7 +178,7 @@
 		height:20px;
 	}
 	.bClassSale{
-		background-color:rgb(140 224 102 / 36%);
+		background-color:#f4f4f4;
 		height:400px;
 		width:100%;
 	}
@@ -226,12 +228,14 @@
 	#bNotice{
 		margin-top:180px;
 		color:rgb(46, 204, 113);
-		font-size:0.8em;
+		font-size:1em;
 	}
 	#bInfoImg{
 		position:absolute;
 		left:800px;
 		top:20px;
+		width:360px;
+		height:360px;
 	}
 	#bInfoTitle{
 		position:absolute;
@@ -288,7 +292,7 @@
 		
 		
 		function todayProduct(idx){
-			var left= -(idx*219);
+			var left= -(idx*245);
 			$("#todayProduct").eq(0).animate({marginLeft:left+"px"},1000);
 		}
 		var todaySelect = 4;
@@ -310,7 +314,7 @@
 		});
 		
 		function newProduct(idx){
-			var left= -(idx*219);
+			var left= -(idx*245);
 			$("#newProduct").eq(0).animate({marginLeft:left+"px"},1000);
 		}
 		var newProductSelect = 4;
@@ -332,7 +336,7 @@
 		});
 		
 		function bestProduct(idx){
-			var left= -(idx*219);
+			var left= -(idx*245);
 			$("#bestProduct").eq(0).animate({marginLeft:left+"px"},1000);
 		}
 		var bestSelect = 4;
@@ -357,11 +361,6 @@
 	});
 </script>
 <div class="section">
-	<div style="height:100px;width:1080px;">
-		<h5><a href="mybuyList">구매내역</a></h5>
-		<h5><a href="myChatList">채팅</a></h5>
-		<!-- 링크걸면서확인 -->
-	</div>
 	<div id="banner">
 		<div id="prevBtn" class="roundImg"></div>
 		<div class="slider">
@@ -378,35 +377,36 @@
 		<div class="prevBtn roundImg" id="todayPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="todayProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 1kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 2kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 3kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 4kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 5kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 6kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 7kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 8kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="todayNext"></div>
 	</div>
 	<div>
 	<h2>오늘의 제철 레시피</h2>
+		<hr/>
 		<div class="todayRecipt">
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/sshj/img/dkimchi.jpg"/></div><div>김치 담그기!</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/sshj/img/dgamzajun.jpg"/></div><div>오늘 저녁은 감자전 어떠세요?</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/sshj/img/dotorimuk.jpg"/></div><div>더운날 생각나도 도토리묵</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
 		</div>
 	</div>
 	</div>
 	<div class="bClassSale">
 		<div class="section" id="bClassSale">
 			<h3 id="bTitle">B급 품목 세일!</h3>
-			<div id="bSubject">감자의 달인 김용제가 재배한 특급감자</div>
+			<div id="bSubject">고구마의 달인 김용제가 재배한 특급고구마</div>
 			<div id="bSpices">강원도 노지감자</div>
 			<div id="bSaleInfo"><span>30,000원</span><span>20,000원</span><span>50,000원</span></div>
 			<div id="bNotice">망설이면 늦어요!</div>
-			<div id="bInfo"><img src="/sshj/img/pi.gif" id="bInfoImg"/>
+			<div id="bInfo"><img src="/sshj/img/dsweetpotato1.jpg" id="bInfoImg"/>
 					<div id="bInfoTitle">강원도 노지감자</div>
 					<div id="bInfoTime">06:48:17 남음</div>
 			</div>
@@ -422,14 +422,14 @@
 		<div class="prevBtn roundImg" id="newProductPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="newProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 1kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 2kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 3kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 4kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 5kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 6kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 7kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 8kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="newProductNext"></div>
@@ -441,23 +441,24 @@
 		<div class="prevBtn roundImg" id="bestProductPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="bestProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 1kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 2kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 3kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 4kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 5kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 6kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 7kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/pi.gif"/></a></div><div><a href="error">GAP방울토마토 8kg</a></div><div>8,200원</div><div>친환경으로 재배한 무농약 토마토(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 1kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 2kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 3kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 4kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 5kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 6kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 7kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
+			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 8kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="bestProductNext"></div>
 	</div>
 		<h2>비트의 레시피</h2>
+		<hr/>
 		<div class="todayRecipt">
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/pi.gif"/></div><div>파를 이용한 요리</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/sshj/img/dkimchi.jpg"/></div><div>김치 담그기!</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/sshj/img/dgamzajun.jpg"/></div><div>오늘 저녁은 감자전 어떠세요?</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<div class="reciptList"><div><img src="/sshj/img/dotorimuk.jpg"/></div><div>더운날 생각나도 도토리묵</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
 		</div>
 	</div>
 </div>

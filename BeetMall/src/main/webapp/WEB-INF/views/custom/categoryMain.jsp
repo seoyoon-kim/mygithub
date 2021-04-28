@@ -75,10 +75,19 @@
 	}
 	#productDiv>ul>li>img{
 		width:198px;
+		height:198px;
+		border-radius: 10%;
 	}
 	#productDiv>ul>li:nth-child(5n+2){
 	    font-size: xx-large;
 	    font-weight: bold;
+	}
+	
+	#categoryAll>img, #categoryFruit>img, #categoryVege>img, #categorySall>img{
+		width:95px;
+		height:96px;
+		border-radius:80%;
+		object-fit:cover;
 	}
 	
 	/* 상품페이지 부분 css끝 */
@@ -201,10 +210,10 @@
 	<div class="main">
 		<div id="mainName"><h1>상품 품목별</h1></div>
 			<ul id="category">
-				<li><sqan id="categoryAll"><img src="<%=request.getContextPath()%>/img/k001.png"><br/>전체</sqan></li>
-				<li><sqan id="categoryFruit"><img src="<%=request.getContextPath()%>/img/k003.png"><br/>과일</sqan></li>
-				<li><sqan id="categoryVege"><img src="<%=request.getContextPath()%>/img/k004.png"><br/>채소</sqan></li>
-				<li><sqan id="categorySall"><img src="<%=request.getContextPath()%>/img/k005.png"><br/>쌀/잡곡</sqan></li>
+				<li><sqan id="categoryAll"><img src="/sshj/img/kmain.png"><br/>전체</sqan></li>
+				<li><sqan id="categoryFruit"><img src="/sshj/img/kfruit.png"><br/>과일</sqan></li>
+				<li><sqan id="categoryVege"><img src="/sshj/img/kvegetable.png"><br/>채소</sqan></li>
+				<li><sqan id="categorySall"><img src="/sshj/img/krice.png"><br/>쌀/잡곡</sqan></li>
 			</ul>
 			<div id="categorySubmenu">
 			<hr/>
@@ -267,7 +276,7 @@
 		<div id="productMain">
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k016.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -276,7 +285,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k017.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -285,7 +294,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k018.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -294,7 +303,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k019.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -303,7 +312,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k020.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -312,7 +321,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k021.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -321,7 +330,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k022.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -330,7 +339,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k016.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -339,7 +348,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k017.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -348,7 +357,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k018.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -357,7 +366,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k019.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -366,7 +375,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k020.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -375,7 +384,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k021.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -384,7 +393,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k022.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -393,7 +402,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k016.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>
@@ -402,7 +411,7 @@
 			</div>
 			<div id="productDiv">
 				<ul>
-					<li><img src="/sshj/img/pi.gif"></li>
+					<li><img src="/sshj/img/k017.png"></li>
 					<li>28,000원</li>
 					<li>제목제목제목제목제목제목</li>
 					<li>리뷰 50,000|4.8/5</li>

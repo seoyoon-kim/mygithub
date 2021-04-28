@@ -13,26 +13,16 @@ public class testController {
 	
 	@RequestMapping("/kcenter")
 	public String kcenter() {
-		return "custom/noticeMain";
+		return "custom/customerCenter/noticeMain";
 	}
 	@RequestMapping("/noticeMain")
 	public String kcenter2() {
-		return "custom/noticeMain";
-	}
-	
-	@RequestMapping("/customerCenter")
-	public String customerCenter() {
-		return "custom/customerCenter";
+		return "custom/customerCenter/noticeMain";
 	}
 	
 	@RequestMapping("/FAQBoard")
 	public String FAQBoard() {
-		return "custom/FAQBoard";
-	}
-	
-	@RequestMapping("/customerCenterWrite")
-	public String customerCenterWrite() {
-		return "custom/customerCenterWrite";
+		return "custom/customerCenter/FAQBoard";
 	}
 	
 	@RequestMapping("/mapping")
@@ -58,6 +48,18 @@ public class testController {
 	@RequestMapping("myfavoriForm")
 	public String myfavoriForm() {
 		return "mypages/myfavoriForm";
+	}
+	@RequestMapping("notice_view2")
+	public String notice_view2() {
+		return "custom/customerCenter/notice_view";
+	}
+	@RequestMapping("knotice_view")
+	public String knotice_view() {
+		return "custom/customerCenter/notice_view";
+	}
+	@RequestMapping("chargeAPI")
+	public String chargeAPI() {
+		return "mypages/chargeAPI";
 	}
 	
 	
@@ -97,6 +99,11 @@ public class testController {
 	public String customMyrecipe() {
 		return "custom/customMyrecipe";
 	}
+	
+	@RequestMapping("/customproduct")
+	public String customproduct() {
+		return "custom/customproduct";
+	}
 
 
 // 윤수///////////////////////////////////////////////////////////////
@@ -116,6 +123,22 @@ public class testController {
 	public String sRegister() {	// 판매자 회원가입
 		return "login/sRegister";	
 	}
+	@RequestMapping("regiFinish")
+	public String regiFinish() {	// 회원가입 완료
+		return "login/registerFinish";	
+	}
+	@RequestMapping("searchId")
+	public String searchId() {	// 아이디 찾기
+		return "login/idSearch";	
+	}
+	@RequestMapping("searchPwd")
+	public String searchPwd() {	// 비밀번호 찾기
+		return "login/pwdSearch";	
+	}
+	@RequestMapping("login")
+	public String login() {	// 회원가입 완료
+		return "login/login";	
+	}
 	@RequestMapping("infoView")
 	public String infoView() {	// 약관조회
 		return "info/infoView";
@@ -124,12 +147,24 @@ public class testController {
 	public String myPoint() {	// 마이포인트
 		return "mypages/mypoint";
 	}
+	@RequestMapping("myinfoEdit")
+	public String myInfoEdit() {	// 내 정보
+		return "mypages/myInfoEdit";
+	}
 	@RequestMapping("mybuyList")
 	public String myBuyList() {	// 구매내역
 		return "mypages/mybuyList";
 	}
 	@RequestMapping("myChatList")
-	public String myChatList() {	// 구매내역
+	public String myChatList() {	// 채팅내역
 		return "mypages/myChatList";
+	}
+	@RequestMapping("leaveMember")
+	public String leaveMember() {	// 회원탈퇴
+		return "mypages/leaveMember";
+	}
+	@RequestMapping("leaveMemberOk")
+	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
+		return "mypages/leaveMemberSuccess";
 	}
 }

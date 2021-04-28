@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="/inc/menu_c.jspf"%>
 <style>
 	#infoTitle{
 		height:40px;
@@ -13,11 +14,11 @@
 	}
 	.infoButton{
 		float:left;
-		margin:0 5px;
 		height:40px;
+		margin-right:1px;
 		line-height:40px;
 		width:15%;
-		background-color:#e06666;
+		background-color: rgb(252,118,45);
 		text-align:center;
 		color:white;
 		font-size:1.2em;
@@ -31,7 +32,7 @@
 		width:1080px;
 		height:980px;
 		top:40px;
-		border: 5px solid #e06666;
+		border: 5px solid rgb(252,118,45);
 		padding:10px;
 		overflow:auto;
 	}
