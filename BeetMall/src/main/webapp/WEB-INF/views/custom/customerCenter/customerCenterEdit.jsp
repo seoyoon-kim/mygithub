@@ -97,38 +97,39 @@
 	<!-- 문의하기 상단 메세지 -->	
 	<div class="cs_message">
 		질문 전 자주묻는 질문을 먼저 확인해주세요. <br/>
-		<a href="<%=request.getContextPath() %>/faq"><span id="link">자주묻는질문 바로가기 </span></a><br/>
+		<a href="<%=request.getContextPath() %>/FAQBoard"><span id="link">자주묻는질문 바로가기 </span></a><br/>
 		<br/>
 		<span id="notice">고객님께서 작성하신 질문은 관리자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 	</div>
 		
-	<form method="post" action="cusomerCenterWriteOk">
+	<form method="post" action="cusomerCenterEditOk">
 		<table>
 			<tbody>
 				<tr>
+					<input type="hidden" name="qmnum" id="qmnum" value="${vo.qmnum}"/>
 					<th colspan="4">문의 작성</th>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >제목</th>
-					<td class="td" colspan="3"><input type="text" name="qmtitle" id="qmtitle" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<td class="td" colspan="3"><input type="text" name="qmtitle" id="qmtitle" value="${vo.qmtitle}"/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span>로그인한 아이디</span></td>
+					<td  class="td"><span>${vo.userid}</span></td>
 				</tr>
 				<tr>
 					<th colspan="4">문의 내용</th>
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="summernote" name="qmcontent" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="summernote" name="qmcontent">${vo.qmcontent}</textarea>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-				<input type="submit" value="문의하기" class="btn" id="write_btn"/>				
+				<input type="reset" value="초기화" class="btn" id="write_btn"/>
+				<input type="submit" value="수정하기" class="btn" id="write_btn"/>				
 			</div>
 		</form>
 </div>
@@ -136,6 +137,34 @@
 $(document).ready(function() {
 	  $('#summernote').summernote({
 		  height: 500,                 // 에디터 높이 
+		//콜백 함수
+          callbacks : { 
+          	onImageUpload : function(files, editor, welEditable) {
+          // 파일 업로드(다중업로드를 위해 반복문 사용)
+          for (var i = files.length - 1; i >= 0; i--) {
+          uploadSummernoteImageFile(files[i],
+          this);
+          		}
+          	}
+          }
 	  });
+});
+/**
+* 이미지 파일 업로드
+*/
+function uploadSummernoteImageFile(file, el) {
+	data = new FormData();
+	data.append("file", file);
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : "uploadSummernoteImageFile",
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(data) {
+			$(el).summernote('editor.insertImage', data.url);
+		}
 	});
+}
 </script>

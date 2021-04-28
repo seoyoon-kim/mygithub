@@ -25,11 +25,6 @@ public class testController {
 		return "custom/customerCenter/FAQBoard";
 	}
 	
-	@RequestMapping("/customerCenterWrite")
-	public String customerCenterWrite() {
-		return "custom/customerCenter/customerCenterWrite";
-	}
-	
 	@RequestMapping("/mapping")
 	public String mapping() {
 		return "custom/mapList";
@@ -61,15 +56,6 @@ public class testController {
 	@RequestMapping("knotice_view")
 	public String knotice_view() {
 		return "custom/customerCenter/notice_view";
-	}
-	@RequestMapping("customerCenterView")
-	public String customerCenterView() {
-		return "custom/customerCenter/customerCenterView";
-	}
-	
-	@RequestMapping("customerCenterEdit")
-	public String customerCenterEdit() {
-		return "custom/customerCenter/customerCenterEdit";
 	}
 	@RequestMapping("chargeAPI")
 	public String chargeAPI() {

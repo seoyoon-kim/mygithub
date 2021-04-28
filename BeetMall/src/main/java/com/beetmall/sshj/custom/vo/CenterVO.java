@@ -10,6 +10,7 @@ public class CenterVO {
 	private String qmdate;
 	private String qmanswer;
 	private String qmoption;
+	private String qmanserdate;
 	
 	public int getQmnum() {
 		return qmnum;
@@ -55,6 +56,10 @@ public class CenterVO {
 	public void setQmoption(String qmoption) {
 		this.qmoption = qmoption;
 	}
-	
-	
+	public String getQmanserdate() {
+		return qmanserdate;
+	}
+	public void setQmanserdate(String qmanserdate) {
+		this.qmanserdate = qmanserdate;
+	}
 }

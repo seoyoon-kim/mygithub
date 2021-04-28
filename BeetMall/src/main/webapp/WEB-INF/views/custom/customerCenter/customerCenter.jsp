@@ -231,9 +231,16 @@
 				<c:forEach var="data" items="${list}">
 				<tr>
 					<td class="number">${data.qmnum}</td>
-					<td class=><a href="<%=request.getContextPath()%>/customerCenterView">${data.qmtitle}</a></td>
+					<td class=><a href="<%=request.getContextPath()%>/customerCenterView?qmnum=${data.qmnum}">${data.qmtitle}</a></td>
 					<td>${data.qmdate}</td>
-					<td><span class="answer_span" id="answer">답변완료</span></td>				
+					<td>
+						<c:if test="${data.qmanswer==null}">
+							<span class="answer_span" id="no_answer">답변대기중</span>
+						</c:if>
+						<c:if test="${data.qmanswer != null}">
+							<span class="answer_span" id="answer">답변완료</span>
+						</c:if>
+					</td>				
 				</tr>
 				</c:forEach>
 			</tbody>

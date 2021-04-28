@@ -100,7 +100,7 @@
 	<!-- 문의하기 상단 메세지 -->	
 	<div class="cs_message">
 		질문 전 자주묻는 질문을 먼저 확인해주세요. <br/>
-		<a href="<%=request.getContextPath() %>/faq"><span id="link">자주묻는질문 바로가기 </span></a><br/>
+		<a href="<%=request.getContextPath() %>/FAQBoard"><span id="link">자주묻는질문 바로가기 </span></a><br/>
 		<br/>
 		<span id="notice">고객님께서 작성하신 질문은 관리자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 	</div>
@@ -118,10 +118,6 @@
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
 					<td  class="td"><span>로그인한 아이디</span></td>
-				</tr>
-				<tr class="tr_head">
-					<th class="menu">파일첨부</th>
-					<td  class="td"><input type="file" value="파일첨부하기" style="width: 500px;"></td>
 				</tr>
 				<tr>
 					<th colspan="4">문의 내용</th>

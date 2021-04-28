@@ -105,6 +105,14 @@
    		color: black;
    }
 </style>
+<script>
+	function Deletebtn(){
+		if(confirm("내가 문의한 내용을 삭제하시겠습니까?")){
+			location.href="customerCenterDelete?qmnum=${vo.qmnum}"
+		}
+		
+	};
+</script>
 <div class="section">
 	<div class="main">
 	<!-- 가운데 메인 div -->
@@ -114,6 +122,7 @@
 			무엇을 도와드릴까요?<br/>
 			<span id="notice">고객님께서 작성하신 질문은 관리자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 		</div>
+		<input type="hidden" value="${vo.qmnum}"/>
 		<!-- 내글 보기 -->	
 		<fieldset>
 			<table>
@@ -123,20 +132,19 @@
 					</tr>
 					<tr class="tr_head">
 						<th class="menu" >제목</th>
-						<td class="td" colspan="3" ><span >상품을 등록했는데 등록이 안됐어요! ㅠ</span></td>
+						<td class="td" colspan="3" ><span >${vo.qmtitle}</span></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">작성자</th>
-						<td class="td"><span >로그인한 아이디</span></td>
+						<td class="td"><span >${vo.userid}</span></td>
 							<th class="menu">문의날짜</th>
-						<td class="td"><span>21/04/21</span></td>
+						<td class="td"><span>${vo.qmdate}</span></td>
 					</tr>
 				
 					<tr>
 						<td class="question_content" colspan="4">
 							<span class="content" >
-							
-							고객 문의 사항 
+								${vo.qmcontent}
 							</span>
 						</td>	
 					</tr>
@@ -150,31 +158,43 @@
 						</th>
 					</tr>
 					<tr class="tr_head">
-						<th class="menu">문의번호</th>
-						<td  class="td"><span>1213</span></td>
 						<th class="menu">답변일</th>
-						<td class="td" ><span>21/04/21</span></td>
+						<td class="td" >
+							<span>
+								<c:if test="${vo.qmanserdate==null}">
+									대기중..
+								</c:if>
+								<c:if test="${vo.qmanserdate!=null}">
+									${vo.qmanserdate}
+								</c:if>
+							</span>
+						</td>
 					</tr>
-				
 					<tr>
 						<td class="question_content" colspan="4">
 							<span class="content" >
 							
-							상품등록이 안돼요
-							</br>
-							상품등록이 안돼요
-							</br>
-							상품등록이 안돼요
-							상품등록이 안돼요
-							</br>
-							상품등록이 안돼요
-							</br>
-							상품등록이 안돼요
-							상품등록이 안돼요
-							</br>
-							상품등록이 안돼요
-							</br>
-							상품등록이 안돼요
+							<c:if test="${vo.qmanswer==null}">
+								<!-- qmanswer -->
+								아직 답변이 도착하지않았습니다 ㅠㅠ<br/>
+								조금만 기다려주세요..! 빠르게 답변드리겠습니다.<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+							</c:if>
+							<c:if test="${vo.qmanswer!=null}">
+								${vo.qmanswer}
+							</c:if>
 							</span>
 						</td>	
 					</tr>
@@ -183,8 +203,8 @@
 		</fieldset>
 			<div class="bottom_wrap">
 				<input type="button" value="확인" class="btn" id="btn" onClick="location.href='<%=request.getContextPath() %>/customerCenter'"/>
-				<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/customerCenterEdit'"/>
-				<input type="button" value="삭제하기" class="btn" id="btn" onClick=""/>
+				<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/customerCenterEdit?qmnum=${vo.qmnum}'"/>
+				<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
 			</div>
 		</div>
 	</div>

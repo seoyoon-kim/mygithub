@@ -30,6 +30,10 @@ public class CenterController {
 	@Inject
 	CenterServiceImp centerService;
 	
+	@RequestMapping("/customerCenterWrite")
+	public String customerCenterWrite() {
+		return "custom/customerCenter/customerCenterWrite";
+	}
 	//1:1문의 글쓰기
 	@RequestMapping(value="/cusomerCenterWriteOk", method=RequestMethod.POST)
 	public ModelAndView cusomerCenterWrite(CenterVO vo, HttpServletRequest req, HttpSession session) {
@@ -43,6 +47,7 @@ public class CenterController {
 		}
 		return mav;
 	}
+	//1:1 목록가져오기 customerCenter부분
 	@RequestMapping("/customerCenter")
 	public ModelAndView qmboardList() {
 		ModelAndView mav = new ModelAndView();
@@ -51,6 +56,56 @@ public class CenterController {
 		mav.setViewName("custom/customerCenter/customerCenter");
 		return mav;
 	}
+	
+	//1:1목록 글보기
+	@RequestMapping("/customerCenterView")
+	public ModelAndView customerCenterView(int qmnum) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo",centerService.centerSelect(qmnum));
+		mav.setViewName("custom/customerCenter/customerCenterView");
+		return mav;
+	}
+	
+	//삭제하기
+	@RequestMapping("/customerCenterDelete")
+	public ModelAndView customerCenterDelete(int qmnum) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(centerService.centerDelete(qmnum)>0){//삭제
+			mav.setViewName("redirect:customerCenter");
+		}else {//삭제실패
+			mav.addObject("qmnum", qmnum);
+			mav.setViewName("redirect:customerCenterView");
+		}
+		return mav;
+	}
+	//수정하기 뷰페이지로이동
+	@RequestMapping("customerCenterEdit")
+	public ModelAndView customerCenterEdit(int qmnum) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo", centerService.centerSelect(qmnum));
+		mav.setViewName("custom/customerCenter/customerCenterEdit");
+		
+		return mav;
+	}
+	//수정하기
+	@RequestMapping("/cusomerCenterEditOk")
+	public ModelAndView cusomerCenterEditOk(CenterVO vo) {
+		ModelAndView mav = new ModelAndView();
+		int result = centerService.centerEditOk(vo);
+		mav.addObject("qmnum", vo.getQmnum());
+		
+		if(result>0) {
+			mav.setViewName("redirect:customerCenterView");
+		}else {
+			mav.setViewName("redirect:customerCenterEdit");
+		}
+		return mav;
+	}
+	
+	
 	
 	///////////////////////////서머노트 이미지업로드부분//////////////////////////////////////////////
 	//서머노트 이미지업로드부분

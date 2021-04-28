@@ -25,4 +25,16 @@ public class CenterServiceImp implements CenterService{
 		return centerDAO.centerAllRecord();
 	}
 
+	public CenterVO centerSelect(int qmnum) {
+		return centerDAO.centerSelect(qmnum);
+	}
+	
+	public int centerDelete(int qmnum) {
+		return centerDAO.centerDelete(qmnum);
+	}
+
+	public int centerEditOk(CenterVO vo) {
+		return centerDAO.centerEditOk(vo);
+	}
+
 }

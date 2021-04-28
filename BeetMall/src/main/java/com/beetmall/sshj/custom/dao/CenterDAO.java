@@ -10,4 +10,10 @@ public interface CenterDAO {
 
 	public List<CenterVO> centerAllRecord();
 
+	public CenterVO centerSelect(int qmnum);
+
+	public int centerDelete(int qmnum);
+
+	public int centerEditOk(CenterVO vo);
+
 }
