@@ -71,7 +71,7 @@
 </style>
 <div class="section" id="loginDiv">
 	<h2>로그인</h2>
-	<form>
+	<form method="post" action="loginOk">
 		<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput"/><br/>
 		<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput"/><br/>
 		<div id="logStatus">
