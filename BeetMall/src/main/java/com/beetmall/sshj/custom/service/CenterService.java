@@ -6,4 +6,5 @@ public interface CenterService {
 	
 	//1:1문의하기 글쓰기 view: customerCenterWrite
 	public int centerWrite(CenterVO vo);
+	
 }
