@@ -136,9 +136,5 @@ public class CenterController {
 		String a = jsonObject.toString();
 		return a;
 	}
-<<<<<<< HEAD
-	////////////////////////////////////////////////////////////////////////////////////
-=======
 
->>>>>>> refs/heads/feature/main_#19
 }
