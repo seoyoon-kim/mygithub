@@ -137,5 +137,9 @@
 			</div>
 			</fieldset>
 		</div>
+<<<<<<< HEAD
 		
+=======
+	
+>>>>>>> branch 'develop' of https://github.com/kschoi93/BeetMall
 	</div>

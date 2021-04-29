@@ -11,5 +11,7 @@
 	<select id="loginOk" resultType="com.beetmall.sshj.custom.vo.MemberVO">
 		select userid, username, usertype, userstop  from member where userid=#{param1} and userpwd=#{param2}
 	</select>
-	
+	<select id="infoSelect" resultType="String">
+		select userinfocontent from useinfo where userinfotitle = #{param1}
+	</select>
 </mapper>
