@@ -72,8 +72,8 @@
 <div class="section" id="loginDiv">
 	<h2>로그인</h2>
 	<form method="post" action="loginOk">
-		<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput"/><br/>
-		<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput"/><br/>
+		<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput" value="tester"/><br/>
+		<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput" value="1234!!"/><br/>
 		<div id="logStatus">
 			<input type="checkbox" name="logalways"/>로그인상태유지
 			<div><a href="searchId" id="searchId">아이디찾기</a> | <a href="searchPwd" id="searchPwd">비밀번호찾기</a></div>

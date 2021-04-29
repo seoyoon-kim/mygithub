@@ -356,8 +356,6 @@
 			}
 			bestProduct(bestSelect);
 		});
-		
-		
 	});
 </script>
 <div class="section">
