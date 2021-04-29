@@ -11,15 +11,6 @@ public class testController {
 		return "custom/categoryMain";
 	}
 	
-	@RequestMapping("/kcenter")
-	public String kcenter() {
-		return "custom/customerCenter/noticeMain";
-	}
-	@RequestMapping("/noticeMain")
-	public String kcenter2() {
-		return "custom/customerCenter/noticeMain";
-	}
-	
 	@RequestMapping("/FAQBoard")
 	public String FAQBoard() {
 		return "custom/customerCenter/FAQBoard";

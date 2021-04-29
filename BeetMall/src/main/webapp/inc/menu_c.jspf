@@ -430,7 +430,7 @@
             <div id="kNoticeCategoryMain">
                <div id="kcategory">고객센터</div>
                <div id="kNoticeMain">
-                  <div><a href="noticeMain">공지사항</a></div>
+                  <div><a href="kcenter">공지사항</a></div>
                </div>
                <div id="kNoticeMain">
                   <div><a href="FAQBoard">자주 묻는 질문</a></div>

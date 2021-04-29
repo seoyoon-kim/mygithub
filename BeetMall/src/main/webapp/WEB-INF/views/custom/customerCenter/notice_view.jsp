@@ -13,6 +13,7 @@
 	}
 	.main{
 		margin-top:30px;
+		height:1000px;
 	}
 	/*표*/
 	table{
@@ -85,6 +86,7 @@
    #NoticeleftMenu{
    		display:block;
    }
+   
 </style>
 <script>
 //테이블 collapse
@@ -135,5 +137,9 @@
 			</div>
 			</fieldset>
 		</div>
+<<<<<<< HEAD
+		
+=======
 	
+>>>>>>> branch 'develop' of https://github.com/kschoi93/BeetMall
 	</div>
