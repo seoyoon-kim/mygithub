@@ -82,30 +82,6 @@
    }
 </style>
 <script>
-$(function(){
-	//선택한 faq tr열고 닫히기	 
-	//수정할 것: this만 열리도록 고치기
-	  	  	$(".faq_td").click(function(){ 
-	  	  		status = $(".answer").css("display"); 
-	  	  		if (status == "none") { 
-	  	  			$(".answer").css("display", ""); 
-	  	  		} else { 
-	  	  			$(".answer").css("display", "none"); 
-	  	  		} 
-	  	  	});
-	//선택한 select option별로 보기
-	//수정할 것 나머지 option선택에 대한 script 추가하기
-	  		
-	  		$('#sel').change(function(){
-	  			var option = $(this).val();
-	  			console.log(option);
-	  			if(option=='total'){ //전체
-	  				$('tr').css('display','');
-	  			}	
-	  		});
-
-	 
-	 });
 
 function showHideFaq(){
 	location.href="notice_view2";
@@ -124,28 +100,13 @@ function showHideFaq(){
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td><a href="javascript:showHideFaq()"><strong>코로나19로 인한 픽업 서비스 중단 안내</strong></a></td>
-					<td>21/04/21</td>
-				</tr>
-				
-				<!-- 임시로 넣은 정보 -->
-				<tr>
-					<td>2</td>
-					<td><a href="">개인정보 처리방침 개정안내</a></td>
-					<td>21/04/21</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="">개인정보 처리방침 개정안내</a></td>
-					<td>21/04/21</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="">개인정보 처리방침 개정안내</a></td>
-					<td>21/04/21</td>
-				</tr>
+				<c:forEach var="data" items="${list}">
+					<tr>
+						<td>${data.infonum}</td>
+						<td><a href="notice_view2infonum=${data.infonum}"><strong>${data.infocontent}</strong></a></td>
+						<td>${data.infowritedate}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 			
 		</table>

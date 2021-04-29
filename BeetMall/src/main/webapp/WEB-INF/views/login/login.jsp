@@ -67,7 +67,9 @@
 		color:black;
 		font-weight:700;
 	}
-	
+	.loginBtn{
+		border:none;
+	}
 </style>
 <div class="section" id="loginDiv">
 	<h2>로그인</h2>
@@ -80,9 +82,9 @@
 		</div>
 		<input type="submit" value="로그인" id="loginBtn"/>
 		<input type="button" value="회원가입" id="registerBtn"/>
-		<input type="button" value="Google 로그인" id="googleLogin"/>
-		<input type="button" value="네이버 로그인" id="naverLogin"/>
-		<input type="button" value="Kakao 로그인" id="kakaoLogin"/>
+		<input type="button" value="Google 로그인" id="googleLogin" class="loginBtn"/>
+		<input type="button" value="네이버 로그인" id="naverLogin" class="loginBtn"/>
+		<input type="button" value="Kakao 로그인" id="kakaoLogin" class="loginBtn"/>
 	</form>
 	
 </div>

@@ -9,10 +9,10 @@
 		border-bottom:1px solid #ddd;
 		margin-bottom:12px;
 	}
-	.infoButton:first-child{
+	.infobusiz{
 		margin-left:0px;
 	}
-	.infoButton{
+	.infobusiz, .infomaition, .personaal{
 		float:left;
 		height:40px;
 		margin-right:1px;
@@ -34,13 +34,59 @@
 		top:40px;
 		border: 5px solid rgb(252,118,45);
 		padding:10px;
-		overflow:auto;
+		overflow: auto;
+	}
+	pre{
+		 background-color: white;
+   		 border: 1px solid white;
+   		 overflow: visible;
+   		 white-space: pre-line;
+   		 font-size:14px;
 	}
 </style>
 <script>
 	$(function(){
-		$(".infoButton").click(function(){
-			$("#infoPrint").text($(this).index()+", "+$(this).text());
+		$(".infobusiz").click(function(){
+			var url = "/sshj/infobusiz";
+	         $.ajax({
+	            url : url,
+	            success : function(result){
+	            	var $result = $(result);
+	            	$result.each(function(idx, obj){
+	            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
+	            	});
+	            }, error:function(){
+	               $("#infoPrint").html("전송받기 실패..");
+	            }
+	         });
+		});
+		$(".infomaition").click(function(){
+			var url = "/sshj/infomaition";
+	         $.ajax({
+	            url : url,
+	            success : function(result){
+	            	var $result = $(result);
+	            	$result.each(function(idx, obj){
+	            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
+	            	});
+	            }, error:function(){
+	               $("#infoPrint").html("전송받기 실패..");
+	            }
+	         });
+		});
+		$(".personaal").click(function(){
+			var url = "/sshj/personaal";
+	         $.ajax({
+	            url : url,
+	            success : function(result){
+	            	var $result = $(result);
+	            	$result.each(function(idx, obj){
+	            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
+	            	});
+	            }, error:function(){
+	               $("#infoPrint").html("전송받기 실패..");
+	            }
+	         });
 		});
 		
 	});
@@ -50,9 +96,9 @@
 		<h2>이용안내</h2>
 	</div>
 	<div id="infoSelect">
-		<div class="infoButton">이용안내</div>
-		<div class="infoButton">이용약관</div>
-		<div class="infoButton">개인정보처리방침</div>
+		<div class="infobusiz">회사소개</div>
+		<div class="infomaition">이용약관</div>
+		<div class="personaal">개인정보처리방침</div>
 		<div><div id="infoPrint"></div></div>
 	</div>
 	

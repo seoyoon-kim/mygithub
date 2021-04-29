@@ -28,4 +28,10 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.loginOk(userid, userpwd);
 	}
 
+	@Override
+	public String infoSelect(String infoname) {
+		
+		return memberDAO.infoSelect(infoname);
+	}
+
 }
