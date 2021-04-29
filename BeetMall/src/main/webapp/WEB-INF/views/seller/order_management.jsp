@@ -340,10 +340,10 @@
 	<!-- 사이드바 -->
 	<nav>
 		<ul>
-			<li><a href="#">상품 관리</a></li>
-			<li><a href="#">상품 등록</a></li>
-			<li><a href="#">주문 관리</a></li>
-			<li><a href="#">판매 관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/product_list">상품관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/product_regi">상품등록</a></li>
+			<li><a href="<%=request.getContextPath()%>/order_management">주문 관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/sale_management">판매 관리</a></li>
 			<li><a href="seller_sales">매출 관리</a></li>
 			<li><a href="#">정산 관리</a></li>
 			<li><a href="#">배송 관리</a></li>
