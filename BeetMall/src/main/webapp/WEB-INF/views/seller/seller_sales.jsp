@@ -850,8 +850,6 @@
 												// 빈날짜가 있으면 0으로 채워준다.
 												if(1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) ){
 													do{
-														console.log(minDate.getMonth());
-														console.log(minDate.getDate());
 														minDate.setDate( minDate.getDate()+1 );
 														resultArr.push(0);
 													}while( 1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) )
@@ -869,107 +867,109 @@
 											let testVal = 0;
 											// 시작일부터 종료일까지 반복하는데,  매출일자와 상품명이 맞으면 값을 넣고 아닐경우 0을 넣는다.
 											// 매출일자와 상품명이 맞으면 +1 을 통해 산출된 데이터 개수만큼 확인한다.
-											for(let t=0; t <= testGap; t++ ){
+											console.log(i+'번째');
+											
+											let testCode1 = 0;
+											let testCode2 = 0;
+											for(let t=0; t <= testGap; t++ ){ // 시작일부터 종료일까지의 갭차이 만큼 반복한다.
 												
-												// 시작일부터 종료일까지 반복문을 실행한다.
-												// 1. 만약, 2021 03 01 + mcatenum이 같으면. 데이터를 넣는다.
-												// 2. 다음 데이터를 받아내고 mcatenum이 linum과 같은지 확인하고
-												//    - 다르면 push(0) 하고, 다음 데이터를 받아내서 mcatenum == linum인 데이터를 찾아낼때까지 반복한다.
-												// 4. 다음 데이터도 1번과 동일한 방법으로 한다.
-												
-												// mcatenum이 비교해서 같지 않으면 실행
-												if( mcatenum != liNum ){ 
-													let testCode = 0;
-													do{
+												// 다음 데이터가 없을경우
+												if(isNaN(orderconfirm.getDate())){
+													
+													resultArr.push(0);
+													continue;
+													
+												}
+
+												if( testCode1 == 0){ //첫번째 일 경우
+													
+													if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){//모든 값이 같으면 데이터를 넣는다.
 														
-														if(mcatenum == liNum){
-															resultArr.pop();
-															resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-															testCode = 1;
-														}else {
-															if(testCode == 1){
-																resultArr.pop();
-																testCode == 0;
-															}
-															resultArr.push(0);
-														}
-														//다음 데이터의 매출일자가 동일한지 확인해야 한다.
+														resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
 														testVal++;
 														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
 														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-													}while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() )
-													
-														/* 
-														resultArr.push(0);
-
-													//다음 데이터의 매출일자가 동일한지 확인해야 한다.
-													testVal++;
-													orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-													mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-													
-													
-													//확인했을때, 동일한 매출일자이면 
-													if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
-														//num을 비교해서 맞다면 마지막에 넣은 데이터를 삭제하고 이번에 나온 데이터를 넣고
-														if(mcatenum == liNum){
-															resultArr.pop();
-															resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-															do{
-																testVal++;
-																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-															}while(같은 일자면 또 반복?)
-														}
 														
-														do {
-															// 만약, 두개의 번호가 다르다. 그러면? 우선 0 데이터를 넣고
+													}else if( minDate.getDate() != orderconfirm.getDate() ){//날짜가 다르면
+														
+														if( mcatenum != liNum ){ // 날짜가 다른데 값도 다를 경우
+															
 															resultArr.push(0);
-															// 또 확인해야 한다. 다음 데이터가 같은지 다른지
 															testVal++;
 															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
 															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-														}while(minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() && mcatenum != liNum)
-													} */
+														
+														} else { //날짜가 다르지만 값이 같을 경우 0을 푸시한다.
+															
+															resultArr.push(0);
+															testCode2 = 0;
+															
+														}
+														
+													}else if( mcatenum != liNum ){//날짜는 같지만 값이 다를경우 0을 푸시한다. 
+														
+														resultArr.push(0);
+														testVal++;
+														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+														
+													}
+												
+													if( minDate.getDate() == orderconfirm.getDate() ){ // 다음 데이터 확인해보니 만약 날짜가 같으면 반복으로 들어가야 한다. 즉, 날짜와 반복 변수가 ++ 되면 안된다.
+														
+														testCode2 = 1;
+														testCode1 = 1;
+														t--;
+													
+													} 
+													
 												}
 												
-												// 다음 데이터의 날짜가 동일하면 번호를 비교해서
-												// 같으면 데이터를 넣고 아니면 0을 넣는다.
-												if( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
+												if( testCode2 == 1 ) { // 두번째 일 경우. 즉, 반복일 경우
 													
-													resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+													if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){ // 반복했는데, 날짜와 값이 모두 같을 경우 값을 더해준다.
+														
+														let saveData = resultArr[resultArr.length-1];
+														resultArr.pop();	
+														resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+														
+													} else if( minDate.getDate() != orderconfirm.getDate() ){ // 두번째 이상 반복했는데, 날짜가 다르다면 0을 푸시해줘야 한다.
+														
+														resultArr.push(0);
+														
+													} else if( mcatenum != liNum ){ // 날짜는 같지만 값이 다르면
+														
+													}
+														
 													testVal++;
 													orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
 													mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
 													
-												} else {
-													resultArr.push(0);
-												}
-												// 또 비교했을때 데이터가 날짜가 맞으면 반복해서 확인한다.
-												while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() ){
-													// mcatenum과 liNum이 같으면 save Data를 활용해 데이터를 저장하고
-													// 배열에 들어있는 마지막 데이터를 삭제 후
-													// 지금 넣을 데이터와 + 전에 있던 데이터와 합하여 넣는다.
-													if( mcatenum == liNum ){
-														let saveData = resultArr[resultArr.length-1];
-														resultArr.pop();	
-														resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-														testVal++;
-														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-													
-													} else {
+													if( minDate.getDate() != orderconfirm.getDate() ){ // 만약 날짜가 같지 않으면 첫번째를 실행시킨다.
 														
-														break;
+														testCode1 = 0;
+														testCode2 = 0;
+														
+													} else { // 만약 날짜와 값이 같거나 ,, 날짜가 같지만 값이 다르면
+														
+														// testCode2 == 1;을 유지하고 반복해야 한다. 즉, 날짜와 반복 변수가 ++되면 안된다.
+														t--;
+														
 													}
 													
 												}
 												
-												// 현재 확인하고 있는 날짜를 ++ 해준다.
-												minDate.setDate(minDate.getDate()+1);
-											}
-
 												
-											
+												// 반복하지 않아도 되면 날짜를 업데이트 한다.
+												if( testCode2 != 1 ){
+													
+													// 현재 확인하고 있는 날짜를 ++ 해준다.
+													minDate.setDate(minDate.getDate()+1); 	
+													
+												}
+												
+											}
+												
 											let data = {
 													label: mcatename, // 품목명을 넣는다
 													data: resultArr, // 데이터를 넣고
