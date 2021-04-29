@@ -24,25 +24,17 @@
 
 <style>
 	li, label{list-style-type:none; padding-bottom:10px;}
+	li{padding-bottom:10px;}
 	select{height:28px;}
 	input, textarea, select{
 		border:1px solid lightgray; 
 		border-radius: 8px;
 	}
+	input,select,button{height:30px;}
 	textarea{
 		width:100%;
 	}
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-	}
+
 /*검색하기*/
 	/*카테고리*/
 	.wrapTitle{margin-bottom:10px;}
@@ -129,9 +121,12 @@
 		padding-bottom:5px;
 	}
 /*판매가격*/
-	#discount_sale_price{
+	#total_price, #productprice{
 		font-weight:bold;
+		font-size:17px;
+		color:orange;
 	}
+	label{margin-right:10px;}
 /*옵션*/
 	.regi_option_table input{
 		border:none;
@@ -155,7 +150,7 @@
 		height:500px; width:80%;
 	}
 /*배송*/
-
+	#pay{height:50px; line-height:30px;}
 /*취소 저장하기 버튼*/
 	.end_button_wrap{
 		text-align:center;
@@ -166,10 +161,23 @@
 		background: #fff;
 		margin: 20px 10px 40px 0 ;
 	}
+	span{line-height:30px;}
+	
 </style>
 <script>
 //1. 카테고리 변경
 $(function(){
+	// 데이터에서 불러오기 
+
+/* 
+대분류 번호
+1	건과류
+2	견과류
+3	과일
+4	쌀
+5	잡곡/혼합곡
+6	채소
+*/
 	
 	var dried_fruits = ['감말랭이', '건망고','건바나나','건자두', '건포도', '곶감', '기타건과류'];
 	var nut = ['대추','땅콩','마카다미아','밤','아몬드','은행','잣','캐슈너트','피스타치오','피칸','해바라기씨','호두','호박씨','기타견과류'];
@@ -252,21 +260,22 @@ $(function(){
         }
 //작은 썸네일 업로드 미리보기 (실패)
 	
-	
+$(document).ready(function(){	
 //할인
-	function discount(){
-		console.log('button discount onclick');
-		if($('uncheck').next('ul').css('display')!='none'){
-			$('#uncheck').next('ul').css('display','none');
-		}
-	
-	}
-$(document).ready(function(){
-		//버튼
-		$('.btn').on('click',function(){
-			$('.btn').css('background', 'gray').css('color','white');
+		$('#sale_check').click(function(){
+			$('#sale_ul').css('display','block');
 		});
-		//국내산, 수입산
+		$('#sale_uncheck').click(function(){
+			$('#sale_ul').css('display','none');
+		});
+	
+
+//버튼
+	/* 	$('.btn').mouseover('click',function(){
+			$(this).css('background', 'gray').css('color','white');
+		});
+		 */
+//국내산, 수입산
 		$('#import').on('click',function(){
 			$('#import_wrap').css('display','block');
 		});
@@ -274,21 +283,35 @@ $(document).ready(function(){
 			$('#import_wrap').css('display','none');
 		});
 		
-});		
-
-//할인여부
-		//$('#uncheck').click(function(){
-		//	$('#discount_price').attr('disabled',true).attr("readonly",true);
+//택배
+		$('#delivery').on('click',function(){
+			$('#delivery_option').css('display','block');
+		});
+		$('#pickup').click(function(){
+			$('#delivery_option').css('display','none');
+		});
+		
+	
+//판매기간 설정
+	$('#sell_check').on('click',function(){
+		$('#sell_start_finish').css('display','block');
+		$('#date_group').css('display','block');
+	});
+	$('#sell_uncheck').on('click',function(){
+		$('#sell_start_finish').css('display','none');
+		$('#date_group').css('display','none');
+	});
 
 //특정기간만 할인 날짜 가져오기
 	//현재 날짜 구하기
 	//https://ninearies.tistory.com/197
 	
 //할인판매가 계산
+
 //기간설정하면 달력날짜 바꾸기
 
 //옵션 적용안함 이면 표 비활성화
-$(document).ready(function(){
+
 	$('#option_tbody').children('tr').css('display','none');
 	$('#select_option').change(function(){
 		var option = $(this).val();
@@ -303,10 +326,11 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
+	
+	
 });		
 
-//라디오버튼
-//배송 픽업선택하면 0처리, 라디오버튼 안됨
 //취소 history back
 	
 
@@ -318,9 +342,9 @@ $(document).ready(function(){
 	<!-- 사이드바 -->
 	<nav>
 		<ul>
-			<li><a href="">상품 관리</a></li>
-			<li><a href="">상품 등록</a></li>
-			<li><a href="">주문 관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/product_list">상품관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/product_regi">상품등록</a></li>
+			<li><a href="<%=request.getContextPath()%>/order_management">주문 관리</a></li>
 			<li><a href="">판매 관리</a></li>
 			<li><a href="seller_sales">매출 관리</a></li>
 			<li><a href="">정산 관리</a></li>
@@ -383,7 +407,7 @@ $(document).ready(function(){
 		<hr/>
 			<ul>
 				<li><label for="">상품명</label>&nbsp;
-					<input type="text" name="saleProductName" id="productRegisterName" size="70"/><span>0/100</span><br/>
+					<input type="text" name="productname" id="productRegisterName" size="70"/><span>0/100</span><br/>
 					<span class="notice">
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.<br/>
 					유명 상품 유사문구를 무단으로 도용하여 ~스타일, ~st 등과 같이 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
@@ -397,41 +421,40 @@ $(document).ready(function(){
 		<div class="category_title">판매가격</div>
 		<hr/>
 		<ul>
-			<li><label>판매가 </label>&nbsp;<input type="number" name="" id="sale_price" min="100" placeholder="숫자만 입력하세요."/><span>원</span></li>
+			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/><span>원</span></li>
 			<br/>
 			<li>
 				<label>할인여부 </label>&nbsp;
-				<button class="btn" id="check">설정</button>&nbsp;
-				<button class="btn" id="uncheck" onclick='discount();'>설정안함</button>
+				<input type="button" name="saleselect" class="btn" id="sale_check" value="설정">&nbsp;
+				<input type="button" name="saleselect"  class="btn" id="sale_uncheck" value="설정안함">
 			</li>
-			<ul>
-				<li><label>전체할인 </label>&nbsp;<input type="number" name="discount_price" id="discount_price" placeholder="할인적용금액" max="0"/><span>원</span>&nbsp;<span>할인</span></li>
-				<li><input type="checkbox" name="" id=""/><span>특정기간만 할인</span></li>
+			<ul id="sale_ul" style="display:none">
+				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" max="0"/><span>원</span>&nbsp;<span>할인</span></li>
+				<li><input type="checkbox" name="saledate" id=""/><span>특정기간만 할인</span></li>
 				<li>
-					<input type="date" name="" id="discount_start"  class="start_date"/> ~ <input type="date" name="" id="discount_finish"/>
+					<input type="date" name="salestart" id="salestart"  class="start_date"/> ~ <input type="date" name="salefinish" id="finish_date"/>
 					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
 				</li>
-				<li><input type="checkbox" name="" id=""/><span>못난이 할인 상품으로 등록</span></li>
-				
 				<li>
-					<label for="">할인 판매가</label>&nbsp; <span id="discount_sale_price" >9000</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
+					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >9000</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
 					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
 				</li>
+				<li><input type="checkbox" name="saleb" id="saleb"/><span>못난이 할인 상품으로 등록</span></li>
 			</ul>
 			<li>
 				<label>판매기간</label>&nbsp;&nbsp;
-				<button class="btn" id="check" >설정</button>&nbsp;
-				<button class="btn" id="uncheck" onclick='sale_date();'>설정안함</button>
+				<input type="button" name="selldate" class="btn" id="sell_check"  value="설정"/ >&nbsp;
+				<input type="button" name="selldate" class="btn" id="sell_uncheck" value="설정안함"/>
 			</li>
-			<li><label>기간설정</label><div id="btm_group">
-				<button class="btn">5일</button>
-				<button class="btn">10일</button>
-				<button class="btn">15일</button>
-				<button class="btn">30일</button>
-				<button class="btn">60일</button>
+			<li id="date_group"><label>기간설정</label><div id="btn_group">
+				<input type="button" name="" class="btn" value="5일"/>
+				<input type="button" name="" class="btn" value="10일"/>
+				<input type="button" name="" class="btn" value="15일"/>
+				<input type="button" name="" class="btn" value="30일"/>
+				<input type="button" name="" class="btn" value="60일"/>
 				</div>
 			</li>
-			<li><input type="date" name="" id="sale_start" class="start_date"/> ~ <input type="date" name="" id="sale_finish"/></li>
+			<li id="sell_start_finish"><input type="date" name="sellstart" id="sale_start" class="start_date"/> ~ <input type="date" name="sellfinish" id="finish_date"/></li>
 		</ul>
 		</div>
 	<!-- 재고수량 -->
@@ -439,7 +462,7 @@ $(document).ready(function(){
 	 <div class="category_title">재고수량</div>
 	 <hr/>
 			<ul>
-				<li><label>재고수량</label>&nbsp; <input type="number" name="" id="" min="0"/><span>개</span></li>
+				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0"/><span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
@@ -469,29 +492,29 @@ $(document).ready(function(){
 						</thead>
 						<tbody id="option_tbody">
 							<tr id='tr1'>
-								<td><input type="text" name="" id="" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="" id="" min="100" placeholder="원"/></td>
-								<td><input type="number" name="" id="" placeholder="개"/></td>
+								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
+								<td><input type="number" name="optionstock" id="optionstock" min="100" placeholder="원"/></td>
+								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
 							</tr>
 							<tr id='tr2'>
-								<td><input type="text" name="" id="" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="" id="" min="100" placeholder="원"/></td>
-								<td><input type="number" name="" id="" placeholder="개"/></td>
+								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
+								<td><input type="number" name="optionstock" id="optionstock" min="100" placeholder="원"/></td>
+								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
 							</tr>
 							<tr id='tr3'>
-								<td><input type="text" name="" id="" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="" id="" min="100" placeholder="원"/></td>
-								<td><input type="number" name="" id="" placeholder="개"/></td>
+								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
+								<td><input type="number" name="optionstock" id="optionstock" min="100" placeholder="원"/></td>
+								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
 							</tr>
 							<tr id='tr4'>
-								<td><input type="text" name="" id="" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="" id=""  min="100" placeholder="원"/></td>
-								<td><input type="number" name="" id="" placeholder="개"/></td>
+								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
+								<td><input type="number" name="optionstock" id="optionstock"  min="100" placeholder="원"/></td>
+								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
 							</tr>
 							<tr id='tr5'>
-								<td><input type="text" name="" id="" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="" id=""  min="100" placeholder="원"/></td>
-								<td><input type="number" name="" id="" placeholder="개"/></td>
+								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
+								<td><input type="number" name="optionstock" id="optionstock"  min="100" placeholder="원"/></td>
+								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
 							</tr>
 						</tbody>
 					</table>
@@ -527,17 +550,19 @@ $(document).ready(function(){
 			<hr/>
 			<ul>
 				<li><label>배송방법</label>&nbsp; 
-					<input type="button" name="deliveryoption" class="btn" value="택배"/>
-					<input type="button" name="deliveryoption" class="btn" value="픽업">
+					<input type="button" name="deliveryoption" class="btn" id="delivery" value="택배"/>
+					<input type="button" name="deliveryoption" class="btn" id="pickup" value="픽업">
 				</li>
-				<li><label>배송비</label>&nbsp;
-					<input type="number" name="deliveryprice" id="delivery_price"/><span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
-				</li>
-				<li><label>결제방식</label>&nbsp;
-					<input type="radio" name="paymentoption" id="delivery_price_option" value="착불"/><label for="착불">착불</label>&nbsp;
-					<input type="radio" name="paymentoption" id="delivery_price_option" value="선결제"/><label for="선결제">선결제</label>&nbsp;
-					<input type="radio" name="paymentoption" id="delivery_price_option"  value="착불 또는 선결제"/><label for="착불또는선결제">착불 또는 선결제</label>
-				</li>
+				<ul id="delivery_option">
+					<li><label>배송비</label>&nbsp;
+						<input type="number" name="deliveryprice" id="delivery_price"/><span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
+					</li>
+					<li id="pay"><label>결제방식</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="착불"/><label for="착불">착불</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="선결제"/><label for="선결제">선결제</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option"  value="착불 또는 선결제"/><label for="착불또는선결제">착불 또는 선결제</label>
+					</li>
+				</ul>
 			</ul>
 		</div>
 	<!-- 상품내용 -->

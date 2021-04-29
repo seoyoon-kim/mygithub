@@ -4,7 +4,7 @@ public class ProductVO {
 	//Product 상품등록
 	private int productnum; //상품번호
 	private String userid; //판매자 아이디
-	private int mcatenum; //중분류 카테고리 번호
+	private int mcatenum; // 카테고리 번호
 	private String productname; //상품명 
 	
 	private int productprice; //판매가격
@@ -42,6 +42,11 @@ public class ProductVO {
 	private String optionstock; //옵션 총 재고수량
 	private String optionnowstock; //옵션 현재 재고수량( 초기값 = 총재고수량)
 	private String optionprice; //옵션가격
+	
+	//할인
+	private int saleprice; //할인가격
+	private String salestart; //할인 시작
+	private String salefinish; //할인 끝
 	
 	//상품
 	public int getProductnum() {
@@ -220,6 +225,26 @@ public class ProductVO {
 	}
 	public void setOptionprice(String optionprice) {
 		this.optionprice = optionprice;
+	}
+	
+	//할인
+	public int getSaleprice() {
+		return saleprice;
+	}
+	public void setSaleprice(int saleprice) {
+		this.saleprice = saleprice;
+	}
+	public String getSalestart() {
+		return salestart;
+	}
+	public void setSalestart(String salestart) {
+		this.salestart = salestart;
+	}
+	public String getSalefinish() {
+		return salefinish;
+	}
+	public void setSalefinish(String salefinish) {
+		this.salefinish = salefinish;
 	}
 	
 
