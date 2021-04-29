@@ -18,6 +18,10 @@ public class MemberController {
 	@Inject
 	MemberService memberservice;
 	
+	@RequestMapping("login")	// 로그인 페이지
+	public String login() {	
+		return "login/login";	
+	}
 	@RequestMapping("register")	// 회원가입페이지
 	public String register() {
 		return "login/register";
@@ -40,31 +44,51 @@ public class MemberController {
 	
 	
 	// 아이디 중복검사
-	@RequestMapping("/idCheck")
-	public ModelAndView idOverlapCheck(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		String userid = req.getParameter("useridCheck");
-		if(userid!=null && userid.equals("")) {
-			System.out.println("userid-->"+userid);
-			if(memberservice.idOverlap(userid)==0) {
-				mav.addObject("overlap","Y");
-			}else {
-				mav.addObject("overlap","N");
-			}
-			mav.addObject("userid",userid);
-			mav.setViewName("redirect:register");
-		}
-		return mav;
+//	@RequestMapping(value="/idOverLap", method=RequestMethod.POST)
+//	public ModelAndView idOverlapCheck(HttpServletRequest req) {
+//		ModelAndView mav = new ModelAndView();
+//		String userid = req.getParameter("Checkid");
+//		if(userid!=null && userid.equals("")) {
+//			System.out.println("userid-->"+userid);
+//			if(memberservice.idOverlap(userid)==0) {
+//				mav.addObject("overlap","Y");
+//			}else {
+//				mav.addObject("overlap","N");
+//			}
+//			mav.addObject("userid",userid);
+//			mav.setViewName("redirect:register");
+//		}
+//		return mav;
+//	}
+	@RequestMapping("/idOverLap")
+	public String idCheck(HttpServletRequest req) {
+		String id = req.getParameter("Checkid");
+		System.out.println(id);
+		System.out.println("ㅇㅇ");
+		
+		return "login/cRegister";
 	}
 	
 	
 	@RequestMapping(value="loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(String userid, String userpwd, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		/*
-		 * if(memberservice.loginOk(userid, userpwd)==1) { session.setAttribute("logId",
-		 * userid); session.setAttribute("logName"); }
-		 */
+		MemberVO vo = memberservice.loginOk(userid, userpwd);
+		
+		if(!vo.getUserstop().equals("Y")) {
+			if(vo.getUserid()!= null && !vo.getUserid().equals("")) {
+				session.setAttribute("logId",vo.getUserid());
+				session.setAttribute("logName", vo.getUsername());
+				session.setAttribute("logStatus", "Y");
+				session.setAttribute("logType", vo.getUsertype());
+				mav.setViewName("redirect:/");
+			}else {
+				mav.setViewName("redirect:login");
+			}
+		}else {
+			mav.addObject("logStop","Y");
+			mav.setViewName("redirect:login");
+		}
 		
 		return mav;
 	}

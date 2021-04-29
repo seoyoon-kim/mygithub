@@ -81,20 +81,24 @@
 </head>
 <body>
 	<div id= "menu">	<!-- 상단메뉴전체 div -->
-	<div class="loginButtons">	<!-- 로그인 전 -->
-		<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
-		<input type="button" value="회원가입" class="menuButtons"/>
-		<input type="button" value="로그인" class="menuButtons"/>
-		<input type="button" value="고객센터" class="menuButtons"/>
-	</div>
-
-	<div class="loginButtons">	<!-- 로그인 후 -->
-		<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
-		<a href="myinfoEdit">김비트님</a><span id="usermypage">▼</span>
-		<input type="button" value="로그아웃" class="menuButtons"/>
-		<input type="button" value="고객센터" class="menuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-	</div>
-
+	<c:if test="${logStatus != 'Y'}">
+		<div class="loginButtons">	<!-- 로그인 전 -->
+			<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
+			<input type="button" value="회원가입" class="menuButtons"/>
+			<input type="button" value="로그인" class="menuButtons"/>
+			<input type="button" value="고객센터" class="menuButtons"/>
+		</div>
+	</c:if>
+	<c:if test="${logStatus == 'Y' }">
+		<div class="loginButtons">	<!-- 로그인 후 -->
+			<c:if test="${logType==2}">
+				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
+			</c:if>
+			<a href="myinfoEdit">${logName}님</a><span id="usermypage">▼</span>
+			<input type="button" value="로그아웃" class="menuButtons"/>
+			<input type="button" value="고객센터" class="menuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+		</div>
+	</c:if>
 	<div id="logoImg">			<!-- 사이트 로고 부분 -->
 		<a href="/sshj"><img src="<%=request.getContextPath()%>/img/dlogo11.png"></a>
 	</div>
