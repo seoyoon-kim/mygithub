@@ -850,8 +850,6 @@
 												// 빈날짜가 있으면 0으로 채워준다.
 												if(1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) ){
 													do{
-														console.log(minDate.getMonth());
-														console.log(minDate.getDate());
 														minDate.setDate( minDate.getDate()+1 );
 														resultArr.push(0);
 													}while( 1 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) )
@@ -873,358 +871,105 @@
 											
 											let testCode1 = 0;
 											let testCode2 = 0;
-											let testCode3 = 0;
 											for(let t=0; t <= testGap; t++ ){ // 시작일부터 종료일까지의 갭차이 만큼 반복한다.
 												
- 												/*do{// 처음에 들어왔을 때 데이터가 같을 경우 실행한다.
-													if( mcatenum == liNum && minDate.getDate() == orderconfirm.getDate() ){
-														
-														if(testCode2==1){ // 두번째일 경우
-															
-															do{ // testCode2면, 똑같은 값이기 때문에 기존에 있던 데이터를 추가 저장해준다.
-																if(mcatenum == liNum && minDate.getDate() == orderconfirm.getDate()){
-																	
-																	let saveData = resultArr[resultArr.length-1];
-																	resultArr.pop();	
-																	resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-																	testVal++;
-																	orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																	mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-																	
+												// 다음 데이터가 없을경우
+												if(isNaN(orderconfirm.getDate())){
+													
+													resultArr.push(0);
+													continue;
+													
+												}
 
-																	t++;
-																	minDate.setDate(minDate.getDate()+1);
-																	
-																}
-																if(isNaN(orderconfirm.getDate())){
-																	break;
-																}
-																
-															}while( mcatenum == liNum && minDate.getDate() == orderconfirm.getDate() )
-															
-															testCode2 = 0;
-															
-														} else if(testCode1 == 0){ // 첫번째일 경우
-															
-															resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-															testVal++;
-															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-															testCode1 = 0;
-															testCode2 = 1;
-															
-															minDate.setDate(minDate.getDate()+1);
-															
-														}
+												if( testCode1 == 0){ //첫번째 일 경우
+													
+													if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){//모든 값이 같으면 데이터를 넣는다.
 														
-														// 날짜는 같지만 값이 다를경우 반복중이었다는 것을 표시
-														if( mcatenum != liNum && minDate.getDate() == orderconfirm.getDate() ){
-															testCode2 = 1;
-														}
-														
-													} 
-													if(isNaN(orderconfirm.getDate())){
-														break;
-													}
-												}while( mcatenum == liNum && minDate.getDate() == orderconfirm.getDate() )
-												
-													
-													
-													
-												do{// 값이 틀리고, 날짜가 틀릴 경우
-													if( mcatenum != liNum || minDate.getDate() != orderconfirm.getDate() ){
-														
-														if( testCode2 == 1 ){ // 앞에서 계산 할 때 두번째 이상일 경우
-															
-															do{
-																if( minDate.getDate() != orderconfirm.getDate() ){// 날짜가 다를 경우 
-																	
-																	resultArr.push(0);
-																	t++;
-																	
-																} else if( minDate.getDate() == orderconfirm.getDate() ){//같은 날짜일 경우
-																	
-																	if( mcatenum == liNum ){ // 값이 같을 경우 
-																		
-																		let saveData = resultArr[resultArr.length-1];
-																		resultArr.pop();	
-																		resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-																		
-																	} 
-																	
-																	// 날짜가 같지만, 값이 다를 경우 다음 값을 확인한다.
-																	
-																}
-															
-																testVal++;
-																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-																
-																
-																minDate.setDate(minDate.getDate()+1);
-																if(isNaN(orderconfirm.getDate())){
-																	break;
-																}
-															}while( minDate.getDate() != orderconfirm.getDate() )
-															
-															testCode2 = 0;
-														
-															
-														} else if(testCode1 == 0){ // 첫번째일 경우
-															
-															resultArr.push(0);
-															testVal++;
-															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-															testCode1 = 0;
-															testCode2 = 1;
-															
-															t++;
-															minDate.setDate(minDate.getDate()+1);
-															
-														}
-														
-													} 
-													if(isNaN(orderconfirm.getDate())){
-														break;
-													}
-												}while( mcatenum != liNum || minDate.getDate() != orderconfirm.getDate() ) 
-													
-													if(isNaN(orderconfirm.getDate())){
-														resultArr.push(0);
-													}
-													
-													*/
-													
-												////////////////////////////////////////////////////////////////////////////////////////////
-												
-												if( testCode2 == 1 ) {
-													
-												} else if( testCode1 == 0){
-													
-												}
-												
-												// 날짜가 같으면
-												if( minDate.getDate() == orderconfirm.getDate() ){
-													
-													if( mcatenum == liNum ) { //데이터도 같으면
-														
-														if( testCode2 == 1 ){ // 같은 날짜 두번째 계산인지 확인한다.
-															
-															do{
-																if(isNaN(orderconfirm.getDate())){
-																	break;
-																}
-																
-																let saveData = resultArr[resultArr.length-1];
-																resultArr.pop();	
-																resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-																testVal++;
-																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-																
-															} while( minDate.getDate() == orderconfirm.getDate() )
-																
-															if( minDate.getDate() != orderconfirm.getDate() ){
-																
-																testCode2 = 1;
-																
-															}
-															
-															testCode1 = 0;
-															
-														} else if( testCode1 == 0 ){ // 첫번째 계산한다.
-															
-															resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-															testVal++;
-															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-															
-															if( minDate.getDate() == orderconfirm.getDate() ){
-																
-																testCode2 = 1;
-																
-															}
-															
-														}
-													
-													
-													} else if( mcatenum != liNum ){ // 데이터가 다르면 0을 넣고 다음 데이터를 구한다.
-														
-														resultArr.push(0);
-														testVal++;
-														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-														
-													}
-													
-												} // 같은 날짜 끝
-													
-													
-												// 날짜가 다르면 실행한다.
-												if( minDate.getDate() != orderconfirm.getDate() ){
-													
-													if( mcatenum == liNum ){ // 값이 같으면
-														if( testCode2 == 1 ){ // 두번째 계산한다.
-															
-															if( mcatenum != liNum )
-															do{
-																
-															}while()
-	
-															testVal++;
-															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-															
-														} else if( testCode1 == 0 ){ // 첫번째 계산한다.
-															
-															//날짜가 다르면 0만 넣고 orderconfirm update를 하지 않는다. 즉, minDate만 업데이트 한다.
-															resultArr.push(0);
-														
-														}
-													} else if( mcatenum != liNum ){ // 값이 다르면
-														
-														do{// 0을 넣고, 반복해서 다음 데이터가 날짜가 맞을때까지 반복한다
-															if(isNaN(orderconfirm.getDate())){
-																break;
-															}
-															
-															resultArr.push(0);
-															testVal++;
-															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-															
-														}while( minDate.getDate() != orderconfirm.getDate() )
-														
-													}
-													
-												}	
-													
-												
-												// 1번 mcatenum linum이 같지 않은지 먼저 걸러내는 용도
-												// mcatenum이 비교해서 같지 않으면 실행
-												if( mcatenum != liNum ){ 
-													let testCode = 0;
-													let againTest = 0;
-													do{
-														
-														if(mcatenum == liNum){
-															let saveData = resultArr[resultArr.length-1];
-															resultArr.pop();	
-															resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-															
-															testCode = 1;
-														}
-														
-														if(mcatenum != liNum){
-															if(testCode == 1){
-																testCode = 0;
-																againTest = 1;
-															} else if(againTest == 1){
-																// 이름이 다른걸 걸렀는데 또 날짜만 같고 이름이 다르면 그냥 지나간다.
-																testCode = 1;
-																againTest = 0;
-															} else {
-																resultArr.push(0);
-															}
-														}
-														//다음 데이터의 매출일자가 동일한지 확인해야 한다.
-														testVal++;
-														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-													}while( minDate.getMonth() == orderconfirm.getMonth() && minDate.getDate() == orderconfirm.getDate() )
-													
-												}
-												
-												
-												// 2번 : 1번에서 데이터가 걸러지지 않았을 때 확인하는 용도
-												let testCode2 = 0;
-												let againTest2 = 0;
-												// 다음 데이터의 날짜가 동일하면 번호를 비교해서
-												// 같으면 데이터를 넣고 아니면 0을 넣는다.
-												if( minDate.getDate() == orderconfirm.getDate() ){
-													if(mcatenum == liNum){
 														resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
 														testVal++;
 														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
 														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-													}  else{
+														
+													}else if( minDate.getDate() != orderconfirm.getDate() ){//날짜가 다르면
+														
+														if( mcatenum != liNum ){ // 날짜가 다른데 값도 다를 경우
+															
+															resultArr.push(0);
+															testVal++;
+															orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+															mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+														
+														} else { //날짜가 다르지만 값이 같을 경우 0을 푸시한다.
+															
+															resultArr.push(0);
+															testCode2 = 0;
+															
+														}
+														
+													}else if( mcatenum != liNum ){//날짜는 같지만 값이 다를경우 0을 푸시한다. 
+														
 														resultArr.push(0);
 														testVal++;
 														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
 														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+														
 													}
+												
+													if( minDate.getDate() == orderconfirm.getDate() ){ // 다음 데이터 확인해보니 만약 날짜가 같으면 반복으로 들어가야 한다. 즉, 날짜와 반복 변수가 ++ 되면 안된다.
+														
+														testCode2 = 1;
+														testCode1 = 1;
+														t--;
 													
-													// 3번 : 1번이 끝나고 나서 데이터를 확인하는 용도 
-												} else if ( minDate.getDate() != orderconfirm.getDate() ){
-													resultArr.push(0);
-													testVal++;
-													orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-													mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-													testCode2 = 1;
+													} 
+													
 												}
 												
-												
-												// 4번 : 2번에서 ++ 했는데 다음 데이터 날짜 값을 비교했을때 맞으면 사용
-												// 또 비교했을때 데이터가 날짜가 맞으면 반복해서 확인한다.
-												/* while( minDate.getDate() == orderconfirm.getDate() ){
-													// 5번 : 3번이 끝난 상태에서 들어왔는데 번호가 일치하지 않을경우
-													if(mcatenum != liNum){
+												if( testCode2 == 1 ) { // 두번째 일 경우. 즉, 반복일 경우
+													
+													if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){ // 반복했는데, 날짜와 값이 모두 같을 경우 값을 더해준다.
 														
-														if(testCode2 == 1){
-															if(mcatenum == liNum){
-																resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-																testVal++;
-																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-																
-															} else {
-																resultArr.push(0);
-																testVal++;
-																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-																
-															}
-															againTest2 = 1;
-															testCode2 = 0;
-															// mcatenum과 liNum이 같으면 save Data를 활용해 데이터를 저장하고
-															// 배열에 들어있는 마지막 데이터를 삭제 후
-															// 지금 넣을 데이터와 + 전에 있던 데이터와 합하여 넣는다.
-														} else if(againTest2 == 1){
-															// 5번에서 데이터를 넣었는데 다음 데이터를 보니까 또 날짜가 같으면
-															// againTest2에서 걸러낸다.
-															if(mcatenum == liNum){
-																let saveData = resultArr[resultArr.length-1];
-																resultArr.pop();	
-																resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-																testVal++;
-																orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-																mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
-																
-															}
-														
-														}
-													} else if( mcatenum == liNum ){
 														let saveData = resultArr[resultArr.length-1];
 														resultArr.pop();	
 														resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
-														testVal++;
-														orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-														mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+														
+													} else if( minDate.getDate() != orderconfirm.getDate() ){ // 두번째 이상 반복했는데, 날짜가 다르다면 0을 푸시해줘야 한다.
+														
+														resultArr.push(0);
+														
+													} else if( mcatenum != liNum ){ // 날짜는 같지만 값이 다르면
+														
+													}
+														
+													testVal++;
+													orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
+													mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
 													
+													if( minDate.getDate() != orderconfirm.getDate() ){ // 만약 날짜가 같지 않으면 첫번째를 실행시킨다.
+														
+														testCode1 = 0;
+														testCode2 = 0;
+														
+													} else { // 만약 날짜와 값이 같거나 ,, 날짜가 같지만 값이 다르면
+														
+														// testCode2 == 1;을 유지하고 반복해야 한다. 즉, 날짜와 반복 변수가 ++되면 안된다.
+														t--;
+														
 													}
-													if(isNaN(orderconfirm.getDate())){
-														break;
-													}
-												} */
+													
+												}
 												
-												// 현재 확인하고 있는 날짜를 ++ 해준다.
-												minDate.setDate(minDate.getDate()+1); 
+												
+												// 반복하지 않아도 되면 날짜를 업데이트 한다.
+												if( testCode2 != 1 ){
+													
+													// 현재 확인하고 있는 날짜를 ++ 해준다.
+													minDate.setDate(minDate.getDate()+1); 	
+													
+												}
 												
 											}
-
 												
-											
 											let data = {
 													label: mcatename, // 품목명을 넣는다
 													data: resultArr, // 데이터를 넣고
