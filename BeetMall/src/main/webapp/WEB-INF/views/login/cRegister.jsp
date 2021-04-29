@@ -98,7 +98,7 @@
 		border:10px solid rgb(252,118,45);
 		text-align:center;
 		position: absolute;
-		top:50%;
+		top:30%;
 		left:340px;
 		display:none;
 		padding-top:20px;
@@ -128,6 +128,16 @@
 		background-color: orange;
 		top:227px;
 		left:700px;
+		display:none;
+	}
+	#modal{
+		background-color: gray;
+		opacity: 0.6;
+		position: fixed;
+		left:0px;
+		top:0px;
+		width:100%;
+		height:100%;
 		display:none;
 	}
 </style>
@@ -204,6 +214,8 @@
 		
 		// 중복검사 창 띄우기
 		$("#idCheckDibPop").click(function(){
+			$("#modal").css("display","block");
+			$(document.body).css("overflow","hidden");
 			$(".idCheckDiv").css("display","block");
 			$("#popupcloseBtn").css("margin-left","140px").css("margin-top","85px");
 		})
@@ -256,6 +268,8 @@
 					$("#checkIdResult").val('Y');
 					$("#userid").attr('disabled',true);
 					popupClose();
+					$("#modal").css("display","none");
+					$(document.body).css("overflow","visible");
 				}
 			}else{
 				return false;
@@ -265,6 +279,8 @@
 		// 중복검사 도중에 창을 닫을 때
 		$("#popupcloseBtn").click(function(){
 			popupClose();
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
 		});
 		
 		// 중복검사 후 아이디 수정하면 못하게 하는 부분
@@ -272,7 +288,6 @@
 			$("#checkIdResult").val('N');
 		});
 		
-
 		
 	});
 	
@@ -331,7 +346,7 @@
 		  return false;
 		}
 	}
-	
+
 </script>
 
 <div class="section">
@@ -390,6 +405,7 @@
 			<input type="checkbox" id="infocheck3" value="infocheck3"/>본인은 만 14세 이상입니다.
 			<div style="margin-bottom:20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
 		</div>
+		<div id="modal"></div>
 		<div class="idCheckDiv">
 			<input type="text" name="userid2" id="userid2" style="margin-right:5px;"/>
 			<input type="button" value="중복검사" class="btn" id="idCheck"/>
@@ -399,6 +415,7 @@
 		<div id="usermap">
 			
 		</div>
+		
 	</div>
 </div>
 </body>
