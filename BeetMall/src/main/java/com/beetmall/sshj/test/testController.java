@@ -119,10 +119,7 @@ public class testController {
 	public String searchPwd() {	// 비밀번호 찾기
 		return "login/pwdSearch";	
 	}
-	@RequestMapping("login")
-	public String login() {	// 회원가입 완료
-		return "login/login";	
-	}
+
 	@RequestMapping("infoView")
 	public String infoView() {	// 약관조회
 		return "info/infoView";

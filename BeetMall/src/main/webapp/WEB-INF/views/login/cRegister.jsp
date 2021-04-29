@@ -151,9 +151,22 @@
 			$(".idCheckDiv").css("display","block");
 		})
 		
+		
+		// 중복확인
 		$("#idCheck").click(function(){
-			var checkId = $("#userid2").val();
-			location.href="idCheck?useridCheck="+checkId;
+			var url = "/idOverLap";
+			var params = "Checkid="+$("#userid2").val();
+			$.ajax({
+				url : url,
+				data : params,
+				success : function(data){
+					console.log(params);
+					console.log(data);
+				}, error : function(){
+					console.log(params);
+					alert("에러?");
+				}
+			});
 		})
 		
 	});
