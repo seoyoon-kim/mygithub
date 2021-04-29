@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.dao.MemberDAO;
@@ -60,16 +61,28 @@ public class MemberController {
 //		}
 //		return mav;
 //	}
-	@RequestMapping("/idOverLap")
-	public String idCheck(HttpServletRequest req) {
+	
+	@RequestMapping("idOverLap")
+	@ResponseBody
+	public int idCheck(HttpServletRequest req) {
 		String id = req.getParameter("Checkid");
-		System.out.println(id);
-		System.out.println("ㅇㅇ");
+		System.out.println("id = "+id);
+		int result = memberservice.idOverlap(id);
+		System.out.println("result = "+result);
 		
-		return "login/cRegister";
+		return result;
 	}
 	
+	@RequestMapping(value="userinfo", method = RequestMethod.GET, produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String infoSelect(HttpServletRequest req) {
+		String info = req.getParameter("infoname");
+		System.out.println(info);
+		String result = memberservice.infoSelect(info);
+		return result;
+	}
 	
+	// 로그인
 	@RequestMapping(value="loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(String userid, String userpwd, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -91,6 +104,13 @@ public class MemberController {
 		}
 		
 		return mav;
+	}
+	
+	// 로그아웃
+	@RequestMapping("logout")
+	public String logoutOk(HttpSession session) {
+		session.invalidate();
+		return "home";
 	}
 	
 	// 회원가입
@@ -130,6 +150,8 @@ public class MemberController {
 		}
 		return mav;
 	}
+	
+	
 	
 	@RequestMapping("regiFinish")
 	public String regiFinish() {	// 회원가입 완료

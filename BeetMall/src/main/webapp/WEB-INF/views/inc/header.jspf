@@ -62,6 +62,7 @@
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
+	
 
 </style>
 <script>
@@ -71,6 +72,9 @@
 		})
 		$("input[value=로그인]").click(function(){
 			location.href="login";
+		})
+		$("input[value=로그아웃]").click(function(){
+			location.href="logout";
 		})
 	});
 </script>
@@ -83,7 +87,6 @@
 	<div id= "menu">	<!-- 상단메뉴전체 div -->
 	<c:if test="${logStatus != 'Y'}">
 		<div class="loginButtons">	<!-- 로그인 전 -->
-			<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
 			<input type="button" value="회원가입" class="menuButtons"/>
 			<input type="button" value="로그인" class="menuButtons"/>
 			<input type="button" value="고객센터" class="menuButtons"/>
