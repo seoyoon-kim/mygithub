@@ -164,6 +164,7 @@
 		width: 100px;
 		height: 35px;
 		background: #fff;
+		margin: 20px 10px 40px 0 ;
 	}
 </style>
 <script>
@@ -448,7 +449,7 @@ $(document).ready(function(){
 			<hr/>
 			<ul class="regi_option_wrap">
 				<li><label>옵션 갯수</label>&nbsp;
-					<select id="select_option">
+					<select id="select_option" name="selectoption">
 						<option selected value='none'>적용안함</option>
 						<option value='1'>1</option>
 						<option value='2'>2</option>
@@ -526,16 +527,16 @@ $(document).ready(function(){
 			<hr/>
 			<ul>
 				<li><label>배송방법</label>&nbsp; 
-					<button class="btn">택배</button>
-					<button class="btn">픽업</button>
+					<input type="button" name="deliveryoption" class="btn" value="택배"/>
+					<input type="button" name="deliveryoption" class="btn" value="픽업">
 				</li>
 				<li><label>배송비</label>&nbsp;
-					<input type="number" name="" id="" /><span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
+					<input type="number" name="deliveryprice" id="delivery_price"/><span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 				</li>
 				<li><label>결제방식</label>&nbsp;
-					<input type="radio" name="" id="delivery_choice" value="착불"/><label for="">착불</label>&nbsp;
-					<input type="radio" name="" id="delivery_choice"  value="선결제"/><label for="">선결제</label>&nbsp;
-					<input type="radio" name="" id="delivery_choice"  value="착불 또는 선결제"/><label for="">착불 또는 선결제</label>
+					<input type="radio" name="paymentoption" id="delivery_price_option" value="착불"/><label for="착불">착불</label>&nbsp;
+					<input type="radio" name="paymentoption" id="delivery_price_option" value="선결제"/><label for="선결제">선결제</label>&nbsp;
+					<input type="radio" name="paymentoption" id="delivery_price_option"  value="착불 또는 선결제"/><label for="착불또는선결제">착불 또는 선결제</label>
 				</li>
 			</ul>
 		</div>
@@ -545,33 +546,33 @@ $(document).ready(function(){
 			<hr/>
 			<ul>
 				<li><label for="">판매단위</label>&nbsp;
-					<input type="number" name="" id=""/>
+					<input type="number" name="selloption" id=""/>
 					<select id="select_unit">
-						<option>해당없음</option>
-						<option>팩</option>
-						<option>박스</option>
+						<option value="none">해당없음</option>
+						<option value="pack">팩</option>
+						<option value="box">박스</option>
 					</select>
 				</li>
 				<li><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="" id=""/>
+					<input type="number" name="sellweight" id="sellweight" />
 					<select id="select_weight">
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>
 				</li>
 				<li><label for="">원산지</label>&nbsp;
-					<button class="btn" id="domestic">국내산</button> <button class="btn" id="import">수입산</button>
+					<input type="button" name="origin" class="btn" id="domestic" value="국내산"/> <input type="button" name="origin" class="btn" id="import" value="수입산"/>
 					<div id="import_wrap" style="display:none">
-						<button class="btn" class="import_nation">중국산</button>
-						<button class="btn" class="import_nation">일본산</button>
-						<button class="btn" class="import_nation">말레이시아산</button>
-						<button class="btn" class="import_nation">필리핀산</button>
-						<button class="btn" class="import_nation">베트남산</button>
-						<button class="btn" class="import_nation">칠레산</button>
+						<input type="button" name="origin" id="china" class="btn" class="import_nation" value="중국산"/>
+						<input type="button" name="origin" id="japan" class="btn" class="import_nation" value="일본산"/>
+						<input type="button" name="origin"  id="malaysia" class="btn" class="import_nation" value="말레이시아산"/>
+						<input type="button" name="origin" id="philippines" class="btn" class="import_nation" value="필리핀산"/>
+						<input type="button" name="origin" id="vietnam" class="btn" class="import_nation" value="베트남산">
+						<input type="button" name="origin" id="chile" class="btn" class="import_nation" value="칠레산"> 
 					</div>
 				</li>
-				<li><label for="">보관/ 포장타입</label>&nbsp;
-					<select id="select_packing">
+				<li><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
+					<select id="select_packing" name="wrapping">
 						<option value='실온'>실온</option>
 						<option value='냉장'>냉장</option>
 						<option value='냉동'>냉동</option>
@@ -594,7 +595,7 @@ $(document).ready(function(){
 		<hr/>
 	<!-- 취소 저장하기 버튼 -->
 		<div class="end_button_wrap">
-			<button class="cancel_btn" class="btn">취소</button>
+			<input type="button" class="cancel_btn" class="btn" value="취소">
 			<input type="submit" name="" value="저장하기" class="save_btn" class="btn"/>
 		</div>
 	</form>
