@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.NoticeDAO">
+	<select id="noticeAllRecord" resultType="com.beetmall.sshj.custom.vo.NoticeVO">
+		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach from notice where infotype = 1 order by infonum desc
+	</select>
+	<select id="noticeAllRecord" resultType="com.beetmall.sshj.custom.vo.NoticeVO">
+		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach from notice where infotype = 1 order by infonum desc
+	</select>
+</mapper>
