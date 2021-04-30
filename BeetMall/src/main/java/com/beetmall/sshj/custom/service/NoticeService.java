@@ -8,4 +8,6 @@ public interface NoticeService {
 
 	public List<NoticeVO> noticeAllRecord();
 
+	public NoticeVO noticeSelect(int infonum);
+
 }
