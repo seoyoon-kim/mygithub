@@ -27,4 +27,5 @@
 	
 	<mybatis-spring:scan base-package="com.beetmall.sshj.dao"/>
 	<mybatis-spring:scan base-package="com.beetmall.sshj.custom.dao"/>
+	<mybatis-spring:scan base-package="com.beetmall.sshj.admin.dao"/>
 </beans>

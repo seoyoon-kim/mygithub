@@ -116,10 +116,7 @@
 
  $(function(){
 //선택한 faq tr열고 닫히기	 
-//수정할 것: this만 열리도록 고치기
-  	  $(function() {
-  		//선택한 faq tr열고 닫히기    
-  		//수정할 것: this만 열리도록 고치기
+//수정할 것: this만 열리도록 고치기	
   		$(".faq_td").click(function() {
   			$(this).parent().next().toggle(
   				function(){
@@ -130,10 +127,8 @@
   				}
   			);
   		});
-  	});
 //선택한 select option별로 보기
-//수정할 것 나머지 option선택에 대한 script 추가하기
-  		
+//수정할 것 나머지 option선택에 대한 script 추가하기		
   		$('#sel').change(function(){
   			var option = $(this).val();
   			console.log(option);
@@ -141,8 +136,6 @@
   				$('tr').css('display','');
   			}	
   		});
-
- 
  });
 </script>
 <body>

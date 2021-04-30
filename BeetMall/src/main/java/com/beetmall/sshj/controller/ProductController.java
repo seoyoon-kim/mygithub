@@ -9,8 +9,16 @@ public class ProductController {
 	public String product_list() {
 		return "seller/product_list";
 	}
+	@RequestMapping("/product_regi")
+	public String product_regi() {
+		return "seller/product_regi";
+	}
 	@RequestMapping("/order_management")
 	public String order_management() {
 		return "seller/order_management";
+	}
+	@RequestMapping("/sale_management")
+	public String seller_management() {
+		return "seller/sale_management";
 	}
 }
