@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+/*================ 본문 시작 =================*/
+/* 공통분모 설정 */
+.wrap{
+	width: 90%;
+	margin: 0 auto;
+}
+
+.wrapContainer{
+	width: 100%;
+	border: 1px solid #ccc;
+	margin-bottom: 30px;
+}
+
+.wrapTitle{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	text-indent: 0.4em;
+	background-color: #f1c40f;
+}
+
+/* 리뷰 검색 */
+#categoryList{
+	width: 90%;
+	margin: 20px auto;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+}
+
+#categoryList>strong{
+	text-indent: 0.4em;
+}
+
+#categoryListMiddle{
+	width: 100%;
+	height: 170px;
+	display: flex;
+	flex-basis: 1;
+	margin-bottom: 10px;
+}
+
+#categoryListMiddle ul{
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	overflow: auto;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+#category{
+	border-right: 1px solid #aaa;
+}
+
+
+#categoryListMiddle li{
+	width: 100%;
+	text-indent: 0.4em;
+	display: flex;
+	margin-top:5px;
+}
+
+#categoryListMiddle span{
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+#categoryManagement{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#categoryManagement li{
+	text-indent: 0.4em;
+	margin-right: 5px;
+}
+
+#categorySearch_container{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#categoryDate{
+	height: 26px;
+	margin-left: 5px;
+}
+/* 수익 매출분석 */
+#chartContainer{
+	width: 95%;
+	margin: 0 auto;
+}
+
+/* 카테고리별 매출분석*/
+#excelContainer{
+	width: 100%;
+	margin: 0 auto;
+}
+#excelList{
+	width: 100%;
+	display: flex;
+	flex-flow: wrap;
+}
+
+#excelList li{
+	flex-basis: 18%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #ddd;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#excelList li:nth-child(n+1):nth-child(-n+6){
+	background-color: #bbb;
+}
+
+#excelList li:nth-child(6n+1){
+	flex-basis: 10%;
+}
+
+		/* 페이징처리부분 */
+	.page_wrap {
+		text-align:center;
+		font-size:0;
+		padding-bottom: 30px;
+	}
+	.page_nation {
+		display:inline-block;
+	}
+	.page_nation .none {
+		display:none;
+	}
+	.page_nation a {
+		display:block;
+		margin:0 3px;
+		float:left;
+		border:1px solid #e6e6e6;
+		width:35px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		background-color:#fff;
+		font-size:13px;
+		color:#999999;
+		text-decoration:none;
+	}
+	.page_nation .arrow {
+		border:1px solid #ccc;
+	}
+
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/* 페이징처리끝 */

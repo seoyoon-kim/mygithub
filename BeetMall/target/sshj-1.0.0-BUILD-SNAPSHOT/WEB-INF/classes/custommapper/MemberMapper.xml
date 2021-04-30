@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.MemberDAO">
+	<insert id="regiFinishiOk">
+		insert into member(userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday, joindate, usertype, userstop, point)
+		values(#{userid}, #{userpwd}, #{username}, #{userphone}, #{useremail}, #{userzipcode}, #{useraddr}, #{userdetailaddr}, #{birthday}, sysdate, 1, 'N',0)
+	</insert>
+	<select id="idOverlap" resultType="int">
+		select count(userid) from member where userid = #{param1}
+	</select>
+	<select id="loginOk" resultType="com.beetmall.sshj.custom.vo.MemberVO">
+		select userid, username, usertype, userstop  from member where userid=#{param1} and userpwd=#{param2}
+	</select>
+	<select id="infoSelect" resultType="String">
+		select userinfocontent from useinfo where userinfotitle = #{param1}
+	</select>
+</mapper>
