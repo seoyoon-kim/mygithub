@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/inc/menu_c.jspf"%>
 <!DOCTYPE html>
@@ -11,14 +10,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<!-- font -->
+		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 		<!-- font-family: 'Nanum Gothic', sans-serif; -->
 		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 		<!-- font-family: 'NanumSquare', sans-serif !important; -->
-		
-</head>
 <style>
 
 /*  기본설정----------------------------------------------                 */
@@ -400,10 +397,6 @@ $(function(){
 })
 
 </script>
-
-
-<body>
-
 <div class="section" id="section">
 
  <!-- ----------------문의 상단------------------------ -->
@@ -558,6 +551,3 @@ $(function(){
  <div style="clear:both;"></div>
  
 </div>
-
-</body>
-</html>
