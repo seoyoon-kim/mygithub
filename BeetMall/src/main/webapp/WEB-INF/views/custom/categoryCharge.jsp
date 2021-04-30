@@ -287,7 +287,7 @@
         $("#kAreamMall").children().children().click(function(){
             var name= $(this).text();
             $(this).css("color","red");
-            $("#kContent").append(name+"&times;"+"&nbsp;&nbsp;");
+            $("#kContent").append(name+"<span>&times;</span>"+"&nbsp;&nbsp;");
         });
         $("#kContent").click(function(){
             kangsan();
