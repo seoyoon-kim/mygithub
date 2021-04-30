@@ -15,44 +15,53 @@
 		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
 
 	
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
 
 <style>
-	li, label{list-style-type:none; padding-bottom:10px;}
+
 	li{padding-bottom:10px;}
 	select{height:28px;}
 	input, textarea, select{
 		border:1px solid lightgray; 
-		border-radius: 8px;
 	}
 	input,select,button{height:30px;}
 	textarea{
 		width:100%;
 	}
-
 /*검색하기*/
+#article{
+   width: 1280px;
+   hegith: 100px;
+   border-bottom: #ddd;
+   padding: 50px;
+   margin: 120px auto 0 auto;
+}
+
 	/*카테고리*/
-	.wrapTitle{margin-bottom:10px;}
+	.wrapTitle{
+		margin:40px 40px 40px 0px;
+		text-align:center;}
 	.category_title{
 	   width: 100%;
 	   height: 30px;
 	   line-height: 30px;
-	   font-weight:bold;
 	   text-indent: 0.4em;
-	   color: rgb(252,118,45);
+	   font-size:16px;
+	   margin-top:20px;
+	   margin-bottom:10px;
+	   font-size:16px;
 	}
-	hr{margin:10px 0 10px 0;}
 	.category_wrap{
 		border:1px solid lightgray;
-		border-radius:8px;
 		padding:20px;
-		margin:10px;
+		margin-botto,:10px;
 	}
+	.category_wrap li, .category_wrap>div{margin-bottom:20px; font-size:16px;}
 	/* 리뷰 검색 */
 	#categoryList{
 	   width: 90%;
@@ -92,7 +101,6 @@
 	
 	#categoryListMiddle li{
 	   width: 100%;
-	   text-indent: 0.4em;
 	   display: flex;
 	}
 	
@@ -106,25 +114,17 @@
 	   display: flex;
 	   flex-wrap: wrap;
 	}
-	
-	#categoryManagement li{
-	   text-indent: 0.4em;
-	   margin-right: 5px;
-	}
+	#categoryManagement .notice{float:right;}
 	#mcategory>li{padding-left:10px;}
 /*제목*/
-	.registerNameNotice, .notice{
-		font-size:0.6em;
-		color:#EAA954;
-	}
-	.saleProductNameRegi{
-		padding-bottom:5px;
+	.notice{
+		font-size:0.9em;
+		color:gray;
 	}
 /*판매가격*/
-	#total_price, #productprice{
+	#total_price{
 		font-weight:bold;
 		font-size:17px;
-		color:orange;
 	}
 	label{margin-right:10px;}
 /*옵션*/
@@ -338,25 +338,45 @@ $(document).ready(function(){
 </script>
 <body>
 	<div class="main">
-		
-	<!-- 사이드바 -->
-	<nav>
-		<ul>
-			<li><a href="<%=request.getContextPath()%>/product_list">상품관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/product_regi">상품등록</a></li>
-			<li><a href="<%=request.getContextPath()%>/order_management">주문 관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/sale_management">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="">정산 관리</a></li>
-			<li><a href="">배송 관리</a></li>
-			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
-		</ul>
-	</nav>
-	
 	<!-- 가운데 content -->
+	       <div id="seller_header">
+      <!-- 상단 메뉴 바 -->
+      <nav>
+         <div id="headerMember">
+            <c:if test="${logStatus != 'Y'}">
+               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
+                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
+                  <input type="button" value="로그인" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
+               </div>
+            </c:if>
+            <c:if test="${logStatus == 'Y' }">
+               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
+                  <c:if test="${logType==2}">
+                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
+                  </c:if>
+                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
+                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+               </div>
+            </c:if>
+         </div>   
+         <ul>
+            <li><a href="#">BEETMALL</a></li>
+            <li><a href="#">상품 관리</a></li>
+            <li><a href="#">상품 등록</a></li>
+            <li><a href="#">주문 관리</a></li>
+            <li><a href="#">판매 관리</a></li>
+            <li><a href="seller_sales">매출 관리</a></li>
+            <li><a href="#">정산 관리</a></li>
+            <li><a href="#">배송 관리</a></li>
+            <li><a href="seller_review">리뷰/문의 관리</a></li>
+            <li><a href="intro_farm">회원정보수정</a></li>
+         </ul>
+      </nav>
+   </div>
 	<div id="article">
-	<div class="wrapTitle">판매관리</div>
+	<div class="wrapTitle" style="font-size:20px">상품등록</div>
 		<!--검색하기 -->
 		<!-- 상품등록 -->
 		<!-- 카테고리 -->
@@ -370,10 +390,9 @@ $(document).ready(function(){
 		<!-- 상품내용 -->
 		<!-- 취소 저장하기 버튼 -->
 	<form method="post" action="">
-	<!-- 카테고리 -->
+	<!------------------------------------------ 카테고리------------------------------------------------->
+	 <div class="category_title">카테고리</div>
 		<div class="category_wrap">
-		 <div class="category_title">카테고리</div>
-		 	<hr/>
             <div id="categoryList">
                <strong>&nbsp;&nbsp;카테고리 선택</strong>
                
@@ -387,7 +406,7 @@ $(document).ready(function(){
                      <li id="multigrain">잡곡/혼합곡<span>&gt;</span></li>
                      <li id="vegetable">채소<span>&gt;</span></li>
                   </ul>
-              <!-- 중분류 선택 -->
+              <!----------------------------------중분류 선택 -------------------------------------------------------->
                   <ul id="mcategory">
         			<!-- 중분류 카테고리 배열로 들어옴 -->
                   </ul>
@@ -396,15 +415,14 @@ $(document).ready(function(){
             </div><!-- categoryList end -->
 		<ul id="categoryManagement">
                   <li>쌀&nbsp; &gt;현미&nbsp;<span>⊠</span></li>
-                  <li><span  class="notice">상품과 맞지 않는 카테고리를 등록할 경우 판매중지, 판매금지될 수 있습니다.</span></li>
+                  <li><span  class="notice"><br/>상품과 맞지 않는 카테고리를 등록할 경우 판매중지, 판매금지될 수 있습니다.</span></li>
         </ul>
 		
 		</div><!-- categorySelection div end -->
 		
-	<!-- 상품명-->
-	<div class="category_wrap">
+	<!----------------------------------------------상품명------------------------------------------>
 		<div class="category_title">상품명 등록</div>
-		<hr/>
+	<div class="category_wrap">
 			<ul>
 				<li><label for="">상품명</label>&nbsp;
 					<input type="text" name="productname" id="productRegisterName" size="70"/><span>0/100</span><br/>
@@ -416,10 +434,10 @@ $(document).ready(function(){
 				</li>
 			</ul>
 		</div> <!-- productNameRegi div end -->
-	<!-- 판매가격 설정-->
-	<div class="category_wrap">
-		<div class="category_title">판매가격</div>
-		<hr/>
+		
+	<!-----------------------------------------------판매가격 설정--------------------------------------->
+	<div class="category_title">판매가격</div>
+	<div class="category_wrap">		
 		<ul>
 			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/><span>원</span></li>
 			<br/>
@@ -457,19 +475,18 @@ $(document).ready(function(){
 			<li id="sell_start_finish"><input type="date" name="sellstart" id="sale_start" class="start_date"/> ~ <input type="date" name="sellfinish" id="finish_date"/></li>
 		</ul>
 		</div>
-	<!-- 재고수량 -->
-	<div class="category_wrap">
+	
+	<!-----------------------------------------------재고수량--------------------------------------->
 	 <div class="category_title">재고수량</div>
-	 <hr/>
+	<div class="category_wrap">
 			<ul>
 				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0"/><span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
-<!-- 옵션 -->
+	<!-----------------------------------------------옵션--------------------------------------->
+	<div class="category_title">옵션</div>
 	<div class="category_wrap">
-		<div class="category_title">옵션</div>
-			<hr/>
 			<ul class="regi_option_wrap">
 				<li><label>옵션 갯수</label>&nbsp;
 					<select id="select_option" name="selectoption">
@@ -522,10 +539,9 @@ $(document).ready(function(){
 				<li><span class="notice">상세페이지에 예시) 호박고구마 1kg (+3000원)으로 표기됩니다.</span></li>
 			</ul>
 			</div>
-	<!-- 상품이미지 -->
+	<!-----------------------------------------------상품 이미지-------------------------------------->
+	<div class="category_title">상품 이미지</div>
 	<div class="category_wrap">
-		<div class="category_title">상품 이미지</div>
-		<hr/>
 			<ul>
 				<li><label>대표이미지</label><br/>
 					<img name="thumb_image" id="thumb_image"src="#" alt="image upload" style="width:300px;"/><br/>
@@ -538,16 +554,14 @@ $(document).ready(function(){
 		 		</li>
 		   </ul>	
 		</div>
-	<!-- 상세설명 -->
+ 	<!-----------------------------------------------상세설명------------------------------------->
+	<div class="category_title">상세설명</div>
 	<div class="category_wrap">
-		<div class="category_title">상세설명</div>
-		<hr/>
 		<textarea id="summernote" name="editordata"></textarea>
 		</div>
-	<!-- 배송 -->
+	<!-----------------------------------------------배송----------------------------------------->
+	<div class="category_title">배송</div>
 	<div class="category_wrap">
-		<div class="category_title">배송</div>
-			<hr/>
 			<ul>
 				<li><label>배송방법</label>&nbsp; 
 					<input type="button" name="deliveryoption" class="btn" id="delivery" value="택배"/>
@@ -565,10 +579,9 @@ $(document).ready(function(){
 				</ul>
 			</ul>
 		</div>
-	<!-- 상품내용 -->
+	<!----------------------------------------------상품내용--------------------------------------->
+	<div class="category_title">상품 내용</div>
 	<div class="category_wrap">
-		<div class="category_title">상품 내용</div>
-			<hr/>
 			<ul>
 				<li><label for="">판매단위</label>&nbsp;
 					<input type="number" name="selloption" id=""/>
@@ -618,7 +631,7 @@ $(document).ready(function(){
 			</ul>
 		</div>
 		<hr/>
-	<!-- 취소 저장하기 버튼 -->
+	<!--------------------------------------------취소/ 저장하기 버튼---------------------------------------->
 		<div class="end_button_wrap">
 			<input type="button" class="cancel_btn" class="btn" value="취소">
 			<input type="submit" name="" value="저장하기" class="save_btn" class="btn"/>
