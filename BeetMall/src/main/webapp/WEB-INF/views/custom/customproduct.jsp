@@ -2,20 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/inc/menu_c.jspf"%>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
 
 <style>
 
 /*  기본설정----------------------------------------------                 */
-
-
-
 .section {
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-	font-family: 'Noto Sans KR', sans-serif;
 }
 
 #leftMenu{ display:block;}
@@ -112,17 +106,10 @@ a:hover, a:active, a:visited, a:link {
 
 #productImgBox {
 	float: left;
-<<<<<<< HEAD
 	margin-left:80px;
 	margin-top: 80px;
 	width: 250px;
 	height: 300px; 
-=======
-	margin-left: 115px;
-	margin-top: 20px;
-	width: 300px;
-	height: 300px;
->>>>>>> refs/remotes/origin/develop
 }
 
 #productImgBox>img {
