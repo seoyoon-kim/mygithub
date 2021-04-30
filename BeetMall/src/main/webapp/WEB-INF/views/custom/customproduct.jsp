@@ -104,7 +104,7 @@ a:hover, a:active, a:visited, a:link {
 #productImgBox {
 	float: left;
 	margin-left: 115px;
-	margin-top: 20px; height : 300px;
+	margin-top: 20px;
 	width: 300px;
 	height: 300px;
 }
