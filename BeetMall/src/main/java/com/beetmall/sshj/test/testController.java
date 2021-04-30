@@ -40,10 +40,6 @@ public class testController {
 	public String myfavoriForm() {
 		return "mypages/myfavoriForm";
 	}
-	@RequestMapping("notice_view2")
-	public String notice_view2() {
-		return "custom/customerCenter/notice_view";
-	}
 	@RequestMapping("knotice_view")
 	public String knotice_view() {
 		return "custom/customerCenter/notice_view";

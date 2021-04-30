@@ -22,4 +22,14 @@ public class NoticeController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/notice_view2")
+	public ModelAndView notice_view2(int infonum) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo", noticeService.noticeSelect(infonum));
+		mav.setViewName("custom/customerCenter/notice_view");
+		
+		return mav;
+	}
 }
