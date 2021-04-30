@@ -33,7 +33,7 @@ a:hover, a:active, a:visited, a:link {
 #section{
 background-color:white;
 margin:0 auto;
-font-family: 'Nanum Gothic', sans-serif;
+font-family: 'Noto Sans KR', sans-serif;
 width:1080px;
 }
 

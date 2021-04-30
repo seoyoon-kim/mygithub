@@ -8,6 +8,9 @@
 <style>
 
 /*  기본설정----------------------------------------------                 */
+
+
+
 .section {
 	width: 1080px;
 	background-color: white;
@@ -73,15 +76,12 @@ a:hover, a:active, a:visited, a:link {
 
 /*  정렬방식----------------------------------------------                 */
 #selectOrderbox {
-	float: left;
 	width: 540px;
-	
-	margin-bottom:30px;
 	margin-top:30px;
 }
 
 #selectOrder {
-	floate: left;
+
 	width: 540px;
 
 }
@@ -93,7 +93,6 @@ a:hover, a:active, a:visited, a:link {
 	margin: 0;
 	padding-left: 420px;
 	text-align: right;
-	margin-top:30px;
 	margin-bottom:30px;
 }
 
@@ -107,27 +106,25 @@ a:hover, a:active, a:visited, a:link {
 
 /*  상품 박스------------이미지 부분----------------------------------                 */
 #productmainbox {
-	width: 850px;
-
-
+	width: 1080px;
+   float: left;
 }
 
 #productImgBox {
 	float: left;
-	margin-left: 70px;
-	margin-top: 20px;
-	margin-right: 20px;
-	width: 300px;
-	height: 350px;
+	margin-left:80px;
+	margin-top: 80px;
+	width: 250px;
+	height: 300px; 
 }
 
 #productImgBox>img {
-	width: 275px;
-	height: 350px;
+	width: 250px;
+	height: 300px;
 }
 
 #ptime {
-	width: 275px;
+	width: 250px;
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
@@ -139,6 +136,7 @@ a:hover, a:active, a:visited, a:link {
 #pbox {
 	width: 550px;
 	float: left;
+	margin-left: 40px;
 	margin-bottom: 40px;
 }
 
@@ -633,8 +631,6 @@ a:hover, a:active, a:visited, a:link {
 	button, .btn{
 		padding: 3px 10px;
 		color: #666666;
-		border-radius: 8px;
-		background:#fff;
 		text-align: center;
  		text-decoration: none;
 		display: inline-block;
@@ -666,9 +662,23 @@ a:hover, a:active, a:visited, a:link {
 	
 	#infoBtn1:hover,#infoBtn2:hover,#infoBtn3:hover{
 	
-	background-color:rgb(252,118,45);	
+	background-color:#FF5430;	
 	color:white;
 	
+	}
+	
+	#infoBtn1:click,#infoBtn2:click,#infoBtn3:click{
+	
+	
+	}
+	
+	#productBtn>.btn{
+	background-color:#eee;	
+	height:30px;
+	}
+	#productBtn>.btn:hover{
+	background-color:#FF5430;
+	color:white;
 	}
 
 
@@ -772,7 +782,7 @@ a:hover, a:active, a:visited, a:link {
 				<div id=productMainTiltle>
 					<b>국산 100% 볶음참깨 160g 80g 볶음참깨 당일생산 당일 배송!!</b>
 				</div>
-				<div id=productPrice>8,900</div>
+				<div id=productPrice>가격 : 8,900</div>
 				<div id="sprofile">
 					<a href="#">경북예천 홍길동</a>
 				</div>

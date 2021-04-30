@@ -21,10 +21,7 @@ public class RecipeServiceImp implements RecipeService {
 		return RecipeDAO.RecipeAllList();
 	}
 
-	@Override
-	public int RecipeInsert(RecipeVO vo) {
-		
-		return RecipeDAO.RecipeInsert(vo);
+	public int recipeWriteOk(RecipeVO vo) {
+		return RecipeDAO.recipeWriteOk(vo);
 	}
-
 }

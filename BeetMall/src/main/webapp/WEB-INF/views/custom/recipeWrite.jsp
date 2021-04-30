@@ -97,7 +97,7 @@
 <div class="section">
 	
 		
-	<form method="post" action="recipeView">
+	<form method="post" action="/sshj/recipeWriteOk" enctype="multipart/form-data">
 		<table>
 			<tbody>
 				<tr>
@@ -105,7 +105,7 @@
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >제목</th>
-					<td class="td" colspan="3"><input type="text" name="qmtitle" id="qmtitle" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<td class="td" colspan="3"><input type="text" name="recipetitle" id="recipetitle" placeholder="문의사항 제목을 입력해주세요."/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
@@ -113,14 +113,14 @@
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">대표이미지</th>
-					<td  class="td"><input type="file" value="파일첨부하기" style="width: 500px;"></td>
+					<td  class="td"><input type="file" value="파일첨부하기" name="file" style="width: 500px;"></td>
 				</tr>
 				<tr>
 					<th colspan="4">레시피 내용</th>
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="recipecontent" name="recipecontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>

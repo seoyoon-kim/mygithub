@@ -2,25 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
   <mapper namespace="com.beetmall.sshj.custom.dao.RecipeDAO">
-  
     <select id="RecipeAllList" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
         select recipenum ,recipemainimg ,userid ,recipetitle ,recipecontent ,recipemainimg, 
         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
-        order by recipenum desc
-          
+        order by recipenum desc     
     </select> 
-    
-    
-    <insert id="recipeInsert" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
-       insert into board(recipenum,userid,recipetitle,recipecontent,recipemainimg)
-       values(recipesq.nextval,1234,#{recipetitle},#{recipecontent},#{recipemainimg})
-    
-    
+    <insert id="recipeWriteOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
+       insert into recipe 
+       values(recipesq.nextval,1234,#{recipetitle},#{recipecontent},#{recipemainimg},sysdate,0,0)
     </insert>
-
-
-
-
-   </mapper>
+  </mapper>

@@ -36,7 +36,7 @@ a:hover, a:active, a:visited, a:link {
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-	font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 /* ------------------페이징처리부분-------------------- */
 .page_wrap {
