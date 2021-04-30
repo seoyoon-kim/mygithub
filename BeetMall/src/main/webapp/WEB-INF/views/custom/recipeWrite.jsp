@@ -136,37 +136,33 @@ $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
 		  focus: true,
-		  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
-				onImageUpload : function(files) {
-					uploadSummernoteImageFile(files[0],this);
-				},
-				onPaste: function (e) {
-					var clipboardData = e.originalEvent.clipboardData;
-					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-						var item = clipboardData.items[0];
-						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-							e.preventDefault();
-						}
-					}
-				}
-			}
+		  //콜백 함수
+          callbacks : { 
+          	onImageUpload : function(files, editor, welEditable) {
+          // 파일 업로드(다중업로드를 위해 반복문 사용)
+          for (var i = files.length - 1; i >= 0; i--) {
+          uploadSummernoteImageFile(files[i],
+          this);
+          		}
+          	}
+          }
 	  });
 	});
 /**
 * 이미지 파일 업로드
 */
-function uploadSummernoteImageFile(file, editor) {
+function uploadSummernoteImageFile(file, el) {
 	data = new FormData();
 	data.append("file", file);
 	$.ajax({
 		data : data,
 		type : "POST",
-		url : "/uploadSummernoteImageFile",
+		url : "uploadSummernoteImageFile",
 		contentType : false,
+		enctype : 'multipart/form-data',
 		processData : false,
 		success : function(data) {
-        	//항상 업로드된 파일의 url이 있어야 한다.
-			$(editor).summernote('insertImage', data.url);
+			$(el).summernote('editor.insertImage', data.url);
 		}
 	});
 }
