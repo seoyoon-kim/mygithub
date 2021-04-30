@@ -1,3 +1,7 @@
+
+
+</div>
+</body>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
@@ -38,8 +42,31 @@ width:40%;
 margin:0 auto;
 text-align:center;
 height:400px;
-
+font-size:19px;
+margin-bottom:200px;
+margin-top:30px;
+padding-top:100px;
 }
+
+/*버튼*/
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+		
+	}
+	/*버튼*/
+	.btn:hover{
+		background: gray;
+		color:white;
+		display: inline-block;
+	}
 
 </style>
 
@@ -48,14 +75,14 @@ height:400px;
 <div class="section">
 
 		
-		<h2 id="buyConfirmTitle">주문 / 결제</h2>
+	
 		
 		
 		<div id="buyConfirmbox">
 		    
 		       <div><b>주문번호 1564867511</b></div>
 		       <div>고객님의 주문이 완료되었습니다.</div>
-		       <div><input type="button" value="구매내역 확인하기" id="buyConfirmButton"/></div>
+		       <div><input type="button" value="구매내역 확인하기" id="buyConfirmButton" class="btn"/></div>
 		   
 		</div>
 		

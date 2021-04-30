@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -12,9 +13,11 @@
 	font-family: 'Nanum Gothic', sans-serif;
 }
 
-#searchBtn {
-	top: 0px;
-	left: 0px;
+#leftMenu{ display:block;}
+
+a:hover, a:active, a:visited, a:link {
+    text-decoration: none;
+    color: black;
 }
 
 /*  상품 품목글자----------------------------------------------                 */
@@ -722,7 +725,7 @@
 			<li><a href="#"><img src="img/cicon01.png"></a></li>
 			<li><a href="#"><img src="img/cicon02.png"></a></li>
 			<li><a href="#"><img src="img/cicon03.png"></a></li>
-			<li><a href="#"><img src="img/cicon02.png"></a></li>
+			<li><a href="#"><img src="img/cicon05.png"></a></li>
 		</ul>
 
 		<!-- ------------------------------상품 박스--------------------------------------------------------------- -->
