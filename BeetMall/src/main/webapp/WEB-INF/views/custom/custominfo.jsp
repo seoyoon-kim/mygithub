@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-  
-<%@ include file="/inc/menu_c.jspf"%>    
-    
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/inc/menu_c.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,18 +22,16 @@
 <style>
 
 /*  기본설정----------------------------------------------                 */
+
 .section{
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
 	font-family: 'Nanum Gothic', sans-serif;
+	font-size:14px;
 	
 }
 
-#searchBtn{
-top:0px;
-left:0px;
-}
 
 	#cMyPageLeft{
 		display: block;
@@ -46,6 +42,11 @@ a:active,a:link,a:visited,a:hover{
       text-decoration: none;
       color:black;
    }
+   
+#section{
+font-size:17px;
+}
+
  /* ------------------페이징처리부분-------------------- */
 	.page_wrap {
 		text-align:center;
@@ -105,15 +106,16 @@ a:active,a:link,a:visited,a:hover{
 float:left;
 width:100%;
 height:20px;
-margin-top:10px;
+margin-top:40px;
 font-weight:bold;
-margin-bottom:30px;
+margin-bottom:40px;
 }
 
 
 .infobtn{
-float:right;
+float:left;
 margin-bottom:4%;
+padding-left:80%;
 width:100%;
 }
 
@@ -136,11 +138,11 @@ border-bottom:2px solid #ddd;
 padding-left:0px;
 }
 
-.infoList{
+.infoList,.innerviewpage{
     float:left;
 	width: 100%;
 	padding-left:0px;
-	margin-bottom:10px;
+	margin-bottom:30px;
 }
 
 
@@ -235,14 +237,174 @@ width:100%;
 float:left;
 margin-bottom:15px;
 }
+<!-------------------문의보기 팝업창------------------------->
+/*표*/
+table{
+	width:1080px;	
+	border-spacing: 0;
+	text-indent: initial;
+	border-top:2px solid lightgray;
+	border-bottom:2px solid lightgray;
+}
+th, .th{
+	display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+  		background-color:#f6f6f6;;
+  		/*#fcfcfc*/
+}
+thead{
+	border-bottom: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    width:100%;
+}
+tr{
+	display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    height:50px;
+}
+.td, .content{
+	padding-left:20px;
+	
+}
+.content{
+	padding: 20px 0 20px;
+}
+td, .td,{
+	height:50px;
+}
+.tr_head{
+	font-weight:bold;
+	border-top:2px solid lightgray;
+	border-bottom:2px solid lightgray;
+}
+.tr_head li{
+	float:left;
+}
+.menu, .th{
+	width:150px; text-align:center;
+}
+.td, .th{ line-height:50px; }
+.td{
+	width:30%; line-height:50px;
+}
+
+#intable{
+width:100%;
+}
+
+
+<!--문의 작성 팝업------------------------------------------>
+
+#infopopDiv{
+float:left;
+width:100%;
+}
+
+#infoDivcontent{
+float:left;
+background-color:#eee;
+width:100%;
+
+}
+
+#infoDivTitle{
+color:black;
+background-color:#ddd;
+}
+
+#subjectBox{
+padding-left:10px;
+padding-right:10px;
+height:40px;
+width:100%;
+margin-bottom:40px;
+
+}
+#subjectBox>textarea{
+padding-left:20px;
+padding-right:20px;
+width:100%;
+height:40px;
+border:none;
+margin-top:10px;
+}
+
+#ContentBox{
+padding-left:10px;
+padding-right:10px;
+height:400px;
+width:100%;
+
+}
+
+#ContentBox>textarea{
+width:100%;
+height:400px;
+border:none;
+}
+
+#BtnBox{
+float:left;
+margin-top:5px;
+margin-bottom:10px;
+width:50%;
+padding-left:400px;
+}
+
+#selectBox{
+float:left;
+width:50%;
+}
+
+#infowritebtn,#infobackbtn {
+    line-height:25px;
+	height: 25px;
+	width: 60px;
+}
+
+#infowritebtn,#infobackbtn{
+	color: #666666;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.5);
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	border: none;
+}
+
+/*버튼*/
+#infowritebtn:hover,#infobackbtn:hover {
+	background: gray;
+	color: white;
+	display: inline-block;
+}
+
+
 
 </style>
+<script>
 
+$(function(){
+	var popup = $(document)
+	var eventX, eventY, divX, divY, moveX, moveY, flag=false;
+	function setMoveStart(){
+		eventX = event.clientX;
+		eventY = event.clientY;
+		divX = parseInt()
+	}
+	
+})
+
+</script>
 
 
 <body>
 
-<div class="section">
+<div class="section" id="section">
 
  <!-- ----------------문의 상단------------------------ -->
   <div id="infoTitle">*******의 문의내역 입니다.</div>
@@ -293,11 +455,85 @@ margin-bottom:15px;
 	    <li>2020-03-28 13:00</li>
 	    <li>답변완료</li>
 	    <li><input type="button" value="확인하기" id="infobutton"/></li>
+	    
+	    
+	    <li><input type="checkbox" name="boardCheckBox" value=""/></li>
+	    <li>123</li>
+	    <li><a href="">너무 맛이 없어요</a></li>
+	    <li>2020-03-28 13:00</li>
+	    <li>답변완료</li>
+	    <li><input type="button" value="확인하기" id="infobutton"/></li>
+	    
 	  </ul>
   </div>
   
-  <!-- -----------------페이징 표시--------------------------- -->
   
+  
+  
+  <!-- -----------------문의 보기 --------------------------- -->
+
+			<table id="intable">
+				<tbody>
+					<tr class="tr_head">
+						<th class="menu">번호</th>
+						<td><span class="td">123</span></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">일시</th>
+						<td ><span class="td">2020.3.25</span></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">상태</th>
+						<td ><span class="td">답변완료</span></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">글제목</th>
+						<td><span class="td">너무 맛이 없어요</span></td>
+					</tr>		
+					<tr>
+						<td colspan="2">
+							<span class="infocontent" >너무 맛이 없어요!!.. 이렇게 맛이없나요?</span>
+						</td>	
+					</tr>
+					<tr style="border-top:3px solid #ddd; border-bottom:3px solid #ddd;">
+						<td colspan="2">
+							<span class="inforeply" >문의 답변이 입력되는곳</span>
+						</td>	
+					</tr>
+				</tbody>
+				
+			</table>
+		</fieldset>
+		<c:if test="${logId==vo.userid}">
+			<a href="">수정</a>
+			<a href="">삭제</a>
+		</c:if>
+ <!-- -----------------문의 작성 팝업 --------------------------- -->
+ 
+ 		<div id="infopopDiv">
+			
+				
+				<div id="infoDivTitle">문의작성하기<span style="float:right;text-align:right;margin-right:10px;font-size:30px;line-height:30px;">&times;</span></div>
+				<div id="infoDivcontent">
+					<div id="subjectBox"><textarea>제목을 입력해 주세요</textarea></div>
+					
+					<div id="ContentBox"><textarea></textarea></div>
+					<div id="selectBox">
+							<input type="radio" name="lockbtn" value="unlock" checked/>공개
+		                    <input type="radio" name="lockbtn" value="lock"/>비공개
+					</div>	
+					<div id="BtnBox">
+					       <input type="button" id="infowritebtn" value="작성" checked/>
+		                   <input type="button" id="infobackbtn" value="취소"/>
+					</div>	<!-- BtnBox -->
+				</div>	<!-- infoDivcontent -->
+			
+		</div>    <!-- infopopDiv -->
+  
+  
+  
+  <!-- -----------------페이징 표시--------------------------- -->
+
   <div class="page_wrap">
 			<div class="page_nation">
 			   <a class="arrow pprev" href="#"></a>
@@ -316,6 +552,8 @@ margin-bottom:15px;
 			   <a class="arrow nnext" href="#"></a>
 			</div>
 	</div>
+ 
+
  
  <div style="clear:both;"></div>
  

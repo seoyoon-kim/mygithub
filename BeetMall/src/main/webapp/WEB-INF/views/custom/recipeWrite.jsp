@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
@@ -15,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
+
 <style>
 	#mypageMenubar{
 		display:block;
@@ -92,10 +94,11 @@
 		width:0;
 	}
 </style>
+
 <div class="section">
 	
 		
-	<form method="post" action="cusomerCenterWriteOk">
+	<form method="post" action="recipeView">
 		<table>
 			<tbody>
 				<tr>
@@ -124,7 +127,7 @@
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
 				<input type="submit" value="작성하기" class="btn" id="write_btn"/>				
 			</div>
 		</form>
