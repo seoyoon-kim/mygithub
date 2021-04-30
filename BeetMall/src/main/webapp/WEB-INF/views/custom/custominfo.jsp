@@ -24,11 +24,13 @@
 <style>
 
 /*  기본설정----------------------------------------------                 */
+
 .section{
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
 	font-family: 'Nanum Gothic', sans-serif;
+	font-size:14px;
 	
 }
 
