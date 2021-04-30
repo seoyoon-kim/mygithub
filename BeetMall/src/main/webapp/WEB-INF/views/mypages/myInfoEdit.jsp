@@ -6,16 +6,17 @@
 		display: block;
 	}
 	#myInfoDiv{
-		height:1180px;
 		font-size:20px;
+		overflow:auto;
+		margin-bottom:100px;
 	}
 	.formUl>li:nth-child(2n+1){
-		width:19%;
+		width:49%;
 		text-align:right;
 		margin-right:5px;
 	}
 	.formUl>li:nth-child(2n){
-		width:78%;
+		width:49%;
 		margin-left:5px;
 	}
 	.spanstar{
@@ -75,20 +76,21 @@
 	button, .btn{
 		padding: 3px 10px;
 		color: #666666;
-		border-radius: 8px;
 		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		border:1px solid #eee;
 		text-align: center;
  		text-decoration: none;
 		display: inline-block;
-		border:none;
 		margin:0 3px;
 	}
 	/*버튼*/
 	.btn:hover{
-		background: gray;
+		background: rgb(252,118,45);
 		color:white;
 		display: inline-block;
+	}
+	input{
+		border:1px solid #eee;
 	}
 </style>
 <div class="section" id="myInfoDiv">
@@ -108,7 +110,7 @@
 			</ul>
 		</form>
 		</div>
-		<h4>나중에 여기 페이지 올때 판매자, 소비자 구분해서 아래 부분 생략할 것</h4>
+		<c:if test="${logType==2 }">
 		<div id="sellerForm">
 			<ul class="formUl" id="sFrm">
 				<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;"/><input type="button" class="btn" value="중복검사"/></li>
@@ -132,5 +134,5 @@
 			</ul>
 			<div style="margin-bottom:20px; padding-top:20px"><input type="submit" value="가입하기" class="btn" id="infosubmit"></div>
 		</div>
-
+		</c:if>
 </div>
