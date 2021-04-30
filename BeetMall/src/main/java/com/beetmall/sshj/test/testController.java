@@ -60,7 +60,7 @@ public class testController {
 	public String recipeHome() {
 		return "custom/recipeHome";
 	}
-	
+/*	
 	@RequestMapping("recipeView")
 	public String recipeView() {
 		return "custom/recipeView";
@@ -70,7 +70,7 @@ public class testController {
 	public String recipeWrite() {
 		return "custom/recipeWrite";
 	}
-	
+*/	
 	@RequestMapping("/custominfo")
 	public String customInfo() {
 		return "custom/custominfo";
@@ -94,6 +94,11 @@ public class testController {
 	@RequestMapping("/customproduct")
 	public String customproduct() {
 		return "custom/customproduct";
+	}
+	
+	@RequestMapping("/custompay")
+	public String custompay() {
+		return "custom/custompay";
 	}
 
 
