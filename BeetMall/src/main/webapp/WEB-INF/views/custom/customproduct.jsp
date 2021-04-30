@@ -112,10 +112,17 @@ a:hover, a:active, a:visited, a:link {
 
 #productImgBox {
 	float: left;
+<<<<<<< HEAD
 	margin-left:80px;
 	margin-top: 80px;
 	width: 250px;
 	height: 300px; 
+=======
+	margin-left: 115px;
+	margin-top: 20px;
+	width: 300px;
+	height: 300px;
+>>>>>>> refs/remotes/origin/develop
 }
 
 #productImgBox>img {

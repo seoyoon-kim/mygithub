@@ -13,21 +13,22 @@
 <!-- font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+
 <style>
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
+	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Noto Sans KR', sans-serif;}
 	.section{
 		width:1080px;
 		margin:0 auto;
 	}
 	.menuButtons{
-		background-color:#ddd;
 		padding:0 5px;
-		border:1px solid white;
 	}
 	.loginButtons{
 		text-align:right;
 		width:1080px;
 		height:25px;
+		padding-top:10px;
 	}
 	#menu{
 		width:1080px;
@@ -37,10 +38,11 @@
 		text-align:center;
 		line-height:150px;
 		height:150px;
+		margin-bottom:30px;
 	}
 	#logoImg img{
-		height:73px;
-		width:339px;
+		width:280px;
+		height:80px;
 	}
 	#menu a:active, #menu a:hover, #menu a:visited, #menu a:link{
 		color:black;
@@ -63,7 +65,26 @@
 		margin-right:0;
 	}
 	
-
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		background-color:#fff;
+		border:1px solid #eee;
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		margin:0 3px;
+	}
+	/*버튼*/
+	.btn:hover{
+		background: rgb(252,118,45);
+		color:white;
+		display: inline-block;
+	}
+	/* 중간잡아주는 클래스 */
+	.centerTarget{
+		margin:0 auto;
+	}
 </style>
 <script>
 	$(function(){
@@ -87,22 +108,22 @@
 	<div id= "menu">	<!-- 상단메뉴전체 div -->
 	<c:if test="${logStatus != 'Y'}">
 		<div class="loginButtons">	<!-- 로그인 전 -->
-			<input type="button" value="회원가입" class="menuButtons"/>
-			<input type="button" value="로그인" class="menuButtons"/>
-			<input type="button" value="고객센터" class="menuButtons"/>
+			<input type="button" value="회원가입" class="menuButtons btn"/>
+			<input type="button" value="로그인" class="menuButtons btn"/>
+			<input type="button" value="고객센터" class="menuButtons btn"/>
 		</div>
 	</c:if>
 	<c:if test="${logStatus == 'Y' }">
 		<div class="loginButtons">	<!-- 로그인 후 -->
 			<c:if test="${logType==2}">
-				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons"/>
+				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons btn"/>
 			</c:if>
 			<a href="myinfoEdit">${logName}님</a><span id="usermypage">▼</span>
-			<input type="button" value="로그아웃" class="menuButtons"/>
-			<input type="button" value="고객센터" class="menuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+			<input type="button" value="로그아웃" class="menuButtons btn"/>
+			<input type="button" value="고객센터" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
 		</div>
 	</c:if>
 	<div id="logoImg">			<!-- 사이트 로고 부분 -->
-		<a href="/sshj"><img src="<%=request.getContextPath()%>/img/dlogo11.png"></a>
+		<a href="/sshj"><img src="<%=request.getContextPath()%>/img/dlogo14.PNG"></a>
 	</div>
 	</div>
