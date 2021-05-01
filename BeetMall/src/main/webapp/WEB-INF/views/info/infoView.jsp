@@ -32,7 +32,7 @@
 		width:1080px;
 		height:980px;
 		top:40px;
-		border: 5px solid rgb(252,118,45);
+		border: 2px solid rgb(252,118,45);
 		padding:10px;
 		overflow: auto;
 	}
