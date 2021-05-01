@@ -91,18 +91,24 @@
 		font-size:13px;
 	}
 	/* 여기서부터내꺼 */
-	#kmiddelname{
-		border-bottom: 1px solid #e06666;
-		margin-bottom: 10px;
+	#kcategoryMainName{
+		border-bottom: 1px solid rgb(252,118,45);
+		margin-bottom: 20px;
 	}
+	#kcategoryMainName>div{
+		font-size: 22px;
+	    margin-bottom: 20px;
+	    font-weight: bold;
+    }
     #kcategoryMain{
         margin-left:20px;
     }
     #kcategory{
-        margin-bottom: 70px;
-    	border-bottom: 1px solid #e06666;
-        font-size: xx-large;
-        color: orange;
+        margin-bottom: 40px;
+	    padding-bottom: 30px;
+	    border-bottom: 1px solid rgb(252,118,45);
+	    font-size: 21px;
+	    font-weight: bold;
     }
 
     #kCateMain{
@@ -110,8 +116,9 @@
     }
 
     #kmiddelname{
-        font-size: 21px;
+        font-size: 19px;
         font-weight: bold;
+        margin-bottom: 10px;
     }
     #leftMenu a:active, #leftMenu a:link, #leftMenu a:visited, #leftMenu a:hover{
     	text-decoration: none;
@@ -123,7 +130,7 @@
     #leftMenu{
        position: absolute;
        left:-200px;
-       top:100px;
+       top:300px;
        display: none;
        width:180px;
        padding-left:10px;
@@ -132,18 +139,23 @@
     #kareaMenu{
     	padding-left: 30px;
     }
+    #menuListName{
+    	font-weight:bold;
+    	border-bottom: 1px solid rgb(252,118,45);
+    	margin-bottom: 20px;
+    }
     
     /* 공지사항 */
     #NoticeleftMenu{
     	position: absolute;
     	left:-200px;
-    	top:35px;
+    	top:130px;
     	display: none;
     	width:180px;
     	height:480px;
     	color:black;
     	background-color:white;
-    	text-align:center;
+    	text-align:left;
     	padding-left:10px;
     	padding-right:10px;
     }
@@ -152,6 +164,7 @@
     }
     #NoticeleftMenu a:active, #NoticeleftMenu a:link, #NoticeleftMenu a:visited, #NoticeleftMenu a:hover{
 		color:black;
+		font-size:16px;
 	}
     #kNoticecategory{
         padding-bottom: 70px;
@@ -165,24 +178,23 @@
     #cMyPageLeft{
     	position: absolute;
     	left:-200px;
-    	top:35px;
+    	top:130px;
     	display: none;
     	width:180px;
     	height:450px;
     	color:black;
     	background-color:white;
-    	text-align:center;
     	padding-left:10px;
     	padding-right:10px;
     	font-size:21px;
     	line-height: 40px;
     }
     #cMyPageLeft>div{
-    	border-bottom:1px solid #e06666;
     	height:50px;
     }
     #cMyPageLeft a:active, #cMyPageLeft a:link, #cMyPageLeft a:visited, #cMyPageLeft a:hover{
 		color:black;
+		font-size:16px;
 	}
 	#menuImgs img{
 		float:left;
@@ -249,7 +261,7 @@
 	}
 	.cateTopCate>a:link, .cateTopCate>a:visited, .cateTopCate>a:hover, .cateTopCate>a:active{
 		text-decoration:none;
-		color:rgb(86, 194, 113);
+		color:rgb(252,118,45);
 		font-size:21px;
 		font-weight:bold;
 	}
@@ -295,30 +307,33 @@
 		margin-left:12px;
 	}
 	#kCateMain>div>a{
-		font-size:18px;
+		font-size: 16px;
+    	margin-left: 10px;
 	}
 	/* 레시피*/
     #mypageMenubar{
     	position: absolute;
     	left:-200px;
-    	top:35px;
+    	top:130px;
     	display: none;
     	width:180px;
     	height:480px;
     	color:black;
     	background-color:white;
-    	text-align:center;
+    	text-align:left;
     	padding-left:10px;
     	padding-right:10px;
     }
 	#menutext{
-        margin-bottom: 70px;
-    	border-bottom: 1px solid #e06666;
-        font-size: 21px;
-        color: orange;
+        margin-bottom: 30px;
+	    padding-bottom: 30px;
+	    border-bottom: 1px solid rgb(252,118,45);
+	    font-size: 21px;
+        font-weight: bold;
     }
 	#repcipevview{
         padding-bottom: 40px;
+        font-size: 16px;
     }
 </style>
 <script>
@@ -399,6 +414,7 @@
 	<div class="section">
 		<div id="menuList">
 			<div id="cMyPageLeft">
+				<div id="menuListName">마이페이지</div>
 				<div><a href="myinfoEdit">정보수정</a></div>
 				<div><a href="customWish">장바구니</a></div>
 				<div><a href="mybuyList">구매내역</a></div>
@@ -415,6 +431,9 @@
          <!-- 여기부터 상품카테고리부분시작 -->
          <div id="leftMenu">
             <div id="kcategoryMain">
+               <div id="kcategoryMainName">
+               		<div>상품분류</div>
+               </div>
                <div id="kCateMain">
                   <div id="kmiddelname">상품 품목별</div>
                   <div><a href="kangsan">전체</a></div>
@@ -435,7 +454,7 @@
                      <div><a href="kangsan3">제주도</a></div>
                   </div>
                   <br/>
-                  <div><a href="mapping">지도로찾는 동네농장</a></div>
+                  <div><a href="mapping">지도로 찾기</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">가격대별</div>

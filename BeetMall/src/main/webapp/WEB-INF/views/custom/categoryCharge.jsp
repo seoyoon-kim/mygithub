@@ -124,6 +124,10 @@
     }
     #kContent{
         width: 600px;
+        overflow:auto;
+    }
+    #kContent>div{
+    	float:left;
     }
     
     #Sequence{
@@ -287,15 +291,18 @@
         $("#kAreamMall").children().children().click(function(){
             var name= $(this).text();
             $(this).css("color","red");
-            $("#kContent").append(name+"&times;"+"&nbsp;&nbsp;");
+            $("#kContent").append("<div><span>"+name+"</span><span class='arrea'>&times;</span>"+"&nbsp;&nbsp;</div>");
         });
-        $("#kContent").click(function(){
-            kangsan();
+       
+        $(document).on('click',"#kContent>div", function(){
+        	$(this).remove();
+        });
+        
+        //서버로보낼값
+        $('#boardUpddate').submit(function(){
+        	
         });
     });
-    function kangsan(){
-        //삭제아직 진행못함
-    };
 </script>
 	<div class="section">
 		<div id="main">
@@ -604,7 +611,7 @@
 	        </div>
 	        <form>
 		        <div id="kContent">
-		
+				
 		        </div>
 		        <input type="submit" value="검색하기" id="boardUpddate"/>
 	      	</form>
