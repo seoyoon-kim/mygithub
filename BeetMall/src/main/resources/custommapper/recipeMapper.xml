@@ -13,7 +13,7 @@
        values(recipesq.nextval,'tester',#{recipetitle},#{recipecontent},#{recipemainimg},sysdate,0,0)
     </insert>
     <select id="RecipeSelect" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-    select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param}
+    select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param,jdbcType=VARCHAR}
     </select>
     
     <select id="RecipeAllListHome" resultType="com.beetmall.sshj.custom.vo.RecipeVO">

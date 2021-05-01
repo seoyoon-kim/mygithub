@@ -12,4 +12,6 @@ public interface RecipeService {
 	public List<RecipeVO>RecipeAllListHome();
 	
 	public List<RecipeVO>customMyrecipe();
+	
+
 }

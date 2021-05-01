@@ -12,6 +12,8 @@ public interface RecipeDAO {
 
 	public int recipeWriteOk(RecipeVO vo);
 	
+	
+	
 	public RecipeVO RecipeSelect(int recipenum);
 
 	public List<RecipeVO>RecipeAllListHome();
