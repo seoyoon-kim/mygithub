@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -12,13 +10,18 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		
-		<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
+	
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
+
 <style>
 	table, fieldset{
 		width:100%;
@@ -37,8 +40,8 @@
 	    vertical-align: inherit;
 	    font-weight: bold;
 	    text-align: -internal-center;
-	    border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
    		background-color: #fcfcfc;
    		font-size: 16px;
 	}
@@ -81,9 +84,10 @@
 /* 검색하기 */
 	#cs_search_container{
 		width: 100%;
-		margin-bottom: 60px;
+	
 		float: center;
 		text-align:center;
+		margin:0 auto;
 	}
 	#cs_search_box{
 		border:none;
@@ -108,15 +112,23 @@
 		height:40px;
 		width:130px;
 		margin-top:30px;
-		margin-left:280px;
+		margin-left:330px;
 		border-radius: 8px 0px 0px 8px;
+	}
+	/* 고객센터 상단 메뉴 */
+	#seller_cs_menu{
+		width:600px;
 	}
 </style>
 <script>
 
  $(function(){
 //선택한 faq tr열고 닫히기	 
-//수정할 것: this만 열리도록 고치기	
+//수정할 것: this만 열리도록 고치기
+  	 
+  	  $(function() {
+  		//선택한 faq tr열고 닫히기    
+  		//수정할 것: this만 열리도록 고치기
   		$(".faq_td").click(function() {
   			$(this).parent().next().toggle(
   				function(){
@@ -127,8 +139,11 @@
   				}
   			);
   		});
+
+  	});
 //선택한 select option별로 보기
-//수정할 것 나머지 option선택에 대한 script 추가하기		
+//수정할 것 나머지 option선택에 대한 script 추가하기
+  		
   		$('#sel').change(function(){
   			var option = $(this).val();
   			console.log(option);
@@ -136,19 +151,41 @@
   				$('tr').css('display','');
   			}	
   		});
+
+ 
  });
 </script>
 <body>
 	<div class="main">
-	<!-- 고객센터 사이드바 -->
-	<nav class="cs_nav" style="margin-rignt:0">
-		<ul class="cs_ul">
-			<li><span class="cs_title">고객센터</span></li>
-			<li><a href="<%=request.getContextPath() %>/notice">공지사항</a></li>
-			<li><a href="<%=request.getContextPath() %>/faq">자주묻는질문</a></li>
-			<li><a href="<%=request.getContextPath() %>/ask_admin_list">문의하기</a></li>
-		</ul>
-	</nav>
+	<!------------------ 고객센터 상단 사이드바 ----------------------->
+         <nav>
+         <div id="headerMember">
+            <c:if test="${logStatus != 'Y'}">
+               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
+                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
+                  <input type="button" value="로그인" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
+               </div>
+            </c:if>
+            <c:if test="${logStatus == 'Y' }">
+               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
+                  <c:if test="${logType==2}">
+                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
+                  </c:if>
+                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
+                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+               </div>
+            </c:if>
+         </div>   
+         <ul id="seller_cs_menu">
+            <li><a href="#">BEETMALL</a></li>
+            <li><a href="notice">공지사항</a></li>
+            <li><a href="faq">자주묻는 질문</a></li>
+            <li><a href="ask_admin_list">문의하기</a></li>
+         </ul>
+      </nav>
+   </div> 
 	<!-- 가운데 메인 div -->
 	<div id="article">
 		<div class="cs_wrapTitle">자주묻는 질문</div>

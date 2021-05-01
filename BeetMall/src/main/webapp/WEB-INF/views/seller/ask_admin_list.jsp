@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -12,35 +10,29 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		
-		<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
-</head>
-<style>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
 
 	
-	#link{color: gray;}
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/csStyle.css">
+</head>
+
+<style>
 	/*표*/
-		table{
-		width:90%;	
-		border-spacing: 0;
-		text-indent: initial;
-		margin:0 0 0px 50px;	
-		border-top:2px solid lightgray;
-		border-bottom:2px solid lightgray;
-		margin-bottom:10px;
-	}
 	th{
 		height:60px;
 		display: table-cell;
 	    vertical-align: inherit;
 	    font-weight: bold;
 	    text-align: -internal-center;
-	    border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
    		background-color: #fcfcfc;
    		font-size: 16px;
 	}
@@ -63,34 +55,7 @@
 		margin-top:30px;
 		text-align:center;
 	}
-	.answer_span{
-		background-color: rgb(252,118,45);
-		border-radius:10px;
-		color:white;
-		padding:5px;
-		font-size:14px;	
-	}
-	#no_answer{ /*레이아웃 보기용 스타일 삭제예정*/
-		color:gray;
-		background: gray;
-		color:white;
-		padding:5px;
-	}
-
-	.btn:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
-	}
-	.btn. select{
-		margin-left:50px;
-		width:130px;
-		height:30px;
-	}
-	#search_container, #select_container{width:90%; margin:0 auto; margin-bottom:10px;}
-	#select_container{margin:0 auto; height:40px;}
-	select{float:right}
-	#ask_btn{color:black; width:100px;}
+	#search_btn{padding:5px;border-left:1px solid lightgray;}
 </style>
 <script>
 	//답변완료 답변대기중 select 
@@ -116,15 +81,35 @@
 </script>
 <body>
 <div class="main">
-	<!-- 고객센터 사이드바 -->
-	<nav class="cs_nav" style="margin-rignt:0">
-		<ul class="cs_ul">
-			<li><span class="cs_title">고객센터</span></li>
-			<li><a href="<%=request.getContextPath() %>/notice">공지사항</a></li>
-			<li><a href="<%=request.getContextPath() %>/faq">자주묻는질문</a></li>
-			<li><a href="<%=request.getContextPath() %>/ask_admin_list">문의하기</a></li>
-		</ul>
-	</nav>
+	<!------------------ 고객센터 상단 사이드바 ----------------------->
+         <nav>
+         <div id="headerMember">
+            <c:if test="${logStatus != 'Y'}">
+               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
+                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
+                  <input type="button" value="로그인" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
+               </div>
+            </c:if>
+            <c:if test="${logStatus == 'Y' }">
+               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
+                  <c:if test="${logType==2}">
+                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
+                  </c:if>
+                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
+                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+               </div>
+            </c:if>
+         </div>   
+         <ul id="seller_cs_menu">
+            <li><a href="#">BEETMALL</a></li>
+            <li><a href="notice">공지사항</a></li>
+            <li><a href="faq">자주묻는 질문</a></li>
+            <li><a href="ask_admin_list">문의하기</a></li>
+         </ul>
+      </nav>
+   </div> 
 	<!-- 가운데 메인 div -->
 	<div id="article">
 		<!-- 문의하기 주황색 윗부분 -->
@@ -139,11 +124,11 @@
 		<!-- 검색/ 문의하기 버튼 -->
 			<div id="search_container">
 			<!--문의하기 버튼 -->
-			<a href="<%=request.getContextPath()%>/ask_admin_write" class="btn" id="ask_btn">문의하기</a>
+			<a href="<%=request.getContextPath()%>/ask_admin_write" id="ask_btn">문의하기</a>
 	
 			<!-- 검색하기 -->
 				<span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
+					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><span id="search_btn">검색</span></a>
 				</span>
 			</div>
 		<fieldset>

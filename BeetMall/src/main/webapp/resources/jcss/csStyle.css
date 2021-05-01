@@ -1,0 +1,123 @@
+@charset "UTF-8";
+/*ask_admin css*/
+a{
+	list-style: none; padding:0; margin:0;
+	}
+.cs_message{
+		margin: 0 auto;
+		font-size:15px;
+		width:90%;
+		margin-bottom:20px;	
+	}
+	
+	#link, #notice{color: gray;}
+	#notice{font-size:12px}
+	/*표*/
+	table{
+		width:100%;	
+		border-spacing: 0;
+		text-indent: initial;
+		margin:0 0 20px 50px;	
+		border-top:1px solid lightgray;
+		border-bottom:1px solid lightgray;
+		font-size:15px;
+	}
+	th, .th{
+		height:40px;
+		font-size:15px;
+		text-align:center;
+		display: table-cell;
+	    vertical-align: inherit;
+	    font-weight: bold;
+	    text-align: -internal-center;
+   		background-color:#f6f6f6;
+   		/*#fcfcfc*/
+	}
+	thead, .answer_content, .td{
+		border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
+	    width:100%;
+	}
+	tr{
+		display: table-row;
+	    vertical-align: inherit;
+	    border-color: inherit;
+	    height:40px;
+	}
+	.td, .content{
+		padding-left:20px;
+		
+	}
+	.content{
+		margin: 20px 0 20px;
+	}
+	td, .td{
+		height:40px;
+	}
+	.tr_head{
+		font-weight:bold;
+	}
+	.tr_head li{
+		float:left;
+	}
+	.td, .th{ line-height:40px;}
+	.td{
+		width:30%; line-height:40px;
+	}
+	/*이전글, 다음글*/
+	.prev_next_wrap{
+		width:90%;
+		margin:20px 0px 0px 50px;
+	}
+	.prev_next_wrap li{
+		height:40px;
+		line-height:40px;
+		border-bottom:1px solid lightgray;
+	}
+	.prev_next_wrap a{
+		padding-left:20px;
+		color: black;
+	}
+	.question_content, .answer_content{padding:10px;}
+	.next{margin-bottom:30px}
+	a{color:black;}
+	answer_line{width:100%; 	background-color:#f6f6f6; height:20px; }
+	#subject,  select{border:none;}
+	#subject{width:300px; color:lightgray;}
+	#subject{border:none; width:500px}
+	a{color:black;}
+	.menu{width:150px}
+	
+	/*ask_admin_list*/	
+	#link{color: gray;}
+	.answer_span{
+		background-color: #fcfcfc;
+		border-radius:10px;
+		padding:5px;
+		font-size:14px;	
+	}
+	.select{
+		margin-left:50px;
+		width:130px;
+		height:30px;
+	}
+	#search_container, #select_container{width:90%; margin:0 auto; margin-bottom:10px;}
+	#select_container{margin:0 auto; height:40px;}
+	select{float:right}
+	/*버튼*/
+	.bottom_wrap{margin:10px auto; width:90%;  text-align:center;}
+	#btn, #ask_btn{
+		width:150px; 
+		height:26px; 
+		margin-left:20px; 
+		background-color:white; 
+		color:black;
+		border:1px solid lightgray;
+	}
+	#ask_btn{margin-left:0;}
+	/* 고객센터 상단 메뉴 */
+	#seller_cs_menu{
+		width:600px;	
+	}
+	/*검색하기*/
+	#search_btn{padding:5px;border-left:1px solid lightgray;}

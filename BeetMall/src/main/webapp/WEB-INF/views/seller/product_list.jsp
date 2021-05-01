@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -12,22 +10,26 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
+	
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
+
 <script>
 	
 
 </script>	
 <style>
-
 	.product_table,.table_wrap{
 		margin: 0 auto;
-		width:95%
+		width:100%
 	}
 	thead{
 		background: #fafafa;
@@ -35,12 +37,12 @@
 	}
 	/*테이블 상단*/
 	th{
-		width:1080px;
+		width:1280px;
 		height:60px;
 		vertical-align:inherit;
 		font-weight:bold;	
     	color:#666666;	
-		font-size:10px;
+		font-size:14px;
 		text-align:center;
 	}
 
@@ -64,7 +66,7 @@
 	.tbl_line_cell{
 		display: table-cell;
 		text-align:center;
-		font-size:10px;
+		font-size:14px;
 		padding:2px 2px 2px 2px;
 	}
 	/*테이블 폭 조정*/
@@ -112,25 +114,46 @@ $(document).ready(function(){
 </script>		
 <body>
 <div class="main">
-		
-	<!-- 사이드바 -->
-	<nav>
-		<ul>
-			<li><a href="<%=request.getContextPath()%>/product_list">상품관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/product_regi">상품등록</a></li>
-			<li><a href="<%=request.getContextPath()%>/order_management">주문 관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/sale_management">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="#">정산 관리</a></li>
-			<li><a href="#">배송 관리</a></li>
-			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
-		</ul>
-	</nav>
+		  <div id="seller_header">
+      <!-- 상단 메뉴 바 -->
+      <nav>
+         <div id="headerMember">
+            <c:if test="${logStatus != 'Y'}">
+               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
+                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
+                  <input type="button" value="로그인" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
+               </div>
+            </c:if>
+            <c:if test="${logStatus == 'Y' }">
+               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
+                  <c:if test="${logType==2}">
+                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
+                  </c:if>
+                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
+                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+               </div>
+            </c:if>
+         </div>   
+         <ul>
+            <li><a href="#">BEETMALL</a></li>
+            <li><a href="#">상품 관리</a></li>
+            <li><a href="#">상품 등록</a></li>
+            <li><a href="#">주문 관리</a></li>
+            <li><a href="#">판매 관리</a></li>
+            <li><a href="seller_sales">매출 관리</a></li>
+            <li><a href="#">정산 관리</a></li>
+            <li><a href="#">배송 관리</a></li>
+            <li><a href="seller_review">리뷰/문의 관리</a></li>
+            <li><a href="intro_farm">회원정보수정</a></li>
+         </ul>
+      </nav>
+   </div>
 	
 	<!-- 가운데 content -->
 	<div id="article">
-		<div class="wrapTitle">내 판매목록</div>
+		<div class="wrapTitle">상품 관리</div>
 	
 			<!-- 전체보기 / select에 따라서 이름 바꾸기 -->
 			<fieldset>

@@ -42,7 +42,7 @@
    margin: 120px auto 0 auto;
 }
 
-	/*카테고리*/
+	/*선택사항 제목, div*/
 	.wrapTitle{
 		margin:40px 40px 40px 0px;
 		text-align:center;}
@@ -63,15 +63,11 @@
 	}
 	.category_wrap li, .category_wrap>div{margin-bottom:20px; font-size:16px;}
 	/* 리뷰 검색 */
+	/* 카테고리 검색 */
 	#categoryList{
 	   width: 90%;
-	   margin: 20px auto;
+	   margin: 50px auto;
 	   border: 1px solid #aaa;
-	   border-radius: 5px;
-	}
-	
-	#categoryList>strong{
-	   text-indent: 0.4em;
 	}
 	
 	#categoryListMiddle{
@@ -80,28 +76,30 @@
 	   display: flex;
 	   flex-basis: 1;
 	   margin-bottom: 10px;
+	   border-top:1px solid #aaa;
 	}
 	
 	#categoryListMiddle ul{
-	   border-top: 1px solid #aaa;
 	   border-bottom: 1px solid #aaa;
 	   overflow: auto;
 	   flex: 1;
 	   display: flex;
 	   flex-direction: column;
-	   
 	}
 	
 	#category{
 	   border-right: 1px solid #aaa;
 	}
-	#category li:hover, #categoryListMiddle li:hover{
-		font-weight:bold;
+	
+	#category a{
+	   color: black;
 	}
 	
 	#categoryListMiddle li{
 	   width: 100%;
+	   text-indent: 0.4em;
 	   display: flex;
+	   margin-top:5px;
 	}
 	
 	#categoryListMiddle span{
@@ -114,11 +112,23 @@
 	   display: flex;
 	   flex-wrap: wrap;
 	}
-	#categoryManagement .notice{float:right;}
-	#mcategory>li{padding-left:10px;}
+	
+	#categoryManagement li{
+	   text-indent: 0.4em;
+	   margin-right: 5px;
+	}
+	
+	#categoryManagement a{
+	   color: black;
+	   font-weight: bold;
+	}
+	#mcategory li>a{
+	   color: black;
+	}
+
 /*제목*/
 	.notice{
-		font-size:0.9em;
+		font-size:0.7em;
 		color:gray;
 	}
 /*판매가격*/
@@ -339,7 +349,7 @@ $(document).ready(function(){
 <body>
 	<div class="main">
 	<!-- 가운데 content -->
-	       <div id="seller_header">
+	  <div id="seller_header">
       <!-- 상단 메뉴 바 -->
       <nav>
          <div id="headerMember">
@@ -395,29 +405,30 @@ $(document).ready(function(){
 		<div class="category_wrap">
             <div id="categoryList">
                <strong>&nbsp;&nbsp;카테고리 선택</strong>
-               
-               <div id="categoryListMiddle">
-               <!-- 대분류 선택 -->
-                  <ul id="category">
-                     <li id="dried_fruits">건과류<span>&gt;</span></li>
-                     <li id="nut">견과류<span>&gt;</span></li>
-                     <li id="fruits">과일<span>&gt;</span></li>
-                     <li id="rice">쌀<span>&gt;</span></li>
-                     <li id="multigrain">잡곡/혼합곡<span>&gt;</span></li>
-                     <li id="vegetable">채소<span>&gt;</span></li>
+                          <div id="categoryListMiddle">
+                  <!--카테고리에서 대분류 카테고리 선택-------------------------->
+                  <ul id="category"><!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
+                     <c:if test="${cateList!=null}">
+                        <!-- 변수 i를 선언해주고 -->
+                        <c:set var="i" value="1"/>
+                        <!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
+                                 i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
+                           <c:forEach var="categoryList" items="${cateList}">
+                              <c:if test="${categoryList.catenum==i}">
+                                 <li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+                                 <c:set var="i" value="${i+1 }"/>
+                              </c:if>
+                           </c:forEach>
+                        <c:remove var="i"/>
+                     </c:if>
                   </ul>
-              <!----------------------------------중분류 선택 -------------------------------------------------------->
-                  <ul id="mcategory">
-        			<!-- 중분류 카테고리 배열로 들어옴 -->
-                  </ul>
+                  
+                  <!--카테고리에서 중분류 카테고리 선택-------------------------->
+                  <ul id="mcategory"></ul>
                </div>
-        
+  				<!--------------------------선택된 카테고리 항목-------------------------->
             </div><!-- categoryList end -->
-		<ul id="categoryManagement">
-                  <li>쌀&nbsp; &gt;현미&nbsp;<span>⊠</span></li>
-                  <li><span  class="notice"><br/>상품과 맞지 않는 카테고리를 등록할 경우 판매중지, 판매금지될 수 있습니다.</span></li>
-        </ul>
-		
+			<ul id="categoryManagement"></ul>
 		</div><!-- categorySelection div end -->
 		
 	<!----------------------------------------------상품명------------------------------------------>

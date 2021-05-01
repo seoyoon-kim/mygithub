@@ -1,7 +1,4 @@
-<!-- 문의사항 작성 페이지 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -18,97 +15,15 @@
 		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		
-		<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/jcss/basicStyle.css">
-</head>
-<style>
-	.cs_message{
-		margin: 0 auto;
-		font-size:15px;
-		width:90%;
-		margin-bottom:20px;	
-	}
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 	
-	#link, #notice{color: gray;}
-	#notice{font-size:12px}
-	/*표*/
-	table{
-		width:90%;	
-		border-spacing: 0;
-		text-indent: initial;
-		margin:0 0 20px 50px;	
-		border-top:2px solid lightgray;
-		border-bottom:2px solid lightgray;
-		font-size:15px;
-	}
-	th, .th{
-		height:40px;
-		font-size:15px;
-		text-align:center;
-		display: table-cell;
-	    vertical-align: inherit;
-	    font-weight: bold;
-	    text-align: -internal-center;
-   		background-color:#f6f6f6;
-   		/*#fcfcfc*/
-	}
-	thead, .answer_content, .td{
-		border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
-	    width:100%;
-	}
-	tr{
-		display: table-row;
-	    vertical-align: inherit;
-	    border-color: inherit;
-	    height:40px;
-	}
-	.td, .content{
-		padding-left:20px;
-		
-	}
-	.content{
-		margin: 20px 0 20px;
-	}
-	td, .td{
-		height:40px;
-	}
-	.tr_head{
-		font-weight:bold;
-	}
-	.tr_head li{
-		float:left;
-	}
-	.td, .th{ line-height:40px;}
-	.td{
-		width:30%; line-height:40px;
-	}
-	/*이전글, 다음글*/
-	.prev_next_wrap{
-		width:90%;
-		margin:20px 0px 0px 50px;
-	}
-	.prev_next_wrap li{
-		height:40px;
-		line-height:40px;
-		border-bottom:1px solid lightgray;
-	}
-	.prev_next_wrap a{
-		padding-left:20px;
-		color: black;
-	}
-	.next{margin-bottom:30px}
-	a{color:black;}
-	answer_line{width:100%; 	background-color:#f6f6f6; height:20px; }
-	#subject, #email, select{border:none;}
-	#subject, #email{width:300px; color:lightgray;}
-	#subject{width:500px}
-	#write_btn{width:150px; margin-left:20px;}
-	a{color:black;}
-	.menu{width:150px}
-</style>
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/csStyle.css">
+</head>
+
+
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote();
@@ -117,15 +32,35 @@ $(document).ready(function() {
 </script>
 <body>
 	<div class="main">
-		<!-- 고객센터 사이드바 -->
-	<nav class="cs_nav" style="margin-rignt:0">
-		<ul class="cs_ul">
-			<li><span class="cs_title">고객센터</span></li>
-			<li><a href="<%=request.getContextPath() %>/notice">공지사항</a></li>
-			<li><a href="<%=request.getContextPath() %>/faq">자주묻는질문</a></li>
-			<li><a href="<%=request.getContextPath() %>/ask_admin_list">문의하기</a></li>
-		</ul>
-	</nav>
+	<!------------------ 고객센터 상단 사이드바 ----------------------->
+         <nav>
+         <div id="headerMember">
+            <c:if test="${logStatus != 'Y'}">
+               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
+                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
+                  <input type="button" value="로그인" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
+               </div>
+            </c:if>
+            <c:if test="${logStatus == 'Y' }">
+               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
+                  <c:if test="${logType==2}">
+                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
+                  </c:if>
+                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
+                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+               </div>
+            </c:if>
+         </div>   
+         <ul id="seller_cs_menu">
+            <li><a href="#">BEETMALL</a></li>
+            <li><a href="notice">공지사항</a></li>
+            <li><a href="faq">자주묻는 질문</a></li>
+            <li><a href="ask_admin_list">문의하기</a></li>
+         </ul>
+      </nav>
+   </div> 
 	<!-- 가운데 메인 div -->
 	<div id="article">
 		<div class="cs_wrapTitle">문의하기</div>
@@ -162,8 +97,8 @@ $(document).ready(function() {
 			</tbody>
 		</table>
 			<div style="text-align:center; margin-bottom:10px ">
-				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-				<input type="submit" value="문의하기" class="btn" id="write_btn"/>				
+				<input type="button" value="취소" id="btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+				<input type="submit" value="문의하기" id="btn"/>				
 			</div>
 	
 		</form>
