@@ -1,22 +1,74 @@
 @charset "UTF-8";
 /*================ 기본 설정 시작 =================*/
-header{
-	width: 1080px; 
-	margin: 0 auto;
-	height: 200px;
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+/* 판매자 페이지는 header, footer 따로쓰기위해 display none */
+header, footer{
+	display: none;
 }
 
 section{
-	width: 1080px;
-	margin: 0 auto;
-	overflow: auto;
-	display: flex;
-	flex-direction: row;
+	width: 100%;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
-footer{
-	width: 1080px;
+/*================ seller header =================*/
+nav{
+	width: 100%;
+	height: 120px;
+	padding: 0 20px;
+	box-shadow: 0px 0px 5px #bbb;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+}
+
+#headerMember{
+	width: 1280px;
+	display: flex;
+	justify-content:flex-end;
+	flex-direction: row;
+	margin: 5px auto 0 auto;
+}
+
+.sellerMenuButtons{
+	border: none;
+	background-color: white;
+	padding: 0 0 0 5px;
+}
+
+nav ul{
+	display: flex;
+	width: 1280px;
+	height: 100px;
+	line-height: 100px;
 	margin: 0 auto;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+nav li{
+	font-size: 16px;
+	text-align: center;
+}
+
+nav li:nth-child(1)>a{
+	color: black;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+article{
+	width: 1280px;
+	hegith: 100px;
+	border-bottom: #ddd;
+	padding: 50px;
+	margin: 120px auto 0 auto;
 }
 
 ul,li{
@@ -25,18 +77,9 @@ ul,li{
 	list-style-type: none;
 }
 
-.font_bold{
-	font-weight: bold;
-}
-
-.default_font{
-	font-family: 'Nanum Gothic', sans-serif;
-	font-size:16px;	
-}
-
 a:hover,a:active,a:visited,a:link{
 	text-decoration: none; 
-	color: white;
+	color: #aaa;
 }
 
 /*================ 기본 설정 끝 =================*/
@@ -79,50 +122,7 @@ a:hover,a:active,a:visited,a:link{
 
 /*================ 헤드 끝 ====================*/
 
-/*================ 사이드바 시작=================*/
-nav{
-	width: 180px;
-	padding: 0 10px;
-	background-color: #f1c40f;
-}
-nav li{
-	padding: 15px;
-	text-align: center;
-}
-/*================ 사이드바 끝 =================*/
 
-article{
-	width: 100%;
-	padding-bottom:50px;
-}
-
-/* 검색하기 */
-#search_container{
-	width: 100%;
-	height: 30px;
-	margin-bottom: 30px;
-}
-#search_box{
-	height: 30px;
-	line-height: 30px;
-	border: solid 1px #ddd;
-	display: inline-block;
-	float: right;
-	background-color: #fff;
-}
-#search{
-	height: 25px;
-	text-indent: 0.2em;
-	border: white;
-	float: left;
-}
-#search_box img{
-	width: 27px;
-	height: 27px;
-	
-	filter: invert(89%) sepia(17%) saturate(7050%) hue-rotate(359deg) brightness(103%) contrast(89%);
-	float: right;
-}
 
 /*================== footer 시작 ====================*/
 footer div{

@@ -2,13 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_header.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_sellerSales.css">
 <!-- 차트 라이브러리 chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
-<!-- 아래 4개의 파일은 html -> pdf 파일로 변환해주는 라이브러리 html2pdf.js다 -->
-<%-- <script src="<%=request.getContextPath() %>/lib/html2canvas.min.js"></script>
-<script src="<%=request.getContextPath() %>/lib/html2pdf.min.js"></script>
- --%>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js'></script>
+<!-- chart.js pdf 변환 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
+
 <!-- 오늘의 날짜를 계산해서 오늘 기준으로 년도, 월, 일이 언제인지를 기준으로 값이 입력 될 수 있도록 한다. -->
 <c:set var='today' value="<%=new java.util.Date() %>"/>
 <c:set var='monthPtn'><fmt:formatDate value="${today }" pattern="yyyy-MM"/></c:set>
@@ -96,6 +97,11 @@
 			// 태그를 이용해 선택된 카테고리의 중분류 카테고리를 담는 변수를 생성한다.
 			let tag ="";
 			
+			// category 대분류 클릭시 색상 변화
+			$('#category>li').css('font-weight','normal');
+			$(this).css('font-weight','bold');
+			
+			
 			// 카테고리 리스트가 널이 아닐경우
 			<c:if test="${cateList!=null }">
 				//  카테고리 넘버가 무엇인지에 따라서 불러온다, 카테고리 넘버가 1이면 중분류 카테고리 1번의 값들을 불러온다.
@@ -103,7 +109,7 @@
 					if(${mcateList.catenum}==cateNum){
 						tag += "<li value='${mcateList.catename}'>"
 								+"<input type='hidden' name='mcatenum' value='${mcateList.mcatenum}'/>"
-								+"${mcateList.mcatename}</li>";
+								+"<a href='#' onclick = 'return false;'/>${mcateList.mcatename}</a></li>";
 					}
 				</c:forEach>
 				$('#mcategory').html(tag);
@@ -111,67 +117,103 @@
 
 		});
 		
-	})
-	
-	
-	$( () => {
+
 		$('#pdfDown').click( () => {
-			console.log('test');
-			// 차트 PDF 다운로드
-			var element = document.getElementById('#myChart');
-			var opt = {
-			  margin:       1,
-			  filename:     'myfile.pdf',
-			  image:        { type: 'jpeg', quality: 0.98 },
-			  html2canvas:  { scale: 2 },
-			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-			};
-			
-			// New Promise-based usage:
-			html2pdf().set(opt).from(element).save();
-			
-			// Old monolithic-style usage:
-			html2pdf(element, opt);
-		})
-		
-	})
+			// 페이지의 크기를 구한다.
+			var reportPageHeight = $('#chartContainer').innerHeight();
+			var reportPageWidth = $('#chartContainer').innerWidth();
+
+			  // 캔버스 개체를 만든다.
+			  var pdfCanvas = $('<canvas />').attr({
+			    id: "canvaspdf",
+			    width: 297,
+			    height: 210
+			  });
+			  
+			  // 캔버스 포지션을 정한다.
+			  var pdfctx = $(pdfCanvas)[0].getContext('2d');
+			  var pdfctxX = 0;
+			  var pdfctxY = 0;
+			  var buffer = 100;
+			  
+ 			  // for each chart.js chart
+			  $("canvas").each(function(index) {
+			    // 차트의 크기를 구한다.
+			    var canvasHeight = $(this).innerHeight();
+			    var canvasWidth = $(this).innerWidth();
+			    
+			    // 새로운 캔서스 안에 넣는다.
+			    pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+			    pdfctxX += canvasWidth + buffer;
+			    pdfctxY += canvasHeight + buffer;
+			     // our report page is in a grid pattern so replicate that in the new canvas
+			    if (index % 2 === 1) {
+			      pdfctxX = 0;
+			      pdfctxY += canvasHeight + buffer;
+			    } 
+			  }); 
+			  
+			  // pdf 객체를 생성하여 넣는다.
+			  var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+			  pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
+			  
+			  // pdf 다운로드
+			  pdf.save('매출내역.pdf');
+		});
+	});
+
 	
 </script>
+
 <section>
-	<!-- 사이드바 -->
-	<nav>
-		<ul>
-			<li><a href="#">상품 관리</a></li>
-			<li><a href="#">상품 등록</a></li>
-			<li><a href="#">주문 관리</a></li>
-			<li><a href="#">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="#">정산 관리</a></li>
-			<li><a href="#">배송 관리</a></li>
-			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
-		</ul>
-	</nav>
+	<div id="seller_header">
+		<!-- 상단 메뉴 바 -->
+		<nav>
+			<div id="headerMember">
+				<c:if test="${logStatus != 'Y'}">
+					<div class="sellerLoginBtn">	<!-- 로그인 전 -->
+						<input type="button" value="회원가입" class="sellerMenuButtons"/>
+						<input type="button" value="로그인" class="sellerMenuButtons"/>
+						<input type="button" value="고객센터" class="sellerMenuButtons"/>
+					</div>
+				</c:if>
+				<c:if test="${logStatus == 'Y' }">
+					<div class="sellerLoginBtn">	<!-- 로그인 후 -->
+						<c:if test="${logType==2}">
+							<input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
+						</c:if>
+						<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
+						<input type="button" value="로그아웃" class="sellerMenuButtons"/>
+						<input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+					</div>
+				</c:if>
+			</div>	
+			<ul>
+				<li><a href="#">BEETMALL</a></li>
+				<li><a href="#">상품 관리</a></li>
+				<li><a href="#">상품 등록</a></li>
+				<li><a href="#">주문 관리</a></li>
+				<li><a href="#">판매 관리</a></li>
+				<li><a href="seller_sales">매출 관리</a></li>
+				<li><a href="#">정산 관리</a></li>
+				<li><a href="#">배송 관리</a></li>
+				<li><a href="seller_review">리뷰/문의 관리</a></li>
+				<li><a href="intro_farm">회원정보수정</a></li>
+			</ul>
+		</nav>
+	</div>
+	
 	<!-- 본문 시작 -->
-	<article>
-		<!-- 검색창 -->
-		<div id="search_container">
-			<span id="search_box">
-				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-			</span>
-		</div>
-		
-		
+	<article>		
 		<div class="wrap">
+			<div class="seller_title">매출 관리</div>
 			<!-- 카테고리 선택 -->
+			<div class="wrapTitle">카테고리</div>
 			<div class="wrapContainer">
-				<div class="wrapTitle">카테고리</div>
 				<div id="categoryList">
-					<strong>&nbsp;&nbsp;카테고리</strong>
-					
 					<div id="categoryListMiddle">
 						<!-- 대분류 카테고리!!!! -->
-						<ul id="category"><!-- 카테고리 리스트에서 대분류 카테고리만 받아오기 -->
+						<ul id="category"><!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
 							<c:if test="${cateList!=null}">
 								<!-- 변수 i를 선언해주고 -->
 								<c:set var="i" value="1"/>
@@ -179,7 +221,7 @@
 											i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
 									<c:forEach var="categoryList" items="${cateList}">
 										<c:if test="${categoryList.catenum==i}">
-											<li value="${categoryList.catenum}">${categoryList.catename}<span>&gt;</span></li>
+											<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
 											<c:set var="i" value="${i+1 }"/>
 										</c:if>
 									</c:forEach>
@@ -187,31 +229,32 @@
 							</c:if>
 						</ul>
 						
-						<!-- 중분류 카테고리!!!!! -->
-						<ul id="mcategory">
-						</ul>
+						<!-- 중분류 카테고리 -->
+						<ul id="mcategory"></ul>
 					</div>
 					
-					<!-- 중분류 카테고리 선택하면 선택된 사항이 들어가는 공간이다!!!! -->
+					<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
 					<ul id="categoryManagement"></ul>
 					
+					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
 					<div id="categorySearch_container">
-						<select class="categorySearch_container_child" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+						<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
 							<option value="년별">년별</option>
 							<option value="월별" selected>월별</option>
 							<option value="일별">일별</option>
 						</select>
-						<input class="categorySearch_container_child" type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start"/>
-						<input class="categorySearch_container_child" type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end"/>
-						<button id="calendarApply">날짜 적용</button>
+						<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start"/>
+						<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b>
+						<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end"/>
+						<button id="calendarApply" style="margin-left:10px;">날짜 적용</button>
 					</div>
 					
 				</div><!-- categoryList 끝 -->
 			</div><!-- 카테고리 선택 끝 -->
 			
 			<!-- 수익 매출 분석 -->
+			<div class="wrapTitle">수익 매출분석<button class="normalBtn" id="pdfDown">PDF 저장</button></div>
 			<div class="wrapContainer">
-				<div class="wrapTitle">수익 매출분석<button id="pdfDown">PDF 저장</button></div>
 				<div id="chartContainer">
 					<canvas id="myChart" style="width:400px;height:200px;"></canvas>
 					
@@ -230,7 +273,14 @@
 									beginAtZero: true // 차트 숫자는 0부터 표시
 								}
 								
+							}, plugins: {
+							      legend: {
+							          labels: {
+							            usePointStyle: true,
+							          },
+							      }
 							}
+							
 						}
 					});
 					
@@ -256,12 +306,6 @@
 					    chart.data.datasets.splice(delData,1);
 					    chart.update();
 					}
-					
-					// 선택한 날짜가 시작일이 종료일보다 뒤일 경우 경고창
-					function dateGapCheck(){
-						
-					}
-					
 					
 					$(function(){
 					//////////////////// 수익 매출분석에 들어갈 labels 시작 /////////////////////
@@ -507,7 +551,7 @@
 							}
 							
 							// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
-							let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></li>";
+							let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+"<a href='#' onclick='return false'>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
 							$('#categoryManagement').append(tag);
 							
 							// append 된 selectName을 배열에 넣어서 저장해놓는다.
@@ -552,7 +596,7 @@
 									"endCalendarDataValue":endCalendarDataValue
 								}, success: function(result){
 									// 엑셀 리스트를 초기화 시킨다.
-									let tag = "<li>No</li>"
+									let tag = "<li>상품번호</li>"
 											+ "<li>매출일자</li>"
 									  	    + "<li>상품명</li>"
 										    + "<li>수량</li>"
@@ -598,7 +642,7 @@
 									// 처음에 날짜 데이터가 있는지 없는지 확인한다.
 									let existenceCheck = new Date($('#excelList li:nth-child(8)').text());
 									if(existenceCheck=='Invalid Date'){
-										alert('검색된 데이터가 없습니다.');
+										alert('검색된 데이터가 없습니다. 날짜를 선택하여 주십시오.');
 										return false;
 									}
 									
@@ -1041,7 +1085,7 @@
 							
 							} else {
 								// 엑셀 리스트를 초기화 시킨다.
-								let tag = "<li>No</li>"
+								let tag = "<li>상품번호</li>"
 										+ "<li>매출일자</li>"
 								  	    + "<li>상품명</li>"
 									    + "<li>수량</li>"
@@ -1061,11 +1105,11 @@
 				</div>
 			</div><!-- 수익 매출분석 끝 -->
 			
+			<div class="wrapTitle">카테고리별 매출분석<button class="normalBtn" id="excelDown">엑셀 저장</button></div>
 			<div class="wrapContainer">
-				<div class="wrapTitle">카테고리별 매출분석<button id="excelDown">엑셀 저장</button></div>
 				<div id="excelContainer">
 					<ul id="excelList">
-						<li>No</li>
+						<li>상품번호</li>
 						<li>매출일자</li>
 						<li>상품명</li>
 						<li>수량</li>
@@ -1097,4 +1141,6 @@
 			
 		</div>
 	</article>
+
+</div>
 </section>

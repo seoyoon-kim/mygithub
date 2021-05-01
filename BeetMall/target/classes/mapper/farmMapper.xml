@@ -19,6 +19,6 @@
 				${item} 
 			</foreach> 
 		</if>
-		and orderconfirm between #{startCalendarDataValue} and #{endCalendarDataValue} order by orderconfirm asc
+		and orderconfirm between #{startCalendarDataValue} and #{endCalendarDataValue} order by orderconfirm asc, ordernum asc 
 	</select>
 </mapper>
