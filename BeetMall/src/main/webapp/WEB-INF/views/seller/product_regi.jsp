@@ -28,6 +28,7 @@
 	select{height:28px;}
 	input, textarea, select{
 		border:1px solid lightgray; 
+		font-size:14px;
 	}
 	input,select,button{height:30px;}
 	textarea{
@@ -38,12 +39,12 @@
    width: 1280px;
    border-bottom: #ddd;
    padding: 50px;
-   margin: 5px auto 0 auto;
+   margin: 0 auto;
 }
 
 	/*선택사항 제목, div*/
 	.wrapTitle{
-		margin:40px 40px 40px 0px;
+		margin:0 40px 40px 0px;
 		text-align:center;}
 	.category_title{
 	   width: 100%;
@@ -110,13 +111,8 @@
 	   width: 90%;
 	   display: flex;
 	   flex-wrap: wrap;
+	   margin-left: 55px;
 	}
-	
-	#categoryManagement li{
-	   text-indent: 0.4em;
-	   margin-right: 5px;
-	}
-	
 	#categoryManagement a{
 	   color: black;
 	   font-weight: bold;
@@ -124,8 +120,8 @@
 	#mcategory li>a{
 	   color: black;
 	}
-
-/*제목*/
+	
+/*해당 목록에 대한 설명 또는 주의사항*/
 	.notice{
 		font-size:0.7em;
 		color:gray;
@@ -213,18 +209,33 @@
           // li 개수 구하여 상품 등록은 한 개의 카테고리만 선택 가능
           let liLength = $('#categoryManagement>li').length;
           if(liLength>=1){
-             return alert('판매 상품 등록은 한 가지 카테고리만 선택해주세요. 원하시는 품목이 없으신 경우 관리자에게 문의해주세요.'); 
+             return alert('판매 상품 등록은 한 가지 카테고리만 선택해주세요.\n원하시는 품목이 없으신 경우 관리자에게 문의해주세요.'); 
           }
           // 선택된 목록 [카테고리 선택] 하단에 보여주기 
-          let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+"<a href='#' onclick='return false'>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
+          let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+"<a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
           $('#categoryManagement').append(tag);
-          // append 된 selectName을 배열에 넣어서 저장
-          // 1. DB 에서 데이터 구할때 쓰이고/ 2. 나중에 지울때 써야한다.
-          resultData.push(selectNum);
-          // 데이터 컨트롤러 실행
-          dataController();  
+      });  
+      //선택한 중분류 삭제
+      //append로 값을 동적으로 추가해줄 경우 새로 html이 실행 된 것이 아니기 때문에 html에서는 그 값을 읽지 못한다.
+      // 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제한다고 생각하면 된다.
+      $(document).on('click','#categoryManagement>li',function(){
+             
+         // 삭제하기 위해서는 어떤 것이 선택되었는지?
+         // 그리고 삭제하는 데이터가 추가 된 것 중에 몇번째에 있는지 알 수 있어야 한다.
+         let liLength = $('#categoryManagement>li').length;
+             
+         // 선택된 목록의 이름과 번호를 구한다.
+         let selectName = $(this).text();
+         let selectNum = $(this).children().val();
+             
+             
+         // 선택된 아이템의 텍스트를 걸러야 한다.
+         let selectGtPosition = selectName.indexOf(">")+1;
+         let selectBoxPosition = selectName.indexOf("⊠");
+         let selectNameResult = selectName.substring(selectGtPosition,selectBoxPosition);
+         $(this).remove();
       });
-   });
+  
 /* 	카테고리 선택 임시 데이터
 	var dried_fruits = ['감말랭이', '건망고','건바나나','건자두', '건포도', '곶감', '기타건과류'];
 	var nut = ['대추','땅콩','마카다미아','밤','아몬드','은행','잣','캐슈너트','피스타치오','피칸','해바라기씨','호두','호박씨','기타견과류'];
@@ -289,11 +300,23 @@
 		e.stopPropagation();
 		return false;
 	});
-		
+//상품명
+	//글자 수 입력에 대한 글자수 변경
+	//100자 넘으면 alert 
+	$('#product_register_name').keyup(function(){
+		var content = $(this).val();//입력된 상품명의 value
+		var count = content.length;
+		$('#count').html(count);
+		if(count>100){
+			alert('상품명은 최대 100자까지 입력 가능합니다.').
+			$(this).val(content.substring(0,100));
+			$('#count').html(100);
+		}
+	});
 //서머노트
 	$(document).ready(function() {
 		  $('#summernote').summernote();
-		});
+	});
 	
 //썸네일 메인이미지 업로드 미리보기
 	function readURL(input) {
@@ -358,29 +381,84 @@ $(document).ready(function(){
 //기간설정하면 달력날짜 바꾸기
 
 //옵션 적용안함 이면 표 비활성화
-
-	$('#option_tbody').children('tr').css('display','none');
+	if($('#select_option').val()=='적용안함'){
+		$('#regi_option_table').css('display','none');
+	}
 	$('#select_option').change(function(){
 		var option = $(this).val();
 		console.log(option);
-		
-		for(var i=0; i<5; i++){
-			if(option=='i'){
-				$('#option_tbody').children('tr').each(function(){
-					
-				});
-				
-			}
+		$('#regi_option_table').css('display','');
+		for(var i = 1; i<option; i++){
+			console.log(option);
+			
+			$('#regi_option_table').children('tr').eq(i).css('display','');
 		}
+
 	});
 	
 	
 	
 });		
-
+//submit 등록하기 전 유효성검사
+$('submit').on('click',function(){
+	//유효성검사 
+	//전체
+	//선택한 날짜가 오늘 이전일 경우 넘어가지 않기, 메세지 띄우기
+	
+	//-------카테고리 선택-------
+	//카테고리가 선택되지 않은 경우,
+	
+	//-------상품명------------
+	//상품명이 공백일 경우,
+	if($('#product_register_name').text('') && $('#product_register_name').val('')){
+         return alert('상품명을 입력해주세요.'); 
+         return false;
+    }
+	//상품명이 100자가 넘는 경우,
+	if($('#product_register_name').text().length>100){
+        return alert('상품명은 100'); 
+        return false;
+   }
+   //--------판매가격-------
+   //판매가격이 입력되지 않은 경우, 
+   		//할인 설정 설정안함  중 어느것도 선택하지 않은 경우,
+	   //할인설정 
+	   //할인금액이 입력되지 않은 경우,
+	   //특정기간 선택 후 기간을 입력하지 않은 경우,
+	   //기간설정 버튼과 하단에 날짜 입력이 동시에 설정되지 않도록 하기
+	   //판매기간 설정 설정안함  중 어느것도 선택하지 않은 경우, 
+	   //판매기간 설정
+	   //날짜를 입력하지 않은 경우,
+	   
+	//--------재고수량---------
+	//재고수량을 입력하지 않은 경우,
+	
+	//-------옵션------------
+	//옵션 선택 후 값을 입력하지 않은 경우,
+	
+	//------상품 이미지-------
+	//대표 이미지를 업로드 하지 않은 경우,
+	
+	//------상세설명---------
+	//상세설명이 빈칸인 경우,
+	
+	//-------배송-----------
+	//택배 또는 픽업 버튼 중 어느것도 선택하지 않은 경우,
+	//택비 설정
+	//배송비를 입력하지 않은 경우,
+	//배송비 결제 방식을 선택하지 않은 경우,
+	
+	//-------상품내용-------------
+	//판매단위를 입력하지 않은 경우,
+	//중량/용량 과 g/kg 중 하나라도 입력하지 않은 경우,
+	//원산지 선택하지 않은 경우,
+	//보간/포장타입을 선택하지 않은 경우,
+	//상품정보, 주의사항, 보관방법, 유통기한이 빈칸일 경우,
+	
+});
 //취소 history back
 	
-
+});//function end
 
 </script>
 <body>
@@ -410,10 +488,10 @@ $(document).ready(function(){
          </div>   
          <ul>
             <li><a href="#">BEETMALL</a></li>
-            <li><a href="#">상품 관리</a></li>
-            <li><a href="#">상품 등록</a></li>
-            <li><a href="#">주문 관리</a></li>
-            <li><a href="#">판매 관리</a></li>
+            <li><a href="product_list">상품 관리</a></li>
+            <li><a href="product_regi">상품 등록</a></li>
+            <li><a href="order_management">주문 관리</a></li>
+            <li><a href="sale_manageement">판매 관리</a></li>
             <li><a href="seller_sales">매출 관리</a></li>
             <li><a href="#">정산 관리</a></li>
             <li><a href="#">배송 관리</a></li>
@@ -466,6 +544,7 @@ $(document).ready(function(){
   				<!--------------------------선택된 카테고리 항목-------------------------->
             </div><!-- categoryList end -->
 			<ul id="categoryManagement"></ul>
+			<span class="notice" style="margin-left:55px;">등록한 판매상품은 고객님이 선택하신 카테고리로 분류되어 홈페이지에 적용됩니다. 원하시는 상품 카테고리가 없거나, 변경을 원하는 경우 관리자에게 문의해주세요.</span>
 		</div><!-- categorySelection div end -->
 		
 	<!----------------------------------------------상품명------------------------------------------>
@@ -473,7 +552,7 @@ $(document).ready(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label for="">상품명</label>&nbsp;
-					<input type="text" name="productname" id="productRegisterName" size="70"/><span>0/100</span><br/>
+					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/><span id="count"></span>/<span id="max_count">100</span><br/>
 					<span class="notice">
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.<br/>
 					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
