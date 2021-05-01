@@ -36,10 +36,9 @@
 /*검색하기*/
 #article{
    width: 1280px;
-   hegith: 100px;
    border-bottom: #ddd;
    padding: 50px;
-   margin: 120px auto 0 auto;
+   margin: 5px auto 0 auto;
 }
 
 	/*선택사항 제목, div*/
@@ -59,14 +58,14 @@
 	.category_wrap{
 		border:1px solid lightgray;
 		padding:20px;
-		margin-botto,:10px;
+		margin-bottom:10px;
 	}
-	.category_wrap li, .category_wrap>div{margin-bottom:20px; font-size:16px;}
+	 .category_wrap>div{margin-bottom:20px; font-size:15px;}
 	/* 리뷰 검색 */
 	/* 카테고리 검색 */
 	#categoryList{
 	   width: 90%;
-	   margin: 50px auto;
+	   margin: 30px auto;
 	   border: 1px solid #aaa;
 	}
 	
@@ -75,7 +74,7 @@
 	   height: 170px;
 	   display: flex;
 	   flex-basis: 1;
-	   margin-bottom: 10px;
+	   margin-bottom: 5px;
 	   border-top:1px solid #aaa;
 	}
 	
@@ -89,8 +88,8 @@
 	
 	#category{
 	   border-right: 1px solid #aaa;
+	   font-size:14px;
 	}
-	
 	#category a{
 	   color: black;
 	}
@@ -108,7 +107,7 @@
 	}
 	
 	#categoryManagement{
-	   width: 100%;
+	   width: 90%;
 	   display: flex;
 	   flex-wrap: wrap;
 	}
@@ -176,19 +175,57 @@
 </style>
 <script>
 //1. 카테고리 변경
-$(function(){
-	// 데이터에서 불러오기 
-
-/* 
-대분류 번호
-1	건과류
-2	견과류
-3	과일
-4	쌀
-5	잡곡/혼합곡
-6	채소
-*/
-	
+// 데이터에서 불러오기 
+   //선택한 대분류 카테고리에 속한 중분류 카테고리 불러오기
+   $(function(){
+      $(document).on('click',"#category>li",function(){
+         // 선택된 카테고리 번호
+         let cateNum = $(this).val();
+         // 태그를 이용해 선택된 카테고리의 중분류 카테고리를 담는 변수
+         let tag ="";
+         
+         // category 대분류 클릭시  bold처리
+         $('#category>li').css('font-weight','normal');
+         $(this).css('font-weight','bold');
+         
+         
+         // 카테고리 리스트가 널이 아닐경우
+         <c:if test="${cateList!=null }">
+            //  카테고리 넘버가 무엇인지에 따라서 불러온다, 카테고리 넘버가 1이면 중분류 카테고리 1번의 값들을 불러오기
+            <c:forEach var="mcateList" items="${cateList}">
+               if(${mcateList.catenum}==cateNum){
+                  tag += "<li value='${mcateList.catename}'>"
+                        +"<input type='hidden' name='mcatenum' value='${mcateList.mcatenum}'/>"
+                        +"<a href='#' onclick = 'return false;'/>${mcateList.mcatename}</a></li>";	
+               }
+            </c:forEach>
+            $('#mcategory').html(tag);
+         </c:if>
+      });
+      // mcategory 중분류 클릭시 
+      $(document).on('click',"#mcategory>li",function(){
+    	  // 선택한 중분류 bold처리
+    	  $('#mcategory>li').css('font-weight','normal');
+          $(this).css('font-weight','bold');
+          // 선택한 목록의 중분류 이름, 번호 구하기
+          let selectName = $(this).text();
+          let selectNum = $(this).children().val();
+          // li 개수 구하여 상품 등록은 한 개의 카테고리만 선택 가능
+          let liLength = $('#categoryManagement>li').length;
+          if(liLength>=1){
+             return alert('판매 상품 등록은 한 가지 카테고리만 선택해주세요. 원하시는 품목이 없으신 경우 관리자에게 문의해주세요.'); 
+          }
+          // 선택된 목록 [카테고리 선택] 하단에 보여주기 
+          let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+"<a href='#' onclick='return false'>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
+          $('#categoryManagement').append(tag);
+          // append 된 selectName을 배열에 넣어서 저장
+          // 1. DB 에서 데이터 구할때 쓰이고/ 2. 나중에 지울때 써야한다.
+          resultData.push(selectNum);
+          // 데이터 컨트롤러 실행
+          dataController();  
+      });
+   });
+/* 	카테고리 선택 임시 데이터
 	var dried_fruits = ['감말랭이', '건망고','건바나나','건자두', '건포도', '곶감', '기타건과류'];
 	var nut = ['대추','땅콩','마카다미아','밤','아몬드','은행','잣','캐슈너트','피스타치오','피칸','해바라기씨','호두','호박씨','기타견과류'];
 	var fruits = ['감', '감귤', '과일바구니','딸기','레몬','리치','망고','매실','바나나','배','복분자','복숭아','블루베리','사과','석류','수박','아보카도','오렌지','자두', '자몽','참외','천혜향 ','체리','키위/참다래', '토마토', '파인애플','포도','한라봉','혼합과일세트', '기타과일'];
@@ -244,8 +281,8 @@ $(function(){
 			}//for end
 		}//if else end
 		
-	});
-});
+	}); */
+
 //버튼 클릭시 위로 올라가기 방지
 	$('button').click(function(e){
 		e.preventDefault();   
@@ -405,7 +442,7 @@ $(document).ready(function(){
 		<div class="category_wrap">
             <div id="categoryList">
                <strong>&nbsp;&nbsp;카테고리 선택</strong>
-                          <div id="categoryListMiddle">
+                 <div id="categoryListMiddle">
                   <!--카테고리에서 대분류 카테고리 선택-------------------------->
                   <ul id="category"><!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
                      <c:if test="${cateList!=null}">
@@ -439,7 +476,7 @@ $(document).ready(function(){
 					<input type="text" name="productname" id="productRegisterName" size="70"/><span>0/100</span><br/>
 					<span class="notice">
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.<br/>
-					유명 상품 유사문구를 무단으로 도용하여 ~스타일, ~st 등과 같이 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
+					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
 					상품명을 검색최적화 가이드에 잘 맞게 입력하면 검색 노출에 도움이 될 수 있습니다. <br/>
 					</span>
 				</li>
@@ -555,7 +592,7 @@ $(document).ready(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label>대표이미지</label><br/>
-					<img name="thumb_image" id="thumb_image"src="#" alt="image upload" style="width:300px;"/><br/>
+					<img name="thumb_image" id="thumb_image"src="#" alt="image upload" style="width:400px;"/><br/>
 					<input type="file" id="thumb_image_upload" accept="img/*" onchange="readURL(this);" /></li>
 				<li>
 					<img name=""  id="thumb_image_small" width="200" src="#" alt="image upload" />&nbsp;	
