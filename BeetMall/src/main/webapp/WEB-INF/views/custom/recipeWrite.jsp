@@ -19,9 +19,10 @@
 <style>
 	#mypageMenubar{
 		display:block;
+		font-size:17px;
 	}
 	
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; font-size:14px;}
+	*{margin:0px; padding:0px; list-style-type :none; font-size:14px;}
 
 	a:hover, a:active, a:visited, a:link {
    		color: black;
@@ -109,7 +110,7 @@
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span>로그인한 아이디</span></td>
+					<td  class="td"><span></span></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">대표이미지</th>

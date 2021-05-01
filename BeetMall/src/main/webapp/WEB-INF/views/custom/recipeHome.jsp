@@ -28,12 +28,12 @@ a:hover, a:active, a:visited, a:link {
 }
 #mypageMenubar{
 	display:block;
+	font-size:17px;
 }
 
 #section{
 background-color:white;
 margin:0 auto;
-font-family: 'Noto Sans KR', sans-serif;
 width:1080px;
 }
 
@@ -209,16 +209,18 @@ height:300px;
 
 }
 
-#recipeListul>li:nth-child(7n+1){
+#recipeListul>li:nth-child(7n+1),#rtitleImg{
 float:left;
 height:300px;
+width:235px;
 
 }
 
 
-#recipeListul>li:nth-child(7n+1)>a>img{
+#recipeListul>li:nth-child(7n+1)>a>img,#rtitleImg{
 height:300px;
 padding:10px;
+width:235px;
 }
 
 #recipeListul>li:nth-child(7n+1)>a{
@@ -286,6 +288,10 @@ $(function(){
 function top10(){ 
 	  $('#top10').css('color','black');	  	  
 	  $('#new10').css('color','#eee');		  
+	  
+	    var txt1="<img src='img/";
+	   var txt2="'/>" ;
+	  
 }
 
 
@@ -296,6 +302,11 @@ function new10(){
 }
 
 
+
+function rtitleimg(){
+	$('#rtitleImg>a')
+	
+}
 
 </script>
 
@@ -344,14 +355,14 @@ function new10(){
    
 	    <div class="recipeList">
 	    
-   
+   <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
 		         <c:forEach var="data" items="${list}">   
 		             <ul id="recipeListul">
-		              <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr5.jfif"></a></li>
-		              <li><a href="recipeView?recipenum=${data.recipenum}">맛있는 딸기 케이크</a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
 		              <li>${data.userid}</li>
-		              <li><a href="recipeView?recipenum=${data.recipenum}">딸기와 유기농 계란을 이용한 케이크 레시피</a></li>
-		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} {data.recipewritedate}</li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}"></a></li>
+		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} ${data.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  
 		           

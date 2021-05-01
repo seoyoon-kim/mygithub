@@ -14,6 +14,11 @@
 <style>
 
 /*  기본설정----------------------------------------------                 */
+a:hover, a:active, a:visited, a:link {
+    text-decoration: none;
+    color: black;
+}
+
 #main {
 	font-size: 20px;
 }
@@ -22,7 +27,6 @@
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-	font-family: 'Nanum Gothic', sans-serif;
 }
 
 #searchBtn {
@@ -245,54 +249,21 @@
 		</div>
 		<!--------------게시판 이미지들-------------------->
 		<div id="recimainbox">
+		
+		
+		   <c:forEach var="data" items="${list}">
+		       <c:if test="${logId==data.userid}"> 
 			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
-			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
-			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
-			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
+							<ul>
+								<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+								<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+								<li>${data.userid}</li>
+								<li>★★★★★(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
+								<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
+							</ul>
+			</div> </c:if>
+			</c:forEach>
+        
 		</div>
 		<!--------------페이징 표시-------------------->
 

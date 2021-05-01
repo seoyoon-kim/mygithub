@@ -482,9 +482,6 @@
                <div id="repcipevview">
                   <div><a href="customMyrecipe">마이레시피</a></div>
                </div>
-               <div id="repcipevview">
-                  <div><a href="recipeView">게시판보기</a></div>
-               </div>
                 <div id="repcipevview">
                   <div><a href="recipeWrite">글쓰기</a></div>
                </div>

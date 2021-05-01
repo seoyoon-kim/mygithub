@@ -22,12 +22,16 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	RecipeServiceImp RecipeService;
 
 	@RequestMapping("/recipeView")
-	public ModelAndView RecipeAllList() {
+	public ModelAndView RecipeAllList(int recipenum) {
 		
 		ModelAndView mav=new ModelAndView();
-		
+		//////////1게시글 목록 뽑아내기
 		mav.addObject("list" , RecipeService.RecipeAllList());
+		//////////2해당 게시글 보이게 하기
+		mav.addObject("vo", RecipeService.RecipeSelect(recipenum));
+	
 		mav.setViewName("custom/recipeView");
+		
 		return mav;
 	}
 	
@@ -77,4 +81,28 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		return mav;
 	}
 	
+	@RequestMapping("/recipeHome")
+	public ModelAndView RecipeAllListHome() {
+		
+		ModelAndView mav=new ModelAndView();
+		//////////1게시글 목록 뽑아내기
+		mav.addObject("list" , RecipeService.RecipeAllListHome());
+
+		mav.setViewName("custom/recipeHome");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/customMyrecipe")
+	public ModelAndView customMyrecipe(String userid) {
+		
+		ModelAndView mav=new ModelAndView();
+		//////////1게시글 목록 뽑아내기
+		mav.addObject("list" , RecipeService.customMyrecipe());	
+		mav.setViewName("custom/customMyrecipe");
+		
+		return mav;
+	}
+
 }

@@ -25,6 +25,7 @@ a:hover, a:active, a:visited, a:link {
 }
 #mypageMenubar{
 	display:block;
+	font-size:17px;
 }
 
 #searchBtn {
@@ -36,7 +37,6 @@ a:hover, a:active, a:visited, a:link {
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-    font-family: 'Noto Sans KR', sans-serif;
 }
 /* ------------------페이징처리부분-------------------- */
 .page_wrap {
@@ -254,6 +254,7 @@ ul>li {
 }
 
 /*표*/
+
 table{
 	width:100%%;	
 	border-spacing: 0;
@@ -286,8 +287,9 @@ tr{
 .content{
 	padding: 20px 0 20px;
 }
-td, .td,{
+td, .td{
 	height:50px;
+	width:930px;
 }
 .tr_head{
 	font-weight:bold;
@@ -302,10 +304,17 @@ td, .td,{
 }
 .td, .th{ line-height:50px;}
 .td{
-	width:30%; line-height:50px;
+	width:930px; line-height:50px;
 }
-</style>
 
+
+</style>
+<script>
+
+
+
+
+</script>
 <body>
 
 	<div class="section">
@@ -335,27 +344,6 @@ td, .td,{
 				</ul>
 
 				<ul id="reciList">
-					<li>123</li>
-					<li>맛있는 요리!</li>
-					<li>작성자</li>
-					<li>50</li>
-					<li>72</li>
-					<li>2020.01.23</li>
-
-					<li>123</li>
-					<li>맛있는 요리!</li>
-					<li>작성자</li>
-					<li>50</li>
-					<li>72</li>
-					<li>2020.01.23</li>
-
-					<li>123</li>
-					<li>맛있는 요리!</li>
-					<li>작성자</li>
-					<li>50</li>
-					<li>72</li>
-					<li>2020.01.23</li>
-
 					<c:forEach var="data" items="${list}">
 					<li>${data.recipenum}</li>
 					<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
@@ -364,7 +352,6 @@ td, .td,{
 					<li>${data.recipehit}</li>
 					<li>${data.recipewritedate}</li>
 					</c:forEach>
-
 				</ul>
 			</div>
 			<!-- slist -->
@@ -389,43 +376,34 @@ td, .td,{
 
 		<!-- ------------------------게시글 보기----------------------------------- -->
 
-
 		<fieldset>
 			<table>
 				<tbody>
 					<tr class="tr_head">
 						<th class="menu">제목</th>
-						<td><span class="td">코로나19로 인한 픽업 서비스 중단 안내</span></td>
+						<td><span class="td" id="td">${vo.recipenum}</span></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">작성자</th>
-						<td ><span class="td">Beetmall</span></td>
+						<td ><span class="td" id="td">${vo.userid}</span></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">추천수</th>
-						<td ><span class="td">Beetmall</span></td>
+						<td ><span class="td" id="td">${vo.reciperecommend}</span></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">조회수</th>
-						<td ><span class="td">Beetmall</span></td>
+						<td ><span class="td" id="td">${vo.recipehit}</span></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">작성일</th>
-						<td ><span class="td">Beetmall</span></td>
+						<td ><span class="td" id="td">${vo.recipewritedate}</span></td>
 					</tr>
 					<tr>
 						<td colspan="2">
 							<span class="content" >
 							
-							베트남 피자 반짱느엉 만들기 돼지고기 볶아주기 갈은 돼지고기에 소금과 후추 마늘을 넣고 볶아주세요. 돼지고기, 옥수수,
-			건새우 계란 섞기 ... 라이스페이퍼 위에 2의 재료 올리고 굽기 ... 파 올려주기 ... 칠리소스 뿌리기 ... 치즈
-			올려주기 ... 라이스페이서 반으로 접어주기 베트남 피자 반짱느엉 만들기 돼지고기 볶아주기 갈은 돼지고기에 소금과 후추
-			마늘을 넣고 볶아주세요. 돼지고기, 옥수수, 건새우 계란 섞기 ... 라이스페이퍼 위에 2의 재료 올리고 굽기 ... 파
-			올려주기 ... 칠리소스 뿌리기 ... 치즈 올려주기 ... 라이스페이서 반으로 접어주기 베트남 피자 반짱느엉 만들기
-
-			돼지고기 볶아주기 갈은 돼지고기에 소금과 후추 마늘을 넣고 볶아주세요. 돼지고기, 옥수수, 건새우 계란 섞기 ...
-
-			라이스페이퍼 위에 2의 재료 올리고 굽기 ... 파 올려주기 ... 칠리소스 뿌리기 ... 치즈 올려주기 ... 라이스페이서
+							${vo.recipecontent}							
 						
 							</span>
 						</td>	

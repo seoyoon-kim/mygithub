@@ -24,4 +24,25 @@ public class RecipeServiceImp implements RecipeService {
 	public int recipeWriteOk(RecipeVO vo) {
 		return RecipeDAO.recipeWriteOk(vo);
 	}
+
+	@Override
+	public RecipeVO RecipeSelect(int recipenum) {
+		
+		return RecipeDAO.RecipeSelect(recipenum);
+	}
+
+	@Override
+	public List<RecipeVO> RecipeAllListHome() {
+		
+		return RecipeDAO.RecipeAllListHome();
+	}
+
+	@Override
+	public List<RecipeVO> customMyrecipe() {
+	
+		return RecipeDAO.customMyrecipe();
+	}
+
+
+	
 }
