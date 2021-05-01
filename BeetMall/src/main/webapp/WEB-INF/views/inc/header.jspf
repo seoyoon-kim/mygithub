@@ -33,6 +33,7 @@
 	#menu{
 		width:1080px;
 		margin:0 auto;
+		padding-top:40px;
 	}
 	#logoImg{
 		text-align:center;
@@ -85,6 +86,36 @@
 	.centerTarget{
 		margin:0 auto;
 	}
+	
+	/* 상단 룰렛 */
+	#rollDiv{
+		width:100%;
+		height:40px;
+		background-color: rgb(252,118,45);
+		color:white;
+		text-align: center;
+		font-size: 15px;
+		line-height: 40px;
+		display:none;
+		position: absolute;
+	}
+	#rollInfo{
+	}
+	.miniroll{
+		font-size:11px;
+	}
+	.arrow{
+		font-size:20px;
+	}
+	#rollClose{
+		display:none;
+		text-align:center;
+	}
+	#rollInfo>span{
+		text-align:center;
+	}
+	
+	
 </style>
 <script>
 	$(function(){
@@ -97,7 +128,85 @@
 		$("input[value=로그아웃]").click(function(){
 			location.href="logout";
 		})
+		/* 메뉴 바 내려오게 하기 */
+		$(document).on('scroll', function(){
+			var scroll = window.scrollY;
+			if(scroll>255){
+				$("#menuBar").css("position","absolute").css("top",scroll).css("z-index","90");
+			}else {
+				$("#menuBar").css("position","static");
+			}
+		});
+		
+		/*룰렛*/
+		setY();
+		$("#rollDiv").on('mousedown',function(){
+			setMoveStart();
+		})
+		$("#rollDiv").on('mouseup',function(){
+			setFlag();
+		})
+		
+		$("#rollClose").click(function(){
+			$("#rollClose").css("display","none");
+			$("#rollOpen").css("display","inline-block");
+			rollClose();
+		})
 	});
+	/* 룰렛 돌리기 */
+	var popup, eventY, divY, flag = false;
+	function setY(){
+		popup = document.getElementById("rollDiv").style;
+		popup.top = "0px";
+		roll = document.getElementById("roll").style;
+	}
+	var roll
+	function setMoveStart(){
+		flag = true;
+		
+		// 클릭이벤트 좌표
+		eventY = event.clientY;
+		// 룰렛 좌표
+		divY = parseInt(popup.top);
+		document.onmousemove = setMouseDrag;
+	}
+	var moveX, moveY;
+	function setMouseDrag(){
+		if(flag){
+			moveY = event.clientY;
+			var y = moveY - eventY;
+			
+			roll.height = divY+y+"px";
+			popup.top = divY+y+"px";
+		}
+	}
+	
+	function setFlag(){
+		var rollclose = document.getElementById("rollClose");
+		var rollopen = document.getElementById("rollOpen");
+		flag = false;
+		if(parseInt(popup.top)<200){
+			roll.height = 0+"px";
+			popup.top = 0+"px";
+			rollclose.style.display = 'none';
+			rollopen.style.display = 'inline-block';
+		}else if(parseInt(popup.top)>200){
+			roll.height = 440+"px";
+			popup.top = 440+"px";
+			infoTxt = document.getElementById("rollInfo");
+			rollclose.style.display = 'inline-block';
+			rollopen.style.display = 'none';
+			
+		}
+		/* popup.top = "0px"; */	
+	}
+	
+	/* document.onmouseup = setFlag; */
+	function rollClose(){
+			roll.height = 0+"px";
+			popup.top = 0+"px";
+	}
+	
 </script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -105,6 +214,15 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_header.css">
 </head>
 <body>
+	<div id="roll" style="position:relative;z-index:100; height:0px;background-color:rgb(255, 194, 161);">
+					
+		</div>
+		<div class="centerTarget" id="rollDiv">
+			<div class="section" id="rollInfo">
+				<span id="rollOpen"><span class="arrow">▽</span> 오늘의 추천 상품! <span class="miniroll">아래로 당겼다 놓아보세요!</span><span class="arrow">▽</span></span>
+				<span id='rollClose'><span class="arrow">△</span> 다시 위로 밀거나 누르시면 닫힙니다 <span class="arrow">△</span></span>				
+			</div>
+	</div>
 	<div id= "menu">	<!-- 상단메뉴전체 div -->
 	<c:if test="${logStatus != 'Y'}">
 		<div class="loginButtons">	<!-- 로그인 전 -->

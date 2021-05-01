@@ -320,6 +320,11 @@
 	#repcipevview{
         padding-bottom: 40px;
     }
+    
+    /* 상단 룰렛 */
+    #rollDiv{
+    	display:block;
+    }
 </style>
 <script>
 	$(function(){
@@ -371,6 +376,11 @@
 		});
 		
 	})
+	
+	
+	
+	
+	
 </script>
 
 
