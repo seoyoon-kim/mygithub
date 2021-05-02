@@ -1,4 +1,4 @@
-package com.beetmall.sshj.controller;
+package com.beetmall.sshj.seller.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beetmall.sshj.service.FarmService;
-import com.beetmall.sshj.vo.FarmVO;
+import com.beetmall.sshj.seller.service.FarmService;
+import com.beetmall.sshj.seller.vo.FarmVO;
 
 @Controller
 public class FarmController {

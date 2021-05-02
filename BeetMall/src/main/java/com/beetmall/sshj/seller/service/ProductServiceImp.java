@@ -1,4 +1,4 @@
-package com.beetmall.sshj.service;
+package com.beetmall.sshj.seller.service;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.beetmall.sshj.vo;
+package com.beetmall.sshj.seller.vo;
 
 public class ProductVO {
 	//Product 상품등록

@@ -1,20 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_header.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_sellerSales.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_header.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">
 <!-- 차트 라이브러리 chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js'></script>
 <!-- chart.js pdf 변환 -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
 
 <!-- 오늘의 날짜를 계산해서 오늘 기준으로 년도, 월, 일이 언제인지를 기준으로 값이 입력 될 수 있도록 한다. -->
-<c:set var='today' value="<%=new java.util.Date() %>"/>
-<c:set var='monthPtn'><fmt:formatDate value="${today }" pattern="yyyy-MM"/></c:set>
-<c:set var='datePtn'><fmt:formatDate value="${today }" pattern="yyyy-MM-dd"/></c:set>
-<c:set var='yearCheck'><fmt:formatDate value="${today }" pattern="yyyy"/></c:set>
+<c:set var='today' value="<%=new java.util.Date()%>" />
+<c:set var='monthPtn'>
+	<fmt:formatDate value="${today }" pattern="yyyy-MM" />
+</c:set>
+<c:set var='datePtn'>
+	<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" />
+</c:set>
+<c:set var='yearCheck'>
+	<fmt:formatDate value="${today }" pattern="yyyy" />
+</c:set>
 
 <script> // 차트와 엑셀에 데이터가 들어가는데 필요한 기능에게 변화되는 도움만 주고 관여는 하지 않는 기능들 모아놓은 스크립트
 
@@ -117,7 +122,7 @@
 
 		});
 		
-
+		//pdf 다운로드 누르면 실행
 		$('#pdfDown').click( () => {
 			// 페이지의 크기를 구한다.
 			var reportPageHeight = $('#chartContainer').innerHeight();
@@ -126,8 +131,8 @@
 			  // 캔버스 개체를 만든다.
 			  var pdfCanvas = $('<canvas />').attr({
 			    id: "canvaspdf",
-			    width: 297,
-			    height: 210
+			    width: reportPageWidth,
+			    height: reportPageHeight
 			  });
 			  
 			  // 캔버스 포지션을 정한다.
@@ -142,15 +147,14 @@
 			    var canvasHeight = $(this).innerHeight();
 			    var canvasWidth = $(this).innerWidth();
 			    
-			    // 새로운 캔서스 안에 넣는다.
+			    // 새로운 캔버스 안에 넣는다.
 			    pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
 			    pdfctxX += canvasWidth + buffer;
-			    pdfctxY += canvasHeight + buffer;
-			     // our report page is in a grid pattern so replicate that in the new canvas
+		     
 			    if (index % 2 === 1) {
 			      pdfctxX = 0;
 			      pdfctxY += canvasHeight + buffer;
-			    } 
+			    }
 			  }); 
 			  
 			  // pdf 객체를 생성하여 넣는다.
@@ -160,9 +164,10 @@
 			  // pdf 다운로드
 			  pdf.save('매출내역.pdf');
 		});
+		
+		
 	});
 
-	
 </script>
 
 <section>
@@ -171,23 +176,21 @@
 		<nav>
 			<div id="headerMember">
 				<c:if test="${logStatus != 'Y'}">
-					<div class="sellerLoginBtn">	<!-- 로그인 전 -->
-						<input type="button" value="회원가입" class="sellerMenuButtons"/>
-						<input type="button" value="로그인" class="sellerMenuButtons"/>
-						<input type="button" value="고객센터" class="sellerMenuButtons"/>
+					<div class="sellerLoginBtn">
+						<!-- 로그인 전 -->
+						<input type="button" value="회원가입" class="sellerMenuButtons" /> <input type="button" value="로그인" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" />
 					</div>
 				</c:if>
 				<c:if test="${logStatus == 'Y' }">
-					<div class="sellerLoginBtn">	<!-- 로그인 후 -->
+					<div class="sellerLoginBtn">
+						<!-- 로그인 후 -->
 						<c:if test="${logType==2}">
-							<input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
+							<input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons" />
 						</c:if>
-						<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
-						<input type="button" value="로그아웃" class="sellerMenuButtons"/>
-						<input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+						<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span> <input type="button" value="로그아웃" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" onClick="location.href='<%=request.getContextPath()%>/ask_admin_list'" />
 					</div>
 				</c:if>
-			</div>	
+			</div>
 			<ul>
 				<li><a href="#">BEETMALL</a></li>
 				<li><a href="#">상품 관리</a></li>
@@ -202,9 +205,9 @@
 			</ul>
 		</nav>
 	</div>
-	
+
 	<!-- 본문 시작 -->
-	<article>		
+	<article>
 		<div class="wrap">
 			<div class="seller_title">매출 관리</div>
 			<!-- 카테고리 선택 -->
@@ -213,51 +216,54 @@
 				<div id="categoryList">
 					<div id="categoryListMiddle">
 						<!-- 대분류 카테고리!!!! -->
-						<ul id="category"><!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
+						<ul id="category">
+							<!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
 							<c:if test="${cateList!=null}">
 								<!-- 변수 i를 선언해주고 -->
-								<c:set var="i" value="1"/>
+								<c:set var="i" value="1" />
 								<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
 											i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
-									<c:forEach var="categoryList" items="${cateList}">
-										<c:if test="${categoryList.catenum==i}">
-											<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
-											<c:set var="i" value="${i+1 }"/>
-										</c:if>
-									</c:forEach>
-								<c:remove var="i"/>
+								<c:forEach var="categoryList" items="${cateList}">
+									<c:if test="${categoryList.catenum==i}">
+										<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+										<c:set var="i" value="${i+1 }" />
+									</c:if>
+								</c:forEach>
+								<c:remove var="i" />
 							</c:if>
 						</ul>
-						
+
 						<!-- 중분류 카테고리 -->
 						<ul id="mcategory"></ul>
 					</div>
-					
+
 					<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
 					<ul id="categoryManagement"></ul>
-					
+
 					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
 					<div id="categorySearch_container">
 						<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
 							<option value="년별">년별</option>
 							<option value="월별" selected>월별</option>
 							<option value="일별">일별</option>
-						</select>
-						<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start"/>
-						<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b>
-						<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end"/>
-						<button id="calendarApply" style="margin-left:10px;">날짜 적용</button>
+						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
 					</div>
-					
-				</div><!-- categoryList 끝 -->
-			</div><!-- 카테고리 선택 끝 -->
-			
+
+				</div>
+				<!-- categoryList 끝 -->
+			</div>
+			<!-- 카테고리 선택 끝 -->
+
 			<!-- 수익 매출 분석 -->
-			<div class="wrapTitle">수익 매출분석<button class="normalBtn" id="pdfDown">PDF 저장</button></div>
+			<div class="wrapTitle">
+				수익 매출분석
+				<button class="normalBtn" id="pdfDown">PDF 저장</button>
+			</div>
 			<div class="wrapContainer">
 				<div id="chartContainer">
-					<canvas id="myChart" style="width:400px;height:200px;"></canvas>
-					
+					<canvas id="myChart" style="width: 400px; height: 200px;"></canvas>
+
 					<script> // 차트 선언, 카테고리, 날짜, 차트, 엑셀 관여하는 스크립트
 					
 					let ctx = document.getElementById("myChart").getContext("2d");
@@ -273,12 +279,6 @@
 									beginAtZero: true // 차트 숫자는 0부터 표시
 								}
 								
-							}, plugins: {
-							      legend: {
-							          labels: {
-							            usePointStyle: true,
-							          },
-							      }
 							}
 							
 						}
@@ -294,7 +294,9 @@
 					// 년별, 월별, 일별인지 체크하기 위한 변수 선언
 					let dateCheck = "";
 					
-					/////////////////////////////// 공통 분모로 사용 가능한 함수 /////////////////////////////
+					// 페이징 번호
+					let excelListNum = 0;
+					/////////////////////////////// 차트 추가 삭제 함수 /////////////////////////////
 					//차트 추가하기
 					function addData(chart, data) {
 					    chart.data.datasets.push(data);
@@ -306,6 +308,10 @@
 					    chart.data.datasets.splice(delData,1);
 					    chart.update();
 					}
+					
+
+					
+					
 					
 					$(function(){
 					//////////////////// 수익 매출분석에 들어갈 labels 시작 /////////////////////
@@ -604,19 +610,24 @@
 									        + "<li>매출금액</li>";
 									// 엑셀 리스트 li에 산출된 데이터 값을 넣는다.
 									let $result = $(result);
+									
 									$result.each(function(idx,vo){
-										tag += "<li>" + vo.ordernum + "</li>";
-										tag += "<li value=" + vo.mcatenum + ">" + vo.orderconfirm + "</li>";
-										tag += "<li value=" + vo.mcatename + ">" + vo.productname + "</li>";
-										tag += "<li>" + vo.orderquantity + "</li>";
-										tag += "<li>" + vo.orderprice + "</li>";
-										tag += "<li>" + (vo.orderquantity * vo.orderprice) + "</li>";
+										
+										tag += "<li style='display: none;'>" + vo.ordernum + "</li>";
+										tag += "<li style='display: none;' value=" + vo.mcatenum + ">" + vo.orderconfirm + "</li>";
+										tag += "<li style='display: none;' value=" + vo.mcatename + ">" + vo.productname + "</li>";
+										tag += "<li style='display: none;'>" + vo.orderquantity + "</li>";
+										tag += "<li style='display: none;'>" + vo.orderprice + "</li>";
+										tag += "<li style='display: none;'>" + (vo.orderquantity * vo.orderprice) + "</li>";
 										
 									});
+									
 									$('#excelList').html(tag);
 									
-									
-									
+									// 엑셀 페이징 				
+									let excelPagingInit = 1;
+									excelPaging($result.length, excelPagingInit);
+									excelListNum = $result.length;
 									
 									// 데이터를 저장해서 넘겨줄 값
 									let resultArr = [];
@@ -1096,6 +1107,8 @@
 							}
 						})// 삭제 함수 끝
 						
+
+						
 						
 					})
 					
@@ -1103,9 +1116,13 @@
 					
 					</script>
 				</div>
-			</div><!-- 수익 매출분석 끝 -->
-			
-			<div class="wrapTitle">카테고리별 매출분석<button class="normalBtn" id="excelDown">엑셀 저장</button></div>
+			</div>
+			<!-- 수익 매출분석 끝 -->
+
+			<div class="wrapTitle">
+				카테고리별 매출분석
+				<button class="normalBtn" id="excelDown">엑셀 저장</button>
+			</div>
 			<div class="wrapContainer">
 				<div id="excelContainer">
 					<ul id="excelList">
@@ -1117,30 +1134,127 @@
 						<li>매출금액</li>
 					</ul>
 				</div>
-				
+<script>
+// 엑셀 페이징 설정
+let MathNum;
+function excelPaging(num , excelPagingInit){
+	let excelPagingTag = '<a class="arrow pprev" href="javascript:void(0);" onclick="apprev(this);"></a> <a class="arrow prev" href="javascript:void(0);" onclick="aprev(this);"></a>';
+	MathNum = Math.ceil(num/10);
+	if(excelPagingInit==1){//초기화
+		if(num<10){
+			excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">1</a>';  
+			for(let i = 1; i <= num; i++){
+				$('#excelList>li:nth-child(n+7):nth-child(-n+'+(7 * num)+')').css('display','inline');
+			}
+		} else if(num>10){
+			for(let i = 0; i < MathNum; i++){
+				if( i == 0 ){
+					excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">' + (i+1) + '</a>';
+				} else {
+					excelPagingTag += '<a class="arrow" href="javascript:void(0);" onclick="anum(this);">' + (i+1) + '</a>';
+				}
+				if(MathNum==10) break;
+			}
+			
+			$('#excelList>li:nth-child(n+7):nth-child(-n+66)').css('display','inline');
+		}
+		
+		excelPagingTag += '<a class="arrow next" href="javascript:void(0);" onclick="anext(this);"></a> <a class="arrow nnext" href="javascript:void(0);" onclick="annext(this);"></a>';
+		
+	} else {// 페이지 이동 ( 이전, 숫자, 다음 , 맨 마지막 시 ) 사용
+		$('#excelList>li:nth-child(n+7)').css('display','none');
+		// 만약 2가 눌리면, 3이 눌리면
+		// 11페이지가 눌리면
+		let pageNum = MathNum/10;
+		
+		if(excelPagingInit==)
+		// 페이지 번호를 나눈 값이 1.1 ~ 2.0 == 11부터 20페이지
+		
+		for(let i = 0; i < MathNum; i++){				
+			if( i == excelPagingInit ){
+				excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">' + (i+1) + '</a>';
+			} else {
+				excelPagingTag += '<a class="arrow" href="javascript:void(0);" onclick="anum(this);">' + (i+1) + '</a>';
+			}
+			if(MathNum==10) break;
+		}
+		
+		for(let i = 1; i <= num; i++){
+			$('#excelList>li:nth-child(n+7):nth-child(-n+'+(7 * num)+')').css('display','inline');
+		}
+		
+		$('#excelList>li:nth-child(n+7):nth-child(-n+66)').css('display','inline');
+		
+		
+		excelPagingTag += '<a class="arrow next" href="javascript:void(0);" onclick="anext(this);"></a> <a class="arrow nnext" href="javascript:void(0);" onclick="annext(this);"></a>'; 
+	}
+/* 	console.log(MathNum);
+	console.log(MathNum/10);
+	console.log(10/10);
+	console.log(20/10);
+	console.log(31/10 * 10); */
+	
+	$('.page_nation').html(excelPagingTag);
+}
+
+// 맨 첫페이지
+function apprev(){
+	// excelList에 값이 10개 이상있으면 엑셀 페이징 초기 
+	if(excelListNum > 10){
+		excelPaging(excelListNum, 1);
+	}
+}
+
+// 이전 페이지 이동
+function aprev(){
+	if(excelListNum > 10){
+		// 1이상이면 이전페이지로 한다.
+		if($('.active').text() > 1 ){
+			excelPaging(excelListNum, $('.active').text()-1);	
+		} 
+	}
+}
+
+// 숫자 누르기
+function anum(clickNum){
+	// 누른 페이지 번호가 무엇인지 확인
+	if(excelListNum > 10){
+		excelPaging($(clickNum).text());
+	}
+}
+
+// 다음페이지
+function anext(){
+	if(excelListNum > 10){
+		// MathNum 즉, 마지막페이지가 아닐 경우 다음페이지로 이동 가능하다.
+		if($('.active').text() > MathNum ){
+			excelPaging(excelListNum, $('.active').text()+1);	
+		}
+	}
+}
+
+// 맨 끝페이지
+function annext(){
+	if(excelListNum > 10){
+		// MathNum 즉, 마지막 페이지로 이동
+		excelPaging(excelListNum, MathNum);
+	}
+}
+
+</script>
 				<!--------------페이징 표시-------------------->
 				<div class="page_wrap">
 					<div class="page_nation">
-					   <a class="arrow pprev" href="#"></a>
-					   <a class="arrow prev" href="#"></a>
-					   <a href="#" class="active">1</a>
-					   <a href="#">2</a>
-					   <a href="#">3</a>
-					   <a href="#">4</a>
-					   <a href="#">5</a>
-					   <a href="#">6</a>
-					   <a href="#">7</a>
-					   <a href="#">8</a>
-					   <a href="#">9</a>
-					   <a href="#">10</a>
-					   <a class="arrow next" href="#"></a>
-					   <a class="arrow nnext" href="#"></a>
+						<a class="arrow pprev" href="#" onclick="return false;"></a> 
+						<a class="arrow prev" href="#" onclick="return false;"></a> 
+						<a class="active" href="#" onclick="return false;">1</a>  
+						<a class="arrow next" href="#" onclick="return false;"></a> 
+						<a class="arrow nnext" href="#" onclick="return false;"></a>
 					</div>
-				 </div>
+				</div>
 			</div>
-			
+
 		</div>
 	</article>
 
-</div>
 </section>

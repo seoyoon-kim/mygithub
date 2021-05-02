@@ -1,4 +1,4 @@
-package com.beetmall.sshj.vo;
+package com.beetmall.sshj.seller.vo;
 
 public class FarmVO {
 	// 카테고리 대분류
