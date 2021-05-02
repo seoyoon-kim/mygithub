@@ -43,6 +43,12 @@ public class RecipeServiceImp implements RecipeService {
 		return RecipeDAO.customMyrecipe();
 	}
 
+	@Override
+	public RecipeVO RecipeLastSelect(RecipeVO vo) {
+		
+		return  RecipeDAO.RecipeLastSelect(vo);
+	}
+
 
 	
 }

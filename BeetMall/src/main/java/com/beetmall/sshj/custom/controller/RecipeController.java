@@ -83,6 +83,8 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			
 			mav.setViewName("redirect:recipeView"); //됬을때
 		}
+		
+		mav.addObject("vo", RecipeService.RecipeLastSelect(vo));
 		mav.setViewName("redirect:recipeHome");
 		
 		return mav;

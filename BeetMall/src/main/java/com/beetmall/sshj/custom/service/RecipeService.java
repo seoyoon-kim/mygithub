@@ -9,6 +9,8 @@ public interface RecipeService {
 	
 	public RecipeVO RecipeSelect(int recipenum);
 
+	public RecipeVO RecipeLastSelect(RecipeVO vo);
+	
 	public List<RecipeVO>RecipeAllListHome();
 	
 	public List<RecipeVO>customMyrecipe();

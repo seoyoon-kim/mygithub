@@ -12,7 +12,7 @@ public interface RecipeDAO {
 
 	public int recipeWriteOk(RecipeVO vo);
 	
-	
+	public RecipeVO RecipeLastSelect(RecipeVO vo);
 	
 	public RecipeVO RecipeSelect(int recipenum);
 

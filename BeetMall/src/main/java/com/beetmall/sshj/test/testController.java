@@ -77,6 +77,16 @@ public class testController {
 	public String customInfo() {
 		return "custom/custominfo";
 	}
+	
+	@RequestMapping("/custominfoWrite")
+	public String custominfoWrite() {
+		return "custom/custominfoWrite";
+	}
+	
+	@RequestMapping("/custominfoView")
+	public String customInfoView() {
+		return "custom/custominfoView";
+	}
 
 	@RequestMapping("/customWish")
 	public String customWish() {
