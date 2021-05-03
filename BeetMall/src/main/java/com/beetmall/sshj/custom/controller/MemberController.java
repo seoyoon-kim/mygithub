@@ -111,19 +111,19 @@ public class MemberController {
 		vo.setUserphone(tel1+"-"+tel2+"-"+tel3);
 		
 		// 확인용 //
-		System.out.println("id-->"+vo.getUserid());
-		System.out.println("pwd-->"+vo.getUserpwd());
-		System.out.println("name-->"+vo.getUsername());
-		System.out.println("tel-->"+vo.getUserphone());
-		System.out.println("email-->"+vo.getUseremail());
-		System.out.println("zipcode-->"+vo.getUserzipcode());
-		System.out.println("addr-->"+vo.getUseraddr());
-		System.out.println("userdetaildder-->"+vo.getUserdetailaddr());
-		System.out.println("birth-->"+vo.getBirthday());
-		System.out.println("joindate-->"+vo.getJoindate());
-		System.out.println("type-->"+vo.getUsertype());
-		System.out.println("stop-->"+vo.getUserstop());
-		System.out.println("point-->"+vo.getPoint());
+		System.out.println("id-->"+vo.getUserid());	// 널
+		System.out.println("pwd-->"+vo.getUserpwd());	// 잘들어옴
+		System.out.println("name-->"+vo.getUsername());	//ㅇㅇ
+		System.out.println("tel-->"+vo.getUserphone());	//ㅇㅇ
+		System.out.println("email-->"+vo.getUseremail());	//ㅇㅇ
+		System.out.println("zipcode-->"+vo.getUserzipcode());	//ㅇㅇ
+		System.out.println("addr-->"+vo.getUseraddr());	//ㅇㅇ
+		System.out.println("userdetaildder-->"+vo.getUserdetailaddr());	//ㅇㅇ
+		System.out.println("birth-->"+vo.getBirthday());	//ㅇㅇ
+		System.out.println("joindate-->"+vo.getJoindate());	// 널
+		System.out.println("type-->"+vo.getUsertype());	//0
+		System.out.println("stop-->"+vo.getUserstop());	//널
+		System.out.println("point-->"+vo.getPoint());	//0
 		// 확인용 //				
 		
 		if(memberservice.regiFinishiOk(vo)==1) {
@@ -139,35 +139,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	// 이메일 인증
-//	@RequestMapping("emailSend")
-//	@ResponseBody
-//	public String sendemail(HttpSession session, HttpServletRequest req) {
-//		String userEmail = req.getParameter("SendToEmail");
-//		UUID random = UUID.randomUUID();
-//		String uuid = random.toString();
-//		String subject = "메일보내기 연습중(제목부분)"; // 메일 제목부분
-//		String content = "<div style='background:lightblue;border:1px solid gray;"
-//				+ "border-radius:5px;margin:30px;padding:30px;width:80%'>"
-//				+ "<h1>이 이메일은 회원가입을 위한 인증코드입니다.</h1>"
-//				+ "<p style='font-size:1.5em'>인증코드:<span style='color:#00f'>"+uuid+"</span></p>"
-//				+ "<div>";
-//		try {
-//			MimeMessage message = MailSender.createMimeMessage();
-//			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-//			messageHelper.setFrom("beetamll@naver.com"); //보내는 메일주소
-//			messageHelper.setTo(userEmail); //받는 메일주소
-//			messageHelper.setSubject(subject); // 보내는 제목
-//			messageHelper.setText("text/html;charset=UTF-8", content);
-//			mailSender.send(message);
-//			session.setAttribute("emailUUID", uuid);
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("이메일 인증 에러");
-//		}
-//		return "";
-//	}
-	//이메일 인증
+	//이메일 인증코드 발송
 	@RequestMapping(value="emailSend", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
 	@ResponseBody
 	public String sendemail(HttpSession session, HttpServletRequest req) {
@@ -176,13 +148,14 @@ public class MemberController {
 		UUID random = UUID.randomUUID();
 		System.out.println("random="+random);
 		String uuid = random.toString();
-		System.out.println("uuid"+uuid);
+		System.out.println("uuid="+uuid);
+		String emailCode = uuid.substring(0,6);
+		System.out.println(emailCode);
+		
 		String subject = "메일보내기 연습중(제목부분)"; // 메일 제목부분
-		String content = "<div style='background:lightblue;border:1px solid gray;"
-				+ "border-radius:5px;margin:30px;padding:30px;width:80%'>"
-				+ "<h1>이 이메일은 회원가입을 위한 인증코드입니다.</h1>"
-				+ "<p style='font-size:1.5em'>인증코드:<span style='color:#00f'>"+uuid+"</span></p>"
-				+ "<div>";
+		String content = "이 이메일은 비트몰의 회원가입을 위한 인증코드입니다.\n"
+					+ "인증코드:"+emailCode;
+		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			
 			@Override
@@ -195,8 +168,26 @@ public class MemberController {
 			}
 		};
 		mailSender.send(preparator);
-		return "성공";
+		session.setAttribute("emailCode", emailCode);
+		return "result";
 	}
+	
+	@RequestMapping("emailCheck")
+	@ResponseBody
+	public int emailCodeCheck(HttpServletRequest req, HttpSession session) {
+		String inputEmailCode = req.getParameter("emailCode");
+		System.out.println("inputEmailCode="+inputEmailCode);
+		String emailCode = (String)session.getAttribute("emailCode");
+		System.out.println("emailCode="+emailCode);
+		if(inputEmailCode.equals(emailCode)) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	
+	
 	@RequestMapping("regiFinish")
 	public String regiFinish() {	// 회원가입 완료
 		return "login/registerFinish";	

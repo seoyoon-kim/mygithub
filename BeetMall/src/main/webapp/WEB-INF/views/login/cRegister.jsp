@@ -185,6 +185,48 @@
 		});
 		
 		$("#infosubmit").click(function(){
+			if($("#checkIdResult").val()=='N'){
+				alert("아이디 중복검사를 진행해주세요");
+				return false;
+			}
+			if($("#checkEmailResult").val()=='N'){
+				alert("이메일 인증을 진행해주세요");
+				return false;
+			}
+			if($("#userpwd").val()==null || $("#userpwd").val()==''){ 
+				alert("비밀번호를 입력해주세요"); 
+				return false;
+			}
+			if($("#userpwd").val() != $("#userpwd2").val()){ 
+				alert("비밀번호 확인과 비밀번호가 일치하지 않습니다."); 
+				return false;
+			}
+			if($("#username").val()==null || $("#username").val()==''){ 
+				alert("이름을 입력해주세요"); 
+				return false;
+			}
+			if($("#userphone2").val()==null || $("#userphone2").val()==''|| $("#userphone3").val()==null || $("#userphone3").val()==''){ 
+				alert("휴대폰 번호를 입력해주세요"); 
+				return false;
+			}
+			if($("#userzipcode").val()==null || $("#userzipcode").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#useraddr").val()==null || $("#useraddr").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#userdetailaddr").val()==null || $("#userdetailaddr").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#birthday").val()==null || $("#birthday").val()==''){ 
+				alert("생년월일을 입력해주세요"); 
+				return false;
+			}
+			
+			
 			if($("#hinfocheck1").val() != "Y") {
 				alert("약관에 동의해주세요!");
 				return false;
@@ -197,11 +239,6 @@
 				alert("약관에 동의해주세요!");
 				return false;
 			}
-			if($("#checkIdResult").val()=='N'){
-				alert("아이디 중복검사를 진행해주세요");
-				return false;
-			}
-			
 			
 			// 맨 밑부분
 			if(regCheck()==false){
@@ -213,12 +250,18 @@
 		});
 		
 		// 중복검사 창 띄우기
-		$("#idCheckDibPop").click(function(){
+		function overlapIdCheck(){
 			$("#modal").css("display","block");
 			$(document.body).css("overflow","hidden");
 			$(".idCheckDiv").css("display","block");
-			$("#popupcloseBtn").css("margin-left","140px").css("margin-top","85px");
-		})
+			$("#popupcloseBtn").css("margin-left","140px").css("margin-top","85px");			
+		}
+		$("#idCheckDibPop").click(function(){
+			overlapIdCheck();
+		});
+		$("#userid").click(function(){
+			overlapIdCheck();
+		});
 		
 		// 중복확인
 		$("#idCheck").click(function(){
@@ -266,7 +309,7 @@
 				if($("#userid2").val()!=null && $("#userid2").val()!=''){
 					$("#userid").val(checkid);
 					$("#checkIdResult").val('Y');
-					$("#userid").attr('disabled',true);
+					/* $("#userid").attr('disabled',true); */
 					popupClose();
 					$("#modal").css("display","none");
 					$(document.body).css("overflow","visible");
@@ -294,30 +337,48 @@
 		        oncomplete: function(data) {
 		            $("#userzipcode").val(data.zonecode);
 		            $("#useraddr").val(data.address);
-		            /* $("#userdetailaddr").css('focus', true); */
 		            document.getElementById('userdetailaddr').focus();
 		        }
 		    }).open();
 		});
 		
-		// 이메일 인증
+		// 이메일 인증코드 전송
 		$("#emailSend").click(function(){
-			var url = 'emailSend'
-			var param = "SendToEmail=ekqhxkq54@naver.com";
+			var url = 'emailSend';
+			var param = "SendToEmail="+$("#useremail").val();
 			$.ajax({
 				url : url,
 				data : param,
 				success :function(data){
-					console.log(data);
+					alert("인증코드가 성공적으로 전송되었습니다. 이메일을 확인해주세요");
 				}, error : function(){
-					console.log("url="+url);
-					console.log("email="+param);
-					alert("실패..");
+					alert("인증코드 전송에 실패하였습니다 잠시후 다시 시도해주세요");
 				}
 			})
 		})
 		
-		
+		// 이메일 인증코드 확인
+		$("#emailCheckBtn").click(function(){
+			if($("#emailCheck").val()!=null || $("#emailCheck").val()!=''){
+				var url = 'emailCheck';
+				var param = "emailCode="+$("#emailCheck").val();
+				$.ajax({
+					url : url,
+					data : param,
+					success : function(data){
+						console.log(data);
+						if(data == -1){
+							alert("인증에 실패하였습니다.");
+						}else if(data == 1){
+							alert("인증에 성공하였습니다.");							
+							$("#checkEmailResult").val('Y');
+						}
+					}, error : function(){
+						alert("인증에 실패하였습니다.");
+					}
+				});
+			}
+		})
 	});
 	
 	// 아이디 검색 팝업 닫기
@@ -388,13 +449,15 @@
 		<input type="hidden" id="hinfocheck2" value="N"/>
 		<input type="hidden" id="hinfocheck3" value="N"/>
 		<input type="hidden" id="checkIdResult" value="N"/>
+		<input type="hidden" id="checkEmailResult" value="N"/>
+		
 			<ul id="formUl">
 				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" readonly/><input type="button" value="중복검사" class="btn" id="idCheckDibPop"/></li>
 				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
 				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
 				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증번호 전송" class="btn" id="emailSend"/></li>
-				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" class="btn"/></li>
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
+				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
 							
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
 																			<option value="010">010</option>
