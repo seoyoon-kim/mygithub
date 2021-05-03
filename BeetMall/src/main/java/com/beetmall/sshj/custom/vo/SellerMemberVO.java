@@ -15,7 +15,7 @@ public class SellerMemberVO {
 	private String storeemail;
 	private String bank;
 	private String bankname;
-	private int bankaccount;
+	private String bankaccount;
 	public String getUserid() {
 		return userid;
 	}
@@ -100,12 +100,13 @@ public class SellerMemberVO {
 	public void setBankname(String bankname) {
 		this.bankname = bankname;
 	}
-	public int getBankaccount() {
+	public String getBankaccount() {
 		return bankaccount;
 	}
-	public void setBankaccount(int bankaccount) {
+	public void setBankaccount(String bankaccount) {
 		this.bankaccount = bankaccount;
 	}
+	
 	
 
 }

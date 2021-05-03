@@ -1,5 +1,6 @@
 package com.beetmall.sshj.custom.controller;
 
+import java.io.File;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -7,16 +8,24 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.MemberService;
+import com.beetmall.sshj.custom.vo.CategoryFarmVO;
 import com.beetmall.sshj.custom.vo.MemberVO;
 import com.beetmall.sshj.custom.vo.SellerMemberVO;
 
@@ -26,6 +35,8 @@ public class MemberController {
 	MemberService memberservice;
 	@Inject
 	JavaMailSenderImpl mailSender;
+	@Inject
+	private DataSourceTransactionManager transactionManager;
 	
 	@RequestMapping("login")	// 로그인 페이지
 	public String login() {	
@@ -43,7 +54,10 @@ public class MemberController {
 	public String sRegister() {	// 판매자 회원가입
 		return "login/sRegister";	
 	}
-	
+	@RequestMapping("registerFinish")
+	public String regiFin() {
+		return "login/registerFinish.jsp";
+	}
 	@RequestMapping("/loginCheck")
 	public ModelAndView loginCheck() {
 		
@@ -112,23 +126,22 @@ public class MemberController {
 		vo.setUserphone(tel1+"-"+tel2+"-"+tel3);
 		
 		// 확인용 //
-		System.out.println("id-->"+vo.getUserid());	// 널
-		System.out.println("pwd-->"+vo.getUserpwd());	// 잘들어옴
-		System.out.println("name-->"+vo.getUsername());	//ㅇㅇ
-		System.out.println("tel-->"+vo.getUserphone());	//ㅇㅇ
-		System.out.println("email-->"+vo.getUseremail());	//ㅇㅇ
-		System.out.println("zipcode-->"+vo.getUserzipcode());	//ㅇㅇ
-		System.out.println("addr-->"+vo.getUseraddr());	//ㅇㅇ
-		System.out.println("userdetaildder-->"+vo.getUserdetailaddr());	//ㅇㅇ
-		System.out.println("birth-->"+vo.getBirthday());	//ㅇㅇ
-		System.out.println("joindate-->"+vo.getJoindate());	// 널
-		System.out.println("type-->"+vo.getUsertype());	//0
-		System.out.println("stop-->"+vo.getUserstop());	//널
-		System.out.println("point-->"+vo.getPoint());	//0
-		// 확인용 //				
-		
+//		System.out.println("id-->"+vo.getUserid());	// 널
+//		System.out.println("pwd-->"+vo.getUserpwd());	// 잘들어옴
+//		System.out.println("name-->"+vo.getUsername());	//ㅇㅇ
+//		System.out.println("tel-->"+vo.getUserphone());	//ㅇㅇ
+//		System.out.println("email-->"+vo.getUseremail());	//ㅇㅇ
+//		System.out.println("zipcode-->"+vo.getUserzipcode());	//ㅇㅇ
+//		System.out.println("addr-->"+vo.getUseraddr());	//ㅇㅇ
+//		System.out.println("userdetaildder-->"+vo.getUserdetailaddr());	//ㅇㅇ
+//		System.out.println("birth-->"+vo.getBirthday());	//ㅇㅇ
+//		System.out.println("joindate-->"+vo.getJoindate());	// 널
+//		System.out.println("type-->"+vo.getUsertype());	//0
+//		System.out.println("stop-->"+vo.getUserstop());	//널
+//		System.out.println("point-->"+vo.getPoint());	//0
+		// 확인용 //	
 		if(memberservice.regiFinishiOk(vo)==1) {
-			mav.setViewName("redirect:/");
+			mav.setViewName("redirect:registerFinish");
 		}else {
 			mav.addObject(vo);
 			mav.addObject("userphone1",tel1);
@@ -141,48 +154,85 @@ public class MemberController {
 	}
 	// 판매자 회원가입
 	@RequestMapping(value="/sregiFinish", method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo,HttpServletRequest req) {
+	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
+	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo, CategoryFarmVO cvo, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String tel1 = req.getParameter("userphone1");
 		String tel2 = req.getParameter("userphone2");
 		String tel3 = req.getParameter("userphone3");
+		
 		vo.setUserphone(tel1+"-"+tel2+"-"+tel3);
-		// 확인용 //
-		System.out.println("id-->"+vo.getUserid());	// 널
-		System.out.println("pwd-->"+vo.getUserpwd());	// 잘들어옴
-		System.out.println("name-->"+vo.getUsername());	//ㅇㅇ
-		System.out.println("tel-->"+vo.getUserphone());	//ㅇㅇ
-		System.out.println("email-->"+vo.getUseremail());	//ㅇㅇ
-		System.out.println("zipcode-->"+vo.getUserzipcode());	//ㅇㅇ
-		System.out.println("addr-->"+vo.getUseraddr());	//ㅇㅇ
-		System.out.println("userdetaildder-->"+vo.getUserdetailaddr());	//ㅇㅇ
-		System.out.println("birth-->"+vo.getBirthday());	//ㅇㅇ
-		System.out.println("joindate-->"+vo.getJoindate());	// 널
-		System.out.println("type-->"+vo.getUsertype());	//0
-		System.out.println("stop-->"+vo.getUserstop());	//널
-		System.out.println("point-->"+vo.getPoint());	//0
 		// 판매자 테이블로 들어가야 하는 부분
+		String path = req.getSession().getServletContext().getRealPath("/resources/sellerregiimgs");
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		MultipartFile file = mr.getFile("sellerregiimg");
+		String uploadFilename = new String();
+		if(file!=null) {	// 첨부파일이 있을 때
+			String orgFilename = file.getOriginalFilename();
+			if(!orgFilename.equals("") && orgFilename!=null) {
+				File f = new File(path, orgFilename);
+				int i = 1;
+				while(f.exists()) {	// 있으면 true, 없으면 false
+					int point = orgFilename.lastIndexOf(".");	// .위치
+					String name = orgFilename.substring(0, point);	// 파일명
+					String extName = orgFilename.substring(point+1);	//확장자
+					f = new File(path, name+"_"+ i++ +"."+extName);
+				}// while end
+				try {
+					file.transferTo(f);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				// 변경된 파일명
+				uploadFilename = f.getName();
+			}
+		}// if end
+		svo.setSellerregiimg(uploadFilename);
 		
-		
-		System.out.println("id-->"+svo.getUserid());	//ㅇㅇ
-		System.out.println("num-->"+svo.getStorenum());	// 0 
-		System.out.println("storename-->"+svo.getStorename()); // ㅇㅇ
-		System.out.println("sellername-->"+svo.getSellername());	//ㅇㅇ
-		System.out.println("sellerreginum-->"+svo.getSellerreginum());	//ㅇㅇ
-		System.out.println("sellerregiimg-->"+svo.getSellerregiimg());	// 널
-		System.out.println("regiapproval-->"+svo.getRegiapproval());	// 널
-		System.out.println("regiapprovaldate-->"+svo.getRegiapprovaldate());	//널
-		System.out.println("zipcode-->"+svo.getStorezipcode());	// ㅇㅇ
-		System.out.println("addr-->"+svo.getStoreaddr());	//ㅇㅇ
-		System.out.println("detailaddr-->"+svo.getStoredetailaddr());	// ㅇㅇ
-		System.out.println("storeemail-->"+svo.getStoreemail());	//ㅇㅇ
-		System.out.println("bank-->"+svo.getBank());	//ㅇㅇ
-		System.out.println("bankname-->"+svo.getBankname());	//ㅇㅇ
-		System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
-		
-		
-		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = transactionManager.getTransaction(def);
+		try {
+			int result1 = memberservice.regiFinishiOk(vo);
+			System.out.println("농장번호"+cvo.getStorenum());
+			cvo.setLatitude("0");
+			cvo.setLogetitude("0");
+			System.out.println("방문자수"+cvo.getFarmvisitor());
+			
+			int result2 = memberservice.farmInsert(cvo);
+			System.out.println("농장번호"+cvo.getStorenum());
+			svo.setStorenum(cvo.getStorenum());
+			System.out.println("id-->"+svo.getUserid());	//ㅇㅇ
+			System.out.println("num-->"+svo.getStorenum());	// 0 
+			System.out.println("storename-->"+svo.getStorename()); // ㅇㅇ
+			System.out.println("sellername-->"+svo.getSellername());	//ㅇㅇ
+			System.out.println("sellerreginum-->"+svo.getSellerreginum());	//ㅇㅇ
+			System.out.println("sellerregiimg-->"+svo.getSellerregiimg());	// 널
+			System.out.println("regiapproval-->"+svo.getRegiapproval());	// 널
+			System.out.println("regiapprovaldate-->"+svo.getRegiapprovaldate());	//널
+			System.out.println("zipcode-->"+svo.getStorezipcode());	// ㅇㅇ
+			System.out.println("addr-->"+svo.getStoreaddr());	//ㅇㅇ
+			System.out.println("detailaddr-->"+svo.getStoredetailaddr());	// ㅇㅇ
+			System.out.println("storeemail-->"+svo.getStoreemail());	//ㅇㅇ
+			System.out.println("bank-->"+svo.getBank());	//ㅇㅇ
+			System.out.println("bankname-->"+svo.getBankname());	//ㅇㅇ
+			System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
+			
+			int result3 = memberservice.sellerRegiFinishiOk(svo);
+			// 정상실행시 commit
+			transactionManager.commit(status);
+			mav.setViewName("redirect:registerFinish");
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("트랜잭션 문제.. 되게 골치아프니 주의..");
+			mav.addObject(vo);
+			mav.addObject(svo);
+			mav.addObject("userphone1",tel1);
+			mav.addObject("userphone2",tel2);
+			mav.addObject("userphone3",tel3);
+			mav.addObject("result","NO");
+			mav.setViewName("redirect:sregister");
+		}
 		return mav;
 	}
 	

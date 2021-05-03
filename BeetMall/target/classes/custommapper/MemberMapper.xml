@@ -14,4 +14,12 @@
 	<select id="infoSelect" resultType="String">
 		select userinfocontent from useinfo where userinfotitle = #{param1}
 	</select>
+	<insert id="farmInsert" parameterType="com.beetmall.sshj.custom.vo.CategoryFarmVO">
+		insert into farm(storenum, farmname, farmintro, farmprofile, farmvisitor, farmbest, latitude, logetitude)
+		values(farmsq.nextval, null, null, null, 0, null, #{latitude}, #{logetitude})
+	</insert>
+	<insert id="sellerRegiFinishiOk" parameterType="com.beetmall.sshj.custom.vo.SellerMemberVO">
+		insert into seller(userid, storenum, storename, sellername, sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname, bankaccount)
+		values(#{userid}, #{storenum}, #{storename}, #{sellername}, #{sellerreginum}, #{sellerregiimg}, 0, null, #{storezipcode}, #{storeaddr}, #{storedetailaddr}, #{storeemail}, #{bank}, #{bankname}, #{bankaccount})
+	</insert>
 </mapper>
