@@ -11,11 +11,6 @@ public class testController {
 		return "custom/categoryMain";
 	}
 	
-	@RequestMapping("/FAQBoard")
-	public String FAQBoard() {
-		return "custom/customerCenter/FAQBoard";
-	}
-	
 	@RequestMapping("/mapping")
 	public String mapping() {
 		return "custom/mapList";
@@ -39,10 +34,6 @@ public class testController {
 	@RequestMapping("myfavoriForm")
 	public String myfavoriForm() {
 		return "mypages/myfavoriForm";
-	}
-	@RequestMapping("knotice_view")
-	public String knotice_view() {
-		return "custom/customerCenter/notice_view";
 	}
 	@RequestMapping("chargeAPI")
 	public String chargeAPI() {
