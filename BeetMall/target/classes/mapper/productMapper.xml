@@ -3,4 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.dao.ProductDAO">
+	<select id="boardAllRecord" resultType="com.beetmall.sshj.vo.ProductVO">
+		
+	</select>
 </mapper>

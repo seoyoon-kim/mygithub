@@ -1,24 +1,37 @@
 package com.beetmall.sshj.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.custom.vo.MemberVO;
 import com.beetmall.sshj.service.FarmService;
+import com.beetmall.sshj.service.ProductService;
+import com.beetmall.sshj.vo.ProductVO;
 
 @Controller
 public class ProductController {
 	
-	//대분류, 중분류 카테고리 데이터를 가져오기 위해 이미 만들어진 FarmService 의존객체 자동주입
 	@Autowired
 	FarmService farmService;
+	@Autowired
+	ProductService productService;
 	
 	//판매상품 목록
 	@RequestMapping("/product_list")
-	public String product_list() {
-		return "seller/product_list";
+	public ModelAndView product_list() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("productList", productService.productAllSelect());
+		mav.setViewName("seller/product_list");
+		return mav;
 	}
+	
 	//판매 상품등록페이지 대분류,중분류 카테고리 불러오기
 	@RequestMapping("/product_regi")
 	public ModelAndView category_select() {
@@ -30,10 +43,21 @@ public class ProductController {
 		return mav;
 	}
 	//판매상품등록
-	/*
-	 * @RequestMapping("/product_regi") public String product_regi() { return
-	 * "seller/product_regi"; }
-	 */
+	@RequestMapping(value="/product_regi", method=RequestMethod.POST)
+	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {
+		
+		//session
+		vo.setUserid((String)session.getAttribute("logVo"));
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(productService.productInsert(vo)>0) {
+			mav.setViewName("redirect:product_list");
+		}else {
+			mav.setViewName("redirect:product_regi");
+		}
+		return mav;
+	}
 	//판매자 주문관리
 	@RequestMapping("/order_management")
 	public String order_management() {
