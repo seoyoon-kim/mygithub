@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.MemberService;
 import com.beetmall.sshj.custom.vo.MemberVO;
+import com.beetmall.sshj.custom.vo.SellerMemberVO;
 
 @Controller
 public class MemberController {
@@ -138,38 +139,83 @@ public class MemberController {
 		}
 		return mav;
 	}
+	// 판매자 회원가입
+	@RequestMapping(value="/sregiFinish", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo,HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String tel1 = req.getParameter("userphone1");
+		String tel2 = req.getParameter("userphone2");
+		String tel3 = req.getParameter("userphone3");
+		vo.setUserphone(tel1+"-"+tel2+"-"+tel3);
+		// 확인용 //
+		System.out.println("id-->"+vo.getUserid());	// 널
+		System.out.println("pwd-->"+vo.getUserpwd());	// 잘들어옴
+		System.out.println("name-->"+vo.getUsername());	//ㅇㅇ
+		System.out.println("tel-->"+vo.getUserphone());	//ㅇㅇ
+		System.out.println("email-->"+vo.getUseremail());	//ㅇㅇ
+		System.out.println("zipcode-->"+vo.getUserzipcode());	//ㅇㅇ
+		System.out.println("addr-->"+vo.getUseraddr());	//ㅇㅇ
+		System.out.println("userdetaildder-->"+vo.getUserdetailaddr());	//ㅇㅇ
+		System.out.println("birth-->"+vo.getBirthday());	//ㅇㅇ
+		System.out.println("joindate-->"+vo.getJoindate());	// 널
+		System.out.println("type-->"+vo.getUsertype());	//0
+		System.out.println("stop-->"+vo.getUserstop());	//널
+		System.out.println("point-->"+vo.getPoint());	//0
+		// 판매자 테이블로 들어가야 하는 부분
+		
+		
+		System.out.println("id-->"+svo.getUserid());	//ㅇㅇ
+		System.out.println("num-->"+svo.getStorenum());	// 0 
+		System.out.println("storename-->"+svo.getStorename()); // ㅇㅇ
+		System.out.println("sellername-->"+svo.getSellername());	//ㅇㅇ
+		System.out.println("sellerreginum-->"+svo.getSellerreginum());	//ㅇㅇ
+		System.out.println("sellerregiimg-->"+svo.getSellerregiimg());	// 널
+		System.out.println("regiapproval-->"+svo.getRegiapproval());	// 널
+		System.out.println("regiapprovaldate-->"+svo.getRegiapprovaldate());	//널
+		System.out.println("zipcode-->"+svo.getStorezipcode());	// ㅇㅇ
+		System.out.println("addr-->"+svo.getStoreaddr());	//ㅇㅇ
+		System.out.println("detailaddr-->"+svo.getStoredetailaddr());	// ㅇㅇ
+		System.out.println("storeemail-->"+svo.getStoreemail());	//ㅇㅇ
+		System.out.println("bank-->"+svo.getBank());	//ㅇㅇ
+		System.out.println("bankname-->"+svo.getBankname());	//ㅇㅇ
+		System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
+		
+		
+		
+		return mav;
+	}
+	
+	
 	
 	//이메일 인증코드 발송
 	@RequestMapping(value="emailSend", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
 	@ResponseBody
 	public String sendemail(HttpSession session, HttpServletRequest req) {
 		String userEmail = req.getParameter("SendToEmail");
-		System.out.println("userrEmail="+userEmail);
 		UUID random = UUID.randomUUID();
-		System.out.println("random="+random);
 		String uuid = random.toString();
-		System.out.println("uuid="+uuid);
 		String emailCode = uuid.substring(0,6);
-		System.out.println(emailCode);
-		
-		String subject = "메일보내기 연습중(제목부분)"; // 메일 제목부분
-		String content = "이 이메일은 비트몰의 회원가입을 위한 인증코드입니다.\n"
-					+ "인증코드:"+emailCode;
-		
-		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-			
-			@Override
-			public void prepare(MimeMessage mimeMessage) throws Exception {
-				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8" );
-				helper.setFrom("beetamll@naver.com");
-				helper.setTo(userEmail);
-				helper.setSubject(subject);
-				helper.setText(content);
-			}
-		};
-		mailSender.send(preparator);
-		session.setAttribute("emailCode", emailCode);
-		return "result";
+		System.out.println("\n\n===========================\n\n");
+		System.out.println("emailCode == "+emailCode);
+		System.out.println("\n\n===========================\n\n");
+		String subject = "[BeetMall]비트몰 구매자 이메일 인증"; // 메일 제목부분
+		String content =  "비트몰 이메일 인증입니다.<br/>"
+						+ "인증번호 : "+emailCode ;
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			messageHelper.setFrom("beetamll0528@gmail.com");
+			messageHelper.setTo(userEmail);
+			messageHelper.setSubject(subject);
+			messageHelper.setText("text/html;charset=UTF-8", content);
+			mailSender.send(message);
+			session.setAttribute("emailCode", emailCode);
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("이메일 인증 오류");
+		}
+		return "";
 	}
 	
 	@RequestMapping("emailCheck")
@@ -180,6 +226,50 @@ public class MemberController {
 		String emailCode = (String)session.getAttribute("emailCode");
 		System.out.println("emailCode="+emailCode);
 		if(inputEmailCode.equals(emailCode)) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	
+	// 판매자 이메일 인증코드 발송
+	@RequestMapping(value="emailSendSeller", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String sendemailSeller(HttpSession session, HttpServletRequest req) {
+		String userEmail = req.getParameter("SendToEmail");
+		UUID random = UUID.randomUUID();
+		String uuid = random.toString();
+		String emailCode = uuid.substring(7,13);
+		System.out.println("\n\n===========================\n\n");
+		System.out.println("emailCode == "+emailCode);
+		System.out.println("\n\n===========================\n\n");
+		String subject = "[BeetMall]비트몰 판매자 이메일 인증"; // 메일 제목부분
+		String content =  "비트몰 이메일 인증입니다.<br/>" + "인증번호 : "+emailCode ;
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			messageHelper.setFrom("beetamll0528@gmail.com");
+			messageHelper.setTo(userEmail);
+			messageHelper.setSubject(subject);
+			messageHelper.setText("text/html;charset=UTF-8", content);
+			mailSender.send(message);
+			session.setAttribute("emailCodeSeller", emailCode);
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("이메일 인증 오류");
+		}
+		return "";
+	}
+	
+	@RequestMapping("emailCheckSeller")
+	@ResponseBody
+	public int emailCodeCheckSeller(HttpServletRequest req, HttpSession session) {
+		String inputEmailCode = req.getParameter("emailCode");
+		System.out.println("inputEmailCode="+inputEmailCode);
+		String emailCodeSeller = (String)session.getAttribute("emailCodeSeller");
+		System.out.println("emailCode="+emailCodeSeller);
+		if(inputEmailCode.equals(emailCodeSeller)) {
 			return 1;
 		}else {
 			return -1;

@@ -344,17 +344,19 @@
 		
 		// 이메일 인증코드 전송
 		$("#emailSend").click(function(){
-			var url = 'emailSend';
-			var param = "SendToEmail="+$("#useremail").val();
-			$.ajax({
-				url : url,
-				data : param,
-				success :function(data){
-					alert("인증코드가 성공적으로 전송되었습니다. 이메일을 확인해주세요");
-				}, error : function(){
-					alert("인증코드 전송에 실패하였습니다 잠시후 다시 시도해주세요");
-				}
-			})
+			if(emailCheckCustom()!=false){
+				var url = 'emailSend';
+				var param = "SendToEmail="+$("#useremail").val();
+				$.ajax({
+					url : url,
+					data : param,
+					success :function(data){
+						alert("인증코드 전송에 성공했습니다. 이메일을 확인해주세요!");
+					}, error : function(){
+						alert("인증코드 전송에 실패하였습니다 잠시후 다시 시도해주세요");
+					}
+				})
+			}
 		})
 		
 		// 이메일 인증코드 확인
@@ -367,11 +369,12 @@
 					data : param,
 					success : function(data){
 						console.log(data);
-						if(data == -1){
-							alert("인증에 실패하였습니다.");
-						}else if(data == 1){
+						if(data == 1){
 							alert("인증에 성공하였습니다.");							
 							$("#checkEmailResult").val('Y');
+							$("#useremail").attr("disabled",true);
+						}else{
+							alert("인증코드가 일치하지 않거나 인증에 실패하였습니다.");
 						}
 					}, error : function(){
 						alert("인증에 실패하였습니다.");
@@ -436,7 +439,17 @@
 		  return false;
 		}
 	}
-
+	// 이메일 검사
+	function emailCheckCustom(){
+		var emailreg = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+		if($("#useremail").val()==null||$("#useremail").val()==''){
+			alert("이메일을 입력하세요")
+			return false;
+		}else if(!emailreg.test(document.getElementById("useremail").value)){
+			alert("이메일이 잘못 입력되었습니다.");
+			return false;			
+		}
+	}
 </script>
 
 <div class="section">
@@ -508,6 +521,10 @@
 			
 		</div>
 		
+		<div id="emailDiv" style="background-color: #ddd;">
+			<h3 style="background-color: white;">비트몰 이메일 인증입니다.</h3>
+			<h5 style="background-color: white;">인증번호 : emailCode</h5>
+		</div>
 	</div>
 </div>
 </body>
