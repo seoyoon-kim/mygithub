@@ -31,6 +31,8 @@ public class ProductController {
 		mav.setViewName("seller/product_list");
 		return mav;
 	}
+	//즐겨찾기 수 계산
+	//판매상품 삭제 시 진행중인 주문있으면 불가능
 	
 	//판매 상품등록페이지 대분류,중분류 카테고리 불러오기
 	@RequestMapping("/product_regi")
@@ -43,7 +45,7 @@ public class ProductController {
 		return mav;
 	}
 	//판매상품등록
-	@RequestMapping(value="/product_regi", method=RequestMethod.POST)
+	@RequestMapping(value="/product_regi_ok", method=RequestMethod.POST)
 	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {
 		
 		//session

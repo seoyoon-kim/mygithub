@@ -171,12 +171,12 @@ $(document).ready(function(){
 						<th class="listMenu" id="thumbImg">대표이미지</th>
 						<th class="listMenu">판매가</th>
 						<th class="listMenu">재고수량</th>
-						<th class="listMenu">상품등록일</th>
+						<th class="listMenu">판매시작일</th>
 						<th class="listMenu">할인가</th>
 						<th class="listMenu">할인율</th>
 						<th class="listMenu">할인기간</th>
 						<th class="listMenu">판매상태</th>
-						<th class="listMenu">조회수</th>
+						<th class="listMenu">즐겨찾기수</th>
 					</tr>
 				</thead>
 				<!-- 전체보기 판매상품 리스트 -->

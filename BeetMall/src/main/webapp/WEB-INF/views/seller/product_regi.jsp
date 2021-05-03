@@ -37,6 +37,7 @@
 	textarea{
 		width:100%;
 	}
+	placeholder{font-size:13px; color:gray;}
 /*검색하기*/
 #article{
    width: 1280px;
@@ -505,7 +506,7 @@ $(function(){
 		<!-- 배송 -->
 		<!-- 상품내용 -->
 		<!-- 취소 저장하기 버튼 -->
-	<form method="post" action="">
+	<form method="post" name="product_regi_form" id="product_regi_form" action="product_regi_ok">
 	<!------------------------------------------ 카테고리------------------------------------------------->
 	 <div class="category_title">카테고리</div>
 		<div class="category_wrap">
@@ -566,7 +567,7 @@ $(function(){
 			</li>
 			<ul id="sale_ul" style="display:none">
 				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" max="0"/><span>원</span>&nbsp;<span>할인</span></li>
-				<li><input type="button" name="sale_period_btn" id="sale_period_btn" class="btn" value="특정기간만 할인"/><span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li>
+				<li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/><span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li>
 				<li id="sale_period">
 					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
 					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
@@ -662,12 +663,12 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label>대표이미지</label><br/>
-					<img name="thumb_image" id="thumb_image"src="#" alt="image upload" style="width:400px;"/><br/>
-					<input type="file" id="thumb_image_upload" accept="img/*" onchange="readURL(this);" /></li>
+					<img name="thumbimg" id="thumbimg"src="#" alt="image upload" style="width:400px;"/><br/>
+					<input type="file" id="thumbimg_upload" accept="img/*" onchange="readURL(this);" /></li>
 				<li>
-					<img name=""  id="thumb_image_small" width="200" src="#" alt="image upload" />&nbsp;	
-					<img name=""  id="thumb_image_small"  width="200" src="#" alt="image upload" />&nbsp; 
-					<img name=""  id="thumb_image_small"  width="200" src="#" alt="image upload" /></br>
+					<img name="addimg"   id="addimg" width="200" src="#" alt="image upload" />&nbsp;	
+					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" />&nbsp; 
+					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" /></br>
 		 			<input type="file" id="thumb_image_uplaod" accept="img/*" multiple/>
 		 		</li>
 		   </ul>	
@@ -702,16 +703,16 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label for="">판매단위</label>&nbsp;
-					<input type="number" name="selloption" id="" min="0"/>
-					<select id="select_unit">
-						<option value="none">해당없음</option>
-						<option value="pack">팩</option>
-						<option value="box">박스</option>
+					<input type="number" name="selloption" id="selloption"  min="0"/>
+					<select id="select_unit" name="selloption" >
+						<option value="단위없음">해당없음</option>
+						<option value="팩">팩</option>
+						<option value="박스">박스</option>
 					</select>
 				</li>
 				<li><label for="">중량/용량</label>&nbsp;
 					<input type="number" name="sellweight" id="sellweight" />
-					<select id="select_weight">
+					<select id="select_weight" name="sellweight" >
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>
@@ -735,16 +736,13 @@ $(function(){
 					</select>
 				</li>
 				<li><label for="">상품정보</label><br/>
-					<textarea placeholder="간략한 상품정보를 입력해주세요."></textarea>
+					<textarea placeholder="간략한 상품정보를 입력해주세요." name="productinformation"></textarea>
 				</li>
 				<li><label for="">주의사항</label><br/>
-					<textarea placeholder="주의사항을 입력해주세요."></textarea>
-				</li>
-				<li><label for="">보관방법</label><br/>
-					<textarea placeholder="보관방법을 입력해주세요. 예) 습기가 없는 서늘한 곳에 보관하세요."></textarea>
+					<textarea placeholder="주의사항을 입력해주세요." name="prevention"></textarea>
 				</li>
 				<li><label for="">유통기한</label><br/>
-					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다."></textarea>
+					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." name="deadline"></textarea>
 				</li>
 			</ul>
 		</div>
