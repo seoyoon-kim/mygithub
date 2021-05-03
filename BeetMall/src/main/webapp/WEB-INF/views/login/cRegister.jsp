@@ -288,6 +288,35 @@
 			$("#checkIdResult").val('N');
 		});
 		
+		// 주소검색
+		$("#zipSearch").click(function(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		            $("#userzipcode").val(data.zonecode);
+		            $("#useraddr").val(data.address);
+		            /* $("#userdetailaddr").css('focus', true); */
+		            document.getElementById('userdetailaddr').focus();
+		        }
+		    }).open();
+		});
+		
+		// 이메일 인증
+		$("#emailSend").click(function(){
+			var url = 'emailSend'
+			var param = "SendToEmail=ekqhxkq54@naver.com";
+			$.ajax({
+				url : url,
+				data : param,
+				success :function(data){
+					console.log(data);
+				}, error : function(){
+					console.log("url="+url);
+					console.log("email="+param);
+					alert("실패..");
+				}
+			})
+		})
+		
 		
 	});
 	
@@ -364,7 +393,7 @@
 				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
 				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
 				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;"/><input type="button" value="인증번호 전송" class="btn"/></li>
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증번호 전송" class="btn" id="emailSend"/></li>
 				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" class="btn"/></li>
 							
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
@@ -391,8 +420,8 @@
 																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"/></li>
 				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
 																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;"/>
-																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:202px;">
-																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;"></li>			
+																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"/>
+																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" placeholder="상세 주소 입력"/></li>			
 				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday"/></li>
 			</ul>
 		</form>
@@ -406,12 +435,12 @@
 			<div style="margin-bottom:20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
 		</div>
 		<div id="modal"></div>
-		<div class="idCheckDiv">
-			<input type="text" name="userid2" id="userid2" style="margin-right:5px;"/>
-			<input type="button" value="중복검사" class="btn" id="idCheck"/>
-			<div id="idCheckResult"></div>
-			<input type="button" value="사용하기" class="btn" id="idCheckFin"/><input type="button" value="닫기" class="btn" id="popupcloseBtn"/>
-		</div>
+			<div class="idCheckDiv">
+				<input type="text" name="userid2" id="userid2" style="margin-right:5px;"/>
+				<input type="button" value="중복검사" class="btn" id="idCheck"/>
+				<div id="idCheckResult"></div>
+				<input type="button" value="사용하기" class="btn" id="idCheckFin"/><input type="button" value="닫기" class="btn" id="popupcloseBtn"/>
+			</div>
 		<div id="usermap">
 			
 		</div>

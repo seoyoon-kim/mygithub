@@ -1,16 +1,21 @@
 package com.beetmall.sshj.custom.controller;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beetmall.sshj.custom.dao.MemberDAO;
 import com.beetmall.sshj.custom.service.MemberService;
 import com.beetmall.sshj.custom.vo.MemberVO;
 
@@ -18,6 +23,8 @@ import com.beetmall.sshj.custom.vo.MemberVO;
 public class MemberController {
 	@Inject
 	MemberService memberservice;
+	@Inject
+	JavaMailSenderImpl mailSender;
 	
 	@RequestMapping("login")	// 로그인 페이지
 	public String login() {	
@@ -42,25 +49,6 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
-	
-	
-	// 아이디 중복검사
-//	@RequestMapping(value="/idOverLap", method=RequestMethod.POST)
-//	public ModelAndView idOverlapCheck(HttpServletRequest req) {
-//		ModelAndView mav = new ModelAndView();
-//		String userid = req.getParameter("Checkid");
-//		if(userid!=null && userid.equals("")) {
-//			System.out.println("userid-->"+userid);
-//			if(memberservice.idOverlap(userid)==0) {
-//				mav.addObject("overlap","Y");
-//			}else {
-//				mav.addObject("overlap","N");
-//			}
-//			mav.addObject("userid",userid);
-//			mav.setViewName("redirect:register");
-//		}
-//		return mav;
-//	}
 	
 	@RequestMapping("idOverLap")
 	@ResponseBody
@@ -151,8 +139,64 @@ public class MemberController {
 		return mav;
 	}
 	
-	
-	
+	// 이메일 인증
+//	@RequestMapping("emailSend")
+//	@ResponseBody
+//	public String sendemail(HttpSession session, HttpServletRequest req) {
+//		String userEmail = req.getParameter("SendToEmail");
+//		UUID random = UUID.randomUUID();
+//		String uuid = random.toString();
+//		String subject = "메일보내기 연습중(제목부분)"; // 메일 제목부분
+//		String content = "<div style='background:lightblue;border:1px solid gray;"
+//				+ "border-radius:5px;margin:30px;padding:30px;width:80%'>"
+//				+ "<h1>이 이메일은 회원가입을 위한 인증코드입니다.</h1>"
+//				+ "<p style='font-size:1.5em'>인증코드:<span style='color:#00f'>"+uuid+"</span></p>"
+//				+ "<div>";
+//		try {
+//			MimeMessage message = MailSender.createMimeMessage();
+//			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+//			messageHelper.setFrom("beetamll@naver.com"); //보내는 메일주소
+//			messageHelper.setTo(userEmail); //받는 메일주소
+//			messageHelper.setSubject(subject); // 보내는 제목
+//			messageHelper.setText("text/html;charset=UTF-8", content);
+//			mailSender.send(message);
+//			session.setAttribute("emailUUID", uuid);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("이메일 인증 에러");
+//		}
+//		return "";
+//	}
+	//이메일 인증
+	@RequestMapping(value="emailSend", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String sendemail(HttpSession session, HttpServletRequest req) {
+		String userEmail = req.getParameter("SendToEmail");
+		System.out.println("userrEmail="+userEmail);
+		UUID random = UUID.randomUUID();
+		System.out.println("random="+random);
+		String uuid = random.toString();
+		System.out.println("uuid"+uuid);
+		String subject = "메일보내기 연습중(제목부분)"; // 메일 제목부분
+		String content = "<div style='background:lightblue;border:1px solid gray;"
+				+ "border-radius:5px;margin:30px;padding:30px;width:80%'>"
+				+ "<h1>이 이메일은 회원가입을 위한 인증코드입니다.</h1>"
+				+ "<p style='font-size:1.5em'>인증코드:<span style='color:#00f'>"+uuid+"</span></p>"
+				+ "<div>";
+		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8" );
+				helper.setFrom("beetamll@naver.com");
+				helper.setTo(userEmail);
+				helper.setSubject(subject);
+				helper.setText(content);
+			}
+		};
+		mailSender.send(preparator);
+		return "성공";
+	}
 	@RequestMapping("regiFinish")
 	public String regiFinish() {	// 회원가입 완료
 		return "login/registerFinish";	
