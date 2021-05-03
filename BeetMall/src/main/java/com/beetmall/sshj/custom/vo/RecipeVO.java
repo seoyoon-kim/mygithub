@@ -37,6 +37,7 @@ public class RecipeVO {
 		this.recipecontent = recipecontent;
 	}
 	public String getRecipemainimg() {
+		System.out.println(recipemainimg);
 		return recipemainimg;
 	}
 	public void setRecipemainimg(String recipemainimg) {

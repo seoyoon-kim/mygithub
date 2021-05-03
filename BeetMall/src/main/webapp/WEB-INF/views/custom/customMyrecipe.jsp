@@ -38,6 +38,19 @@ a:hover, a:active, a:visited, a:link {
 	display: block;
 }
 
+ .wrapTitle{
+	   margin-top: 30px;
+	   height: 30px;
+	   line-height: 30px;
+	   /* color: #fff; */
+	   color:black;
+	   font-weight:bold;
+	   font-size:1em;
+	   text-indent: 0.4em;
+	   /* background-color: rgb(224,102,102); */
+	   margin-bottom:30px;
+	}
+
 /* ------------------페이징처리부분-------------------- */
 .page_wrap {
 	text-align: center;
@@ -126,20 +139,20 @@ a:hover, a:active, a:visited, a:link {
 
 #myrecipeTop {
 	float: left;
-	width: 500px;
-}
-
-#myrecipeTop2 {
-	float: right;
 	width: 440px;
 }
 
-#myrecipeTop2>li {
+#myrecipeTop2 {
+	float: left;
+	width: 500px;
+}
+
+#myrecipeTop2>li,#myrecipeTop2>input {
 	padding-right: 10px;
 }
 
 /*------------------------하단 게시판메뉴-----------------------------------*/
-#recimainbox {
+#recimainbox,#recimainbox2 {
 	float: left;
 	width: 100%;
 	padding-left: 10px;
@@ -147,20 +160,20 @@ a:hover, a:active, a:visited, a:link {
 	margin-top:20px;
 }
 
-#recipebox {
+#recipebox{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width: 30%;
 	float: left;
 }
 
-#recipebox>ul>li>a>img {
+#recipebox>ul>li>a>img{
 	width: 270px;
 	height: 170px;
 	border-radius: 3px;
 }
 
-#recipebox>ul>li:nth-child(5n+1) {
+#recipebox>ul>li:nth-child(5n+1){
 	width: 100%;
 }
 
@@ -221,12 +234,30 @@ a:hover, a:active, a:visited, a:link {
 	display: inline-block;
 }
 </style>
+<script>
+$(document).ready(function(){
+	 
+	  
+	  $("#myrbtn").click(function(){
+		  $("#recimainbox").show()
+		   $("#recimainbox2").hide()
+	  })
+	  
+	  
+	  $("#goodrbtn").click(function(){
+		  $("#recimainbox2").show()
+		   $("#recimainbox").hide()
+		 
+	  })
+
+  })
+</script>
 
 <body>
 	<div class="section" id="main">
-		<div>
+		
 			<div id="reciTitle">
-				<h1>마이레시피</h1>
+				<div class="wrapTitle">${logId}님의 마이레시피 내역입니다.</div>				
 			</div>
 
 			<!--------------상단 메뉴바들-------------------->
@@ -242,15 +273,14 @@ a:hover, a:active, a:visited, a:link {
 							<option>조회수순</option>
 					</select></li>
 					<li><input type="button" id="norebtn" value="선택즐겨찾기제거" /></li>
-					<li><input type="text" id="search" name="search"
-						placeholder="검색하기"></li>
+					<li><span id="search_box">
+					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
+				</span></li>
 				</ul>
 			</div>
-		</div>
-		<!--------------게시판 이미지들-------------------->
+		
+		<!--------------마이레시피 게시판 이미지들-------------------->
 		<div id="recimainbox">
-		
-		
 		   <c:forEach var="data" items="${list}">
 		       <c:if test="${logId==data.userid}"> 
 			<div id="recipebox">
@@ -262,6 +292,24 @@ a:hover, a:active, a:visited, a:link {
 								<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
 							</ul>
 			</div> </c:if>
+			</c:forEach>
+        
+		</div>
+		
+		<!--------------즐겨찾기 게시판 이미지들-------------------->
+	    <div id="recimainbox2" style="display:none">
+	    <div>Ddd</div>
+		   <c:forEach var="data" items="${list}">
+		      <!--   <c:if test="${logId==data.userid}"> -->
+			<div id="recipebox" >
+							<ul>
+								<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+								<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+								<li>${data.userid}</li>
+								<li>★★★★★(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
+								<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
+							</ul>
+			</div></c:if>
 			</c:forEach>
         
 		</div>

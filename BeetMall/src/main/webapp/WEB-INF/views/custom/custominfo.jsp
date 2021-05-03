@@ -205,7 +205,13 @@
 </script>
 <div class="section">
 	<div class="main">
-		<div class="wrapTitle">${logId}의 문의 내역입니다.</div>
+		<div class="wrapTitle">${logId}님의 문의 내역입니다.</div>
+		<div class="cs_message">
+				질문 전 자주묻는 질문을 먼저 확인해주세요. <br/>
+				<a href="<%=request.getContextPath() %>/FAQBoard"><span id="link">자주묻는질문 바로가기 >></span></a><br/>
+				<br/>
+				고객님께서 비트몰에 문의하신 내용을 확인할 수 있습니다.<br/>
+		</div>
 		   <!-- 검색/ 문의하기 버튼 -->
 			<div id="search_container">
 			<!--문의하기 버튼 -->

@@ -22,18 +22,25 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	RecipeServiceImp RecipeService;
 
 	@RequestMapping("/recipeView")
-	public ModelAndView RecipeAllList(int recipenum) {
+	public ModelAndView RecipeSelect(int recipenum) {
+		//////////2해당 게시글 보이게 하기
+		ModelAndView mav=new ModelAndView();
+	
+		mav.addObject("vo", RecipeService.RecipeSelect(recipenum));
+		mav.setViewName("custom/recipeView");
+		
+		return mav;
+	}
+	
+	
+	
+	@RequestMapping("/recipeList")
+	public ModelAndView RecipeAllList() {
 		
 		ModelAndView mav=new ModelAndView();
 		//////////1게시글 목록 뽑아내기
-		mav.addObject("list" , RecipeService.RecipeAllList());
-		mav.addObject("vo", RecipeService.RecipeSelect(recipenum));
-		
-		
-		//////////2해당 게시글 보이게 하기
-		
-
-		mav.setViewName("custom/recipeView");
+		mav.addObject("list" , RecipeService.RecipeAllList());			
+		mav.setViewName("custom/recipeList");
 		
 		return mav;
 	}
@@ -58,7 +65,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
  //   	String paramName = recipemainimg.getName(); //매개변수 이름확인할라고 SYSOUT찎을라고만든거
 		String orgName = file.getOriginalFilename();//원파일명
 		
-
+   
 		//실제 업로드 발생 : tansferTo()
 		try {
 			if(orgName != null && !orgName.equals("")) {
@@ -81,11 +88,12 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			mav.setViewName("redirect:recipeWrite"); //세팅이안됫을때
 		}else {
 			
-			mav.setViewName("redirect:recipeView"); //됬을때
+			mav.setViewName("redirect:recipeList"); //됬을때
 		}
 		
-		mav.addObject("vo", RecipeService.RecipeLastSelect(vo));
-		mav.setViewName("redirect:recipeHome");
+		
+		
+		mav.setViewName("redirect:recipeList");
 		
 		return mav;
 	}
@@ -114,4 +122,17 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		return mav;
 	}
 
+	
+	
+	///////////////////////////////////// 추천한게시글///////////////////////////////////////
+	@RequestMapping("/recigoodOk")
+	public ModelAndView recigoodOk(int recipenum) {
+	ModelAndView mav=new ModelAndView();
+	
+	mav.addObject("vo", RecipeService.recigoodOk(recipenum));
+	mav.setViewName("custom/recipeView");
+	
+	return mav;
+}
+	
 }

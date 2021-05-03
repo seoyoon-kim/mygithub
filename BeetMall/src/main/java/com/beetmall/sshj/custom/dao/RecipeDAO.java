@@ -12,11 +12,13 @@ public interface RecipeDAO {
 
 	public int recipeWriteOk(RecipeVO vo);
 	
-	public RecipeVO RecipeLastSelect(RecipeVO vo);
+	public int RecipeLastSelect(RecipeVO vo);
 	
 	public RecipeVO RecipeSelect(int recipenum);
 
 	public List<RecipeVO>RecipeAllListHome();
 	
 	public List<RecipeVO>customMyrecipe();
+	
+	public int recigoodOk(int recipenum);
 }

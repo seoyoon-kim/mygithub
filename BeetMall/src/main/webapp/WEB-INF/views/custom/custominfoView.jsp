@@ -189,7 +189,6 @@
 		</fieldset>
 			<div class="bottom_wrap">
 				<input type="button" value="확인" class="btn" id="btn" onClick="location.href='<%=request.getContextPath() %>/customerCenter'"/>
-				<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/customerCenterEdit?qmnum=${vo.qmnum}'"/>
 				<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
 			</div>
 		</div>

@@ -13,13 +13,10 @@
        values(recipesq.nextval,'tester',#{recipetitle},#{recipecontent},#{recipemainimg},sysdate,0,0)
     </insert>
     <select id="selectLastSelect" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-    
-    
-    
-    
+    select recipenum from( select * from (recipe) order by recipeWritedate DESC)where ROWNUM = 1    
     </select> 
     <select id="RecipeSelect" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-    select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param,jdbcType=VARCHAR}
+    select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param}
     </select>
     
     <select id="RecipeAllListHome" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
@@ -29,10 +26,14 @@
     </select>
     
     <select id="customMyrecipe" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-        select  recipetitle,userid,recipemainimg, 
+        select  recipenum,recipetitle,userid,recipemainimg, 
         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
         order by recipenum desc     
-    </select>
+    </select>  
+    
+    <update id=" recigoodOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
+       update recipe set reciperecommend=#{reciperecommend}+1 where recipenum=${param}
+    </update>
     
  
   </mapper>

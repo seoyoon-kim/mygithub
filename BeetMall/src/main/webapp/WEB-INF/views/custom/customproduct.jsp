@@ -19,6 +19,8 @@ a:hover, a:active, a:visited, a:link {
     color: black;
 }
 
+
+
 /*  상품 품목글자----------------------------------------------                 */
 #mainName {
 	text-align: center;
@@ -661,9 +663,10 @@ a:hover, a:active, a:visited, a:link {
 	
 	}
 	
-	#infoBtn1:click,#infoBtn2:click,#infoBtn3:click{
 	
 	
+	#infoBtn1:active,#infoBtn2:active,#infoBtn3:active{
+	outline: 0;
 	}
 	
 	#productBtn>.btn{

@@ -127,7 +127,7 @@
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
+				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/recipeList'"/>
 				<input type="submit" value="작성하기" class="btn" id="write_btn"/>				
 			</div>
 		</form>
@@ -158,7 +158,7 @@ function uploadSummernoteImageFile(file, el) {
 	$.ajax({
 		data : data,
 		type : "POST",
-		url : "uploadSummernoteImageFile",
+		url : ,
 		contentType : false,
 		enctype : 'multipart/form-data',
 		processData : false,

@@ -105,7 +105,7 @@
 		<span id="notice">고객님께서 작성하신 질문은 판매자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 	</div>
 		
-	<form method="post" action="cusomerCenterWriteOk">
+	<form method="post" action="CustomInfoWriteOk">
 		<table>
 			<tbody>
 				<tr>
@@ -130,7 +130,7 @@
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/CustomView'"/>
 				<input type="submit" value="문의하기" class="btn" id="write_btn"/>				
 			</div>
 		</form>
