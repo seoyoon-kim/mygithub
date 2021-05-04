@@ -65,6 +65,12 @@ footer{
 }
 
 </style>
+<c:if test="${logType!=2}">
+	<script>
+		alert('판매자만 페이지에 접속 할 수 있습니다.');
+		location.href = "/sshj";
+	</script>
+</c:if>
 <div id="seller_header">
 	<!-- 상단 메뉴 바 -->
 	<nav>

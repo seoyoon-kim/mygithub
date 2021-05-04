@@ -12,9 +12,9 @@
 		storename, sellername, sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, 
 		storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname, bankaccount 
 		from (select * from seller) a join farm b on a.storenum = b.storenum) c 
-		join product d on c.productnum = d.productnum where c.userid='ghdrlfehd'
+		join product d on c.productnum = d.productnum where c.userid='${userid}'
 	</select>
 	<select id="selectFavorite" resultType="int">
-		select sum(storenum) storenum from favorite where storenum=(select storenum from seller where userid='ghdrlfehd')
+		select sum(storenum) storenum from favorite where storenum=(select storenum from seller where userid='${userid}')
 	</select>
 </mapper>

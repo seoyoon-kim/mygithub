@@ -17,15 +17,22 @@ public class IntroController {
 	
 	@RequestMapping("/intro_farm")
 	public ModelAndView intro_farm(HttpSession session) {
-		String userid = (String)session.getAttribute("logId");
 		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("logId")!=null) {
+			String userid = (String)session.getAttribute("logId");
 
-		mav.addObject("result", service.selectInfo(userid)); // 전체 데이터 불러오기
-		mav.addObject("favorite", service.selectFavorite(userid)); // 즐겨찾기 수 불러오기
-		mav.setViewName("seller/intro_farm");
-		
-		
-		
+			if((int)session.getAttribute("logType") == 2 ) {
+				mav.addObject("result", service.selectInfo(userid)); // 전체 데이터 불러오기
+				mav.addObject("favorite", service.selectFavorite(userid)); // 즐겨찾기 수 불러오기
+				mav.setViewName("seller/intro_farm");
+			}	else {
+				mav.setViewName("redirect:/");
+				
+			}
+		} else {
+			mav.setViewName("redirect:/");
+			
+		}
 		return mav;
 	}
 	
