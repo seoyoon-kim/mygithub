@@ -327,10 +327,25 @@ $(document).ready(function(){
 		</div>
 
 
+<script>
+$(function(){
+	   //비동기식으로 서버에 데이터를 보내기 문자열을 리턴받는다.  
+	   var params = "num=12345&name=홍길동&id=goguma";
+	   $("#goodrbtn").click(function(){
+		
+		   var url= "/myapp/ajaxString";
+		   $.ajax({
+			   url :url,
+			   date: params,
+			   success:function(result){
+				   $("#resultData").html(result);
+			   },error:function(){
+				   $("#resultData").html("전송받기 실패..");
+			   }
+		   })
+	   });
 
-
-
-
+</script>
 
 
 
