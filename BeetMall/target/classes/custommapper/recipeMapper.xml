@@ -16,7 +16,7 @@
     select recipenum from( select * from (recipe) order by recipeWritedate DESC)where ROWNUM = 1    
     </select> 
     <select id="RecipeSelect" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-    select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param}
+    select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param1}
     </select>
     
     <select id="RecipeAllListHome" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
@@ -31,8 +31,8 @@
         order by recipenum desc     
     </select>  
     
-    <update id=" recigoodOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
-       update recipe set reciperecommend=#{reciperecommend}+1 where recipenum=${param}
+    <update id="recigoodOk">
+       update recipe set reciperecommend=reciperecommend+1 where recipenum=#{param1}
     </update>
     
  

@@ -20,5 +20,5 @@ public interface RecipeDAO {
 	
 	public List<RecipeVO>customMyrecipe();
 	
-	public int recigoodOk(int recipenum);
+	public int recigoodOk(int data);
 }

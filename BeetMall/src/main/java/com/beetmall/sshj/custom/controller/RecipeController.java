@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -126,13 +127,17 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	///////////////////////////////////// 추천한게시글///////////////////////////////////////
 	@RequestMapping("/recigoodOk")
-	public ModelAndView recigoodOk(int recipenum) {
-	ModelAndView mav=new ModelAndView();
+	@ResponseBody
+	public int recigoodOk(HttpServletRequest req) {
+//	ModelAndView mav=new ModelAndView();
+	int data= Integer.parseInt(req.getParameter("num"));
+
+	System.out.println(RecipeService.recigoodOk(data));
 	
-	mav.addObject("vo", RecipeService.recigoodOk(recipenum));
-	mav.setViewName("custom/recipeView");
+//	mav.addObject("goodvo", RecipeService.recigoodOk(data));
+//	mav.setViewName("custom/recipeView");
 	
-	return mav;
+	return data;
 }
 	
 }

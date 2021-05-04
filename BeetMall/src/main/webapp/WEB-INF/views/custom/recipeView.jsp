@@ -397,8 +397,8 @@ td, .td{
 
 		<!-- ------------------------하단 표시들----------------------------------- -->
 		<ul id="recivb">
-			<li id="goodidli"><div id="goodid" onclick="goodset()">추천해요<img src="img/cstar2.png" id="goodimg" onclick="goodset()"></div></li>
-			<li id="keepidli"><div id="keepid" onclick="keepset()">즐겨찾기<img src="img/ccart2.png" id="keepimg" onclick="keepset()"></div></li>
+			<li id="goodidli"><div id="goodid" onclick="goodset()">추천해요<img src="img/cstar2.png" id="goodimg"></div></li>
+			<li id="keepidli"><div id="keepid" onclick="keepset()">즐겨찾기<img src="img/ccart2.png" id="keepimg"></div></li>
 			<li id="share1"><a href=""><img src="img/cicon01.png"></a></li>
 			<li><a href=""><img src="img/cicon02.png"></a></li>
 			<li><a href=""><img src="img/cicon03.png"></a></li>
@@ -414,44 +414,44 @@ td, .td{
 
 
 
-
-
 	</div>
 	
 <script>
 function goodset(){
-	  var good="<div id='nogoodid' onclick='nogoodset()'>추천해요<img src='img/cstar.png' id='nogoodimg' onclick='nogoodset()'></div>"
+	  var good="<div id='nogoodid' onclick='nogoodset()'>추천해요<img src='img/cstar.png' id='nogoodimg'></div>"
 	  document.getElementById("goodidli").innerHTML=good;
 	  
-	    var url = "/recigoodOk";
-		
-		
+	    var url = "recigoodOk";		
+		var num= "num="+${vo.recipenum};
+		console.log(url, num);
 		$.ajax({
 			url:url,
-			data: ${vo.recipenum},
+			data:num,
 			success:function(result){
-				console.log('댓글등록성공---> ' + result);
+				console.log('추천수 올리시 성공---> ');
 				
 			},error:function(e){
 				console.log(e.responseText);
+				console.log("실패");
 			}
 		})
-	  
+		
+	
 	  }
 	  
 function nogoodset(){
-	  var good="<div id='goodid' onclick='goodset()'>추천해요<img src='img/cstar2.png' id='goodimg' onclick='goodset()'></div>"
+	  var good="<div id='goodid' onclick='goodset()'>추천해요<img src='img/cstar2.png' id='goodimg'></div>"
 	  document.getElementById("goodidli").innerHTML=good;
 	  }
 
 
 function keepset(){
-	var keep="<div id='nokeepid' onclick='nokeepset()''>즐겨찾기<img src='img/ccart.png' id='nokeepimg' onclick='nokeepset()'></div>"
+	var keep="<div id='nokeepid' onclick='nokeepset()''>즐겨찾기<img src='img/ccart.png' id='nokeepimg'></div>"
 	document.getElementById("keepidli").innerHTML=keep;
 	  }
 	  
 function nokeepset(){
-	var keep="<div id='keepid' onclick='keepset()''>즐겨찾기<img src='img/ccart2.png' id='keepimg' onclick='keepset()'></div>"
+	var keep="<div id='keepid' onclick='keepset()''>즐겨찾기<img src='img/ccart2.png' id='keepimg'></div>"
 	document.getElementById("keepidli").innerHTML=keep;
 	  }
 

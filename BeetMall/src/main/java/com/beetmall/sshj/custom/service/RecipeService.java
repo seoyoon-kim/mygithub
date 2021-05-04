@@ -17,6 +17,6 @@ public interface RecipeService {
 	
 	public List<RecipeVO>customMyrecipe();
 	
-	public int recigoodOk(int recipenum);
+	public int recigoodOk(int data);
 
 }

@@ -50,9 +50,9 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public int recigoodOk(int recipenum) {
+	public int recigoodOk(int data) {
 		
-	 return RecipeDAO.recigoodOk(recipenum);
+	 return RecipeDAO.recigoodOk(data);
 	}
 
 
