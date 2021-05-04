@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Color;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -85,8 +86,9 @@ public class FarmController {
 			// 셀 스타일
 			CellStyle style = xssfwb.createCellStyle();
 			style.setFont(font);
-			style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
+			style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
 			style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			style.setVerticalAlignment(VerticalAlignment.CENTER);
 			style.setAlignment(HorizontalAlignment.CENTER);
 		
 		// 시트생성
@@ -111,13 +113,16 @@ public class FarmController {
 		
 		xssfsheet.createRow(i++);
 		xssfrow = xssfsheet.createRow(i++); // 빈행 추가
-		
+			
+			//테이블 폰트 설정
+			XSSFFont tableFont = xssfwb.createFont();
+			tableFont.setFontHeightInPoints((short)14);
+			tableFont.setFontName("나눔고딕");
+			
 		// 테이블 스타일 설정
 		CellStyle tableStyle = xssfwb.createCellStyle();
-		font.setFontHeightInPoints((short)14);//폰트 재설정
-		font.setBold(false);
 		tableStyle.setAlignment(HorizontalAlignment.CENTER);
-		tableStyle.setFont(font);
+		tableStyle.setFont(tableFont);
 		tableStyle.setBorderBottom(BorderStyle.THIN);
 		tableStyle.setBorderLeft(BorderStyle.THIN);
 		tableStyle.setBorderRight(BorderStyle.THIN);
