@@ -113,7 +113,6 @@
 	#pickupMain{
 		float: right;
 		vertical-align: middle;
-		padding-top: 15px;
    		font-size: large;
 	}
 	#Sequence{
