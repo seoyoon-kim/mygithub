@@ -44,17 +44,6 @@ public class FarmController {
 		return mav;
 	}
 	
-	@RequestMapping("/seller_review")
-	public String seller_review() {
-		return "seller/seller_review";
-	}
-
-	
-	@RequestMapping("/edit_farm")
-	public String edit_farm() {
-		return "seller/edit_farm";
-	}
-
 	@RequestMapping("/getListData") // seller_sales 페이지에서 차트와 엑셀 데이터 가져오는 dao
 	@ResponseBody
 	public List<FarmVO> getListData(FarmVO vo,HttpSession session) {
