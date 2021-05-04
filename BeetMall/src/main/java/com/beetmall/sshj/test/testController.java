@@ -11,11 +11,6 @@ public class testController {
 		return "custom/categoryMain";
 	}
 	
-	@RequestMapping("/FAQBoard")
-	public String FAQBoard() {
-		return "custom/customerCenter/FAQBoard";
-	}
-	
 	@RequestMapping("/mapping")
 	public String mapping() {
 		return "custom/mapList";
@@ -40,14 +35,6 @@ public class testController {
 	public String myfavoriForm() {
 		return "mypages/myfavoriForm";
 	}
-	@RequestMapping("notice_view2")
-	public String notice_view2() {
-		return "custom/customerCenter/notice_view";
-	}
-	@RequestMapping("knotice_view")
-	public String knotice_view() {
-		return "custom/customerCenter/notice_view";
-	}
 	@RequestMapping("chargeAPI")
 	public String chargeAPI() {
 		return "mypages/chargeAPI";
@@ -60,7 +47,7 @@ public class testController {
 	public String recipeHome() {
 		return "custom/recipeHome";
 	}
-	
+/*	
 	@RequestMapping("recipeView")
 	public String recipeView() {
 		return "custom/recipeView";
@@ -70,7 +57,7 @@ public class testController {
 	public String recipeWrite() {
 		return "custom/recipeWrite";
 	}
-	
+*/	
 	@RequestMapping("/custominfo")
 	public String customInfo() {
 		return "custom/custominfo";
@@ -94,6 +81,11 @@ public class testController {
 	@RequestMapping("/customproduct")
 	public String customproduct() {
 		return "custom/customproduct";
+	}
+	
+	@RequestMapping("/custompay")
+	public String custompay() {
+		return "custom/custompay";
 	}
 
 

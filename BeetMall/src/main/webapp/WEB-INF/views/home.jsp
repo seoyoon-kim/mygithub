@@ -2,8 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
 <style>
+	html, body{
+		width:100%;
+		height:100%;
+	}
 	.slider{
-		width:1080px;
+		width:100%;
 		height:450px;
 		overflow:hidden;
 		position:relative;
@@ -14,7 +18,6 @@
 		position:relative;
 	}
 	.slider img{
-		width:1080px;
 		height:450px;
 		margin:0;
 		padding:0;
@@ -35,7 +38,7 @@
 	}
 	#nextBtn{
 		background-image:url(/sshj/img/dright-arrow2.png);
-		left:1038px;
+		left:1080px;
 	}
 	.nextBtn, .prevBtn{
 		width:30px;
@@ -57,6 +60,7 @@
 	}
 	#banner{
 		position:relative;
+		width:100%;
 	}
 	.roundImg{
 		border-radius:100%;
@@ -265,6 +269,31 @@
 		opacity: 80%;
 		color:white;
 	}
+	#sliderImgs img{
+		width:100%;
+	}
+	#homeVideo{
+		width:100%;
+		height:450px;
+		position: relative;
+	}
+	#videoPlay{
+		width:100%;
+		height:450px;
+	}
+	#videoModal{
+		width:100%;
+		height:450px;
+		background-color:black;
+		opacity: 50%;
+		position:absolute;
+		
+	}
+	video{
+		width:100%;
+		height:450px;
+		object-fit:fill;
+	}
 </style>
 </head>
 <script>
@@ -357,18 +386,15 @@
 			bestProduct(bestSelect);
 		});
 	});
+	
 </script>
+<div id="homeVideo" class="centerTarget">
+	<div id="videoModal"></div>
+	<video autoplay muted loop preload="auto" id="videoPlay">
+		<source src="<%=request.getContextPath()%>/video/dvideo.webm" type="video/webm"/>
+	</video>
+</div>	
 <div class="section">
-	<div id="banner">
-		<div id="prevBtn" class="roundImg"></div>
-		<div class="slider">
-			<div></div>
-			<div>
-				<a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dleaves.jpg"/></a><a href="error/errorPage.jsp"><img src="/sshj/img/dcherry-blossom.jpg"/></a><a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dmelon.jpg"/></a>
-			</div>
-		</div>
-		<div id="nextBtn" class="roundImg"></div>
-	</div>
 	<h2>오늘의 상품<span id="numm"></span></h2>
 	<hr/>
 	<div class="productList">
@@ -396,23 +422,18 @@
 			<div class="reciptList"><div><img src="/sshj/img/dotorimuk.jpg"/></div><div>더운날 생각나도 도토리묵</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
 		</div>
 	</div>
-	</div>
-	<div class="bClassSale">
-		<div class="section" id="bClassSale">
-			<h3 id="bTitle">B급 품목 세일!</h3>
-			<div id="bSubject">고구마의 달인 김용제가 재배한 특급고구마</div>
-			<div id="bSpices">강원도 노지감자</div>
-			<div id="bSaleInfo"><span>30,000원</span><span>20,000원</span><span>50,000원</span></div>
-			<div id="bNotice">망설이면 늦어요!</div>
-			<div id="bInfo"><img src="/sshj/img/dsweetpotato1.jpg" id="bInfoImg"/>
-					<div id="bInfoTitle">강원도 노지감자</div>
-					<div id="bInfoTime">06:48:17 남음</div>
-			</div>
-			
+</div>
+<div id="banner" class="centerTarget">
+	<div id="prevBtn" class="roundImg"></div>
+	<div class="slider">
+		<div></div>
+		<div id="sliderImgs">
+			<a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dleaves.jpg"/></a><a href="error/errorPage.jsp"><img src="/sshj/img/dcherry-blossom.jpg"/></a><a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dmelon.jpg"/></a>
 		</div>
+	<div id="nextBtn" class="roundImg"></div>
 	</div>
-	
-	<div class="section">
+</div>
+<div class="section">
 	<br/>
 	<h2>신상품<span id="numm"></span></h2>
 	<hr/>
@@ -458,5 +479,4 @@
 			<div class="reciptList"><div><img src="/sshj/img/dgamzajun.jpg"/></div><div>오늘 저녁은 감자전 어떠세요?</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
 			<div class="reciptList"><div><img src="/sshj/img/dotorimuk.jpg"/></div><div>더운날 생각나도 도토리묵</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
 		</div>
-	</div>
 </div>

@@ -1,0 +1,224 @@
+@charset "UTF-8";
+/*
+<!-- font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<!-- font-family: 'Nanum Gothic', sans-serif; -->
+*/
+	body{width:1920px; padding:0; margin:0; font-family: 'Nanum Gothic', sans-serif; font-size:16px;}
+	.main{width:1280px;display:flex; margin: 0 auto;}
+	#article,.detail_modal{width:1080px;}
+	/*버튼*/
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
+	}
+	/*버튼*/
+	.btn:onclick{
+		background: gray;
+		color:white;
+	} 
+	/*테이블헤더*/
+	th{
+		height:50px;
+		display: table-cell;
+	    vertical-align: inherit;
+	    font-weight: bold;
+	    text-align: -internal-center;
+	    border-bottom: 2px solid #ccc;
+	    border-top: 2px solid #ccc;
+   		background-color: #fcfcfc;
+   		font-size: 16px;
+	}
+
+	input, textarea, select{
+		border:1px solid lightgray; 
+		border-radius: 8px;
+	}
+	li, label{list-style-type:none; padding-bottom:10px;}
+	select{height:28px;}
+	/* 검색하기 */
+	#search_container{
+		width: 100%;
+		height: 30px;
+		margin-bottom: 30px;
+	}
+	#search_box{
+		height: 30px;
+		line-height: 30px;
+		border: solid 1px #ddd;
+		display: inline-block;
+		float: right;
+		background-color: #fff;
+	}
+	#search{
+		height: 25px;
+		text-indent: 0.2em;
+		border: white;
+		float: left;
+	}
+	#search_box img{
+		width: 27px;
+		height: 27px;
+		
+		filter: invert(86%) sepia(34%) saturate(7117%) hue-rotate(311deg) brightness(90%) contrast(103%);
+		float: right;
+	}
+	/*판매자 왼쪽 카테고리*/
+	nav{
+		width: 180px;
+		margin:0;
+		padding: 0 30px;
+		background: rgb(252,118,45);
+		color:black;
+		padding: 25px;
+	}
+	nav li{
+		/*padding: 25px;*/
+		text-align: center;
+		color:black;
+		font-weight:bold;
+		margin:25px 0 25px 0 ;
+	}
+	nav a{color:white}
+	
+	/*판매자 고객센터 - 왼쪽 카테고리*/
+	.cs_nav{
+		width: 180px;
+		margin-right:0;
+		padding: 0 10px;
+		background: rgb(252,118,45);
+		color:black;
+		padding: 25px;
+	}
+	.cs_nav li{
+		padding:0;
+		text-align:center;
+		color:black;
+		font-weight:bold;
+		margin:70px 0 70px 0;
+	}
+	.cs_nav>li a{color:black; font-weight:bold; margin-bottom:20px;}
+	.cs_ul>li:nth-child(1){
+		font-size:25px; 
+		margin:0; padding:0;
+		text-align: center;
+		color:rgb(252,118,45);
+	}
+	.cs_title{
+		color:white;
+		font-weight:bold
+	}
+	/*고객센터 상단 title bar & 판매자 페이지 상단title bar*/
+	.cs_message{
+		margin: 0 auto;
+		font-size:15px;
+		width:90%;
+		margin-bottom:20px;	
+		font-weight:bold;
+	}
+	.cs_wrapTitle, .wrapTitle{
+	   width: 100%;
+	   height: 30px;
+	   line-height: 30px;
+	   font-weight:bold;
+	   text-indent: 0.4em;
+	   color: rgb(252,118,45);
+	   border-top:1px solid rgb(252,118,45);
+	   border-bottom:1px solid rgb(252,118,45);
+	   margin-bottom:30px;
+	}
+	/* 페이징처리부분 */
+	.page_wrap {
+		text-align:center;
+		font-size:0;
+		padding-bottom: 30px;
+	}
+	.page_nation {
+		display:inline-block;
+	}
+	.page_nation .none {
+		display:none;
+	}
+	.page_nation a {
+		display:block;
+		margin:0 3px;
+		float:left;
+		border:1px solid #e6e6e6;
+		width:35px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		background-color:#fff;
+		font-size:13px;
+		color:#999999;
+		text-decoration:none;
+	}
+	.page_nation .arrow {
+		border:1px solid #ccc;
+	}
+	.page_nation .pprev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
+		margin-left:0;
+	}
+	.page_nation .prev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
+		margin-right:7px;
+	}
+	.page_nation .next {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
+		margin-left:7px;
+	}
+	.page_nation .nnext {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
+		margin-right:0;
+	}
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/*input=number 증감화살표 없애기*/
+	/* Chrome, Safari, Edge, Opera */
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+	}
+/* 	textarea:disabled, 
+	input:not([type]):disabled, 
+	input[type="color" i]:disabled, 
+	input[type="date" i]:disabled, 
+	input[type="datetime" i]:disabled, 
+	input[type="datetime-local" i]:disabled,
+	input[type="email" i]:disabled, 
+	input[type="month" i]:disabled, 
+	input[type="password" i]:disabled, 
+	input[type="number" i]:disabled, 
+	input[type="search" i]:disabled, 
+	input[type="tel" i]:disabled, 
+	input[type="text" i]:disabled, 
+	input[type="time" i]:disabled, 
+	input[type="url" i]:disabled, 
+	input[type="week" i]:disabled {
+	   color:#000;
+	   -webkit-text-fill-color:#000;
+	   background-color:#f4f5f6;
+	   -webkit-opacity:1;
+} */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+   -moz-appearance: textfield;
+}

@@ -19,5 +19,11 @@ public class NoticeServiceImp implements NoticeService{
 		
 		return noticeDAO.noticeAllRecord();
 	}
+
+	@Override
+	public NoticeVO noticeSelect(int infonum) {
+		
+		return noticeDAO.noticeSelect(infonum);
+	}
 	
 }

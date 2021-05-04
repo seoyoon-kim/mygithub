@@ -6,6 +6,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
+	.main{
+		height: 1000px;
+	}
 	.wrapTitle{
 	   margin-top: 50px;
 	   width: 100%;
@@ -103,7 +106,7 @@ function showHideFaq(){
 				<c:forEach var="data" items="${list}">
 					<tr>
 						<td>${data.infonum}</td>
-						<td><a href="notice_view2infonum=${data.infonum}"><strong>${data.infocontent}</strong></a></td>
+						<td><a href="notice_view2?infonum=${data.infonum}"><strong>${data.infocontent}</strong></a></td>
 						<td>${data.infowritedate}</td>
 					</tr>
 				</c:forEach>
