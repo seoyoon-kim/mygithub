@@ -2,10 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
 <style>
-	html, body{
-		width:100%;
-		height:100%;
-	}
 	.slider{
 		width:100%;
 		height:450px;
@@ -13,7 +9,7 @@
 		position:relative;
 	}
 	.slider>div:nth-child(2){
-		width:3240px;
+		width:5760px;
 		height:450px;
 		position:relative;
 	}
@@ -21,6 +17,7 @@
 		height:450px;
 		margin:0;
 		padding:0;
+		width:1920px;
 	}
 	#prevBtn, #nextBtn{
 		width:30px;
@@ -33,12 +30,12 @@
 		background-position:-1px -1px;
 	}
 	#prevBtn{
-		left:10px;
+		left:110px;
 		background-image:url(/sshj/img/dleft-arrow2.png);
 	}
 	#nextBtn{
 		background-image:url(/sshj/img/dright-arrow2.png);
-		left:1080px;
+		left:1100px;
 	}
 	.nextBtn, .prevBtn{
 		width:30px;
@@ -52,11 +49,11 @@
 	}
 	.nextBtn{
 		background-image:url(/sshj/img/dright-arrow2.png);
-		left:1008px;
+		left:1040px;
 	}
 	.prevBtn{
 		background-image:url(/sshj/img/dleft-arrow2.png);
-		left:40px;
+		left:10px;
 	}
 	#banner{
 		position:relative;
@@ -67,8 +64,8 @@
 		opacity:70%;
 	}
 	.productList{
-		padding-left:50px;
-		padding-right:50px;
+		padding-left:10px;
+		padding-right:10px;
 		float:left;
 		width:1080px;
 		height:360px;
@@ -84,32 +81,34 @@
 	}
 	
 	.productPanel>div:nth-child(4n+1), .productPanel img{
-		width:225px;
+		width:255px;
 		height:250px;
 	}
 	.productPanel>div:nth-child(4n+2){
-		width:225px;
+		width:255px;
 		height:40px;
-		font-size:1.1em;
+		font-size:16px;
 		font-weight:800;
+		padding-top:5px;
 	}
 	.productPanel>div:nth-child(4n+3){
-		width:225px;
+		width:255px;
 		height:40px;
-		font-size:1.1em;
+		font-size:15px;
 		font-weight:800;
+		text-align:right;
 	}
 	.productPanel>div:nth-child(4n){
-		width:225px;
+		width:255px;
 		height:30px;
-		font-size:0.7em;
+		font-size:12px;
 		color:#999;		
 	}
 	.productPanel{
-		width:225px;
+		width:255px;
 		height:360px;
-		margin-left:10px;
-		margin-right:10px;
+		margin-left:5px;
+		margin-right:5px;
 	}
 	h2{
 		text-align:center;
@@ -120,42 +119,42 @@
 		text-decoration: none;
 	}
 	.product{
-		width:1960px;
+		width:2120px;		/* 상품 전체 */
 		height:360px;
 		position:relative;
 	}
 	.productSetWidth{
-		width:980px;
+		width:1060px;		/* 상품 표현 너비*/
 		overflow:hidden;
 	}
 	.todayRecipt{
 		width:1080px;
 		height:360px;
-		padding:0 50px;
+		padding:0 12px;
 		margin-bottom:50px;
 	}
 	.reciptList>div:nth-child(3n+1), .reciptList>div:nth-child(3n+1) img{
-		width:306px;
+		width:342px;
 		height:250px;
 	}
 	.reciptList>div:nth-child(3n+2){
-		width:306px;
+		width:342px;
 		height:40px;
 		font-size:1.3em;
 		font-weight:600;
 		line-height:40px;
 	}
 	.reciptList>div:nth-child(3n){
-		width:306px;
+		width:342px;
 		height:30px;
 		text-align:right;
 		position:relative;
 	}
 	.reciptList{
-		width:306px;
+		width:342px;
 		height:330px;
 		float:left;
-		margin:0 10px;
+		margin:0 5px;
 	}
 	.like, .unlike{
 		height:20px;
@@ -163,7 +162,7 @@
 		background-size:20px 20px;
 		float:right;
 		position:absolute;
-		left:245px;
+		left:280px;
 		top:2px;
 	}
 	.like{
@@ -297,23 +296,28 @@
 </style>
 </head>
 <script>
+	var wid100= window.outerWidth;
+	var bannerLength = 8; // 배너 개수
+	var maxRan = 7;	// 랜덤 범위(최대값 - 1)
+	var ran = parseInt(Math.random()*maxRan);	// 배너의 수에 따라 조절할 수 있어야함
+	var proWidth = 265; /* 상품 너비 */ 
 	$(function(){
+		imgWidthSet()
 		function banner(idx){
-			var left= -(idx*1080);
+			var left= -(idx*wid100);
 			$(".slider>div").eq(1).animate({marginLeft:left+"px"},1000);
 		}
-		var ran = parseInt(Math.random()*3);
 		banner(ran);
 		$("#prevBtn").click(function(){
 			ran--;
 			if(ran<0){
-				ran=2;
+				ran=maxRan;
 			}
 			banner(ran);
 		});
 		$("#nextBtn").click(function(){
 			ran++;
-			if(ran>2){
+			if(ran>maxRan){
 				ran=0;
 			}
 			banner(ran);
@@ -321,7 +325,7 @@
 		
 		
 		function todayProduct(idx){
-			var left= -(idx*245);
+			var left= -(idx*proWidth);
 			$("#todayProduct").eq(0).animate({marginLeft:left+"px"},1000);
 		}
 		var todaySelect = 4;
@@ -343,7 +347,7 @@
 		});
 		
 		function newProduct(idx){
-			var left= -(idx*245);
+			var left= -(idx*proWidth);
 			$("#newProduct").eq(0).animate({marginLeft:left+"px"},1000);
 		}
 		var newProductSelect = 4;
@@ -365,7 +369,7 @@
 		});
 		
 		function bestProduct(idx){
-			var left= -(idx*245);
+			var left= -(idx*proWidth);
 			$("#bestProduct").eq(0).animate({marginLeft:left+"px"},1000);
 		}
 		var bestSelect = 4;
@@ -385,7 +389,54 @@
 			}
 			bestProduct(bestSelect);
 		});
+		
+		
+		//좋아용 싫어용
+		$(".reciptList>div:nth-child(3n)>div:first-child").click(function(){
+			console.log("이벤트");
+			if(ran%4==1){
+				$(this).toggleClass('like').toggleClass('unlike').animate({left:"276px", top:"-2px"},100).animate({left:"280px", top:"2px"},100);	
+			}else if(ran%4==2){
+				$(this).toggleClass('like').toggleClass('unlike').animate({left:"284px", top:"-2px"},100).animate({left:"280px", top:"2px"},100);
+			}else if(ran%4==3){
+				$(this).toggleClass('like').toggleClass('unlike').animate({left:"276px", top:"6px"},100).animate({left:"280px", top:"2px"},100);
+			}else{
+				$(this).toggleClass('like').toggleClass('unlike').animate({left:"284px", top:"6px"},100).animate({left:"280px", top:"2px"},100);
+			}
+			
+		})
 	});
+	
+	$(window).resize(function(){
+		if(wid100>1080){
+			imgWidthSet();	
+		}
+		if(wid100<1080){
+			imgWidthMinSet();
+		}
+	});
+	function imgWidthSet(){
+		wid100 = window.outerWidth;
+		$("#sliderImgs img").css("width",wid100);
+		$(".slider>div:nth-child(2)").css("width",(bannerLength*wid100));
+		$(".slider>div").eq(1).css("margin-left",-(ran*wid100));
+		$("#nextBtn").css("left",wid100-150);
+	}
+	
+	function imgWidthMinSet(){
+		wid100 = window.outerWidth;
+		$("#sliderImgs img").css("width",1080);
+		$(".slider>div:nth-child(2)").css("width",(bannerLength*1080));
+		$(".slider>div").eq(1).css("margin-left",-(ran*1080));
+		$("#nextBtn").css("left",1080-150);
+	}
+	
+	$("#banner").hover(function(){
+		console.log('올라옴');
+	}, function(){
+		console.log("나감");
+	});
+	
 	
 </script>
 <div id="homeVideo" class="centerTarget">
@@ -423,12 +474,12 @@
 		</div>
 	</div>
 </div>
-<div id="banner" class="centerTarget">
+<div id="banner" class="centerTarget" style="margin:0 auto;">
 	<div id="prevBtn" class="roundImg"></div>
 	<div class="slider">
 		<div></div>
 		<div id="sliderImgs">
-			<a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dleaves.jpg"/></a><a href="error/errorPage.jsp"><img src="/sshj/img/dcherry-blossom.jpg"/></a><a href="/sshj/inc/errorPage.jsp"><img src="/sshj/img/dmelon.jpg"/></a>
+			<a href="/sshj/"><img src="/sshj/img/dbanner1.jpg"/></a><a href="/sshj/"><img src="/sshj/img/dbanner2.jpg"/></a><a href="/sshj/"><img src="/sshj/img/dbanner3.jpg"/></a><a href="/sshj/"><img src="/sshj/img/dbanner4.jpg"/></a><a href="/sshj/"><img src="/sshj/img/dbanner5.jpg"/></a><a href="/sshj/"><img src="/sshj/img/dbanner6.jpg"/></a><a href="/sshj/"><img src="/sshj/img/dbanner7.jpg"/></a><a href="/sshj/"><img src="/sshj/img/dbanner8.jpg"/></a>
 		</div>
 	<div id="nextBtn" class="roundImg"></div>
 	</div>
