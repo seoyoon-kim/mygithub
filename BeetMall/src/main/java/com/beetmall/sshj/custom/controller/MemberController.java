@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -69,9 +70,9 @@ public class MemberController {
 	@ResponseBody
 	public int idCheck(HttpServletRequest req) {
 		String id = req.getParameter("Checkid");
-		System.out.println("id = "+id);
+//		System.out.println("id = "+id);
 		int result = memberservice.idOverlap(id);
-		System.out.println("result = "+result);
+//		System.out.println("result = "+result);
 		
 		return result;
 	}
@@ -120,10 +121,12 @@ public class MemberController {
 	@RequestMapping(value="/cregiFinish", method=RequestMethod.POST)
 	public ModelAndView regiFinishiOk(MemberVO vo, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
+		
 		String tel1 = req.getParameter("userphone1");
 		String tel2 = req.getParameter("userphone2");
 		String tel3 = req.getParameter("userphone3");
 		vo.setUserphone(tel1+"-"+tel2+"-"+tel3);
+		vo.setUsertype(1);
 		
 		// 확인용 //
 //		System.out.println("id-->"+vo.getUserid());	// 널
@@ -141,7 +144,7 @@ public class MemberController {
 //		System.out.println("point-->"+vo.getPoint());	//0
 		// 확인용 //	
 		if(memberservice.regiFinishiOk(vo)==1) {
-			mav.setViewName("redirect:registerFinish");
+			mav.setViewName("redirect:regiFinish");
 		}else {
 			mav.addObject(vo);
 			mav.addObject("userphone1",tel1);
@@ -153,84 +156,101 @@ public class MemberController {
 		return mav;
 	}
 	// 판매자 회원가입
-	@RequestMapping(value="/sregiFinish", method=RequestMethod.POST)
+	@RequestMapping(value="/sregiFinish", method= RequestMethod.POST)
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
-	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo, CategoryFarmVO cvo, HttpServletRequest req) {
+	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo, CategoryFarmVO cvo, @RequestParam MultipartFile file, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String tel1 = req.getParameter("userphone1");
 		String tel2 = req.getParameter("userphone2");
 		String tel3 = req.getParameter("userphone3");
-		
 		vo.setUserphone(tel1+"-"+tel2+"-"+tel3);
-		// 판매자 테이블로 들어가야 하는 부분
-		String path = req.getSession().getServletContext().getRealPath("/resources/sellerregiimgs");
-		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-		MultipartFile file = mr.getFile("sellerregiimg");
-		String uploadFilename = new String();
-		if(file!=null) {	// 첨부파일이 있을 때
-			String orgFilename = file.getOriginalFilename();
-			if(!orgFilename.equals("") && orgFilename!=null) {
-				File f = new File(path, orgFilename);
-				int i = 1;
-				while(f.exists()) {	// 있으면 true, 없으면 false
-					int point = orgFilename.lastIndexOf(".");	// .위치
-					String name = orgFilename.substring(0, point);	// 파일명
-					String extName = orgFilename.substring(point+1);	//확장자
-					f = new File(path, name+"_"+ i++ +"."+extName);
-				}// while end
-				try {
-					file.transferTo(f);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
-				// 변경된 파일명
-				uploadFilename = f.getName();
-			}
-		}// if end
-		svo.setSellerregiimg(uploadFilename);
 		
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
 		TransactionStatus status = transactionManager.getTransaction(def);
 		try {
+			// 회원등록 1
+			vo.setUsertype(2);
 			int result1 = memberservice.regiFinishiOk(vo);
-			System.out.println("농장번호"+cvo.getStorenum());
-			cvo.setLatitude("0");
-			cvo.setLogetitude("0");
-			System.out.println("방문자수"+cvo.getFarmvisitor());
+//			System.out.println("농장번호-->"+cvo.getStorenum());
+//			System.out.println("방문자수-->"+cvo.getFarmvisitor());
 			
+			// 농장 생성
+			cvo.setFarmname(svo.getSellername()+"의 농장");
+			cvo.setFarmintro(svo.getSellername()+"의 농장입니다.");
 			int result2 = memberservice.farmInsert(cvo);
-			System.out.println("농장번호"+cvo.getStorenum());
-			svo.setStorenum(cvo.getStorenum());
-			System.out.println("id-->"+svo.getUserid());	//ㅇㅇ
-			System.out.println("num-->"+svo.getStorenum());	// 0 
-			System.out.println("storename-->"+svo.getStorename()); // ㅇㅇ
-			System.out.println("sellername-->"+svo.getSellername());	//ㅇㅇ
-			System.out.println("sellerreginum-->"+svo.getSellerreginum());	//ㅇㅇ
-			System.out.println("sellerregiimg-->"+svo.getSellerregiimg());	// 널
-			System.out.println("regiapproval-->"+svo.getRegiapproval());	// 널
-			System.out.println("regiapprovaldate-->"+svo.getRegiapprovaldate());	//널
-			System.out.println("zipcode-->"+svo.getStorezipcode());	// ㅇㅇ
-			System.out.println("addr-->"+svo.getStoreaddr());	//ㅇㅇ
-			System.out.println("detailaddr-->"+svo.getStoredetailaddr());	// ㅇㅇ
-			System.out.println("storeemail-->"+svo.getStoreemail());	//ㅇㅇ
-			System.out.println("bank-->"+svo.getBank());	//ㅇㅇ
-			System.out.println("bankname-->"+svo.getBankname());	//ㅇㅇ
-			System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
 			
+//			System.out.println("농장번호-->"+cvo.getStorenum());
+//			System.out.println("id-->"+svo.getUserid());	//ㅇㅇ
+//			System.out.println("num-->"+svo.getStorenum());	// 0 
+//			System.out.println("storename-->"+svo.getStorename()); // ㅇㅇ
+//			System.out.println("sellername-->"+svo.getSellername());	//ㅇㅇ
+//			System.out.println("sellerreginum-->"+svo.getSellerreginum());	//ㅇㅇ
+//			System.out.println("sellerregiimg-->"+svo.getSellerregiimg());	// 널
+//			System.out.println("regiapproval-->"+svo.getRegiapproval());	// 널
+//			System.out.println("regiapprovaldate-->"+svo.getRegiapprovaldate());	//널
+//			System.out.println("zipcode-->"+svo.getStorezipcode());	// ㅇㅇ
+//			System.out.println("addr-->"+svo.getStoreaddr());	//ㅇㅇ
+//			System.out.println("detailaddr-->"+svo.getStoredetailaddr());	// ㅇㅇ
+//			System.out.println("storeemail-->"+svo.getStoreemail());	//ㅇㅇ
+//			System.out.println("bank-->"+svo.getBank());	//ㅇㅇ
+//			System.out.println("bankname-->"+svo.getBankname());	//ㅇㅇ
+//			System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
+			
+			//////////////////// 파일 업로드
+			String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
+			System.out.println("path="+path);
+			String paramName = file.getName();
+			String orgName = file.getOriginalFilename();
+			System.out.println(paramName+", "+orgName);
+			
+			try {
+				if(orgName != null) {
+					File f = new File(path, orgName);
+					int i = 1;
+					while(f.exists()) {
+						int point = orgName.lastIndexOf(".");
+						String name = orgName.substring(0, point);
+						String extName = orgName.substring(point+1);
+						
+						f = new File(path, name+"_"+ i++ + "." + extName);
+					}// while
+					orgName = f.getName();
+					
+					try {
+						file.transferTo(new File(path,orgName));
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			svo.setSellerregiimg(orgName);
+			//////////////////// 파일 업로드 end)
+			// 판매자 등록
 			int result3 = memberservice.sellerRegiFinishiOk(svo);
-			// 정상실행시 commit
+			
+			////////////////////등록 실패시 파일 삭제
+			if(result3 <=0) {
+				if(orgName != null) {
+					File delf = new File(path, orgName);
+					delf.delete();
+				}
+			}
+			////////////////////파일 삭제 end)
+			
 			transactionManager.commit(status);
-			mav.setViewName("redirect:registerFinish");
+			// 정상실행시 commit
+			if(result1 == 1 && result2 == 1 && result3 == 1) {
+				System.out.println("판매자 정상 등록되었습니다");
+				mav.setViewName("redirect:regiFinish");
+			}else {
+				System.out.println("판매자 정상등록실패");
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("트랜잭션 문제.. 되게 골치아프니 주의..");
-			mav.addObject(vo);
-			mav.addObject(svo);
-			mav.addObject("userphone1",tel1);
-			mav.addObject("userphone2",tel2);
-			mav.addObject("userphone3",tel3);
-			mav.addObject("result","NO");
 			mav.setViewName("redirect:sregister");
 		}
 		return mav;

@@ -53,10 +53,11 @@
 		background-color:white;
 	}
 	#infoView, #infoView2{
-		width:1080px;
-		height:50px;
-		background-color:rgb(252,118,45);
-		color:white;
+		width:1050px;
+		height:500px;
+		background-color:white;
+		border:rgb(252,118,45);
+		color:black;
 		line-height:50px;
 		font-size:25px;
 		padding-left:10px;
@@ -143,33 +144,29 @@
 </style>
 <script>
 	$(function(){
-		$("#infoView").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
-			var params = 'infoname=이용약관';
-			$.ajax({
-				url:"userinfo",
-				data : params,
-				success : function(data){
-					console.log(data);
-					$("#infoView").html(data).addClass("infoView").css("font-size","14px");
-				}, error : function(){
-					alert("약관 오류발생...");
-				}
-			});
+		$("#infoView").css("height","350px").css("background-color","white");
+		var params = 'infoname=이용약관';
+		$.ajax({
+			url:"userinfo",
+			data : params,
+			success : function(data){
+				console.log(data);
+				$("#infoView").html(data).addClass("infoView").css("font-size","14px").css("border","1px solid #ddd");
+			}, error : function(){
+				alert("약관 오류발생...");
+			}
 		});
-		$("#infoView2").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
-			var params = 'infoname=개인정보처리방침';
-			$.ajax({
-				url:"userinfo",
-				data : params,
-				success : function(data){
-					console.log(data);
-					$("#infoView2").html(data).addClass("infoView").css("font-size","14px");
-				}, error : function(){
-					alert("약관 오류발생...");
-				}
-			});
+		$("#infoView2").css("height","350px").css("background-color","white");
+		var params = 'infoname=개인정보처리방침';
+		$.ajax({
+			url:"userinfo",
+			data : params,
+			success : function(data){
+				console.log(data);
+				$("#infoView2").html(data).addClass("infoView").css("font-size","14px").css("border","1px solid #ddd");
+			}, error : function(){
+				alert("약관 오류발생...");
+			}
 		});
 		$("#infocheck1").click(function(){
 			$(this).prop("checked", true).prop("disabled", true);
@@ -372,7 +369,7 @@
 						if(data == 1){
 							alert("인증에 성공하였습니다.");							
 							$("#checkEmailResult").val('Y');
-							$("#useremail").attr("disabled",true);
+							$("#useremail").attr("readonly",true);
 						}else{
 							alert("인증코드가 일치하지 않거나 인증에 실패하였습니다.");
 						}
@@ -521,10 +518,6 @@
 			
 		</div>
 		
-		<div id="emailDiv" style="background-color: #ddd;">
-			<h3 style="background-color: white;">비트몰 이메일 인증입니다.</h3>
-			<h5 style="background-color: white;">인증번호 : emailCode</h5>
-		</div>
 	</div>
 </div>
 </body>

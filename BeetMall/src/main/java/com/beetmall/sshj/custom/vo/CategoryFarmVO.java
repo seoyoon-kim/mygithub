@@ -7,8 +7,7 @@ public class CategoryFarmVO {
 	private String farmprofile; //프로필이미지
 	private int farmvisitor; //방문자수
 	private String farmbest; //대표상품
-	private String latitude; //위도
-	private String logetitude; //경도
+	private int productnum;	// 상품번호
 	public int getStorenum() {
 		return storenum;
 	}
@@ -45,18 +44,13 @@ public class CategoryFarmVO {
 	public void setFarmbest(String farmbest) {
 		this.farmbest = farmbest;
 	}
-	public String getLatitude() {
-		return latitude;
+	public int getProductnum() {
+		return productnum;
 	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+	public void setProductnum(int productnum) {
+		this.productnum = productnum;
 	}
-	public String getLogetitude() {
-		return logetitude;
-	}
-	public void setLogetitude(String logetitude) {
-		this.logetitude = logetitude;
-	}
+
 	
 	
 }

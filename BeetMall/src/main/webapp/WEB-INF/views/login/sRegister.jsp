@@ -4,7 +4,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	#section{
-		height:1300px;
+		height:2100px;
 		overflow:auto;
 	}
 	button, .btn{
@@ -58,10 +58,11 @@
 		background-color:white;
 	}
 	#infoView, #infoView2{
-		width:1080px;
-		height:50px;
-		background-color:rgb(252,118,45);
-		color:white;
+		width:1050px;
+		height:500px;
+		background-color:white;
+		border:rgb(252,118,45);
+		color:black;
 		line-height:50px;
 		font-size:25px;
 		padding-left:10px;
@@ -170,33 +171,29 @@
 </style>
 <script>
 	$(function(){
-		$("#infoView").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
+			$("#infoView").css("height","350px").css("background-color","white");
 			var params = 'infoname=이용약관';
 			$.ajax({
 				url:"userinfo",
 				data : params,
 				success : function(data){
 					console.log(data);
-					$("#infoView").html(data).addClass("infoView").css("font-size","14px");
+					$("#infoView").html(data).addClass("infoView").css("font-size","14px").css("border","1px solid #ddd");
 				}, error : function(){
 					alert("약관 오류발생...");
 				}
 			});
-		});
-		$("#infoView2").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
+			$("#infoView2").css("height","350px").css("background-color","white");
 			var params = 'infoname=개인정보처리방침';
 			$.ajax({
 				url:"userinfo",
 				data : params,
 				success : function(data){
 					console.log(data);
-					$("#infoView2").html(data).addClass("infoView").css("font-size","14px");
+					$("#infoView2").html(data).addClass("infoView").css("font-size","14px").css("border","1px solid #ddd");
 				}, error : function(){
 					alert("약관 오류발생...");
 				}
-			});
 		});
 		$("#infocheck1").click(function(){
 			$(this).prop("checked", true).prop("disabled", true);
@@ -269,12 +266,19 @@
 				alert("약관에 동의해주세요!");
 				return false;
 			}
-			
+			if($("#bankName").val() == null){
+				alert("은행을 선택해주세요")
+				return false;
+			}
+			if($("#sellerregiimg").val() == null || $("#sellerregiimg").val()==''){
+				alert("사업자등록증은 반드시 첨부해야 합니다!");
+				return false;
+			}
 			// 맨 밑부분
 			if(regCheck()==false){
 				return false;
 			}else{
-				$("#regiFrm").submit();
+				//$("#regiFrm").submit();
 			}
 			return true;
 		});
@@ -411,7 +415,7 @@
 						if(data == 1){
 							alert("인증에 성공하였습니다.");							
 							$("#checkEmailResult").val('Y');
-							$("#useremail").attr("disabled",true);
+							$("#emailCheck").attr("readonly", true);
 						}else{
 							alert("인증코드가 일치하지 않거나 인증에 실패하였습니다.");
 						}
@@ -452,7 +456,7 @@
 						if(data == 1){
 							alert("인증에 성공하였습니다.");							
 							$("#checkEmailSellerResult").val('Y');
-							$("#storeemailCheck").attr("disabled",true);
+							$("#storeemailCheck").attr("readonly",true);
 						}else{
 							alert("인증코드가 일치하지 않거나 인증에 실패하였습니다.");
 						}
@@ -550,6 +554,7 @@
 			alert("이메일이 잘못 입력되었습니다.");
 			return false;			
 		}
+		
 	}
 	// 이메일 검사
 	function emailCheckCustom(){
@@ -591,11 +596,11 @@
 				
 			<ul id="formUl">	
 				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" readonly/><input type="button" value="중복검사" class="btn" id="idCheckDibPop"/></li>
-				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
-				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
-				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;"/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
-				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
+				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd" value="123456"/></li>	
+				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left" value="123456"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username" value="테스타"/></li>		
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
+				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;" value="8b334c"/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
 							
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
 																			<option value="010">010</option>
@@ -617,37 +622,39 @@
 																			<option value="063">063</option>
 																			<option value="064">064</option>
 																			</select> -
-																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4"/> -
-																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"/></li>
+																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4" value="1234"/> -
+																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4" value="1234"/></li>
 				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
-																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;"/>
-																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"/>
-																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" placeholder="상세 주소 입력"/></li>			
-				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday"/></li>
+																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;" value="12345"/>
+																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"value="12345"/>
+																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" placeholder="상세 주소 입력" value="상세 주소 입력하는 곳.."/></li>			
+				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday" value="1978-01-01"/></li>
 			</ul>
 			
 			<div id="infoCheckDiv" style="padding-top:390px;">
+				<h4>▼이용약관</h4>
 				<div id="infoView" class="radiusClass">▼이용약관</div>
 				<input type="checkbox" id="infocheck1" value="infocheck1"  />&nbsp;동의합니다.<br/>
+				<h4>▼개인정보 처리방침</h4>
 				<div id="infoView2" class="radiusClass">▼개인정보 처리방침</div>
 				<input type="checkbox" id="infocheck2" value="infocheck2"/>&nbsp;동의합니다. <br/>
 				<input type="checkbox" id="infocheck3" value="infocheck3"/>본인은 만 14세 이상입니다.
 			</div>
 			<div style="position: relative;">
 				<ul class="formUl" id="sFrm">
-					<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;" id="storename"/></li>
-					<li><span class="spanstar">*</span>대표자</li>				<li><input type="text" name="sellername" id="sellername"/></li>	
-					<li><span class="spanstar">*</span>사업장등록번호</li>		<li><input type="text" name="sellerreginum" id="sellerreginum" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
-					<li><span class="spanstar">*</span>사업자등록증 첨부</li>	<li><input type="file" name="sellerregiimgname" id="sellerregiimg"/></li>
+					<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;" id="storename" value="씽씽농산물"/></li>
+					<li><span class="spanstar">*</span>대표자</li>				<li><input type="text" name="sellername" id="sellername" value="김씽씽"/></li>	
+					<li><span class="spanstar">*</span>사업장등록번호</li>		<li><input type="text" name="sellerreginum" id="sellerreginum" style="float:left" value="1234562487"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+					<li><span class="spanstar">*</span>사업자등록증 첨부</li>	<li><input type="file" name="file" id="sellerregiimg"/></li>
 					<li></li>								<li><div id="notice">※사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.<br/>
 																	※사업자등록증을 첨부해주세요. 관리 절차에 따라 가입이 승인됩니다.<br/>
 																	※인증이 되지 않을 경우 고객센터(02-111-1111)로 문의해주세요.</div></li>		
 					<li><span class="spanstar">*</span>사업장소재지</li>		<li><input type="button"  id="sellerzipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
-																			<input type="text" name="storezipcode" id="storezipcode" readonly  style="width:100px;"/>
-																			<input type="text" name="storeaddr" id="storeaddr" style="margin-top:5px; width:302px;" readonly  placeholder="우편 번호 검색을 통해 입력해주세요" />
-																			<input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top:5px; width:540px;" placeholder="상세 주소 입력"/></li>					
-					<li><span class="spanstar">*</span>은행</li>				<li><select name="bank">
-																				<option value="index">은행명선택</option>  
+																			<input type="text" name="storezipcode" id="storezipcode" readonly  style="width:100px;"value="12345"/>
+																			<input type="text" name="storeaddr" id="storeaddr" style="margin-top:5px; width:302px;" readonly  placeholder="우편 번호 검색을 통해 입력해주세요"value="12345" />
+																			<input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top:5px; width:540px;" placeholder="상세 주소 입력" value="사업장 소재지 상세 주소"/></li>					
+					<li><span class="spanstar">*</span>은행</li>				<li><select name="bank" id="bankName">
+																				<option value="index" disabled selected>은행명선택</option>  
 																				<option value="국민">국민</option>  
 																				<option value="비씨">비씨</option>  
 																				<option value="신한">신한</option>  
@@ -666,10 +673,10 @@
 																				<option value="카카오뱅크">카카오뱅크</option>  
 																				<option value="케이뱅크">케이뱅크</option>  
 																			</select></li>			
-					<li><span class="spanstar">*</span>계좌번호</li>			<li><input type="text" name="bankaccount" id="bankaccount"/></li>
-					<li><span class="spanstar">*</span>예금주</li>				<li><input type="text" name="bankname" id="bankname"/></li>
-					<li><span class="spanstar">*</span>이메일</li>				<li><input type="text" name="storeemail" id="storeemail" style="margin-right:5px;"/><input type="button" value="인증코드 전송" id="storeemailBtn" class="btn"/></li>
-					<li></li>													<li><input type="text" name="storeemailCheck" id="storeemailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" id="storeemailCheckBtn" class="btn"/></li>
+					<li><span class="spanstar">*</span>계좌번호</li>			<li><input type="text" name="bankaccount" id="bankaccount" value="111334455567"/></li>
+					<li><span class="spanstar">*</span>예금주</li>				<li><input type="text" name="bankname" id="bankname" value="최씽씽"/></li>
+					<li><span class="spanstar">*</span>이메일</li>				<li><input type="text" name="storeemail" id="storeemail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증코드 전송" id="storeemailBtn" class="btn"/></li>
+					<li></li>													<li><input type="text" name="storeemailCheck" id="storeemailCheck" style="margin-right:5px;" value="7-cd58"/><input type="button" value="인증하기" id="storeemailCheckBtn" class="btn"/></li>
 				</ul>
 				<img src="/sshj/img/dimgPrev.png" id="imgPrev"/>
 				<div id="imgPrevInfo"><span>위 이미지는 미리보기입니다.</span></div>
