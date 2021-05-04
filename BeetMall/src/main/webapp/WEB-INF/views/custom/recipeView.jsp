@@ -2,15 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/inc/menu_c.jspf"%>
-
 <!-- font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
-	rel="stylesheet">
-<!-- font-family: 'Nanum Gothic', sans-serif; -->
-<link rel="stylesheet" type="text/css"	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
-<!-- font-family: 'NanumSquare', sans-serif !important; -->
-<link rel="stylesheet"	href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 <script>
 	
@@ -388,14 +382,18 @@ td, .td{
 				</tbody>
 			</table>
 		</fieldset>
+		<!--  
 		<c:if test="${logId==vo.userid}">
 			<a href="">수정</a>
 			<a href="">삭제</a>
 		</c:if>
-		
+		-->
 		
 
 		<!-- ------------------------하단 표시들----------------------------------- -->
+		<c:if test="${logId==vo.userid}">
+			
+		
 		<ul id="recivb">
 			<li id="goodidli"><div id="goodid" onclick="goodset()">추천해요<img src="img/cstar2.png" id="goodimg"></div></li>
 			<li id="keepidli"><div id="keepid" onclick="keepset()">즐겨찾기<img src="img/ccart2.png" id="keepimg"></div></li>
@@ -404,7 +402,9 @@ td, .td{
 			<li><a href=""><img src="img/cicon03.png"></a></li>
 			<li><a href=""><img src="img/cicon05.png"></a></li>
 		</ul>
-
+		
+		
+        </c:if>
 
 		<!-- ------------------------검색 기능----------------------------------- -->
 		<div id="searchbox">
@@ -412,15 +412,15 @@ td, .td{
 		</div>
 
 
-
-
 	</div>
 	
 <script>
 function goodset(){
+	
+	
 	  var good="<div id='nogoodid' onclick='nogoodset()'>추천해요<img src='img/cstar.png' id='nogoodimg'></div>"
 	  document.getElementById("goodidli").innerHTML=good;
-	  
+		
 	    var url = "recigoodOk";		
 		var num= "num="+${vo.recipenum};
 		console.log(url, num);
@@ -429,6 +429,21 @@ function goodset(){
 			data:num,
 			success:function(result){
 				console.log('추천수 올리시 성공---> ');
+				
+			},error:function(e){
+				console.log(e.responseText);
+				console.log("실패");
+			}
+		})
+		
+		 var url = "recigoodOk2";		
+		 var data= "id=${logId}&num=${vo.recipenum}";
+		console.log(url,data);
+		$.ajax({
+			url:url,
+			data:data,
+			success:function(result){
+				console.log('장바구니 올리기 성공---> ');
 				
 			},error:function(e){
 				console.log(e.responseText);
@@ -448,8 +463,24 @@ function nogoodset(){
 function keepset(){
 	var keep="<div id='nokeepid' onclick='nokeepset()''>즐겨찾기<img src='img/ccart.png' id='nokeepimg'></div>"
 	document.getElementById("keepidli").innerHTML=keep;
+	
+		var url = "recikeepOk";		
+		var data= "id=${logId}&num=${vo.recipenum}";
+		console.log(url,data);
+		$.ajax({
+			url:url,
+			data:data,
+			success:function(result){
+				console.log('장바구니 올리기 성공---> ');
+				
+			},error:function(e){
+				console.log(e.responseText);
+				console.log("실패");
+			}
+		})
+	
 	  }
-	  
+	 
 function nokeepset(){
 	var keep="<div id='keepid' onclick='keepset()''>즐겨찾기<img src='img/ccart2.png' id='keepimg'></div>"
 	document.getElementById("keepidli").innerHTML=keep;

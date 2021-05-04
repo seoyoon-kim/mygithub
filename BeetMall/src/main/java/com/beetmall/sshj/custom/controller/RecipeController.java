@@ -126,6 +126,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	
 	///////////////////////////////////// 추천한게시글///////////////////////////////////////
+	
 	@RequestMapping("/recigoodOk")
 	@ResponseBody
 	public int recigoodOk(HttpServletRequest req) {
@@ -139,5 +140,30 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	return data;
 }
+	
+	///////////////////////////////////// 추천한게시글 담기///////////////////////////////////////
+	
+	@RequestMapping("/recigoodOk2")
+	@ResponseBody
+	public String recigoodOk2(HttpServletRequest req) {
+		String id=req.getParameter("id");
+		int num=Integer.parseInt(req.getParameter("num"));
+		System.out.println(RecipeService.recigoodOk2(id, num));
+	return num+","+id;
+}
+	
+	///////////////////////////////////장바구니////////////////////////////////////////////
+	
+	@RequestMapping("/recikeepOk")
+	@ResponseBody
+	public String recikeepOk(HttpServletRequest req) {
+		String id=req.getParameter("id");
+		int num=Integer.parseInt(req.getParameter("num"));
+		System.out.println(RecipeService.recikeepOk(id, num));
+	return num+","+id;
+}
+
+
+
 	
 }

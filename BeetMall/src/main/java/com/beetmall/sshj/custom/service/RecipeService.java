@@ -18,5 +18,9 @@ public interface RecipeService {
 	public List<RecipeVO>customMyrecipe();
 	
 	public int recigoodOk(int data);
+	
+	public int recikeepOk(String id,int num);
+	
+	public int recigoodOk2(String id,int num);
 
 }

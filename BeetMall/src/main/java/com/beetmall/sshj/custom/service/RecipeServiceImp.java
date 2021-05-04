@@ -55,6 +55,18 @@ public class RecipeServiceImp implements RecipeService {
 	 return RecipeDAO.recigoodOk(data);
 	}
 
+	@Override
+	public int recikeepOk(String id,int num) {
+		
+		return RecipeDAO.recikeepOk(id,num);
+	}
+
+	@Override
+	public int recigoodOk2(String id, int num) {
+		
+		return RecipeDAO.recigoodOk2(id,num);
+	}
+
 
 	
 }
