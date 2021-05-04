@@ -12,7 +12,7 @@
 		to_char(orderconfirm, 'YYYY-MM-DD') orderconfirm, orderprice, mc.mcatename mcatename
 		from (select ordernum, a.productnum, productname, b.mcatenum, orderquantity, orderconfirm, orderprice, userid
 		from (select ordernum,productnum,orderquantity,orderconfirm,orderprice from orderdetail) a join product b on a.productnum = b.productnum )
-		od join mcategory mc on od.mcatenum = mc.mcatenum where userid='ghdrlfehd'
+		od join mcategory mc on od.mcatenum = mc.mcatenum where userid='${userid}'
 		<if test="#{resultData}!=''">
 			and od.productnum in 
 			<foreach collection="resultData" item="item" index="index" open="(" separator="," close=")" > 
