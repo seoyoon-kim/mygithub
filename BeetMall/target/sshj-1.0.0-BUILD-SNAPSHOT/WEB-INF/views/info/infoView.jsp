@@ -32,7 +32,7 @@
 		width:1080px;
 		height:980px;
 		top:40px;
-		border: 5px solid rgb(252,118,45);
+		border: 2px solid rgb(252,118,45);
 		padding:10px;
 		overflow: auto;
 	}
@@ -45,6 +45,20 @@
 	}
 </style>
 <script>
+	window.onload = function(){
+		var url = "/sshj/infobusiz";
+         $.ajax({
+            url : url,
+            success : function(result){
+            	var $result = $(result);
+            	$result.each(function(idx, obj){
+            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
+            	});
+            }, error:function(){
+               $("#infoPrint").html("전송받기 실패..");
+            }
+         });
+	}
 	$(function(){
 		$(".infobusiz").click(function(){
 			var url = "/sshj/infobusiz";

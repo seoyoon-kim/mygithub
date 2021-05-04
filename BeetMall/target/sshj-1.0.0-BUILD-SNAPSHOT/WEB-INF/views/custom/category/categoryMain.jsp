@@ -90,8 +90,7 @@
 		object-fit:cover;
 	}
 	
-	/* 상품페이지 부분 css끝 */	
-	
+	/* 상품페이지 부분 css끝 */
 	.main{
 		width:1080px;
 	}
@@ -114,7 +113,6 @@
 	#pickupMain{
 		float: right;
 		vertical-align: middle;
-		padding-top: 15px;
    		font-size: large;
 	}
 	#Sequence{
@@ -204,9 +202,12 @@
 		});
 	});
 </script>
+<!-- <div id="left">
+	카테고리 나와야하는부분
+</div> -->
 <div class="section">
 	<div class="main">
-		<div id="mainName"><h1>못난이 할인</h1></div>
+		<div id="mainName"><h1>상품 품목별</h1></div>
 			<ul id="category">
 				<li><sqan id="categoryAll"><img src="/sshj/img/kmain.png"><br/>전체</sqan></li>
 				<li><sqan id="categoryFruit"><img src="/sshj/img/kfruit.png"><br/>과일</sqan></li>
@@ -216,9 +217,10 @@
 			<div id="categorySubmenu">
 			<hr/>
 				<select id="Sequence">
-					<option value="평점순" selected="selected">평점순</option>
-					<option value="가격순">가격순</option>
-					<option value="조회수순">조회수순</option>
+					<option value="평점높은순" selected="selected">평점높은순</option>
+					<option value="평점낮은순">평점낮은순</option>
+					<option value="가격높은순">가격높은순</option>
+					<option value="가격낮은순">가격낮은순</option>
 				</select>
 				<a id="category2Left" style="display: none">◀</a>
 				<div id="category2">

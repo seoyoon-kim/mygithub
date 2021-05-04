@@ -203,7 +203,7 @@
 		<!-- 문의하기 상단 메세지 -->	
 			<div class="cs_message">
 				질문 전 자주묻는 질문을 먼저 확인해주세요. <br/>
-				<a href="<%=request.getContextPath() %>/notice_view2"><span id="link">자주묻는질문 바로가기 >></span></a><br/>
+				<a href="<%=request.getContextPath() %>/FAQBoard"><span id="link">자주묻는질문 바로가기 >></span></a><br/>
 				<br/>
 				고객님께서 비트몰에 문의하신 내용을 확인할 수 있습니다.<br/>
 			</div>

@@ -53,10 +53,11 @@
 		background-color:white;
 	}
 	#infoView, #infoView2{
-		width:1080px;
-		height:50px;
-		background-color:rgb(252,118,45);
-		color:white;
+		width:1050px;
+		height:500px;
+		background-color:white;
+		border:rgb(252,118,45);
+		color:black;
 		line-height:50px;
 		font-size:25px;
 		padding-left:10px;
@@ -143,33 +144,29 @@
 </style>
 <script>
 	$(function(){
-		$("#infoView").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
-			var params = 'infoname=이용약관';
-			$.ajax({
-				url:"userinfo",
-				data : params,
-				success : function(data){
-					console.log(data);
-					$("#infoView").html(data).addClass("infoView").css("font-size","14px");
-				}, error : function(){
-					alert("약관 오류발생...");
-				}
-			});
+		$("#infoView").css("height","350px").css("background-color","white");
+		var params = 'infoname=이용약관';
+		$.ajax({
+			url:"userinfo",
+			data : params,
+			success : function(data){
+				console.log(data);
+				$("#infoView").html(data).addClass("infoView").css("font-size","14px").css("border","1px solid #ddd");
+			}, error : function(){
+				alert("약관 오류발생...");
+			}
 		});
-		$("#infoView2").click(function(){
-			$(this).css("height","500px").css("background-color","white").css("border","3px solid rgb(252,118,45)").css("color","black").css("transition", "0.5s");
-			var params = 'infoname=개인정보처리방침';
-			$.ajax({
-				url:"userinfo",
-				data : params,
-				success : function(data){
-					console.log(data);
-					$("#infoView2").html(data).addClass("infoView").css("font-size","14px");
-				}, error : function(){
-					alert("약관 오류발생...");
-				}
-			});
+		$("#infoView2").css("height","350px").css("background-color","white");
+		var params = 'infoname=개인정보처리방침';
+		$.ajax({
+			url:"userinfo",
+			data : params,
+			success : function(data){
+				console.log(data);
+				$("#infoView2").html(data).addClass("infoView").css("font-size","14px").css("border","1px solid #ddd");
+			}, error : function(){
+				alert("약관 오류발생...");
+			}
 		});
 		$("#infocheck1").click(function(){
 			$(this).prop("checked", true).prop("disabled", true);
@@ -185,6 +182,48 @@
 		});
 		
 		$("#infosubmit").click(function(){
+			if($("#checkIdResult").val()=='N'){
+				alert("아이디 중복검사를 진행해주세요");
+				return false;
+			}
+			if($("#checkEmailResult").val()=='N'){
+				alert("이메일 인증을 진행해주세요");
+				return false;
+			}
+			if($("#userpwd").val()==null || $("#userpwd").val()==''){ 
+				alert("비밀번호를 입력해주세요"); 
+				return false;
+			}
+			if($("#userpwd").val() != $("#userpwd2").val()){ 
+				alert("비밀번호 확인과 비밀번호가 일치하지 않습니다."); 
+				return false;
+			}
+			if($("#username").val()==null || $("#username").val()==''){ 
+				alert("이름을 입력해주세요"); 
+				return false;
+			}
+			if($("#userphone2").val()==null || $("#userphone2").val()==''|| $("#userphone3").val()==null || $("#userphone3").val()==''){ 
+				alert("휴대폰 번호를 입력해주세요"); 
+				return false;
+			}
+			if($("#userzipcode").val()==null || $("#userzipcode").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#useraddr").val()==null || $("#useraddr").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#userdetailaddr").val()==null || $("#userdetailaddr").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#birthday").val()==null || $("#birthday").val()==''){ 
+				alert("생년월일을 입력해주세요"); 
+				return false;
+			}
+			
+			
 			if($("#hinfocheck1").val() != "Y") {
 				alert("약관에 동의해주세요!");
 				return false;
@@ -197,11 +236,6 @@
 				alert("약관에 동의해주세요!");
 				return false;
 			}
-			if($("#checkIdResult").val()=='N'){
-				alert("아이디 중복검사를 진행해주세요");
-				return false;
-			}
-			
 			
 			// 맨 밑부분
 			if(regCheck()==false){
@@ -213,12 +247,18 @@
 		});
 		
 		// 중복검사 창 띄우기
-		$("#idCheckDibPop").click(function(){
+		function overlapIdCheck(){
 			$("#modal").css("display","block");
 			$(document.body).css("overflow","hidden");
 			$(".idCheckDiv").css("display","block");
-			$("#popupcloseBtn").css("margin-left","140px").css("margin-top","85px");
-		})
+			$("#popupcloseBtn").css("margin-left","140px").css("margin-top","85px");			
+		}
+		$("#idCheckDibPop").click(function(){
+			overlapIdCheck();
+		});
+		$("#userid").click(function(){
+			overlapIdCheck();
+		});
 		
 		// 중복확인
 		$("#idCheck").click(function(){
@@ -266,7 +306,7 @@
 				if($("#userid2").val()!=null && $("#userid2").val()!=''){
 					$("#userid").val(checkid);
 					$("#checkIdResult").val('Y');
-					$("#userid").attr('disabled',true);
+					/* $("#userid").attr('disabled',true); */
 					popupClose();
 					$("#modal").css("display","none");
 					$(document.body).css("overflow","visible");
@@ -288,7 +328,57 @@
 			$("#checkIdResult").val('N');
 		});
 		
+		// 주소검색
+		$("#zipSearch").click(function(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		            $("#userzipcode").val(data.zonecode);
+		            $("#useraddr").val(data.address);
+		            document.getElementById('userdetailaddr').focus();
+		        }
+		    }).open();
+		});
 		
+		// 이메일 인증코드 전송
+		$("#emailSend").click(function(){
+			if(emailCheckCustom()!=false){
+				var url = 'emailSend';
+				var param = "SendToEmail="+$("#useremail").val();
+				$.ajax({
+					url : url,
+					data : param,
+					success :function(data){
+						alert("인증코드 전송에 성공했습니다. 이메일을 확인해주세요!");
+					}, error : function(){
+						alert("인증코드 전송에 실패하였습니다 잠시후 다시 시도해주세요");
+					}
+				})
+			}
+		})
+		
+		// 이메일 인증코드 확인
+		$("#emailCheckBtn").click(function(){
+			if($("#emailCheck").val()!=null || $("#emailCheck").val()!=''){
+				var url = 'emailCheck';
+				var param = "emailCode="+$("#emailCheck").val();
+				$.ajax({
+					url : url,
+					data : param,
+					success : function(data){
+						console.log(data);
+						if(data == 1){
+							alert("인증에 성공하였습니다.");							
+							$("#checkEmailResult").val('Y');
+							$("#useremail").attr("readonly",true);
+						}else{
+							alert("인증코드가 일치하지 않거나 인증에 실패하였습니다.");
+						}
+					}, error : function(){
+						alert("인증에 실패하였습니다.");
+					}
+				});
+			}
+		})
 	});
 	
 	// 아이디 검색 팝업 닫기
@@ -346,7 +436,17 @@
 		  return false;
 		}
 	}
-
+	// 이메일 검사
+	function emailCheckCustom(){
+		var emailreg = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+		if($("#useremail").val()==null||$("#useremail").val()==''){
+			alert("이메일을 입력하세요")
+			return false;
+		}else if(!emailreg.test(document.getElementById("useremail").value)){
+			alert("이메일이 잘못 입력되었습니다.");
+			return false;			
+		}
+	}
 </script>
 
 <div class="section">
@@ -359,13 +459,15 @@
 		<input type="hidden" id="hinfocheck2" value="N"/>
 		<input type="hidden" id="hinfocheck3" value="N"/>
 		<input type="hidden" id="checkIdResult" value="N"/>
+		<input type="hidden" id="checkEmailResult" value="N"/>
+		
 			<ul id="formUl">
 				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" readonly/><input type="button" value="중복검사" class="btn" id="idCheckDibPop"/></li>
 				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
 				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
 				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;"/><input type="button" value="인증번호 전송" class="btn"/></li>
-				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" class="btn"/></li>
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
+				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
 							
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
 																			<option value="010">010</option>
@@ -391,8 +493,8 @@
 																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"/></li>
 				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
 																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;"/>
-																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:202px;">
-																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;"></li>			
+																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"/>
+																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" placeholder="상세 주소 입력"/></li>			
 				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday"/></li>
 			</ul>
 		</form>
@@ -406,12 +508,12 @@
 			<div style="margin-bottom:20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
 		</div>
 		<div id="modal"></div>
-		<div class="idCheckDiv">
-			<input type="text" name="userid2" id="userid2" style="margin-right:5px;"/>
-			<input type="button" value="중복검사" class="btn" id="idCheck"/>
-			<div id="idCheckResult"></div>
-			<input type="button" value="사용하기" class="btn" id="idCheckFin"/><input type="button" value="닫기" class="btn" id="popupcloseBtn"/>
-		</div>
+			<div class="idCheckDiv">
+				<input type="text" name="userid2" id="userid2" style="margin-right:5px;"/>
+				<input type="button" value="중복검사" class="btn" id="idCheck"/>
+				<div id="idCheckResult"></div>
+				<input type="button" value="사용하기" class="btn" id="idCheckFin"/><input type="button" value="닫기" class="btn" id="popupcloseBtn"/>
+			</div>
 		<div id="usermap">
 			
 		</div>

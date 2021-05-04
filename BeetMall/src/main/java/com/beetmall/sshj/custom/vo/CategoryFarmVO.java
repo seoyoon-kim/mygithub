@@ -44,10 +44,5 @@ public class CategoryFarmVO {
 	public void setProductnum(int productnum) {
 		this.productnum = productnum;
 	}
-	public String getStoreaddr() {
-		return storeaddr;
-	}
-	public void setStoreaddr(String storeaddr) {
-		this.storeaddr = storeaddr;
-	}
+	
 }

@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
-	#main{
+	.main{
 		height: 1000px;
 	}
 	.wrapTitle{
