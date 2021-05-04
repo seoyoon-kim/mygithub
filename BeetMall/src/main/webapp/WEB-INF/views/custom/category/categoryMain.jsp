@@ -218,9 +218,10 @@
 			<div id="categorySubmenu">
 			<hr/>
 				<select id="Sequence">
-					<option value="평점순" selected="selected">평점순</option>
-					<option value="가격순">가격순</option>
-					<option value="조회수순">조회수순</option>
+					<option value="평점높은순" selected="selected">평점높은순</option>
+					<option value="평점낮은순">평점낮은순</option>
+					<option value="가격높은순">가격높은순</option>
+					<option value="가격낮은순">가격낮은순</option>
 				</select>
 				<a id="category2Left" style="display: none">◀</a>
 				<div id="category2">
