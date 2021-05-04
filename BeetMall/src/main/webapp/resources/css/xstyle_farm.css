@@ -1,10 +1,45 @@
 @charset "UTF-8";
+/*================ 기본 설정 시작 =================*/
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+}
 
+section{
+	width: 100%;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+article{
+	width: 1280px;
+	border-bottom: #ddd;
+	padding: 50px;
+	margin: 120px auto 0 auto;
+}
+
+ul,li{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+a:hover,a:active,a:visited,a:link{
+	text-decoration: none; 
+	color: #aaa;
+}
 /*================ 본문 시작 =================*/
 
 /*---------- 본문 컨테이너 -----------*/
+.seller_title{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 50px;
+}
 #info_container{
-	width: 700px;
+	width: 80%;
 	margin: 0 auto 30px auto;
 }
 #info_container>div{
@@ -12,12 +47,11 @@
 }
 /* 프로필 이미지*/
 #profile_box{
-	width: 700px;
+	width: 100%;
 	height: 200px;
 	text-align: center;
 	margin: 0px auto 30px auto;
 	border: 1px solid #ddd;
-	border-radius: 10px;
 	background-color: #fff;
 }
 #farmname{
@@ -41,13 +75,13 @@
 	display: flex;
 }
 #contact_content{
-	width: 600px;
+	width: 90%;
 	border: 1px solid #ddd;
-	border-radius: 10px;
 	padding: 10px;
 }
 #contact_content div{
 	overflow: auto;
+	margin-top: 5px;
 }
 #contact_content span{
 	width: 130px;
@@ -60,16 +94,14 @@
 
 /* 대표 메뉴 */
 #repMenu_content{
-	width: 600px;
+	width: 90%;
 	display: flex;
 	border: 1px solid #ddd;
-	border-radius: 10px;
 	overflow: hidden;
 }
 #repMenu_content img{
 	width: 150px;
 	height: 150px;
-	border-radius: 10px;
 	float: left;
 }
 #repMenu_content>div>div{
@@ -98,7 +130,6 @@
 	color: #fff;
 	background-color: #aaa;
 	border: 0px;
-	border-radius: 5px;
 }
 /*---------- 본문 컨테이너 끝 -----------*/
 
