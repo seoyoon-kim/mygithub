@@ -37,7 +37,7 @@
 	textarea{
 		width:100%;
 	}
-	placeholder{font-size:13px; color:gray;}
+	placeholder{font-size:13px; color:gray; text-align:right;}
 /*검색하기*/
 #article{
    width: 1280px;
@@ -264,10 +264,41 @@ $(function(){
 	});
 //서머노트
 	$(document).ready(function() {
-		  $('#summernote').summernote();
-		  $('#summernote').css('z-index','-10');
+		  $('#summernote').summernote({
+			  focus: true,
+			  lang: "ko-KR",	
+			  //콜백 함수
+	          callbacks : { 
+	          onImageUpload : function(files, editor, welEditable) {
+	          // 파일 업로드(다중업로드를 위해 반복문 사용)
+	          for (var i = files.length - 1; i >= 0; i--) {
+	          uploadSummernoteImageFile(files[i],
+	          this);
+	          		}
+	          	}
+	          }  
+		  });
+		  $('#summernote').css('z-index','-1000px'); 
+		  $('#summernote').summernote('enable');
 	});
 	
+//이미지 파일 업로드
+	
+	function uploadSummernoteImageFile(file, el) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "uploadSummernoteImageFile",
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			success : function(data) {
+				$(el).summernote('editor.insertImage', data.url);
+			}
+		});
+	}	
 //썸네일 메인이미지 업로드 미리보기
 	function readURL(input) {
          if (input.files && input.files[0]) {
@@ -609,7 +640,7 @@ $(function(){
 			<ul class="regi_option_wrap">
 				<li><label>옵션 갯수</label>&nbsp;
 					<select id="select_option" name="selectoption">
-						<option selected value='none'>적용안함</option>
+						<option selected value='0'>적용안함</option>
 						<option value='1'>1</option>
 						<option value='2'>2</option>
 						<option value='3'>3</option>
