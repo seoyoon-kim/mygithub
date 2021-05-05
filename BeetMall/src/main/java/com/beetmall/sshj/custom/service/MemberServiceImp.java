@@ -5,12 +5,14 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.MemberDAO;
+import com.beetmall.sshj.custom.vo.CategoryFarmVO;
 import com.beetmall.sshj.custom.vo.MemberVO;
+import com.beetmall.sshj.custom.vo.SellerMemberVO;
 @Service
 public class MemberServiceImp implements MemberService {
 	@Inject
 	MemberDAO memberDAO;
-	
+
 	@Override
 	public int regiFinishiOk(MemberVO vo) {	//회원가입 완료
 		return memberDAO.regiFinishiOk(vo);
@@ -32,6 +34,18 @@ public class MemberServiceImp implements MemberService {
 	public String infoSelect(String infoname) {
 		
 		return memberDAO.infoSelect(infoname);
+	}
+
+	@Override
+	public int sellerRegiFinishiOk(SellerMemberVO svo) {
+		
+		return memberDAO.sellerRegiFinishiOk(svo);
+	}
+
+	@Override
+	public int farmInsert(CategoryFarmVO cvo) {
+		
+		return memberDAO.farmInsert(cvo);
 	}
 
 }

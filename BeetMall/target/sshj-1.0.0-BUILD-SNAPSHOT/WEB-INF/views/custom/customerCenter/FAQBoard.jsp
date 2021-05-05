@@ -231,54 +231,24 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="data" items="${list}">
 				<tr class="question">
-					<td class="number">1</td>  <!--a href="javascript:showHideFaq()"  -->
-					<td class="fa1_category">[상품]</td>
-					<td class="faq_td"><strong>상품등록은 어떻게 하나요?</strong></td>
+					<td class="number">${data.faqnum}</td>  <!--a href="javascript:showHideFaq()"  -->
+					<td class="fa1_category">[${data.faqcate}]</td>
+					<td class="faq_td"><strong>${data.faqtitle}</strong></td>
 				</tr>
 				<tr class="answer" style="display:none">
 					<td class="answer_td">답변</td>
 					<td class="answer_td" colspan="3" >  
-						보다 자세한 매장의 안내는 아래 오프라인 페이지 이동을 통해 각 매장의 위치 또는 이벤트 진행상황을 확인하실 수 있습니다.<br/> 
-						<br/> 
-						상품등록은 어쩌구 저쩌구 <br/>
-						<br/> 
-						보다 자세한 매장의 안내는 아래 오프라인 페이지 이동을 통해 각 매장의 위치 또는 이벤트 진행상황을 확인하실 수 있습니다.<br/> 
-						<br/> 
-						상품등록은 어쩌구 저쩌구 <br/>
-						<br/> 
-						<a href="#" style="color:red">상픔등록 페이지 바로 가기 >></a>
-						<br/> 
+						${data.faqcontent} 
+						<br/>
 						<p>
 							답변이 충분하지 않으시다면 관리자에게 문의하기를 이용해 주세요.
-							<a href="<%=request.getContextPath() %>/ask_admin_list" style="font-weight:bold"><span style="color:black">문의하기</span></a>
+							<a href="<%=request.getContextPath() %>/customerCenter" style="font-weight:bold"><span style="color:black">문의하기</span></a>
 						</p>
 					 </td>
 				</tr>
-				
-				<!-- 임시로 넣은 정보 삭제예정-->
-				<tr>
-					<td>2</td>
-					<td class="fa1_category">[회원]</td>
-					<td class="faq_td"><strong>농장 정보를 수정하고 싶어요.</strong></td>
-					
-				</tr>
-				<tr class="answer" style="display:none">
-					<td class="answer_td">답변</td>
-					<td class="answer_td" colspan="3" >  
-						레이아웃 확인 display : none 미적용<br/> 
-						<br/> 
-						script: click display none-> block적용 <br/>
-						<br/> 
-						<a href="#" style="color:red">농장정보 수정하기 바로 가기 >></a>
-						<br/> 
-						<p>
-							답변이 충분하지 않으시다면 관리자에게 문의하기를 이용해 주세요.
-							<a href="<%=request.getContextPath() %>/ask_admin_list" style="font-weight:bold"><span style="color:black">문의하기</span></a>
-						</p>
-					 </td>
-				</tr>
-				
+				</c:forEach>				
 			</tbody>
 		</table>
 			<!-- 페이징-->
