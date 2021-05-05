@@ -25,7 +25,7 @@
 		<property name="mapperLocations" value="classpath:/*mapper/*Mapper.xml"></property>
 	</bean>
 	
-	<mybatis-spring:scan base-package="com.beetmall.sshj.dao"/>
+	<mybatis-spring:scan base-package="com.beetmall.sshj.seller.dao"/>
 	<mybatis-spring:scan base-package="com.beetmall.sshj.custom.dao"/>
 	<mybatis-spring:scan base-package="com.beetmall.sshj.admin.dao"/>
 </beans>

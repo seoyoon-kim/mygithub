@@ -18,7 +18,7 @@ public class CategoryController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("list", categoryService.mapAllRecord());
-		mav.setViewName("custom/category/mapList");
+		mav.setViewName("custom/category/mapList2");
 		
 		return mav;
 	}

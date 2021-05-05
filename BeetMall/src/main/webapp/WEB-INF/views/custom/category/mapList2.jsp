@@ -95,10 +95,6 @@
 		padding-bottom: 20px;
 	}
 	/* 지도부분 */
-	.info {position:relative;top:5px;left:5px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;font-size:12px;padding:5px;background:#fff;list-style:none;margin:0;} 
-	.info:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
-	.info .label {display:inline-block;width:50px; color:black;}
-	.number {font-weight:bold;color:#00a0e9;} 
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
@@ -113,6 +109,10 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+    .info2 {position:relative;top:5px;left:5px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;font-size:12px;padding:5px;background:#fff;list-style:none;margin:0;} 
+	.info2:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+	.info2 .label2 {display:inline-block;width:50px;}
+	.number2 {font-weight:bold;color:#00a0e9;} 
 	/* 지도부분끝 */
 	
 </style>
@@ -122,7 +122,7 @@
 </script>
 <div class="section">
 	<div id="mainName"><h1>지도로 찾는 동네 농장</h1></div>
-	<div id="idididididididiidididi" style="height:400px;"></div>
+	<div id="idididididididiidididi" style="height:700px;"></div>
 	<div>※실제 위치와 상이할수 있습니다.</div>
 	<div>※자신의 위치에서 마우스 왼쪽버튼을 누른후 목적지에서 오른쪽버튼을 누르면 직선거리가 표시됩니다.</div> 
 	<div class="main">
@@ -311,21 +311,11 @@
 		// 마커 이미지의 이미지 주소입니다
 		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 		
-		var markers = []; //markers생성
 		var marker = [];
 		<c:forEach items="${list}" var="data"> 
-		////////////마커 클러스트리 시작//////////////////////////
-		// 마커 클러스터러를 생성합니다 
-	    var clusterer = new kakao.maps.MarkerClusterer({
-	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	        minLevel: 7 // 클러스터 할 최소 지도 레벨 
-	    });
-		////////////마커 클러스트리 끝//////////////////////////
 		geocoder.addressSearch('${data.storeaddr}', function(result, status) {
 			// 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
-		    	 
 		    	var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 			    // 마커 이미지의 이미지 크기 입니다
 			    var imageSize = new kakao.maps.Size(24, 35); 
@@ -340,16 +330,17 @@
 			        title : "${data.farmname}", // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			        image : markerImage // 마커 이미지 
 			    });
-			    markers.push(marker${data.storenum});
 				/////////////infowindow 시작/////////////////////////////////
 				// 커스텀 오버레이에 표시할 컨텐츠 입니다
 				// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
 				// 별도의 이벤트 메소드를 제공하지 않습니다 
-				var content = '<div class="wrap">' + 
+				var content = document.createElement('div');
+				content.className= 'overlay';
+				content.innerHTML= '<div class="wrap">' + 
 				            '    <div class="info">' + 
 				            '        <div class="title">' + 
 				            '            ${data.farmname}' + 
-				            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+				            '            <div class="close" title="닫기"></div>' + 
 				            '        </div>' + 
 				            '        <div class="body">' + 
 				            '            <div class="img">' +
@@ -360,17 +351,20 @@
 				            '            </div>' + 
 				            '        </div>' + 
 				            '    </div>' +    
-				            '</div>';
+				            '</div>'
+				content.onclick = function() {
+					overlay.setMap(null);
+				};
 				
 				// 마커 위에 커스텀오버레이를 표시합니다
 				// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 				var overlay = new kakao.maps.CustomOverlay({
 				    content: content,
-				    map: map,
 				    position: marker${data.storenum}.getPosition(),
 				    clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
 				});
 				///////////////////////infowindow 끝/////////////////////////////////////////
+
 				////////////마커 클릭이벤트////////////////////////////////
 			    // 마커에 클릭이벤트를 등록합니다
 				kakao.maps.event.addListener(marker${data.storenum}, 'click', function() {
@@ -382,24 +376,8 @@
 		     }
 		});
 	    </c:forEach>
-		clusterer.addMarkers(markers);
-		///////////////찍어주기 끝//////////////////////
-		
-		////////////마커 클러스트리 클릭이벤트//////////////////////////
-	    // 마커 클러스터러에 클릭이벤트를 등록합니다
-	    // 마커 클러스터러를 생성할 때 disableClickZoom을 true로 설정하지 않은 경우
-	    // 이벤트 헨들러로 cluster 객체가 넘어오지 않을 수도 있습니다
-	    kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-	
-	        // 현재 지도 레벨에서 1레벨 확대한 레벨
-	        var level = map.getLevel()-1;
-	
-	        // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
-	        map.setLevel(level, {anchor: cluster.getCenter()});
-	    });
 	    
-	    ////////////마커 클러스트리 클릭이벤트 끝//////////////////////////
-		
+		///////////////찍어주기 끝//////////////////////
 		////////////////////컨트롤////////////////////////////
 		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 		var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -551,7 +529,7 @@
 		                
 		            // 반경 정보를 표시할 커스텀오버레이의 내용입니다
 		            var radius = Math.round(drawingCircle.getRadius()),   
-		            content = '<div class="info">반경 <span class="number">' + radius + '</span>m</div>';
+		            content = '<div class="info2">반경 <span class="number2">' + radius + '</span>m</div>';
 		            
 		            // 반경 정보를 표시할 커스텀 오버레이의 좌표를 마우스커서 위치로 설정합니다
 		            drawingOverlay.setPosition(mousePosition);
@@ -676,9 +654,9 @@
 		
 		    // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
 		    if (walkkTime > 60) {
-		        walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+		        walkHour = '<span class="number2">' + Math.floor(walkkTime / 60) + '</span>시간 '
 		    }
-		    walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+		    walkMin = '<span class="number2">' + walkkTime % 60 + '</span>분'
 		
 		    // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
 		    var bycicleTime = distance / 227 | 0;
@@ -686,20 +664,20 @@
 		
 		    // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
 		    if (bycicleTime > 60) {
-		        bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+		        bycicleHour = '<span class="number2">' + Math.floor(bycicleTime / 60) + '</span>시간 '
 		    }
-		    bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+		    bycicleMin = '<span class="number2">' + bycicleTime % 60 + '</span>분'
 		
 		    // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
-		    var content = '<ul class="info">';
+		    var content = '<ul class="info2">';
 		    content += '    <li>';
-		    content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+		    content += '        <span class="label2">총거리</span><span class="number2">' + distance + '</span>m';
 		    content += '    </li>';
 		    content += '    <li>';
-		    content += '        <span class="label">도보</span>' + walkHour + walkMin;
+		    content += '        <span class="label2">도보</span>' + walkHour + walkMin;
 		    content += '    </li>';
 		    content += '    <li>';
-		    content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+		    content += '        <span class="label2">자전거</span>' + bycicleHour + bycicleMin;
 		    content += '    </li>';
 		    content += '</ul>'
 		
