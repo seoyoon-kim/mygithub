@@ -25,4 +25,6 @@ public interface RecipeDAO {
 	public int recikeepOk(String id,int num);
 	
 	public int recigoodOk2(String id,int num);
+	
+	public List<RecipeVO> customMyrecipe2(String id);
 }

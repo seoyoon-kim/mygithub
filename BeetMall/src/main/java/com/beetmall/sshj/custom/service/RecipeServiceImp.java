@@ -67,6 +67,11 @@ public class RecipeServiceImp implements RecipeService {
 		return RecipeDAO.recigoodOk2(id,num);
 	}
 
+	@Override
+	public List<RecipeVO> customMyrecipe2(String id){
+		return RecipeDAO.customMyrecipe2(id);
+	}
+
 
 	
 }

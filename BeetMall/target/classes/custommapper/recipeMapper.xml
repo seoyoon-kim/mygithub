@@ -41,5 +41,13 @@
        insert into favorite(userid,recipenum) VALUES(#{param1},${param2})
     </insert>
     
+    <select id="customMyrecipe2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
+        select b.recipenum,b.recipetitle,b.userid,b.recipemainimg,b.re,b.reciperecommend,b.recipehit from 
+        (select r.recipenum,r.recipetitle,r.userid,r.recipemainimg,to_char(r.recipewritedate,'MM-DD HH:MI')re,r.reciperecommend,
+        r.recipehit from recipe r join favorite f on r.recipenum=f.recipenum)b 
+        where b.userid=${param}
+    </select>  
+    
+    
  
   </mapper>

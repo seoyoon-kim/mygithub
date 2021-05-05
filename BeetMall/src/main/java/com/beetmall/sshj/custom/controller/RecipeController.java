@@ -125,7 +125,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 
 	
 	
-	///////////////////////////////////// 추천한게시글///////////////////////////////////////
+	/////////////////////////////////////레시피 추천 수 올리기///////////////////////////////////////
 	
 	@RequestMapping("/recigoodOk")
 	@ResponseBody
@@ -141,7 +141,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	return data;
 }
 	
-	///////////////////////////////////// 추천한게시글 담기///////////////////////////////////////
+	///////////////////////////////////// 레시피 추천 기록///////////////////////////////////////
 	
 	@RequestMapping("/recigoodOk2")
 	@ResponseBody
@@ -152,7 +152,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	return num+","+id;
 }
 	
-	///////////////////////////////////장바구니////////////////////////////////////////////
+	///////////////////////////////////레시피 장바구니 등록////////////////////////////////////////////
 	
 	@RequestMapping("/recikeepOk")
 	@ResponseBody
@@ -162,7 +162,27 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		System.out.println(RecipeService.recikeepOk(id, num));
 	return num+","+id;
 }
+ 
+	////////////////////////////////////장바구니 담은 레시피 선택/////////////////////////////////
+	
+	@RequestMapping("/customMyrecipe2")
+	@ResponseBody
+	public ModelAndView customMyrecipe2(HttpServletRequest req) {
+		ModelAndView mav=new ModelAndView();
+		
+		String id=req.getParameter("id");
+	
+		mav.addObject("list2" , RecipeService.customMyrecipe2(id));	
+		
+		
+		mav.setViewName("custom/customMyrecipe");
+		
+		return mav;
+		
+	
+	}
 
+	
 
 
 	

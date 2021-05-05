@@ -245,9 +245,43 @@ $(document).ready(function(){
 	  
 	  
 	  $("#goodrbtn").click(function(){
-		  $("#recimainbox2").show()
+		  
 		   $("#recimainbox").hide()
-		 
+		    $("#recimainbox2").show()
+		   
+		var url = "customMyrecipe2";		
+		var data2= "id=${logId}";
+		console.log(url,data2);
+		
+		
+		$.ajax({
+			url:url,
+			data:data2,
+			success:function(result){
+				   alert("즐겨찾기내역")
+				   var $result=$(result);
+				   $("#recimainbox2>#recipebox").html("<ul></ul>");
+				    
+				   $result.each(function(idx,data2){
+  
+					   $("#recimainbox2>#recipebox ul").append(							   
+							   "<li><a href='recipeView?recipenum="+data2.recipenum+"'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
+					           "<li><a href='recipeView?recipenum="+data2.recipenum+"'>"+data2.recipetitle+"</a></li>"+   
+					           "<li>"+data2.userid+"</li>"+
+							   "<li>추천수("+data2.reciperecommend+")  조회수"+data2.recipehit+"</li>"+
+							   "<li><input type='checkbox' name='recipeCheckBox' value='' /></li>"				   
+					   );
+					   
+				   });				  
+				
+				
+	},error:function(e){
+	console.log(e.responseText);
+	console.log("장바구니 불러오기 실패");
+			}
+		})
+		  
+
 	  })
 
   })
@@ -280,37 +314,32 @@ $(document).ready(function(){
 			</div>
 		
 		<!--------------마이레시피 게시판 이미지들-------------------->
-		<div id="recimainbox">
+		<div id="recimainbox" >
 		   <c:forEach var="data" items="${list}">
 		       <c:if test="${logId==data.userid}"> 
-			<div id="recipebox">
-							<ul>
-								<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-								<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
-								<li>${data.userid}</li>
-								<li>★★★★★(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
-								<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-							</ul>
-			</div> </c:if>
+					<div id="recipebox">
+									<ul>
+										<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+										<li>${data.userid}</li>
+										<li>★★★★★(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
+										<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
+									</ul>
+					</div> 
+			   </c:if>
 			</c:forEach>
         
 		</div>
 		
 		<!--------------즐겨찾기 게시판 이미지들-------------------->
 	    <div id="recimainbox2" style="display:none">
-	    <div>Ddd</div>
-		   <c:forEach var="data" items="${list}">
-		      <!--   <c:if test="${logId==data.userid}"> -->
+	    <div>즐겨찾기</div>
+		   
+		    
 			<div id="recipebox" >
-							<ul>
-								<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-								<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
-								<li>${data.userid}</li>
-								<li>★★★★★(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
-								<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-							</ul>
-			</div></c:if>
-			</c:forEach>
+					
+			</div>
+			
         
 		</div>
 		<!--------------페이징 표시-------------------->
@@ -327,25 +356,6 @@ $(document).ready(function(){
 		</div>
 
 
-<script>
-$(function(){
-	   //비동기식으로 서버에 데이터를 보내기 문자열을 리턴받는다.  
-	   var params = "num=12345&name=홍길동&id=goguma";
-	   $("#goodrbtn").click(function(){
-		
-		   var url= "/myapp/ajaxString";
-		   $.ajax({
-			   url :url,
-			   date: params,
-			   success:function(result){
-				   $("#resultData").html(result);
-			   },error:function(){
-				   $("#resultData").html("전송받기 실패..");
-			   }
-		   })
-	   });
-
-</script>
 
 
 
