@@ -94,6 +94,10 @@ a:hover,a:active,a:visited,a:link{
 	margin-right: 10px;
 }
 
+#dateBtn{
+	background-color: #ddd;
+}
+
 #orderBtn{
 	background-color: #fff;
 }

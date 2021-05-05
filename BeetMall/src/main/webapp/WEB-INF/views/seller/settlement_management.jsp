@@ -11,14 +11,14 @@
 </c:set>
 <script>
 $(()=>{
-	$('#dateBtn').click( () => {
+	$('#dateBtn').click( function(){
 		if( $(this).css('background-color') == 'rgb(255, 255, 255)' ){
 			$(this).css('background-color','rgb(221,221,221)');
 			$('#orderBtn').css('background-color','rgb(255, 255, 255)');
 		}
 	});
 	
-	$('#orderBtn').click( () => {
+	$('#orderBtn').click( function(){
 		if( $(this).css('background-color') == 'rgb(255, 255, 255)' ){
 			$(this).css('background-color','rgb(221,221,221)');
 			$('#dateBtn').css('background-color','rgb(255, 255, 255)');
@@ -27,9 +27,53 @@ $(()=>{
 })
 
 function dataInsertCheck(){
-	if( $('#startDate').val() == '' || $('#endDate').val() == '' ){
-		alert('조회기간을 설정해 주시기 바랍니다.');
+	let startDate = $('#startDate').val();
+	let endDate = $('#endDate').val();
+	if( startDate == '' || endDate == '' ){
+		alert('조회기간을 설정해야 조회 가능합니다.');
+		return false;
 	}
+
+	// 조회기준 '날짜' 선택되어 있을 경우
+	if( $('#dateBtn').css('background-color') == 'rgb(221, 221, 221)' ){
+
+		$.ajax({
+			url: 'sellerDateSearchingData',
+			data: $('#searchingFrm').serialize(),
+			success: function(result){
+				let tag = '<thead><tr>'
+						+ '<th scope="col">주문번호</th>'
+						+ '<th scope="col">매출일자</th>'
+						+ '<th scope="col">주문금액</th>'
+						+ '<th scope="col">실결제금액</th>'
+						+ '<th scope="col">결제수수료</th>'
+						+ '<th scope="col">이용수수료</th>'
+						+ '<th scope="col">정산금액</th>'
+						+ '<th scope="col">정산날짜</th>'
+						+ '</tr></thead><tbody>';
+				
+				let $result = $(result);
+				
+				$result.each(function(idx,vo){
+					tag += '<tr>'
+						+  '<td>1234</td>'
+						+  '<td>2021/02/02</td>'
+						+  '<td>100</td>'
+						+  '<td>12</td>'
+						+  '<td>88</td>'
+						+  '<td>342</td>'
+						+  '<td>234</td>'
+						+  '<td>2021/10/10</td>'
+						+  '</tr>';
+				});
+				tag += '</tbody>';
+			},
+			error: function(){
+				console.log('데이터 가져오기 실패');
+			},
+		})
+	}
+	
 }
 	
 </script>
@@ -71,25 +115,13 @@ function dataInsertCheck(){
 								<th scope="col">주문번호</th>
 								<th scope="col">매출일자</th>
 								<th scope="col">주문금액</th>
-								<th scope="col">결제수수료</th>
 								<th scope="col">실결제금액</th>
+								<th scope="col">결제수수료</th>
 								<th scope="col">이용수수료</th>
 								<th scope="col">정산금액</th>
 								<th scope="col">정산날짜</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1234</td>
-								<td>2021/02/02</td>
-								<td>100</td>
-								<td>12</td>
-								<td>88</td>
-								<td>342</td>
-								<td>234</td>
-								<td>2021/10/10</td>
-							</tr>
-						</tbody>
 					</table>
 				</div>
 			</div>
