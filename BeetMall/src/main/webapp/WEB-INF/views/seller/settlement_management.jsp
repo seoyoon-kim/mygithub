@@ -38,9 +38,12 @@ function dataInsertCheck(){
 	if( $('#dateBtn').css('background-color') == 'rgb(221, 221, 221)' ){
 
 		$.ajax({
+			type: 'GET',
 			url: 'sellerDateSearchingData',
+			traditional : true,
 			data: $('#searchingFrm').serialize(),
 			success: function(result){
+				console.log('test');
 				let tag = '<thead><tr>'
 						+ '<th scope="col">주문번호</th>'
 						+ '<th scope="col">매출일자</th>'
@@ -53,20 +56,29 @@ function dataInsertCheck(){
 						+ '</tr></thead><tbody>';
 				
 				let $result = $(result);
-				
+				console.log($result);
 				$result.each(function(idx,vo){
+					console.log('test = '+idx);
+					console.log(vo);
+					console.log(vo.ordernum);
 					tag += '<tr>'
-						+  '<td>1234</td>'
-						+  '<td>2021/02/02</td>'
-						+  '<td>100</td>'
-						+  '<td>12</td>'
-						+  '<td>88</td>'
-						+  '<td>342</td>'
-						+  '<td>234</td>'
-						+  '<td>2021/10/10</td>'
+						+  '<td>'+vo.ordernum+'</td>'
+						+  '<td>'+vo.orderdate+'</td>'
+						+  '<td>'+vo.orderprice+'</td>'
+						+  '<td>'+vo.realpayment+'</td>'
+						+  '<td>'+(vo.realpayment*0.05)+'</td>'
+						+  '<td>'+(vo.realpayment*0.058)+'</td>'
+						+  '<td>'+vo.realpayment-(vo.realpayment*0.05)-(vo.realpayment*0.058)+'</td>'
+						if(${vo.settlecheck == 'Y'}){
+							+  '<td>'+vo.settledate+'</td>'
+						} else {
+							+  '<td>-</td>'
+						}
 						+  '</tr>';
 				});
 				tag += '</tbody>';
+				console.log(tag);
+				$('table').html(tag);
 			},
 			error: function(){
 				console.log('데이터 가져오기 실패');
