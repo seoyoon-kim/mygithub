@@ -59,19 +59,14 @@ a:hover,a:active,a:visited,a:link{
 	height: 25px;
 	line-height: 25px;
 	background-color: #fff;
-	margin-top: 15px;
-	border: 1px solid #aaa;	
+	margin: 15px 0 15px 0;
+	border: 1px solid #ccc;	
 	text-align: center;
+	padding: 0 10px;
 }
 
 /*==================조회하기=================*/
-#searchingStandard{
-	height: 20px;
-	display: flex;
-}
-
-#searchingTerm{
-	height: 20px;
+#searchingStandard, #searchingTerm{
 	display: flex;
 }
 
@@ -81,11 +76,41 @@ a:hover,a:active,a:visited,a:link{
 	padding:0 5px;
 }
 
+#searchingStandard, #searchingTerm{
+	margin-top: 30px;
+}
+
+#searchingFrm p{
+	margin: 0 50px 0 30px;
+}
+
+#searchingStandard input{
+	width: 150px;
+	height: 50px;
+	border: 1px solid #ccc;
+}
+
+#searchingTerm select, #searchingTerm input{
+	margin-right: 10px;
+}
+
+#orderBtn{
+	background-color: #fff;
+}
+
+#dateBtn:hover, #orderBtn:hover{
+	transition: transform 1s;
+	transform: scale(1.05,1.05);
+}
+
+
 /*==================주문 건별 정산분석=================*/
 table{
 	width: 100%;
-	border: 1px solid #aaa;
+	border: 1px solid #bbb;
+	border-collapse: collapse;
 }
+
 table>thead>tr{
 	display: flex;
 	background-color: #ddd;
@@ -93,11 +118,13 @@ table>thead>tr{
 
 table>tbody>tr{
 	display: flex;
-}
+} 
 
 table>thead th, table>tbody td{
 	flex-basis: 12.5%;
 	text-align: center;
+	border: 1px solid #bbb;
+	padding: 10px;
 }
 
 

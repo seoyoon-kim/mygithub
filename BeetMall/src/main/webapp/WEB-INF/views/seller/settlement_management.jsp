@@ -1,6 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_settlementManagement.css">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var='today' value="<%=new java.util.Date()%>" />
+<c:set var='monthPtn'>
+	<fmt:formatDate value="${today }" pattern="yyyy-MM" />
+</c:set>
+<c:set var='datePtn'>
+	<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" />
+</c:set>
+<script>
+$(()=>{
+	$('#dateBtn').click( () => {
+		if( $(this).css('background-color') == 'rgb(255, 255, 255)' ){
+			$(this).css('background-color','rgb(221,221,221)');
+			$('#orderBtn').css('background-color','rgb(255, 255, 255)');
+		}
+	});
+	
+	$('#orderBtn').click( () => {
+		if( $(this).css('background-color') == 'rgb(255, 255, 255)' ){
+			$(this).css('background-color','rgb(221,221,221)');
+			$('#dateBtn').css('background-color','rgb(255, 255, 255)');
+		}
+	});
+})
+
+function dataInsertCheck(){
+	if( $('#startDate').val() == '' || $('#endDate').val() == '' ){
+		alert('조회기간을 설정해 주시기 바랍니다.');
+	}
+}
+	
+</script>
 <section>
 	<%@include file="/WEB-INF/views/inc/sellerHeader.jsp"%>
 	<article>
@@ -8,11 +40,11 @@
 			<div class="wrap">
 				<div class="wrapTitle">조회하기</div>
 				<div class="wrapContainer">
-					<form method="post" action="">
+					<form method="post" action="javascript:dataInsertCheck()" id="searchingFrm">
 						<div id="searchingStandard">
 							<p>조회기준</p>
-							<button id="dateBtn">날짜</button>
-							<button id="orderBtn">주문 건별</button>
+							<input type="button" id="dateBtn" value="날짜"/>
+							<input type="button" id="orderBtn" value="주문 건별"/>
 						</div>
 						<div id="searchingTerm">
 							<p>조회기간</p>
@@ -21,8 +53,9 @@
 								<option>정산 날짜</option>
 								<option>매출일자</option>
 							</select>
-							<input type="date" id="startDate" name="startDate"/>
-							<input type="date" id="endDate" name="endDate"/>
+							<input type="date" id="startDate" name="startDate" min="2018-01-01" max="${datePtn}"/>
+							~&nbsp;&nbsp;
+							<input type="date" id="endDate" name="endDate" min="2018-01-01" max="${datePtn}"/>
 						</div>
 						<div id="searchingBtnContainer">
 							<input class="normalBtn" type="submit" value="검색"/>
@@ -31,18 +64,18 @@
 					</form>
 				</div>
 				<div class="wrapTitle">주문 건별 정산분석</div>
-				<div class="wrapContainer">
+				<div class="wrapContainer" style="border:none;">
 					<table>
 						<thead>
 							<tr>
-								<th>주문번호</th>
-								<th>매출일자</th>
-								<th>주문금액</th>
-								<th>결제수수료</th>
-								<th>실결제금액</th>
-								<th>이용수수료</th>
-								<th>정산금액</th>
-								<th>정산날짜</th>
+								<th scope="col">주문번호</th>
+								<th scope="col">매출일자</th>
+								<th scope="col">주문금액</th>
+								<th scope="col">결제수수료</th>
+								<th scope="col">실결제금액</th>
+								<th scope="col">이용수수료</th>
+								<th scope="col">정산금액</th>
+								<th scope="col">정산날짜</th>
 							</tr>
 						</thead>
 						<tbody>
