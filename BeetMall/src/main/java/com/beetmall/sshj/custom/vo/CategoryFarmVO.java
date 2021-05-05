@@ -6,8 +6,8 @@ public class CategoryFarmVO {
 	private String farmintro; //소개
 	private String farmprofile; //프로필이미지
 	private int farmvisitor; //방문자수
-	private String farmbest; //대표상품
-	private int productnum;	// 상품번호
+	private int productnum; //대표상품끌어오기위해서 넣은것
+	private String storeaddr; //주소
 	public int getStorenum() {
 		return storenum;
 	}
@@ -38,19 +38,16 @@ public class CategoryFarmVO {
 	public void setFarmvisitor(int farmvisitor) {
 		this.farmvisitor = farmvisitor;
 	}
-	public String getFarmbest() {
-		return farmbest;
-	}
-	public void setFarmbest(String farmbest) {
-		this.farmbest = farmbest;
-	}
 	public int getProductnum() {
 		return productnum;
 	}
 	public void setProductnum(int productnum) {
 		this.productnum = productnum;
 	}
-
-	
-	
+	public String getStoreaddr() {
+		return storeaddr;
+	}
+	public void setStoreaddr(String storeaddr) {
+		this.storeaddr = storeaddr;
+	}
 }

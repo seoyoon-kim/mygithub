@@ -67,7 +67,8 @@
 	}
 	/*이전글, 다음글*/
 	.prev_next_wrap{
-		width:90%;
+		overflow:auto;
+		width:100%;
 		margin:20px 0px 0px 50px;
 	}
 	.prev_next_wrap li{
@@ -86,6 +87,9 @@
    #NoticeleftMenu{
    		display:block;
    }
+   .prev_next_ul{
+   		width: 900px;
+   }
    
 </style>
 <script>
@@ -99,32 +103,25 @@
 				<tbody>
 					<tr class="tr_head">
 						<th class="menu">제목</th>
-						<td><span class="td">코로나19로 인한 픽업 서비스 중단 안내</span></td>
+						<td><span class="td">${vo.infonum}</span></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">작성자</th>
-						<td ><span class="td">Beetmall</span></td>
+						<td ><span class="td">${vo.infotitle}</span></td>
 					</tr>
 					<tr class="tr_head">
 					<td colspan="2">
 						<ul>
 							<li class="th">작성일</li>
-							<li class="td">21/04/21</li>
+							<li class="td">${vo.infowritedate}</li>
 							<li class="th">조회수</li>
-							<li class="td">21</li>
+							<li class="td">${vo.infohit}</li>
 						</ul>
 					</tr>
 				
 					<tr>
 						<td colspan="2">
-							<span class="content" >
-							
-							고객님 안녕하세요.
-							코로나19로 인한 픽업 서비스 중단 안내드립니다.
-							2021.04.21 부터 어쩌구 저쩌구 
-							저쩌구
-						
-							</span>
+							<span class="content" >${vo.infocontent}</span>
 						</td>	
 					</tr>
 				</tbody>
@@ -137,9 +134,4 @@
 			</div>
 			</fieldset>
 		</div>
-<<<<<<< HEAD
-		
-=======
-	
->>>>>>> branch 'develop' of https://github.com/kschoi93/BeetMall
 	</div>

@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="noticeAllRecord" resultType="com.beetmall.sshj.custom.vo.NoticeVO">
 		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach from notice where infotype = 1 order by infonum desc
 	</select>
-	<select id="noticeAllRecord" resultType="com.beetmall.sshj.custom.vo.NoticeVO">
-		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach from notice where infotype = 1 order by infonum desc
+	<select id="noticeSelect" resultType="com.beetmall.sshj.custom.vo.NoticeVO">
+		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach from notice where infonum=#{param1}
 	</select>
 </mapper>
