@@ -170,6 +170,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		return mav;
 	}
 	
+	
 //////////////////////////////////////////////////////////내가 작성한 레시피///////////////////////////////////////////////////////////	
 	@RequestMapping("/customMyrecipe")
 	public ModelAndView customMyrecipe(String userid) {
