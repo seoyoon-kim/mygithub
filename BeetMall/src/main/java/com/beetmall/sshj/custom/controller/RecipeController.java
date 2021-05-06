@@ -27,7 +27,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 //////////////////////////////////////////////////////////레시피 뷰///////////////////////////////////////////////////////////
 	@RequestMapping("/recipeView")
 	public ModelAndView RecipeSelect(int recipenum) {
-		//////////2해당 게시글 보이게 하기---------
+		//////////2해당 게시글 보이게 하기----------
 		ModelAndView mav=new ModelAndView();
 	
 		mav.addObject("vo", recipeService.RecipeSelect(recipenum));
