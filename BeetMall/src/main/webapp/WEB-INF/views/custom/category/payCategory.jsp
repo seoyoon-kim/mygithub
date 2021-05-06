@@ -152,9 +152,10 @@
 			<div id="hrMain">
 				<hr/>
 					<select id="Sequence" style="padding-left: 10px;">
-						<option value="평점순" selected="selected">평점순</option>
-						<option value="가격순">가격순</option>
-						<option value="조회수순">조회수순</option>
+						<option value="평점높은순" selected="selected">평점높은순</option>
+						<option value="평점낮은순">평점낮은순</option>
+						<option value="가격높은순">가격높은순</option>
+						<option value="가격낮은순">가격낮은순</option>
 					</select>
 					<div>5,000원 이하</div>
 					<div>10,000원 이하</div>

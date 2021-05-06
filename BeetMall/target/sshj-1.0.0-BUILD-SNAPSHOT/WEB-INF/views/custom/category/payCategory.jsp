@@ -95,20 +95,8 @@
 		width:1080px;
 	}
 	#mainName{
-		text-align: center;
+		text-align: left;
 		margin-bottom: 20px;
-	}
-	#category{
-		overflow: auto;
-		height:130px;
-		width:auto;
-		padding-left:120px;
-	}
-	#category li{
-		float: left;
-		text-align: center;
-		padding-left : 90px;
-		padding-right : 10px;
 	}
 	#pickupMain{
 		float: right;
@@ -128,151 +116,59 @@
 		-moz-appearance: none;
 		appearance: none;
 	}
-	#pickup{
-		width: 17px;
-    	height: 17px;
-	}
-	#categorySubmenu{
-		margin-top: 150px;
-	}
-	#categorySubmenu> #pickupMain, #Sequence{
-		position:relative;
-		height:40px;
-	}
-	#category2{
-		position:absolute;
-		left:550px;
-		top: 480px;
-		width:830px;
-		height:21px;
-		overflow:hidden;
-	}
-	#category2>span>div>a{
-		text-align: center;
-		padding:20px;
-	}
 	
 	#searchBtn{
 		left:0px;
 		top:0px;
 	}
+	#hrMain{
+		overflow:auto;
+	}
+	#hrMain>#Sequence, #hrMain>div, #hrMain>pickupMain{
+		float:left;
+	    padding-left: 30px;
+	}
+	#hrMain>div{
+		padding-top:10px;
+	}
+	
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+	#minNum{
+		width:120px;
+	}
+	#MaxNum{
+		width:150px;
+	}
 </style>
 <script>
-	$(function(){
-		$("#categoryAll").click(function(){
-			$("#category2Left").css("display", "none");
-			$("#category2Right").css("display", "none");
-			$("#categoryAll2").css("display", "block");
-			$("#categoryFruit2").css("display", "none");
-			$("#categoryVege2").css("display", "none");
-			$("#categorySall2").css("display", "none");
-		});
-		$("#categoryFruit").click(function(){
-			$("#category2Left").css("display", "none");
-			$("#category2Right").css("display", "none");
-			$("#category2Left").css("display", "contents");
-			$("#category2Right").css("display", "contents");
-			$("#categoryAll2").css("display", "none");
-			$("#categoryFruit2").css("display", "block");
-			$("#categoryVege2").css("display", "none");
-			$("#categorySall2").css("display", "none");
-		});
-		$("#categoryVege").click(function(){
-			$("#category2Left").css("display", "contents");
-			$("#category2Right").css("display", "contents");
-			$("#categoryAll2").css("display", "none");
-			$("#categoryFruit2").css("display", "none");
-			$("#categoryVege2").css("display", "block");
-			$("#categorySall2").css("display", "none");
-		});
-		$("#categorySall").click(function(){
-			$("#category2Left").css("display", "none");
-			$("#category2Right").css("display", "none");
-			$("#categoryAll2").css("display", "none");
-			$("#categoryFruit2").css("display", "none");
-			$("#categoryVege2").css("display", "none");
-			$("#categorySall2").css("display", "block");
-		});
-		$("#category2Right").click(function(){
-			$("#categoryVege2>div").first().appendTo('#categoryVege2');
-			$("#categoryFruit2>div").first().appendTo('#categoryFruit2');
-		});
-		$("#category2Left").click(function(){
-			$("#categoryVege2>div").last().prependTo('#categoryVege2');
-			$("#categoryFruit2>div").last().prependTo('#categoryFruit2');
-		});
-	});
 </script>
-<!-- <div id="left">
-	카테고리 나와야하는부분
-</div> -->
 <div class="section">
 	<div class="main">
-		<div id="mainName"><h1>상품 품목별</h1></div>
-			<ul id="category">
-				<li><sqan id="categoryAll"><img src="/sshj/img/kmain.png"><br/>전체</sqan></li>
-				<li><sqan id="categoryFruit"><img src="/sshj/img/kfruit.png"><br/>과일</sqan></li>
-				<li><sqan id="categoryVege"><img src="/sshj/img/kvegetable.png"><br/>채소</sqan></li>
-				<li><sqan id="categorySall"><img src="/sshj/img/krice.png"><br/>쌀/잡곡</sqan></li>
-			</ul>
-			<div id="categorySubmenu">
-			<hr/>
-				<select id="Sequence">
-					<option value="평점순" selected="selected">평점순</option>
-					<option value="가격순">가격순</option>
-					<option value="조회수순">조회수순</option>
-				</select>
-				<a id="category2Left" style="display: none">◀</a>
-				<div id="category2">
-					<span id="categoryAll2" style="display: none;">전체</span>
-					<span id="categoryFruit2" style="display: none;">
-						<div>
-							<a>전체</a>
-							<a>감/홍시/곶감</a>
-							<a>감귤/한라봉/천혜향</a>
-							<a>딸기/베리</a>
-							<a>매실/산수유/오미자</a>
-							<a>배</a>
-							<a>사과</a>
-						</div>
-						<div>
-							<a>수박/참외/멜론/키위</a>
-							<a>자두/복숭아/포도</a>
-							<a>토마토</a>
-							<a>기타과일</a>
-						</div>
-					</span>
-					<span id="categoryVege2" style="display: none;">
-						<div>
-							<a>전체</a>
-							<a>감자/옥수수</a>
-							<a>견과/밤/잣/콩/대추</a>
-							<a>고구마</a>
-							<a>나물/건나물</a>
-							<a>당근/연근/우엉/마</a>
-						</div>
-						<div>
-							<a>마늘/생강/양파/파</a>
-							<a>배추/상추/쌈채소</a>
-							<a>버섯</a>
-							<a>양초/도라지/삼/더덕</a>
-							<a>피망/파프리카/고추</a>
-						</div>
-						<div>
-							<a>호박/아스파라거스</a>
-							<a>기타채소</a>
-						</div>
-					</span>
-					<span id="categorySall2" style="display: none;">
-						<a>전체</a>
-						<a>쌀/찹쌀/흑미/현미</a>
-						<a>수수/보리/팥/콩</a>
-						<a>깨/기타잡곡</a>
-					</span>
-				</div>
-				<span id="pickupMain"><a id="category2Right" style="display: none">▶&nbsp;</a><input type="checkbox" id="pickup" value="pickup"/>&nbsp;픽업여부</span>
-			<hr/>
+		<div id="mainName"><h1>가격대별 찾기</h1></div>
+			<div id="hrMain">
+				<hr/>
+					<select id="Sequence" style="padding-left: 10px;">
+						<option value="평점높은순" selected="selected">평점높은순</option>
+						<option value="평점낮은순">평점낮은순</option>
+						<option value="가격높은순">가격높은순</option>
+						<option value="가격낮은순">가격낮은순</option>
+					</select>
+					<div>5,000원 이하</div>
+					<div>10,000원 이하</div>
+					<div>50,000원 이하</div>
+					<div>50,000원 이상</div>
+					<div>
+						<form>
+							<input type="number" id="minNum" min="1000"/>~ <input type="number" id="MaxNum" min="1000"/>
+							<input type="submit" value="검색하기"/>
+						</form>
+					</div>
 			</div>
+			<hr/>
 		<div id="productMain">
 			<div id="productDiv">
 				<ul>

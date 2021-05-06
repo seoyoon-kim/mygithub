@@ -124,6 +124,10 @@
     }
     #kContent{
         width: 600px;
+        overflow:auto;
+    }
+    #kContent>div{
+    	float:left;
     }
     
     #Sequence{
@@ -287,15 +291,18 @@
         $("#kAreamMall").children().children().click(function(){
             var name= $(this).text();
             $(this).css("color","red");
-            $("#kContent").append(name+"&times;"+"&nbsp;&nbsp;");
+            $("#kContent").append("<div><span>"+name+"</span><span class='arrea'>&times;</span>"+"&nbsp;&nbsp;</div>");
         });
-        $("#kContent").click(function(){
-            kangsan();
+       
+        $(document).on('click',"#kContent>div", function(){
+        	$(this).remove();
+        });
+        
+        //서버로보낼값
+        $('#boardUpddate').submit(function(){
+        	
         });
     });
-    function kangsan(){
-        //삭제아직 진행못함
-    };
 </script>
 	<div class="section">
 		<div id="main">
@@ -604,16 +611,17 @@
 	        </div>
 	        <form>
 		        <div id="kContent">
-		
+				
 		        </div>
 		        <input type="submit" value="검색하기" id="boardUpddate"/>
 	      	</form>
 	    </div>
 	    <hr/>
 	    <select id="Sequence">
-	        <option value="평점순" selected="selected">평점순</option>
-	        <option value="가격순">가격순</option>
-	        <option value="조회수순">조회수순</option>
+	        <option value="평점높은순" selected="selected">평점높은순</option>
+			<option value="평점낮은순">평점낮은순</option>
+			<option value="가격높은순">가격높은순</option>
+			<option value="가격낮은순">가격낮은순</option>
 	    </select>
 	    <div id="productMain">
 			<div id="productDiv">
