@@ -235,11 +235,11 @@
 		margin-bottom: 10px;
 	}
 	#buyReviewtxt{
-		width:610px;
-		height:400px;
+		width:660px;
+		height:467px;
 		overflow:auto;
-		margin-left:36px;
-		margin-right:36px;
+		margin-left:10px;
+		margin-right:10px;
 		background-color: white;
 		font-size: 18px;
 		padding:5px;
@@ -356,12 +356,24 @@
 			$(this).toggleClass("thumbsupYes");
 		})
 		$(".nonBtn").attr("readonly",true);
+		$("#divcloseBtn").click(function(){
+			$("#buyCancelRollBack").css("display","none");
+		})
 	})
 	$(document).ready(function(){
 		$("#summernote").summernote({
 			height:660,
 			minHeight:660,
 			maxHeight:660,
+			lang:"ko-KR",
+			placeholder:'리뷰를 작성해주세요'
+		});
+	});
+	$(document).ready(function(){
+		$("#buyReviewtxt").summernote({
+			height:360,
+			minHeight:360,
+			maxHeight:360,
 			lang:"ko-KR",
 			placeholder:'리뷰를 작성해주세요'
 		});
@@ -379,12 +391,15 @@
 			url : url,
 			data : "ordernum="+ordernum,
 			success : function(result){
+				$("#buyCancelNotice").css("display","none");
 				if(result == 1){
 					console.log('취소성공');
+					location.href="mybuyList";
 				}else if(result == -1){
 					console.log('배송중이라 취소 못함');
+					$("#buyCancelRollBack").css("display","block");
 				}else{
-					console.log
+					alert('취소에 실패했습니다 고객센터로 연락 부탁드립니다');
 				}
 			}, error : function(){
 				console.log('취소실패');
@@ -423,8 +438,25 @@
 			}
 		})
 	});
+	var date = new Date();
+	var today = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+addZero(date.getDate());
+	function addZero(value){
+		if(value<10){
+			return "0"+value;
+		}else{
+			return value;
+		}
+	}
 	$(document).on('click','input[value=리뷰작성]', function(){
 		var num = $(this).parent().prev().children().val();
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();
+		$("#buyReviewView").css("display","block");
+		var tag = "<li>번호</li> <li>"+ordernum+"</li>";
+			tag	+= "<li>작성자</li> <li>"+"${logId}"+"</li>";
+			tag	+= "<li>작성일</li> <li>"+today+"</li>";
+			tag += "<li>제목</li>	<li><input type='text' placeholer='제목을 입력하세요' style='width:443px'/></li>";	
+		$("#infoInput").empty().append(tag);
+		$("#buyReviewtxt").next().css("margin-top","10px");
 	});
 	$(document).on('click','input[value=환불확정]', function(){
 		var num = $(this).parent().prev().children().val();
@@ -553,23 +585,21 @@
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:340px;">
 				<h2>배송중 / 배송완료 상품은 취소할 수 없습니다.</h2>
 				<h2>판매자에게 문의해주세요</h2>
-				<input type="button" value="확인" class="btn" style="top:240px"/>
+				<input type="button" value="확인" class="btn" style="top:240px" id="divcloseBtn"/>
 			</div>
 		</div>
 		
 		<div class="buyListDiv" id="buyReviewView">
 			<div class="buyListBar" style="font-size:21px;">상품리뷰 보기</div><div class="buyListBarClose">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:700px;background-color: #ddd;">
-				<ul>
+			<div class="buyListContent" style="padding-top:60px; height:700px;background-color: #ddd; text-align: center;">
+				<ul id="infoInput" style="text-align:left;">
 					<li>번호</li> 	<li>100</li>
 					<li>작성자</li> 	<li>rabbit123</li>
 					<li>작성일</li>	<li>2021-04-02</li>
 					<li>추천</li>	<li>4<div class="thumbsupYes"></div></li>
 				</ul>
-				<div id="buyReviewtxt">
-					굉장히 긴 문장
-				</div>
-				<input type="button" value="확인" class="btn" style="top:630px;"/>
+				<textarea id="buyReviewtxt"></textarea>
+				<input type="button" value="확인" class="btn" style="top:630px;" />
 			</div>
 		</div>
 		
