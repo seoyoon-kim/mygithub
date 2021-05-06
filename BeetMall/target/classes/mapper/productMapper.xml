@@ -4,7 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.dao.ProductDAO">
 	<select id="boardAllRecord" resultType="com.beetmall.sshj.vo.ProductVO">
-		
+		select  p.productnum,c.catenum,c.catename,m.mcatenum,m.mcatename,p.productname,p.thumbimg,p.productprice,
+             p.totalstock ,p.sellstart,p.sellfinish, 
+             d.saleprice, floor(( d.saleprice/p.productprice)*100) as salepercent , d.salestart, d.salefinish
+		from product p
+		join mcategory m on m.mcatenum = p.mcatenum
+		join category c on c.catenum = m.catenum
+		join discount d on d.productnum = p.productnum
+		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,d.saleprice,d.salestart,d.salefinish 
+		order by p.sellstart desc ;
 	</select>
 	<insert id="productInsert" parameterType="com.beetmall.sshj.vo.ProductVO">
 		insert into product (productnum, userid, mcatenum, productname, productprice, saleselect, saleb, optionselect,
@@ -17,12 +25,5 @@
        			#{productcontent}, #{deliveryoption}, #{deliverprice}, #{paymentoption}, #{selloption}, #{sellweight}, 
        			#{origin}, #{wrapping}, #{productinformation}, #{prevention}, #{deadline})       				
 	</insert>
-	<insert id="productInsert" parameterType="com.beetmall.sshj.vo.ProductVO">
-		insert all
-			when optionselect = 1 and productnum = 26 then
-			into optiontbl values(optionsq.nextval, 86, '삼잎국화물', 300, 300, 11000)
-			when saleselect = 1 and productnum = 26 then
-			into discount values(86, -1000, '21/05/05', '21/05/07')
-			select saleselect, optionselect, productnum from product ;
-	</insert>
+	
 </mapper>

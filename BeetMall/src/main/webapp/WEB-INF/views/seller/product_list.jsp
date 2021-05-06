@@ -169,14 +169,14 @@ $(document).ready(function(){
 						<th class="listMenu">중분류</th>
 						<th class="listMenu">상품이름</th>
 						<th class="listMenu" id="thumbImg">대표이미지</th>
-						<th class="listMenu">판매가</th>
 						<th class="listMenu">재고수량</th>
 						<th class="listMenu">판매시작일</th>
-						<th class="listMenu">할인가</th>
+						<th class="listMenu">판매가</th>
+						<th class="listMenu">할인금액</th>
+						<th class="listMenu">할인적용판매금액</th>
 						<th class="listMenu">할인율</th>
 						<th class="listMenu">할인기간</th>
 						<th class="listMenu">판매상태</th>
-						<th class="listMenu">즐겨찾기수</th>
 					</tr>
 				</thead>
 				<!-- 전체보기 판매상품 리스트 -->
@@ -186,43 +186,36 @@ $(document).ready(function(){
 				<!-- 페이징추가 -->
 				<tbody>
 					<!-- table 1 line -->
+					<c:forEach var="vo" items="${cateList}">
 					<tr class="tbl_line">
-						<td  class="tbl_line_cell"><div class="productCheck"><input type="checkbox" checked id="oneItemCk" name="oneItemCk" checked="checked" title="상품 선택"></div></td>
-						<td class="tbl_line_cell"><div class="productNum"><span class="productNum">1</span></div></td>
+						<td  class="tbl_line_cell"><div id="productCheck"><input type="checkbox" checked id="oneItemCk" name="oneItemCk" checked="checked" title="상품 선택"></div></td>
+						<td class="tbl_line_cell"><div id="productNum"><span id="productNum">${vo.productnum}</span></div></td>
 						<!-- 대분류 번호 숨기기 -->
-						<td class="tbl_line_cell"><div class="mCategory"><span class="mCateName">과일</span></div></td>
+						<td class="tbl_line_cell">	
+							<div id="mCategory">
+								<span id="mCateName">${vo.catename }</span>
+								<input type="hidden" value="${vo.catenum}"/>
+							</div>
+						</td>
 						<!-- 중분류 번호 숨기기 -->
-						<td class="tbl_line_cell"><div class="category"><span class="cateName">사과</span></div></td>
-						<td class="tbl_line_cell"><div class="product"><span class="productName"><a href="">가을햇살 영동사과</a></span></div></td>	
-						<td class="tbl_line_cell"><div class="thumbnail"><img src=""/></div></td>
-						<td class="tbl_line_cell"><div class="salePrice"><span class="price"><span class="price_num">10,000</span>원</span></div></td>
-						<td class="tbl_line_cell"><div class="stock"><span class="unsoldStock">90</span>/<span class="totalStock">100</span></div></td>
-						<td class="tbl_line_cell"><div class="regiDate">21/04/17</div></td>
-						<td class="tbl_line_cell"><div class="discountPrice"><span class="price"><span class="price_num">1,000</span>원</span></div></td>
-						<td class="tbl_line_cell"><div class="discountPercent"><span class="percent">10</span>%</div></td>
-						<td class="tbl_line_cell"><div class="discountDate"><span class="discountStart">21/04/17</span> ~ <span class="discountFinish">21/04/30</span></div></td>
-						<td class="tbl_line_cell"><div class="saleStatus"><span class="statusText">판매중</span></div></td>
-						<td class="tbl_line_cell"><div class="hit">10</div></td>
+						<td class="tbl_line_cell">
+							<div id="category">
+								<span id="cateName">${vo.mcatename }</span>
+								<input type="hidden" value="${vo.mcatenum}"/>
+							</div>
+						</td>
+						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="">${vo.productname}</a></span></div></td>	
+						<td class="tbl_line_cell"><div id="thumbnail"><img src="${vo.thumbimg}"/></div></td>
+						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">90</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
+						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
+						<td class="tbl_line_cell"><div id="productprice"><span id="price"><span id="price_num">${vo.productprice }</span>원</span></div></td>
+						<td class="tbl_line_cell"><div id="saleprice"><span id="price"><span id="price_num">${vo.saleprice}</span>원</span></div></td>
+						<td class="tbl_line_cell"><div id="sellprice"><span id="price"><span id="price_num">${vo.productprice }-${vo.saleprice}</span>원</span></div></td>
+						<td class="tbl_line_cell"><div id="salepercent"><span id="salepercent">${vo.salepercent}</span>%</div></td>
+						<td class="tbl_line_cell"><div id="saleperiod"><span id="salestart">${vo.salestart }</span> ~ <span id="salefinish">${vo.salefinish }</span></div></td>
+						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText">판매중</span></div></td>
 					</tr>
-					<!-- 반복 삭제할것-->
-					<tr class="tbl_line">
-						<td  class="tbl_line_cell"><div class="productCheck"><input type="checkbox" checked id="oneItemCk" name="oneItemCk" checked="checked" title="상품 선택"></div></td>
-						<td class="tbl_line_cell"><div class="productNum"><span class="productNum">1</span></div></td>
-						<!-- 대분류 번호 숨기기 -->
-						<td class="tbl_line_cell"><div class="mCategory"><span class="mCateName">과일</span></div></td>
-						<!-- 중분류 번호 숨기기 -->
-						<td class="tbl_line_cell"><div class="category"><span class="cateName">사과</span></div></td>
-						<td class="tbl_line_cell"><div class="product"><span class="productName"><a href="">가을햇살 영동사과</a></span></div></td>	
-						<td class="tbl_line_cell"><div class="thumbnail"><img src=""/></div></td>
-						<td class="tbl_line_cell"><div class="salePrice"><span class="price"><span class="price_num">10,000</span>원</span></div></td>
-						<td class="tbl_line_cell"><div class="stock"><span class="unsoldStock">90</span>/<span class="totalStock">100</span></div></td>
-						<td class="tbl_line_cell"><div class="regiDate">21/04/17</div></td>
-						<td class="tbl_line_cell"><div class="discountPrice"><span class="price"><span class="price_num">1,000</span>원</span></div></td>
-						<td class="tbl_line_cell"><div class="discountPercent"><span class="percent">10</span>%</div></td>
-						<td class="tbl_line_cell"><div class="discountDate"><span class="discountStart">21/04/17</span> ~ <span class="discountFinish">21/04/30</span></div></td>
-						<td class="tbl_line_cell"><div class="saleStatus"><span class="statusText">판매중</span></div></td>
-						<td class="tbl_line_cell"><div class="hit">10</div></td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="option_wrap">
@@ -235,7 +228,9 @@ $(document).ready(function(){
 				<option value="낮은가격순">낮은가격순</option>
 				</select>
 				<!-- 버튼 -->
-				<input type="submit" value="판매상품 삭제" class="btn"/>
+				<input type="submit" value="판매상품 삭제" id="remove_product" class="btn"/>
+				<input type="submit" value="판매상품 수정" id="edit_product"class="btn"/>
+				<input type="submit" value="판매 중지" id="stop_sell" class="btn"/>
 				<!-- 테이블 내 체크박스 폼안에 넣기? -->
 					
 			<!-- https://www.oliveyoung.co.kr/store/cart/getCart.do 참조중 -->
