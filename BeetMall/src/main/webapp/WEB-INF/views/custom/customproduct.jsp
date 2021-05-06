@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/inc/menu_c.jspf"%>
+
 <style>
 
 /*  기본설정----------------------------------------------                 */
@@ -9,13 +10,16 @@
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-	font-family: 'Nanum Gothic', sans-serif;
 }
 
-#searchBtn {
-	top: 0px;
-	left: 0px;
+#leftMenu{ display:block;}
+
+a:hover, a:active, a:visited, a:link {
+    text-decoration: none;
+    color: black;
 }
+
+
 
 /*  상품 품목글자----------------------------------------------                 */
 #mainName {
@@ -68,13 +72,14 @@
 
 /*  정렬방식----------------------------------------------                 */
 #selectOrderbox {
-	float: left;
 	width: 540px;
+	margin-top:30px;
 }
 
 #selectOrder {
-	floate: left;
+
 	width: 540px;
+
 }
 
 /*  공유 아이콘 정렬----------------------------------------------                 */
@@ -84,6 +89,7 @@
 	margin: 0;
 	padding-left: 420px;
 	text-align: right;
+	margin-bottom:30px;
 }
 
 #sharicon>li {
@@ -96,15 +102,16 @@
 
 /*  상품 박스------------이미지 부분----------------------------------                 */
 #productmainbox {
-	width: 850px;
+	width: 1080px;
+   float: left;
 }
 
 #productImgBox {
 	float: left;
-	margin-left: 115px;
-	margin-top: 20px; height : 300px;
-	width: 300px;
-	height: 300px;
+	margin-left:80px;
+	margin-top: 80px;
+	width: 250px;
+	height: 300px; 
 }
 
 #productImgBox>img {
@@ -125,6 +132,7 @@
 #pbox {
 	width: 550px;
 	float: left;
+	margin-left: 40px;
 	margin-bottom: 40px;
 }
 
@@ -173,6 +181,7 @@
 	width: 50%;
 	height: 35px;
 	line-height: 35px;
+	margin-bottom:10px;
 }
 
 #mapbtn {
@@ -194,7 +203,7 @@
 	width: 80%;
 }
 
-#productTotalPrice {
+#productTotalPrice>b {
 	padding-left: 350px;
 	width: 100%;
 	float: left;
@@ -204,6 +213,7 @@
 	font-weight: 700px;
 	padding-left:280px;
 	margin-bottom:15px;
+	
 }
 
 #productBtn {
@@ -225,7 +235,7 @@
 	padding-left: 10px;
 	height: 30px;
 	line-height: 30px;
-	border-bottom: 1px solid rgb(252,118,45);
+	border-bottom: 1px solid #eee;
 	margin-bottom: 10px;
 }
 
@@ -613,12 +623,10 @@
 #productInfoPage {
 	padding-left: 0px;
 }
+
 	button, .btn{
 		padding: 3px 10px;
 		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
 		text-align: center;
  		text-decoration: none;
 		display: inline-block;
@@ -637,14 +645,45 @@
 	}
 	/*버튼*/
 	.btn:hover, .minibtn:hover{
-		background: gray;
-		color:white;
+		background-color:white;
+		color:black;
 		display: inline-block;
 	}
+	
+	
+	#infoBtn1,#infoBtn2,#infoBtn3{
+	   border-radius: 1px;	 	
+	   background-color:#eee;	
+	}
+	
+	#infoBtn1:hover,#infoBtn2:hover,#infoBtn3:hover{
+	
+	background-color:#FF5430;	
+	color:white;
+	
+	}
+	
+	
+	
+	#infoBtn1:active,#infoBtn2:active,#infoBtn3:active{
+	outline: 0;
+	}
+	
+	#productBtn>.btn{
+	background-color:#eee;	
+	height:30px;
+	}
+	#productBtn>.btn:hover{
+	background-color:#FF5430;
+	color:white;
+	}
+
+
+
 </style>
 <script>
 
-/*
+
 
   $(document).ready(function(){
 	 
@@ -672,7 +711,7 @@
 	
   })
  
-*/
+
 
 
 
@@ -722,11 +761,11 @@
 			<li><a href="#"><img src="img/cicon01.png"></a></li>
 			<li><a href="#"><img src="img/cicon02.png"></a></li>
 			<li><a href="#"><img src="img/cicon03.png"></a></li>
-			<li><a href="#"><img src="img/cicon02.png"></a></li>
+			<li><a href="#"><img src="img/cicon05.png"></a></li>
 		</ul>
 
 		<!-- ------------------------------상품 박스--------------------------------------------------------------- -->
-		<div id=productMainBox>
+		<div id=productMainBox >
 
 
 			<div id=productImgBox>
@@ -740,7 +779,7 @@
 				<div id=productMainTiltle>
 					<b>국산 100% 볶음참깨 160g 80g 볶음참깨 당일생산 당일 배송!!</b>
 				</div>
-				<div id=productPrice>8,900</div>
+				<div id=productPrice>가격 : 8,900</div>
 				<div id="sprofile">
 					<a href="#">경북예천 홍길동</a>
 				</div>
@@ -778,7 +817,7 @@
 				<!--productPrBox  -->
 
 
-				<div id=productTotalPrice>총 상품금액:8,900원</div>
+				<div id=productTotalPrice><b>총 상품금액:8,900원</b></div>
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn"/>
 					<input type="button" value="장바구니 담기" class="btn"/>
@@ -891,16 +930,11 @@
 		<!-- -------------------------------------상세정보박스1  끝-------------------------------------------------------- -->
 		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
-		<div class="infoBtnb">
-			<input type="button" id="infoBtn1" value="상품설명"  class="btn"/> <input
-				type="button" id="infoBtn2" value="고객후기" class="btn" /> <input type="button"
-				id="infoBtn3" value="상품문의"  class="btn"/>
-		</div>
-		
+
 		<!-- -------------------------------------상세정보박스2  시작-------------------------------------------------------- -->
 
 		<div id="productInfoPage">
-			<div id="productInfoPage2">
+			<div id="productInfoPage2" style="display:none">
 				<div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
 
@@ -979,16 +1013,10 @@
 
 		<!--- -------------------------------------상세정보박스2  끝-------------------------------------------------------- -->
 		
-		<div class="infoBtnb">
-			<input type="button" id="infoBtn1" value="상품설명"  class="btn"/> <input
-				type="button" id="infoBtn2" value="고객후기" class="btn" /> <input type="button"
-				id="infoBtn3" value="상품문의" class="btn" />
-		</div>
-		
-		
+	
 		<!-- -------------------------------------상세정보박스3  시작-------------------------------------------------------- -->
 		<div id="productInfoPage">
-			<div id="productInfoPage3">
+			<div id="productInfoPage3" style="display:none">
 
 				<div id="qtitle">상품에 대한 문의를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>

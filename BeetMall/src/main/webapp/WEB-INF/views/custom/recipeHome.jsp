@@ -1,12 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/inc/recipeMypageMenu.jspf"%>    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ include file="/inc/menu_c.jspf"%>
-    
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,34 +11,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" />
 
-<!-- font -->
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
-		<!-- font-family: 'NanumSquare', sans-serif !important; -->
 		
-<script>
 
 
-
-</script>
-
-
-
-</head>
 <style>
 /*  기본설정----------------------------------------------                 */
+body, .btn{
+font-size: 14px !important;
+}
 
-#searchBtn{
-top:0px;
-left:0px;
+a:hover, a:active, a:visited, a:link {
+    text-decoration: none;
+    color: black;
+}
+#mypageMenubar{
+	display:block;
+	font-size:17px;
 }
 
 #section{
 background-color:white;
 margin:0 auto;
-font-family: 'Nanum Gothic', sans-serif;
+width:1080px;
 }
 
 ul>li{
@@ -53,7 +42,17 @@ list-style-type:none;
 a:active,a:link,a:visited,a:hover{
       text-decoration: none;
       color:black;
+ 
    }
+
+#menuListUl{
+font-size:17px;
+}
+
+#mypageMenubar{
+	display:block;
+}
+
 
 /* ------------------페이징처리부분-------------------- */
 	.page_wrap {
@@ -122,8 +121,8 @@ a:active,a:link,a:visited,a:hover{
 
 
 #slider>li>a>img{
-width:800px;
-height:500px;
+width:900px;
+height:550px;
 margin:0 auto; 
 }
 
@@ -135,23 +134,35 @@ height:20px;
 margin-top:10px;
 }
 
+.bx-prev{
+
+}
+
 
 /* 탑서치부분----------------------------------------------                 */
 
 #searchLine{
-margin:0px; padding:0px; width:670px;
+margin:0px; padding:0px; width:530px;
 height:50px;
 line-height:40px;
 float:left;
-margin-bottom:30px;
+margin-bottom:5px;
 }
 
 #searchLine2{
-margin:0px; padding:0px; width:410px; height:50px; line-height:40px;float:right;
-margin-bottom:30px;
+float:left;
+margin:0px;  width:480px; height:50px; line-height:30px;
+margin-bottom:5px;
+padding-left:170px;
+margin-left:60px;
+psdding-top:5px;
 }
 #searchLine2>input,#searchLine2>a>input{
-line-height:25px;
+line-height:40px;
+}
+#selectSearchid,#search{
+line-height:30px;
+height:30px;
 }
 
 #searchLine>li:nth-child(3n+1){
@@ -167,18 +178,20 @@ margin-right:20px;
 height:30px; width:69px;
 }
 
-#top10>a,#new10>a{color:black; font-weight:bold; margin-bottom:20px;}
+#top10,#new10{color:black; font-weight:bold; margin-bottom:20px;}
 
-#searchbtn,#writebtn{
+#writebtn{
 		padding: 3px 10px;
 		color: #666666;
 		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		background:#eee;
 		text-align: center;
  		text-decoration: none;
 		display: inline-block;
-		border:none;
+		border:1px solid #eee;
+		line-height:25px;
+		height:30px;
+		width:200px;
 	}
 	/*버튼*/
 	#searchbtn:hover,#writebtn:hover{
@@ -187,112 +200,92 @@ height:30px; width:69px;
 		display: inline-block;
 	}
 
+#writebtndiv{
+width:100%;
+float:left;
+padding-right:880px;
+line-height:25px;
+margin-bottom:40px;
+}
+
 
 
 /*  레시피 리스트----------------------------------------------                 */
 
-.recipeList{
-   float:left; 
-   width:100%;
-   height:100%;
-   margin:0 auto;
-   padding:0 auto;
-   border-top:1px solid #ddd;
-    }    
- 
- .recipeList>div{
- width:100%;
- heigh:220px;
- 
- }
- 
- .recipeList>div>ul{
- width:100%;
- margin-top:10px;
- margin-bottom:10px;
- background-color:#eee;
- height:210px;
- border-radius:3px;
- }
- 
- .recipeList>div>ul>li>img{
-    width:140px;
-    height:200px;
-    float:left;
-    margin-top:4px;
-    margin-right:10px;
-    border-radius:5px;
- }   
- 
- .recipeList>div>ul>li>a>img{
-    width:140px;
-    height:200px;
-    float:left;
-    margin-top:4px;
-    margin-right:10px;
-    border-radius:5px;
- }   
- 
- 
- .recipeList>div>ul>li:nth-child(5n+2){
-    margin-top:10px;
-    height:20px;
-    float:left;
- }
- 
-  .recipeList>div>ul>li:nth-child(5n+3){
-    height:20px;  margin-top:3px;
-    float:left;
-    width:80%;
- }
- 
-   .recipeList>div>ul>li:nth-child(5n+4){
-    margin-top:12px;
-    height:110px;
-    width:50%;
-    float:left;
- }
- 
-   .recipeList>div>ul>li:nth-child(5n+5){
-   width:890px;
-    height:20px;
-    padding-left:610px;
-    
- }
- 
+.recipeListNew{
+width:100%;
+float:left;
+margin-bottom:30px;
+}
 
- 
-    
-/*
- .recipeList>ul{
-  background-color:#EBDFE2;
- 
- }   
- 
- .recipeList>ul>li{
- 
- border-bottom:3px solid #ddd; 
- margin:0 auto;
- padding:0 auto;
- margin-top:3px;
- 
- 
- }
- 
- .recipeList>div{
-  margin:0 auto;
-  padding:0 auto;
-  float:left;
-    }
-    
-    
-.recipeList>ul>li>div>img{
- width:150px;
- height:200px;
-}    
-*/
+#recipeListul{
+width:100%;
+float:left;
+margin-top:3px;
+margin-left:3px;
+margin-bottom:3px;
+height:150px;
+
+}
+
+#recipeListul>li:nth-child(7n+1),#rtitleImg{
+float:left;
+height:150px;
+width:235px;
+
+}
 
 
+#recipeListul>li:nth-child(7n+1)>a>img,#rtitleImg{
+height:150px;
+padding:10px;
+width:235px;
+}
+
+#recipeListul>li:nth-child(7n+1)>a{
+float:left;
+}
+
+#recipeListul>li:nth-child(7n+2)>a{
+float:left;
+padding-left:10px;
+padding-top:10px;
+padding-right:400px;
+padding-bottom:10px;
+width:840px;
+height:55px;
+line-height:55px;
+font-weight:bold;
+
+}
+
+#recipeListul>li:nth-child(5n+3){
+float:left;
+padding-left:10px;
+width:840px;
+padding-right:400px;
+color:gray;
+}
+
+#recipeListul>li:nth-child(5n+4){
+float:left;
+padding-left:10px;
+width:840px;
+height:35px;
+padding-right:400px;
+padding-top:0px;
+}
+
+#recipeListul>li:nth-child(5n+5){
+float:left;
+padding-left:450px;
+width:840px;
+height:25px;
+}
+
+#section{
+font-size:17px;
+}
 </style>
 
 <script>
@@ -309,9 +302,41 @@ $(function(){
 	  
 });
 
+
+
+function top10(){ 
+	  $('#top10').css('color','black');	  	  
+	  $('#new10').css('color','#eee');	
+	  
+	  $(".recipeListTop").show()
+	  $(".recipeListNew").hide()
+	  
+	  $('#top10s').attr("selected",true);
+	  $('#new10s').attr("selected",false);
+}
+
+
+
+
+function new10(){ 
+	  var txt1=""; 
+	  $('#new10').css('color','black');	  
+	  $('#top10').css('color','#eee');
+	  
+	  $(".recipeListTop").hide()
+	  $(".recipeListNew").show()
+	  
+	  $('#new10s').attr("selected",true);
+	  $('#top10s').attr("selected",false);
+}
+
+
+
+
+
 </script>
 
-<body>
+<body onload="top10()" >
 
 
   <div class="section" id="section">
@@ -321,104 +346,72 @@ $(function(){
 	    
 	     <div class="bxslider">
 	      <ul id="slider" >
-			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr4.jfif"/></a></li>
-			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr4.jfif"/></a></li>	
-			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr4.jfif"/></a></li>
-			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr4.jfif"/></a></li>  
+			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe01.jpg"/></a></li>
+			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe02.jpg"/></a></li>	
+			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe03.jpg"/></a></li>
+			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe04.jpg"/></a></li>  
 		  </ul>
 	     </div>
 
 <!-- -------------------------탑서치부분-------------------------------------- -->		    
 	    <ul id="searchLine">
-	    <li><select name="selectOrder">
-	                   <option>인기글순</option>
-	                   <option>추천순</option>
-	                   <option>조화수순</option>
-	                   <option>최신순</option>
+	    <li><select name="selectOrder" id="selectOrder">
+	                   <option id="top10s">추천수순</option>
+	                   <option>조회수순</option>
+	                   <option id="new10s">최신순</option>
 	                </select></li>
-	     <li id="top10"><a href="#">TOP10</a></li>
-	     <li id="new10"><a href="#">NEW10</a></li>
+	     <li id="top10" onclick="top10()">TOP10</li>
+	     <li id="new10" onclick="new10()">NEW10</li>
+	     
 	    </ul>
 	    
 	    <div id="searchLine2">
+	   
 	    <select name="selectSearch" id="selectSearchid">
 	                   <option>제목</option>
 	                   <option>글쓴이</option>
 	                   <option>글내용</option>
 	                </select>
-	    <input type="text" name="search"  placeholder="검색어를 입력하세요"/>
-	    <input type="submit" id="searchbtn" value="Search"/>
-	    <a href="<%=request.getContextPath() %>/recipeWrite"><input type="submit" id="writebtn" value="글쓰기"/></a>
+	    <span id="search_box">
+					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
+		</span>
+	    
 	    </div>
-	    <br/>
+	    <div id="writebtndiv"><a href="<%=request.getContextPath() %>/recipeWrite"><input type="submit" id="writebtn" value="글 작성하러 가기"/></a></div>
 	
 <!-- -------------------------레시피 리스트들-------------------------------------- -->	
-        <br/>
-        <!--  
-	    <div id="recipeList">
+        
+   
+	    <div class="recipeListNew">
 	    
-	    
-	    <c:forEach var="data" items="${list}">
-		       <div class="recipeListposition">
-			       <img src="img/r3.jfif">
-			        <div id="firststdatelist">
-			        <a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a>
-			        작성자: ${data.userid}
-			        내용: ${data.recipecontent}
-			        </div>
-		        </div>
-		        <div id="lastdatelist">추천수 ${data.reciperecommend}, 조회수${data.recipehit} , 날짜${data.recipewritedate}</div> 
-	         </c:forEach> 
-	      
+   <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
+		         <c:forEach var="data" items="${list}">   
+		             <ul id="recipeListul">
+		              <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+		              <li>${data.userid}</li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}"></a></li>
+		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} ${data.recipewritedate}</li>
+		            </ul>
+		         </c:forEach>  
+		           
+	
 	    </div>
-	    -->
-	    <div class="recipeList">
 	    
-		   
-		      <div>
-		        <!-- <c:forEach var="data" items="${list}"> -->
-		               
-			              
-			              
-			             
-						  
-						  <ul id="recipeListul">
-			                 <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr3.jfif"></a></li>
-				             <li> 제목: <a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a> </li>
-				             <li> 작성자: ${data.userid} </li>
-							 <li> 내용: <a href="recipeView?recipenum=${data.recipenum}">${data.recipecontent}</a> </li> 
-							 <li>★추천수 ${data.reciperecommend}, 조회수${data.recipehit} ,${data.recipewritedate}</li>
-							 
-						  </ul>
-						  
-						  <ul id="recipeListul">
-			                 <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr3.jfif"></a></li>
-				             <li> 제목: <a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a> </li>
-				             <li> 작성자: ${data.userid} </li>
-							 <li> 내용: <a href="recipeView?recipenum=${data.recipenum}">${data.recipecontent}</a> </li> 
-							 <li>★추천수 ${data.reciperecommend}, 조회수${data.recipehit} ,${data.recipewritedate}</li>
-							 
-						  </ul>
-						  
-						  <ul id="recipeListul">
-			                 <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/cr3.jfif"></a></li>
-				             <li> 제목: <a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a> </li>
-				             <li> 작성자: ${data.userid} </li>
-							 <li> 내용: <a href="recipeView?recipenum=${data.recipenum}">${data.recipecontent}</a> </li> 
-							 <li>★추천수 ${data.reciperecommend}, 조회수${data.recipehit} ,${data.recipewritedate}</li>
-							 
-						  </ul>
-						  
-						  
-						  
-						  
-			             
-			             
-			           
-		          <!-- </c:forEach> -->
-		      </div>
-		      
-
+	     <div class="recipeListTop" style="display:none">
+	    
+   <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
+		         <c:forEach var="data2" items="${list2}">   
+		             <ul id="recipeListul">
+		              <li><a href="recipeView?recipenum=${data2.recipenum}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}">${data2.recipetitle}</a></li>
+		              <li>${data2.userid}</li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}"></a></li>
+		              <li>★추천해요 ${data2.reciperecommend} 조회수${data2.recipehit} ${data2.recipewritedate}</li>
+		            </ul>
+		         </c:forEach>  
+		           
+	
 	    </div>
 	    
 	    	<div class="page_wrap">
@@ -443,6 +436,3 @@ $(function(){
 	    <div style="clear:both;"></div>
 	    
 	 </div>   
-
-</body>
-</html>

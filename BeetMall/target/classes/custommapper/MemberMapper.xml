@@ -3,7 +3,7 @@
 <mapper namespace="com.beetmall.sshj.custom.dao.MemberDAO">
 	<insert id="regiFinishiOk">
 		insert into member(userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday, joindate, usertype, userstop, point)
-		values(#{userid}, #{userpwd}, #{username}, #{userphone}, #{useremail}, #{userzipcode}, #{useraddr}, #{userdetailaddr}, #{birthday}, sysdate, 1, 'N',0)
+		values(#{userid}, #{userpwd}, #{username}, #{userphone}, #{useremail}, #{userzipcode}, #{useraddr}, #{userdetailaddr}, #{birthday}, sysdate, #{usertype}, 'N',0)
 	</insert>
 	<select id="idOverlap" resultType="int">
 		select count(userid) from member where userid = #{param1}
@@ -14,4 +14,9 @@
 	<select id="infoSelect" resultType="String">
 		select userinfocontent from useinfo where userinfotitle = #{param1}
 	</select>
+
+	<insert id="sellerRegiFinishiOk" parameterType="com.beetmall.sshj.custom.vo.SellerMemberVO">
+		insert into seller(userid, storenum, storename, sellername, sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname, bankaccount)
+		values(#{userid}, farmsq.currval, #{storename}, #{sellername}, #{sellerreginum}, #{sellerregiimg}, 0, null, #{storezipcode}, #{storeaddr}, #{storedetailaddr}, #{storeemail}, #{bank}, #{bankname}, #{bankaccount})
+	</insert>
 </mapper>
