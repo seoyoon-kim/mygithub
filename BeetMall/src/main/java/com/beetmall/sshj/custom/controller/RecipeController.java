@@ -152,23 +152,14 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		ModelAndView mav=new ModelAndView();
 		//////////1게시글 목록 뽑아내기
 		mav.addObject("list" , recipeService.recipeAllListHome());
-
+        mav.addObject("list2" , recipeService.recipeAllListHome2());
+        
 		mav.setViewName("custom/recipeHome");
 		
 		return mav;
 	}
 	
-	@RequestMapping("/recipeHome2")
-	public ModelAndView RecipeAllListHome2() {
-		
-		ModelAndView mav=new ModelAndView();
-		//////////1게시글 목록 뽑아내기
-		mav.addObject("list2" , recipeService.recipeAllListHome2());
 
-		mav.setViewName("custom/recipeHome");
-		
-		return mav;
-	}
 	
 	
 //////////////////////////////////////////////////////////내가 작성한 레시피///////////////////////////////////////////////////////////	

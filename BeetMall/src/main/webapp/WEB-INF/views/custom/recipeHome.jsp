@@ -16,6 +16,9 @@
 
 <style>
 /*  기본설정----------------------------------------------                 */
+body, .btn{
+font-size: 14px !important;
+}
 
 a:hover, a:active, a:visited, a:link {
     text-decoration: none;
@@ -301,7 +304,6 @@ $(function(){
 
 
 
-
 function top10(){ 
 	  $('#top10').css('color','black');	  	  
 	  $('#new10').css('color','#eee');	
@@ -309,9 +311,11 @@ function top10(){
 	  $(".recipeListTop").show()
 	  $(".recipeListNew").hide()
 	  
-	
-	  
+	  $('#top10s').attr("selected",true);
+	  $('#new10s').attr("selected",false);
 }
+
+
 
 
 function new10(){ 
@@ -321,14 +325,14 @@ function new10(){
 	  
 	  $(".recipeListTop").hide()
 	  $(".recipeListNew").show()
+	  
+	  $('#new10s').attr("selected",true);
+	  $('#top10s').attr("selected",false);
 }
 
 
 
-function rtitleimg(){
-	$('#rtitleImg>a')
-	
-}
+
 
 </script>
 
@@ -345,16 +349,16 @@ function rtitleimg(){
 			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe01.jpg"/></a></li>
 			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe02.jpg"/></a></li>	
 			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe03.jpg"/></a></li>
-			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe04.jfif"/></a></li>  
+			  <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/crecipe04.jpg"/></a></li>  
 		  </ul>
 	     </div>
 
 <!-- -------------------------탑서치부분-------------------------------------- -->		    
 	    <ul id="searchLine">
 	    <li><select name="selectOrder" id="selectOrder">
-	                   <option>추천수순</option>
-	                   <option>조화수순</option>
-	                   <option>최신순</option>
+	                   <option id="top10s">추천수순</option>
+	                   <option>조회수순</option>
+	                   <option id="new10s">최신순</option>
 	                </select></li>
 	     <li id="top10" onclick="top10()">TOP10</li>
 	     <li id="new10" onclick="new10()">NEW10</li>
@@ -401,7 +405,7 @@ function rtitleimg(){
 		             <ul id="recipeListul">
 		              <li><a href="recipeView?recipenum=${data2.recipenum}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
 		              <li><a href="recipeView?recipenum=${data2.recipenum}">${data2.recipetitle}</a></li>
-		              <li>${data.userid}</li>
+		              <li>${data2.userid}</li>
 		              <li><a href="recipeView?recipenum=${data2.recipenum}"></a></li>
 		              <li>★추천해요 ${data2.reciperecommend} 조회수${data2.recipehit} ${data2.recipewritedate}</li>
 		            </ul>

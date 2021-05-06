@@ -230,28 +230,7 @@ ul>li {
 	margin-top: 10px;
 }
 
-#searchbtn {
-	height: 30px;
-	width: 69px;
-}
 
-#searchbtn {
-	padding: 3px 10px;
-	color: #666666;
-	border-radius: 8px;
-	background: #fff;
-	box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.5);
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	border: none;
-}
-/*버튼*/
-#searchbtn:hover {
-	background: gray;
-	color: white;
-	display: inline-block;
-}
 
 /*표*/
 
