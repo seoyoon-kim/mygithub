@@ -131,6 +131,15 @@ table>thead th, table>tbody td{
 	padding: 10px;
 }
 
+table tr td{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#totalMoney{
+	float: right;
+}
 
 /*================ 페이징처리부분 ===============*/
 .page_wrap {

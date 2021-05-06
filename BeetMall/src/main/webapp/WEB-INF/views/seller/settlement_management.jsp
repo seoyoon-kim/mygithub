@@ -25,6 +25,12 @@ $(()=>{
 		}
 	});
 })
+// 콤마 찍은 숫자 표현하기, 정규표현식
+function reqularExpression(num){
+	//							/ : 정규표현식 시작
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+}
+
 
 function dataInsertCheck(){
 	let startDate = $('#startDate').val();
@@ -43,41 +49,57 @@ function dataInsertCheck(){
 			traditional : true,
 			data: $('#searchingFrm').serialize(),
 			success: function(result){
-				console.log('test');
-				let tag = '<thead><tr>'
-						+ '<th scope="col">주문번호</th>'
-						+ '<th scope="col">매출일자</th>'
-						+ '<th scope="col">주문금액</th>'
-						+ '<th scope="col">실결제금액</th>'
-						+ '<th scope="col">결제수수료</th>'
-						+ '<th scope="col">이용수수료</th>'
-						+ '<th scope="col">정산금액</th>'
-						+ '<th scope="col">정산날짜</th>'
-						+ '</tr></thead><tbody>';
+				console.log(result);
+				let tag = '<thead><tr>';
+					tag += '<th scope="col">주문번호</th>';
+					tag += '<th scope="col">매출일자</th>';
+					tag += '<th scope="col">주문금액</th>';
+					tag += '<th scope="col">실결제금액</th>';
+					tag += '<th scope="col">결제수수료</th>';
+					tag += '<th scope="col">이용수수료</th>';
+					tag += '<th scope="col">정산금액</th>';
+					tag += '<th scope="col">정산날짜</th>';
+					tag += '</tr></thead><tbody>';
+
+				if(result.length == 0){
+					alert('검색된 데이터가 없습니다.');
+					
+					tag += '</tbody>';
+					
+					$('#totalMoney').html('');
+					$('table').html(tag);
+					return false;
+				}
 				
-				let $result = $(result);
-				console.log($result);
+				let $result = $(result[1]);
+				
 				$result.each(function(idx,vo){
-					console.log('test = '+idx);
-					console.log(vo);
-					console.log(vo.ordernum);
-					tag += '<tr>'
-						+  '<td>'+vo.ordernum+'</td>'
-						+  '<td>'+vo.orderdate+'</td>'
-						+  '<td>'+vo.orderprice+'</td>'
-						+  '<td>'+vo.realpayment+'</td>'
-						+  '<td>'+(vo.realpayment*0.05)+'</td>'
-						+  '<td>'+(vo.realpayment*0.058)+'</td>'
-						+  '<td>'+vo.realpayment-(vo.realpayment*0.05)-(vo.realpayment*0.058)+'</td>'
-						if(${vo.settlecheck == 'Y'}){
-							+  '<td>'+vo.settledate+'</td>'
-						} else {
-							+  '<td>-</td>'
-						}
-						+  '</tr>';
+					tag += '<tr>';
+					tag += '<td>' + vo.ordernum + '</td>';
+					tag += '<td>' + vo.orderdate + '</td>';
+					tag += '<td>' + reqularExpression(vo.orderprice) + '</td>';
+					tag += '<td>' + reqularExpression(vo.realpayment) + '</td>';
+					tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.05)) + '</td>';
+					tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.058)) + '</td>';
+					tag += '<td>' + reqularExpression(Math.round(vo.realpayment-(vo.realpayment*0.05)-(vo.realpayment*0.058))) + '</td>';
+					if(vo.settlecheck=='Y '){
+						tag +=  '<td>'+vo.settledate+'</td>';
+					} else {
+						tag +=  '<td>-</td>';
+					}
+					
+					tag += '</tr>';
+					
 				});
 				tag += '</tbody>';
-				console.log(tag);
+
+				// 엑셀 페이징
+				excelPaging(result[0].totalPage, result[0].pageNum, result[0].startPageNum, result[0].onePageNum);
+				
+				// 합계금액
+				$('#totalMoney').html("정산 합계 금액 : " + reqularExpression(Math.round(result[0].totalMoney- (result[0].totalMoney*0.05) - (result[0].totalMoney*0.058)) ) + "원");
+				
+				// 테이블 렌더
 				$('table').html(tag);
 			},
 			error: function(){
@@ -86,6 +108,38 @@ function dataInsertCheck(){
 		})
 	}
 	
+}
+
+function excelPaging(totalPage, pageNum, startPageNum, onePageNum){
+	let tag = '<div class="page_nation">';
+	if( totalPage == 1 ){
+		tag += '<a class="arrow pprev" href="#" onclick="return false;"></a>';
+		tag += '<a class="arrow prev" href="#" onclick="return false;"></a>'; 
+		tag += '<a class="active" href="#" onclick="return false;">1</a>';
+		tag += '<a class="arrow next" href="#" onclick="return false;"></a>';
+		tag += '<a class="arrow nnext" href="#" onclick="return false;"></a>';
+	} else { // total page가 1페이지를 초과하면 실행한다.
+		if(pageNum > 1){ // 1페이지가 아닐때, 이전, 맨끝을 만든다.
+			tag += '<a class="arrow pprev" href="sellerPagingData?pageNum=1"></a>';
+			tag += '<a class="arrow prev" href="sellerPagingData?pageNum='+(pageNum-1)+'"></a>';
+		}
+		for( let i = startPageNum; i <= startPageNum+onePageNum-1; i++){
+			if( i == pageNum){
+				tag += '<a class="active" href="#">'+ i +'</a>';
+			} else {
+				tag += '<a class="arrow" href="sellerPagingData?pageNum='+i+'">'+ i +'</a>';
+			}
+			if(i == totalPage) break;
+		}
+		if(pageNum < totalPage){
+			tag += '<a class="arrow next" href="sellerPagingData?pageNum='+(pageNum+1)+'"></a>';
+			tag += '<a class="arrow nnext" href="sellerPagingData?pageNum='+totalPage+'"></a>';
+		}
+			
+	}
+	tag += '</div>';
+
+	$('.page_wrap').html(tag);
 }
 	
 </script>
@@ -135,7 +189,19 @@ function dataInsertCheck(){
 							</tr>
 						</thead>
 					</table>
+					<hr>
+					<div id="totalMoney"></div>
+					<div class="page_wrap">
+						<div class="page_nation">
+							<a class="arrow pprev" href="#" onclick="return false;"></a> 
+							<a class="arrow prev" href="#" onclick="return false;"></a> 
+							<a class="active" href="#" onclick="return false;">1</a> 
+							<a class="arrow next" href="#" onclick="return false;"></a> 
+							<a class="arrow nnext" href="#" onclick="return false;"></a>
+						</div>
+					</div>
 				</div>
+				
 			</div>
 	</article>
 </section>

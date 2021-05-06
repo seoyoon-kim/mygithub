@@ -15,8 +15,12 @@ public class SettleServiceImp implements SettleService{
 	
 	@Override
 	public List<SettleVO> getDateData(SettleVO vo) {
-		// TODO Auto-generated method stub
 		return dao.getDateData(vo);
+	}
+
+	@Override
+	public List<SettleVO> totalSettle(SettleVO vo) {
+		return dao.totalSettle(vo);
 	}
 	
 	
