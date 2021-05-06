@@ -1,10 +1,17 @@
 package com.beetmall.sshj.seller.vo;
 
 public class ProductVO {
+	//category 대분류
+	private int catenum;
+	private String catename;
+	
+	//mcategory 중분류
+	private String mcatename;
+	
 	//Product 상품등록
 	private int productnum; //상품번호
 	private String userid; //판매자 아이디
-	private int mcatenum; // 카테고리 번호
+	private int mcatenum; // 중분류 카테고리 번호
 	private String productname; //상품명 
 	
 	private int productprice; //판매가격
@@ -47,11 +54,37 @@ public class ProductVO {
 	private int saleprice; //할인가격
 	private String salestart; //할인 시작
 	private String salefinish; //할인 끝
+	//할인율
+	private int salepercent; //할인율 담을 변수
+	//판매가-할인금액 = 할인적용된 판매가
+	private int sellprice;
+	
+	
+	//대분류, 중분류
+	public int getCatenum() {
+		return catenum;
+	}
+	public void setCatenum(int catenum) {
+		this.catenum = catenum;
+	}
+	public String getCatename() {
+		return catename;
+	}
+	public void setCatename(String catename) {
+		this.catename = catename;
+	}
+	public String getMcatename() {
+		return mcatename;
+	}
+	public void setMcatename(String mcatename) {
+		this.mcatename = mcatename;
+	}
 	
 	//상품
 	public int getProductnum() {
 		return productnum;
 	}
+	
 	public void setProductnum(int productnum) {
 		this.productnum = productnum;
 	}
@@ -246,7 +279,22 @@ public class ProductVO {
 	public void setSalefinish(String salefinish) {
 		this.salefinish = salefinish;
 	}
+	//할인율
+	public int getSalepercent() {
+		return salepercent;
+	}
+	public void setSalepercent(int salepercent) {
+		this.salepercent = salepercent;
+	}
+	//할인적용된 판매가
+	public int getSellprice() {
+		return sellprice;
+	}
+	public void setSellprice(int sellprice) {
+		this.sellprice = sellprice;
+	}
 	
 
+	
 	
 }

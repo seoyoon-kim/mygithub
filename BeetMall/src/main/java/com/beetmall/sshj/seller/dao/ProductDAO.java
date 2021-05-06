@@ -1,7 +1,15 @@
 package com.beetmall.sshj.seller.dao;
 
+import java.util.List;
+
+import com.beetmall.sshj.seller.vo.ProductVO;
+
 public interface ProductDAO {
-//상품 카테고리 불러오기 (select category join mcategory)
-//상품선택
+
+	//판매자 판매상품 목록 전체 보기
+	 public List<ProductVO> productAllSelect(String userid); 
+	 
+	//상품 등록하기
+	public int productInsert(ProductVO vo);
 
 }

@@ -1,4 +1,4 @@
-
+package com.beetmall.sshj.seller.service;
 
 import java.util.List;
 
@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.beetmall.sshj.seller.dao.ProductDAO;
+import com.beetmall.sshj.seller.vo.ProductVO;
 
-import com.beetmall.sshj.vo.ProductVO;
+
 
 @Service
 public class ProductServiceImp implements ProductService {

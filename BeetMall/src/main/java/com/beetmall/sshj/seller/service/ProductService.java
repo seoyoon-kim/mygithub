@@ -1,8 +1,9 @@
-
+package com.beetmall.sshj.seller.service;
 
 import java.util.List;
 
-import com.beetmall.sshj.vo.ProductVO;
+import com.beetmall.sshj.seller.vo.ProductVO;
+
 
 public interface ProductService {
 	//판매자 판매상품 목록 전체 보기
