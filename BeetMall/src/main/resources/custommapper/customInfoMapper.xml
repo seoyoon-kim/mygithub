@@ -7,4 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			insert into userqboard(qnum, productnum, userid, qcontent,qwritedate,qopen,qanswer)
   			values(qmboardsq.nextval, #{productnum},'qwer' , #{qcontent}, sysdate,0,#{qanswer})
 	</insert>
+	
+	<select id="CustomInfoAllRecord" resultType="com.beetmall.sshj.custom.vo.CustomInfoVO">
+        select userid,qnum,productnum,qcontent, 
+        to_char(qwritedate,'MM-DD HH:MI')qwritedate,qanswer,qopen from recipe
+        order by qnum desc     
+    </select>
+    
 </mapper>

@@ -105,15 +105,19 @@
 		<span id="notice">고객님께서 작성하신 질문은 판매자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 	</div>
 		
-	<form method="post" action="CustomInfoWriteOk">
+	<form method="post" action="/sshj/custominfoWriteOk" enctype="multipart/form-data">
 		<table>
 			<tbody>
 				<tr>
 					<th colspan="4">문의 작성</th>
 				</tr>
 				<tr class="tr_head">
-					<th class="menu" >상품명</th>
-					<td class="td" colspan="3"><input type="text" name="qtitle" id="qtitle" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<th class="menu" >상품번호</th>
+					<td class="td" colspan="3"><input type="text" name="productnum" id="productnum" placeholder="상품번호 입력."/></td>
+				</tr>
+				<tr class="tr_head">
+					<th class="menu" >제목</th>
+					<td class="td" colspan="3"><input type="text" name="qtitle" id="qtitle" placeholder="제목을 입력해주세요."/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
@@ -130,7 +134,7 @@
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/CustomView'"/>
+				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/CustominfoView'"/>
 				<input type="submit" value="문의하기" class="btn" id="write_btn"/>				
 			</div>
 		</form>
@@ -152,5 +156,25 @@ $(document).ready(function() {
           }
 	  });
 	});
+	
+/**
+* 이미지 파일 업로드
+*/
+function uploadSummernoteImageFile(file, el) {
+	data = new FormData();
+	data.append("file", file);
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : "uploadSummernoteImageFile",
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(data) {
+			$(el).summernote('editor.insertImage', data.url);
+		}
+	});
+}
+
 	
 </script>
