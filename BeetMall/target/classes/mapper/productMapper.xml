@@ -13,7 +13,16 @@
 		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,p.saleselect, p.optionselect, p.saleb
 		order by p.sellstart desc 
 	</select>
-	
+	<select id="discountSelect" resultType="com.beetmall.sshj.vo.ProductVO">
+	 	select p.productnum, d.productnum ,p.saleselect, d.saleprice, to_number(p.productprice - d.saleprice) sellprice,
+            floor(( d.saleprice/p.productprice)*100) as salepercent,	
+            to_char(d.salestart, 'YY/MM/DD') salestart, to_char(d.salefinish, 'YY/MM/DD') salefinish
+     	 from discount d, product p where p.productnum = d.productnum and d.productnum = #{productnum};
+	</select>
+	<select id="optionSelect" resultType="com.beetmall.sshj.vo.ProductVO">
+	 	 select p.optionselect, p.productnum, o.productnum , o.optionnum, o.optionname, o.optionstock, o.optionprice
+  		 from optiontbl o , product p where p.productnum = o.productnum and o.productnum = #{productnum};
+	</select>
 	<insert id="productInsert" parameterType="com.beetmall.sshj.vo.ProductVO">
 		insert into product (productnum, userid, mcatenum, productname, productprice, saleselect, saleb, optionselect,
 								sellstart,sellfinish, totalstock, nowstock, thumbimg, addimg,

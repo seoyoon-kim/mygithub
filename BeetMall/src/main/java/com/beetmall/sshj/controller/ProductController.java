@@ -28,6 +28,8 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("productList", productService.productAllSelect());
+		mav.addObject("discountList", productService.discountSelect());
+		mav.addObject("optionList", productService.optionSelect());
 		mav.setViewName("seller/product_list");
 		return mav;
 	}
@@ -44,6 +46,7 @@ public class ProductController {
 		mav.setViewName("seller/product_regi");
 		return mav;
 	}
+	
 	//판매상품등록
 	@RequestMapping(value="/product_regi_ok", method=RequestMethod.POST)
 	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {

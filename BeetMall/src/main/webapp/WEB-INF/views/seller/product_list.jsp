@@ -222,22 +222,22 @@ $(document).ready(function(){
 						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">90</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
 						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
 						<td class="tbl_line_cell"><div id="productprice"><span id="price"><span id="price_num">${vo.productprice }</span>원</span></div></td>
-						<c:if test=""> <!-- 할인적용 -->
-							<td class="tbl_line_cell"><div id="saleSelect"><span id="select"></span></div></td>
+						<c:if test="${saleselect == 1}"> <!-- 할인적용 -->
+							<td class="tbl_line_cell"><div id="saleSelect"><span id="select">적용</span></div></td>
 						</c:if>
-						<c:if test="">	<!-- 할인적용안함 -->
-							<td class="tbl_line_cell"><div id="saleSelect"><span id="select"></span></div></td>
+						<c:if  test="${saleselect == 0}">	<!-- 할인적용안함 -->
+							<td class="tbl_line_cell"><div id="saleSelect"><span id="select">적용안함</span></div></td>
 						</c:if>
-						<c:if test=""><!-- 옵션적용 -->
+						<c:if test="${optionselect==1 }"><!-- 옵션적용 -->
 							<td class="tbl_line_cell"><div id="optionSelect"><span id="select"></span></div></td>
 						</c:if>
-						<c:if test=""><!-- 옵션적용 안함 -->
+						<c:if test="${optionselect==0 }"><!-- 옵션적용 안함 -->
 							<td class="tbl_line_cell"><div id="optionSelect"><span id="select"></span></div></td>
 						</c:if>
-						<c:if test=""> <!-- 못난이 할인 적용 -->
+						<c:if test="${saleb==1}"> <!-- 못난이 할인 적용 -->
 						<td class="tbl_line_cell"><div id="bSelect"><span id="select"></span></div></td>
 						</c:if>
-						<c:if test="">  <!-- 못난이 할인 적용안함 -->
+						<c:if test="${saleb==0 }">  <!-- 못난이 할인 적용안함 -->
 						<td class="tbl_line_cell"><div id="bSelect"><span id="select"></span></div></td>
 						</c:if>
 						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText">판매중</span></div></td>
