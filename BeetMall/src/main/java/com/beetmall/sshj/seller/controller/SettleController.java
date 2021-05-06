@@ -35,59 +35,40 @@ public class SettleController {
 		vo.setEndDate(req.getParameter("endDate"));
 		vo.setUserid((String)req.getSession().getAttribute("logId"));
 		
+		System.out.println(vo.getStartDate());
+		System.out.println(vo.getEndDate());
+		System.out.println(vo.getUserid());
+		System.out.println(vo.getOnePageNum());
+		System.out.println(vo.getPageNum());
+		System.out.println(vo.getOnePageRecord());
+		System.out.println(vo.getLastPageRecord());
+		
 		// 정산 금액 총 합계 가져오기
-		List<SettleVO> totalSettle = service.totalSettle(vo);
-				
+		List<SettleVO> totalSettle = service.totalSettle(vo); // totalMoney, totalRecord
+		
 		ArrayList<Object> sendData = new ArrayList<Object>();
 		
 		
 		long result = 0;
 		if(totalSettle.size() !=0) { // 값이 1이상 있으면 실행된다.
 			SettleVO vo2 = totalSettle.get(0);
-			sendData.add(0,vo2);
+			sendData.add(0,vo2);// totalMoney, totalRecord
 		} else {
 			sendData.add(0, 0);
 		}
 		
 		vo.setTotalMoney(result);
+		List<SettleVO> lst = service.getDateData(vo);
 		
 		// 데이터 가져오기
-		List<SettleVO> list = service.getDateData(vo);
-		sendData.add(1, list);
-		
+		for(int i = 0; i < lst.size(); i++) {
+			SettleVO vo2 = lst.get(i);
+			System.out.println(vo2.getOrderdate());
+		}
+		sendData.add(1, service.getDateData(vo));
+
 		return sendData;
 	}
 	
-	@RequestMapping(value = "/sellerPagingData",method = RequestMethod.GET)
-	public ModelAndView searchingPagingData(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		SettleVO vo = new SettleVO();
-		// 기본 설정
-		vo.setStartDate(req.getParameter("startDate"));
-		vo.setEndDate(req.getParameter("endDate"));
-		vo.setUserid((String)req.getSession().getAttribute("logId"));
-		
-		// 정산 금액 총 합계 가져오기
-		List<SettleVO> totalSettle = service.totalSettle(vo);
-				
-		ArrayList<Object> sendData = new ArrayList<Object>();
-		
-		
-		long result = 0;
-		if(totalSettle.size() !=0) { // 값이 1이상 있으면 실행된다.
-			SettleVO vo2 = totalSettle.get(0);
-			sendData.add(0,vo2);
-		} else {
-			sendData.add(0, 0);
-		}
-		
-		vo.setTotalMoney(result);
-		
-		// 데이터 가져오기
-		List<SettleVO> list = service.getDateData(vo);
-		sendData.add(1, list);
-		mav.addObject("list",sendData);
-		mav.setViewName("seller/settlement_management");
-		return mav;
-	}
+
 }

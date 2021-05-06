@@ -10,6 +10,9 @@
 	<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" />
 </c:set>
 <script>
+let startDate;
+let endDate;
+
 $(()=>{
 	$('#dateBtn').click( function(){
 		if( $(this).css('background-color') == 'rgb(255, 255, 255)' ){
@@ -33,8 +36,9 @@ function reqularExpression(num){
 
 
 function dataInsertCheck(){
-	let startDate = $('#startDate').val();
-	let endDate = $('#endDate').val();
+	startDate = $('#startDate').val();
+	endDate = $('#endDate').val();
+	
 	if( startDate == '' || endDate == '' ){
 		alert('조회기간을 설정해야 조회 가능합니다.');
 		return false;
@@ -42,7 +46,7 @@ function dataInsertCheck(){
 
 	// 조회기준 '날짜' 선택되어 있을 경우
 	if( $('#dateBtn').css('background-color') == 'rgb(221, 221, 221)' ){
-
+		console.log($('#searchingFrm').serialize());
 		$.ajax({
 			type: 'GET',
 			url: 'sellerDateSearchingData',
@@ -61,7 +65,7 @@ function dataInsertCheck(){
 					tag += '<th scope="col">정산날짜</th>';
 					tag += '</tr></thead><tbody>';
 
-				if(result.length == 0){
+				if(result[1].length == 0){
 					alert('검색된 데이터가 없습니다.');
 					
 					tag += '</tbody>';

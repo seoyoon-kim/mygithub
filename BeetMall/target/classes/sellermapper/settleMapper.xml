@@ -3,20 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SettleDAO">
-	<select id="getDateData" resultType="com.beetmall.sshj.seller.vo.SettleVO">		
-		select ordernum, to_char(orderdate, 'YYYY-MM-DD') orderdate, orderprice, realpayment, to_char(settledate, 'YYYY-MM-DD') settledate, settlecheck 
-		from ( select d.ordernum ordernum, d.orderdate orderdate, d.orderprice orderprice, d.realpayment realpayment, c.settledate settledate, c.settlecheck settlecheck
+	<select id="getDateData" resultType="com.beetmall.sshj.seller.vo.SettleVO">	
+		select ordernum, to_char(orderdate, 'YYYY-MM-DD') orderdate, orderprice, realpayment, to_char(settledate, 'YYYY-MM-DD') settledate, settlecheck
+		from ( select ordernum, orderdate, orderprice, realpayment, settledate, settlecheck 
+		from ( select d.ordernum, d.orderdate, d.orderprice, d.realpayment, c.settledate, c.settlecheck
 		from ( select ordernum, orderstatus, settlecheck, settledate 
 		from ( select productnum from product where userid='${userid}' ) a join orderdetail b on a.productnum = b.productnum) c 
-		join ordertbl d on c.ordernum = d.ordernum where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord}
-		and orderdate BETWEEN '${startDate}' and '${endDate}' and orderstatus='구매확정' order by orderdate desc)
+		join ordertbl d on c.ordernum = d.ordernum 
+		where orderdate BETWEEN '2021-01-01' and '2021-05-06' and orderstatus='구매확정' order by orderdate asc, ordernum asc)
+		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} order by orderdate desc, ordernum desc) 
 		<if test="#{pageNum} == #{totalPage}">
 			where rownum <![CDATA[ <= ]]>${lastPageRecord} 
 		</if>	
 		<if test="#{pageNum} != #{totalPage}">
 			where rownum <![CDATA[ <= ]]>${onePageRecord} 
-		</if>
-		order by orderdate asc, ordernum asc
+		</if> 
+		order by orderdate asc
 	</select>
 	<select id="totalSettle" resultType="com.beetmall.sshj.seller.vo.SettleVO">
 		select sum(realpayment) totalMoney, count(realpayment) totalRecord 
