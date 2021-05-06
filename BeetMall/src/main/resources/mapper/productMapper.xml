@@ -13,7 +13,7 @@
 		join mcategory m on m.mcatenum = p.mcatenum
 		join category c on c.catenum = m.catenum
 		join discount d on d.productnum = p.productnum
-        where p.userid = 'kimseller'
+        where p.userid = #{param1}
 		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,d.saleprice,d.salestart,d.salefinish 
 		order by p.sellstart desc 
 	</select>

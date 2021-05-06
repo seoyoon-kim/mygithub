@@ -28,7 +28,7 @@
 
 </script>	
 <style>
-	#productName a{color:black;}
+	#productName a{color:black; cursor:pointer;}
 	.product_table,.table_wrap{
 		margin: 0 auto;
 		width:100%
@@ -73,15 +73,17 @@
 		text-align:center;
 		font-size:12px;
 		padding:1px 5px 1px 5px;
-		border-left:1px solid lightgray;
+		/*border-left:1px solid lightgray;*/
 	}
 	.product_table td:first-child{border-left:none}
 	/*테이블 폭 조정*/
 	.productCheck, .productNum, .product_table th:first-child, .product_table th:nth-child(2) {
-		width:2%;
+		width:4%;
 	}
-	.product_table th:nth-child(4){width:8%}
+	.product_table th:nth-child(3){width:7%}
+	.product_table th:nth-child(4){width:7%}
 	.product_table th:nth-child(5){width:16%}
+	.product_table th:nth-child(12){width:4%}
 	.product_table th:nth-child(13){width:12%}
 	/*상품 이름*/
 	.productName a{color:gray; font-weight:bold; }
@@ -111,25 +113,36 @@
  	
 </style>
 <script>
-/* <option value="전체보기" selected>전체보기</option>
-<option value="최신등록순">최신등록순</option>
-<option value="누적판매순">누적판매순</option>
-<option value="높은가격순">높은가격순</option>
-<option value="낮은가격순">낮은가격순</option> */
 //체크박스 전체선택
 $(function(){
 	$('#productCheck').click(function(){
 		$('.product_table input[type=checkbox]').prop('checked',$('#productCheck').prop('checked'));
 	});
 });
-//답변완료 답변대기중 select 
+//select 
 $(document).ready(function(){
 	$('#selectList').change(function(){
 		var option = $(this).val();
+		var price = $('#productprice>#price_num').val();
+		console.log(price);
 		console.log(option);
 		if(option=='전체보기'){ //전체
-			$('tr').css('display','');
-	}
+			
+		}
+		if(option =='판매중'){
+			$('td:contains("판매중")').parents('tr').css('display','');
+			$('td:contains("판매종료")').parents('tr').css('display','none');
+		}
+		if(option =='판매종료'){
+			$('td:contains("판매종료")').parents('tr').css('display','');
+			$('td:contains("판매중")').parents('tr').css('display','none');
+		}
+		if(optoin='높은가격순'){
+			
+		}
+		//누적판매순
+		//높은가격순
+		//낮은가격순
 	});
  		
 });
@@ -160,10 +173,10 @@ $(document).ready(function(){
          </div>   
          <ul>
             <li><a href="#">BEETMALL</a></li>
-            <li><a href="#">상품 관리</a></li>
-            <li><a href="#">상품 등록</a></li>
-            <li><a href="#">주문 관리</a></li>
-            <li><a href="#">판매 관리</a></li>
+            <li><a href="product_list">상품 관리</a></li>
+            <li><a href="product_regi">상품 등록</a></li>
+            <li><a href="order_management">주문 관리</a></li>
+            <li><a href="sale_management">판매 관리</a></li>
             <li><a href="seller_sales">매출 관리</a></li>
             <li><a href="#">정산 관리</a></li>
             <li><a href="#">배송 관리</a></li>
@@ -230,9 +243,9 @@ $(document).ready(function(){
 						<td class="tbl_line_cell"><div id="thumbnail"><img src="${vo.thumbimg}"/></div></td>
 						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">90</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
 						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
-						<td class="tbl_line_cell"><div id="productprice"><span id="price"><span id="price_num">${vo.productprice }</span>원</span></div></td>
-						<td class="tbl_line_cell"><div id="saleprice"><span id="price"><span id="price_num">${vo.saleprice}</span>원</span></div></td>
-						<td class="tbl_line_cell"><div id="sellprice"><span id="price"><span id="price_num">${vo.sellprice}</span>원</span></div></td>
+						<td class="tbl_line_cell"><div id="productprice"><span id="price_num">${vo.productprice }</span><span id="won">원</span></div></td>
+						<td class="tbl_line_cell"><div id="saleprice"><span id="price_num">${vo.saleprice}</span><span id="won">원</span></div></td>
+						<td class="tbl_line_cell"><div id="sellprice"><span id="price_num">${vo.sellprice}</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="salepercent"><span id="salepercent">${vo.salepercent}</span>%</div></td>
 						<td class="tbl_line_cell"><div id="saleperiod"><span id="salestart">${vo.salestart }</span> ~ <span id="salefinish">${vo.salefinish }</span></div></td>
 						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText">판매중</span></div></td>
@@ -247,7 +260,8 @@ $(document).ready(function(){
 				<!-- select pull-down menu넣기 -->
 				<select id="selectList">
 				<option value="전체보기" selected>전체보기</option>
-				<option value="최신등록순">최신등록순</option>
+				<option value="판매중">판매중</option>
+				<option value="판매종료">판매중</option>
 				<option value="누적판매순">누적판매순</option>
 				<option value="높은가격순">높은가격순</option>
 				<option value="낮은가격순">낮은가격순</option>
