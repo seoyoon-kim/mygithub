@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,16 +24,21 @@ public class ProductController {
 	ProductService productService;
 	
 	//판매상품 목록
-	@RequestMapping("/product_list")
-	public ModelAndView product_list() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("productList", productService.productAllSelect());
-		mav.addObject("discountList", productService.discountSelect());
-		mav.addObject("optionList", productService.optionSelect());
-		mav.setViewName("seller/product_list");
-		return mav;
-	}
+	
+	  @RequestMapping("/product_list") 
+	  public ModelAndView product_list(ProductVO vo, HttpSession session) { 
+		  
+		  ModelAndView mav = new ModelAndView();
+		  vo.setUserid((String)session.getAttribute("logId"));
+		  mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
+		  
+		  mav.setViewName("seller/product_list"); 
+		  return mav; 
+	  }
+	 
+	
+	 
+	 
 	//즐겨찾기 수 계산
 	//판매상품 삭제 시 진행중인 주문있으면 불가능
 	

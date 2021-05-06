@@ -4,25 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.dao.ProductDAO">
 	<select id="productAllSelect" resultType="com.beetmall.sshj.vo.ProductVO">
-	 	select  p.productnum,c.catenum,c.catename,m.mcatenum,m.mcatename,p.productname,p.thumbimg,p.productprice,p.totalstock,p.saleselect, p.optionselect, p.saleb,
-				to_char(p.sellstart, 'YY/MM/DD') sellstart , to_char(p.sellfinish, 'YY/MM/DD') sellfinish
+	 	select  p.productnum,c.catenum,c.catename,m.mcatenum,m.mcatename,p.productname,p.thumbimg,p.productprice,p.totalstock,
+				to_number(p.productprice - d.saleprice) sellprice,
+				to_char(p.sellstart, 'YY/MM/DD') sellstart , to_char(p.sellfinish, 'YY/MM/DD') sellfinish, 
+             	d.saleprice, floor(( d.saleprice/p.productprice)*100) as salepercent, 
+             	to_char(d.salestart, 'YY/MM/DD') salestart, to_char(d.salefinish, 'YY/MM/DD') salefinish
 		from product p
 		join mcategory m on m.mcatenum = p.mcatenum
 		join category c on c.catenum = m.catenum
-        where p.userid = #{userid}
-		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,p.saleselect, p.optionselect, p.saleb
+		join discount d on d.productnum = p.productnum
+        where p.userid = 'kimseller'
+		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,d.saleprice,d.salestart,d.salefinish 
 		order by p.sellstart desc 
 	</select>
-	<select id="discountSelect" resultType="com.beetmall.sshj.vo.ProductVO">
-	 	select p.productnum, d.productnum ,p.saleselect, d.saleprice, to_number(p.productprice - d.saleprice) sellprice,
-            floor(( d.saleprice/p.productprice)*100) as salepercent,	
-            to_char(d.salestart, 'YY/MM/DD') salestart, to_char(d.salefinish, 'YY/MM/DD') salefinish
-     	 from discount d, product p where p.productnum = d.productnum and d.productnum = #{productnum};
-	</select>
-	<select id="optionSelect" resultType="com.beetmall.sshj.vo.ProductVO">
-	 	 select p.optionselect, p.productnum, o.productnum , o.optionnum, o.optionname, o.optionstock, o.optionprice
-  		 from optiontbl o , product p where p.productnum = o.productnum and o.productnum = #{productnum};
-	</select>
+
 	<insert id="productInsert" parameterType="com.beetmall.sshj.vo.ProductVO">
 		insert into product (productnum, userid, mcatenum, productname, productprice, saleselect, saleb, optionselect,
 								sellstart,sellfinish, totalstock, nowstock, thumbimg, addimg,

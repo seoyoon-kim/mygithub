@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %>
+<%-- <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> --%>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -38,15 +38,6 @@
 	textarea{
 		width:100%;
 	}
-	placeholder{font-size:13px; color:gray; text-align:right;}
-/*검색하기*/
-#article{
-   width: 1280px;
-   border-bottom: #ddd;
-   padding: 50px;
-   margin: 0 auto;
-}
-
 	/*선택사항 제목, div*/
 	.wrapTitle{
 		margin:0 40px 40px 0px;

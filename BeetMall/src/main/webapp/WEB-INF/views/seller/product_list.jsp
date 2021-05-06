@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> --%>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -27,13 +28,15 @@
 
 </script>	
 <style>
+	#productName a{color:black;}
 	.product_table,.table_wrap{
 		margin: 0 auto;
 		width:100%
 	}
 	.product_table thead{
-		background: #fafafa;
-		border-bottom: 2px solid lightgray;
+		
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
 	}
 	/*테이블 상단*/
 	.product_table th{
@@ -42,10 +45,12 @@
 		vertical-align:inherit;
 		font-weight:bold;	
     	color:#666666;	
-		font-size:14px;
+		font-size:12px;
 		text-align:center;
 	}
-
+	.product_table td{
+		font-size:12px;
+	}
 	.product_table, .tbl_line{
 		border-bottom: 1px solid lightgray;
 		padding:0px;
@@ -61,18 +66,23 @@
 	
 	.tbl_line{
 		vertical-align:inherit;
-		height: 60px; 	
+		height: 50px; 	
 	}
 	.tbl_line_cell{
 		display: table-cell;
 		text-align:center;
-		font-size:14px;
-		padding:2px 2px 2px 2px;
+		font-size:12px;
+		padding:1px 5px 1px 5px;
+		border-left:1px solid lightgray;
 	}
+	.product_table td:first-child{border-left:none}
 	/*테이블 폭 조정*/
-	.productCheck, .hit, .productNum, .product_table th:first-child, .product_table th:nth-child(2) , .product_table th:last-child{
-		width:40px;
+	.productCheck, .productNum, .product_table th:first-child, .product_table th:nth-child(2) {
+		width:2%;
 	}
+	.product_table th:nth-child(4){width:8%}
+	.product_table th:nth-child(5){width:16%}
+	.product_table th:nth-child(13){width:12%}
 	/*상품 이름*/
 	.productName a{color:gray; font-weight:bold; }
 	/*드롭메뉴와 삭제버튼*/
@@ -82,28 +92,22 @@
 		height:50px;
 	}
 	select{
-		width:150px;	
+		width:130px;	
 		border:1px solid lightgray;
-		margin-top:5px;
-		font-size:14px;
+		margin-top:5px;	
 	}
 	select, .btn{ 
 		margin-top:5px; 
 		height:30px;
+		font-size:12px;
 	}
+	input{height:30px; border:1px solid lightgray; font-size:12px;}
+	input[type="text"]{width:200px;}
+	input[type="button"]{width:50px; margin-right:10px; background:white;}
+	
 	.btn{float:left;}
- 	
- 	#discount_option_table{
- 		width:60%;
- 		font-size:14px;
- 		border:1px solid lightgray;
- 		text-align:center;
- 		
- 	}
- 	#discount_option_table thead, ##discount_option_table tr{height:40px;}
- 	#discount_option_table th{width:25%;}
- 	#discount_option_table tr{border-bottom:1px solid lightgray; height:50px;}
- 	#discount_option_thead_tr{text-align:center;}
+ 	#remove_product{margin-right:10px;}
+ 	.option_wrap{margin-top:8px;} 
  	
 </style>
 <script>
@@ -112,6 +116,12 @@
 <option value="누적판매순">누적판매순</option>
 <option value="높은가격순">높은가격순</option>
 <option value="낮은가격순">낮은가격순</option> */
+//체크박스 전체선택
+$(function(){
+	$('#productCheck').click(function(){
+		$('.product_table input[type=checkbox]').prop('checked',$('#productCheck').prop('checked'));
+	});
+});
 //답변완료 답변대기중 select 
 $(document).ready(function(){
 	$('#selectList').change(function(){
@@ -164,7 +174,7 @@ $(document).ready(function(){
    </div>
 	
 	<!-- 가운데 content -->
-	<div id="article">
+	<div id="article" style="margin-top:0px;">
 		<div class="wrapTitle">상품 관리</div>
 	
 			<!-- 전체보기 / select에 따라서 이름 바꾸기 -->
@@ -175,7 +185,7 @@ $(document).ready(function(){
 				<thead>
 					<!-- table 메뉴 14개-->
 					<tr>
-						<th class="listMenu"><input type="checkbox" checked id="productItem" name="" value=" title="판매상품 전체 선택"></th>
+						<th class="listMenu"><input type="checkbox" checked id="productCheck" name="" value=" title="판매상품 전체 선택"></th>
 						<th class="listMenu">상품번호</th>
 						<th class="listMenu">대분류</th>
 						<th class="listMenu">중분류</th>
@@ -184,12 +194,11 @@ $(document).ready(function(){
 						<th class="listMenu">재고수량</th>
 						<th class="listMenu">판매시작일</th>
 						<th class="listMenu">판매가</th>
-						<th class="listMenu">할인</th>
-						<th class="listMenu">옵션</th>
-						<th class="listMenu">못난이할인</th>
+						<th class="listMenu">할인금액</th>
+						<th class="listMenu">할인적용판매가</th>
+						<th class="listMenu">할인율</th>
 						<th class="listMenu">할인기간</th>
 						<th class="listMenu">판매상태</th>
-						<th class="listMenu">상세정보</th>
 					</tr>
 				</thead>
 				<!-- 전체보기 판매상품 리스트 -->
@@ -222,31 +231,19 @@ $(document).ready(function(){
 						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">90</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
 						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
 						<td class="tbl_line_cell"><div id="productprice"><span id="price"><span id="price_num">${vo.productprice }</span>원</span></div></td>
-						<c:if test="${saleselect == 1}"> <!-- 할인적용 -->
-							<td class="tbl_line_cell"><div id="saleSelect"><span id="select">적용</span></div></td>
-						</c:if>
-						<c:if  test="${saleselect == 0}">	<!-- 할인적용안함 -->
-							<td class="tbl_line_cell"><div id="saleSelect"><span id="select">적용안함</span></div></td>
-						</c:if>
-						<c:if test="${optionselect==1 }"><!-- 옵션적용 -->
-							<td class="tbl_line_cell"><div id="optionSelect"><span id="select"></span></div></td>
-						</c:if>
-						<c:if test="${optionselect==0 }"><!-- 옵션적용 안함 -->
-							<td class="tbl_line_cell"><div id="optionSelect"><span id="select"></span></div></td>
-						</c:if>
-						<c:if test="${saleb==1}"> <!-- 못난이 할인 적용 -->
-						<td class="tbl_line_cell"><div id="bSelect"><span id="select"></span></div></td>
-						</c:if>
-						<c:if test="${saleb==0 }">  <!-- 못난이 할인 적용안함 -->
-						<td class="tbl_line_cell"><div id="bSelect"><span id="select"></span></div></td>
-						</c:if>
+						<td class="tbl_line_cell"><div id="saleprice"><span id="price"><span id="price_num">${vo.saleprice}</span>원</span></div></td>
+						<td class="tbl_line_cell"><div id="sellprice"><span id="price"><span id="price_num">${vo.sellprice}</span>원</span></div></td>
+						<td class="tbl_line_cell"><div id="salepercent"><span id="salepercent">${vo.salepercent}</span>%</div></td>
+						<td class="tbl_line_cell"><div id="saleperiod"><span id="salestart">${vo.salestart }</span> ~ <span id="salefinish">${vo.salefinish }</span></div></td>
 						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText">판매중</span></div></td>
-						<td class="tbl_line_cell"><div id="detail"><a href="">상세보기 ></a></div></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<div class="option_wrap">
+			
+				<!-- 검색하기 -->
+				<input type="text" placeholder="검색어를 입력하세요."><input type ="button" value="검색" /> 
 				<!-- select pull-down menu넣기 -->
 				<select id="selectList">
 				<option value="전체보기" selected>전체보기</option>
@@ -258,74 +255,26 @@ $(document).ready(function(){
 				<!-- 버튼 -->
 				<input type="submit" value="판매상품 삭제" id="remove_product" class="btn"/>
 				<input type="submit" value="판매상품 수정" id="edit_product"class="btn"/>
-				<input type="submit" value="판매 중지" id="stop_sell" class="btn"/>
-				<!-- 테이블 내 체크박스 폼안에 넣기? -->
+				
+		
 					
-			<!-- https://www.oliveyoung.co.kr/store/cart/getCart.do 참조중 -->
+		
 			</div>
 			<!-- 페이징-->
 				<div class="page_wrap">
-					<div class="page_nation">
-					   <a class="arrow pprev" href="#"></a>
-					   <a class="arrow prev" href="#"></a>
-					   <a href="#" class="active">1</a>
-					   <a href="#">2</a>
-					   <a class="arrow next" href="#"></a>
-					   <a class="arrow nnext" href="#"></a>
-					 </div>
+				<div class="page_nation">
+				   <a class="arrow pprev" href="#"></a>
+				   <a class="arrow prev" href="#"></a>
+				   <a href="#" class="active">1</a>
+				   <a href="#">2</a>
+				   <a href="#">3</a>
+				   <a class="arrow next" href="#"></a>
+				   <a class="arrow nnext" href="#"></a>
 				</div>
+		 	</div>
 			<!-- 페이징 end -->
 			</div><!-- table wrap end -->
 		</fieldset>	
-		<!-- discount & option -->
-		<div id="discount_option_wrap">
-			<table id="discount_option_table">
-				<thead>
-					<tr><th colspan="4">닫기</th></tr>
-				</thead>
-				<thead >
-					<tr id="discount_option_thead_tr"><th colspan="4">판매상품 할인정보</th></tr>
-				</thead>
-				<thead>
-					<tr>
-						<th>할인금액</th>
-						<th>할인적용판매금액</th>
-						<th>할인율</th>
-						<th>할인기간</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="tbl_line_cell"><div id="saleprice"><span id="price"><span id="price_num">${vo.saleprice}</span>원</span></div></td>
-						<td class="tbl_line_cell"><div id="sellprice"><span id="price"><span id="price_num">${vo.sellprice}</span>원</span></div></td>
-						<td class="tbl_line_cell"><div id="salepercent"><span id="salepercent">${vo.salepercent}</span>%</div></td>
-						<td class="tbl_line_cell"><div id="saleperiod"><span id="salestart">${vo.salestart }</span> ~ <span id="salefinish">${vo.salefinish }</span></div></td>
-					</tr>
-				</tbody>
-				<thead>
-					<tr id="discount_option_thead_tr"><th colspan="4">판매상품 옵션 </th></tr>
-				</thead>
-				<thead>
-					<tr>
-						<th>옵션명</th>
-						<th>가격</th>
-						<th>재고수량</th>
-						<th>판매수량</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				
-				</tbody>
-				
-				
-			</table>
-		</div>
 	</div><!-- article div end -->
 </div> <!-- main div end -->
 </body>
