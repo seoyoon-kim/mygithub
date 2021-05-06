@@ -12,17 +12,33 @@
        insert into recipe 
        values(recipesq.nextval,'tester',#{recipetitle},#{recipecontent},#{recipemainimg},sysdate,0,0)
     </insert>
+    
+    <delete id="recipeDelete">
+		delete from recipe where recipenum=#{param1}
+	</delete>
+	
+	<update id="recipeEditeOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
+		update recipe set recipetitle=#{recipetitle}, recipecontent=#{recipecontent} where recipenum=#{recipenum}
+	</update>
+    
     <select id="selectLastSelect" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
     select recipenum from( select * from (recipe) order by recipeWritedate DESC)where ROWNUM = 1    
     </select> 
     <select id="RecipeSelect" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
     select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param}
     </select>   
-    <select id="RecipeAllListHome" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
+    <select id="recipeAllListHome" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
         select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
         order by recipenum desc     
     </select>   
+    
+    <select id="recipeAllListHome2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
+        select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
+        to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
+        order by reciperecommend desc     
+    </select> 
+ 
     <select id="customMyrecipe" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
         select  recipenum,recipetitle,userid,recipemainimg, 
         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
@@ -33,19 +49,20 @@
        update recipe set reciperecommend=reciperecommend+1 where recipenum=#{param1}
     </update>
     
-    <insert id="recigoodOk2" parameterType="com.beetmall.sshj.custom.vo.favoriteVO">
+    <insert id="recigoodOk2" parameterType="com.beetmall.sshj.custom.vo.FavoriteVO">
        insert into favorite(userid,recipegoodnum) VALUES(#{param1},${param2})
     </insert>
     
-    <insert id="recikeepOk" parameterType="com.beetmall.sshj.custom.vo.favoriteVO">
+    <insert id="recikeepOk" parameterType="com.beetmall.sshj.custom.vo.FavoriteVO">
        insert into favorite(userid,recipenum) VALUES(#{param1},${param2})
     </insert>
     
+
     <select id="customMyrecipe2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-        select b.recipenum,b.recipetitle,b.userid,b.recipemainimg,b.re,b.reciperecommend,b.recipehit from 
-        (select r.recipenum,r.recipetitle,r.userid,r.recipemainimg,to_char(r.recipewritedate,'MM-DD HH:MI')re,r.reciperecommend,
+        select b.recipenum,b.recipetitle,b.userid,b.recipemainimg,b.reciperecommend,b.recipehit from 
+        (select r.recipenum,r.recipetitle,r.userid,r.recipemainimg,r.reciperecommend,
         r.recipehit from recipe r join favorite f on r.recipenum=f.recipenum)b 
-        where b.userid=${param}
+        where b.userid=#{param1}
     </select>  
     
     

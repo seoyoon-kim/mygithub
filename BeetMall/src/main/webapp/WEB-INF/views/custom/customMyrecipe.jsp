@@ -160,39 +160,43 @@ a:hover, a:active, a:visited, a:link {
 	margin-top:20px;
 }
 
-#recipebox{
+#recipebox,#recipebox2{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width: 30%;
 	float: left;
 }
 
-#recipebox>ul>li>a>img{
+#recipebox2>ul{
+float:left;
+}
+
+#recipebox>ul>li>a>img,#recipebox2>ul>li>a>img{
 	width: 270px;
 	height: 170px;
 	border-radius: 3px;
 }
 
-#recipebox>ul>li:nth-child(5n+1){
+#recipebox>ul>li:nth-child(5n+1),#recipebox2>ul>li:nth-child(5n+1){
 	width: 100%;
 }
 
-#recipebox>ul>li:nth-child(5n+2) {
+#recipebox>ul>li:nth-child(5n+2),#recipebox2>ul>li:nth-child(5n+2){
 	width: 100%;
 	font-weight: bold;
 	margin-top: 5px;
 }
 
-#recipebox>ul>li:nth-child(5n+3) {
+#recipebox>ul>li:nth-child(5n+3),#recipebox2>ul>li:nth-child(5n+3){
 	width: 100%;
 }
 
-#recipebox>ul>li:nth-child(5n+4) {
+#recipebox>ul>li:nth-child(5n+4),#recipebox2>ul>li:nth-child(5n+4){
 	width: 80%;
 	font-size: 0.5em;
 }
 
-#recipebox>ul>li:nth-child(5n+5) {
+#recipebox>ul>li:nth-child(5n+5),#recipebox2>ul>li:nth-child(5n+5){
 	width: 10%;
 }
 
@@ -235,12 +239,23 @@ a:hover, a:active, a:visited, a:link {
 }
 </style>
 <script>
+function logno(){
+	if(${logId==null}){
+		if(confirm("로그인후 이용해주세요")){
+			location.href="login"
+		}
+	}
+};
+
+
 $(document).ready(function(){
 	 
 	  
 	  $("#myrbtn").click(function(){
 		  $("#recimainbox").show()
 		   $("#recimainbox2").hide()
+		   $("#myrbtn").css("background-color","#eee")
+		   $("#goodrbtn").css("background-color","#fff")
 	  })
 	  
 	  
@@ -248,6 +263,8 @@ $(document).ready(function(){
 		  
 		   $("#recimainbox").hide()
 		    $("#recimainbox2").show()
+		    $("#myrbtn").css("background-color","#fff")
+		   $("#goodrbtn").css("background-color","#eee")
 		   
 		var url = "customMyrecipe2";		
 		var data2= "id=${logId}";
@@ -258,18 +275,18 @@ $(document).ready(function(){
 			url:url,
 			data:data2,
 			success:function(result){
-				   alert("즐겨찾기내역")
+				   
 				   var $result=$(result);
-				   $("#recimainbox2>#recipebox").html("<ul></ul>");
+				  
 				    
 				   $result.each(function(idx,data2){
   
-					   $("#recimainbox2>#recipebox ul").append(							   
-							   "<li><a href='recipeView?recipenum="+data2.recipenum+"'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
+					   $("#recimainbox2").append(							   
+							   "<div id='recipebox2'><ul><li><a href='recipeView?recipenum="+data2.recipenum+"'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
 					           "<li><a href='recipeView?recipenum="+data2.recipenum+"'>"+data2.recipetitle+"</a></li>"+   
 					           "<li>"+data2.userid+"</li>"+
 							   "<li>추천수("+data2.reciperecommend+")  조회수"+data2.recipehit+"</li>"+
-							   "<li><input type='checkbox' name='recipeCheckBox' value='' /></li>"				   
+							   "<li><input type='checkbox' name='recipeCheckBox' value='' /></li></ul></div>"				   
 					   );
 					   
 				   });				  
@@ -287,7 +304,7 @@ $(document).ready(function(){
   })
 </script>
 
-<body>
+<body onload="logno()">
 	<div class="section" id="main">
 		
 			<div id="reciTitle">
@@ -314,6 +331,8 @@ $(document).ready(function(){
 			</div>
 		
 		<!--------------마이레시피 게시판 이미지들-------------------->
+		
+		
 		<div id="recimainbox" >
 		   <c:forEach var="data" items="${list}">
 		       <c:if test="${logId==data.userid}"> 
@@ -322,7 +341,7 @@ $(document).ready(function(){
 										<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
 										<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
 										<li>${data.userid}</li>
-										<li>★★★★★(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
+										<li>추천수(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
 										<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
 									</ul>
 					</div> 
@@ -333,12 +352,11 @@ $(document).ready(function(){
 		
 		<!--------------즐겨찾기 게시판 이미지들-------------------->
 	    <div id="recimainbox2" style="display:none">
-	    <div>즐겨찾기</div>
+	    
+	
 		   
 		    
-			<div id="recipebox" >
-					
-			</div>
+			
 			
         
 		</div>

@@ -382,12 +382,12 @@ td, .td{
 				</tbody>
 			</table>
 		</fieldset>
-		<!--  
+		 
 		<c:if test="${logId==vo.userid}">
-			<a href="">수정</a>
-			<a href="">삭제</a>
+				<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/recipeEdite?recipenum=${vo.recipenum}'"/>
+				<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
 		</c:if>
-		-->
+		
 		
 
 		<!-- ------------------------하단 표시들----------------------------------- -->
@@ -415,6 +415,15 @@ td, .td{
 	</div>
 	
 <script>
+
+function Deletebtn(){
+	if(confirm("내가 쓴 레시피를 삭제하시겠습니까?")){
+		location.href="recipeDelete?recipenum=${vo.recipenum}"
+	}
+	
+};
+
+
 function goodset(){
 	
 	

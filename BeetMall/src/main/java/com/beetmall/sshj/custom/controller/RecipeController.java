@@ -1,6 +1,7 @@
 package com.beetmall.sshj.custom.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,40 +14,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.custom.service.RecipeService;
 import com.beetmall.sshj.custom.service.RecipeServiceImp;
+import com.beetmall.sshj.custom.vo.CenterVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 	@Controller
 	public class RecipeController {
 
 	@Inject
-	RecipeServiceImp RecipeService;
-
+	RecipeServiceImp recipeService;
+//////////////////////////////////////////////////////////레시피 뷰///////////////////////////////////////////////////////////
 	@RequestMapping("/recipeView")
 	public ModelAndView RecipeSelect(int recipenum) {
-		//////////2해당 게시글 보이게 하기
+		//////////2해당 게시글 보이게 하기---------
 		ModelAndView mav=new ModelAndView();
 	
-		mav.addObject("vo", RecipeService.RecipeSelect(recipenum));
+		mav.addObject("vo", recipeService.RecipeSelect(recipenum));
 		mav.setViewName("custom/recipeView");
 		
 		return mav;
 	}
 	
-	
+//////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	
 	
 	@RequestMapping("/recipeList")
 	public ModelAndView RecipeAllList() {
 		
 		ModelAndView mav=new ModelAndView();
 		//////////1게시글 목록 뽑아내기
-		mav.addObject("list" , RecipeService.RecipeAllList());			
+		mav.addObject("list" , recipeService.RecipeAllList());			
 		mav.setViewName("custom/recipeList");
 		
 		return mav;
 	}
 
-	
+//////////////////////////////////////////////////////////레시피 작성///////////////////////////////////////////////////////////	
 	@RequestMapping("/recipeWrite")
 	public String RecipeWrite() {
 		return "custom/recipeWrite";
@@ -77,7 +80,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			System.out.println("파일업로드 에러발생 --> " + e.getMessage());
 		}
 		
-		int result = RecipeService.recipeWriteOk(vo);
+		int result = recipeService.recipeWriteOk(vo);
 		////////////////////////////////////////
 		//레코드 추가 실패시 파일을 삭제
 		if(result<=0) {
@@ -99,25 +102,81 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		return mav;
 	}
 	
+
+//////////////////////////////////////////////////////////레시피 수정///////////////////////////////////////////////////////////
+	//수정하기 뷰페이지로이동
+		@RequestMapping("recipeEdite")
+		public ModelAndView recipeEdite(int recipenum) {
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("vo", recipeService.RecipeSelect(recipenum));
+			mav.setViewName("custom/recipeEdite");
+			
+			return mav;
+		}
+		
+		//수정하기
+		@RequestMapping("/recipeEditeOk")
+		public ModelAndView recipeEditeOk(RecipeVO vo) {
+			ModelAndView mav = new ModelAndView();
+			int result = recipeService.recipeEditeOk(vo);
+			mav.addObject("recipenum", vo.getRecipenum());
+			
+			if(result>0) {
+				mav.setViewName("redirect:recipeView");
+			}else {
+				mav.setViewName("redirect:recipeEdite");
+			}
+			return mav;
+		}
+	
+//////////////////////////////////////////////////////////레시피 지우기///////////////////////////////////////////////////////////
+	
+	@RequestMapping("/recipeDelete")
+	public ModelAndView recipeDelete(int recipenum) {
+		ModelAndView mav = new ModelAndView();
+		
+		if(recipeService.recipeDelete(recipenum)>0){//삭제
+			mav.setViewName("redirect:recipeHome");
+		}else {//삭제실패
+			mav.addObject("recipenum", recipenum);
+			mav.setViewName("redirect:recipeList");
+		}
+		return mav;
+	}
+	
+//////////////////////////////////////////////////////////레시피 홈///////////////////////////////////////////////////////////
 	@RequestMapping("/recipeHome")
 	public ModelAndView RecipeAllListHome() {
 		
 		ModelAndView mav=new ModelAndView();
 		//////////1게시글 목록 뽑아내기
-		mav.addObject("list" , RecipeService.RecipeAllListHome());
+		mav.addObject("list" , recipeService.recipeAllListHome());
 
 		mav.setViewName("custom/recipeHome");
 		
 		return mav;
 	}
 	
+	@RequestMapping("/recipeHome2")
+	public ModelAndView RecipeAllListHome2() {
+		
+		ModelAndView mav=new ModelAndView();
+		//////////1게시글 목록 뽑아내기
+		mav.addObject("list2" , recipeService.recipeAllListHome2());
+
+		mav.setViewName("custom/recipeHome");
+		
+		return mav;
+	}
 	
+//////////////////////////////////////////////////////////내가 작성한 레시피///////////////////////////////////////////////////////////	
 	@RequestMapping("/customMyrecipe")
 	public ModelAndView customMyrecipe(String userid) {
 		
 		ModelAndView mav=new ModelAndView();
 		//////////1게시글 목록 뽑아내기
-		mav.addObject("list" , RecipeService.customMyrecipe());	
+		mav.addObject("list" ,recipeService.customMyrecipe());	
 		mav.setViewName("custom/customMyrecipe");
 		
 		return mav;
@@ -133,7 +192,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 //	ModelAndView mav=new ModelAndView();
 	int data= Integer.parseInt(req.getParameter("num"));
 
-	System.out.println(RecipeService.recigoodOk(data));
+	System.out.println(recipeService.recigoodOk(data));
 	
 //	mav.addObject("goodvo", RecipeService.recigoodOk(data));
 //	mav.setViewName("custom/recipeView");
@@ -148,7 +207,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	public String recigoodOk2(HttpServletRequest req) {
 		String id=req.getParameter("id");
 		int num=Integer.parseInt(req.getParameter("num"));
-		System.out.println(RecipeService.recigoodOk2(id, num));
+		System.out.println(recipeService.recigoodOk2(id, num));
 	return num+","+id;
 }
 	
@@ -159,7 +218,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	public String recikeepOk(HttpServletRequest req) {
 		String id=req.getParameter("id");
 		int num=Integer.parseInt(req.getParameter("num"));
-		System.out.println(RecipeService.recikeepOk(id, num));
+		System.out.println(recipeService.recikeepOk(id, num));
 	return num+","+id;
 }
  
@@ -167,20 +226,18 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	@RequestMapping("/customMyrecipe2")
 	@ResponseBody
-	public ModelAndView customMyrecipe2(HttpServletRequest req) {
-		ModelAndView mav=new ModelAndView();
+	public List<RecipeVO> customMyrecipe2(HttpServletRequest req) {
+		
 		
 		String id=req.getParameter("id");
-	
-		mav.addObject("list2" , RecipeService.customMyrecipe2(id));	
-		
-		
-		mav.setViewName("custom/customMyrecipe");
-		
-		return mav;
+	    System.out.println(id);
+	    List<RecipeVO> list = recipeService.customMyrecipe2(id);
+	    
+	    return list;
 		
 	
 	}
+	
 
 	
 

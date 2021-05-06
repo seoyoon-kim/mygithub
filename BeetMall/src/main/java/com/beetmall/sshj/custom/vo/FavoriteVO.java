@@ -1,6 +1,6 @@
 package com.beetmall.sshj.custom.vo;
 
-public class favoriteVO {
+public class FavoriteVO {
 	private String userid;
 	private int storenum;
 	private int recipenum;

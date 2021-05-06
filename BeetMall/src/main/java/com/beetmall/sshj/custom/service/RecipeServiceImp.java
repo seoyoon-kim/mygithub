@@ -32,9 +32,9 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> RecipeAllListHome() {
+	public List<RecipeVO> recipeAllListHome() {
 		
-		return RecipeDAO.RecipeAllListHome();
+		return RecipeDAO.recipeAllListHome();
 	}
 
 	@Override
@@ -70,6 +70,25 @@ public class RecipeServiceImp implements RecipeService {
 	@Override
 	public List<RecipeVO> customMyrecipe2(String id){
 		return RecipeDAO.customMyrecipe2(id);
+	}
+
+
+	@Override
+	public int recipeEditeOk(RecipeVO vo) {
+		
+		return RecipeDAO.recipeEditeOk(vo);
+	}
+
+	@Override
+	public int recipeDelete(int recipenum) {
+		
+		return RecipeDAO.recipeDelete(recipenum);
+	}
+
+	@Override
+	public List<RecipeVO> recipeAllListHome2() {
+		
+		return RecipeDAO.recipeAllListHome2();
 	}
 
 
