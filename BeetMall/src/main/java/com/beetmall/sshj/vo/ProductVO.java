@@ -56,6 +56,8 @@ public class ProductVO {
 	private String salefinish; //할인 끝
 	//할인율
 	private int salepercent; //할인율 담을 변수
+	//판매가-할인금액 = 할인적용된 판매가
+	private int sellprice;
 	
 	
 	//대분류, 중분류
@@ -284,7 +286,15 @@ public class ProductVO {
 	public void setSalepercent(int salepercent) {
 		this.salepercent = salepercent;
 	}
+	//할인적용된 판매가
+	public int getSellprice() {
+		return sellprice;
+	}
+	public void setSellprice(int sellprice) {
+		this.sellprice = sellprice;
+	}
 	
 
+	
 	
 }

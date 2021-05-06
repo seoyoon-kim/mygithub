@@ -172,6 +172,16 @@
 	}
 	span{line-height:30px;}
 	
+/*placeholder*/
+
+input::-webkit-input-placeholder { font-size: 90%; padding-left:5px;}
+#optionstock::-webkit-input-placeholder, #optionprice::-webkit-input-placeholder{ font-size: 90%; text-align:right;}
+#optionname::-webkit-input-placeholder{ font-size: 90%; text-align:center;}
+input::-moz-placeholder { font-size: 90%;padding-left:5px; }
+input:-ms-input-placeholder { font-size: 90%;padding-left:5px; }
+input:-moz-placeholder { font-size: 90%; padding-left:5px;}
+input::placeholder { font-size: 90%; padding-left:5px;}
+
 </style>
 <script>
 

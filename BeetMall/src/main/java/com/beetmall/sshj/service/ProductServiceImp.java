@@ -21,8 +21,18 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
+	public List<ProductVO> discountSelect() {
+		return productDAO.discountSelect();
+	}
+
+	@Override
+	public List<ProductVO> optionSelect() {
+		return productDAO.optionSelect();
+	}
+	@Override
 	public int productInsert(ProductVO vo) {
 		return productDAO.productInsert(vo);
 	}
+
 
 }

@@ -10,6 +10,10 @@
 	body{padding:0; margin:0 auto; font-family: 'Noto Sans KR', sans-serif; font-size:16px;}
 	.main{width:1280px; display:flex; margin: 0 auto;}
 	#article,.detail_modal{width:1280px; margin: 0 auto;}
+	/* 제목*/
+	.wrapTitle{
+		margin:0 40px 40px 0px;
+		text-align:center;}
 	/*버튼*/
 	button, .btn{
 		padding: 3px 10px;
