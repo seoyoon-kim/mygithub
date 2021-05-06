@@ -137,7 +137,7 @@ $(document).ready(function(){
 			$('td:contains("판매종료")').parents('tr').css('display','');
 			$('td:contains("판매중")').parents('tr').css('display','none');
 		}
-		if(optoin='높은가격순'){
+		if(option='높은가격순'){
 			
 		}
 		//누적판매순
