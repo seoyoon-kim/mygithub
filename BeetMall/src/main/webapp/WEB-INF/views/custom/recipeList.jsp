@@ -2,9 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/inc/menu_c.jspf"%>
+
 <!-- font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+	rel="stylesheet">
+<!-- font-family: 'Nanum Gothic', sans-serif; -->
+<link rel="stylesheet" type="text/css"	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<!-- font-family: 'NanumSquare', sans-serif !important; -->
+<link rel="stylesheet"	href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 
 <script>
 	
@@ -131,8 +137,8 @@ ul>li {
 /*  게시글 리스트----------------------------------------------                 */
 #slist {
 	width: 100%;
-	height: 15px;
-	margin-bottom: 10px;
+	height: 150px;
+	margin-bottom: 100px;
 }
 
 #reciListT {
@@ -195,36 +201,26 @@ ul>li {
 	border-top: 1px solid #ddd;
 }
 
-#recivb>li{
+#recivb>li {
 	width: 2%;
 	float: left;
 	line-height: 20px;
-	height:20px;
 }
 
-
-
-#recivb>li:nth-child(6n+1),#goodidli{
-	width: 90px; 
-	float:left;
+#recivb>li:nth-child(6n+1) {
+	width: 10%;
 }
 
-#recivb>li:nth-child(6n+2),#keepidli{
-	width: 90px;
-	float:left;
+#recivb>li:nth-child(6n+2) {
+	width: 82%;
 }
 
-#recivb>li>div>img {
+#recivb>li>img {
 	width: 20px;
 }
 
 #recivb>li>a>img {
 	width: 20px;
-}
-
-#share1{
-margin-left:800px;
-height:20px;
 }
 
 /*  검색표시----------------------------------------------                 */
@@ -234,28 +230,7 @@ height:20px;
 	margin-top: 10px;
 }
 
-#searchbtn {
-	height: 30px;
-	width: 69px;
-}
 
-#searchbtn {
-	padding: 3px 10px;
-	color: #666666;
-	border-radius: 8px;
-	background: #fff;
-	box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.5);
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	border: none;
-}
-/*버튼*/
-#searchbtn:hover {
-	background: gray;
-	color: white;
-	display: inline-block;
-}
 
 /*표*/
 
@@ -313,22 +288,50 @@ td, .td{
 
 
 </style>
+<script>
 
+
+
+
+</script>
 <body>
 
 	<div class="section">
 
 		<!-- ------------------------큰제목----------------------------------- -->
 		<div id="recipettile">
-			<b>레시피</b>
+			<b>레시피를 올리는 곳입니다.</b>
 		</div>
 		<!-- ------------------------게시글 리스트----------------------------------- -->
 		<div>
 
-			
+			<select name="selectOrder" style="float: right">
+				<option>최신순</option>
+				<option>추천순</option>
+				<option>조회수순</option>
+			</select>
 
 
 			<div id="slist">
+				<ul id="reciListT">
+					<li><b>번호</b></li>
+					<li><b>제목</b></li>
+					<li><b>작성자</b></li>
+					<li><b>추천수</b></li>
+					<li><b>조회수</b></li>
+					<li><b>작성일</b></li>
+				</ul>
+
+				<ul id="reciList">
+					<c:forEach var="data" items="${list}">
+					<li>${data.recipenum}</li>
+					<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+					<li>${data.userid}</li>
+					<li>${data.reciperecommend}</li>
+					<li>${data.recipehit}</li>
+					<li>${data.recipewritedate}</li>
+					</c:forEach>
+				</ul>
 			</div>
 			<!-- slist -->
 
@@ -341,163 +344,27 @@ td, .td{
 		<!-- -----------------------------페이지 표시----------------------------------------- -->
 
 		<div class="page_wrap">
-			
+			<div class="page_nation">
+				<a class="arrow pprev" href="#"></a> <a class="arrow prev" href="#"></a>
+				<a href="#" class="active">1</a> <a href="#">2</a> <a href="#">3</a>
+				<a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a>
+				<a href="#">8</a> <a href="#">9</a> <a href="#">10</a> <a
+					class="arrow next" href="#"></a> <a class="arrow nnext" href="#"></a>
+			</div>
 		</div>
 
-
-		<!-- ------------------------게시글 보기----------------------------------- -->
-
-		<fieldset>
-			<table>
-				<tbody>
-					<tr class="tr_head">
-						<th class="menu">제목</th>
-						<td><span class="td" id="td">${vo.recipetitle}</span></td>
-					</tr>
-					<tr class="tr_head">
-						<th class="menu">작성자</th>
-						<td ><span class="td" id="td">${vo.userid}</span></td>
-					</tr>
-					<tr class="tr_head">
-						<th class="menu">추천수</th>
-						<td ><span class="td" id="td">${vo.reciperecommend}</span></td>
-					</tr>
-					<tr class="tr_head">
-						<th class="menu">조회수</th>
-						<td ><span class="td" id="td">${vo.recipehit}</span></td>
-					</tr>
-					<tr class="tr_head">
-						<th class="menu">작성일</th>
-						<td ><span class="td" id="td">${vo.recipewritedate}</span></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<span class="content" >
-							
-							${vo.recipecontent}							
-						
-							</span>
-						</td>	
-					</tr>
-				</tbody>
-			</table>
-		</fieldset>
-		 
-		<c:if test="${logId==vo.userid}">
-				<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/recipeEdite?recipenum=${vo.recipenum}'"/>
-				<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
-		</c:if>
-		
-		
-
-		<!-- ------------------------하단 표시들----------------------------------- -->
-		<c:if test="${logId==vo.userid}">
-			
-		
-		<ul id="recivb">
-			<li id="goodidli"><div id="goodid" onclick="goodset()">추천해요<img src="img/cstar2.png" id="goodimg"></div></li>
-			<li id="keepidli"><div id="keepid" onclick="keepset()">즐겨찾기<img src="img/ccart2.png" id="keepimg"></div></li>
-			<li id="share1"><a href=""><img src="img/cicon01.png"></a></li>
-			<li><a href=""><img src="img/cicon02.png"></a></li>
-			<li><a href=""><img src="img/cicon03.png"></a></li>
-			<li><a href=""><img src="img/cicon05.png"></a></li>
-		</ul>
-		
-		
-        </c:if>
-
+	
 		<!-- ------------------------검색 기능----------------------------------- -->
 		<div id="searchbox">
-		    <input type="button" id="listbtn" value="목록으로" onClick="location.href='<%=request.getContextPath() %>/recipeList'"/>
+			<input type="text" name="search" placeholder="검색어를 입력하세요" /> <input
+				type="submit" id="searchbtn" value="Search" />
 		</div>
+
+
+
+
 
 
 	</div>
-	
-<script>
-
-function Deletebtn(){
-	if(confirm("내가 쓴 레시피를 삭제하시겠습니까?")){
-		location.href="recipeDelete?recipenum=${vo.recipenum}"
-	}
-	
-};
-
-
-function goodset(){
-	
-	
-	  var good="<div id='nogoodid' onclick='nogoodset()'>추천해요<img src='img/cstar.png' id='nogoodimg'></div>"
-	  document.getElementById("goodidli").innerHTML=good;
-		
-	    var url = "recigoodOk";		
-		var num= "num="+${vo.recipenum};
-		console.log(url, num);
-		$.ajax({
-			url:url,
-			data:num,
-			success:function(result){
-				console.log('추천수 올리시 성공---> ');
-				
-			},error:function(e){
-				console.log(e.responseText);
-				console.log("실패");
-			}
-		})
-		
-		 var url = "recigoodOk2";		
-		 var data= "id=${logId}&num=${vo.recipenum}";
-		console.log(url,data);
-		$.ajax({
-			url:url,
-			data:data,
-			success:function(result){
-				console.log('장바구니 올리기 성공---> ');
-				
-			},error:function(e){
-				console.log(e.responseText);
-				console.log("실패");
-			}
-		})
-		
-	
-	  }
-	  
-function nogoodset(){
-	  var good="<div id='goodid' onclick='goodset()'>추천해요<img src='img/cstar2.png' id='goodimg'></div>"
-	  document.getElementById("goodidli").innerHTML=good;
-	  }
-
-
-function keepset(){
-	var keep="<div id='nokeepid' onclick='nokeepset()''>즐겨찾기<img src='img/ccart.png' id='nokeepimg'></div>"
-	document.getElementById("keepidli").innerHTML=keep;
-	
-		var url = "recikeepOk";		
-		var data= "id=${logId}&num=${vo.recipenum}";
-		console.log(url,data);
-		$.ajax({
-			url:url,
-			data:data,
-			success:function(result){
-				console.log('장바구니 올리기 성공---> ');
-				
-			},error:function(e){
-				console.log(e.responseText);
-				console.log("실패");
-			}
-		})
-	
-	  }
-	 
-function nokeepset(){
-	var keep="<div id='keepid' onclick='keepset()''>즐겨찾기<img src='img/ccart2.png' id='keepimg'></div>"
-	document.getElementById("keepidli").innerHTML=keep;
-	  }
-
-	  
-
-
-</script>
 </body>
 </html>

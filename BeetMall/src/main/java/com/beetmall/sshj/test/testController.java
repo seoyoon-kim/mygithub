@@ -17,12 +17,12 @@ public class testController {
 	
 	
 //	윤주///////////////////////////////////////////////////////////////
-	
+/*	
 	@RequestMapping("recipeHome")
 	public String recipeHome() {
 		return "custom/recipeHome";
 	}
-/*	
+	
 	@RequestMapping("recipeView")
 	public String recipeView() {
 		return "custom/recipeView";
@@ -32,10 +32,26 @@ public class testController {
 	public String recipeWrite() {
 		return "custom/recipeWrite";
 	}
+	
+	@RequestMapping("/customMyrecipe")
+	public String customMyrecipe() {
+		return "custom/customMyrecipe";
+	}
+	
 */	
 	@RequestMapping("/custominfo")
 	public String customInfo() {
 		return "custom/custominfo";
+	}
+	
+	@RequestMapping("/custominfoWrite")
+	public String custominfoWrite() {
+		return "custom/custominfoWrite";
+	}
+	
+	@RequestMapping("/custominfoView")
+	public String customInfoView() {
+		return "custom/custominfoView";
 	}
 
 	@RequestMapping("/customWish")
@@ -48,10 +64,7 @@ public class testController {
 		return "custom/customBuyConfirm";
 	}
 
-	@RequestMapping("/customMyrecipe")
-	public String customMyrecipe() {
-		return "custom/customMyrecipe";
-	}
+	
 	
 	@RequestMapping("/customproduct")
 	public String customproduct() {
