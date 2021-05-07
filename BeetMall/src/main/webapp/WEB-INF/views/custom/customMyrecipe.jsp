@@ -279,10 +279,10 @@ $(document).ready(function(){
 				  
 				    
 				   $result.each(function(idx,data2){
-  
+   
 					   $("#recimainbox2").append(							   
-							   "<div id='recipebox2'><ul><li><a href='recipeView?recipenum="+data2.recipenum+"'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
-					           "<li><a href='recipeView?recipenum="+data2.recipenum+"'>"+data2.recipetitle+"</a></li>"+   
+							   "<div id='recipebox2'><ul><li><a href='recipeView?recipenum="+data2.recipenum+"&id=${logId}'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
+					           "<li><a href='recipeView?recipenum="+data2.recipenum+"&id=${logId}'>"+data2.recipetitle+"</a></li>"+   
 					           "<li>"+data2.userid+"</li>"+
 							   "<li>추천수("+data2.reciperecommend+")  조회수"+data2.recipehit+"</li>"+
 							   "<li><input type='checkbox' name='recipeCheckBox' value='' /></li></ul></div>"				   
@@ -337,8 +337,8 @@ $(document).ready(function(){
 		       <c:if test="${logId==data.userid}"> 
 					<div id="recipebox">
 									<ul>
-										<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-										<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 										<li>${data.userid}</li>
 										<li>추천수(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
 										<li><input type="checkbox" name="recipeCheckBox" value="" /></li>

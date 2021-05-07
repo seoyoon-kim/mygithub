@@ -386,10 +386,10 @@ function new10(){
    <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
 		         <c:forEach var="data" items="${list}">   
 		             <ul id="recipeListul">
-		              <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-		              <li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 		              <li>${data.userid}</li>
-		              <li><a href="recipeView?recipenum=${data.recipenum}"></a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"></a></li>
 		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} ${data.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  
@@ -402,10 +402,10 @@ function new10(){
    <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
 		         <c:forEach var="data2" items="${list2}">   
 		             <ul id="recipeListul">
-		              <li><a href="recipeView?recipenum=${data2.recipenum}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
-		              <li><a href="recipeView?recipenum=${data2.recipenum}">${data2.recipetitle}</a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 		              <li>${data2.userid}</li>
-		              <li><a href="recipeView?recipenum=${data2.recipenum}"></a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"></a></li>
 		              <li>★추천해요 ${data2.reciperecommend} 조회수${data2.recipehit} ${data2.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  
