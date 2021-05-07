@@ -33,6 +33,18 @@ public class ProductServiceImp implements ProductService {
 		return productDAO.productAllSelect(userid) ;
 	}
 
+	@Override
+	public int totalProduct(SearchAndPageVO spvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<ProductVO> onePageRecordSelect(SearchAndPageVO spvo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

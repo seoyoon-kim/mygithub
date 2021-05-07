@@ -335,7 +335,7 @@
 	
 	<!-- 가운데 content -->
 	<div id="article">
-	<div class="wrapTitle">판매관리</div>
+	<div class="wrapTitle">주문관리</div>
 	
 		<!-- 상단 검색 옵션 : 접수일/ 카테고리/ 주문번호/ 고객ID/ 검색 -->
 		<form>
