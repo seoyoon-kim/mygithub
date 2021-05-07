@@ -10,4 +10,6 @@ public interface MyBuyListService {
 	public int orderCommit(int ordernum);
 	public int orderCancel(int ordernum);
 	public int orderCancelOk(int ordernum);
+	public int reviewCheck(int ordernum);
+	public MyBuyListVO selectBuyList(int productnum);
 }

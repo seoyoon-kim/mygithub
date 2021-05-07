@@ -44,17 +44,19 @@
 		margin:5px 0;
 		text-align:center;
 	}
-	#pointUl>li:nth-child(6n+1){
-		line-height:20px;
-		padding-top:10px;
-	}
 	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4), #pointUl>li:nth-child(5), #pointUl>li:nth-child(6){
 		border-bottom:1px solid rgb(252,118,45);
 		
 	}
+	#pointUl>li:nth-child(6n+1){
+		line-height:20px;
+		padding-top:10px;
+	}
+	
 	#pointUl>li:nth-child(6n){
 		width:240px;
 	}
+	
 	#pointUl>li:nth-child(6n+3){
 		width:300px;
 	}
@@ -243,6 +245,10 @@
 		background-color: white;
 		font-size: 18px;
 		padding:5px;
+		margin-bottom:15px;
+	}
+	.buyListContent>input:last-child{
+		margin-top:15px;
 	}
 	#reviewWrite{
 		width:610px;
@@ -371,9 +377,9 @@
 	});
 	$(document).ready(function(){
 		$("#buyReviewtxt").summernote({
-			height:360,
-			minHeight:360,
-			maxHeight:360,
+			height:380,
+			minHeight:380,
+			maxHeight:380,
 			lang:"ko-KR",
 			placeholder:'리뷰를 작성해주세요'
 		});
@@ -439,7 +445,7 @@
 		})
 	});
 	var date = new Date();
-	var today = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+addZero(date.getDate());
+	var today = date.getFullYear()+"/"+addZero(date.getMonth()+1)+"/"+addZero(date.getDate());
 	function addZero(value){
 		if(value<10){
 			return "0"+value;
@@ -447,16 +453,52 @@
 			return value;
 		}
 	}
+	var reviewCheck = 0;
 	$(document).on('click','input[value=리뷰작성]', function(){
 		var num = $(this).parent().prev().children().val();
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
-		$("#buyReviewView").css("display","block");
-		var tag = "<li>번호</li> <li>"+ordernum+"</li>";
-			tag	+= "<li>작성자</li> <li>"+"${logId}"+"</li>";
-			tag	+= "<li>작성일</li> <li>"+today+"</li>";
-			tag += "<li>제목</li>	<li><input type='text' placeholer='제목을 입력하세요' style='width:443px'/></li>";	
-		$("#infoInput").empty().append(tag);
-		$("#buyReviewtxt").next().css("margin-top","10px");
+		var url = "reviewCheck";
+		var param = "ordernum="+ordernum;
+		$.ajax({
+			url : url,
+			data : param,
+			success : function(result){
+				reviewCheck = result;
+				console.log("성공 현재 리뷰결과 => "+reviewCheck);
+				if(reviewCheck == 1){	// 리뷰 작성 가능
+					$("#buyReviewWrite").css("display","block");
+					$("#buyReviewView").css("display","none");
+					/* $.ajax({
+						url : "productInfo",
+						data : "productNum"+num,
+						success:function(result){
+							console.log(result);
+						}, error : function(){
+							console.log('실패');
+						}
+					}) */
+					
+					
+				}else if(reviewCheck == -1){	// 리뷰 이미 작성함
+					$("#buyReviewWrite").css("display","none");
+					$("#buyReviewView").css("display","block");
+					
+					/* var tag = "<li>번호</li> <li>"+ordernum+"</li>";
+					tag	+= "<li>작성자</li> <li>"+"${logId}"+"</li>";
+					tag	+= "<li>작성일</li> <li>"+today+"</li>";
+					tag += "<li>제목</li>	<li><input type='text' placeholer='제목을 입력하세요' style='width:443px'/></li>";	
+					$("#infoInput").empty().append(tag); */
+					$("#buyReviewtxt").next().css("margin-top","10px");
+				}
+			},error : function(){
+				console.log("실패.");
+			}
+			
+		});
+		
+		
+		
+		
 	});
 	$(document).on('click','input[value=환불확정]', function(){
 		var num = $(this).parent().prev().children().val();
@@ -495,7 +537,7 @@
 					<li>
 					<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="">${vo.productname}</a></span><span class="buydetail wordcut"><a href="">${vo.productcontent}</a></span>
 					</li>
-					<li><span class="pointprice">${vo.orderprice}</span>원</li>
+					<li><span class="pointprice">${vo.orderprice}</span>원${vo.ordercnt}</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
 					<c:if test="${vo.orderstatus == '준비중'}">
 					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
@@ -512,8 +554,13 @@
 					<c:if test="${vo.orderstatus == '취소'}">
 					<li></li>
 					</c:if>
-					<c:if test="${vo.orderstatus == '구매완료'}">
-					<li><input type="button" class="btn" value="리뷰작성"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>
+					<c:if test="${vo.orderstatus == '구매확정'}">
+						<c:if test="${vo.ordercnt == null || vo.ordercnt <=0}">
+						<li><input type="button" class="btn" value="리뷰작성"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>
+						</c:if>
+						<c:if test="${vo.ordercnt != null && vo.ordercnt>=1 }">
+						<li><input type="button" class="btn" value="작성완료"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>						
+						</c:if>
 					</c:if>					
 				</c:forEach>
 				<!-- 구분용 -->
@@ -609,7 +656,7 @@
 			<div class="buyListContent" style="padding-top:60px; height:1200px;">
 			<div id="buyProduct">
 				<span class="buyListleftMenu">구매상품</span>
-				<img src="/sshj/img/dsweetpotato2.jpg"/>
+				<img src="/sshj/"/>
 				<div>[매당 약 190원]KF94 대형 100매 국산원재료 지퍼형 5매입</div>
 				<div>[옵션]1개</div>
 			</div>

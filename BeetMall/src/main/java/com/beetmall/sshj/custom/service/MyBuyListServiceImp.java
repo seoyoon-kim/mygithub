@@ -37,6 +37,18 @@ public class MyBuyListServiceImp implements MyBuyListService {
 		return mybuylistDAO.orderCancelOk(ordernum);
 	}
 
+	@Override
+	public int reviewCheck(int ordernum) {
+		
+		return mybuylistDAO.reviewCheck(ordernum);
+	}
+
+	@Override
+	public MyBuyListVO selectBuyList(int productnum) {
+		
+		return mybuylistDAO.selectBuyList(productnum);
+	}
+
 	
 
 }

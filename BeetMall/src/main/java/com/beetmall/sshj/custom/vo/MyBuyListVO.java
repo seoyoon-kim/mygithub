@@ -10,6 +10,7 @@ public class MyBuyListVO {
 	private String orderstatus;
 	private int productnum;
 	private long invoice;
+	private int ordercnt;
 	
 	public String getOrderdate() {
 		return orderdate;
@@ -64,6 +65,12 @@ public class MyBuyListVO {
 	}
 	public void setInvoice(long invoice) {
 		this.invoice = invoice;
+	}
+	public int getOrdercnt() {
+		return ordercnt;
+	}
+	public void setOrdercnt(int ordercnt) {
+		this.ordercnt = ordercnt;
 	}
 	
 	

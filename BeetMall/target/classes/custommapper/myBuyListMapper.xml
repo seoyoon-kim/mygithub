@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.custom.dao.MyBuyListDAO">
 	<select id="selectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO">
-		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, del.invoice as invoice, pro.productnum
+		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, del.invoice as invoice, pro.productnum, rev.ordernum as ordercnt
 		from ordertbl ord
 		    join orderdetail det
 		        on ord.ordernum = det.ordernum
@@ -10,6 +10,8 @@
 		        on det.productnum = pro.productnum
 		    join delivery del
 		        on det.ordernum = del.ordernum
+            left join review rev
+                on det.ordernum = rev.ordernum
 		where ord.userid=#{param1}
 	</select>
 	<update id="orderCommit">
@@ -21,4 +23,10 @@
 	<update id="orderCancelOk">
 		update orderdetail set orderstatus ='취소' where orderstatus not in('배송중', '배송완료') and ordernum = #{param1}
 	</update>
+	<select id="reviewCheck" resultType="Integer">
+		select count(*) from review where ordernum = #{param1}
+	</select>
+	<!-- <select id="selectBuyList" resultType="com.beetamll.sshj.custom.vo.MyBuyListVO">
+		select productnum, thumbimg, productname from product where productnum = #{param1}
+	</select> -->
 </mapper>

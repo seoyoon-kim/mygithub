@@ -60,4 +60,26 @@ public class MyBuyListController {
 		return result;
 	}
 	
+	@RequestMapping("reviewCheck")
+	@ResponseBody
+	public int reviewCheck(HttpServletRequest req) {
+		int result = 0;
+		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
+		int reviewCheck = mybuylistservice.reviewCheck(ordernum);
+		System.out.println(reviewCheck);
+		if(reviewCheck<=0) {
+			result = 1;
+		}else {
+			result = -1;
+		}
+		return result;
+	}
+	
+	@RequestMapping("productInfo")
+	@ResponseBody
+	public String productImgName(HttpServletRequest req) {
+		int productNum = Integer.parseInt(req.getParameter("productNum"));
+		mybuylistservice.selectBuyList(productNum);
+		return "safd";
+	}
 }
