@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+/*================ 본문 시작 =================*/
+
+/*---------- 본문 컨테이너 -----------*/
+#info_container{
+	width: 700px;
+	margin: 0 auto 30px auto;
+}
+#info_container>div{
+	margin-bottom: 30px;
+}
+/* 프로필 이미지*/
+#profile_box{
+	width: 700px;
+	height: 200px;
+	text-align: center;
+	margin: 0px auto 30px auto;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	background-color: #fff;
+}
+#farmname{
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+#profile_box img{
+	width: 100px;
+	height: 110px;
+	margin: 10px auto 0 auto;
+}
+
+/* 농장 소개 */
+#farm_info>div,#farm_contact>div:nth-child(1),#farm_repMenu>div:nth-child(2){
+	width: 150px;
+	font-size: 20px;
+	font-family: 나눔고딕;
+	font-weight: bold;
+}
+#farm_info,#farm_contact,#farm_repMenu{
+	display: flex;
+}
+#contact_content{
+	width: 600px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	padding: 10px;
+}
+#contact_content div{
+	overflow: auto;
+}
+#contact_content span{
+	width: 130px;
+	float: left;
+}
+#contact_content p{
+	float: left;
+	margin: 0;
+}
+
+/* 대표 메뉴 */
+#repMenu_content{
+	width: 600px;
+	display: flex;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	overflow: hidden;
+}
+#repMenu_content img{
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+	float: left;
+}
+#repMenu_content>div>div{
+	display:flex;
+}
+#repMenu_content>div>div{
+	margin: 10px;
+}
+#repMenu_content>div>p{
+	margin: 0 10px 10px 10px;
+	font-weight: bold;
+}
+
+#repMenu_content span{
+	color: red;
+}
+
+#info_frm>div:last-child{
+	width: auto;
+	text-align: center;
+}
+#edit_btn{
+	display: inline;
+	margin: 0 auto;
+	padding: 5px 10px;
+	color: #fff;
+	background-color: #aaa;
+	border: 0px;
+	border-radius: 5px;
+}
+/*---------- 본문 컨테이너 끝 -----------*/
+
+/*================ 본문 끝 =================*/
