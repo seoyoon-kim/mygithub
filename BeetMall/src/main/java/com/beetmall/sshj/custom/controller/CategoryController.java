@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.CategoryService;
+import com.beetmall.sshj.custom.vo.CategoryVO;
 
 @Controller
 public class CategoryController {
@@ -16,7 +17,6 @@ public class CategoryController {
 	@RequestMapping("/mapping")
 	public ModelAndView mapping() {
 		ModelAndView mav = new ModelAndView();
-		
 		mav.addObject("list", categoryService.mapAllRecord());
 		mav.setViewName("custom/category/mapList2");
 		
@@ -24,8 +24,12 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("/kangsan")
-	public String kangsan() {
-		return "custom/category/categoryMain";
+	public ModelAndView kangsan() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", categoryService.categorylist());
+		mav.setViewName("custom/category/categoryMain");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/kangsan2")

@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -12,13 +11,18 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
+	
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
+
 <style>
 	/*판매자 왼쪽 카테고리*/
 	.option_change, .page_wrap, table, .search, .management_container, .detail_modal {margin:0 auto;}
@@ -376,22 +380,7 @@
 </script>		
 <body>
 	<div class="main" onkeyup="endModal()">
-	
-	<!-- 사이드바 -->
-	<nav>
-		<ul>
-			<li><a href="<%=request.getContextPath()%>/product_list">상품관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/product_regi">상품등록</a></li>
-			<li><a href="<%=request.getContextPath()%>/order_management">주문 관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/sale_management">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="#">정산 관리</a></li>
-			<li><a href="#">배송 관리</a></li>
-			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
-		</ul>
-	</nav>
-	
+
 	<!-- 가운데 content -->
 	<div id="article">
 	<div class="wrapTitle">판매관리</div>
