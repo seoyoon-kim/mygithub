@@ -35,10 +35,11 @@ public class ProductController {
 		  if(spvo.getSearchWord()!=null) { //%% like 연산자
 				//spvo.setSearchWord("%"+spvo.getSearchWord()+"%");
 				spvo.setSearchWord(spvo.getSearchWord());
-			
-			System.out.println("word=" + spvo.getSearchWord());
+				mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
+				mav.addObject("productList", productService.searchList(spvo)); 
+				System.out.println("word=" + spvo.getSearchWord());
 		  }
-		  mav.addObject("productList", productService.searchList(spvo)); 
+		  
 		  mav.setViewName("seller/product_list"); 
 		  return mav; 
 	  }
