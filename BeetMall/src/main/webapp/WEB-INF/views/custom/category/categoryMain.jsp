@@ -78,9 +78,16 @@
 		height:198px;
 		border-radius: 10%;
 	}
+	#productDiv>ul>li{
+		width:200px;
+		padding-top: 8px;
+	}
 	#productDiv>ul>li:nth-child(5n+2){
-	    font-size: xx-large;
+	    font-size: x-large;
 	    font-weight: bold;
+	}
+	#productDiv>ul>li:nth-child(5n+1){
+	    padding-top:15px;
 	}
 	
 	#categoryAll>img, #categoryFruit>img, #categoryVege>img, #categorySall>img{
@@ -96,11 +103,12 @@
 	}
 	#mainName{
 		text-align: center;
-		margin-bottom: 20px;
+		margin-bottom: 40px;
+		margin-top: 80px;
 	}
 	#category{
 		overflow: auto;
-		height:130px;
+		height:200px;
 		width:auto;
 		padding-left:120px;
 	}
@@ -114,6 +122,7 @@
 		float: right;
 		vertical-align: middle;
    		font-size: large;
+	    padding-top: 5px;
 	}
 	#Sequence{
 		margin-left:20px;
@@ -132,7 +141,7 @@
     	height: 17px;
 	}
 	#categorySubmenu{
-		margin-top: 150px;
+		margin-top: 250px;
 	}
 	#categorySubmenu> #pickupMain, #Sequence{
 		position:relative;
@@ -141,7 +150,7 @@
 	#category2{
 		position:absolute;
 		left:550px;
-		top: 480px;
+		top: 685px;
 		width:830px;
 		height:21px;
 		overflow:hidden;
@@ -154,6 +163,9 @@
 	#searchBtn{
 		left:0px;
 		top:0px;
+	}
+	#coloor{
+		color:red;
 	}
 </style>
 <script>
@@ -209,10 +221,10 @@
 	<div class="main">
 		<div id="mainName"><h1>상품 품목별</h1></div>
 			<ul id="category">
-				<li><sqan id="categoryAll"><img src="/sshj/img/kmain.png"><br/>전체</sqan></li>
-				<li><sqan id="categoryFruit"><img src="/sshj/img/kfruit.png"><br/>과일</sqan></li>
-				<li><sqan id="categoryVege"><img src="/sshj/img/kvegetable.png"><br/>채소</sqan></li>
-				<li><sqan id="categorySall"><img src="/sshj/img/krice.png"><br/>쌀/잡곡</sqan></li>
+				<li><sqan id="categoryAll"><img src="/sshj/img/kmain.png"><br/><br/>전체</sqan></li>
+				<li><sqan id="categoryFruit"><img src="/sshj/img/kfruit.png"><br/><br/>과일</sqan></li>
+				<li><sqan id="categoryVege"><img src="/sshj/img/kvegetable.png"><br/><br/>채소</sqan></li>
+				<li><sqan id="categorySall"><img src="/sshj/img/krice.png"><br/><br/>쌀/잡곡</sqan></li>
 			</ul>
 			<div id="categorySubmenu">
 			<hr/>
@@ -274,150 +286,39 @@
 			<hr/>
 			</div>
 		<div id="productMain">
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k018.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k019.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k020.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k021.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k022.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k018.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k019.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k020.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k021.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k022.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
+			<c:forEach var="data" items="${list}">
+				<div id="productDiv">
+					<ul style="width:200px;">
+						<li><img src="/sshj/img/${data.thumbimg}"></li>
+						<li>
+							<c:if test="${data.saleprice==null || data.saleprice==''}">
+								${data.productprice}원
+							</c:if>
+							<c:if test="${data.saleprice != null && data.saleprice != ''}">
+								${data.productprice-data.saleprice}원
+							</c:if>
+						</li>
+						<li>${data.productname}</li>
+						<c:if test="${data.totalscore==1}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==2}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==3}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==4}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==5}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
+						</c:if>
+						<li>${data.storeaddr}</li>
+						<li>${data.username}</li>
+					</ul>
+				</div>
+			</c:forEach>
 		</div>
 		<div class="page_wrap">
 			<div class="page_nation">
