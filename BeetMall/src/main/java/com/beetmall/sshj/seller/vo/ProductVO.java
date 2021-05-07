@@ -20,8 +20,8 @@ public class ProductVO {
 	private String sellstart;//판매시작일
 	private String sellfinish;//판매종료일
 	
-	private int totalstock;//총재고수량
-	private int nowstock;//현재재고수량 ( 초기값 = 총재고수량)
+	private int totalstock;//총재고수량  
+	private int nowstock;//현재재고수량 ( count(productnum) from orderdetail)
 	
 	private String thumbimg;//썸네일이미지
 	private String addimg;// 추가이미지

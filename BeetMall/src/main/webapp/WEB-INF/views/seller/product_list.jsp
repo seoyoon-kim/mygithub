@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> --%>
+ <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -28,13 +28,13 @@
 
 </script>	
 <style>
+	#article{margin:120px 0 0 0;}
 	#productName a{color:black; cursor:pointer;}
+	.table_wrap{margin-top:20px;}
 	.product_table,.table_wrap{
-		margin: 0 auto;
 		width:100%
 	}
 	.product_table thead{
-		
 		border-top: 1px solid lightgray;
 		border-bottom: 1px solid lightgray;
 	}
@@ -47,6 +47,7 @@
     	color:#666666;	
 		font-size:12px;
 		text-align:center;
+		
 	}
 	.product_table td{
 		font-size:12px;
@@ -91,6 +92,7 @@
 	.option_wrap{
 		text-align:right; 
 		margin: 0 auto;
+		margin-top:10px;
 		height:50px;
 	}
 	select{
@@ -100,16 +102,15 @@
 	}
 	select, .btn{ 
 		margin-top:5px; 
-		height:30px;
+		height:40px;
 		font-size:12px;
 	}
-	input{height:30px; border:1px solid lightgray; font-size:12px;}
+	input{height:40px; border:1px solid lightgray; font-size:12px;}
 	input[type="text"]{width:200px;}
-	input[type="button"]{width:50px; margin-right:10px; background:white;}
-	
+	#searchBtn{margin-left:-1px; background:white; width:50px;}
 	.btn{float:left;}
  	#remove_product{margin-right:10px;}
- 	.option_wrap{margin-top:8px;} 
+ 	.option_wrap{margin:8px 0 20px 0;} 
  	
 </style>
 <script>
@@ -119,6 +120,16 @@ $(function(){
 		$('.product_table input[type=checkbox]').prop('checked',$('#productCheck').prop('checked'));
 	});
 });
+//검색어 확인
+$(function(){
+	$("#searchForm").submit(function(){
+		//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+		if($('#searchWord').val()=="" || '#searchWord').val()==null){
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+		return true;
+	});
 //select 
 $(document).ready(function(){
 	$('#selectList').change(function(){
@@ -149,47 +160,16 @@ $(document).ready(function(){
 </script>		
 <body>
 <div class="main">
-		  <div id="seller_header">
-      <!-- 상단 메뉴 바 -->
-      <nav>
-         <div id="headerMember">
-            <c:if test="${logStatus != 'Y'}">
-               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
-                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
-                  <input type="button" value="로그인" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
-               </div>
-            </c:if>
-            <c:if test="${logStatus == 'Y' }">
-               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
-                  <c:if test="${logType==2}">
-                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
-                  </c:if>
-                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
-                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-               </div>
-            </c:if>
-         </div>   
-         <ul>
-            <li><a href="#">BEETMALL</a></li>
-            <li><a href="product_list">상품 관리</a></li>
-            <li><a href="product_regi">상품 등록</a></li>
-            <li><a href="order_management">주문 관리</a></li>
-            <li><a href="sale_management">판매 관리</a></li>
-            <li><a href="seller_sales">매출 관리</a></li>
-            <li><a href="#">정산 관리</a></li>
-            <li><a href="#">배송 관리</a></li>
-            <li><a href="seller_review">리뷰/문의 관리</a></li>
-            <li><a href="intro_farm">회원정보수정</a></li>
-         </ul>
-      </nav>
-   </div>
-	
+
 	<!-- 가운데 content -->
-	<div id="article" style="margin-top:0px;">
+	<div id="article" >
 		<div class="wrapTitle">상품 관리</div>
-	
+			<div style="margin-top:20px;">			
+				<!-- 검색하기 -->
+				<form method="get" action="product_list" id="searchForm">
+					<input type="text" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요."><input type ="submit" id ="searchBtn" value="검색" /> 
+				</form>
+			</div>
 			<!-- 전체보기 / select에 따라서 이름 바꾸기 -->
 			<fieldset>
 			<div class="table_wrap">
@@ -255,8 +235,6 @@ $(document).ready(function(){
 			</table>
 			<div class="option_wrap">
 			
-				<!-- 검색하기 -->
-				<input type="text" placeholder="검색어를 입력하세요."><input type ="button" value="검색" /> 
 				<!-- select pull-down menu넣기 -->
 				<select id="selectList">
 				<option value="전체보기" selected>전체보기</option>

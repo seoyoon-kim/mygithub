@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.seller.dao.ProductDAO;
 import com.beetmall.sshj.seller.vo.ProductVO;
+import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 
 
 
@@ -16,7 +17,12 @@ public class ProductServiceImp implements ProductService {
 	//dao 객체를 주입해야함
 	@Inject
 	ProductDAO productDAO;
+
 	
+	 @Override public List<ProductVO> searchList(SearchAndPageVO spvo) { 
+		 return productDAO.searchList(spvo); 
+	 }
+	 
 	@Override
 	public int productInsert(ProductVO vo) {
 		return productDAO.productInsert(vo);
@@ -26,6 +32,7 @@ public class ProductServiceImp implements ProductService {
 	public List<ProductVO> productAllSelect(String userid) {
 		return productDAO.productAllSelect(userid) ;
 	}
+
 
 
 }

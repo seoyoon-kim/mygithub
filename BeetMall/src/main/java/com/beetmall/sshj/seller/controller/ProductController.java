@@ -5,14 +5,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beetmall.sshj.custom.vo.MemberVO;
 import com.beetmall.sshj.seller.service.ProductService;
 import com.beetmall.sshj.seller.vo.ProductVO;
+import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 
 
 @Controller
@@ -23,19 +23,26 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
+	//검색
 	//판매상품 목록
-	
 	  @RequestMapping("/product_list") 
-	  public ModelAndView product_list(ProductVO vo, HttpSession session) { 
+	  public ModelAndView product_list(ProductVO vo, SearchAndPageVO spvo, HttpSession session) { 
 		  
 		  ModelAndView mav = new ModelAndView();
 		  vo.setUserid((String)session.getAttribute("logId"));
 		  mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
-		  
+			
+		  if(spvo.getSearchWord()!=null) { //%% like 연산자
+				//spvo.setSearchWord("%"+spvo.getSearchWord()+"%");
+				spvo.setSearchWord(spvo.getSearchWord());
+			
+			System.out.println("word=" + spvo.getSearchWord());
+		  }
+		  mav.addObject("productList", productService.searchList(spvo)); 
 		  mav.setViewName("seller/product_list"); 
 		  return mav; 
 	  }
-	 
+	
 	//판매상품 삭제 시 진행중인 주문있으면 불가능
 	
 	//판매 상품등록페이지 대분류,중분류 카테고리 불러오기
@@ -54,7 +61,7 @@ public class ProductController {
 	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {
 		
 		//session
-		vo.setUserid((String)session.getAttribute("logVo"));
+		vo.setUserid((String)session.getAttribute("logId"));
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -65,6 +72,9 @@ public class ProductController {
 		}
 		return mav;
 	}
+	//여러개 레코드 한번에 삭제 
+	
+	
 	//판매자 주문관리
 	@RequestMapping("/order_management")
 	public String order_management() {

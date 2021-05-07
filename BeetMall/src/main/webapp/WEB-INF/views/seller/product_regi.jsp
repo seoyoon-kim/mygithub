@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> --%>
+<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -38,10 +38,7 @@
 	textarea{
 		width:100%;
 	}
-	/*선택사항 제목, div*/
-	.wrapTitle{
-		margin:0 40px 40px 0px;
-		text-align:center;}
+	/* div*/
 	.category_title{
 	   width: 100%;
 	   height: 30px;
@@ -489,7 +486,7 @@ $(function(){
 <body>
 	<div class="main">
 	<!-- 가운데 content -->
-	  <div id="seller_header">
+	<%--   <div id="seller_header">
       <!-- 상단 메뉴 바 -->
       <nav>
          <div id="headerMember">
@@ -524,7 +521,7 @@ $(function(){
             <li><a href="intro_farm">회원정보수정</a></li>
          </ul>
       </nav>
-   </div>
+   </div> --%>
 	<div id="article">
 	<div class="wrapTitle" style="font-size:20px">상품등록</div>
 		<!--검색하기 -->

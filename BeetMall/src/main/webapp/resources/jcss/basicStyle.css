@@ -4,11 +4,11 @@
 
 	body{padding:0; margin:0 auto; font-family: 'Noto Sans KR', sans-serif; font-size:16px;}
 	.main{width:1280px; display:flex; margin: 0 auto;}
-	#article,.detail_modal{width:1280px; margin: 0 auto;}
-	#article{margin-top:0px; padding-top:0px;}
+	.detail_modal{width:1280px; margin: 0 auto;}
+	#article{margin-top:120px;}
 	/* 제목*/
 	.wrapTitle{
-		margin:0 40px 40px 0px;
+		margin:40px 40px 40px 0px;
 		text-align:center;
 		font-size:20px;
 	}
@@ -20,6 +20,7 @@
  		text-decoration: none;
 		display: inline-block;
 		border:1px solid lightgray;
+	}
 	/*테이블헤더*/
 	th{
 		height:50px;
@@ -27,9 +28,9 @@
 	    vertical-align: inherit;
 	    font-weight: bold;
 	    text-align: -internal-center;
-	    border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
-   		background-color: #fcfcfc;
+	    border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
+   		/*background-color: #fcfcfc;*/
    		font-size: 16px;
 	}
 
@@ -64,28 +65,7 @@
 		filter: invert(86%) sepia(34%) saturate(7117%) hue-rotate(311deg) brightness(90%) contrast(103%);
 		float: right;
 	}
-<<<<<<< HEAD
 
-=======
-	/*판매자 왼쪽 카테고리*/
-	nav{
-		width: 180px;
-		margin:0;
-		padding: 0 30px;
-		background: #623c2f;
-		color:black;
-		padding: 25px;
-	}
-	nav li{
-		/*padding: 25px;*/
-		text-align: center;
-		color:black;
-		font-weight:bold;
-		margin:25px 0 25px 0 ;
-	}
-	nav a{color:white}
-	
->>>>>>> refs/remotes/origin/develop
 	/*판매자 고객센터 - 왼쪽 카테고리*/
 	.cs_nav{
 		width: 180px;

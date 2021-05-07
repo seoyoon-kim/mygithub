@@ -69,7 +69,7 @@ nav li:nth-child(1)>a{
    border-bottom: #ddd;
    padding: 50px;
    padding-top:10px;
-   margin: 0 auto;
+   margin: 120px auto 0 auto;
 }
 
 ul,li{
