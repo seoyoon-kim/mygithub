@@ -51,10 +51,10 @@
 	  	top:200px;
 	  	left:-25px;
 	  	font-size:20px;
+	  	color:white;
   	}
   	#topBar>p{
   		padding-left:60px;
-  		color:white;
   	}
   	input{
   		border:none;
@@ -63,7 +63,7 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:127px;
+	   	top:119px;
 	   	left:180px;
 	   	width:1351px;
    }
@@ -131,7 +131,7 @@
 	}
 	#bottommm{
 		text-align:center;  
-		margin-top: 950px;
+		margin-top: 1771px;
 		position:relative;
 		left:-782px;
 	}
@@ -140,97 +140,136 @@
 	}
 	.write_btn{
 		height:40px;
-	}
-	#write_btn{
-		width:150px;
-	}
-	#cancle_btn{
-		position:relative;
-		top:38px;
-		left:200px;
 	} 
-	input[type="submit"].btn:hover, input[type="button"].btn:hover{
+	#cancel_btn{
+		position:relative;
+		top:-40px;
+		left:260px;
+	}
+	
+	input[type="submit"].btn:hover, input[type="button"].btn:hover, input[type="reset"].btn:hover{
    	  background: #b3b3b3;
 	  color:white;
 	  display: inline-block;
 	  outline: 0;
 	} 
-	input[type="file"]{
-		display:none;
-	}
-	#attach{
+	#file-upload-button{
 		height:28px;
-		width:100px;
-		font-size:14px;
-		color:black;
-		background-color:lightgray;
-		padding:7px 0;
-		border:1px solid gray;
-		border-radius:3px;
-		margin-right:10px;
+	}
+	#qContent{
+		font-weight:normal; 
+		height:300px;
+		padding:15px;
 	}
 </style>
-<script>
-$(document).ready(function(){ 
-	  var fileTarget = $('#file'); 
-	  fileTarget.on('change', function(){ // 값이 변경되면
-		  if(window.FileReader){ //modern browser
-			  var filename = $(this)[0].files[0].name; 
-		  } else { // old IE 
-	        	var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
-	        } 
-	        // 추출한 파일명 삽입 
-	        $(this).siblings('.uploadFile').val(filename); 
-	    }); 
-	}); 
-</script>
 <div id="body1">
 <div class="container">
 	<div id="topBar">
-		<p><strong>공지 작성</strong></p>   
+		<p><strong>상품 문의 보기</strong></p>   
 	</div>
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>
 			<tbody> 
 				<tr class="tr_head">
-					<th class="menu" >공지 번호</th>
-					<td class="td" colspan="3"><input type="text" name="qmtitle" id="qmtitle" placeholder=""/></td>
+					<th class="menu" >문의 번호</th>
+					<td class="td" colspan="3">
+						<div id="qNum">
+							12369
+						</div>
+					</td>
+				</tr>
+				<tr class="tr_head">
+					<th class="menu" >아이디</th>
+					<td class="td" colspan="3">
+						<div id="writer">
+							aeuifhu093
+						</div>
+					</td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">제목</th>
-					<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="공지 제목을 입력하세요"/></td>
+					<td  class="td">
+						<div id="qTitle">
+							배송지 변경 문의드려요
+						</div>	
+					</td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">등록일</th>
-					<td  class="td"><input type="text" placeholder="" style="width: 500px;"></td>
+					<td  class="td">
+						<div id="writedate">
+							2021/03/21
+						</div>
+					</td>
+				</tr> 
+				<tr>
+					<th id="" colspan="4">소비자 문의 내용</th>
+				</tr>
+				<tr>
+					<th colspan="4" style="background-color:white;">
+						<div id="qContent">
+							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
+							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
+							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
+							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
+							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
+							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
+							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.
+						</div>
+					</th>
+				</tr>				
+				<!-- 판매자 답변 -->
+				<tr>
+					<th id="smallTitle" colspan="4">판매자 답변 내용</th>
 				</tr>
 				<tr class="tr_head">
-					<th class="menu">첨부파일</th>
-					<td  class="td">
-						<div style="display:flex;">
-							<label for="file" id="attach"> 
-								파일 첨부하기
-							</label>
-							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile" style="width: 500px;" id="uploadFile" value="">
+					<th class="menu" >아이디</th>
+					<td class="td" colspan="3">
+						<div id="writer">
+							ihatecorona
 						</div>
-					</td> 
+					</td>
 				</tr>
-				
+				<tr class="tr_head">
+					<th class="menu">등록일</th>
+					<td  class="td">
+						<div id="writedate">
+							2021/06/21
+						</div>
+					</td>
+				</tr> 
 				<tr>
-					<th id="smallTitle" colspan="4">공지 내용</th>
+					<th colspan="4" style="background-color:white;">
+						<div id="qContent">
+							제가 너무 늦게 확인을 했네요 자가격리중이라.. 죄송합니다
+						</div>
+					</th>
+				</tr>	
+				<!-- 관리자 답변 -->
+				<tr>
+					<th id="smallTitle" colspan="4">답변 작성</th>
 				</tr>
+				<tr class="tr_head">
+					<th class="menu">등록일</th>
+					<td  class="td">
+						<div id="writedate">
+							2021/04/21
+						</div>
+					</td>
+				</tr> 
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="답변내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>				
+				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
+				<input type="reset" value="다시쓰기" class="btn write_btn id="reset_btn"/>
+				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
+							
 			</div>
 		</form>
 		</div>

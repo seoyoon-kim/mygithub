@@ -66,13 +66,15 @@
 	   	top:127px;
 	   	left:180px;
 	   	width:1351px;
-   }
-   
+   }   
    th, .th{
    		background-color:#E9E9E9;
+   		
 	}
 	.td, form input{
 	  background-color:#F8F7F7;
+	  text-align:left;
+	  padding-left:10px;
 	} 
 	table{
 		width:100%;	
@@ -160,7 +162,7 @@
 	}
 	#attach{
 		height:28px;
-		width:100px;
+		width:130px;
 		font-size:14px;
 		color:black;
 		background-color:lightgray;
@@ -187,39 +189,39 @@ $(document).ready(function(){
 <div id="body1">
 <div class="container">
 	<div id="topBar">
-		<p><strong>공지 작성</strong></p>   
+		<p><strong>레시피 작성</strong></p>   
 	</div>
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>
 			<tbody> 
 				<tr class="tr_head">
-					<th class="menu" >공지 번호</th>
-					<td class="td" colspan="3"><input type="text" name="qmtitle" id="qmtitle" placeholder=""/></td>
+					<th class="menu" >레시피 번호</th>
+					<td class="td" colspan="3"><div id="recipeNum">1532</div></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">제목</th>
-					<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="공지 제목을 입력하세요"/></td>
+					<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="레시피 제목을 입력하세요"/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">등록일</th>
-					<td  class="td"><input type="text" placeholder="" style="width: 500px;"></td>
+					<td  class="td"><div id="recipeWriteDate">2021/05/21</div></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">첨부파일</th>
 					<td  class="td">
 						<div style="display:flex;">
 							<label for="file" id="attach"> 
-								파일 첨부하기
+								섬네일 첨부하기
 							</label>
 							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile" style="width: 500px;" id="uploadFile" value="">
+							<input class="uploadFile" style="width: 500px;" id="uploadFile" value="" placeholder="jpg, png, jpgf 파일만 업로드해주세요. 미첨부시 텍스트만 적용됩니다.">
 						</div>
 					</td> 
 				</tr>
 				
 				<tr>
-					<th id="smallTitle" colspan="4">공지 내용</th>
+					<th id="smallTitle" colspan="4">레시피 내용</th>
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">

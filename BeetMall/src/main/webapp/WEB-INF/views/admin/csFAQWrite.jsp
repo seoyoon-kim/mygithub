@@ -53,7 +53,7 @@
 	  	font-size:20px;
   	}
   	#topBar>p{
-  		padding-left:60px;
+  		padding-left:60px; 
   		color:white;
   	}
   	input{
@@ -63,7 +63,7 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:127px;
+	   	top:147px;
 	   	left:180px;
 	   	width:1351px;
    }
@@ -148,82 +148,82 @@
 		position:relative;
 		top:38px;
 		left:200px;
-	} 
+	}
+	
 	input[type="submit"].btn:hover, input[type="button"].btn:hover{
    	  background: #b3b3b3;
 	  color:white;
 	  display: inline-block;
 	  outline: 0;
 	} 
-	input[type="file"]{
-		display:none;
-	}
-	#attach{
-		height:28px;
-		width:100px;
-		font-size:14px;
-		color:black;
-		background-color:lightgray;
-		padding:7px 0;
-		border:1px solid gray;
-		border-radius:3px;
-		margin-right:10px;
+	#noticeSubject{
+		color:lightgray;
 	}
 </style>
-<script>
-$(document).ready(function(){ 
-	  var fileTarget = $('#file'); 
-	  fileTarget.on('change', function(){ // 값이 변경되면
-		  if(window.FileReader){ //modern browser
-			  var filename = $(this)[0].files[0].name; 
-		  } else { // old IE 
-	        	var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
-	        } 
-	        // 추출한 파일명 삽입 
-	        $(this).siblings('.uploadFile').val(filename); 
-	    }); 
-	}); 
-</script>
 <div id="body1">
 <div class="container">
 	<div id="topBar">
-		<p><strong>공지 작성</strong></p>   
+		<p><strong>자주 묻는 질문 등록</strong></p>   
 	</div>
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>
 			<tbody> 
 				<tr class="tr_head">
-					<th class="menu" >공지 번호</th>
-					<td class="td" colspan="3"><input type="text" name="qmtitle" id="qmtitle" placeholder=""/></td>
+					<th class="menu" >FAQ 번호</th>
+					<td class="td" colspan="3">
+						<div id="faqNum">
+							65812
+						</div>
+					</td>
 				</tr>
+				
+			<tr class="tr_head">
+				<th class="menu" >대상</th>
+				<td class="td" colspan="3">
+					<div id="cate">
+					<select>
+						<option value="전체" selected>전체</option> 
+						<option value="소비자" >소비자</option>
+						<option value="판매자">판매자</option> 
+					</select>
+					</div>
+				</td>
+			</tr>
+			<tr class="tr_head">
+				<th class="menu" >카테고리</th>
+				<td class="td" colspan="3">
+					<div id="cate">
+					<select>
+						<option value="카테고리" selected>카테고리</option> 
+						<option value="상품" >상품</option>
+						<option value="회원/포인트">회원/포인트</option>
+						<option value="판매">판매</option>
+						<option value="주문/결제">주문/결제</option>
+						<option value="배송">배송</option>
+						<option value="판매">교환</option>
+					</select>
+					</div>
+				</td>
+			</tr>
 				<tr class="tr_head">
 					<th class="menu">제목</th>
-					<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="공지 제목을 입력하세요"/></td>
+					<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="제목을 입력하세요"/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">등록일</th>
-					<td  class="td"><input type="text" placeholder="" style="width: 500px;"></td>
-				</tr>
-				<tr class="tr_head">
-					<th class="menu">첨부파일</th>
 					<td  class="td">
-						<div style="display:flex;">
-							<label for="file" id="attach"> 
-								파일 첨부하기
-							</label>
-							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile" style="width: 500px;" id="uploadFile" value="">
+						<div id="writedate">
+							2021/02/23
 						</div>
-					</td> 
-				</tr>
-				
+					</td>
+				</tr> 
 				<tr>
-					<th id="smallTitle" colspan="4">공지 내용</th>
+					<th id="smallTitle" colspan="4">자주 묻는 질문 내용</th>
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="자주 묻는 질문 내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
