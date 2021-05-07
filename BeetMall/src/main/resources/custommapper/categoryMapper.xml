@@ -6,4 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="mapAllRecord" resultType="com.beetmall.sshj.custom.vo.CategoryFarmVO">
 		select a.storenum, a.farmname, a.farmintro, a.farmprofile, a.productnum, b.storeaddr from farm a join seller b on a.storenum = b.storenum
 	</select>
+	<select id="categorylist" resultType="com.beetmall.sshj.custom.vo.CategoryVO">
+		select a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, 
+				e.salestart, e.salefinish, avg(reviewscore) as totalscore, count(b.productnum) as sumreview
+		from product a 
+		    join review b 
+		        on a.productnum=b.productnum 
+		    join member c
+		        on c.userid=a.userid
+		    join seller d
+		        on d.userid=a.userid
+		    left outer join discount e
+		        on e.productnum=a.productnum
+		group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
+		order by productnum
+	</select>
 </mapper>
