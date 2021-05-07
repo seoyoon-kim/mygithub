@@ -34,7 +34,10 @@
 		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,d.saleprice,d.salestart,d.salefinish 
 		order by p.sellstart desc 
 	</select>
-	
+	<select id="totalProduct" resultType="com.beetmall.sshj.seller.vo.ProductVO">
+		select count(*)  from product
+	</select>
+
 	<insert id="productInsert" parameterType="com.beetmall.sshj.seller.vo.ProductVO">
 		insert into product (productnum, userid, mcatenum, productname, productprice, saleselect, saleb, optionselect,
 								sellstart,sellfinish, totalstock, nowstock, thumbimg, addimg,
