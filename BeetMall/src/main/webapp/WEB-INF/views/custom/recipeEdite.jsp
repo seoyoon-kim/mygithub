@@ -98,19 +98,20 @@
 <div class="section">
 	
 		
-	<form method="post" action="/sshj/recipeWriteOk" enctype="multipart/form-data">
+	<form method="post" action="/sshj/recipeEditeOk" enctype="multipart/form-data">
 		<table>
 			<tbody>
 				<tr>
+				    <input type="hidden" name="recipenum" id="recipenum" value="${vo.recipenum}"/>
 					<th colspan="4">레시피 작성</th>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >제목</th>
-					<td class="td" colspan="3"><input type="text" name="recipetitle" id="recipetitle" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<td class="td" colspan="3"><input type="text" name="recipetitle" id="recipetitle" value="${vo.recipetitle}"/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span></span></td>
+					<td  class="td"><span>${vo.userid}</span></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">대표이미지</th>
@@ -121,15 +122,14 @@
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="recipecontent" name="recipecontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="recipecontent" name="recipecontent" class="summernote" >${vo.recipecontent}</textarea>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
 			<div id="bottommm">
 				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/recipeList'"/>
-				<input type="submit" value="작성하기" class="btn" id="write_btn"/>		
-						
+				<input type="submit" value="작성하기" class="btn" id="write_btn"/>				
 			</div>
 		</form>
 </div>
