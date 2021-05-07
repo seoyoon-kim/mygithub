@@ -32,8 +32,42 @@
 		border-radius: 3px;
 	}  
 	
-	/*상품정보 파트*/
 
+	/*  카테고리 소분류----------------------------------------------                 */
+	#categorySubmenu>ul { 
+		floate: left;
+		width: 1080px;
+		line-height: 30px;
+		padding: 0 30px;
+	}
+	
+	#categorySubmenu>ul>li {
+		width: 204px;
+	}
+	
+	/*상품정보 파트*/
+	/*  공유 아이콘 정렬----------------------------------------------                 */
+	#sharicon {
+		float: right;
+		width: 540px;
+		margin: 0;
+		padding: 10px 0 0 950px;
+		text-align: right;
+	}
+	
+	#sharicon>li {
+		width: 30px;
+	}
+	
+	#sharicon>li>a>img {
+		width: 25px;
+	}
+	#topLine{
+		border-bottom:1px solid gray;
+		padding-top:75px;
+		width:1070px;
+		margin:10px 0;
+	}
 	/*  상품 박스------------이미지 부분----------------------------------                 */
 	#productmainbox {
 		width: 850px;
@@ -63,7 +97,7 @@
 	
 	/*  상품 박스------------텍스트 부분----------------------------------                 */
 	#pbox {
-		width: 550px;
+		width: 500px;
 		float: left;
 		margin-bottom: 40px;
 	}
@@ -106,6 +140,7 @@
 		float: left;
 		margin: 0 auto;
 		padding-left: 0px;
+		width:550px;
 	}
 	
 	#productPrBox>ul>li {
@@ -580,23 +615,12 @@
 			background: gray;
 			color:white;
 			display: inline-block;
-		}
-</style>	 
+		} 
 </style> 
-<%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
-		<div id="topBar">
-			<ul>
-				<li><h5><strong><a href="productDetailA">상품 상세보기</a></strong></h5></li>  
-			</ul> 
-		</div>  
-   		<div id="contentBox">  
-
+<script>
 /*
 
-  $(document).ready(function(){
+$(document).ready(function(){
 	 
 	  
 	  $("#infoBtn1").click(function(){
@@ -620,34 +644,26 @@
 	  })
 	  
 	
-  })
- 
+})
+
 */
 
-
-
-
 </script>
-<body>
-
+<%@ include file="/inc/top.jspf" %>
+<%@ include file="/inc/leftBar.jspf" %>
+<div id="body1">
+	<div id="container">
+		<div id="topBar">
+			<ul>
+				<li><h5><strong><a href="productDetailA">상품 상세보기</a></strong></h5></li>  
+			</ul> 
+		</div>  
+   		<div id="contentBox">  
 	<div class="section" id="productPageDiv">
-		<div id="mainName">
-			<h2>상품 품목별</h2>
+		<div id="mainName"> 
 		</div>
 
-		<!-- ------------------------------------카테고리이미지-------------------------------------------------------- -->
-		<ul id="category">
-			<li><span id="categoryAll"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />전체</span></li>
-			<li><span id="categoryarea"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />지역별</span></li>
-			<li><span id="categoryFruit"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />과일</span></li>
-			<li><span id="categoryVege"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />채소</span></li>
-			<li><span id="categorySall"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />쌀/잡곡</span></li>
-		</ul>
+		 
 		<!-- ------------------------------------카테고리 소분류--------------------------------------------------------- -->
 
 		<div id="categorySubmenu">
@@ -658,23 +674,14 @@
 				<li>께/기타잡곡</li>
 			</ul>
 		</div>
-		<!-- -------------------------------------정렬방식 -------------------------------------------------------- -->
-		<div id="selectOrderbox">
-			<select name="selectOrder">
-				<option>평점순</option>
-				<option>가격순</option>
-				<option>조회수순</option>
-			</select>
-		</div>
-
 		<!-- ---------------------------------공유 아이콘 정렬------------------------------------------------------------ -->
+		<div id="topLine"></div>
 		<ul id=sharicon>
 			<li><a href="#"><img src="img/cicon01.png"></a></li>
 			<li><a href="#"><img src="img/cicon02.png"></a></li>
 			<li><a href="#"><img src="img/cicon03.png"></a></li>
 			<li><a href="#"><img src="img/cicon05.png"></a></li>
 		</ul>
-
 		<!-- ------------------------------상품 박스--------------------------------------------------------------- -->
 		<div id=productMainBox>
 
@@ -1018,5 +1025,5 @@
  
 	</div>   
 </div> 
-
+</div>
 </html>
