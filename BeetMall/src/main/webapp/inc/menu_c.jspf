@@ -335,6 +335,11 @@
         padding-bottom: 40px;
         font-size: 16px;
     }
+    
+    /* 상단 룰렛 */
+    #rollDiv{
+    	display:block;
+    }
 </style>
 <script>
 	$(function(){
@@ -386,6 +391,11 @@
 		});
 		
 	})
+	
+	
+	
+	
+	
 </script>
 
 
@@ -499,10 +509,10 @@
                   <div><a href="recipeHome">홈</a></div>
                </div>
                <div id="repcipevview">
-                  <div><a href="customMyrecipe">마이레시피</a></div>
+                  <div><a href="recipeList">목록보기</a></div>
                </div>
                <div id="repcipevview">
-                  <div><a href="recipeView">게시판보기</a></div>
+                  <div><a href="customMyrecipe">마이레시피</a></div>
                </div>
                 <div id="repcipevview">
                   <div><a href="recipeWrite">글쓰기</a></div>

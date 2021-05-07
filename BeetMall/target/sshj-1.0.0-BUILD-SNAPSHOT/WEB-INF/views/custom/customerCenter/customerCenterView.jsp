@@ -16,17 +16,19 @@
 
 <style>
 	.cs_message{
-		margin: 0 auto;
 		font-size:15px;
-		width:90%;
+		margin-left: 0px;
+	    margin-right: 0px;
+	    width: 1080px;
 	}
 	#notice{font-size:12px;color: gray;}
+	fieldset{width: 1080px;}
 	/*표*/
 	table{
-		width:90%;	
+		width: 1080px;
+    	margin-left: 0px;
 		border-spacing: 0;
 		text-indent: initial;
-		margin:0 0 20px 50px;
 		border-top:2px solid lightgray;
 		border-bottom:2px solid lightgray;
 		font-size:13px;
@@ -92,7 +94,14 @@
 	.next{margin-bottom:30px}
 	a{color:black;}
 	.answer_line{width:100%; 	background-color:#f6f6f6; height:20px; }
-	.bottom_wrap{margin:10px auto; width:90%;  text-align:center;}
+	.bottom_wrap{
+		margin-left: 0px;
+	    margin-right: 0px;
+	    width: 1080px;
+	    margin-bottom: 50px;
+	    margin-top: 20px;
+	    text-align:center;
+	}
 	button, .btn{width:150px; height:26px; margin-left:20px;}
 	
 	#article{

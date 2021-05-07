@@ -21,7 +21,6 @@
 	width: 1080px;
 	background-color: white;
 	margin: 0 auto;
-	font-family: 'Nanum Gothic', sans-serif;
 }
 
 #cMyPageLeft {
