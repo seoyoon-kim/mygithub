@@ -26,7 +26,11 @@
 	<select id="reviewCheck" resultType="Integer">
 		select count(*) from review where ordernum = #{param1}
 	</select>
-	<!-- <select id="selectBuyList" resultType="com.beetamll.sshj.custom.vo.MyBuyListVO">
+	<select id="selectReviewProduct" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO">
 		select productnum, thumbimg, productname from product where productnum = #{param1}
-	</select> -->
+	</select>
+	<insert id="reviewWrite">
+		insert into review(reviewnum, ordernum, productnum, reviewcontent, userid, reviewwritedate, reviewrecommend, reviewimg, reviewscore, reviewreport, reviewanswer)
+		values(reviewsq.nextval, #{ordernum}, #{productnum}, #{reviewcontent}, #{userid}, sysdate, 0, #{reviewimg}, #{reviewscore}, 0,  null)
+	</insert>
 </mapper>

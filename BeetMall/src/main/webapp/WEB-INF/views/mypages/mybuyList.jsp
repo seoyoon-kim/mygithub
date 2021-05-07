@@ -53,8 +53,11 @@
 		padding-top:10px;
 	}
 	
+	#pointUl>li:nth-child(6n+2){
+		width:105px;
+	}
 	#pointUl>li:nth-child(6n){
-		width:240px;
+		width:270px;
 	}
 	
 	#pointUl>li:nth-child(6n+3){
@@ -344,6 +347,10 @@
 	.nonBtn{
 		
 	}
+	.redstar{
+		color:red;
+		text-size:13px;
+	}
 </style>
 <script>
 	$(function(){
@@ -369,21 +376,15 @@
 	$(document).ready(function(){
 		$("#summernote").summernote({
 			height:660,
+			placeholder:'고객님의 리뷰를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 리뷰는 숨김처리 될 수 있습니다.',
 			minHeight:660,
 			maxHeight:660,
-			lang:"ko-KR",
-			placeholder:'리뷰를 작성해주세요'
+			lang:"ko-KR"
 		});
 	});
-	$(document).ready(function(){
-		$("#buyReviewtxt").summernote({
-			height:380,
-			minHeight:380,
-			maxHeight:380,
-			lang:"ko-KR",
-			placeholder:'리뷰를 작성해주세요'
-		});
-	});
+	$(document).on('click','#invoiceCloseBtn', function(){
+		$("#buyListdeliverySearch").css("display","none");
+	})
 	$(document).on('click',"input[value=취소하기]", function(){
 		var num = $(this).parent().prev().children().val();
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
@@ -457,49 +458,39 @@
 	$(document).on('click','input[value=리뷰작성]', function(){
 		var num = $(this).parent().prev().children().val();
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
-		var url = "reviewCheck";
-		var param = "ordernum="+ordernum;
+		$("#buyReviewWrite").css("display","block");
+		$("#buyReviewView").css("display","none");
+		console.log("productNum=",num);
 		$.ajax({
-			url : url,
-			data : param,
-			success : function(result){
-				reviewCheck = result;
-				console.log("성공 현재 리뷰결과 => "+reviewCheck);
-				if(reviewCheck == 1){	// 리뷰 작성 가능
-					$("#buyReviewWrite").css("display","block");
-					$("#buyReviewView").css("display","none");
-					/* $.ajax({
-						url : "productInfo",
-						data : "productNum"+num,
-						success:function(result){
-							console.log(result);
-						}, error : function(){
-							console.log('실패');
-						}
-					}) */
-					
-					
-				}else if(reviewCheck == -1){	// 리뷰 이미 작성함
-					$("#buyReviewWrite").css("display","none");
-					$("#buyReviewView").css("display","block");
-					
-					/* var tag = "<li>번호</li> <li>"+ordernum+"</li>";
-					tag	+= "<li>작성자</li> <li>"+"${logId}"+"</li>";
-					tag	+= "<li>작성일</li> <li>"+today+"</li>";
-					tag += "<li>제목</li>	<li><input type='text' placeholer='제목을 입력하세요' style='width:443px'/></li>";	
-					$("#infoInput").empty().append(tag); */
-					$("#buyReviewtxt").next().css("margin-top","10px");
-				}
-			},error : function(){
-				console.log("실패.");
+			url : "productInfo",
+			data : "productNum="+num,
+			success:function(result){
+				console.log(result);
+				console.log("resultproductname="+result.productname);
+				$("#reviewImg").attr("src","/sshj/resources/sellerProductImgs/"+result.thumbimg);
+				$("#reviewTitle").html(result.productname);
+				$("#reviewordernum").val(ordernum);
+				$("#reviewproductnum").val(num);
+				console.log("reviewordernun = "+$("#reviewordernum").val()+"reviewproductnum = "+$("#reviewproductnum").val());
+			}, error : function(){
+				console.log('실패');
 			}
-			
 		});
-		
-		
-		
-		
 	});
+	$(document).on('click','input[value=리뷰작성완료]', function(){
+		var num = $(this).parent().prev().children().val();
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();S
+		$("#buyReviewWrite").css("display","none");
+		$("#buyReviewView").css("display","block");
+		var tag = "<li>번호</li> <li>"+ordernum+"</li>";
+		tag	+= "<li>작성자</li> <li>"+${logId}+"</li>";
+		tag	+= "<li>작성일</li> <li>"+today+"</li>";
+		tag += "<li>제목</li>	<li><input type='text' placeholer='제목을 입력하세요' style='width:443px'/></li>";	
+		
+		$("#infoInput").empty().append(tag); 
+		//$("#buyReviewtxt").next().css("margin-top","5px");
+	})
+	
 	$(document).on('click','input[value=환불확정]', function(){
 		var num = $(this).parent().prev().children().val();
 	});
@@ -509,7 +500,23 @@
 	$(document).on('click','input[value=문의작성]', function(){
 		var num = $(this).parent().prev().children().val();
 	});
-
+	
+	$(document).on('click','input[value=리뷰작성완료하기]', function(){
+		var reviewForm = $("form[name=reviewFrm]").serialize();
+		$.ajax({
+			type:'post',
+			url : "reviewWrite",
+			data : reviewForm,
+			dataType : 'json',
+			success:function(result){
+				console.log('리뷰전송성공');
+				console.log(result);
+				
+			},error:function(){
+				console.log("리뷰전송실패");
+			}
+		});
+	});
 </script>
 <div class="section">
 	<div id="mypointList">
@@ -537,7 +544,7 @@
 					<li>
 					<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="">${vo.productname}</a></span><span class="buydetail wordcut"><a href="">${vo.productcontent}</a></span>
 					</li>
-					<li><span class="pointprice">${vo.orderprice}</span>원${vo.ordercnt}</li>
+					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
 					<c:if test="${vo.orderstatus == '준비중'}">
 					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
@@ -559,7 +566,7 @@
 						<li><input type="button" class="btn" value="리뷰작성"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>
 						</c:if>
 						<c:if test="${vo.ordercnt != null && vo.ordercnt>=1 }">
-						<li><input type="button" class="btn" value="작성완료"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>						
+						<li><input type="button" class="btn" value="리뷰작성완료"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>						
 						</c:if>
 					</c:if>					
 				</c:forEach>
@@ -574,7 +581,7 @@
 			<iframe src="https://www.ilogen.com/web/personal/tkSearch" height="548px" width="1298px"  frameborder="no" id="invoiceIframe">
 			
 			</iframe><br/>
-				<input type="button" value="확인" class="btn"/>
+				<input type="button" value="확인" class="btn" id="invoiceCloseBtn"/>
 			</div>
 		</div>
 		<div class="section">
@@ -645,7 +652,7 @@
 					<li>작성일</li>	<li>2021-04-02</li>
 					<li>추천</li>	<li>4<div class="thumbsupYes"></div></li>
 				</ul>
-				<textarea id="buyReviewtxt"></textarea>
+				<div id="buyReviewtxt"></div>
 				<input type="button" value="확인" class="btn" style="top:630px;" />
 			</div>
 		</div>
@@ -656,21 +663,35 @@
 			<div class="buyListContent" style="padding-top:60px; height:1200px;">
 			<div id="buyProduct">
 				<span class="buyListleftMenu">구매상품</span>
-				<img src="/sshj/"/>
-				<div>[매당 약 190원]KF94 대형 100매 국산원재료 지퍼형 5매입</div>
-				<div>[옵션]1개</div>
+				<img src="/sshj/" id="reviewImg"/>
+				<div id="reviewTitle" style="font-size: 17px;padding-left:5px;">불러오는 중입니다...</div>
+				<div></div>
 			</div>
-			<div id="buyProductStar">
-				<span class="buyListleftMenu">상품평가</span>
-				<div id="reviewStars">별별별별별</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
-			</div>
-			<div id="buyProductImg">
-				<span class="buyListleftMenu" style="float:left">첨부이미지</span><input type="file" name="filename"/>&nbsp;
-			</div>
-			<textarea name="reviewcontent" id="summernote">
-				서머노트 사용해야 할 부분
-			</textarea>
-			<input type="button" value="작성하기" class="btnSubmit"/>
+			<form method="post" name="reviewFrm" enctype="multipart/form-data" >
+					<input type="hidden" name="ordernum" value="" id="reviewordernum"/>
+					<input type="hidden" name="productnum" value="" id="reviewproductnum"/>
+				<div id="buyProductStar">
+					<span class="buyListleftMenu">상품평가</span>
+					<div id="reviewStars">
+						<span class="redstar">
+							<select name="reviewscore">
+								<option value="5">★★★★★</option>
+								<option value="4">★★★★</option>
+								<option value="3">★★★</option>
+								<option value="2">★★</option>
+								<option value="1">★</option>
+							</select>
+						</span>
+					</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
+				</div>
+				<div id="buyProductImg">
+					<span class="buyListleftMenu" style="float:left">첨부이미지</span><input type="file" name="file"/>&nbsp;
+				</div>
+				<textarea name="reviewcontent" id="summernote">
+					
+				</textarea>
+				<input type="button" value="리뷰작성완료하기" class="btnSubmit" id="reviewSubmitBtn"/>
+			</form>
 			</div>
 		</div>
 		

@@ -3,6 +3,7 @@ package com.beetmall.sshj.custom.service;
 import java.util.List;
 
 import com.beetmall.sshj.custom.vo.MyBuyListVO;
+import com.beetmall.sshj.custom.vo.ReviewVO;
 
 public interface MyBuyListService {
 
@@ -11,5 +12,6 @@ public interface MyBuyListService {
 	public int orderCancel(int ordernum);
 	public int orderCancelOk(int ordernum);
 	public int reviewCheck(int ordernum);
-	public MyBuyListVO selectBuyList(int productnum);
+	public MyBuyListVO selectReviewProduct(int productnum);
+	public int reviewWrite(ReviewVO vo);
 }

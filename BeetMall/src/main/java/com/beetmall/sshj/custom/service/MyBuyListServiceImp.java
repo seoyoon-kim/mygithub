@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.MyBuyListDAO;
 import com.beetmall.sshj.custom.vo.MyBuyListVO;
+import com.beetmall.sshj.custom.vo.ReviewVO;
 
 @Service
 public class MyBuyListServiceImp implements MyBuyListService {
@@ -44,11 +45,15 @@ public class MyBuyListServiceImp implements MyBuyListService {
 	}
 
 	@Override
-	public MyBuyListVO selectBuyList(int productnum) {
+	public MyBuyListVO selectReviewProduct(int productnum) {
 		
-		return mybuylistDAO.selectBuyList(productnum);
+		return mybuylistDAO.selectReviewProduct(productnum);
 	}
 
-	
+	@Override
+	public int reviewWrite(ReviewVO vo) {
+		
+		return mybuylistDAO.reviewWrite(vo);
+	}	
 
 }
