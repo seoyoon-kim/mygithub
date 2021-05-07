@@ -112,6 +112,7 @@ ul>li {
 }
 
 
+
 #recipettile>b {
 	float: left;
 	width: 100%;
@@ -119,6 +120,7 @@ ul>li {
 	height: 20px;
 	margin-top: 10px;
 }
+
 
 /*  큰제목----------------------------------------------                 */
 #recit {
