@@ -106,6 +106,7 @@ ul>li {
 	list-style-type: none;
 }
 
+
 #reciList, #recivb, #reciContenView {
 	padding: 0px;
 	margin: 0px;
