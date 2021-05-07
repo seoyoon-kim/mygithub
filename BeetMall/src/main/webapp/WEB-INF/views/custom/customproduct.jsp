@@ -8,7 +8,7 @@
 /*  기본설정----------------------------------------------                 */
 .section {
 	width: 1080px;
-	background-color: white;
+	
 	margin: 0 auto;
 }
 
@@ -679,6 +679,9 @@ a:hover, a:active, a:visited, a:link {
 	}
 
 
+#productBtn{
+    padding-left: 0px;
+}
 
 </style>
 <script>
