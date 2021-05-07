@@ -17,19 +17,26 @@
 	 #container li{ 
 		 list-style-type:none; 
 		 float:left; 
-		 width:10%; 
 	 }  
 	#contentBox{ 
 		top:20px; 
 		margin-left:10px;
 	}
+	#topBar h5{
+		width:300px; 
+	}
+	#topBar h5 a{
+		color:white;
+	}
+	#contentBox li{ 
+		 width:16%; 
+	}
 	#contentBox li:nth-of-type(8n-7){ 
 		width:0%; 
-	}
-	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1){  
-		width:30%; 
-		padding-left:20px; 
 	}    
+	#topBar li{ 
+		 width:10%; 
+	}
 	#topBar li:nth-of-type(3){
 		width:5.5%;
 	} 
@@ -96,197 +103,177 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="customerListA">일반회원</a></strong></h5></li> 
+				<li><h5><strong><a href="customerListA">상품 문의</a></strong></h5></li> 
 				<li><select name="sort" > 
-		   				<option value="이름" selected>이름</option>
-		   				<option value="아이디">아이디</option>
-		   				<option value="나이">나이</option> 
-		   				<option value="이메일">이메일</option> 
-		   				<option value="생년월일">생년월일</option> 
-		   				<option value="주소">주소</option> 
-		   				<option value="가입날짜">가입날짜</option> 
+		   				<option value="전체" selected>전체</option>
+		   				<option value="문의번호">문의번호</option>
+		   				<option value="제목">제목</option> 
+		   				<option value="신고된 문의">신고된 문의</option> 
+		   				<option value="구매자">구매자</option> 
+		   				<option value="판매자">판매자</option> 
+		   				<option value="등록일">등록일</option> 
 			  		</select> 
 	   			</li> 
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
-				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
-				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
+				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li> 
+				<li><button class="success" value="del" name="del" id="delBtn">비공개</button></li>
 			</ul> 
 		</div>  
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
 				<li><input type="checkbox" name="check"  ></li>
-				<li>이름</li>
-				<li>아이디</li>
-				<li>나이</li>
-				<li>이메일</li>
-				<li>생년월일</li>
-				<li>주소</li>
-				<li>가입일</li> 
+				<li>번호</li>
+				<li>제목</li>
+				<li>신고여부</li>
+				<li>구매자</li>
+				<li>판매자</li>
+				<li>등록일</li> 
 			</ul>
-		</div>  
-		
-		 
+		</div>    
 			<ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		<ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>   
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 <ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul> 
 		 
 
@@ -296,13 +283,12 @@
 		<c:forEach var="data" items="${list}">
 			<ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
+				<li> 123587</li>
+				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
+				<li> - </li>
+				<li> double123 </li> 
+				<li>seller890</li>
+				<li>2021-02-21</li>  
 			</ul>
 		</c:forEach>-->
 		</div>	 
