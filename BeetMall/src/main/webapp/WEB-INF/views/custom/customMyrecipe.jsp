@@ -25,7 +25,6 @@ a:hover, a:active, a:visited, a:link {
 
 .section {
 	width: 1080px;
-	background-color: white;
 	margin: 0 auto;
 }
 

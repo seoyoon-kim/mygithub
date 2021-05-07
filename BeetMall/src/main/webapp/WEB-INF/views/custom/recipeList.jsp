@@ -35,7 +35,6 @@ a:hover, a:active, a:visited, a:link {
 
 .section {
 	width: 1080px;
-	background-color: white;
 	margin: 0 auto;
 }
 /* ------------------페이징처리부분-------------------- */
@@ -325,7 +324,7 @@ td, .td{
 				<ul id="reciList">
 					<c:forEach var="data" items="${list}">
 					<li>${data.recipenum}</li>
-					<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+					<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 					<li>${data.userid}</li>
 					<li>${data.reciperecommend}</li>
 					<li>${data.recipehit}</li>

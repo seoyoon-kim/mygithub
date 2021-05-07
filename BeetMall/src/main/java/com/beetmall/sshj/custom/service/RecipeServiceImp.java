@@ -56,15 +56,15 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public int recikeepOk(String id,int num) {
+	public int recikeepOk(int num,String id) {
 		
-		return RecipeDAO.recikeepOk(id,num);
+		return RecipeDAO.recikeepOk(num,id);
 	}
 
 	@Override
-	public int recigoodOk2(String id, int num) {
+	public int recigoodOk2(int num,String id) {
 		
-		return RecipeDAO.recigoodOk2(id,num);
+		return RecipeDAO.recigoodOk2(num,id);
 	}
 
 	@Override
@@ -89,6 +89,23 @@ public class RecipeServiceImp implements RecipeService {
 	public List<RecipeVO> recipeAllListHome2() {
 		
 		return RecipeDAO.recipeAllListHome2();
+	}
+
+	@Override
+	public int recipeHit(int data) {
+		
+		return RecipeDAO.recipeHit(data);
+	}
+
+	@Override
+	public int recikeepOnly(int num,String id) {
+		
+		return RecipeDAO.recikeepOnly(num,id);
+	}
+
+	@Override
+	public int recigoodOnly(int num,String id) {
+		return RecipeDAO.recigoodOnly(num,id);
 	}
 
 

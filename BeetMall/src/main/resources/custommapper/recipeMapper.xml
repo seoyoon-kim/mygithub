@@ -45,25 +45,37 @@
         order by recipenum desc     
     </select>  
     
-    <update id="recigoodOk">
+    <update id="recigoodOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
        update recipe set reciperecommend=reciperecommend+1 where recipenum=#{param1}
     </update>
     
     <insert id="recigoodOk2" parameterType="com.beetmall.sshj.custom.vo.FavoriteVO">
-       insert into favorite(userid,recipegoodnum) VALUES(#{param1},${param2})
+       insert into favorite(recipegoodnum,userid) VALUES(#{param1},#{param2})
     </insert>
+
+    <select id="recigoodOnly" resultType="com.beetmall.sshj.custom.vo.FavoriteVO">
+     select count(recipegoodnum) from favorite where userid=#{param2} and recipegoodnum=#{param1}
+     </select>
     
     <insert id="recikeepOk" parameterType="com.beetmall.sshj.custom.vo.FavoriteVO">
-       insert into favorite(userid,recipenum) VALUES(#{param1},${param2})
+       insert into favorite(recipenum,userid) VALUES(#{param1},#{param2})
     </insert>
     
-
+    <select id="recikeepOnly" resultType="com.beetmall.sshj.custom.vo.FavoriteVO">
+     select count(recipenum) from favorite where userid=#{param2} and recipenum=#{param1}
+     </select>
+     
     <select id="customMyrecipe2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
         select b.recipenum,b.recipetitle,b.userid,b.recipemainimg,b.reciperecommend,b.recipehit from 
         (select r.recipenum,r.recipetitle,r.userid,r.recipemainimg,r.reciperecommend,
         r.recipehit from recipe r join favorite f on r.recipenum=f.recipenum)b 
         where b.userid=#{param1}
     </select>  
+    
+    <update id="recipeHit" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
+       update recipe set recipehit=recipehit+1 where recipenum=#{param1}
+    </update>
+    
     
     
  

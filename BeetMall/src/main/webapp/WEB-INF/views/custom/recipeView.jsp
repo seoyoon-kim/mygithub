@@ -29,7 +29,6 @@ a:hover, a:active, a:visited, a:link {
 
 .section {
 	width: 1080px;
-	background-color: white;
 	margin: 0 auto;
 }
 /* ------------------페이징처리부분-------------------- */
@@ -263,8 +262,8 @@ table{
 	width:100%%;	
 	border-spacing: 0;
 	text-indent: initial;
-	border-top:2px solid lightgray;
-	border-bottom:2px solid lightgray;
+	border-top:1px solid lightgray;
+	border-bottom:1px solid lightgray;
 }
 th, .th{
 	display: table-cell;
@@ -275,8 +274,8 @@ th, .th{
   		/*#fcfcfc*/
 }
 thead{
-	border-bottom: 2px solid #ccc;
-    border-top: 2px solid #ccc;
+	border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
     width:100%;
 }
 tr{
@@ -297,8 +296,8 @@ td, .td{
 }
 .tr_head{
 	font-weight:bold;
-	border-top:2px solid lightgray;
-	border-bottom:2px solid lightgray;
+	border-top:1px solid lightgray;
+	border-bottom:1px solid lightgray;
 }
 .tr_head li{
 	float:left;
@@ -395,7 +394,7 @@ td, .td{
 			
 		
 		<ul id="recivb">
-			<li id="goodidli"><div id="goodid" onclick="goodset()">추천해요<img src="img/cstar2.png" id="goodimg"></div></li>
+			<li id="goodidli"><div id="goodid" onclick="goodset()">추천해요<img src="img/dunlike.png" id="goodimg"></div></li>
 			<li id="keepidli"><div id="keepid" onclick="keepset()">즐겨찾기<img src="img/ccart2.png" id="keepimg"></div></li>
 			<li id="share1"><a href=""><img src="img/cicon01.png"></a></li>
 			<li><a href=""><img src="img/cicon02.png"></a></li>
@@ -426,22 +425,21 @@ function Deletebtn(){
 
 function goodset(){
 	
-	
-	  var good="<div id='nogoodid' onclick='nogoodset()'>추천해요<img src='img/cstar.png' id='nogoodimg'></div>"
+	  var good="<div id='nogoodid' onclick='nogoodset()'>추천해요<img src='img/dlike.png' id='nogoodimg'></div>"
 	  document.getElementById("goodidli").innerHTML=good;
 		
 	    var url = "recigoodOk";		
-		var num= "num="+${vo.recipenum};
-		console.log(url, num);
+		var data = "num=${vo.recipenum}";
+		console.log(url, data);
 		$.ajax({
 			url:url,
-			data:num,
+			data:data,
 			success:function(result){
 				console.log('추천수 올리시 성공---> ');
 				
 			},error:function(e){
 				console.log(e.responseText);
-				console.log("실패");
+				console.log("추천수 올리시 실패");
 			}
 		})
 		
@@ -452,11 +450,11 @@ function goodset(){
 			url:url,
 			data:data,
 			success:function(result){
-				console.log('장바구니 올리기 성공---> ');
+				console.log('추천기록 올리기 성공---> ');
 				
 			},error:function(e){
 				console.log(e.responseText);
-				console.log("실패");
+				console.log("추천기록 올리기 실패");
 			}
 		})
 		
@@ -464,7 +462,7 @@ function goodset(){
 	  }
 	  
 function nogoodset(){
-	  var good="<div id='goodid' onclick='goodset()'>추천해요<img src='img/cstar2.png' id='goodimg'></div>"
+	  var good="<div id='goodid' onclick='goodset()'>추천해요<img src='img/dunlike.png' id='goodimg'></div>"
 	  document.getElementById("goodidli").innerHTML=good;
 	  }
 
@@ -482,11 +480,13 @@ function keepset(){
 			success:function(result){
 				console.log('장바구니 올리기 성공---> ');
 				
+				
 			},error:function(e){
 				console.log(e.responseText);
-				console.log("실패");
+				console.log("장바구니 실패");
 			}
 		})
+		
 	
 	  }
 	 
