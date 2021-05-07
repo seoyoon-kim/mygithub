@@ -103,10 +103,6 @@ public class testController {
 	public String myInfoEdit() {	// 내 정보
 		return "mypages/myInfoEdit";
 	}
-	@RequestMapping("mybuyList")
-	public String myBuyList() {	// 구매내역
-		return "mypages/mybuyList";
-	}
 	@RequestMapping("myChatList")
 	public String myChatList() {	// 채팅내역
 		return "mypages/myChatList";

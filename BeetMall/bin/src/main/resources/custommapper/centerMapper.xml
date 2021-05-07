@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.CenterDAO">
+	<insert id="centerWrite" parameterType="com.beetmall.sshj.custom.vo.CenterVO">
+  			insert into qmboard(qmnum, userid, qmtitle, qmContent, qmdate, qmanswer, qmoption)
+  			values(qmboardsq.nextval, 'qwer', #{qmtitle}, #{qmcontent}, sysdate, null, 1)
+	</insert>
+	<select id="centerAllRecord" resultType="com.beetmall.sshj.custom.vo.CenterVO">
+		select qmnum, userid, qmtitle, qmcontent, to_char(qmdate,'MM-DD HH:MI') as qmdate, qmanswer, qmoption from qmboard where qmoption = 1 order by qmnum desc
+	</select>
+	<select id="centerSelect" resultType="com.beetmall.sshj.custom.vo.CenterVO">
+		select qmnum, userid, qmtitle, qmcontent, to_char(qmdate,'YY/MM/DD HH:MI') as qmdate, qmanswer, qmoption, to_char(qmanserdate,'YY/MM/DD HH:MI') as qmanserdate from qmboard where qmnum=${param1}
+	</select>
+	<delete id="centerDelete">
+		delete from qmboard where qmnum=#{param1}
+	</delete>
+	<update id="centerEditOk" parameterType="com.beetmall.sshj.custom.vo.CenterVO">
+		update qmboard set qmtitle=#{qmtitle}, qmcontent=#{qmcontent} where qmnum=#{qmnum}
+	</update>
+</mapper>
