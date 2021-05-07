@@ -33,6 +33,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		///조회수
 		recipeService.recipeHit(recipenum);
 		//뷰어전체
+		
 		mav.addObject("vo", recipeService.RecipeSelect(recipenum));		
 		mav.setViewName("custom/recipeView");
 
