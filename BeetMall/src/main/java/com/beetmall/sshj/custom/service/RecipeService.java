@@ -21,14 +21,20 @@ public interface RecipeService {
 	
 	public int recigoodOk(int data);
 	
-	public int recikeepOk(String id,int num);
+	public int recigoodOk2(int num,String id);
 	
-	public int recigoodOk2(String id,int num);
+	public int recigoodOnly(int num,String id);
+	
+	public int recikeepOk(int num,String id);
+	
+	public int recikeepOnly(int num,String id);
 	
 	public List<RecipeVO> customMyrecipe2(String id);
 	
 	public int recipeDelete(int recipenum);
 
 	public int recipeEditeOk(RecipeVO vo);
+	
+	public int recipeHit(int data);
 
 }

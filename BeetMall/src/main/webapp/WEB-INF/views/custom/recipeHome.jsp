@@ -30,7 +30,6 @@ a:hover, a:active, a:visited, a:link {
 }
 
 #section{
-background-color:white;
 margin:0 auto;
 width:1080px;
 }

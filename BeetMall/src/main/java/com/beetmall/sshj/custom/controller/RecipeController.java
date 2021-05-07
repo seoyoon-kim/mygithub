@@ -29,10 +29,13 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	public ModelAndView RecipeSelect(int recipenum) {
 		//////////2해당 게시글 보이게 하기----------
 		ModelAndView mav=new ModelAndView();
-	
-		mav.addObject("vo", recipeService.RecipeSelect(recipenum));
+
+		///조회수
+		recipeService.recipeHit(recipenum);
+		//뷰어전체
+		mav.addObject("vo", recipeService.RecipeSelect(recipenum));		
 		mav.setViewName("custom/recipeView");
-		
+
 		return mav;
 	}
 	
@@ -180,16 +183,20 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	@RequestMapping("/recigoodOk")
 	@ResponseBody
-	public int recigoodOk(HttpServletRequest req) {
-//	ModelAndView mav=new ModelAndView();
-	int data= Integer.parseInt(req.getParameter("num"));
+	public String recigoodOk(HttpServletRequest req) {
 
-	System.out.println(recipeService.recigoodOk(data));
+    String id=req.getParameter("id");
+	int num= Integer.parseInt(req.getParameter("num"));
 	
-//	mav.addObject("goodvo", RecipeService.recigoodOk(data));
-//	mav.setViewName("custom/recipeView");
+	//int countr=recipeService.recigoodOnly(num,id);
 	
-	return data;
+	//if(countr<0) {
+	System.out.println(recipeService.recigoodOk(num));
+	//return num+","+id+","+countr;
+	//}
+	
+	
+	return num+","+id;
 }
 	
 	///////////////////////////////////// 레시피 추천 기록///////////////////////////////////////
@@ -197,10 +204,19 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	@RequestMapping("/recigoodOk2")
 	@ResponseBody
 	public String recigoodOk2(HttpServletRequest req) {
+		
 		String id=req.getParameter("id");
 		int num=Integer.parseInt(req.getParameter("num"));
-		System.out.println(recipeService.recigoodOk2(id, num));
-	return num+","+id;
+		
+       // int countr=recipeService.recigoodOnly(num, id);
+		
+	   //if(countr<0) {
+	   System.out.println(recipeService.recigoodOk2(num,id));		
+	   //return num+","+id+","+countr;
+	   //}
+		
+		
+		return num+","+id;
 }
 	
 	///////////////////////////////////레시피 장바구니 등록////////////////////////////////////////////
@@ -208,11 +224,22 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	@RequestMapping("/recikeepOk")
 	@ResponseBody
 	public String recikeepOk(HttpServletRequest req) {
+		
+		
 		String id=req.getParameter("id");
 		int num=Integer.parseInt(req.getParameter("num"));
-		System.out.println(recipeService.recikeepOk(id, num));
-	return num+","+id;
+		System.out.println(num);
+		
+		//int countr=recipeService.recikeepOnly(num,id);
+		
+		//if(countr<0) {
+		System.out.println(recipeService.recikeepOk(num,id));
+		//return num+","+id+","+countr;
+		//}
+	    return num+","+id;
 }
+	
+	
  
 	////////////////////////////////////장바구니 담은 레시피 선택/////////////////////////////////
 	
