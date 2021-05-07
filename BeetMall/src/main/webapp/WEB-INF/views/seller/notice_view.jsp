@@ -20,30 +20,23 @@
 	
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/csStyle.css">
+	
 </head>
 
 <style>
 
 	/*표*/
-	table{
-		width:90%;	
-		border-spacing: 0;
-		text-indent: initial;
-		margin:0 0 20px 50px;	
-		border-top:1px solid lightgray;
-		border-bottom:1px solid lightgray;
-	}
-	th, .th{
+	.th{
 		display: table-cell;
 	    vertical-align: inherit;
-	    font-weight: bold;
 	    text-align: -internal-center;
    		background-color:#f6f6f6;;
    		/*#fcfcfc*/
 	}
 	thead{
-		border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
 	    width:100%;
 	}
 	tr{

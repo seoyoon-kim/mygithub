@@ -20,9 +20,11 @@
 	
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/csStyle.css">
 </head>
 
 <style>
+	.cs_wrapTitle{text-align:left; width:100%;}
 	table, fieldset{
 		width:100%;
 	}
@@ -34,21 +36,7 @@
 		margin-bottom:30px;
 		width:95%;
 	}
-	th{
-		height:50px;
-		display: table-cell;
-	    vertical-align: inherit;
-	    font-weight: bold;
-	    text-align: -internal-center;
-	    border-bottom: 1px solid #ccc;
-	    border-top: 1px solid #ccc;
-   		background-color: #fcfcfc;
-   		font-size: 16px;
-	}
-	td{
-		height:50px;
-		border-bottom:1px solid lightgray;
-	}
+	td{border-bottom:1px solid lightgray;}
 	td:nth-child(1), td:nth-child(2){
 		text-align:center;
 		width:100px;
@@ -66,12 +54,11 @@
 	}
 	/*답변*/
 	.answer{
-			background-color:#f6f6f6;
 			display:none;	
 	}
 	.answer_td{
 		padding: 20px 10px 20px 10px;
-		font-size:15px;
+		font-size:12px;
 	}
 	.answer_td:nth-child(1){
 		color:red;
@@ -105,7 +92,7 @@
 	#cs_search_q{
 		font-weight:bold;
 		color:gray;
-		font-size:20px;
+		font-size:17px;
 	}
 	select{
 		float:left; 

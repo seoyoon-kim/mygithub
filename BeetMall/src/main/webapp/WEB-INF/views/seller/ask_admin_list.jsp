@@ -25,21 +25,7 @@
 
 <style>
 	/*표*/
-	th{
-		height:60px;
-		display: table-cell;
-	    vertical-align: inherit;
-	    font-weight: bold;
-	    text-align: -internal-center;
-	    border-bottom: 1px solid #ccc;
-	    border-top: 1px solid #ccc;
-   		background-color: #fcfcfc;
-   		font-size: 16px;
-	}
-	td{
-		height:50px;
-		border-bottom:1px solid lightgray;
-	}
+
 	td:nth-child(1),td:nth-child(3),td:nth-child(4){
 		text-align:center;
 		width:140px;
@@ -56,6 +42,7 @@
 		text-align:center;
 	}
 	#search_btn{padding:5px;border-left:1px solid lightgray;}
+	#sel{margin-top:10px;}
 </style>
 <script>
 	//답변완료 답변대기중 select 
@@ -124,7 +111,7 @@
 		<!-- 검색/ 문의하기 버튼 -->
 			<div id="search_container">
 			<!--문의하기 버튼 -->
-			<a href="<%=request.getContextPath()%>/ask_admin_write" id="ask_btn">문의하기</a>
+			<button id="ask_btn" onClick="location.href='<%=request.getContextPath()%>/ask_admin_write'">문의하기</button>
 	
 			<!-- 검색하기 -->
 				<span id="search_box">

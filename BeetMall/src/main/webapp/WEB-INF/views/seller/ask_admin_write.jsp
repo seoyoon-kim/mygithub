@@ -96,7 +96,7 @@ $(document).ready(function() {
 				</tr>
 			</tbody>
 		</table>
-			<div style="text-align:center; margin-bottom:10px ">
+			<div style="text-align:center; margin-top:20px;">
 				<input type="button" value="취소" id="btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
 				<input type="submit" value="문의하기" id="btn"/>				
 			</div>

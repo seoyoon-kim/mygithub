@@ -27,21 +27,7 @@
 
 	
 	/*표*/
-	th{
-		height:50px;
-		display: table-cell;
-	    vertical-align: inherit;
-	    font-weight: bold;
-	    text-align: -internal-center;
-	    border-bottom: 1px solid #ccc;
-	    border-top: 1px solid #ccc;
-   		background-color: #fcfcfc;
-   		font-size: 16px;
-	}
-	td{
-		height:50px;
-		border-bottom: 1px solid lightgray;
-	}
+
 	td:nth-child(1), td:nth-child(3){
 		text-align:center;
 		width:100px;
