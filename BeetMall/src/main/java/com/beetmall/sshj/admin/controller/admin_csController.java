@@ -36,6 +36,35 @@ public class admin_csController {
 		mav.setViewName("/admin/csFAQ");
 		return mav;
 	}
+ @RequestMapping("/csQBrowse")
+	public ModelAndView csQBrowse() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/csQBrowse");
+		return mav;
+	}	
+ @RequestMapping("/csAnswerA")
+	public ModelAndView csAnswerA() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/csAnswerA");
+		return mav;
+	}	
+ @RequestMapping("/csFAQWrite")
+	public ModelAndView csFAQWrite() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/csFAQWrite");
+		return mav;
+	}	
+ @RequestMapping("/csQOpen")
+	public ModelAndView csQOpen() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/csQOpen");
+		return mav;
+	}	
+	
 	
 	
 	

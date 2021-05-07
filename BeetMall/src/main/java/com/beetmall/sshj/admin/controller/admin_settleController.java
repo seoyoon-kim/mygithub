@@ -19,8 +19,15 @@ public class admin_settleController {
 	Boardervice adminService;
 	 
 	
-	 
-		
+	@RequestMapping("/settleMng")
+	public ModelAndView settleMng() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/settleMng");
+		return mav;
+	}
+	
+	
 	 
 	 
 	
