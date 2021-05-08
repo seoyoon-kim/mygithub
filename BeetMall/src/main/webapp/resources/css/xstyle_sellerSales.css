@@ -204,7 +204,7 @@ a:hover,a:active,a:visited,a:link{
 	background-color: #bbb;
 }
 
-#excelList li:nth-child(6n+1){
+#excelList li:nth-child(6n+2){
 	flex-basis: 10%;
 }
 

@@ -159,7 +159,7 @@ function searchingData(pageNum){
 			let $result = $(result[1]);
 			if(selectBtnCheck == "날짜"){
 				
-			} else if{
+			} else {
 				$result.each(function(idx,vo){
 					tag += '<tr>';
 					tag += '<td>' + vo.ordernum + '</td>';
