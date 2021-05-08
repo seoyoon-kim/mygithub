@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.seller.dao.SellerFaqDAO;
+import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 import com.beetmall.sshj.seller.vo.SellerFaqVO;
 
 @Service
@@ -17,6 +18,11 @@ public class SellerFaqServiceImp implements SellerFaqService {
 	@Override
 	public List<SellerFaqVO> sellerfaqAllRecord() {
 		return sellerFaqDAO.sellerfaqAllRecord();
+	}
+
+	@Override
+	public List<SellerFaqVO> searchList(SearchAndPageVO spvo) {
+		return sellerFaqDAO.searchList(spvo);
 	}
 
 }

@@ -129,7 +129,17 @@
   				}
   			);
   		});
+//검색어
 
+  		$("#search").onkeyup(function(){
+  			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+  			if($('#searchWord').val()==""){
+  				alert("검색어를 입력하세요");
+  				return false;
+  			}
+  			return true;
+  		});
+  		
   	});
 //선택한 select option별로 보기
 //수정할 것 나머지 option선택에 대한 script 추가하기
@@ -185,7 +195,7 @@
 		<!-- 검색하기 -->
 		<div id="cs_search_container">	
 			<span id="cs_search_q">자주묻는 질문을 검색해보세요.<br/></span>
-			<select id="sel">
+			<select id="sel" name="searchKey">
 				<option value="total">전체</option>
 				<option value="product">상품</option>
 				<option value="member">회원/포인트</option>
@@ -195,7 +205,7 @@
 				<option value="claim">교환/반품/환불</option>
 			</select>
 			<span id="cs_search_box">
-				<input type="text" id="search" name="search" placeholder="궁금하신 내용을 입력해주세요.">
+				<input type="text" name="searchWord" id="search"  placeholder="궁금하신 내용을 입력해주세요.">
 			</span>
 		</div>
 		<!-- 자주묻는질문 테이블-->
