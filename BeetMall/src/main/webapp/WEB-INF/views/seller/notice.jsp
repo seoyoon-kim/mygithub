@@ -113,27 +113,11 @@
 					<td><a href="<%=request.getContextPath() %>/notice_view"><strong>코로나19로 인한 픽업 서비스 중단 안내</strong></a></td>
 					<td>21/04/21</td>
 				</tr>
-				
-				<!-- 임시로 넣은 정보 -->
-				<tr>
-					<td>2</td>
-					<td><a href="">개인정보 처리방침 개정안내</a></td>
-					<td>21/04/21</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="">개인정보 처리방침 개정안내</a></td>
-					<td>21/04/21</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="">개인정보 처리방침 개정안내</a></td>
-					<td>21/04/21</td>
-				</tr>
+		
 			</tbody>
 			
 		</table>
-		<!-- 페이징 by kangsan -->
+		<!-- 페이징-->
 		<div class="page_wrap">
 			<div class="page_nation">
 			   <a class="arrow pprev" href="#"></a>
@@ -142,12 +126,6 @@
 			   <a href="#">2</a>
 			   <a href="#">3</a>
 			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>

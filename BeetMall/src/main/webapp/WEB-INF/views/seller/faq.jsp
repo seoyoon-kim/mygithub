@@ -24,7 +24,7 @@
 </head>
 
 <style>
-/*css 겹치는 부분은 basicCSS*/
+/*css 겹치는 부분은 basicStyle , CsStyle*/
 
 	.cs_wrapTitle{text-align:left; width:100%;}
 	table, fieldset{
@@ -57,13 +57,14 @@
 	/*답변*/
 	.answer{
 			display:none;	
+			background-color: #fcfcfc;
 	}
 	.answer_td{
 		padding: 20px 10px 20px 10px;
 		font-size:12px;
 	}
 	.answer_td:nth-child(1){
-		color:red;
+		color:rgb(224,102,102);
 		font-weight:bold;
 	}
 	.answer_td:nth-child(2){
@@ -137,6 +138,9 @@
   			var option = $(this).val();
   			console.log(option);
   			if(option=='total'){ //전체
+  				$('tr').css('display','');
+  			}
+  			if(option=='product'){ //전체
   				$('tr').css('display','');
   			}	
   		});

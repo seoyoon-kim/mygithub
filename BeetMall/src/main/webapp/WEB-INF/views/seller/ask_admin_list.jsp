@@ -43,6 +43,8 @@
 	}
 	#search_btn{padding:5px;border-left:1px solid lightgray;}
 	#sel{margin-top:10px;}
+	/*답변대기중*/
+	#no_answer{color:rgb(224,102,102);}
 </style>
 <script>
 	//답변완료 답변대기중 select 

@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.beetmall.sshj.seller.dao.SellerFaqDAO;
 import com.beetmall.sshj.seller.vo.SellerFaqVO;
 
+@Service
 public class SellerFaqServiceImp implements SellerFaqService {
 	@Inject
 	SellerFaqDAO sellerFaqDAO;
