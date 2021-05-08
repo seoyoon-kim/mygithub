@@ -145,7 +145,7 @@ function searchingData(pageNum){
 				tag += '<th scope="col">정산금액</th>';
 				tag += '<th scope="col">정산날짜</th>';
 				tag += '</tr></thead><tbody>';
-
+ 
 			if(result[1].length == 0){
 				alert('검색된 데이터가 없습니다.');
 				
@@ -183,7 +183,7 @@ function searchingData(pageNum){
 
 			// 엑셀 페이징
 			excelInitPaging(result[2].totalPage, result[2].pageNum, result[2].startPageNum, result[2].onePageNum);
-			
+			console.log(result[2].startPageNum);
 			// 합계금액
 			$('#totalMoney').html("정산 합계 금액 : " + reqularExpression(Math.round(result[0].totalMoney- (result[0].totalMoney*0.05) - (result[0].totalMoney*0.058)) ) + "원");
 			
@@ -198,7 +198,11 @@ function searchingData(pageNum){
 
 // 페이징 설정
 function excelInitPaging(totalPage, pageNum, startPageNum, onePageNum){
-
+	console.log(startPageNum);
+	console.log(startPageNum+onePageNum-1);
+	console.log(totalPage);
+	console.log(pageNum);
+	console.log('--------------------');
 	let tag = '<div class="page_nation">';
 	if( totalPage == 1 ){
 		tag += '<a class="arrow pprev" href="#" onclick="return false;"></a>';

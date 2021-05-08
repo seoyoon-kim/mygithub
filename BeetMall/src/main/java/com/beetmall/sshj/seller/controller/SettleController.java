@@ -67,16 +67,20 @@ public class SettleController {
 				sendData.add(1, service.getSettleData(vo));
 			}
 			System.out.println(sendData.get(1).toString());
+		
 		} else { // 주문 건별 기준일때, 매출일자와 정산날짜 기준인지 확인
+	
 			//매출일자 기준이면 getOrderDateData 실행
 			if(req.getParameter("selectOption").equals("매출일자")) {
 				sendData.add(1, service.getOrderDateData(vo)); // array[1] vo 데이터를 보낸
 			} else { // 정산날짜 기준이면 getOrderSettleData
 				sendData.add(1, service.getOrderSettleData(vo)); //
 			}
+			
 		}		
 		sendData.add(2, vo);
 		
+
 		return sendData;
 	}
 	

@@ -25,7 +25,7 @@
 // 선택된 날짜의 데이터를 저장해 높는 변수
 let startCalendarDataValue = "";
 let endCalendarDataValue = "";
-let excelViewListNum = 3;
+
 
 //날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
 let yearCheck="";
@@ -41,8 +41,11 @@ let excelListNum = 0;
 // 엑셀에서 사용할 값이 들어있는 리스트 변수
 let excelArrList ;
 
-// 엑셀에서 사용할 표시되는 리스트 갯수 정하는 변수
-let excelViewNum = 10;
+// 엑셀에서 사용할 표시되는 페이지 갯수 정하는 변수
+let excelViewListNum;
+
+//엑셀 최대 페이지 갯수
+let excelMaxPage;
 
 // 엑셀 페이징 설정
 let MathNum;
@@ -536,9 +539,11 @@ $(function(){
 				$('#excelList').html(tag);
 				
 				// 엑셀 페이징 				
-				let excelPagingInit = 1; // 시작 초기 번호
+				let excelPagingInit = 1; // 선택번호
+				excelViewListNum = 10; // excel에 보여지는 갯수를 몇개로 할건지 초기화
 				excelListNum = $result.length; // totalRecord 갯수
-				excelPaging(excelListNum, excelPagingInit);
+				excelMaxPage = 10; // excel Max Page 갯수
+				excelPaging(excelListNum, excelPagingInit, excelViewListNum, excelMaxPage);
 				$('#excelViewNum').val('10').prop('selected',true);
 				
 				// 총 합계 데이터 입력
@@ -1045,7 +1050,7 @@ $(function(){
 })
 
 /////////////////////////////// 엑셀 기능 함수 /////////////////////////////////////
-function excelPaging(num , excelPagingInit){
+function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 	// excelPaging 할때, html 변화를 render
 	let excelPagingTag = '<a class="arrow pprev" href="javascript:void(0);" onclick="apprev(this);"></a> <a class="arrow prev" href="javascript:void(0);" onclick="aprev(this);"></a>';
 	// 모든 display none으로 초기화하고 시작
@@ -1054,10 +1059,10 @@ function excelPaging(num , excelPagingInit){
 	// num에는 li 갯수가 몇 개 있는지 들어있다.
 	// num을 10으로 나눈 값
 	MathNum = Math.ceil(num/excelViewListNum);
+	//시작번호 ((excelPagingInit -1 / excelViewListNum*excelViewListNum)+1
+	let startPageNum = (Math.floor((excelPagingInit-1) / excelMaxPage)*excelMaxPage)+1;
 	
-	console.log(MathNum);
-	console.log(num);
-	if(excelPagingInit==1){//초기화
+	if(MathNum==1){// 초기화 총 페이지수가 1이면 실행한다.
 		if(num<excelViewListNum){ // num 갯수가 페이지 갯수보다 적으면
 			excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">1</a>';  
 			for(let i = 1; i <= num; i++){
@@ -1094,7 +1099,18 @@ function excelPaging(num , excelPagingInit){
 		// 만약 눌린 페이지가 10 이하면  1 2 3 4 5 6 7 8 9 10
 		// 만약 눌린 페이지가 11 이상 20 이하면 11 12 13 14 15 16 17 18 19 20
 		// 만약 눌린 페이지가 21 이상 30 이하면 21 22 23 24 25 26 27 28 29 30
+		for( let i = startPageNum; i <= startPageNum + excelMaxPage-1 ; i++){
+			if( i == excelPagingInit ){
+				excelPagingTag += '<a class="active" href="#">' + i + '</a>';
+			} else {
+				excelPagingTag += '<a class="arrow" href="javascript:void(0);" onclick="anum(this);">' + i + '</a>';
+			}
+			if(i == MathNum) break;
+		}
 		
+		$('#excelList>li:nth-child(n+'+ (7+ ((6*excelViewListNum) * (excelPagingInit-1) ) ) +'):nth-child(-n+'+ (6+(6*excelViewListNum) + ( (6*excelViewListNum) * (excelPagingInit-1) ) ) +')').css('display','inline');
+		
+		/*
 		let result = excelPagingInit%excelViewListNum - excelPagingInit+1; // 시작값 ex) (25%10) - 25 + 1= 21
 		// MathNum = 즉, 총 보유하고 있는 페이지와 result를 비교했을때의 차이값 만큼 표시 한다 
 		// MathNum == 25이고
@@ -1125,7 +1141,7 @@ function excelPaging(num , excelPagingInit){
 		// 3일때는 127 ~ 186    +120
 
 		$('#excelList>li:nth-child(n+'+ (7+ (60 * (excelPagingInit-1) ) ) +'):nth-child(-n+'+ (66 + ( 60 * (excelPagingInit-1) ) ) +')').css('display','inline');
-			
+		*/	
 		
 		
 		
@@ -1139,7 +1155,7 @@ function excelPaging(num , excelPagingInit){
 function apprev(){
 	// excelList에 값이 10개 이상있으면 엑셀 페이징 초기 
 	if(excelListNum > excelViewListNum){
-		excelPaging(excelListNum, 1);
+		excelPaging(excelListNum, 1, excelViewListNum, excelMaxPage);
 	}
 }
 
@@ -1148,7 +1164,7 @@ function aprev(){
 	if(excelListNum > excelViewListNum){
 		// 1이상이면 이전페이지로 한다.
 		if(parseInt($('.active').text(),10) > 1 ){
-			excelPaging(excelListNum, parseInt($('.active').text(),10)-1);	
+			excelPaging(excelListNum, parseInt($('.active').text(),10)-1, excelViewListNum, excelMaxPage);	
 		} 
 	}
 }
@@ -1157,7 +1173,7 @@ function aprev(){
 function anum(clickNum){
 	// 누른 페이지 번호가 무엇인지 확인
 	if(excelListNum > excelViewListNum){
-		excelPaging(excelListNum, parseInt($(clickNum).text(),10) );
+		excelPaging(excelListNum, parseInt($(clickNum).text(),10), excelViewListNum ,excelMaxPage);
 	}
 }
 
@@ -1166,7 +1182,7 @@ function anext(){
 	if(excelListNum > excelViewListNum){
 		// MathNum 즉, 마지막페이지가 아닐 경우 다음페이지로 이동 가능하다.
 		if(parseInt($('.active').text(),10) < MathNum ){
-			excelPaging(excelListNum, parseInt($('.active').text(),10)+1);	
+			excelPaging(excelListNum, parseInt($('.active').text(),10)+1, excelViewListNum, excelMaxPage);	
 		}
 	}
 }
@@ -1175,7 +1191,7 @@ function anext(){
 function annext(){
 	if(excelListNum > excelViewListNum){
 		// MathNum 즉, 마지막 페이지로 이동
-		excelPaging(excelListNum, MathNum);
+		excelPaging(excelListNum, MathNum, excelViewListNum, excelMaxPage);
 	}
 }
 $(()=>{
@@ -1209,7 +1225,12 @@ $(()=>{
 		});
 	});
 })
-	
+
+
+function changeViewListNum(num){
+	excelViewListNum = $('#excelViewNum option:selected').val();
+	excelPaging(excelListNum , 1, excelViewListNum, excelMaxPage);
+}
 
 </script>
 
@@ -1302,7 +1323,7 @@ $(()=>{
 			<div class="wrapTitle">
 				카테고리별 매출분석
 				<button class="normalBtn" id="excelDown">엑셀 저장</button>
-				<select id="excelViewNum">
+				<select id="excelViewNum" onchange="javascript:changeViewListNum(this)">
 					<option selected="selected">10</option>
 					<option>50</option>
 					<option>100</option>
