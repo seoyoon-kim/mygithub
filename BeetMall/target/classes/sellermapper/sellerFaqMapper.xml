@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerFaqDAO">
+	<select id="faqList" resultType="com.beetmall.sshj.custom.vo.SellerFaqVO">
+		select faqnum, faqcate, faqtitle, faqcontent, faqoption from faq where faqoption = 2 order by faqnum desc
+	</select>
+
+</mapper>

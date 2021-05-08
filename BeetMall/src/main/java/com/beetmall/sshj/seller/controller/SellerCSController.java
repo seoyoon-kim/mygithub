@@ -30,9 +30,6 @@ public class SellerCSController {
 	public String ask_admin_edit() {
 		return "seller/ask_admin_edit";
 	}
-	@RequestMapping("/faq")
-	public String faq() {
-		return "seller/faq";
-	}
+
 }
 
