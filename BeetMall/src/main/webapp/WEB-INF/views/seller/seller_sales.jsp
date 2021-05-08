@@ -149,48 +149,51 @@ $(document).on('click',"#category>li",function(){
 
 });
 
-//pdf 다운로드 누르면 실행
-$('#pdfDown').click( () => {
-	// 페이지의 크기를 구한다.
-	var reportPageHeight = $('#chartContainer').innerHeight();
-	var reportPageWidth = $('#chartContainer').innerWidth();
+$( ()=>{
+	//pdf 다운로드 누르면 실행
+	$('#pdfDown').click( () => {
+		// 페이지의 크기를 구한다.
+		var reportPageHeight = $('#chartContainer').innerHeight();
+		var reportPageWidth = $('#chartContainer').innerWidth();
 
-	  // 캔버스 개체를 만든다.
-	  var pdfCanvas = $('<canvas />').attr({
-	    id: "canvaspdf",
-	    width: reportPageWidth,
-	    height: reportPageHeight
-	  });
-	  
-	  // 캔버스 포지션을 정한다.
-	  var pdfctx = $(pdfCanvas)[0].getContext('2d');
-	  var pdfctxX = 0;
-	  var pdfctxY = 0;
-	  var buffer = 100;
-	  
-		  // for each chart.js chart
-	  $("canvas").each(function(index) {
-	    // 차트의 크기를 구한다.
-	    var canvasHeight = $(this).innerHeight();
-	    var canvasWidth = $(this).innerWidth();
-	    
-	    // 새로운 캔버스 안에 넣는다.
-	    pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
-	    pdfctxX += canvasWidth + buffer;
-     
-	    if (index % 2 === 1) {
-	      pdfctxX = 0;
-	      pdfctxY += canvasHeight + buffer;
-	    }
-	  }); 
-	  
-	  // pdf 객체를 생성하여 넣는다.
-	  var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
-	  pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
-	  
-	  // pdf 다운로드
-	  pdf.save('매출내역.pdf');
-});
+		  // 캔버스 개체를 만든다.
+		  var pdfCanvas = $('<canvas />').attr({
+		    id: "canvaspdf",
+		    width: reportPageWidth,
+		    height: reportPageHeight
+		  });
+		  
+		  // 캔버스 포지션을 정한다.
+		  var pdfctx = $(pdfCanvas)[0].getContext('2d');
+		  var pdfctxX = 0;
+		  var pdfctxY = 0;
+		  var buffer = 100;
+		  
+			  // for each chart.js chart
+		  $("canvas").each(function(index) {
+		    // 차트의 크기를 구한다.
+		    var canvasHeight = $(this).innerHeight();
+		    var canvasWidth = $(this).innerWidth();
+		    
+		    // 새로운 캔버스 안에 넣는다.
+		    pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+		    pdfctxX += canvasWidth + buffer;
+	     
+		    if (index % 2 === 1) {
+		      pdfctxX = 0;
+		      pdfctxY += canvasHeight + buffer;
+		    }
+		  }); 
+		  
+		  // pdf 객체를 생성하여 넣는다.
+		  var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+		  pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
+		  
+		  // pdf 다운로드
+		  pdf.save('BEETMALL 매출내역.pdf');
+		  alert('BEETMALL 매출내역 PDF 파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
+	});
+})
 
 
 
@@ -1145,36 +1148,37 @@ function annext(){
 		excelPaging(excelListNum, MathNum);
 	}
 }
-
-// 엑셀저장
-$('#excelDown').click( () => {
-	if($('#categoryManagement>li').length<1 || startCalendarDataValue=='' || endCalendarDataValue==''){
-		alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
-		return false;
-	}
-	let excelData = [];
-	for(let i =0; i<excelArrList.length; i++){
-		excelData.push(excelArrList[i].ordernum);
-		excelData.push(excelArrList[i].orderconfirm);
-		excelData.push(excelArrList[i].productname);
-		excelData.push(excelArrList[i].orderquantity);
-		excelData.push(excelArrList[i].orderprice);
-		excelData.push(parseInt(excelArrList[i].orderquantity,10) * parseInt(excelArrList[i].orderprice,10));
-	}
-	
-	$.ajax({
-		type: "POST",
-		url: "excel_down",
-		traditional : true,
-		data: {
-			"excelData":excelData
-		}, success: function(result){
-			console.log('성공');
-		}, error: function(error){
-			alert('엑셀 다운로드 실패');
+$(()=>{
+	// 엑셀저장
+	$('#excelDown').click( () => {
+		if($('#categoryManagement>li').length<1 || startCalendarDataValue=='' || endCalendarDataValue==''){
+			alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
+			return false;
 		}
+		let excelData = [];
+		for(let i =0; i<excelArrList.length; i++){
+			excelData.push(excelArrList[i].ordernum);
+			excelData.push(excelArrList[i].orderconfirm);
+			excelData.push(excelArrList[i].productname);
+			excelData.push(excelArrList[i].orderquantity);
+			excelData.push(excelArrList[i].orderprice);
+			excelData.push(parseInt(excelArrList[i].orderquantity,10) * parseInt(excelArrList[i].orderprice,10));
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "excel_down",
+			traditional : true,
+			data: {
+				"excelData":excelData
+			}, success: function(result){
+				alert('BEETMALL 매출관리 엑셀파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
+			}, error: function(error){
+				alert('엑셀 다운로드 실패');
+			}
+		});
 	});
-});
+})
 	
 
 </script>
@@ -1285,6 +1289,7 @@ $('#excelDown').click( () => {
 						<li>매출금액</li>
 					</ul>
 				</div>
+				<hr>
 				<div id="totalMoney"></div>
 				<!--------------페이징 표시-------------------->
 				<div class="page_wrap">

@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+/*================ 본문 시작 =================*/
+/* 공통분모 설정 */
+.wrap{
+	width: 90%;
+	margin: 0 auto;
+}
+
+.wrapContainer{
+	width: 100%;
+	border: 1px solid #ccc;
+	margin-bottom: 30px;
+}
+
+.wrapTitle{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	text-indent: 0.4em;
+	background-color: #f1c40f;
+}
+
+/* 리뷰보기 */
+#reviewInfo{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#reviewInfo li{
+	width: 25%;
+	height: 60px;
+	line-height: 50px;
+	text-align: center;
+	border: 1px solid #aaa;
+}
+
+/* 리뷰 검색 */
+#categoryList{
+	width: 90%;
+	margin: 20px auto;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+}
+
+#categoryList>strong{
+	text-indent: 0.4em;
+}
+
+#categoryListMiddle{
+	width: 100%;
+	height: 170px;
+	display: flex;
+	flex-basis: 1;
+}
+
+#categoryListMiddle ul{
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	overflow: auto;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+#category{
+	border-right: 1px solid #aaa;
+}
+
+#categoryListMiddle li{
+	width: 100%;
+	text-indent: 0.4em;
+	display: flex;
+}
+
+#categoryListMiddle span{
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+#categoryManagement{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#categoryManagement li{
+	text-indent: 0.4em;
+	margin: 10px 0;
+}
+
+#categorySearch_container{
+	margin-bottom: 5px;
+	display: flex;
+}
+/* categorySearch_container의 공통문보 설정*/
+.categorySearch_container_child{
+	margin-left: 5px;
+}
+
+/* 리뷰 출력 */
+#sortContainer{
+	width: 100%;
+	height: 30px;
+	margin-bottom: 5px;
+}
+
+#sortSelect{
+	float: right;
+}
+
+#reviewList{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#reviewList li:nth-child(n+1):nth-child(-n+7){
+	background-color:#bbb;
+}
+
+#reviewList li{
+	flex: 1 1 14%;
+	text-align: center;
+	border: 1px solid #ddd;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 20px 0;
+}
+
+#reviewList a{
+	color: #000;
+}
+
+/*================ 본문 끝 =================*/
+
+/* 팝업 */
+#popup{
+	width: 500px;
+	height: auto;
+	position: absolute;
+	background-color: #fff;
+}
+
+.wrapContainer_Edit1{
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+#reviewManagement{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+#reivewManagement>li{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	display: flex;
+	border-bottom: 1px solid #ccc;
+}
+
+#reivewManagement>li>b{
+	width: 20%;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+#repMenu_img{
+	margin-right: 20px;
+}
+
+#good_img{
+	width: 30px;
+	height: 30px;
+	margin: 30px 0 0 150px;
+}
+
+#reviewContent{
+	width: 95%;
+	height: 100px;
+	background-color: #ddd;
+	display: flex;
+	margin: 10px auto;
+}
+
+#reviewContent p{
+	flex-basis: 2;
+	margin: 10px;
+}
+
+#reviewContent img{
+	flex-basis: 1;
+}
+
+#popupBtnContainer{
+	width: 100%;
+	height: 50px;
+	text-align: center;
+}
+
+#popupBtnContainer input:nth-child(1){
+	background-color: pink;
+	border: 1px solid pink;
+	border-radius: 5px;
+}
+
+#popupBtnContainer input:nth-child(2){
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+#popupBtnContainer input:nth-child(3){
+	background-color: gray;
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+/* 신고하기 */
+#declaration{
+	width: 300px;
+	height: auto;
+	position: absolute;
+	background-color: #fff;
+	left: 900px;
+}
+
+#declarationFrm{
+	width:100%;
+	text-align:center;
+	display:inline-flex;
+	flex-direction: column;
+		align-items: cneter;
+		justify-content: center;
+}
+
+#declarationFrm>div>select{
+
+}
