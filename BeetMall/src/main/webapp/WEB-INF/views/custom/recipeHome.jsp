@@ -224,7 +224,7 @@ margin-top:3px;
 margin-left:3px;
 margin-bottom:3px;
 height:150px;
-
+border-bottom:1px solid #eee;
 }
 
 #recipeListul>li:nth-child(7n+1),#rtitleImg{
@@ -376,7 +376,6 @@ function new10(){
 		</span>
 	    
 	    </div>
-	    <div id="writebtndiv"><a href="<%=request.getContextPath() %>/recipeWrite"><input type="submit" id="writebtn" value="글 작성하러 가기"/></a></div>
 	
 <!-- -------------------------레시피 리스트들-------------------------------------- -->	
         
