@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.MyBuyListDAO;
+import com.beetmall.sshj.custom.vo.ClaimVO;
 import com.beetmall.sshj.custom.vo.MyBuyListVO;
 import com.beetmall.sshj.custom.vo.ReviewVO;
 
@@ -54,6 +55,48 @@ public class MyBuyListServiceImp implements MyBuyListService {
 	public int reviewWrite(ReviewVO vo) {
 		
 		return mybuylistDAO.reviewWrite(vo);
+	}
+
+	@Override
+	public ReviewVO reviewSelect(int ordernum) {
+		
+		return mybuylistDAO.reviewSelect(ordernum);
+	}
+
+	@Override
+	public int reviewgoodCount(int reviewnum) {
+		
+		return mybuylistDAO.reviewgoodCount(reviewnum);
+	}
+
+	@Override
+	public int reviewcheck(int reviewnum, String userid) {
+		
+		return mybuylistDAO.reviewcheck(reviewnum, userid);
+	}
+
+	@Override
+	public int reviewGoodCancel(int reviewnum, String userid) {
+		
+		return mybuylistDAO.reviewGoodCancel(reviewnum, userid);
+	}
+
+	@Override
+	public int reviewGood(int reviewnum, String userid) {
+		
+		return mybuylistDAO.reviewGood(reviewnum, userid);
+	}
+
+	@Override
+	public int claimInsert(ClaimVO vo) {
+		
+		return mybuylistDAO.claimInsert(vo);
+	}
+
+	@Override
+	public int claimUpdate(int ordernum, String status) {
+		
+		return mybuylistDAO.claimUpdate(ordernum, status);
 	}	
 
 }

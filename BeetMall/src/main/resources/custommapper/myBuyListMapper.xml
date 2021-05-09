@@ -33,4 +33,27 @@
 		insert into review(reviewnum, ordernum, productnum, reviewcontent, userid, reviewwritedate, reviewrecommend, reviewimg, reviewscore, reviewreport, reviewanswer)
 		values(reviewsq.nextval, #{ordernum}, #{productnum}, #{reviewcontent}, #{userid}, sysdate, 0, #{reviewimg}, #{reviewscore}, 0,  null)
 	</insert>
+	<select id="reviewSelect" resultType="com.beetmall.sshj.custom.vo.ReviewVO">
+		select reviewnum, reviewcontent, userid, reviewwritedate, 
+		(select count(reviewnum) from reviewlike
+		where reviewnum = (select reviewnum from review where ordernum=#{param1})) as reviewcount
+		from (select * from review where ordernum = #{param1})
+	</select>
+	<select id="reviewcheck" resultType="Integer">
+		select count(*) from reviewlike where reviewnum = #{param1} and userid=#{param2}
+	</select>
+	<delete id="reviewGoodCancel">
+		delete from reviewlike where reviewnum = #{param1} and userid=#{param2}
+	</delete>
+	<insert id="reviewGood">
+		insert into reviewlike(reviewnum, userid, reviewgood)
+		values(#{param1}, #{param2}, 1)
+	</insert>
+	<insert id="claimInsert" parameterType="com.beetmall.sshj.custom.vo.ClaimVO">
+		insert into claim(ordernum, productnum, claimkind, claimstatus, claimcontent, claimdate, delivery, invoice)
+		values(#{ordernum}, #{productnum}, #{claimkind}, #{claimstatus}, #{claimcontent}, sysdate, #{delivery}, #{invoice})
+	</insert>
+	<update id="claimUpdate">
+		update orderdetail set orderstatus = #{param2} where ordernum=#{param1}
+	</update>
 </mapper>
