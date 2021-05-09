@@ -14,4 +14,6 @@ public interface SellerNoticeService{
 	public int countInfoHit(int infonum);
 //이전글 다음글
 	public SearchAndPageVO lagLeadSelect(int infonum);
+//총 레코드 수 구하기
+	public int totalRecord(SearchAndPageVO spvo);
 }

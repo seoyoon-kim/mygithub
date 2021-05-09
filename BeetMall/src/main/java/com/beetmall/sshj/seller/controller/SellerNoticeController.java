@@ -1,6 +1,7 @@
 package com.beetmall.sshj.seller.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,18 +16,22 @@ public class SellerNoticeController {
 	SellerNoticeService sellerNoticeService;
 	
 	@RequestMapping("/notice")
-	public ModelAndView sellerNoticeAllRecord(SearchAndPageVO spvo) {
+	public ModelAndView sellerNoticeAllRecord(SearchAndPageVO sapvo, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("noticeList", sellerNoticeService.sellerNoticeAllRecord(spvo));
-		//검색어가 있을 때,
-		if(spvo.getSearchWord()!=null) { 		
-			spvo.setSearchWord(spvo.getSearchWord());
-			mav.addObject("noticeList", sellerNoticeService.sellerNoticeAllRecord(spvo) );
-			System.out.println(" word=" + spvo.getSearchWord());
+		
+		//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
+		String reqPageNum = req.getParameter("pageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
+		if(reqPageNum != null) {
+			sapvo.setPageNum(Integer.parseInt(reqPageNum)); 
 		}
+		//총 레코드 수 구하기 
+		sapvo.setTotalRecord(sellerNoticeService.totalRecord(sapvo));	
+		//검색어가 있을 때,
+		sapvo.setSearchWord(sapvo.getSearchWord());
 		
-		mav.setViewName("seller/notice");
-		
+		mav.addObject("sapvo",sapvo);
+		mav.addObject("noticeList", sellerNoticeService.sellerNoticeAllRecord(sapvo) );
+		mav.setViewName("seller/notice");	
 		return mav;
 	}
 	@RequestMapping("/notice_view")

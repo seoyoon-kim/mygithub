@@ -27,7 +27,16 @@
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote();
-	
+	  $("#askFrm").submit(function(){
+		 	 if($('#subject').val()=="" || #('#subject').val()==null){
+				alert("문의 제목을 입력해주세요.");
+				return false;
+			}
+			if($('#qmcontent').val()=="" || #('#qmcontent').val()==null){
+				alert("문의 내용을 입력해주세요.");
+				return false;
+			}
+			return true;	
 	});
 </script>
 <body>
@@ -73,7 +82,7 @@ $(document).ready(function() {
 			<span id="notice">고객님께서 작성하신 질문은 관리자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 		</div>
 			
-		<form method="post" action="">
+		<form method="post" action="ask_admin_write_ok" id="askFrm">
 		<table>
 			<tbody>
 				<tr>
@@ -81,7 +90,7 @@ $(document).ready(function() {
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >제목</th>
-					<td class="td"><input type="text" name="" id="subject" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<td class="td"><input type="text" name="qmtitle" id="subject" placeholder="문의사항 제목을 입력해주세요."/></td>
 					<th class="menu">작성자</th>
 					<td  class="td"><span>로그인한 아이디</span></td>	
 				</tr>
@@ -91,7 +100,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="summernote" name="editordata" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="summernote" id="qmcontent" name="qmcontent" placeholder="문의내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>

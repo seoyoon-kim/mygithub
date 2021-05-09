@@ -75,6 +75,8 @@ public class ProductController {
 	}
 	//여러개 레코드 한번에 삭제 
 	
+	//수정하기
+	
 	
 	//판매자 주문관리
 	@RequestMapping("/order_management")

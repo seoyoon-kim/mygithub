@@ -182,10 +182,11 @@
                   </c:if>
                   <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
                   <input type="button" value="로그아웃" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/notice'"/>
                </div>
             </c:if>
          </div>   
+         <!-- headerMember end -->
          <ul id="seller_cs_menu">
             <li><a href="#">BEETMALL</a></li>
             <li><a href="notice">공지사항</a></li>
@@ -193,7 +194,6 @@
             <li><a href="ask_admin_list">문의하기</a></li>
          </ul>
       </nav>
-   </div> 
 	<!-- 가운데 메인 div -->
 	<div id="article">
 		<div class="cs_wrapTitle">자주묻는 질문</div>
@@ -247,19 +247,39 @@
 				</c:forEach>
 			</tbody>
 		</table>
-			<!-- 페이징-->
+		<!-------------- 페이징------------------>
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+				
+			  	<!--맨앞으로-->
+  				<a class="arrow_pprev" href="faq?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--앞으로-->
+        		<a class="arrow_prev" href="faq?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
+         		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
+	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
+	            	<c:if test="${p<=sapvo.totalPage}">  
+						<!--현재페이지 :  현재보고있는 페이지 표시 -->
+		               <c:if test="${p==sapvo.pageNum}">
+		                  <a class="on" href="faq?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+		               <!-- 현재페이지가 아닐 때 -->
+		               <c:if test="${p!=sapvo.pageNum}">
+		                  <a href="faq?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+	            	</c:if>
+        		</c:forEach>
+        		<!-- 다음 페이지가 있을 때 -->
+				<!--뒤로-->            
+	         	<a class="arrow next" href="faq?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--맨뒤로-->
+	         	<a class="arrow nnext" href="faq?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 			</div>
-		 </div>
+		 </div> 
+		 <!-------------- 페이징 끝 --------------->
 		</fieldset>
-		</div>
-	</div>
+		
+		</div><!-- article end -->
+	</div><!-- main end -->
 </body>
 </html>

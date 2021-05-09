@@ -29,5 +29,9 @@ public class SellerNoticeServiceImp implements SellerNoticeService {
 	public SearchAndPageVO lagLeadSelect(int infonum) {
 		return sellerNoticeDAO.lagLeadSelect(infonum);
 	}
+	@Override
+	public int totalRecord(SearchAndPageVO spvo) {
+		return sellerNoticeDAO.totalRecord(spvo);
+	}
 
 }

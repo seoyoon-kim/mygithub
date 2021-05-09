@@ -153,12 +153,13 @@
 			<c:if test="${sapvo.prevNo>0}">
 				<li class="prev"><strong>&#9651;  이전글</strong><a href="notice_view?infonum=${sapvo.prevNo}">${sapvo.prevSubject}</a></li>
 			</c:if>
-			<c:if test="${sapvo.nextNo==0}">
-				${spvo.nextSubject}
-			</c:if>
 			<c:if test="${sapvo.nextNo>0}">
 				<li class="next"><strong>&#9661;  다음글</strong><a href="notice_view?infonum=${sapvo.nextNo}">${sapvo.nextSubject}</a></li>
 			</c:if>
+			<c:if test="${sapvo.nextNo==0}">
+				${sapvo.nextSubject}
+			</c:if>
+			
 			</ul>
 		</div>
 		</fieldset>

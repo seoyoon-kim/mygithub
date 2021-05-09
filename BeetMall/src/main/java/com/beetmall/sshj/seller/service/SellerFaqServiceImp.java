@@ -20,4 +20,9 @@ public class SellerFaqServiceImp implements SellerFaqService {
 		return sellerFaqDAO.sellerfaqAllRecord(spvo);
 	}
 
+	@Override
+	public int totalRecord(SearchAndPageVO spvo) {
+		return sellerFaqDAO.totalRecord(spvo);
+	}
+
 }
