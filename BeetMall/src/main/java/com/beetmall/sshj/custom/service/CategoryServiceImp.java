@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.beetmall.sshj.custom.dao.CategoryDAO;
 import com.beetmall.sshj.custom.vo.CategoryFarmVO;
 import com.beetmall.sshj.custom.vo.CategoryVO;
+import com.beetmall.sshj.custom.vo.PageSearchVO;
 
 @Service
 public class CategoryServiceImp implements CategoryService {
@@ -22,8 +23,28 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryVO> categorylist() {
-		return categoryDAO.categorylist();
+	public List<CategoryVO> categorylist(PageSearchVO pageVO) {
+		return categoryDAO.categorylist(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> pickupCheckTure() {
+		return categoryDAO.pickupCheckTure();
 	}
 	
+	@Override
+	public List<CategoryVO> highhigh1() {
+		return categoryDAO.highhigh1();
+	}
+
+	@Override
+	public List<CategoryVO> lowlow1() {
+		return categoryDAO.lowlow1();
+	}
+
+	@Override
+	public int categoryOnetotalRecord(PageSearchVO pageVO) {
+		return categoryDAO.categoryOnetotalRecord(pageVO);
+	}
+
 }

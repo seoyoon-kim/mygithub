@@ -81,7 +81,6 @@ public class MemberController {
 	@ResponseBody
 	public String infoSelect(HttpServletRequest req) {
 		String info = req.getParameter("infoname");
-		System.out.println(info);
 		String result = memberservice.infoSelect(info);
 		return result;
 	}

@@ -1,19 +1,23 @@
 package com.beetmall.sshj.custom.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.CategoryService;
-import com.beetmall.sshj.custom.vo.CategoryVO;
+import com.beetmall.sshj.custom.vo.PageSearchVO;
 
 @Controller
 public class CategoryController {
 	@Inject
 	CategoryService categoryService;
 	
+	//지도부분
 	@RequestMapping("/mapping")
 	public ModelAndView mapping() {
 		ModelAndView mav = new ModelAndView();
@@ -23,29 +27,98 @@ public class CategoryController {
 		return mav;
 	}
 	
-	@RequestMapping("/kangsan")
-	public ModelAndView kangsan() {
+	//카테고리메인
+	@RequestMapping("/categoryMain")
+	public ModelAndView categoryMain(HttpServletRequest req, HttpServletResponse res) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", categoryService.categorylist());
+		
+		String pageNumStr = req.getParameter("pageNum");
+		
+		PageSearchVO pageVO = new PageSearchVO();
+		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
+		
+		mav.addObject("list", categoryService.categorylist(pageVO));
+		mav.addObject("pageVO",pageVO);
+		
 		mav.setViewName("custom/category/categoryMain");
 		
 		return mav;
 	}
 	
-	@RequestMapping("/kangsan2")
-	public String kangsan2() {
-		return "custom/category/uglyItem";
+	//픽업여부체크시
+	@RequestMapping("/pickupCheckTure")
+	@ResponseBody
+	public ModelAndView pickupCheckTure() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", categoryService.pickupCheckTure());
+		mav.setViewName("custom/category/category");
+		return mav;
 	}
 	
-	@RequestMapping("kangsan3")
-	public String kangsan3() {
-		return "custom/category/categoryCharge";
+	//픽업여부 해제시>메인으로
+	@RequestMapping("/pickupCheckFalse")
+	@ResponseBody
+	public ModelAndView pickupCheckFalse() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", categoryService.categorylist());
+		mav.setViewName("custom/category/category");
+		return mav;
 	}
 	
-	@RequestMapping("kangsan4")
-	public String kangsan4() {
-		return "custom/category/payCategory";
+	//평점높은순
+	@RequestMapping("/highhigh1")
+	@ResponseBody
+	public ModelAndView highhigh1(){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", categoryService.highhigh1());
+		mav.setViewName("custom/category/category");
+		return mav;
 	}
 	
+	//평점낮은순
+	@RequestMapping("/lowlow1")
+	@ResponseBody
+	public ModelAndView lowlow1(){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", categoryService.lowlow1());
+		mav.setViewName("custom/category/category");
+		return mav;
+	}
 	
+	//지역별보기
+	@RequestMapping("categoryCharge")
+	public ModelAndView categoryCharge() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", categoryService.categorylist());
+		mav.setViewName("custom/category/categoryCharge");
+		
+		return mav;
+	}
+	
+	//가격대별보기
+	@RequestMapping("payCategory")
+	public ModelAndView payCategory() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", categoryService.categorylist());
+		mav.setViewName("custom/category/payCategory");
+		
+		return mav;
+	}
+	//못난이할인
+	@RequestMapping("/uglyItem")
+	public ModelAndView uglyItem() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", categoryService.categorylist());
+		mav.setViewName("custom/category/uglyItem");
+		
+		return mav;
+	}
 }

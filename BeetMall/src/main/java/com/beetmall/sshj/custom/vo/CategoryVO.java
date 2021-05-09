@@ -11,6 +11,7 @@ public class CategoryVO {
 	private String productname;//상품이름
 	private int productprice;//상품가격
 	private String thumbimg;//이미지
+	private int proprice;//실가격
 	
 	//리뷰
 	private String totalscore; //별점
@@ -91,12 +92,10 @@ public class CategoryVO {
 		return salestart;
 	}
 	public void setSalestart(String salestart) {
-		
 		try {
 			Date todaytimeee = today.parse(salestart);
 			if(now.getTime() <= todaytimeee.getTime()) {
-				System.out.println("찍힘?");
-				salestart = "1";
+				this.salestart = "1";
 			}else{
 				this.salestart = salestart;
 			}
@@ -111,14 +110,18 @@ public class CategoryVO {
 		try {
 			Date todaytimeee = today.parse(salefinish);
 			if(now.getTime() >= todaytimeee.getTime()) {
-				salefinish = "1";
+				this.salefinish = "1";
 			}else{
 				this.salefinish = salefinish;
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println(salefinish);
-		
+	}
+	public int getProprice() {
+		return proprice;
+	}
+	public void setProprice(int proprice) {
+		this.proprice = proprice;
 	}
 }
