@@ -53,7 +53,7 @@
 		float: right;
 		background-color: #fff;
 	}
-	#search{
+	#search, #searchWord{
 		height: 25px;
 		text-indent: 0.2em;
 		border: white;

@@ -16,12 +16,13 @@ public class SellerFaqController {
 	@RequestMapping("/faq")
 	public ModelAndView sellerfaqAllRecord(SearchAndPageVO spvo) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("faqList", sellerfaqService.sellerfaqAllRecord());
+		mav.addObject("faqList", sellerfaqService.sellerfaqAllRecord(spvo));
 		
-		if(spvo.getSearchWord()!=null) { //%% like 연산자
+		if(spvo.getSearchWord()!=null) { 
 			//spvo.setSearchWord("%"+spvo.getSearchWord()+"%");
 			spvo.setSearchWord(spvo.getSearchWord());
-			mav.addObject("faqList", sellerfaqService.searchList(spvo));
+			spvo.setSearchKey(spvo.getSearchKey());
+			mav.addObject("faqList", sellerfaqService.sellerfaqAllRecord(spvo));
 			System.out.println("key=" + spvo.getSearchKey()+" , word=" + spvo.getSearchWord());
 		}
 		

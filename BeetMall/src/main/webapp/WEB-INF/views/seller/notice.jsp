@@ -46,14 +46,26 @@
 	.option_change{
 		width:100%;
 	}
-		
+	
 	#seller_cs_menu{
 		width:600px;
 	}
+	/*검색 basicStyle.css 와 안맞아서 수정*/
+	#search_box{border:none;}
+	#searchBtn{margin-left:-1px; background:white; width:50px; height:30px;}
+	#searchWord{height:30px; border: 1px solid lightgray;}
 </style>
 <script>
-//테이블 collapse
-  //showHideFaq
+	//검색어 확인
+	$(function(){
+		$("#searchForm").submit(function(){
+			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+			if($('#searchWord').val()=="" || #('#searchWord').val()==null){
+				alert("검색어를 입력하세요.");
+				return false;
+			}
+			return true;
+		});
 </script>
 <body>
 	<div class="main">
@@ -94,9 +106,11 @@
 		<div class="cs_wrapTitle">공지사항</div>
 	<!-------------------------검색하기 ---------------------------------------------->
 		<div id="search_container">
-			<span id="search_box">
-				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><span id="search_btn">검색</span></a>
-			</span>
+			<form method="get" action="notice" id="searchForm">
+				<span id="search_box">
+					<input type="text" id="searchWord" name="searchWord" placeholder="검색하기"><input type="submit" id="searchBtn" value="검색"/>
+				</span>
+			</form>
 		</div>
 		<fieldset>
 		<table>
@@ -108,12 +122,13 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="nvo" items="${noticeList}">
 				<tr>
-					<td>1</td>
-					<td><a href="<%=request.getContextPath() %>/notice_view"><strong>코로나19로 인한 픽업 서비스 중단 안내</strong></a></td>
-					<td>21/04/21</td>
+					<td>${nvo.infonum}</td>
+					<td><a href="notice_view?infonum=${nvo.infonum}"><strong>${nvo.infotitle}</strong></a></td>
+					<td>${nvo.infowritedate}</td>
 				</tr>
-		
+				</c:forEach>
 			</tbody>
 			
 		</table>

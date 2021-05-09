@@ -27,16 +27,9 @@
 <style>
 
 	/*표*/
-	.th{
-		display: table-cell;
-	    vertical-align: inherit;
-	    text-align: -internal-center;
-   		background-color:#f6f6f6;;
-   		/*#fcfcfc*/
-	}
 	thead{
-		border-bottom: 1px solid #ccc;
-	    border-top: 1px solid #ccc;
+		/* border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc; */
 	    width:100%;
 	}
 	tr{
@@ -45,12 +38,13 @@
 	    border-color: inherit;
 	    height:50px;
 	}
-	.td, .content{
+	.td{
 		padding-left:20px;
 	}
 	.content{
-		padding: 20px 0 20px;
+		padding: 10px;
 	}
+	#content_td{padding: 25px 25px 25px 30px;}
 	.tr_head{
 		font-weight:bold;
 	}
@@ -61,23 +55,26 @@
 		width:150px; text-align:center;
 	}
 	.td, .th{ line-height:50px;}
-	td{border-bottom: 2px solid #ccc; padding:0;}
+	.td{border-left:1px solid lightgray;}
 	/*이전글, 다음글*/
 	.prev_next_wrap{
-		width:90%;
-		margin:20px 0px 0px 50px;
+		width:100%;
+		margin: 0 auto;
+		margin-top:20px;
 	}
 	.prev_next_wrap li{
-		height:40px;
-		line-height:40px;
-		border-bottom:1px solid lightgray;
+		height:30px;
+		line-height:30px;
+	
 	}
 	.prev_next_wrap a{
 		padding-left:20px;
 		color: black;
+		font-size:12px;
 	}
+	.next, .prev{font-size:12px;}
 	.next{margin-bottom:30px}
-	
+	.content{padding:10px;}
 	#seller_cs_menu{
 		width:600px;
 	}
@@ -125,42 +122,43 @@
 		<fieldset>
 		<table>
 			<tbody>
-				<tr class="tr_head">
-					<th class="menu">제목</th>
-					<td class="td"><span>코로나19로 인한 픽업 서비스 중단 안내</span></td>
+			<input type="hidden" name="infonum" value="${nvo.infonum}"/>
+				<tr class="tr_head"> 
+					<th class="menu">${nvo.infotitle}</th>
+					<td class="td" colspan="3"><span>${nvo.infotitle}</span></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span>Beetmall</span></td>
+					<td  class="td" colspan="3" ><span>Beetmall</span></td>
 				</tr>
 				<tr class="tr_head">
-				<td colspan="2">
-					<ul>
-						<li class="th">작성일</li>
-						<li class="td" style="padding-left:20px">21/04/21</li>
-						<li class="th">조회수</li>
-						<li class="td" style="padding-left:20px">21</li>
-					</ul>
+					<td class="th">작성일</td>
+					<td class="td" >${nvo.infowritedate}</td>
+					<td class="th">조회수</td>
+					<td class="td">${nvo.infohit}</td>
 				</tr>
 			
 				<tr>
-					<td colspan="2">
-						<span class="content" >
-						
-						고객님 안녕하세요.
-						코로나19로 인한 픽업 서비스 중단 안내드립니다.
-						2021.04.21 부터 어쩌구 저쩌구 
-						저쩌구
-					
-						</span>
+					<td colspan="4" id="content_td">
+						<span class="content" >${nvo.infocontent}</span>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
 		<div class="prev_next_wrap">
 			<ul class="prev_next_ul">
-				<li class="prev"><strong>&#9651;이전글</strong><a href="">이전글이 없습니다.</a></li>
-				<li class="next"><strong>&#9661;다음글</strong><a href="">다음글이 없습니다.</a></li>
+			<c:if test="${sapvo.prevNo==0}">
+				${sapvo.prevSubject}
+			</c:if>
+			<c:if test="${sapvo.prevNo>0}">
+				<li class="prev"><strong>&#9651;  이전글</strong><a href="notice_view?infonum=${sapvo.prevNo}">${sapvo.prevSubject}</a></li>
+			</c:if>
+			<c:if test="${sapvo.nextNo==0}">
+				${spvo.nextSubject}
+			</c:if>
+			<c:if test="${sapvo.nextNo>0}">
+				<li class="next"><strong>&#9661;  다음글</strong><a href="notice_view?infonum=${sapvo.nextNo}">${sapvo.nextSubject}</a></li>
+			</c:if>
 			</ul>
 		</div>
 		</fieldset>

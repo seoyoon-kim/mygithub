@@ -3,8 +3,24 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerFaqDAO">
-	<select id="sellerfaqAllRecord" resultType="com.beetmall.sshj.seller.vo.SellerFaqVO">
-		select faqnum, faqcate, faqtitle, faqcontent, faqoption from faq where faqoption = 2 order by faqnum desc
+	<select id="sellerfaqAllRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="com.beetmall.sshj.seller.vo.SellerFaqVO">
+		select faqnum, faqcate, faqtitle, faqcontent, faqoption 
+		from faq 
+		<choose>
+			<when test ='searchWord!=null and searchKey!=null'>
+				where faqcate = '${searchKey}' and faqtitle like '%${searchWord}%' and faqoption = 2
+			</when>
+			<when test ='searchKey!=null &amp;&amp; searchWord==null'>
+				where faqcate = '${searchKey}' and faqoption = 2
+			</when>
+			<when test ='searchWord!=null &amp;&amp; searchKey=="전체"'>
+				where faqtitle like '%${searchWord}%' and faqoption = 2
+			</when>
+			<when test ='searchWord==null or searchKey=="전체" '>
+				where faqoption = 2
+			</when>
+		</choose>		
+		order by faqnum desc
 	</select>
-
+	
 </mapper>

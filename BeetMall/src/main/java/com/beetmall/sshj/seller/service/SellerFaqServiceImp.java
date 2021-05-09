@@ -16,13 +16,8 @@ public class SellerFaqServiceImp implements SellerFaqService {
 	SellerFaqDAO sellerFaqDAO;
 	
 	@Override
-	public List<SellerFaqVO> sellerfaqAllRecord() {
-		return sellerFaqDAO.sellerfaqAllRecord();
-	}
-
-	@Override
-	public List<SellerFaqVO> searchList(SearchAndPageVO spvo) {
-		return sellerFaqDAO.searchList(spvo);
+	public List<SellerFaqVO> sellerfaqAllRecord(SearchAndPageVO spvo) {
+		return sellerFaqDAO.sellerfaqAllRecord(spvo);
 	}
 
 }

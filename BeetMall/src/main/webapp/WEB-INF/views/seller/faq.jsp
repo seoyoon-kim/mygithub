@@ -74,15 +74,15 @@
 /* 검색하기 */
 	#cs_search_container{
 		width: 100%;
-	
 		float: center;
 		text-align:center;
 		margin:0 auto;
 	}
 	#cs_search_box{
 		border:none;
+
 	}
-	#search{
+	#searchWord{
 		height:40px;
 		width:400px;
 		text-indent: 0.2em;
@@ -90,7 +90,8 @@
 		float: center;
 		border:1px solid lightgray; 
 		border-radius: 0px 8px 8px 0px;
-		margin:30px 0px 60px -2px;		
+		margin:30px 0px 60px -2px;	
+		margin-right:320px;
 	}
 	#cs_search_q{
 		font-weight:bold;
@@ -130,29 +131,33 @@
   			);
   		});
 //검색어
-
-  		$("#search").onkeyup(function(){
+		$('#selectKey').change(function(){
+  			console.log($('#searchKey').val());
+  			$('#searchFrm').submit(); //input = submit 없이 submit 넘기기
+  			return true;
+  		})
+  		$("#searchWord").onkeyup(function(){
   			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
-  			if($('#searchWord').val()==""){
+  			console.log("검색어 -> ", $('#search').val());
+  			if($('#search').val()==""){
   				alert("검색어를 입력하세요");
   				return false;
   			}
+  			$('#searchFrm').submit();
   			return true;
   		});
+  	
   		
   	});
 //선택한 select option별로 보기
 //수정할 것 나머지 option선택에 대한 script 추가하기
   		
-  		$('#sel').change(function(){
+  		$('#searchKey').change(function(){
   			var option = $(this).val();
   			console.log(option);
-  			if(option=='total'){ //전체
+  			if(option=='전체'){ //전체
   				$('tr').css('display','');
   			}
-  			if(option=='product'){ //전체
-  				$('tr').css('display','');
-  			}	
   		});
 
  
@@ -195,18 +200,20 @@
 		<!-- 검색하기 -->
 		<div id="cs_search_container">	
 			<span id="cs_search_q">자주묻는 질문을 검색해보세요.<br/></span>
-			<select id="sel" name="searchKey">
-				<option value="total">전체</option>
-				<option value="product">상품</option>
-				<option value="member">회원/포인트</option>
-				<option value="sale">판매</option>
-				<option value="order">주문/결제</option>
-				<option value="delivary">배송</option>
-				<option value="claim">교환/반품/환불</option>
-			</select>
-			<span id="cs_search_box">
-				<input type="text" name="searchWord" id="search"  placeholder="궁금하신 내용을 입력해주세요.">
-			</span>
+			<form method="get" action="faq" id="searchFrm">
+				<select  name="searchKey" id="searchKey">
+					<option value="전체">전체</option>
+					<option value="상품">상품</option>
+					<option value="회원/포인트">회원/포인트</option>
+					<option value="판매">판매</option>
+					<option value="주문/결제">주문/결제</option>
+					<option value="배송">배송</option>
+					<option value="교환/반품/환불">교환/반품/환불</option>
+				</select>
+				<span id="cs_search_box">
+					<input type="text" name="searchWord" id="searchWord"  placeholder="궁금하신 내용을 입력해주세요.">
+				</span>
+			</form>
 		</div>
 		<!-- 자주묻는질문 테이블-->
 		<fieldset>

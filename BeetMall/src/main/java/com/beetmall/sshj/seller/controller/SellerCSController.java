@@ -6,14 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SellerCSController {
 
-	@RequestMapping("/notice")
-	public String notice() {
-		return "seller/notice";
-	}
-	@RequestMapping("/notice_view")
-	public String noticeView() {
-		return "seller/notice_view";
-	}	
 	@RequestMapping("/ask_admin_list")
 	public String ask_admin_list() {
 		return "seller/ask_admin_list";
