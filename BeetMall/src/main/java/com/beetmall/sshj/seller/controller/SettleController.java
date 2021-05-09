@@ -36,9 +36,8 @@ public class SettleController {
 		// 페이지로 보낼 array 데이터
 		ArrayList<Object> sendData = new ArrayList<Object>();
 		
-		// 조회기준 날짜, 주문 건별 구분
+		// 조회기준이 주문건별일때
 		if(!req.getParameter("selectBtnCheck").equals("날짜")) {
-			System.out.println("test");
 			// 주문 건별 기준일때, total구하기
 			// 정산 금액 총 합계 가져오기
 			List<SettleVO> totalSettle = service.totalSettle(vo); // totalMoney, totalRecord
@@ -51,33 +50,62 @@ public class SettleController {
 			} else {
 				sendData.add(0, 0); // array[0]보내는 데이터
 			}
-		}
-
-		// selectBtnCheck가 무엇이냐! 날짜냐, 주문건별이나 확인
-		if(req.getParameter("selectBtnCheck").equals("날짜")) { // 날짜 기준일때, 매출일자와 정산날짜 기준인지 확인
-			List<SettleVO> listData = service.getDateData(vo);
 			
-			// list에 들어있는 갯수를 totalRecord로 세팅한다.
-			vo.setTotalRecord(listData.size()); 
-			System.out.println(vo.getTotalRecord());
-			
-			if(req.getParameter("selectOption").equals("매출일자")){
-				sendData.add(1, listData);
-			} else {
-				sendData.add(1, service.getSettleData(vo));
-			}
-			System.out.println(sendData.get(1).toString());
-		
-		} else { // 주문 건별 기준일때, 매출일자와 정산날짜 기준인지 확인
-	
 			//매출일자 기준이면 getOrderDateData 실행
 			if(req.getParameter("selectOption").equals("매출일자")) {
 				sendData.add(1, service.getOrderDateData(vo)); // array[1] vo 데이터를 보낸
 			} else { // 정산날짜 기준이면 getOrderSettleData
 				sendData.add(1, service.getOrderSettleData(vo)); //
 			}
+		}
+		
+		// 조회기준이 날짜 기준일때, 매출일자와 정산날짜 기준인지 확인
+		if(req.getParameter("selectBtnCheck").equals("날짜")) { 
+			List<SettleVO> listData ;
 			
-		}		
+			int totalMoney = 0;
+			if( req.getParameter("selectOption").equals("매출일자")) { // 매출일자일때 totalmoney를 구한다.
+				List<SettleVO> vo3 = service.getDateDataTotalRecord(vo);
+				for(int i = 0 ; i < vo3.size(); i++) {
+					int realPayResult = (int) vo3.get(i).getRealpayment();
+					
+					totalMoney += Math.round(realPayResult - (realPayResult*0.05) - (realPayResult*0.058));
+					
+				}
+				vo.setTotalRecord(vo3.size());
+				
+				listData = service.getDateData(vo);
+			} else { // 정산날짜 일때 totalmoney를 구한다.
+				List<SettleVO> vo3 = service.getSettleDataTotalRecord(vo);
+				for(int i = 0 ; i < vo3.size(); i++) {
+					int realPayResult = (int) vo3.get(i).getRealpayment();
+					if(vo3.get(i).getSettledate()==null) {
+						// settleDate가 null 이면 정산이 된 상품이 아니기 때문에
+						// totalMoney에 더하지 않는다.
+						continue;
+					}
+					
+					totalMoney += Math.round(realPayResult - (realPayResult*0.05) - (realPayResult*0.058));
+					
+				}
+				vo.setTotalRecord(vo3.size());
+				listData = service.getSettleData(vo);
+			}
+			
+			vo.setTotalMoney(totalMoney);
+			
+			sendData.add(0, vo);
+			sendData.add(1, listData);
+			
+				
+			if(listData.size()==0) {
+					
+				sendData.add(0,vo);
+				sendData.add(1,vo);
+			}
+		}
+		
+		
 		sendData.add(2, vo);
 		
 

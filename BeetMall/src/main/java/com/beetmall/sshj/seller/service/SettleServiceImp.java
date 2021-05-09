@@ -37,6 +37,16 @@ public class SettleServiceImp implements SettleService{
 	public List<SettleVO> getSettleData(SettleVO vo) {
 		return dao.getSettleData(vo);
 	}
+
+	@Override
+	public List<SettleVO> getDateDataTotalRecord(SettleVO vo) {
+		return dao.getDateDataTotalRecord(vo);
+	}
+
+	@Override
+	public List<SettleVO> getSettleDataTotalRecord(SettleVO vo) {
+		return dao.getSettleDataTotalRecord(vo);
+	}
 	
 	
 	

@@ -13,6 +13,11 @@
 let startDate;
 let endDate;
 let selectBtnCheck;
+let selectOption = "매출일자";
+
+function selectOptionCheck(oc){
+	selectOption = $(oc).val();
+}
 
 $(()=>{
 	$('#dateBtn').click( function(){
@@ -68,74 +73,99 @@ function searchingData(pageNum){
 		data: $('#searchingFrm').serialize()+"&pageNum="+pageNum+"&selectBtnCheck="+selectBtnCheck,
 		success: function(result){
 			console.log(result);
+			/*
+				result[0] : totalMoney, totalRecord 가 들어있음
+				result[1] : db에서 검색한 데이터가 들어있음
+							ordernum, orderdate, orderprice, realpayment, settledate, settlecheck
+				result[2] : excelPaging에 사용할 데이터가 들어있음 
+							onePageNum, pageNum, startPageNum, totalPage, totalRecord  
+				
+			*/
 			let tag = '<thead><tr>';
-				tag += '<th scope="col">주문번호</th>';
-				tag += '<th scope="col">매출일자</th>';
-				tag += '<th scope="col">주문금액</th>';
-				tag += '<th scope="col">실결제금액</th>';
-				tag += '<th scope="col">결제수수료</th>';
-				tag += '<th scope="col">이용수수료</th>';
-				tag += '<th scope="col">정산금액</th>';
-				tag += '<th scope="col">정산날짜</th>';
-				tag += '</tr></thead><tbody>';
 
-			if(result[1].length == 0){
-				alert('검색된 데이터가 없습니다.');
-				
-				tag += '</tbody>';
-				
-				$('#totalMoney').html('');
-				$('table').html(tag);
-				return false;
-			}
+			console.log('test');
+			console.log(selectBtnCheck);
 			
 			let $result = $(result[1]);
-			
-			$result.each(function(idx,vo){
-				tag += '<tr>';
-				tag += '<td>' + vo.ordernum + '</td>';
-				tag += '<td>' + vo.orderdate + '</td>';
-				tag += '<td>' + reqularExpression(vo.orderprice) + '</td>';
-				tag += '<td>' + reqularExpression(vo.realpayment) + '</td>';
-				tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.05)) + '</td>';
-				tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.058)) + '</td>';
-				tag += '<td>' + reqularExpression(Math.round(vo.realpayment-(vo.realpayment*0.05)-(vo.realpayment*0.058))) + '</td>';
-				if(vo.settlecheck=='Y '){
-					tag +=  '<td>'+vo.settledate+'</td>';
+			if(selectBtnCheck == '날짜'){// 날짜 선택했을때
+				if(selectOption=='매출일자'){
+					tag += '<th scope="col">매출일자</th>';
+					tag += '<th scope="col">주문금액</th>';
+					tag += '<th scope="col">실결제금액</th>';
+					tag += '<th scope="col">결제수수료</th>';
+					tag += '<th scope="col">이용수수료</th>';
+					tag += '<th scope="col">정산금액</th>';
+					tag += '</tr></thead><tbody>';
+					
+					
+					
+					if(result[1].length == 0){
+						alert('검색된 데이터가 없습니다.');
+						
+						tag += '</tbody>';
+						
+						$('#totalMoney').html('');
+						$('table').html(tag);
+						return false;
+					}
+					
+					$result.each(function(idx,vo){
+					
+						tag += '<tr>';
+						tag += '<td>'+ vo.orderdate+'</td>';
+						tag += '<td>' + reqularExpression(vo.orderprice) + '</td>';
+						tag += '<td>' + reqularExpression(vo.realpayment) + '</td>';
+						tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.05)) + '</td>';
+						tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.058)) + '</td>';
+						tag += '<td>' + reqularExpression(Math.round(vo.realpayment-(vo.realpayment*0.05)-(vo.realpayment*0.058))) + '</td>';
+						
+						
+						tag += '</tr>';
+						
+					});
 				} else {
-					tag +=  '<td>-</td>';
+					
+					tag += '<th scope="col">정산날짜</th>';
+					tag += '<th scope="col">주문금액</th>';
+					tag += '<th scope="col">실결제금액</th>';
+					tag += '<th scope="col">결제수수료</th>';
+					tag += '<th scope="col">이용수수료</th>';
+					tag += '<th scope="col">정산금액</th>';
+					tag += '</tr></thead><tbody>';
+					
+					
+					
+					if(result[1].length == 0){
+						alert('검색된 데이터가 없습니다.');
+						
+						tag += '</tbody>';
+						
+						$('#totalMoney').html('');
+						$('table').html(tag);
+						return false;
+					}
+					
+					$result.each(function(idx,vo){
+					
+						tag += '<tr>';
+						if(vo.settledate==null || vo.settledate==''){
+							tag +=  '<td>-</td>';
+						} else {
+							tag +=  '<td>'+vo.settledate+'</td>';
+						}
+						tag += '<td>' + reqularExpression(vo.orderprice) + '</td>';
+						tag += '<td>' + reqularExpression(vo.realpayment) + '</td>';
+						tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.05)) + '</td>';
+						tag += '<td>' + reqularExpression(Math.round(vo.realpayment*0.058)) + '</td>';
+						tag += '<td>' + reqularExpression(Math.round(vo.realpayment-(vo.realpayment*0.05)-(vo.realpayment*0.058))) + '</td>';
+						
+						
+						tag += '</tr>';
+						
+					});
 				}
 				
-				tag += '</tr>';
-				
-			});
-			tag += '</tbody>';
-
-			// 엑셀 페이징
-			excelInitPaging(result[2].totalPage, result[2].pageNum, result[2].startPageNum, result[2].onePageNum);
-			
-			// 합계금액
-			$('#totalMoney').html("정산 합계 금액 : " + reqularExpression(Math.round(result[0].totalMoney- (result[0].totalMoney*0.05) - (result[0].totalMoney*0.058)) ) + "원");
-			
-			// 테이블 렌더
-			$('table').html(tag);
-		},
-		error: function(){
-			console.log('데이터 가져오기 실패');
-		},
-	})
-}
-
-// 주문 건별 매출일자 선택시 초기화
-function searchingData(pageNum){
-	$.ajax({
-		type: 'GET',
-		url: 'sellerSettleSearchingData',
-		traditional : true,
-		data: $('#searchingFrm').serialize()+"&pageNum="+pageNum+"&selectBtnCheck="+selectBtnCheck,
-		success: function(result){
-			console.log(result);
-			let tag = '<thead><tr>';
+			}else { // 정산 기준일때
 				tag += '<th scope="col">주문번호</th>';
 				tag += '<th scope="col">매출일자</th>';
 				tag += '<th scope="col">주문금액</th>';
@@ -145,21 +175,17 @@ function searchingData(pageNum){
 				tag += '<th scope="col">정산금액</th>';
 				tag += '<th scope="col">정산날짜</th>';
 				tag += '</tr></thead><tbody>';
- 
-			if(result[1].length == 0){
-				alert('검색된 데이터가 없습니다.');
 				
-				tag += '</tbody>';
+				if(result[1].length == 0){
+					alert('검색된 데이터가 없습니다.');
+					
+					tag += '</tbody>';
+					
+					$('#totalMoney').html('');
+					$('table').html(tag);
+					return false;
+				}
 				
-				$('#totalMoney').html('');
-				$('table').html(tag);
-				return false;
-			}
-			
-			let $result = $(result[1]);
-			if(selectBtnCheck == "날짜"){
-				
-			} else {
 				$result.each(function(idx,vo){
 					tag += '<tr>';
 					tag += '<td>' + vo.ordernum + '</td>';
@@ -180,15 +206,20 @@ function searchingData(pageNum){
 				});
 			}
 			tag += '</tbody>';
-
+			console.log(result[2].totalPage);
+			console.log(result[2].pageNum);
+			console.log(result[2].startPageNum);
+			console.log(result[2].onePageNum);
 			// 엑셀 페이징
 			excelInitPaging(result[2].totalPage, result[2].pageNum, result[2].startPageNum, result[2].onePageNum);
-			console.log(result[2].startPageNum);
+			
 			// 합계금액
 			$('#totalMoney').html("정산 합계 금액 : " + reqularExpression(Math.round(result[0].totalMoney- (result[0].totalMoney*0.05) - (result[0].totalMoney*0.058)) ) + "원");
 			
 			// 테이블 렌더
 			$('table').html(tag);
+			$('table>thead th').css('flex-basis','16.66%');
+			$('table>tbody td').css('flex-basis','16.66%');
 		},
 		error: function(){
 			console.log('데이터 가져오기 실패');
@@ -198,11 +229,6 @@ function searchingData(pageNum){
 
 // 페이징 설정
 function excelInitPaging(totalPage, pageNum, startPageNum, onePageNum){
-	console.log(startPageNum);
-	console.log(startPageNum+onePageNum-1);
-	console.log(totalPage);
-	console.log(pageNum);
-	console.log('--------------------');
 	let tag = '<div class="page_nation">';
 	if( totalPage == 1 ){
 		tag += '<a class="arrow pprev" href="#" onclick="return false;"></a>';
@@ -235,7 +261,37 @@ function excelInitPaging(totalPage, pageNum, startPageNum, onePageNum){
 	$('.page_wrap').html(tag);
 }
 
-
+$(()=>{
+	// 엑셀저장
+	$('#excelDown').click( () => {
+		if($('#categoryManagement>li').length<1 || startCalendarDataValue=='' || endCalendarDataValue==''){
+			alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
+			return false;
+		}
+		let excelData = [];
+		for(let i =0; i<excelArrList.length; i++){
+			excelData.push(excelArrList[i].ordernum);
+			excelData.push(excelArrList[i].orderconfirm);
+			excelData.push(excelArrList[i].productname);
+			excelData.push(excelArrList[i].orderquantity);
+			excelData.push(excelArrList[i].orderprice);
+			excelData.push(parseInt(excelArrList[i].orderquantity,10) * parseInt(excelArrList[i].orderprice,10));
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "excel_down",
+			traditional : true,
+			data: {
+				"excelData":excelData
+			}, success: function(result){
+				alert('BEETMALL 매출관리 엑셀파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
+			}, error: function(error){
+				alert('엑셀 다운로드 실패');
+			}
+		});
+	});
+})
 	
 </script>
 <section>
@@ -253,9 +309,9 @@ function excelInitPaging(totalPage, pageNum, startPageNum, onePageNum){
 						</div>
 						<div id="searchingTerm">
 							<p>조회기간</p>
-							<select name="selectOption">
-								<option selected="selected">매출일자</option>
-								<option>정산 날짜</option>
+							<select name="selectOption" onchange="javascript:selectOptionCheck(this)">
+								<option selected="selected" value="매출일자">매출일자</option>
+								<option value="정산날짜">정산날짜</option>
 							</select>
 							<input type="date" id="startDate" name="startDate" min="2018-01-01" max="${datePtn}"/>
 							~&nbsp;&nbsp;
@@ -267,7 +323,10 @@ function excelInitPaging(totalPage, pageNum, startPageNum, onePageNum){
 						</div>
 					</form>
 				</div>
-				<div class="wrapTitle">주문 건별 정산분석</div>
+				<div class="wrapTitle">
+					정산분석
+					<button class="normalBtn" id="excelDown">엑셀 저장</button>
+				</div>
 				<div class="wrapContainer" style="border:none;">
 					<table>
 						<thead>

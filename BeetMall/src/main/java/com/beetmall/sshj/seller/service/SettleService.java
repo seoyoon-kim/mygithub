@@ -17,4 +17,11 @@ public interface SettleService {
 	
 	// 정산금액 합계 가져오기
 	public List<SettleVO> totalSettle(SettleVO vo);
+	
+	// 조회기준 날짜 기준일때 매출일자 토탈 레코드
+	public List<SettleVO> getDateDataTotalRecord(SettleVO vo);
+	
+	// 조회기준 날짜 기준일때 정산날짜 토탈 레코드
+	public List<SettleVO> getSettleDataTotalRecord(SettleVO vo);
+	
 }

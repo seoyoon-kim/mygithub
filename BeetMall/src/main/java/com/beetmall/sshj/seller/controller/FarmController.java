@@ -146,6 +146,7 @@ public class FarmController {
 				}
 			}
 		}
+		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"/Downloads/BEETMALL 매출관리.xlsx");
 		File file = new File(System.getProperty("user.home")+"/Downloads/BEETMALL 매출관리.xlsx");
 		try {
 			// file의 경로로 엑셀 outputStream
