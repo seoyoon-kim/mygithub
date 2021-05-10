@@ -21,7 +21,13 @@ public class ProductViewController {
 	public ModelAndView ProductViewSelect(int productnum) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("plist", productViewService.ProductViewSelect(productnum));
+		//테이블이 product/들어가는 수: productnum int/나오는 값 1개
+		//sellfinish,thumbimg,productname,productprice,selloption,sellweight,
+		//deliveryoption,origin,wrapping
+		mav.addObject("plist",productViewService.ProductViewSelect(productnum));
+		mav.addObject("plist",productViewService.ProductViewSelectFarm(productnum));
+		mav.addObject("plist",productViewService.ProductViewSelectoption(productnum));
+		
 		mav.setViewName("custom/customproduct");
 		
 		return mav;

@@ -8,5 +8,8 @@ public interface ProductViewDAO {
 
 	public ProductViewVO ProductViewSelect(int productnum);
 	
+	public ProductViewVO ProductViewSelectFarm(int productnum);
+	
+	public ProductViewVO ProductViewSelectoption(int productnum);
 	
 }

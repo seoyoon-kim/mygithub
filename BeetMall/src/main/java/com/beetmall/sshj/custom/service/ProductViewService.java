@@ -8,4 +8,8 @@ public interface ProductViewService {
 
 	public ProductViewVO ProductViewSelect(int productnum);
 	
+    public ProductViewVO ProductViewSelectFarm(int productnum);
+	
+	public ProductViewVO ProductViewSelectoption(int productnum);
+	
 }

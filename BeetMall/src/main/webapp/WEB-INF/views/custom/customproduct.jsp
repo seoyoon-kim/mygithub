@@ -834,9 +834,9 @@ padding-left:10px;
 						<li>추가옵션</li>  <!-- 13 -->
 						<li></li>  <!-- 14 -->
 						<li><select name="selecOption" id="selecOption">  <!-- 15 -->
-								<option>${plist.optionname}</option>
-								<option>${plist.optionname}</option>
-								<option>${plist.optionname}</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
 						</select></li>
 						<li><input type="button" class="pmbtn minibtn" value="-"/>1번<input	type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 16 -->
 					</ul>
@@ -844,7 +844,7 @@ padding-left:10px;
 				<!--productPrBox  -->
 
 
-				<div id=productTotalPrice><b>총 상품금액:${plist.productname}원</b></div>
+				<div id=productTotalPrice><b>총 상품금액:원</b></div>
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn"/>
 					<input type="button" value="장바구니 담기" class="btn"/>

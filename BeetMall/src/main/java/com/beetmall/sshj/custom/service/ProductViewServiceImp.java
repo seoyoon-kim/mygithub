@@ -17,10 +17,25 @@ public class ProductViewServiceImp implements ProductViewService {
 	ProductViewDAO productVeiwDAO;
 
 	@Override
-	public ProductViewVO ProductViewSelect(int productnum) {
-		
+	public ProductViewVO ProductViewSelect(int productnum) {		
 		return productVeiwDAO.ProductViewSelect(productnum);
 	}
+
+	
+	
+	@Override
+	public ProductViewVO ProductViewSelectFarm(int productnum) {		
+		return productVeiwDAO.ProductViewSelectFarm(productnum);			
+	}
+
+	
+	
+	@Override
+	public ProductViewVO ProductViewSelectoption(int productnum) {
+		return productVeiwDAO.ProductViewSelectoption(productnum);		
+	}
+	
+	
 	
 }
 
