@@ -56,6 +56,9 @@
 	#content select{
 		height:28px;
 	} 
+	.contentList>li:nth-of-type(7){
+		padding-top:5.5px;
+	}
 	/*버튼*/
 	#btns{ 
 		top:-115px; 
@@ -144,7 +147,7 @@
 		</div>  
 		
 		 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -155,7 +158,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -166,7 +169,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -177,7 +180,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -188,7 +191,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -199,7 +202,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -210,7 +213,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -221,7 +224,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -232,7 +235,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -243,7 +246,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -254,7 +257,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -265,7 +268,7 @@
 				<li>562</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -275,136 +278,10 @@
 				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
 				<li>562</li>
 				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-		 
-		 
-
-
- 
+			</ul>  
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>

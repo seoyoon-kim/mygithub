@@ -148,6 +148,7 @@
 		width: 50%;
 		height: 35px;
 		line-height: 35px;
+		text-align:left;
 	}
 	
 	#mapbtn {
@@ -158,26 +159,30 @@
 		height: 25px;
 		line-height: 15px;
 	}
-	
+	.reviewList, #reviewTitle, #qnaTitle, #qnaList{
+		margin-left:0 !important;
+	}
 	#productPrBox>ul>li>#ppbtn, #productPrBox>ul>li>.pmbtn {
 		line-height: 10px;
 		width: 20px;
 		height:20px;
 	}
-	
+	#title li:nth-of-type(5), #contentBox li:nth-of-type(5) {
+		width:50%;	
+	}
 	#selecOption {
 		width: 80%;
 	}
 	
 	#productTotalPrice {
 		padding-left: 350px;
-		width: 100%;
+		width: 130%;
 		float: left;
 		line-height: 50px;
 		height: 50px;
 		font-size:30px;
 		font-weight: 700px;
-		padding-left:280px;
+		padding-left:200px;
 		margin-bottom:15px;
 	}
 	
@@ -185,8 +190,7 @@
 		width: 100%;
 		height: 50px;
 		line-height: 30px;
-		float: left;
-		padding-left:85px;
+		float: left; 
 	}
 	
 	#productBtn>input {
@@ -362,7 +366,9 @@
 		height: 200px;
 		margin-bottom: 30px;
 	}
-	
+	.reviewList>li:nth-of-type(5){
+		width:90px !important;
+	}
 	#reviewTitle>li, .reviewList>li {
 		width: 10%;
 		float: left;
@@ -377,8 +383,7 @@
 		line-height: 150px;
 	}
 	
-	#reviewTitle>li:nth-child(5n+1), .reviewList>li:nth-child(5n+1) {
-		text-align:center;
+	#reviewTitle>li:nth-child(5n+1), .reviewList>li:nth-child(5n+1) { 
 		width: 90px;
 	}
 	#reviewTitle>li:nth-child(5n+2){
@@ -525,6 +530,7 @@
 		border-bottom: 1px solid #ddd;
 		height: 30px;
 		line-height: 30px;
+		margin:5px 0;
 	}
 	#qnaTitle>li:nth-child(5n+1), #qnaList>li:nth-child(5n+1) {
 		text-align:center;
@@ -556,6 +562,9 @@
 	#qnaList>li>img {
 		width: 20px;
 		height: 20px;
+	}
+	#qnaWriteBtn>input[type=button] {
+		margin-top:30px;
 	}
 	
 	<!--
@@ -914,7 +923,7 @@ $(document).ready(function(){
 				</ul>
 
 				<div id="reviewWriteBtn">
-					<input type="button" value="후기 작성"  class="btn"/>
+					<input type="button" value="후기 작성"  class="btn" disabled/>
 				</div>
 
 				<!-- 페이징 표시--------- -->
@@ -992,7 +1001,7 @@ $(document).ready(function(){
 				</ul>
 
 				<div id="qnaWriteBtn">
-					<input type="button" value="문의 작성" class="btn"/>
+					<input type="button" value="문의 작성" class="btn" disabled/>
 				</div>
 
 				<!-- 페이징 표시--------- -->

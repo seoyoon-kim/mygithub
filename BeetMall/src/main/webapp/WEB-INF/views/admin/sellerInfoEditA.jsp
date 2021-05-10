@@ -1,21 +1,68 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+<!-- include libraries(jQuery, bootstrap, ajax) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<!-- font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
+ 
+<!-- css --> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
+<style> 
+	 #contentBox{
+	 	height:1780px;
+	 }
+	 #infoHeader{
+	 	padding-top:20px;
+	 } 
+	 #info{
+	 	top:-278px;
+	 	left:-250px;
+	 }
+	  #info li:nth-of-type(5){
+	 	padding-left:460px;
+	 } /*좌하 신고 정보*/
+	 #reportBox{
+	 	top:-470px; 
+	 	height:120px;
+	 	left:0;
+	 }
+	 #reportTitle{ 
+	 	position:relative; 
+	 	top:0;
+	 	left:0;
+	 	width:500px;
+	 } 
+	 #reportHeader{
+	 	top:10px;
+	 	left:-70px;
+	 }
+	#reportHeader>li:nth-of-type(2){
+	 	top:-43px;
+	 	left:165px;
+	 }
+	 #report{
+	 	top:-80px;
+	 	left:100px;
+	 }
+	 #reportBox button{
+	 	top:-155px;
+	 	left:370px;
+	 }
+</style>
 <script>
 </script>
 <div id="body1">
@@ -135,6 +182,18 @@
 							
 			</div>
 			</div><!-- info_container 종료 -->
+		</div>
+		
+		<!-- 사업자 등록증 모달창 -->
+		<div id="modal">
+			<div id="modalHeader"> 사업자 등록증</div>
+			<img class="cartImg" src="./img/y_certiImg.jpg" >
+			<hr>
+			<div id="modalBtns">
+				<button class="success" value="" name="" id="">인증 확인</button>
+				<button class="success" value="" name="" id="">반려</button>
+				<button class="success" value="" name="" id="">취소</button>
+			</div>  
 		</div>		 
 	</div>
 </div>

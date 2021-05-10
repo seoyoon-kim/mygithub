@@ -104,7 +104,7 @@
 	<%@ include file="/inc/top.jspf" %>
 	<%@ include file="/inc/leftBar.jspf" %>
 <div id="body1"> 
-	<div id="total"> 
+	<div id="total">   
 		<div id="deli"> 
 			<p>주문/배송</p><br/> 
 			   <div id="box0">신규 주문 <div>13</div> 건</div> 

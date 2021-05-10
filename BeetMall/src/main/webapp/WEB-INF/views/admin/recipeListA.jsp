@@ -59,8 +59,8 @@
 	}
 	.cartImg{
 		margin-left:10px;
-		height:20%;
-		width:25%;
+		height:15%;
+		width:20%;
 	}
 	#content input, textarea, select, #noticeSearchFrm input{
 		border:1px solid lightgray; 
@@ -72,6 +72,12 @@
 	#content select{
 		height:28px;
 	} 
+	.contentList:nth-of-type(2n-1)>li:nth-of-type(6){
+		padding:8.5px 0;
+	}
+	.contentList:nth-of-type(2n)>li:nth-of-type(6){
+		padding:9px 0;
+	}
 	/*버튼*/
 	#btns{ 
 		top:-115px; 
@@ -146,10 +152,8 @@
 				<li>작성자</li>
 				<li>등록일</li> 
 			</ul>
-		</div>  
-		
-		  
-			<ul class="noticeList">
+		</div>      
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -160,7 +164,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -171,7 +175,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -182,7 +186,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -193,7 +197,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -204,7 +208,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -215,7 +219,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -226,7 +230,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -237,7 +241,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -248,7 +252,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -259,7 +263,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -270,117 +274,7 @@
 				<li>greenlike</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
@@ -397,7 +291,7 @@
  
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>

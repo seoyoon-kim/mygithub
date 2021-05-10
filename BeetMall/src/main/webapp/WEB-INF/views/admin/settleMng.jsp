@@ -15,6 +15,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
 <style>
+	button{
+		border-radius:5px;
+	}
 	/*맨 위 top Bar*/
 	#topBar li{
 		width:12%;
@@ -23,6 +26,10 @@
 	#topBar li>input, 
 	#topBar li>button{
 		margin-right:10px;
+	}
+	#topBar li>button{
+		color:dimgray;
+		border-radius:2px;
 	}
 	#topBar li:nth-of-type(2){
 		margin-left:108px;
@@ -43,8 +50,7 @@
 		width:20%;
 	} 
 	#topBar li:nth-of-type(4)>button{
-		width:110px;
-		color:black;
+		width:120px; 
 	}
 	#topBar li:nth-of-type(5){
 		width:10%;
@@ -62,7 +68,7 @@
 	#topBar li:nth-of-type(8){
 		position:relative; left:1135px; top:-56px;
 	}    
-	#title>ul,.productList{
+	#title>ul,.contentList{
 		position:relative; left:-40px;
 	} 
 	#title li:nth-of-type(5), #contentBox li:nth-of-type(5){ 
@@ -80,11 +86,8 @@
 	#contentBox li:nth-of-type(8){
 		width:14%;
 	}  
-	.productList{
+	.contentList{
 		height:28px;
-	}
-	.productList:nth-of-type(1){ 
-		margin-top:10px;
 	} 
 	#contentList>ul{
 		float:left;
@@ -137,36 +140,42 @@
 		border-spacing:0;
 	}
 	.tg td{
-		border-color:dimgray;
-		border-style:solid;
-		border-width:1px;
+		border:lightray solid 1px; 
 		font-size:14px;
 		overflow:hidden;
 		padding:10px 5px;
 		word-break:normal;
 	}
 	.tg th{
-		border-color:dimgray;
-		border-style:solid;
-		border-width:1px;
+		border:lightray solid 1px; 
 		font-size:14px;
 		font-weight:normal;
 		overflow:hidden;
 		padding:10px 5px;
 		word-break:normal;
 	}
-	.tg .tg-j8xs{
-		background-color:#c0c0c0;
+	.tg .settleHeader{
+		background-color:lightgray;
 		font-size:16px;
 		font-weight:bold;
 		text-align:center;
 		vertical-align:top
 	}
-	.tg .tg-13pz{
+	.tg .settleHeader:nth-of-type(1){
+		border-radius:10px 0 0 0 ;
+	}
+	.tg .settleHeader:nth-of-type(3){
+		border-radius:0 10px 0 0 ;
+	}
+	.settleHeader:not(.settleHeader:nth-of-type(3)),
+	.settleContent:not(.settleContent:nth-of-type(3)){
+		border-right:1px solid #DFDFDF;
+	}
+	.tg .settleContent{
 		font-size:18px;
 		text-align:center;
 		vertical-align:top
-	}
+	} 
 	 #settleBtn{
 	 	position:relative;
 	 	top:-90px;
@@ -179,6 +188,7 @@
 	 	font-weight:bold;
 	 	font-size:18px;
 	 	letter-spacing:2px;
+	 	border-radius:5px;
 	 }
 	 #settleBtn:hover{
 	 	background-color: midnightblue;
@@ -225,7 +235,7 @@
 		</div>  
 		  <div id="contentList">
 			<!--<c:forEach var="data" items="${list}">
-				<ul class="productList">
+				<ul class="contentList">
 					<li></li>
 					<li>buyNo?</li>
 					<li>cate?</li>
@@ -238,7 +248,7 @@
 				</ul>
 			</c:forEach>-->
 			
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -248,7 +258,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -258,7 +268,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -268,7 +278,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -278,7 +288,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -288,7 +298,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -298,7 +308,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -308,7 +318,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -318,7 +328,7 @@
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
 				</ul>
-			<ul class="productList">
+			<ul class="contentList">
 					<li>12345</li>
 					<li>견과류</li>
 					<li>취소요청</li>
@@ -327,78 +337,7 @@
 					<li>beermore</li>
 					<li>almondfarm</li>
 					<li>2021/01/12</li>
-				</ul>
-			<ul class="productList">
-					<li>12345</li>
-					<li>견과류</li>
-					<li>취소요청</li>
-					<li>배송완료</li>  
-					<li class="wordCut"><a href="#">오독오독 맛있는 아몬드 맥주 안주로 제격!</a></li>  
-					<li>beermore</li>
-					<li>almondfarm</li>
-					<li>2021/01/12</li>
-				</ul>
-			<ul class="productList">
-					<li>12345</li>
-					<li>견과류</li>
-					<li>입금대기중</li>
-					<li>배송준비</li>  
-					<li class="wordCut"><a href="#">오독오독 맛있는 아몬드 맥주 안주로 제격!</a></li>  
-					<li>beermore</li>
-					<li>almondfarm</li>
-					<li>2021/01/12</li>
-				</ul>
-			<ul class="productList">
-					<li>12345</li>
-					<li>견과류</li>
-					<li>결제완료</li>
-					<li>배송준비</li>  
-					<li class="wordCut"><a href="#">오독오독 맛있는 아몬드 맥주 안주로 제격!</a></li>  
-					<li>beermore</li>
-					<li>almondfarm</li>
-					<li>2021/01/12</li>
-				</ul>
-			<ul class="productList">
-					<li>12345</li>
-					<li>견과류</li>
-					<li>반품요청</li>
-					<li>배송중</li>  
-					<li class="wordCut"><a href="#">오독오독 맛있는 아몬드 맥주 안주로 제격!</a></li>  
-					<li>beermore</li>
-					<li>almondfarm</li>
-					<li>2021/01/12</li>
-				</ul>
-			<ul class="productList">
-					<li>12345</li>
-					<li>견과류</li>
-					<li>입금완료</li>
-					<li>픽업대기중</li>  
-					<li class="wordCut"><a href="#">오독오독 맛있는 아몬드 맥주 안주로 제격!</a></li>  
-					<li>beermore</li>
-					<li>almondfarm</li>
-					<li>2021/01/12</li>
-				</ul>
-			<ul class="productList">
-					<li>12345</li>
-					<li>견과류</li>
-					<li>입금완료</li>
-					<li>픽업완료</li>  
-					<li class="wordCut"><a href="#">오독오독 맛있는 아몬드 맥주 안주로 제격!</a></li>  
-					<li>beermore</li>
-					<li>almondfarm</li>
-					<li>2021/01/12</li>
-				</ul>
-			<ul class="productList">
-					<li>12345</li>
-					<li>견과류</li>
-					<li>취소요청</li>
-					<li>배송중</li>  
-					<li class="wordCut"><a href="#">오독오독 맛있는 아몬드 맥주 안주로 제격!</a></li>  
-					<li>beermore</li>
-					<li>almondfarm</li>
-					<li>2021/01/12</li>
-				</ul>
-			
+				</ul>  
 			</div> 
 		</div>
 		<div class="page_wrap">
@@ -429,16 +368,16 @@
 			</colgroup>
 			<thead>
 			  <tr>
-			    <th class="tg-j8xs">정산일</th>
-			    <th class="tg-j8xs">수익</th>
-			    <th class="tg-j8xs">총 정산 금액</th>
+			    <th class="settleHeader">정산일</th>
+			    <th class="settleHeader">수익</th>
+			    <th class="settleHeader">총 정산 금액</th>
 			  </tr>
 			</thead>
 			<tbody>
 			  <tr>
-			    <td class="tg-13pz"><div id="settleDate">2021/03/26</div></td>
-			    <td class="tg-13pz"><div class="flex"><div id="profit">3,269,840</div>원</div></td>
-			    <td class="tg-13pz"><div class="flex"><div id="settleMoney">9,561,028</div>원</div></td>
+			    <td class="settleContent"><div id="settleDate">2021/03/26</div></td>
+			    <td class="settleContent"><div class="flex"><div id="profit">3,269,840</div>원</div></td>
+			    <td class="settleContent"><div class="flex"><div id="settleMoney">9,561,028</div>원</div></td>
 			  </tr>
 			</tbody>
 			</table>

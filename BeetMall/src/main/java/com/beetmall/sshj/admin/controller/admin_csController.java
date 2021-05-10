@@ -64,6 +64,23 @@ public class admin_csController {
 		mav.setViewName("/admin/csQOpen");
 		return mav;
 	}	
+	//신고 목록 보기
+	@RequestMapping("/csreportListA")
+	public ModelAndView csreportListA() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/csreportListA");
+		return mav;
+	} 
+	//신고 채팅 보기
+	@RequestMapping("/csChat")
+	public ModelAndView csChat() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/csChat");
+		return mav;
+	} 
+	
 	
 	
 	

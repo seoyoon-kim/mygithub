@@ -140,125 +140,81 @@
 		</div>  
 		
 		 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>주문/결제</li>
-				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
-				
-			</ul> 
-		 
-
-
- 
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li> 
+			</ul>    
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>주문/결제</li>

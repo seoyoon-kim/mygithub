@@ -134,112 +134,112 @@
 		</div>  
 		
 		 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
@@ -252,7 +252,7 @@
  
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>

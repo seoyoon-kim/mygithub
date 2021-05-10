@@ -128,125 +128,94 @@
 		</div>  
 		
 		 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>
 				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
 				<li>userid</li> <li>2021/02/20</li>
 			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>소비자</li>
-				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
-				<li>userid</li> <li>2021/02/20</li>
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>소비자</li>
-				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
-				<li>userid</li> <li>2021/02/20</li>
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>소비자</li>
-				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
-				<li>userid</li> <li>2021/02/20</li>
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>소비자</li>
-				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
-				<li>userid</li> <li>2021/02/20</li>
-			</ul> 
-		 
-
-
  
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>소비자</li>

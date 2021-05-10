@@ -165,11 +165,15 @@
 		height:300px;
 		padding:15px;
 	}
+	.empty{
+		background-color:white;
+		border-right:none !important;
+	}
 </style>
 <div id="body1">
 <div class="container">
 	<div id="topBar">
-		<p><strong>공지 작성</strong></p>   
+		<p><strong>문의 답변 작성</strong></p>   
 	</div>
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
@@ -215,13 +219,11 @@
 						</div>
 					</td>
 				</tr> 
-				<tr>
-					<th id="" colspan="4">문의 내용</th>
-				</tr>
-				<tr>
-					<th colspan="4" style="background-color:white;">
+				<tr class="tr_head">
+					<th class="menu">문의 내용</th>
+					<td  class="td">
 						<div id="qContent">
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
+							 배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
@@ -229,8 +231,13 @@
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.
 						</div>
-					</th>
-				</tr>
+					</td>
+				</tr>  
+				<tr class="tr_head">
+					<th class="menu empty"></th>
+					<td  class="td empty">
+					</td>
+				</tr> 
 				<tr>
 					<th id="smallTitle" colspan="4">답변 내용</th>
 				</tr>

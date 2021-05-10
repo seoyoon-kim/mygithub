@@ -131,7 +131,7 @@
 				<li>등록일</li> 
 			</ul>
 		</div>    
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -140,7 +140,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -149,7 +149,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -158,7 +158,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -167,7 +167,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -176,7 +176,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -185,7 +185,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -194,7 +194,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -203,7 +203,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -212,7 +212,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -221,7 +221,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>  
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -230,7 +230,7 @@
 				<li>seller890</li>
 				<li>2021-02-21</li>   
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
@@ -238,50 +238,11 @@
 				<li> double123 </li> 
 				<li>seller890</li>
 				<li>2021-02-21</li>  
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 123587</li>
-				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
-				<li> - </li>
-				<li> double123 </li> 
-				<li>seller890</li>
-				<li>2021-02-21</li>  
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 123587</li>
-				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
-				<li> - </li>
-				<li> double123 </li> 
-				<li>seller890</li>
-				<li>2021-02-21</li>  
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 123587</li>
-				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
-				<li> - </li>
-				<li> double123 </li> 
-				<li>seller890</li>
-				<li>2021-02-21</li>  
-			</ul> 
-		 <ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 123587</li>
-				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>
-				<li> - </li>
-				<li> double123 </li> 
-				<li>seller890</li>
-				<li>2021-02-21</li>  
-			</ul> 
-		 
-
-
+			</ul>  
  
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 123587</li>
 				<li><a href="회원정보?">이중 결제가 된 것 같아요 </a></li>

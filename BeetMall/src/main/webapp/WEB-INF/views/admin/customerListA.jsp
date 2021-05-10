@@ -25,6 +25,7 @@
 	}
 	#contentBox li:nth-of-type(8n-7){ 
 		width:0%; 
+		margin-top:3px;
 	}
 	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1){  
 		width:30%; 
@@ -50,7 +51,7 @@
 	}
 	#content select{
 		height:28px;
-	} 
+	}  
 	/*버튼*/
 	#btns{ 
 		top:-115px; 
@@ -128,7 +129,7 @@
 		</div>  
 		
 		 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -138,7 +139,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -148,7 +149,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -158,7 +159,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -168,7 +169,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -178,7 +179,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -188,7 +189,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -198,7 +199,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -208,7 +209,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -218,7 +219,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -228,7 +229,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -238,7 +239,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -248,7 +249,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -258,7 +259,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -268,7 +269,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -278,7 +279,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		 <ul class="noticeList">
+		 <ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>
@@ -294,7 +295,7 @@
  
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>
 				<li><a href="회원정보?">id</a></li>

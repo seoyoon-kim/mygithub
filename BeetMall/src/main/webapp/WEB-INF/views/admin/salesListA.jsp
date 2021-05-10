@@ -248,7 +248,7 @@
 	}
 	#searchBox{
 		position:relative;
-		left:-1310px;
+		left:-1950px;
 		top:-10px;
 	}
 	#searchBox label{
@@ -294,13 +294,10 @@
 	table{
 		width:1070px;
 		position:relative;
-		left:-10px;
-		top:-23px;
+		left:-10px; 
 	}
 	input[type=checkbox]{
-		background-color:lightgray;
-		
-		zoom: 1.2;
+		background-color:lightgray; 
 		top:0px;	
 	}
 	a:link{
@@ -328,7 +325,7 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/salesListA">판매 내역</a></strong></h5></li> 
+				<li><h5><strong><a href="salesListA">판매 내역</a></strong></h5></li> 
 				<li><select name="sort" > 
 				<option value="구매번호" selected>구매번호</option>  
 		   				<option value="주문현황">주문현황</option>   

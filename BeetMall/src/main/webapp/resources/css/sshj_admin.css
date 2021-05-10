@@ -58,15 +58,18 @@
 		width:100px;
 	}
 	#topBar{ 
-		background-color:#182337; 
+		background-color:rgb(40,40,100); 
 		float:left; 
 		height:50px; 
 		padding:10px 0 0 0px;  
-		width:1280px;
+		width:1920px;
 		left:-200px;
 	} 
 	#topBar>p{ 
 		color:white;
+	}
+	#topBar button{
+		border-radius:5px;
 	}
 	#topBar li:nth-of-type(2){ 
 		margin-left:130px; 
@@ -118,7 +121,7 @@
 	  text-align: center;
 	  text-decoration: none;	  
 	  border: none;	  
-	  border-radius: 4px;	  
+	  border-radius: 5px;	  
 	  display: inline-block;
 	  width: auto;	   	  
 	  cursor: pointer;	  
@@ -159,15 +162,24 @@
 		padding:65px 0 25px 0; 
 		border-bottom:gray 1px solid;
 	}
-	.noticeList{
-		height:20px; 
+	#bottommm{
+		text-align:center;  
+		margin-top: 950px;
+		position:relative;
+		left:-700px;
+		width:1000px;
+	}
+	.contentList{
+		height:40px;
 		position:relative;  
 		margin-bottom:10px;
-		padding-top:5px;
-	}
-	.noticeList:nth-of-type(1){ 
-		margin-top:10px;
+		padding-top:5px; 
+	}  
+	.contentList>li{
+		padding:10px 0;
+		border-bottom:1px solid #E8E8E8;
 	} 
+	
 	#noticeSearchFrm{ 
 		top:30px; left:252px; 
 		} 
@@ -182,8 +194,7 @@
 	input[type=text]{
 		width:408px;
 	}
-	input[type=checkbox] {
-		zoom: 1.8;
+	input[type=checkbox] { 
 		top:-11px;		
 	}  
 	input[type=submit]{
@@ -200,10 +211,6 @@
 	}
 	#content li, label{list-style-type:none; padding-bottom:10px;}
 	#content select{height:28px;}
-	#contentList{
-		margin-top:10px;
-	}
-	
 	
 	
 	

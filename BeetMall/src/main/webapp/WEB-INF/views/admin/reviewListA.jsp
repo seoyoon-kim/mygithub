@@ -20,12 +20,12 @@
 		 width:9%; 
 	 }  
 	 #container li:nth-of-type(6){ 
-	 	padding:0 40px 0 20px;
+	 	padding:10px 0 10px 20px;
 	 }
 	#contentBox{ 
 		top:20px; 
 		margin-left:10px;
-	} 
+	}  
 	#contentBox li:nth-of-type(9n-8){ 
 		width:0%; 
 	}
@@ -41,10 +41,7 @@
 	} 
 	#contentBox li:nth-of-type(6){ 
 		width:21%; 
-	}   
-	#contentBox li:nth-of-type(7){ 
-		margin-left:10px; 
-	}   
+	}    
 	#topBar li:nth-of-type(3){
 		width:12%;
 	} 
@@ -86,26 +83,7 @@
 	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
 	}  
-	/*신고, 처리완료 표시*/
-	#reported, #processed{
-		position:absolute; 
-		left: 888px;
-		border-radius:10px;
-		width:68px;
-		padding-left:1px;
-	}
-	#reported{ 
-		top: 545px;
-		background-color:red;
-		text-align:center;
-		width:50px;
-		margin-left:5px;
-	}
-	#processed{
-		top:483px;
-		background-color:#F5D726;  
-		padding-left:5px;
-	}
+	 
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -339,7 +317,7 @@
 		</div>  
 		
 		 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -350,7 +328,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -361,7 +339,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -372,7 +350,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -383,7 +361,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -394,7 +372,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -405,7 +383,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -416,7 +394,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -427,7 +405,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -438,7 +416,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -449,7 +427,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -460,7 +438,7 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>채소</li>
@@ -471,135 +449,10 @@
 				<li>ilovetomato</li>
 				<li>2021/04/26</li> 
 			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li class="subjectLine"><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>제주천혜향</li>
-				<li class="subjectLine">천혜향 향이 진짜 좋아요 너무 맛있어서 또 주문할거예요<div id="reportDiv"></div></li>
-				<li>답변완료</li>
-				<li>ilovetomato</li>
-				<li>2021/04/26</li> 
-			</ul> 
-		 
-		 
-
-
- 
+			  
 		<!--  
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
 				<li>판매자</li>
@@ -638,13 +491,7 @@
 				<input type="submit" value="검색"/> 
 			</form> 
 		</div>  
-	</div>
-	<div id="reported">
-		신고	
-	</div>
-	<div id="processed">
-		처리완료	
-	</div>
+	</div> 
 	<!-- 모달 -->
 	<div>
 		<div id="reviewModal">

@@ -26,22 +26,6 @@ public class admin_boardController {
 	public String noticeBoardWrite() { 
 		 return "/admin/noticeBoardWrite"; 
 	}
-	//상품 목록 보기
-	@RequestMapping("/productListA")
-	public ModelAndView productListA() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/productListA");
-		return mav;
-	}
-	//상품 상세 보기
-	@RequestMapping("/productDetailA")
-	public ModelAndView productDetailA() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/productDetailA");
-		return mav;
-	}
 	//리뷰 목록보기
 	@RequestMapping("/reviewListA")
 	public ModelAndView reviewListA() {
@@ -66,15 +50,6 @@ public class admin_boardController {
 		mav.setViewName("/admin/recipeWriteA");
 		return mav;
 	}
-	//신고 목록 보기
-	@RequestMapping("/reportListA")
-	public ModelAndView reportListA() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/reportListA");
-		return mav;
-	} 
-	
 	
 	
 	

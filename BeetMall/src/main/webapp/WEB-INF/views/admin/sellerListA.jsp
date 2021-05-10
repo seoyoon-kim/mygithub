@@ -36,11 +36,8 @@
 		margin-left:98px; 
 	}
 	/*회색 바와 데이터 제목, 데이터 내용*/
-	#contentBox li:nth-of-type(9n+1){ width:0%; }  
- 	/*데이터 내용의 topBar*/
- 	#title li:nth-of-type(5), #contentBox li:nth-of-type(5){ 
-		width:13%; 
-	}  
+	#contentBox li:nth-of-type(8n+1){ width:0%; }  
+ 	 
 	#btns a>button, button:nth-of-type(4){ margin-left:900px; }  
 	 
 	.page_nation .pprev {
@@ -107,183 +104,83 @@
 				<li>가입일</li> 
 			</ul>
 		</div>  
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16</li> 
 			</ul>  
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16</li> 
 			</ul>  
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
 				<li>2020-02-16<br/></li> 
 			</ul>  
 		
-		<ul class="noticeList">
+		 
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
 				<li>2020-02-16<br/></li> 
 			</ul> 
-		
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
 				<li>2020-02-16<br/></li> 
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
 				<li>2020-02-16<br/></li> 
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
 				<li>2020-02-16<br/></li> 
 			</ul> 
-		<ul class="noticeList">
+		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>홍길동</li>
 				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="noticeList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45<li>
+				<li>45</li>
 				<li>seller@abc.com</li>
 				<li>1963/02/23</li>
 				<li>서울시 마포구 백범로</li>
@@ -291,7 +188,7 @@
 			</ul> 
 		
 		<c:forEach var="data" items="${list}">
-			<ul class="noticeList">
+			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> name?</li>
 				<li><a href="회원정보?">id?</a></li>
@@ -320,45 +217,7 @@
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>
-		 </div>
-
-	<!-- 
-	 <ul class="breadcrumb pagination-md">
-	 	 % if(nowNum>1){%>
-	 		<li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=nowNum-1%> %
-	 		if(searchWord!=null && !searchWord.equals("")){
-	 			out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" 
-				class="page-link">Prev</a></li>
-		 % }else{%>
-			<li class="page-item disabled"><a href="#" class="page-link">Prev</a></li>
-		 % }
-	 		//페이지 번호 매기기                  
-	 		for(int p=startPage; p<startPage+onePageSize; p++){
-				if(p<=totalPage){
-		 			if(nowNum==p){//현재 보고있는 페이지에 표시하기
-		%>		 	
-	 				<li class="page-item active"><a href="noticeBoardList.jsp?nowNum= %=p%> %
-			if(searchWord!=null && !searchWord.equals("")){
-				out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" class="page-link"> %=p%></a></li>
-		  
-		 % 		}else{//현재 보고있는 페이지가 아닐 때 표시하기
-		    %>
-        <li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=p %> %if(searchWord!=null && !searchWord.equals("")){out.write("&searchKey="+searchKey+"&searchWord="+searchWord);} %>" class="page-link"> %=p %></a></li>   
-           %   }
-          }/// totalPage
-      }
-
-	 	if(nowNum==totalPage){ //마지막 페이지
-	 	%>
-	 		<li class="page-item disabled"><a href="#" class="page-link">Next</a></li>	
-	 	 % }else{ %>
-	 	 	<li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=nowNum+1%> %
-	 	if(searchWord!=null && !searchWord.equals("")){
-	 		out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" class="page-link">Next</a></li>
-	 	 % } %>
-	 </ul>		
- -->
- 
+		 </div> 
 		 <div>
 			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<select name="searchKey">

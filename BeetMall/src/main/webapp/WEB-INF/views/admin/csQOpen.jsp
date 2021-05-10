@@ -63,7 +63,7 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:119px;
+	   	top:159px;
 	   	left:180px;
 	   	width:1351px;
    }
@@ -75,7 +75,7 @@
 	  background-color:#F8F7F7;
 	} 
 	table{
-		width:100%;	
+		width:1080px;	
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
@@ -129,24 +129,20 @@
 	.td{
 		width:0;
 	}
-	#bottommm{
-		text-align:center;  
+	#bottommm{ 
 		margin-top: 1771px;
 		position:relative;
-		left:-782px;
+		left:-820px;
+		width:1000px;
+		display:flex;
 	}
 	#bottommm>input{
 		border:1px solid gray;
+		width:150px;
 	}
 	.write_btn{
 		height:40px;
-	} 
-	#cancel_btn{
-		position:relative;
-		top:-40px;
-		left:260px;
-	}
-	
+	}   
 	input[type="submit"].btn:hover, input[type="button"].btn:hover, input[type="reset"].btn:hover{
    	  background: #b3b3b3;
 	  color:white;
@@ -156,11 +152,11 @@
 	#file-upload-button{
 		height:28px;
 	}
-	#qContent{
+	#qContent, #aContent{
 		font-weight:normal; 
 		height:300px;
 		padding:15px;
-	}
+	}  
 </style>
 <div id="body1">
 <div class="container">
@@ -202,12 +198,10 @@
 							2021/03/21
 						</div>
 					</td>
-				</tr> 
-				<tr>
-					<th id="" colspan="4">소비자 문의 내용</th>
-				</tr>
-				<tr>
-					<th colspan="4" style="background-color:white;">
+				</tr>  
+				<tr class="tr_head">
+					<th class="menu">소비자 문의 내용</th> 
+					<td colspan="4" style="background-color:white;">
 						<div id="qContent">
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
@@ -217,11 +211,15 @@
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.
 						</div>
-					</th>
-				</tr>				
+					</td>
+				</tr> 
+				<tr>
+					<th id="empty" colspan="4" style="background-color:white; border-right:white 1px solid"></th>
+				</tr> 
+			 			
 				<!-- 판매자 답변 -->
 				<tr>
-					<th id="smallTitle" colspan="4">판매자 답변 내용</th>
+					<th id="smallTitle" colspan="4">판매자 답변</th>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >아이디</th>
@@ -239,13 +237,17 @@
 						</div>
 					</td>
 				</tr> 
-				<tr>
-					<th colspan="4" style="background-color:white;">
-						<div id="qContent">
-							제가 너무 늦게 확인을 했네요 자가격리중이라.. 죄송합니다
+				<tr class="tr_head">
+					<th class="menu">판매자 답변 내용</th> 
+					<td colspan="4" style="background-color:white;">
+						<div id="aContent">
+							 죄송합니다 ㅠㅠㅠㅠ
 						</div>
-					</th>
-				</tr>	
+					</td>
+				</tr> 
+				<tr>
+					<th id="empty" colspan="4" style="background-color:white; border-right:white 1px solid"></th>
+				</tr> 
 				<!-- 관리자 답변 -->
 				<tr>
 					<th id="smallTitle" colspan="4">답변 작성</th>

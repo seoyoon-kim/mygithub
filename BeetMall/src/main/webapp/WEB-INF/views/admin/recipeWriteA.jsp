@@ -63,7 +63,7 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:127px;
+	   	top:147px;
 	   	left:180px;
 	   	width:1351px;
    }   
@@ -77,7 +77,7 @@
 	  padding-left:10px;
 	} 
 	table{
-		width:100%;	
+		width:1080px;
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
@@ -132,10 +132,10 @@
 		width:0;
 	}
 	#bottommm{
-		text-align:center;  
+		display:flex;
 		margin-top: 950px;
 		position:relative;
-		left:-782px;
+		left:-810px;
 	}
 	#bottommm>input{
 		border:1px solid gray;
@@ -145,11 +145,6 @@
 	}
 	#write_btn{
 		width:150px;
-	}
-	#cancle_btn{
-		position:relative;
-		top:38px;
-		left:200px;
 	} 
 	input[type="submit"].btn:hover, input[type="button"].btn:hover{
    	  background: #b3b3b3;
@@ -231,8 +226,9 @@ $(document).ready(function(){
 			</tbody>
 		</table>
 			<div id="bottommm">
+				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
+				<input type="reset" value="다시 쓰기" class="btn write_btn" id="write_btn"/>	
 				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>				
 			</div>
 		</form>
 		</div>
