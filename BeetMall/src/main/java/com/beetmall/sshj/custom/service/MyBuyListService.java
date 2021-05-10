@@ -22,4 +22,5 @@ public interface MyBuyListService {
 	public int reviewGood(int reviewnum, String userid);
 	public int claimInsert(ClaimVO vo);
 	public int claimUpdate(int ordernum, String status);
+	public ClaimVO returnSelect(int ordernum);
 }

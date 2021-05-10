@@ -56,4 +56,7 @@
 	<update id="claimUpdate">
 		update orderdetail set orderstatus = #{param2} where ordernum=#{param1}
 	</update>
+	<select id="returnSelect" resultType="com.beetmall.sshj.custom.vo.ClaimVO">
+		select ordernum, claimkind, claimstatus, claimcontent, claimdate, delivery, invoice from claim where ordernum=#{param1} 
+	</select>
 </mapper>

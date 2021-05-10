@@ -10,7 +10,7 @@
 		display: block;
 	}
 	#mypointList{
-		height:3500px;
+		height:1500px;
 		overflow:auto;
 		position: relative;
 	}
@@ -178,7 +178,7 @@
 	#buyReturnInput{	/* 반품 클릭시 */
 		font-size:17px;
 		/* line-height:40px; */
-		display: block;
+		display: none;
 	}
 	#buyCancelNotice{	/* 취소 클릭시 */
 		display: none;
@@ -375,6 +375,52 @@
 	#tradeDiv, #refundDiv{
 		padding-left:10px;
 	}
+	#returnUl>li:nth-child(2n+1){
+		width:200px;
+		text-align:left;
+		padding-left:10px;
+		border-bottom:1px solid rgb(250, 250, 250);
+	}
+	#returnUl>li:nth-child(2n){
+		width:348px;
+		border-bottom:1px solid rgb(250, 250, 250);
+	}
+	#returnUl>li:last-child{
+		width:548px;
+		height:410px;
+		background-color: rgb(250, 250, 250);
+		overflow:auto;
+		padding-top:5px;
+		padding-left:10px;
+		padding-right:10px;
+	}
+	#returnDiv{
+		display:none;
+	}
+	#questionUl>li:nth-child(2n+1){
+		width:200px;
+		text-align:left;
+		padding-left:10px;
+		border-bottom:1px solid rgb(250, 250, 250);
+		font-size:17px;
+	}
+	#questionUl>li:nth-child(2n){
+		width:348px;
+		border-bottom:1px solid rgb(250, 250, 250);
+		font-size:17px;
+	}
+	#questionUl>li:last-child{
+		width:548px;
+		height:530px;		
+		background-color: rgb(250, 250, 250);
+		padding-top:5px;
+		padding-left:10px;
+		padding-right:10px;
+		margin-bottom:15px;
+	}
+	#questionDiv{
+		display:none;
+	}
 </style>
 <script>
 	$(function(){
@@ -496,8 +542,8 @@
 	$(document).on('click','input[value=리뷰작성완료]', function(){
 		var num = $(this).parent().prev().children().val();
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
-		$("#buyReviewWrite").css("display","none");
 		$("#buyReviewView").css("display","block");
+		$("#buyReviewWrite").css("display","none");
 		var reviewnum = -1;
 		$.ajax({
 			url : "reviewSelect",
@@ -532,8 +578,6 @@
 				alert('서버에 문제가 있어 불러오기에 실패했습니다\n잠시후 다시 시도하세요\n error_code:03');
 			}
 		});
-		
-		
 	})
 	
 	$(document).on('click','input[value="반품/환불신청"]', function(){
@@ -545,11 +589,53 @@
 		console.log("제품번호=="+num+"주문번호"+ordernum);
 	});
 	$(document).on('click','input[value=재구매]', function(){
-		var num = $(this).parent().prev().children().val();
+		var num = $(this).prev().prev().val();
+		console.log(num);
 		location.href="productInfo?num="+num;
 	});
 	$(document).on('click','input[value=문의작성]', function(){
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();
+		var productnum = $(this).parent().prev().children().val();
+		$("#qboardnum").val(productnum);
+		$("#qsetNum").html(productnum);
+		$("#questionDiv").css("display","block");
+	});
+	$(document).on('click','#questionBtn', function(){
+		$("#questionForm").submit();
+	});
+	$(document).on('click','#questionCloseBtn', function(){
+		$("#questionDiv").css("display","none");
+	});
+	$(document).on('click','input[value="환불내역 보기"]', function(){
 		var num = $(this).parent().prev().children().val();
+		$("#returnDiv").css("display","block");
+		var ordernum = $(this).prev().val();
+		console.log(ordernum);
+		$.ajax({
+			url:"returnView",
+			data : "ordernum="+ordernum,
+			success: function(result){
+				console.log(result);
+				var type = "";
+				if(result.claimkind==1){
+					type="환불"
+				}else if(result.claimkind == 2){
+					type="반품"
+				}
+				var tag = "<li>주문번호</li><li>"+result.ordernum+"</li>";
+				tag += "<li>상태</li><li>"+type+"</li>";
+				tag += "<li>"+type+"사유</li><li>"+result.claimstatus+"</li>";
+				tag += "<li>택배사</li><li>"+result.delivery+"</li>";
+				tag += "<li>송장번호</li><li>"+result.invoice+"</li>";
+				tag += "<li>접수일</li><li>"+result.claimdate+"</li>";
+				tag += "<li>"+result.claimcontent+"</li>"
+				
+				$("#returnUl").empty();
+				$("#returnUl").append(tag);
+			}, error:function(){
+				
+			}
+		})
 	});
 	
 	
@@ -584,31 +670,17 @@
  	$(document).on('click', "#refund", function(){
  		$(".change").text('환불');
 	});
+ 	
 	$(document).on('click', "#trade", function(){
- 		$(".change").text('반품/교환');
+ 		$(".change").text('반품');
 	}); 
 	$(document).on('click', ".anotherCompany", function(){
+		
 		$(".anotherSelect").css("display","block").attr("disabled", false);
 	});
-	/* $(document).on('click', "#tradeAddrBtn", function(){
-		new daum.Postcode({
-	        oncomplete: function(data) {
-	            $("#tradeZipcode").val(data.zonecode);
-	            $("#tradeAddr").val(data.address);
-	            document.getElementById('tradeAddrDetail').focus();
-	        }
-	    }).open();
-	}); */
-	
-	/* $(document).on('click', "#refundAddrBtn", function(){
-		new daum.Postcode({
-	        oncomplete: function(data) {
-	            $("#refundZipcode").val(data.zonecode);
-	            $("#refundAddr").val(data.address);
-	            document.getElementById('refundAddrDetail').focus();
-	        }
-	    }).open();
-	}); */
+	$(document).on('click', "#returnBtn", function(){
+		$("#returnDiv").css("display","none");
+	});
 </script>
 <div class="section">
 	<div id="mypointList">
@@ -653,19 +725,19 @@
 					<c:if test="${vo.orderstatus == '취소'}">
 					<li></li>
 					</c:if>
-					<c:if test="${vo.orderstatus == '반품/교환 진행중'}">
-					<li></li>
-					</c:if>
 					<c:if test="${vo.orderstatus == '환불 진행중'}">
-					<li></li>
+					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="환불내역 보기"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '반품 진행중'}">
+					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="환불내역 보기"/></li>
 					</c:if>
 					
 					<c:if test="${vo.orderstatus == '구매확정'}">
 						<c:if test="${vo.ordercnt == null || vo.ordercnt <=0}">
-						<li><input type="button" class="btn" value="리뷰작성"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>
+						<li><input type="hidden" value="${vo.productnum}"/><input type="button" class="btn" value="리뷰작성"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>
 						</c:if>
 						<c:if test="${vo.ordercnt != null && vo.ordercnt>=1 }">
-						<li><input type="button" class="btn" value="리뷰작성완료"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>						
+						<li><input type="hidden" value="${vo.productnum}"/><input type="button" class="btn" value="리뷰작성완료"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>						
 						</c:if>
 					</c:if>					
 				</c:forEach>
@@ -705,14 +777,14 @@
 				<input type="hidden" name="productnum" id="returnProductnum"/>
 				
 				<div style="background-color: rgb(250, 250, 250); text-align:center;height: 100px;margin-left:-10px;padding-top: 7px;">
-					<input type="radio" name="claimkind" value="1" id="trade" style="margin-top:60px;" checked/><span style=" margin-right:5px;">반품/교환 신청</span>
+					<input type="radio" name="claimkind" value="1" id="trade" style="margin-top:60px;" checked/><span style=" margin-right:5px;">반품 신청</span>
 					<input type="radio" name="claimkind" value="2" id="refund"/><span style="margin-left:5px;">환불 신청</span>
 				</div>
-				<h3 style="text-align: center">해당 제품을 <span class="change">반품/교환</span>하시겠습니까?</h3>
-				<h5><span class="change">반품/교환</span> 사유를 선택해주세요</h5>
+				<h3 style="text-align: center">해당 제품을 <span class="change">반품</span>하시겠습니까?</h3>
+				<h5><span class="change">반품</span>사유를 선택해주세요</h5>
 				<select name="whyReturn">
 					<option value="구매의사취소">구매의사취소</option>
-					<option value="색상 및 사이즈 변경">색상 및 사이즈 변경</option>
+					<option value="종류 및 크기 변경">종류 및 크기 변경</option>
 					<option value="다른 상품 잘못 주문">다른 상품 잘못 주문</option>
 					<option value="서비스 불만족">서비스 불만족</option>
 					<option value="배송지연">배송지연</option>
@@ -723,8 +795,8 @@
 					<option value="색상 등 다른상품 잘못 배송">색상 등 다른상품 잘못 배송</option>
 				</select>
 				<div>
-					<span class="warningInfo">제품 <span class="change">반품/교환</span>시 발생하는 배송비는 소비자 부담입니다.<br/></span>
-					<span class="warningInfo">단, 상품의 변질, 파손으로 인해 발생된 <span class="change">반품/교환</span> 배송비는 판매자가 부담합니다.</span>
+					<span class="warningInfo">제품 <span class="change">반품</span>시 발생하는 배송비는 소비자 부담입니다.<br/></span>
+					<span class="warningInfo">단, 상품의 변질, 파손으로 인해 발생된 <span class="change">반품</span> 배송비는 판매자가 부담합니다.</span>
 				</div>
 				<div class="companyDiv">
 				<span class="normalFont" style="margin-right:10px;">택배사를 선택해주세요</span>
@@ -737,9 +809,10 @@
 				<span style="margin-right:10px;">송장 번호 </span><input type="text" name="invoice" style="margin-left:80px;"/>
 				</div>
 				<textarea class="summernote" name="claimcontent"></textarea>
-				<div style="text-align:center;margin-top:10px;"><input type="submit" value="반품/교환 신청" class="btn" style="top:520px;"/></div>
+				<div style="text-align:center;margin-top:10px;"><input type="submit" value="반품 신청" class="btn" style="top:520px;"/></div>
 			</form>
 			</div>
+		</div>
 		<div class="buyListDiv" id="buyCancelNotice">
 			<div class="buyListBar" style="font-size:21px;">배송 취소</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align:center;padding-top:100px; height:300px;">
@@ -809,6 +882,44 @@
 			</form>
 			</div>
 		</div>
+		<div class="buyListDiv" id="returnDiv">
+			<div class="buyListBar" style="font-size:21px;width:550px;">환불정보</div><div class="buyListBarClose" style="left:500px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:730px;background-color:white; text-align: center;width:550px;">
+				<ul id="returnUl" style="text-align:left;">
+					<li>주문번호</li>		<li></li>
+					<li>상태</li>		<li></li>
+					<li>환불사유</li> 	<li></li>
+					<li>택배사</li>		<li></li>
+					<li>송장번호</li>		<li></li>
+					<li>접수일</li>		<li></li>
+					<li></li>
+				</ul>
+				<div id="" style="width:1060px;"></div>
+				<input type="button" value="닫기" class="btn" style="top:600px;" id="returnBtn" />
+			</div>
+		</div>
+		<div class="buyListDiv" id="questionDiv">
+			<div class="buyListBar" style="font-size:21px;width:550px;">문의하기</div><div class="buyListBarClose" style="left:500px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:730px;background-color:white; text-align: center;width:550px;">
+			<form id="questionForm" action="questionWrite" method="post">
+				<input type="hidden" name="productnum" value="" id="qboardnum"/>
+				<ul id="questionUl" style="text-align:left;">
+					<li>상품번호</li>		<li><span id="qsetNum"></span></li>
+					<li>공개비공개 설정하기</li> 	<li>
+										<select name="open">
+											<option value="Y">공개</option>
+											<option value="N">비공개</option>
+										</select>
+										</li>
+					<li><textarea id="summernoteQuestion"></textarea></li>
+				</ul>
+				
+				<div id="" style="width:1060px;"></div>
+				<input type="button" value="문의하기" class="btn" style="top:660px;" id="questionBtn"/>
+				<input type="button" value="닫기" class="btn" style="top:600px;margin-top: 0px;" id="questionCloseBtn"/>
+			</form>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -852,15 +963,27 @@ $(document).ready(function() {
       }
 	  });
 	});
-/* $(document).ready(function(){
-	$("#summernote").summernote({
-		height:660,
-		placeholder:'고객님의 리뷰를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 리뷰는 숨김처리 될 수 있습니다.',
-		minHeight:660,
-		maxHeight:660,
-		lang:"ko-KR"
+$(document).ready(function() {
+	  $('#summernoteQuestion').summernote({
+		  height: 430,                 // 에디터 높이
+		  maxHeight:430,
+		  minHeight:430,
+		  width:530,
+		  focus: true,
+		  placeholder:'고객님의 문의를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 문의는 숨김처리 또는 삭제 될 수 있습니다.',
+		  //콜백 함수
+      callbacks : { 
+      	onImageUpload : function(files, editor, welEditable) {
+      // 파일 업로드(다중업로드를 위해 반복문 사용)
+      for (var i = files.length - 1; i >= 0; i--) {
+      uploadSummernoteImageFile(files[i],
+      this);
+      		}
+      	}
+      }
+	  });
 	});
-}); */
+
 </script>
 
 <script>

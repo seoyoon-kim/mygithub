@@ -78,7 +78,6 @@ public class MyBuyListController {
 		int result = 0;
 		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
 		int reviewCheck = mybuylistservice.reviewCheck(ordernum);
-		System.out.println("여기니??"+reviewCheck);
 		if(reviewCheck<=0) {
 			result = 1;
 		}else {
@@ -231,8 +230,8 @@ public class MyBuyListController {
 		
 		
 		if(kind == 1) {
-			vo.setClaimstatus("반품/교환");
-			status = "반품/교환 진행중";
+			vo.setClaimstatus("반품");
+			status = "반품 진행중";
 		}else if(kind == 2) {
 			vo.setClaimstatus("환불");
 			status = "환불 진행중";
@@ -255,4 +254,18 @@ public class MyBuyListController {
 		return mav;
 	}
 	
+	@RequestMapping("returnView")
+	@ResponseBody
+	public ClaimVO returnSelect(int ordernum, ClaimVO vo) {
+		System.out.println("주문번호"+ordernum);
+		vo = mybuylistservice.returnSelect(ordernum);
+		
+		return vo;
+	}
+	@RequestMapping(value="questionWrite")
+	public String questionWrite(int productnum ) {
+		// 여기서부터 작성
+		
+		return "mybuyList";
+	}
 }

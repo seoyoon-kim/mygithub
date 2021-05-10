@@ -97,6 +97,12 @@ public class MyBuyListServiceImp implements MyBuyListService {
 	public int claimUpdate(int ordernum, String status) {
 		
 		return mybuylistDAO.claimUpdate(ordernum, status);
+	}
+
+	@Override
+	public ClaimVO returnSelect(int ordernum) {
+		
+		return mybuylistDAO.returnSelect(ordernum);
 	}	
 
 }
