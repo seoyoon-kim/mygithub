@@ -60,9 +60,12 @@ public class SellerAskAdminController {
 	}
 	//문의하기 폼으로 이동
 	@RequestMapping("/ask_admin_write")
-	public ModelAndView askWriteForm(SellerAskAdminVO saavo){
+	public ModelAndView askWriteForm(SellerAskAdminVO saavo, HttpSession session){
 		ModelAndView mav = new ModelAndView();
+		saavo.setUserid((String)session.getAttribute("logId"));
 		mav.setViewName("seller/ask_admin_write");
+		
+	
 		return mav;
 		}	
 	//문의하기 

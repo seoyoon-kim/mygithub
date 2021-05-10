@@ -268,6 +268,12 @@
 			});
 		});
 	//탭
+	$(function(){
+		var menu = $('.management_category').nth-child('this');
+		$('menu').click(function(){
+			
+		});
+	})
 	//배송정보 변경
 	//모달
 	function modal(id) {
@@ -465,14 +471,14 @@
 				</div>
 				<div class="option_change"style="text-align:right;">
 					<select id="option_sel">
-						<option>-</option>
-						<option>배송준비중</option>
-						<option>배송중</option>
-						<option>배송완료</option>
-						<option>픽업대기중</option>
-						<option>픽업완료</option>
+						<option value="">-</option>
+						<option value="배송준비중">배송준비중</option>
+						<option value="배송중">배송중</option>
+						<option value="배송완료">배송완료</option>
+						<option value="픽업대기중">픽업대기중</option>
+						<option value="픽업대기중">픽업완료</option>
 					</select>
-					<button >변경</button>
+					<button id="selBtn">변경</button>
 				</div>
 			<!-- 페이징-->
 			<div class="page_wrap">

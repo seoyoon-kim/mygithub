@@ -32,7 +32,7 @@ $(document).ready(function() {
 				alert("문의 제목을 입력해주세요.");
 				return false;
 			}
-			if($('#qmcontent').val()=="" || #('#qmcontent').val()==null){
+			if($('#userid').val()=="" || #('#userid').val()==null){
 				alert("문의 내용을 입력해주세요.");
 				return false;
 			}
@@ -92,7 +92,7 @@ $(document).ready(function() {
 					<th class="menu" >제목</th>
 					<td class="td"><input type="text" name="qmtitle" id="subject" placeholder="문의사항 제목을 입력해주세요."/></td>
 					<th class="menu">작성자</th>
-					<td  class="td"><span>로그인한 아이디</span></td>	
+					<td  class="td"><span>${saavo.userid}</span></td>	
 				</tr>
 				
 				<tr>
@@ -100,7 +100,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="summernote" id="qmcontent" name="qmcontent" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="summernote"  name="qmcontent" placeholder="문의내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
