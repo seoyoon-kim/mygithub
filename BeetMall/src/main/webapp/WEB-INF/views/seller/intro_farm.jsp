@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_introFarm.css">
 <section>
 	<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %>	
 	<!-- 본문 시작 -->
 	<article>
-		<div class="seller_title">회원정보수정</div>
+		<div class="seller_title">농장소개</div>
 	
 		<form method="post" action="edit_farm" id="info_frm">
 			<input type="hidden" name="storenum" value="${result.storenum}"/>
