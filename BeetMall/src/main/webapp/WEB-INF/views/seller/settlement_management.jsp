@@ -12,13 +12,16 @@
 <script>
 let startDate;
 let endDate;
-let selectBtnCheck;
-let selectOption = "매출일자";
+let selectBtnCheck ;
+let selectOption ="매출일자";
+let dataSubmitCheck = "";
 
+// option이 체크되면
 function selectOptionCheck(oc){
 	selectOption = $(oc).val();
 }
 
+// 날짜버튼, 주문 건별 버튼이 눌릴경우,,,,
 $(()=>{
 	$('#dateBtn').click( function(){
 		if( $(this).css('background-color') == 'rgb(255, 255, 255)' ){
@@ -50,17 +53,15 @@ function dataInsertCheck(){
 		alert('조회기간을 설정해야 조회 가능합니다.');
 		return false;
 	}
-
 	// 조회기준 '날짜' 선택되어 있을 경우
 	if( $('#dateBtn').css('background-color') == 'rgb(221, 221, 221)' ){
+
 		selectBtnCheck = "날짜";
 		searchingData(pageNum);
-		
 	} else { // 주문건별 선택되어 있을 경우
 		selectBtnCheck = "주문건별";
 		searchingData(pageNum);
 	}
-	console.log(selectBtnCheck);
 	
 }
 
@@ -69,10 +70,8 @@ function searchingData(pageNum){
 	$.ajax({
 		type: 'GET',
 		url: 'sellerSettleSearchingData',
-		traditional : true,
 		data: $('#searchingFrm').serialize()+"&pageNum="+pageNum+"&selectBtnCheck="+selectBtnCheck,
 		success: function(result){
-			console.log(result);
 			/*
 				result[0] : totalMoney, totalRecord 가 들어있음
 				result[1] : db에서 검색한 데이터가 들어있음
@@ -83,12 +82,9 @@ function searchingData(pageNum){
 			*/
 			let tag = '<thead><tr>';
 
-			console.log('test');
-			console.log(selectBtnCheck);
-			
 			let $result = $(result[1]);
 			if(selectBtnCheck == '날짜'){// 날짜 선택했을때
-				if(selectOption=='매출일자'){
+				if(selectOption=='매출일자'){ // 날짜 - 매출일자 기준
 					tag += '<th scope="col">매출일자</th>';
 					tag += '<th scope="col">주문금액</th>';
 					tag += '<th scope="col">실결제금액</th>';
@@ -123,8 +119,7 @@ function searchingData(pageNum){
 						tag += '</tr>';
 						
 					});
-				} else {
-					
+				} else { // 날짜 - 정산날짜 기준
 					tag += '<th scope="col">정산날짜</th>';
 					tag += '<th scope="col">주문금액</th>';
 					tag += '<th scope="col">실결제금액</th>';
@@ -164,8 +159,8 @@ function searchingData(pageNum){
 						
 					});
 				}
-				
-			}else { // 정산 기준일때
+
+			}else { // 주문 건별 기준일때
 				tag += '<th scope="col">주문번호</th>';
 				tag += '<th scope="col">매출일자</th>';
 				tag += '<th scope="col">주문금액</th>';
@@ -206,10 +201,9 @@ function searchingData(pageNum){
 				});
 			}
 			tag += '</tbody>';
-			console.log(result[2].totalPage);
-			console.log(result[2].pageNum);
-			console.log(result[2].startPageNum);
-			console.log(result[2].onePageNum);
+			
+			dataSubmitCheck = "Y";
+
 			// 엑셀 페이징
 			excelInitPaging(result[2].totalPage, result[2].pageNum, result[2].startPageNum, result[2].onePageNum);
 			
@@ -218,8 +212,13 @@ function searchingData(pageNum){
 			
 			// 테이블 렌더
 			$('table').html(tag);
-			$('table>thead th').css('flex-basis','16.66%');
-			$('table>tbody td').css('flex-basis','16.66%');
+			if(selectBtnCheck == '날짜'){
+				$('table>thead th').css('flex-basis','16.66%');
+				$('table>tbody td').css('flex-basis','16.66%');
+			} else {
+				$('table>thead th').css('flex-basis','12.5%');
+				$('table>tbody td').css('flex-basis','12.5%');
+			}
 		},
 		error: function(){
 			console.log('데이터 가져오기 실패');
@@ -264,28 +263,17 @@ function excelInitPaging(totalPage, pageNum, startPageNum, onePageNum){
 $(()=>{
 	// 엑셀저장
 	$('#excelDown').click( () => {
-		if($('#categoryManagement>li').length<1 || startCalendarDataValue=='' || endCalendarDataValue==''){
+		
+		if(dataSubmitCheck==''){
 			alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
 			return false;
 		}
-		let excelData = [];
-		for(let i =0; i<excelArrList.length; i++){
-			excelData.push(excelArrList[i].ordernum);
-			excelData.push(excelArrList[i].orderconfirm);
-			excelData.push(excelArrList[i].productname);
-			excelData.push(excelArrList[i].orderquantity);
-			excelData.push(excelArrList[i].orderprice);
-			excelData.push(parseInt(excelArrList[i].orderquantity,10) * parseInt(excelArrList[i].orderprice,10));
-		}
 		
 		$.ajax({
-			type: "POST",
-			url: "excel_down",
-			traditional : true,
-			data: {
-				"excelData":excelData
-			}, success: function(result){
-				alert('BEETMALL 매출관리 엑셀파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
+			type: "GET",
+			url: "settle_excelDown?selectBtnCheck="+selectBtnCheck+"&selectOption="+selectOption+"&startdate="+startDate+"&enddate="+endDate,
+			success: function(result){
+				alert('BEETMALL 정산관리 엑셀파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
 			}, error: function(error){
 				alert('엑셀 다운로드 실패');
 			}

@@ -22,7 +22,12 @@ public class SettleServiceImp implements SettleService{
 	public List<SettleVO> totalSettle(SettleVO vo) {
 		return dao.totalSettle(vo);
 	}
-
+	
+	@Override
+	public List<SettleVO> totalOrder(SettleVO vo) {
+		return dao.totalOrder(vo);
+	}
+	
 	@Override
 	public List<SettleVO> getOrderSettleData(SettleVO vo) {
 		return dao.getOrderSettleData(vo);
@@ -47,6 +52,18 @@ public class SettleServiceImp implements SettleService{
 	public List<SettleVO> getSettleDataTotalRecord(SettleVO vo) {
 		return dao.getSettleDataTotalRecord(vo);
 	}
+
+	@Override
+	public List<SettleVO> excelOrderDateData(SettleVO vo) {
+		return dao.excelOrderDateData(vo);
+	}
+
+	@Override
+	public List<SettleVO> excelOrderSettleData(SettleVO vo) {
+		return dao.excelOrderSettleData(vo);
+	}
+
+
 	
 	
 	
