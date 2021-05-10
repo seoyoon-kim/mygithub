@@ -26,6 +26,7 @@
 let startCalendarDataValue = "";
 let endCalendarDataValue = "";
 
+
 //날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
 let yearCheck="";
 
@@ -40,14 +41,48 @@ let excelListNum = 0;
 // 엑셀에서 사용할 값이 들어있는 리스트 변수
 let excelArrList ;
 
-// 엑셀에서 사용할 표시되는 리스트 갯수 정하는 변수
-let excelViewNum = 10;
+// 엑셀에서 사용할 표시되는 페이지 갯수 정하는 변수
+let excelViewListNum;
+
+//엑셀 최대 페이지 갯수
+let excelMaxPage;
 
 // 엑셀 페이징 설정
 let MathNum;
 
 /////////////////////////////// 차트 함수 /////////////////////////////
 let myChart ;
+
+
+
+// 기능
+
+//차트 추가하기
+function addData(chart, data) {
+  chart.data.datasets.push(data);
+  chart.update();
+}
+
+//차트 삭제하기
+function removeData(chart,delData) {
+  chart.data.datasets.splice(delData,1);
+  chart.update();
+}
+
+//콤마 찍은 숫자 표현하기, 정규표현식
+function reqularExpression(num){
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+}
+
+//콤마 풀고 계산하기 위한 기능
+function revertNumType(num){
+	return num.replace(/\,/g,'');
+}
+
+
+
+
+
 
 //차트와 엑셀에 데이터가 들어가는데 필요한 기능에게 변화되는 도움만 주고 관여는 하지 않는 기능들 모아놓은 스크립트
 
@@ -191,23 +226,10 @@ $( ()=>{
 		  
 		  // pdf 다운로드
 		  pdf.save('BEETMALL 매출내역.pdf');
-		  alert('BEETMALL 매출내역 PDF 파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
+		  alert('BEETMALL 매출내역 PDF 파일 다운로드가 실행되어 다운로드 폴더에 생성됩니다.');
 	});
 })
 
-
-
-//차트 추가하기
-function addData(chart, data) {
-    chart.data.datasets.push(data);
-    chart.update();
-}
-
-//차트 삭제하기
-function removeData(chart,delData) {
-    chart.data.datasets.splice(delData,1);
-    chart.update();
-}
 
 $(function(){
 	//////////////////// 수익 매출분석에 들어갈 labels 시작 /////////////////////
@@ -494,8 +516,8 @@ $(function(){
 				"endCalendarDataValue":endCalendarDataValue
 			}, success: function(result){
 				// 엑셀 리스트를 초기화 시킨다.
-				let tag = "<li>주문번호</li>"
-						+ "<li>매출일자</li>"
+				let tag = "<li>매출일자</li>"
+						+ "<li>주문번호</li>"
 				  	    + "<li>상품명</li>"
 					    + "<li>수량</li>"
 					    + "<li>단가</li>"
@@ -505,31 +527,36 @@ $(function(){
 				excelArrList = $result;
 				$result.each(function(idx,vo){
 					
-					tag += "<li>" + vo.ordernum + "</li>";
 					tag += "<li value=" + vo.mcatenum + ">" + vo.orderconfirm + "</li>";
+					tag += "<li>" + vo.ordernum + "</li>";
 					tag += "<li value=" + vo.mcatename + ">" + vo.productname + "</li>";
-					tag += "<li>" + vo.orderquantity + "</li>";
-					tag += "<li>" + vo.orderprice + "</li>";
-					tag += "<li>" + (vo.orderquantity * vo.orderprice) + "</li>";
+					tag += "<li>" + reqularExpression(vo.orderquantity) + "</li>";
+					tag += "<li>" + reqularExpression(vo.orderprice) + "</li>";
+					tag += "<li>" + reqularExpression(vo.orderquantity * vo.orderprice) + "</li>";
 					
 				});
 				
 				$('#excelList').html(tag);
 				
 				// 엑셀 페이징 				
-				let excelPagingInit = 1;
-				excelPaging($result.length, excelPagingInit);
-				excelListNum = $result.length;
+				let excelPagingInit = 1; // 선택번호
+				excelViewListNum = 10; // excel에 보여지는 갯수를 몇개로 할건지 초기화
+				excelListNum = $result.length; // totalRecord 갯수
+				excelMaxPage = 10; // excel Max Page 갯수
+				excelPaging(excelListNum, excelPagingInit, excelViewListNum, excelMaxPage);
+				$('#excelViewNum').val('10').prop('selected',true);
 				
 				// 총 합계 데이터 입력
 				if($('#categoryManagement>li').length>0 && startCalendarDataValue != '' && endCalendarDataValue != ''){
 					let totalMoney = 0;
 					for(let i = 1; i <= excelListNum; i++){
-						totalMoney += parseInt($('#excelList>li:nth-child('+(6+(6*i))+')').text(),10);
+						// 정규표현식으로 ,가 생성되어 있다. 다시 풀어주고 계산해야 한다.
+						let revertData = revertNumType($('#excelList>li:nth-child('+(6+(6*i))+')').text());
+						totalMoney += parseInt(revertData, 10);
 					}
 					//totalMoney / 100
 					
-					$('#totalMoney').html("총 합계금액 : " + totalMoney + "원");
+					$('#totalMoney').html("총 합계금액 : " + reqularExpression(totalMoney) + "원");
 				} else {
 					$('#totalMoney').html('');
 				}
@@ -557,9 +584,9 @@ $(function(){
 				
 				
 				// 처음에 날짜 데이터가 있는지 없는지 확인한다.
-				let existenceCheck = new Date($('#excelList li:nth-child(8)').text());
+				let existenceCheck = new Date($('#excelList li:nth-child(7)').text());
 				if(existenceCheck=='Invalid Date'){
-					alert('검색된 데이터가 없습니다. 날짜를 선택하여 주십시오.');
+					alert('검색된 데이터가 없습니다.');
 					return false;
 				}
 				
@@ -586,7 +613,7 @@ $(function(){
 						let color3 = Math.floor(Math.random() * 256);
 						
 						// 현재 있는 데이터의 첫 시작 날짜가 minDate보다 2이상 차이 날 경우에 데이터 0을 미리 다 넣어놓고 시작해야 한다.
-						let firstDateCheck = new Date($('#excelList li:nth-child(8)').text());
+						let firstDateCheck = new Date($('#excelList li:nth-child(7)').text());
 						
 						if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) || 1 < (firstDateCheck.getMonth() - minDate.getMonth()) )  {
 							
@@ -614,17 +641,19 @@ $(function(){
 							//언제까지? 날짜가 끝날때까지
 							for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
 								// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
-								let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+								let orderconfirm = new Date($('#excelList li:nth-child('+(7+(j*6))+')').text());
 								// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
-								let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
-																					
+								let mcatenum = $('#excelList li:nth-child('+(7+(j*6))+')').attr('value');
+											
 								// orderconfirm이 maxDate보다 낮을때까지
 								// mcatenum과 liNum의 값이 같을때 포함해서 값을 저장한다.
 								if(minDate.getMonth() == orderconfirm.getMonth()){
 									// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 더해준다.
 									if(mcatenum == liNum){
+										// 정규표현식으로 콤마가 되어있는 값을 다시 바꿔줘야 한다.
+										let resultData = revertNumType($('#excelList li:nth-child('+(12+(j*6))+')').text());
 										//계산된 값을 계속해서 저장해준다.
-										resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+										resultsum += parseInt(resultData, 10);
 									}
 								}
 								
@@ -642,15 +671,17 @@ $(function(){
 									resultArr = [];
 									resultsum = 0;
 								}
+								
 							}
 						}else { // "월" 수 차이가 있게 했을 경우
 							//언제까지? 날짜가 끝날때까지
 							for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
+								
 								// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
-								let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+								let orderconfirm = new Date($('#excelList li:nth-child('+(7+(j*6))+')').text());
 								// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
-								let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
-																					
+								let mcatenum = $('#excelList li:nth-child('+(7+(j*6))+')').attr('value');
+						
 								if(maxDate < orderconfirm && mcatenum == liNum){
 									//배열에 넣는다.
 									resultArr.push(resultsum);
@@ -662,8 +693,10 @@ $(function(){
 								if(minDate.getMonth() == orderconfirm.getMonth()){
 									// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 더해준다.
 									if(mcatenum == liNum){
+										// 정규표현식으로 콤마가 되어있는 값을 다시 바꿔줘야 한다.
+										let resultData = revertNumType($('#excelList li:nth-child('+(12+(j*6))+')').text());
 										//계산된 값을 계속해서 저장해준다.
-										resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+										resultsum += parseInt(resultData, 10);
 									}
 								}
 								
@@ -681,6 +714,7 @@ $(function(){
 									resultArr = [];
 									resultsum = 0;
 								}
+								
 							}
 						}
 					}// 월별 차트 출력 끝 //
@@ -706,7 +740,7 @@ $(function(){
 						let color3 = Math.floor(Math.random() * 256);
 						
 						// 현재 있는 데이터의 첫 시작 날짜가 minDate보다 2이상 차이 날 경우에 데이터 0을 미리 다 넣어놓고 시작해야 한다.
-						let firstDateCheck = new Date($('#excelList li:nth-child(8)').text());
+						let firstDateCheck = new Date($('#excelList li:nth-child(7)').text());
 						
 						//만약... 데이터 첫 시작 날짜가 다를 경우의 조건
 						if( 0 < (firstDateCheck.getFullYear() - minDate.getFullYear()) )  {
@@ -724,15 +758,15 @@ $(function(){
 						
 						//언제까지? 날짜가 끝날때까지
 						for(let j=0; j < $('#excelList li:nth-child(6n+12)').length; j++){
+							
 							// orderconfirm : 엑셀 리스트에서 적혀있는 날짜를 Date로 객체화한다.
-							let orderconfirm = new Date($('#excelList li:nth-child('+(8+(j*6))+')').text());
+							let orderconfirm = new Date($('#excelList li:nth-child('+(7+(j*6))+')').text());
 							// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
-							let mcatenum = $('#excelList li:nth-child('+(8+(j*6))+')').attr('value');
+							let mcatenum = $('#excelList li:nth-child('+(7+(j*6))+')').attr('value');
 							// 합계를 낼 시작날짜
 							let startSumDate = new Date(orderconfirm.getFullYear(),1,1);
 							// 합계를 낼 마지막 날짜
 							let endSumDate = new Date(orderconfirm.getFullYear(),12,31);
-							
 							
 							// orderconfirm가 maxDate보다 커지면 minDate와 maxDate를 한달 늘린다.
 							if(maxDate < orderconfirm && mcatenum == liNum){
@@ -788,7 +822,7 @@ $(function(){
 						let color3 = Math.floor(Math.random() * 256);
 						
 						// 현재 있는 데이터의 첫 시작 날짜가 minDate보다 2이상 차이 날 경우에 데이터 0을 미리 다 넣어놓고 시작해야 한다.
-						let firstDateCheck = new Date($('#excelList li:nth-child(8)').text());
+						let firstDateCheck = new Date($('#excelList li:nth-child(7)').text());
 						
 						//만약... 데이터 첫 시작 날짜가 다를 경우의 조건
 						if( firstDateCheck.getFullYear() != minDate.getFullYear() || firstDateCheck.getMonth() != minDate.getMonth() || 0 < (firstDateCheck.getTime()/1000/60/60/24) - (minDate.getTime()/1000/60/60/24) )  {
@@ -822,9 +856,9 @@ $(function(){
 						// 시작일부터 종료날까지 반복한다.
 						let testGap = (endDate.getTime()/ 1000/ 60/ 60/ 24)-(minDate.getTime()/1000/60/60/24);
 						// 엑셀리스트에 처음에 적혀있는 날짜를 구한다.
-						let orderconfirm = new Date($('#excelList li:nth-child(8)').text());
+						let orderconfirm = new Date($('#excelList li:nth-child(7)').text());
 						// mcatenum : 엑셀리스트에서 숨겨져 있는 mcatenum을 가져온다.
-						let mcatenum = $('#excelList li:nth-child(8)').attr('value');
+						let mcatenum = $('#excelList li:nth-child(7)').attr('value');
 						let testVal = 0;
 						// 시작일부터 종료일까지 반복하는데,  매출일자와 상품명이 맞으면 값을 넣고 아닐경우 0을 넣는다.
 						// 매출일자와 상품명이 맞으면 +1 을 통해 산출된 데이터 개수만큼 확인한다.
@@ -833,7 +867,7 @@ $(function(){
 						let testCode2 = 0;
 						for(let t=0; t <= testGap; t++ ){ // 시작일부터 종료일까지의 갭차이 만큼 반복한다.
 							
-							// 다음 데이터가 없을경우
+							// 다음 데이터가 없을경우 0을 넣는다.
 							if(isNaN(orderconfirm.getDate())){
 								
 								resultArr.push(0);
@@ -844,11 +878,11 @@ $(function(){
 							if( testCode1 == 0){ //첫번째 일 경우
 								
 								if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){//모든 값이 같으면 데이터를 넣는다.
-									
-									resultArr.push( parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+									let resultData = $('#excelList li:nth-child('+(12+(testVal*6))+')').text();
+									resultArr.push( parseInt(resultData, 10) );
 									testVal++;
-									orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-									mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+									orderconfirm = new Date($('#excelList li:nth-child('+(7+(testVal*6))+')').text());
+									mcatenum = $('#excelList li:nth-child('+(7+(testVal*6))+')').attr('value');
 									
 								}else if( minDate.getDate() != orderconfirm.getDate() ){//날짜가 다르면
 									
@@ -856,8 +890,8 @@ $(function(){
 										
 										resultArr.push(0);
 										testVal++;
-										orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-										mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+										orderconfirm = new Date($('#excelList li:nth-child('+(7+(testVal*6))+')').text());
+										mcatenum = $('#excelList li:nth-child('+(7+(testVal*6))+')').attr('value');
 									
 									} else { //날짜가 다르지만 값이 같을 경우 0을 푸시한다.
 										
@@ -870,8 +904,8 @@ $(function(){
 									
 									resultArr.push(0);
 									testVal++;
-									orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-									mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+									orderconfirm = new Date($('#excelList li:nth-child('+(7+(testVal*6))+')').text());
+									mcatenum = $('#excelList li:nth-child('+(7+(testVal*6))+')').attr('value');
 									
 								}
 							
@@ -888,10 +922,10 @@ $(function(){
 							if( testCode2 == 1 ) { // 두번째 일 경우. 즉, 반복일 경우
 								
 								if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){ // 반복했는데, 날짜와 값이 모두 같을 경우 값을 더해준다.
-									
+									let resultData = $('#excelList li:nth-child('+(12+(testVal*6))+')').text();
 									let saveData = resultArr[resultArr.length-1];
 									resultArr.pop();	
-									resultArr.push( saveData + parseInt($('#excelList li:nth-child('+(12+(testVal*6))+')').text(), 10) );
+									resultArr.push( saveData + parseInt(resultData, 10) );
 									
 								} else if( minDate.getDate() != orderconfirm.getDate() ){ // 두번째 이상 반복했는데, 날짜가 다르다면 0을 푸시해줘야 한다.
 									
@@ -902,8 +936,8 @@ $(function(){
 								}
 									
 								testVal++;
-								orderconfirm = new Date($('#excelList li:nth-child('+(8+(testVal*6))+')').text());
-								mcatenum = $('#excelList li:nth-child('+(8+(testVal*6))+')').attr('value');
+								orderconfirm = new Date($('#excelList li:nth-child('+(7+(testVal*6))+')').text());
+								mcatenum = $('#excelList li:nth-child('+(7+(testVal*6))+')').attr('value');
 								
 								if( minDate.getDate() != orderconfirm.getDate() ){ // 만약 날짜가 같지 않으면 첫번째를 실행시킨다.
 									
@@ -1001,8 +1035,8 @@ $(function(){
 		
 		} else {
 			// 엑셀 리스트를 초기화 시킨다.
-			let tag = "<li>주문번호</li>"
-					+ "<li>매출일자</li>"
+			let tag = "<li>매출일자</li>"
+					+ "<li>주문번호</li>"
 			  	    + "<li>상품명</li>"
 				    + "<li>수량</li>"
 				    + "<li>단가</li>"
@@ -1016,7 +1050,7 @@ $(function(){
 })
 
 /////////////////////////////// 엑셀 기능 함수 /////////////////////////////////////
-function excelPaging(num , excelPagingInit){
+function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 	// excelPaging 할때, html 변화를 render
 	let excelPagingTag = '<a class="arrow pprev" href="javascript:void(0);" onclick="apprev(this);"></a> <a class="arrow prev" href="javascript:void(0);" onclick="aprev(this);"></a>';
 	// 모든 display none으로 초기화하고 시작
@@ -1024,26 +1058,27 @@ function excelPaging(num , excelPagingInit){
 	
 	// num에는 li 갯수가 몇 개 있는지 들어있다.
 	// num을 10으로 나눈 값
-	MathNum = Math.ceil(num/10);
+	MathNum = Math.ceil(num/excelViewListNum);
+	//시작번호 ((excelPagingInit -1 / excelViewListNum*excelViewListNum)+1
+	let startPageNum = (Math.floor((excelPagingInit-1) / excelMaxPage)*excelMaxPage)+1;
 	
-
-	if(excelPagingInit==1){//초기화
-		if(num<10){
+	if(MathNum==1){// 초기화 총 페이지수가 1이면 실행한다.
+		if(num<excelViewListNum){ // num 갯수가 페이지 갯수보다 적으면
 			excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">1</a>';  
 			for(let i = 1; i <= num; i++){
 				$('#excelList>li:nth-child(n+7):nth-child(-n+'+(6+(6 * num))+')').css('display','inline');
 			}
-		} else if(num>10){
+		} else if(num>excelViewListNum){
 			for(let i = 0; i < MathNum; i++){
 				if( i == 0 ){
 					excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">' + (i+1) + '</a>';
 				} else {
 					excelPagingTag += '<a class="arrow" href="javascript:void(0);" onclick="anum(this);">' + (i+1) + '</a>';
 				}
-				if(MathNum==10) break;
+				if(excelViewListNum==i) break;
 			}
 			
-			$('#excelList>li:nth-child(n+7):nth-child(-n+66)').css('display','inline');
+			$('#excelList>li:nth-child(n+7):nth-child(-n+'+(6+(6 * excelViewListNum))+')').css('display','inline');
 		}
 		
 		excelPagingTag += '<a class="arrow next" href="javascript:void(0);" onclick="anext(this);"></a> <a class="arrow nnext" href="javascript:void(0);" onclick="annext(this);"></a>';
@@ -1064,20 +1099,31 @@ function excelPaging(num , excelPagingInit){
 		// 만약 눌린 페이지가 10 이하면  1 2 3 4 5 6 7 8 9 10
 		// 만약 눌린 페이지가 11 이상 20 이하면 11 12 13 14 15 16 17 18 19 20
 		// 만약 눌린 페이지가 21 이상 30 이하면 21 22 23 24 25 26 27 28 29 30
+		for( let i = startPageNum; i <= startPageNum + excelMaxPage-1 ; i++){
+			if( i == excelPagingInit ){
+				excelPagingTag += '<a class="active" href="#">' + i + '</a>';
+			} else {
+				excelPagingTag += '<a class="arrow" href="javascript:void(0);" onclick="anum(this);">' + i + '</a>';
+			}
+			if(i == MathNum) break;
+		}
 		
-		let result = excelPagingInit%10-excelPagingInit+1; // 시작값 ex) (25%10) - 25 + 1= 21
+		$('#excelList>li:nth-child(n+'+ (7+ ((6*excelViewListNum) * (excelPagingInit-1) ) ) +'):nth-child(-n+'+ (6+(6*excelViewListNum) + ( (6*excelViewListNum) * (excelPagingInit-1) ) ) +')').css('display','inline');
+		
+		/*
+		let result = excelPagingInit%excelViewListNum - excelPagingInit+1; // 시작값 ex) (25%10) - 25 + 1= 21
 		// MathNum = 즉, 총 보유하고 있는 페이지와 result를 비교했을때의 차이값 만큼 표시 한다 
 		// MathNum == 25이고
 		// result == 21부터 시작이면 25까지만 표시되게
 		// 만약 돌리다가 10을 넘을경우 브레이크 한다.
-		if(excelPagingInit <= 10){
+		if(excelPagingInit <= excelViewListNum){
 			for(let i = 1; i <= MathNum; i++){
 				if( i == excelPagingInit ){
 					excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">' + i + '</a>';
 				} else {
 					excelPagingTag += '<a class="arrow" href="javascript:void(0);" onclick="anum(this);">' + i + '</a>';
 				}
-				if(MathNum==10) break;
+				if(MathNum==excelViewListNum) break;
 			}
 		} else {
 			for(let i = result; i <= (MathNum-result); i++){				
@@ -1086,7 +1132,7 @@ function excelPaging(num , excelPagingInit){
 				} else {
 					excelPagingTag += '<a class="arrow" href="javascript:void(0);" onclick="anum(this);">' + i + '</a>';
 				}
-				if((result%10)== 0) break;
+				if((result%10)== excelViewListNum) break;
 			}
 		}
 		// 어디부터 어디까지 나오게 할건지
@@ -1095,7 +1141,7 @@ function excelPaging(num , excelPagingInit){
 		// 3일때는 127 ~ 186    +120
 
 		$('#excelList>li:nth-child(n+'+ (7+ (60 * (excelPagingInit-1) ) ) +'):nth-child(-n+'+ (66 + ( 60 * (excelPagingInit-1) ) ) +')').css('display','inline');
-			
+		*/	
 		
 		
 		
@@ -1108,17 +1154,17 @@ function excelPaging(num , excelPagingInit){
 // 맨 첫페이지
 function apprev(){
 	// excelList에 값이 10개 이상있으면 엑셀 페이징 초기 
-	if(excelListNum > 10){
-		excelPaging(excelListNum, 1);
+	if(excelListNum > excelViewListNum){
+		excelPaging(excelListNum, 1, excelViewListNum, excelMaxPage);
 	}
 }
 
 // 이전 페이지 이동
 function aprev(){
-	if(excelListNum > 10){
+	if(excelListNum > excelViewListNum){
 		// 1이상이면 이전페이지로 한다.
 		if(parseInt($('.active').text(),10) > 1 ){
-			excelPaging(excelListNum, parseInt($('.active').text(),10)-1);	
+			excelPaging(excelListNum, parseInt($('.active').text(),10)-1, excelViewListNum, excelMaxPage);	
 		} 
 	}
 }
@@ -1126,26 +1172,26 @@ function aprev(){
 // 숫자 누르기
 function anum(clickNum){
 	// 누른 페이지 번호가 무엇인지 확인
-	if(excelListNum > 10){
-		excelPaging(excelListNum, parseInt($(clickNum).text(),10) );
+	if(excelListNum > excelViewListNum){
+		excelPaging(excelListNum, parseInt($(clickNum).text(),10), excelViewListNum ,excelMaxPage);
 	}
 }
 
 // 다음페이지
 function anext(){
-	if(excelListNum > 10){
+	if(excelListNum > excelViewListNum){
 		// MathNum 즉, 마지막페이지가 아닐 경우 다음페이지로 이동 가능하다.
 		if(parseInt($('.active').text(),10) < MathNum ){
-			excelPaging(excelListNum, parseInt($('.active').text(),10)+1);	
+			excelPaging(excelListNum, parseInt($('.active').text(),10)+1, excelViewListNum, excelMaxPage);	
 		}
 	}
 }
 
 // 맨 끝페이지
 function annext(){
-	if(excelListNum > 10){
+	if(excelListNum > excelViewListNum){
 		// MathNum 즉, 마지막 페이지로 이동
-		excelPaging(excelListNum, MathNum);
+		excelPaging(excelListNum, MathNum, excelViewListNum, excelMaxPage);
 	}
 }
 $(()=>{
@@ -1179,7 +1225,12 @@ $(()=>{
 		});
 	});
 })
-	
+
+
+function changeViewListNum(num){
+	excelViewListNum = $('#excelViewNum option:selected').val();
+	excelPaging(excelListNum , 1, excelViewListNum, excelMaxPage);
+}
 
 </script>
 
@@ -1272,7 +1323,7 @@ $(()=>{
 			<div class="wrapTitle">
 				카테고리별 매출분석
 				<button class="normalBtn" id="excelDown">엑셀 저장</button>
-				<select id="excelViewNum">
+				<select id="excelViewNum" onchange="javascript:changeViewListNum(this)">
 					<option selected="selected">10</option>
 					<option>50</option>
 					<option>100</option>
