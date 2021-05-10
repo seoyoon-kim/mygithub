@@ -5,6 +5,7 @@ import java.util.List;
 import com.beetmall.sshj.custom.vo.ClaimVO;
 import com.beetmall.sshj.custom.vo.MyBuyListVO;
 import com.beetmall.sshj.custom.vo.ReviewVO;
+import com.beetmall.sshj.custom.vo.UserQBoardVO;
 
 public interface MyBuyListDAO {
 	public List<MyBuyListVO> selectBuyList(String userid);
@@ -22,4 +23,8 @@ public interface MyBuyListDAO {
 	public int claimInsert(ClaimVO vo);
 	public int claimUpdate(int ordernum, String status);
 	public ClaimVO returnSelect(int ordernum);
+	public int qboardInsert(UserQBoardVO vo);
+	public int returnFinish(int ordernum);
+	public List<MyBuyListVO> monthSelectBuyList(String userid, int month);
+	
 }

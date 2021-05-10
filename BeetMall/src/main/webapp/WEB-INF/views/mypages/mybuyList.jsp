@@ -45,10 +45,7 @@
 		margin:5px 0;
 		text-align:center;
 	}
-	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4), #pointUl>li:nth-child(5), #pointUl>li:nth-child(6){
-		border-bottom:1px solid rgb(252,118,45);
-		
-	}
+	
 	#pointUl>li:nth-child(6n+1){
 		line-height:20px;
 		padding-top:10px;
@@ -76,6 +73,11 @@
 	#pointUl>li:nth-child(6n+3) img{
 		line-height:60px;
 		float:left;
+	}
+	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4), #pointUl>li:nth-child(5), #pointUl>li:nth-child(6){
+		border-bottom:1px solid rgb(252,118,45);
+		line-height: 20px;
+		padding-top:10px;
 	}
 	#pointUl img{
 		height:58px;
@@ -462,16 +464,14 @@
 			success : function(result){
 				$("#buyCancelNotice").css("display","none");
 				if(result == 1){
-					console.log('취소성공');
 					location.href="mybuyList";
 				}else if(result == -1){
-					console.log('배송중이라 취소 못함');
 					$("#buyCancelRollBack").css("display","block");
 				}else{
-					alert('취소에 실패했습니다 고객센터로 연락 부탁드립니다');
+					alert('취소에 실패했습니다 고객센터로 연락 부탁드립니다 \n error_code:02');
 				}
 			}, error : function(){
-				console.log('취소실패');
+				alert('취소에 실패했습니다 고객센터로 연락 부탁드립니다 \n error_code:02');
 			}
 		});
 	})
@@ -498,12 +498,11 @@
 			data : param,
 			success(result){
 				if(result>=1){
-					console.log('성공');
 					$("#buyCommit").css("display","none");
 					location.href="mybuyList";
 				}
 			}, error(){
-				console.log('실패..');
+				alert("구매확정 오류 \n error:code-07");
 			}
 		})
 	});
@@ -522,20 +521,19 @@
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
 		$("#buyReviewWrite").css("display","block");
 		$("#buyReviewView").css("display","none");
-		console.log("productNum=",num);
+		
 		$.ajax({
 			url : "productInfo",
 			data : "productNum="+num,
 			success:function(result){
-				console.log(result);
-				console.log("resultproductname="+result.productname);
+				
 				$("#reviewImg").attr("src","/sshj/resources/sellerProductImgs/"+result.thumbimg);
 				$("#reviewTitle").html(result.productname);
 				$("#reviewordernum").val(ordernum);
 				$("#reviewproductnum").val(num);
-				console.log("reviewordernun = "+$("#reviewordernum").val()+"reviewproductnum = "+$("#reviewproductnum").val());
+				
 			}, error : function(){
-				console.log('실패');
+			alert("리뷰작성 오류가 발생했습니다. \n error-code:13")
 			}
 		});
 	});
@@ -586,19 +584,19 @@
 		$("#buyReturnInput").css("display","block");
 		$("#returnProductnum").val(num);
 		$("#returnOrdernum").val(ordernum); 
-		console.log("제품번호=="+num+"주문번호"+ordernum);
 	});
 	$(document).on('click','input[value=재구매]', function(){
 		var num = $(this).prev().prev().val();
-		console.log(num);
-		location.href="productInfo?num="+num;
+		location.href="customproduct?no="+num;
 	});
 	$(document).on('click','input[value=문의작성]', function(){
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
 		var productnum = $(this).parent().prev().children().val();
 		$("#qboardnum").val(productnum);
-		$("#qsetNum").html(productnum);
+		$(".qsetNum").html(productnum);
 		$("#questionDiv").css("display","block");
+		
+		
 	});
 	$(document).on('click','#questionBtn', function(){
 		$("#questionForm").submit();
@@ -606,16 +604,20 @@
 	$(document).on('click','#questionCloseBtn', function(){
 		$("#questionDiv").css("display","none");
 	});
+	$(document).on('click','input[value=환불확정]', function(){
+		var ordernum = $(this).prev().prev().val();
+		if(confirm('환불을 확정하시겠습니까? 환불확정 된 주문은 모든 환불 절차가 끝난 것입니다.')){
+			location.href="returnSubmit?ordernum="+ordernum;
+		}
+	})
 	$(document).on('click','input[value="환불내역 보기"]', function(){
 		var num = $(this).parent().prev().children().val();
 		$("#returnDiv").css("display","block");
 		var ordernum = $(this).prev().val();
-		console.log(ordernum);
 		$.ajax({
 			url:"returnView",
 			data : "ordernum="+ordernum,
 			success: function(result){
-				console.log(result);
 				var type = "";
 				if(result.claimkind==1){
 					type="환불"
@@ -681,17 +683,29 @@
 	$(document).on('click', "#returnBtn", function(){
 		$("#returnDiv").css("display","none");
 	});
+	$(document).on('click', "#3months", function(){
+		location.href="monthmybuyList?month=3";
+	});
+	$(document).on('click', "#6months", function(){
+		location.href="monthmybuyList?month=6";
+	});
+	$(document).on('click', "#12months", function(){
+		location.href="monthmybuyList?month=12";
+	});
+	$(document).on('click', "#allmonths", function(){
+		location.href="mybuyList";
+	});
 </script>
 <div class="section">
 	<div id="mypointList">
 		<h2>구매내역</h2>
 		<div id="pointSelect">
-			<div class="btn">전체</div>
+			<div class="btn" id="allmonths">전체</div>
 		</div>
 		<div id="pointSelectDate">
-			<div class="btn">3개월</div>
-			<div class="btn">6개월</div>
-			<div class="btn">1년</div>
+			<div class="btn" id="3months">3개월</div>
+			<div class="btn" id="6months">6개월</div>
+			<div class="btn" id="12months">1년</div>
 		</div>
 		<div>
 			<ul id="pointUl">
@@ -706,7 +720,7 @@
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li>${vo.ordernum}</li>
 					<li>
-					<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="">${vo.productname}</a></span><span class="buydetail wordcut"><a href="">${vo.productcontent}</a></span>
+					<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productcontent}</a></span>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
@@ -720,13 +734,13 @@
 					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="구매확정"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="반품/환불신청"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '환불'}">
-					<li><input type="button" class="btn" value="환불확정"/><input type="button" class="btn" value="문의작성"/></li>
+					<li><input type="button" class="btn" value="문의작성"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '취소'}">
 					<li></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '환불 진행중'}">
-					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="환불내역 보기"/></li>
+					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="환불내역 보기"/><input type="button" class="btn" value="환불확정"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '반품 진행중'}">
 					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="환불내역 보기"/></li>
@@ -904,14 +918,14 @@
 			<form id="questionForm" action="questionWrite" method="post">
 				<input type="hidden" name="productnum" value="" id="qboardnum"/>
 				<ul id="questionUl" style="text-align:left;">
-					<li>상품번호</li>		<li><span id="qsetNum"></span></li>
+					<li>상품번호</li>		<li><span id="productnum" class="qsetNum"></span></li>
 					<li>공개비공개 설정하기</li> 	<li>
-										<select name="open">
+										<select name="qopen">
 											<option value="Y">공개</option>
 											<option value="N">비공개</option>
 										</select>
 										</li>
-					<li><textarea id="summernoteQuestion"></textarea></li>
+					<li><textarea id="summernoteQuestion" name="qcontent"></textarea></li>
 				</ul>
 				
 				<div id="" style="width:1060px;"></div>
@@ -999,10 +1013,8 @@ function uploadSummernoteImageFile(file, el) {
 		processData : false,
 		success : function(data) {
 			$(el).summernote('editor.insertImage', data.url);
-			console.log("성공");
-			console.log(data);
 		}, error: function(){
-			console.log("실패");
+			
 		}
 	});
 }

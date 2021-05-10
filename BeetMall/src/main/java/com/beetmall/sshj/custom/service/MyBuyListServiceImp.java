@@ -10,6 +10,7 @@ import com.beetmall.sshj.custom.dao.MyBuyListDAO;
 import com.beetmall.sshj.custom.vo.ClaimVO;
 import com.beetmall.sshj.custom.vo.MyBuyListVO;
 import com.beetmall.sshj.custom.vo.ReviewVO;
+import com.beetmall.sshj.custom.vo.UserQBoardVO;
 
 @Service
 public class MyBuyListServiceImp implements MyBuyListService {
@@ -103,6 +104,25 @@ public class MyBuyListServiceImp implements MyBuyListService {
 	public ClaimVO returnSelect(int ordernum) {
 		
 		return mybuylistDAO.returnSelect(ordernum);
-	}	
+	}
+
+	@Override
+	public int qboardInsert(UserQBoardVO vo) {
+		
+		return mybuylistDAO.qboardInsert(vo);
+	}
+
+	@Override
+	public int returnFinish(int ordernum) {
+		
+		return mybuylistDAO.returnFinish(ordernum);
+	}
+
+	@Override
+	public List<MyBuyListVO> monthSelectBuyList(String userid, int month) {
+		
+		return mybuylistDAO.monthSelectBuyList(userid, month);
+	}
+
 
 }
