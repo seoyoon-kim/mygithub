@@ -16,6 +16,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by faqnum desc		
 	</select>
 	<select id="faqOnetotalRecord" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO" resultType="int">
-		select count(faqnum) from faq
+		select count(faqnum) from faq where faqoption=1
 	</select>
 </mapper>

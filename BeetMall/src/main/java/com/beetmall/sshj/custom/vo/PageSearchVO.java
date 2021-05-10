@@ -4,7 +4,7 @@ public class PageSearchVO {
 //	필요한정보를 세팅
 	private int pageNum=1;//현재페이지
 	private int onePageNum=5;//한페이지당 페이지 번호수
-	private int onePageRecord=13;//한페이지당 레코드 수
+	private int onePageRecord=12;//한페이지당 레코드 수
 	
 //	디비에서 가져오는 정보
 	private int startPageNum=1;//시작페이지-

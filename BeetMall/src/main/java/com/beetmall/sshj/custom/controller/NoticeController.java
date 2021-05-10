@@ -31,6 +31,7 @@ public class NoticeController {
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
 		pageVO.setTotalRecord(noticeService.noticeOnetotalRecord(pageVO));
+		System.out.println("pageVO = " + pageVO.getTotalPage());
 		
 		mav.addObject("list", noticeService.noticeAllRecord(pageVO));
 		mav.addObject("pageVO",pageVO);

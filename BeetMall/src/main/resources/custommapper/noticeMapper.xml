@@ -22,6 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		update notice set infohit=infohit+1 where infonum=#{param1}
   	</update>
   	<select id="noticeOnetotalRecord" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO" resultType="int">
-		select count(infonum) from notice
+		select count(infonum) from notice where infotype=1
 	</select>
 </mapper>
