@@ -8,7 +8,7 @@
 /*  기본설정----------------------------------------------                 */
 .section {
 	width: 1080px;
-	background-color: white;
+	
 	margin: 0 auto;
 }
 
@@ -102,14 +102,14 @@ a:hover, a:active, a:visited, a:link {
 
 /*  상품 박스------------이미지 부분----------------------------------                 */
 #productmainbox {
-	width: 1080px;
+   width: 1080px;
    float: left;
 }
 
 #productImgBox {
 	float: left;
 	margin-left:80px;
-	margin-top: 80px;
+	margin-top: 100px;
 	width: 250px;
 	height: 300px; 
 }
@@ -121,8 +121,8 @@ a:hover, a:active, a:visited, a:link {
 
 #ptime {
 	width: 250px;
-	height: 40px;
-	line-height: 40px;
+	height: 50px;
+	line-height: 50px;
 	text-align: center;
 	background-color: red;
 	color: white;
@@ -142,6 +142,7 @@ a:hover, a:active, a:visited, a:link {
 	line-height: 50px;
 	float: left;
 	margin-right: 150px;
+	font-size:23px;
 }
 
 #productPrice {
@@ -149,6 +150,7 @@ a:hover, a:active, a:visited, a:link {
 	width: 50%;
 	height: 50px;
 	line-height: 50px;
+	font-size:20px;
 }
 
 #sprofile {
@@ -174,15 +176,36 @@ a:hover, a:active, a:visited, a:link {
 	float: left;
 	margin: 0 auto;
 	padding-left: 0px;
+	
 }
 
 #productPrBox>ul>li {
 	float: left;
-	width: 50%;
+	width: 45%;
 	height: 35px;
 	line-height: 35px;
 	margin-bottom:10px;
+	margin-top:5px;
+	border-bottom:1px solid #eee;
 }
+
+#productPrBox>ul>li:nth-child(16n+13),#productPrBox>ul>li:nth-child(16n+14),#productPrBox>ul>li:nth-child(16n+1),#productPrBox>ul>li:nth-child(16n+2){
+border-bottom:none;
+}
+
+#productPrBox>ul>li:nth-child(16n+1),
+#productPrBox>ul>li:nth-child(16n+3),
+#productPrBox>ul>li:nth-child(16n+5),
+#productPrBox>ul>li:nth-child(16n+7),
+#productPrBox>ul>li:nth-child(16n+9),
+#productPrBox>ul>li:nth-child(16n+11),
+#productPrBox>ul>li:nth-child(16n+13){
+color:gray;
+font-size:17px;
+width: 55%;
+padding-left:10px;
+}
+
 
 #mapbtn {
 	border: none;
@@ -213,6 +236,7 @@ a:hover, a:active, a:visited, a:link {
 	font-weight: 700px;
 	padding-left:280px;
 	margin-bottom:15px;
+	color:red;
 	
 }
 
@@ -561,10 +585,12 @@ a:hover, a:active, a:visited, a:link {
 	height: 30px;
 	line-height: 30px;
 }
+
 #qnaTitle>li:nth-child(5n+1), #qnaList>li:nth-child(5n+1) {
 	text-align:center;
 	width: 90px;
 }
+
 #qnaTitle>li:nth-child(5n+2){
 	text-align:center;
 }
@@ -679,6 +705,9 @@ a:hover, a:active, a:visited, a:link {
 	}
 
 
+#productBtn{
+    padding-left: 0px;
+}
 
 </style>
 <script>
@@ -777,47 +806,45 @@ a:hover, a:active, a:visited, a:link {
 
 			<div id=pbox>
 				<div id=productMainTiltle>
-					<b>국산 100% 볶음참깨 160g 80g 볶음참깨 당일생산 당일 배송!!</b>
+					<b>${plist.productname}</b>   <!-- 상품명 -->
 				</div>
-				<div id=productPrice>가격 : 8,900</div>
+				<div id=productPrice>${plist.productprice}</div>  <!-- 가격 -->
 				<div id="sprofile">
-					<a href="#">경북예천 홍길동</a>
+					<a href="#">${plist.farmname}</a>  <!--농장이름 -->
 				</div>
 				<div id="simg">
-					<a href="#"><img src="img/cprofile.png"></a>
+					<a href="#"><img src="img/cprofile.png"></a>  <!-- 프사 -->
 				</div>
-
 
 				<div id=productPrBox>
 					<ul>
-						<li>판매단위</li>
-						<li>1통</li>
-						<li>중량/용량</li>
-						<li>160g</li>
-						<li>배송구분</li>
-						<li>픽업/배송<input type="button" id="mapbtn" value="픽업위치확인하기" /></li>
-						<li>원산지</li>
-						<li>국산</li>
-						<li>포장타입</li>
-						<li>냉장/종이포장</li>
-						<li>안내사항</li>
-						<li>어쩌구저쩌구</li>
-						<li>구매수량</li>
-						<li><input type="button" class="pmbtn minibtn" value="-"/>1통<input	type="button" class="pmbtn minibtn" value="+"/></li>
-						<li>추가옵션</li>
-						<li></li>
-						<li><select name="selecOption" id="selecOption">
+						<li>판매단위</li>  <!-- 1 -->
+						<li>${plist.selloption}</li> <!-- 2 -->
+						<li>중량/용량</li> <!-- 3 -->
+						<li>${plist.sellweight}</li> <!-- 4 -->
+						<li>배송구분</li> <!-- 5 -->
+						<li>${plist.deliveryoption}<input type="button" id="mapbtn" value="픽업위치확인하기" /></li>  <!-- 6 -->
+						<li>원산지</li>  <!-- 7 -->
+						<li>${plist.origin}</li>  <!-- 8 -->
+						<li>포장타입</li>  <!-- 9 -->
+						<li>${plist.wrapping}</li>  <!-- 10 -->
+						
+						<li>구매수량</li>  <!-- 11 -->
+						<li><input type="button" class="pmbtn minibtn" value="-"/>1<input	type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
+						<li>추가옵션</li>  <!-- 13 -->
+						<li></li>  <!-- 14 -->
+						<li><select name="selecOption" id="selecOption">  <!-- 15 -->
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
 						</select></li>
-						<li><input type="button" class="pmbtn minibtn" value="-"/>1번<input	type="button" class="pmbtn minibtn" value="+"/></li>
+						<li><input type="button" class="pmbtn minibtn" value="-"/>1번<input	type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 16 -->
 					</ul>
 				</div>
 				<!--productPrBox  -->
 
 
-				<div id=productTotalPrice><b>총 상품금액:8,900원</b></div>
+				<div id=productTotalPrice><b>총 상품금액:원</b></div>
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn"/>
 					<input type="button" value="장바구니 담기" class="btn"/>

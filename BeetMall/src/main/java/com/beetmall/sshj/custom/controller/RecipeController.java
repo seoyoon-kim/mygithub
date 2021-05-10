@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.RecipeService;
 import com.beetmall.sshj.custom.service.RecipeServiceImp;
-import com.beetmall.sshj.custom.vo.CenterVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 	@Controller
@@ -26,13 +25,26 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	RecipeServiceImp recipeService;
 //////////////////////////////////////////////////////////레시피 뷰///////////////////////////////////////////////////////////
 	@RequestMapping("/recipeView")
-	public ModelAndView RecipeSelect(int recipenum) {
+	public ModelAndView RecipeSelect(int recipenum,String id) {
 		//////////2해당 게시글 보이게 하기----------
 		ModelAndView mav=new ModelAndView();
-
-		///조회수
+        
+		///여기까지 아이디랑 넘 넘어옴
+		
+		///조회수//
 		recipeService.recipeHit(recipenum);
+		//좋아요 누른거 나오게 하기
+		int countrk=recipeService.recikeepOnly(recipenum,id);
+		//장바구니 누른거 나오게 하기
+		int countrg=recipeService.recigoodOnly(recipenum, id);
+		
+		mav.addObject("countrk",countrk);
+		mav.addObject("countrg",countrg);
+		
+		System.out.println("Ff");
+		
 		//뷰어전체
+	
 		mav.addObject("vo", recipeService.RecipeSelect(recipenum));		
 		mav.setViewName("custom/recipeView");
 
@@ -146,6 +158,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			mav.setViewName("redirect:recipeList");
 		}
 		return mav;
+		
 	}
 	
 //////////////////////////////////////////////////////////레시피 홈///////////////////////////////////////////////////////////
@@ -218,6 +231,22 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		
 		return num+","+id;
 }
+    ///////////////////////////////////// 레시피 추천 기록 삭제///////////////////////////////////////
+	
+	@RequestMapping("/recigoodDelete")
+	@ResponseBody
+	public int recigoodDelete(HttpServletRequest req) {
+		
+		
+		String id=req.getParameter("id");
+		int num=Integer.parseInt(req.getParameter("num"));
+		
+		//System.out.println("삭제"+id+num);여기까지 옴
+		
+		return recipeService.recigoodDelete(num,id);
+	
+		
+	}
 	
 	///////////////////////////////////레시피 장바구니 등록////////////////////////////////////////////
 	
@@ -257,9 +286,20 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	}
 	
+   ////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
 
-	
-
+	@RequestMapping("/recikeepDelete")
+	@ResponseBody
+	public int recikeepDelete(HttpServletRequest req) {
+				
+		String id=req.getParameter("id");
+		int num=Integer.parseInt(req.getParameter("num"));
+		
+		return recipeService.recikeepDelete(num,id);
+		
+		
+		
+	}
 
 	
 }
