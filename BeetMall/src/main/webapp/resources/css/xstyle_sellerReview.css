@@ -67,17 +67,11 @@ a:hover,a:active,a:visited,a:link{
 	text-align: center;
 	border: 1px solid #aaa;
 }
-
-/* 리뷰 검색 */
+/* 카테고리 검색 */
 #categoryList{
 	width: 90%;
-	margin: 20px auto;
+	margin: 50px auto;
 	border: 1px solid #aaa;
-	border-radius: 5px;
-}
-
-#categoryList>strong{
-	text-indent: 0.4em;
 }
 
 #categoryListMiddle{
@@ -85,10 +79,10 @@ a:hover,a:active,a:visited,a:link{
 	height: 170px;
 	display: flex;
 	flex-basis: 1;
+	margin-bottom: 10px;
 }
 
 #categoryListMiddle ul{
-	border-top: 1px solid #aaa;
 	border-bottom: 1px solid #aaa;
 	overflow: auto;
 	flex: 1;
@@ -100,10 +94,15 @@ a:hover,a:active,a:visited,a:link{
 	border-right: 1px solid #aaa;
 }
 
+#category a{
+	color: black;
+}
+
 #categoryListMiddle li{
 	width: 100%;
 	text-indent: 0.4em;
 	display: flex;
+	margin-top:5px;
 }
 
 #categoryListMiddle span{
@@ -119,16 +118,39 @@ a:hover,a:active,a:visited,a:link{
 
 #categoryManagement li{
 	text-indent: 0.4em;
-	margin: 10px 0;
+	margin-right: 5px;
+}
+
+#categoryManagement a{
+	color: black;
+	font-weight: bold;
 }
 
 #categorySearch_container{
-	margin-bottom: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	display: flex;
+	
 }
-/* categorySearch_container의 공통문보 설정*/
-.categorySearch_container_child{
-	margin-left: 5px;
+
+.categorySearch_item{
+	flex-basis: 100px;
+	margin-right: 10px;
+}
+
+#categoryDate{
+	height: 26px;
+	margin-left: 10px;
+}
+
+#calendarApply{
+	border: 1px solid #aaa;
+	background-color: white;
+	padding: 0 5px;
+}
+
+#mcategory li>a{
+	color: black;
 }
 
 /* 리뷰 출력 */

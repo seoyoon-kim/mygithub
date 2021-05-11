@@ -2,12 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">
-<!-- 차트 라이브러리 chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
-<!-- chart.js pdf 변환 -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
-
 <!-- 오늘의 날짜를 계산해서 오늘 기준으로 년도, 월, 일이 언제인지를 기준으로 값이 입력 될 수 있도록 한다. -->
 <c:set var='today' value="<%=new java.util.Date()%>" />
 <c:set var='monthPtn'>
@@ -19,6 +13,12 @@
 <c:set var='yearCheck'>
 	<fmt:formatDate value="${today }" pattern="yyyy" />
 </c:set>
+
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">
+<!-- 차트 라이브러리 chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+<!-- chart.js pdf 변환 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
 
 <script>
 //////////////////////////////// 전역변수 선언 /////////////////////////////////
@@ -260,9 +260,6 @@ $(function(){
 			return false;
 		}
 		
-		// 최대 선택 가능 날짜의 차이는 6개월 이다. 일수로 치면 180일 이고,
-		// 년도 기준과 6개월 이상, 180일 이상은 차트만 기입되고 엑셀이 기입되지 않도록 한다.
-		// 왜냐? 데이터가 너무 많아질 경우 오히려 서비스 저하가 발생 할 수 있기 때문이다.
 		
 		//========================제한사항 걸러내기 끝 ===============================//
 		
