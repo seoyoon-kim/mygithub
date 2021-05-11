@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- 오늘의 날짜를 계산해서 오늘 기준으로 년도, 월, 일이 언제인지를 기준으로 값이 입력 될 수 있도록 한다. -->
@@ -300,7 +300,7 @@ $(function(){
 </script>
 
 <section>
-	<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %>
+	<%@include file="/WEB-INF/views/inc/sellerHeader.jsp"%>
 	<!-- 본문 시작 -->
 	<article>
 		<div class='seller_title'>리뷰관리</div>
@@ -308,19 +308,20 @@ $(function(){
 			<!-- 리뷰 보기 -->
 			<div class="wrapTitle">리뷰보기</div>
 			<div class="wrapContainer">
-				
+
 				<ul id="reviewInfo">
-					<li style="font-weight:bold;">새 리뷰</li>
+					<li style="font-weight: bold;">새 리뷰</li>
 					<li>${resultData.newReview }건</li>
-					<li style="font-weight:bold;">미답변</li>
+					<li style="font-weight: bold;">미답변</li>
 					<li>${resultData.nullReview }건</li>
-					<li style="font-weight:bold;">사용자 총 평점</li>
+					<li style="font-weight: bold;">사용자 총 평점</li>
 					<li>${resultData.totalScore }/5</li>
-					<li style="font-weight:bold;">전체 리뷰 수</li>
+					<li style="font-weight: bold;">전체 리뷰 수</li>
 					<li>${resultData.totalReview }건</li>
 				</ul>
-			</div><!-- 리뷰 보기 끝 -->
-			
+			</div>
+			<!-- 리뷰 보기 끝 -->
+
 			<!-- 리뷰 검색 -->
 			<div class="wrapTitle">리뷰 검색</div>
 			<div class="wrapContainer">
@@ -361,9 +362,11 @@ $(function(){
 						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
 					</div>
 
-				</div><!-- categoryList 끝 -->
-			</div><!-- 리뷰 검색 끝 -->
-			
+				</div>
+				<!-- categoryList 끝 -->
+			</div>
+			<!-- 리뷰 검색 끝 -->
+
 			<!-- 리뷰 출력 -->
 			<!-- 정렬방법 고르기 -->
 			<div id="sortContainer">
@@ -373,7 +376,7 @@ $(function(){
 					<option>평점 낮은 순</option>
 				</select>
 			</div>
-			
+
 			<ul id="reviewList">
 				<li>상품명</li>
 				<li>평점</li>
@@ -383,16 +386,16 @@ $(function(){
 				<li>등록일</li>
 				<li>답변 여부</li>
 				<c:if test="${reviewList != null }">
-					<c:forEach var="result" items="${reviewList}" varStatus="i" >
+					<c:forEach var="result" items="${reviewList}" varStatus="i">
 						<li>${result.productname }</li>
 						<li>${result.reviewscore }</li>
 						<c:if test="${result.reviewimg != null }">
-							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;")></li>
+							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )></li>
 						</c:if>
 						<c:if test="${result.reviewimg == null }">
 							<li>-</li>
 						</c:if>
-						<li><a href=""><input type="hidden" name="reviewnum" value="${result.reviewnum }"/>${result.reviewcontent }</a></li>
+						<li><a href=""><input type="hidden" name="reviewnum" value="${result.reviewnum }" />${result.reviewcontent }</a></li>
 						<li>${result.userid }</li>
 						<li>${result.reviewwritedate }</li>
 						<c:if test="${result.reviewanswer != null }">
@@ -405,46 +408,107 @@ $(function(){
 				</c:if>
 			</ul>
 			<!-- 리뷰 출력 끝 -->
+			<script>
+				function paging(pageNum){
+					let url = "SellerReviewPaging";
+					let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord};
+					
+					$.ajax({
+						url: url,
+						data: param,
+						success: function(result){
+							let tag = "<li>상품명</li>";
+								tag += "<li>평점</li>";
+								tag += "<li>포토</li>";
+								tag += "<li>리뷰 내용</li>";
+								tag += "<li>등록자</li>";
+								tag += "<li>등록일</li>";
+								tag += "<li>답변 여부</li>";
+							console.log(result);
+							result2 = $(result[1]);
+							result2.each( function (idx, vo){
+								tag += "<li>" + vo.productname + "</li>";
+								tag += "<li>" + vo.reviewscore + "</li>";
+								if(vo.reviewimg != null){
+									let data = vo.reviewimg;
+									tag += "<li style='background-image: url(<%=request.getContextPath()%>/resources/img/data); background-size: 100% 100%;' )></li>"
+								} else {
+									tag += "<li>-</li>";
+								}
+								tag += "<li><a href=''><input type='hidden' name='reviewnum' value='${result.reviewnum }' />"+vo.reviewcontent+"</a></li>";
+								tag += "<li>" + vo.userid + "</li>";
+								tag += "<li>" + vo.reviewwritedate + "</li>";
+								if(vo.reviewanswer != null){
+									tag += "<li>답변 완료</li>";
+								} else {
+									tag += "<li>미답변</li>";
+								}
+							})
+							$('#reviewList').html(tag);
+						}, error: function(){
+							console.log('페이징 실패');
+						}
+					})
+				}
+			</script>
+			<!--------------페이징 표시-------------------->
+			
+			<c:if test="${resultData != null }">
+				
+				<div class="page_wrap">
+					<div class="page_nation">
+						<c:if test="${resultData.pageNum != 1 }">
+							<a class="arrow pprev" href="javascript:paging(1)"></a> 
+							<a class="arrow prev" href="javascript:paging(${resultData.pageNum-1}"></a> 
+						</c:if>
+							<c:forEach var="i" begin="${resultData.startPageNum }" end="${resultData.totalPage }" >
+								<c:if test="${resultData.pageNum == i }">
+									<a class="active" href="#" onclick="return false;">${i}</a> 
+								</c:if>
+								<c:if test="${resultData.pageNum != i }">
+									<a class="arrow" href="javascript:paging(${i})">${i}</a>
+								</c:if>
+							</c:forEach>
+						<c:if test="${resultData.totalPage != resultData.pageNum }">
+							<a class="arrow next" href="javascript:paging(${resultData.pageNum+1})"></a>
+							<a class="arrow nnext" href="javascript:paging(${resultData.totalPage})"></a>
+						</c:if>
+					</div>
+				</div>
+				
+			</c:if>
 		</div>
-	</article><!-- 본문 끝 -->
-	
-	
+	</article>
+	<!-- 본문 끝 -->
+
+
 	<!-- 팝업 시작 -->
 	<div id="popup">
 		<div class="wrapContainer_Edit1">
 			<form method="" action="">
 				<div class="wrapTitle">리뷰</div>
 				<ul id="reivewManagement">
-					<li>
-						<b>구매상품</b>
-						<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png" id="repMenu_img"/>
-						<div>싸고 맛있는 빵빠레빵빠빵</div>
-					</li>
-					<li>
-						<b>등록자</b>
-						tkaudeotk00
-					</li>
-					<li>
-						<b>등록일</b>
-						2021.05.02
-					</li>
-					<li>
-						<b>평점</b>
-						<div>★★★★★</div>
-						<img src="<%=request.getContextPath() %>/resources/img/xgood.png" id="good_img"/> : 2
-					</li>
+					<li><b>구매상품</b> <img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png" id="repMenu_img" />
+						<div>싸고 맛있는 빵빠레빵빠빵</div></li>
+					<li><b>등록자</b> tkaudeotk00</li>
+					<li><b>등록일</b> 2021.05.02</li>
+					<li><b>평점</b>
+						<div>★★★★★</div> <img src="<%=request.getContextPath() %>/resources/img/xgood.png" id="good_img" /> : 2</li>
 				</ul>
 				<div>
-					<br/><b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br/>
+					<br />
+					<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />
 					<div id="reviewContent">
-						<p> 이제 드디어 대저 토마토 먹을 수 있네요 대저 토마토 처음 먹어봤는데요 너무 맛있어요</p>
-						<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img"/>
+						<p>이제 드디어 대저 토마토 먹을 수 있네요 대저 토마토 처음 먹어봤는데요 너무 맛있어요</p>
+						<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img" />
 					</div>
 				</div>
-				
+
 				<!-- 섬머노트 -->
-			  	<div id="summernote"><p></p></div>
-				  <script>
+				<div id="summernote">
+					<p></p>
+				</div>
+				<script>
 				    $(document).ready(function() {
 				        $('#summernote').summernote({
 				        	placeholder: '300자 이내로 입력해주세요',
@@ -454,14 +518,13 @@ $(function(){
 				    });
 				  </script>
 				<div id="popupBtnContainer">
-					<input type="submit" name="popupOk" value="확인"/>
-					<input type="submit" name="popupClose" value="닫기"/>
-					<input type="submit" name="popupDeclaration" value="신고">
+					<input type="submit" name="popupOk" value="확인" /> <input type="submit" name="popupClose" value="닫기" /> <input type="submit" name="popupDeclaration" value="신고">
 				</div>
-			</form>  	  
+			</form>
 		</div>
-	</div><!-- 리뷰 보기 팝업 끝 -->
-	
+	</div>
+	<!-- 리뷰 보기 팝업 끝 -->
+
 	<!-- 신고하기 -->
 	<div id="declaration">
 		<div class="wrapContainer_Edit1">
@@ -469,9 +532,7 @@ $(function(){
 			<form method="" action="" id="declarationFrm">
 				<div>2021/03/26</div>
 				<div>
-					신고 대상 리뷰 : 21.03.02<br/>
-					신고 대상 아이디 : tkaudeotk02<br/>
-					구매품명: 대저짭짤이 토마토(10Kg)
+					신고 대상 리뷰 : 21.03.02<br /> 신고 대상 아이디 : tkaudeotk02<br /> 구매품명: 대저짭짤이 토마토(10Kg)
 				</div>
 				<div>
 					<select>
@@ -483,8 +544,7 @@ $(function(){
 					</select>
 				</div>
 				<div>
-					<input type="text" width="200px" placeholder="300자 이내로 작성">
-					<input type="submit" value="보내기"/>
+					<input type="text" width="200px" placeholder="300자 이내로 작성"> <input type="submit" value="보내기" />
 				</div>
 			</form>
 		</div>

@@ -1,6 +1,7 @@
 package com.beetmall.sshj.seller.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.seller.service.SellerSalesService;
@@ -82,9 +86,9 @@ public class SellerReviewController {
 			}
 			
 			vo.setUserid(userid);
-			System.out.println(vo.getUserid());
+			vo.setTotalRecord(list.size());
+
 			List<SellerReviewVO> test = service.reviewlist(vo);
-			System.out.println(test.get(1).getReviewanswer());
 			
 			mav.addObject("reviewList",service.reviewlist(vo));
 			mav.addObject("resultData",vo);
@@ -95,6 +99,17 @@ public class SellerReviewController {
 			mav.setViewName("home");
 			return mav;
 		}
-		
 	}
+	
+	@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<Object> reviewPaging(HttpSession session, SellerReviewVO vo, Model model) {
+		vo.setUserid((String)session.getAttribute("logId"));
+		ArrayList<Object> dataList = new ArrayList<Object>();
+		dataList.add(0, service.reviewlist(vo));
+		dataList.add(1, vo);
+		return dataList;
+	}
+
+
 }

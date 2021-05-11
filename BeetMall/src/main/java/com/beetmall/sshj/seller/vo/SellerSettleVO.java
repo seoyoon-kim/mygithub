@@ -13,6 +13,7 @@ public class SellerSettleVO {
 	private String endDate; // 종료날짜
 	private long totalMoney; // 정산금액 합계
 	
+	///////////////////////////////////////////////////////////////////////////
 	//페이징
 	private int pageNum=1; // 현재 누른 페이지
 	private int onePageNum=10; // 한페이지당 페이지 번호수
@@ -80,6 +81,9 @@ public class SellerSettleVO {
 	public void setLastPageRecord(int lastPageRecord) {
 		this.lastPageRecord = lastPageRecord;
 	}
+	
+	
+	//////////////////////////////////////////페이징 ///////////////////////////////////
 	public long getTotalMoney() {
 		return totalMoney;
 	}

@@ -16,8 +16,14 @@
 		    reviewscore, reviewreport, reviewanswer, productname
 		    from review a join (select productnum, productname 
 		from product where userid='${userid}') b on a.productnum = b.productnum order by reviewanswer desc, reviewwritedate desc) 
-		where rownum <![CDATA[ <= ]]> 10 order by reviewanswer asc, reviewwritedate asc) 
-		where rownum <![CDATA[ <= ]]> 10 order by reviewanswer desc, reviewwritedate desc
+		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} order by reviewanswer asc, reviewwritedate asc) 
+		<if test="#{totalPage} == #{pageNum}">
+			where rownum <![CDATA[ <= ]]> ${lastPageRecord} 
+		</if>
+		<if test="#{totalPage} != #{pageNum}">
+			where rownum <![CDATA[ <= ]]> ${onePageRecord}
+		</if>
+		order by reviewanswer desc, reviewwritedate desc
 	</select>
 	
 </mapper>
