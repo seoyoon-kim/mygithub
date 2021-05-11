@@ -109,6 +109,10 @@ a:hover,a:active,a:visited,a:link{
 
 
 /*==================주문 건별 정산분석=================*/
+#excelDown{
+	float: right;
+}
+
 table{
 	width: 100%;
 	border: 1px solid #bbb;
@@ -139,6 +143,7 @@ table tr td{
 
 #totalMoney{
 	float: right;
+	font-weight: bold;
 }
 
 /*================ 페이징처리부분 ===============*/

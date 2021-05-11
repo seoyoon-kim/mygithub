@@ -15,6 +15,26 @@ public interface SettleService {
 	// 날짜 매출일자 데이터 가져오기
 	public List<SettleVO> getSettleData(SettleVO vo);
 	
-	// 정산금액 합계 가져오기
+	// 매출일자 합계 구하기
+	public List<SettleVO> totalOrder(SettleVO vo);
+	
+	// 정산일자 합계 구하기
 	public List<SettleVO> totalSettle(SettleVO vo);
+	
+	
+	
+	
+	
+	// 조회기준 날짜 기준일때 매출일자 토탈 레코드   + 엑셀 다운위한 데이터 전체 불러오기용
+	public List<SettleVO> getDateDataTotalRecord(SettleVO vo);
+	
+	// 조회기준 날짜 기준일때 정산날짜 토탈 레코드   + 엑셀 다운위한 데이터 전체 불러오기용
+	public List<SettleVO> getSettleDataTotalRecord(SettleVO vo);
+	
+	
+	// 엑셀 다운위한 데이터 전체 불러오기
+	public List<SettleVO> excelOrderDateData(SettleVO vo);
+	
+	// 엑셀 다운위한 데이터 전체 불러오기
+	public List<SettleVO> excelOrderSettleData(SettleVO vo);
 }

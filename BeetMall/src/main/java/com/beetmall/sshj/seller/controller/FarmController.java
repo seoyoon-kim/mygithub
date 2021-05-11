@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -103,6 +104,8 @@ public class FarmController {
 			
 		// 테이블 스타일 설정
 		CellStyle tableStyle = xssfwb.createCellStyle();
+		XSSFDataFormat format = xssfwb.createDataFormat();
+		tableStyle.setDataFormat(format.getFormat("#,##0"));
 		tableStyle.setAlignment(HorizontalAlignment.CENTER);
 		tableStyle.setFont(tableFont);
 		tableStyle.setBorderBottom(BorderStyle.THIN);
@@ -146,6 +149,7 @@ public class FarmController {
 				}
 			}
 		}
+		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"/Downloads/BEETMALL 매출관리.xlsx");
 		File file = new File(System.getProperty("user.home")+"/Downloads/BEETMALL 매출관리.xlsx");
 		try {
 			// file의 경로로 엑셀 outputStream
