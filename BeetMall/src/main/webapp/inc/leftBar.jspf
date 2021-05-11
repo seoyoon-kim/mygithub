@@ -137,7 +137,7 @@ $(function(){
 	  <input type="checkbox" id="menu_bar03" class="accordion" />
 		  <ul id="links03">
 		    <li><a href="salesAnalasysA">수익 매출분석</a></li>
-		    <li><a href="">카테고리별 매출분석</a></li>
+		    <li><a href="salesCateAnalasysA">카테고리별 매출분석</a></li>
 		    <li><a href="salesListA">판매내역</a></li> 
 		  </ul> 
 	  <label for="menu_bar04">정산 관리  <div id="tri"><img id="more" src="<%=request.getContextPath()%>/img/y_more_gray.png"></div> </label>
@@ -150,29 +150,29 @@ $(function(){
 		  <ul id="links05">
 		    <li><a href="noticeBoardList">공지 관리</a></li>
 		    <li><a href="reviewListA">소비자 리뷰</a></li>
-		    <li><a href="recipeListA">레시피 관리</a></li>
-		    <li><a href="designList">디자인 관리</a></li> 
+		    <li><a href="boardRecipeListA">레시피 관리</a></li>
+		    <li><a href="boardDesignMng">디자인 관리</a></li> 
 		  </ul> 
 	  <label for="menu_bar06">고객센터 <div id="tri"><img id="more" src="<%=request.getContextPath()%>/img/y_more_gray.png"></div> </label>
 	  <input type="checkbox" id="menu_bar06" class="accordion" />
 		  <ul id="links06">
 		    <li><a href="csQuestionA">고객 문의</a></li> 
 		    <li><a href="csQBrowse">상품 문의</a></li> 
-		    <li><a href="csFAQ">자주 묻는 질문</a></li>
+		    <li><a href="csFAQ">자주 묻는 질문</a></li>  
+		    <li><a href="csChat">1:1 대화하기</a></li>  
 		    <li><a href="csreportListA">신고 관리</a></li> 
-		    <li><a href="csChat">신고 채팅 관리</a></li> 
+		    <li><a href="csReportChat">신고 채팅 관리</a></li> 
 		  </ul>
 	  <label for="menu_bar07">임시 <div id="tri"><img id="more" src="<%=request.getContextPath()%>/img/y_more_gray.png"></div> </label>
 	  <input type="checkbox" id="menu_bar07" class="accordion" />
 		  <ul id="links07">
-		    <li><a href="customerInfoEditA">회원정보수정</a></li> 
-		    <li><a href="sellerInfoEditA">판매자정보수정</a></li> 
+		    <li><a href="boardCustomerInfoEdit">회원정보수정</a></li> 
+		    <li><a href="boardSellerInfoEdit">판매자정보수정</a></li> 
 		    <li><a href="noticeBoardWrite">공지 작성</a></li> 
 		    <li><a href="csAnswerA">문의 답변 작성</a></li> 
 		    <li><a href="csQOpen">상품문의 열람, 답변</a></li> 
 		    <li><a href="csFAQWrite">FAQ작성</a></li>
 		    <li><a href="recipeWriteA">레시피 작성</a></li>  
-		    <li><a href="">상세판매내역(아직)</a></li>    
-		    <li><a href="">채팅하기(아직)</a></li>  
+		    <li><a href="">상세판매내역(아직)</a></li>  
 		  </ul>
 </div> 

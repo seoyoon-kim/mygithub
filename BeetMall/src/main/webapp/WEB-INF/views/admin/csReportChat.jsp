@@ -116,16 +116,6 @@
 		overflow:hidden;
 		text-overflow:ellipsis;
 	}
-	/*하단 검색*/ 
-	#dateSearch{ 
-		margin:20px 0 0  200px;
-	}
-	#dateSearch input, form input, select{
-		border-radius:2px;
-	} 
-	form input[type=text]{
-		width:300px
-	}
 	/*페이징 이미지 링크*/
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -143,12 +133,11 @@
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}  
-	
 	/*모달*/
 	#modal{
 		border:1px solid gray;
 		width:500px;
-		margin:300px 0 0 450px;
+		margin:500px 0 0 450px;
 	}
 	#modalHeader{
 		background-color:lightgray;
@@ -190,13 +179,13 @@
 	}
 	#modal button:not(#modalPast button){
 		width:70px;
-		margin-right:5px;
+		margin-right:10px;
 	} 
 	#modal button:nth-of-type(1):not(#modalPast button){
-		margin-left:5px;
+		margin-left:30px;
 	} 
 	#modal select{
-		margin-left:20px;
+		margin-left:30px;
 	}
 </style>
 <script>
@@ -208,7 +197,7 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/reportListA">1:1 대화하기</a></strong></h5></li> 
+				<li><h5><strong><a href="/reportListA">신고 채팅</a></strong></h5></li> 
 				<li><select name="sort"> 
 						<option value="채팅번호" selected>채팅번호</option>
 		   				<option value="주문번호">주문번호</option>
@@ -217,16 +206,21 @@
 		   				 <option value="판매자">판매자</option>
 		   				 <option value="날짜">날짜</option>
 		   				 <option value="내용">내용</option> 
-		   				 <option value="미답변">미답변</option>  
+		   				 <option value="신고처리">신고처리</option>  
 	   				 </select>
 	   			</li> 
 	   			<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
-				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li> 
+				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>
+				<li><input type="text" placeholder="검색어를 입력해주세요"  style="width:160px;"/></li>
+				<li><button class="success" value="search" name="search" id="search">검색</button></li> 
 				<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
 				<li><button class="success" value="del" name="del" id="edit">정지</button></li> 
 			</ul> 
 		</div>  
-   		<div id="contentBox"> 	 
+   		<div id="contentBox"> 	
+   		<div style="float:right;">신고 채팅은 노란색으로 표시됩니다</div>
 		<div id="title">
 			<ul>
 				<li><input type="checkbox" name="check"></li>
@@ -237,11 +231,11 @@
 				<li>판매자</li>
 				<li>날짜</li>
 				<li>내용</li> 
-				<li>답변여부</li>
+				<li>신고처리</li>
 			</ul>
 		</div>  
 		<div id="contentList">
-			<c:forEach var="data" items="${list}">
+			<c:forEach var="data" items="${list}"> 
 				<ul class="contentList">
 					<li><input type="checkbox" name="check" id="check"> </li>
 					<li>1286</li>
@@ -251,8 +245,8 @@
 					<li>yuthgvf</li>
 					<li>2021/03/21</li>
 					<li class="wordCut"><a href="제목?">상품 추가 주문 가능한지 문의드려요 포도 세 박스 더 주문하고싶어요</a></li>
-					<li>답변완료</li> 
-				</ul> 
+					<li>-</li> 
+				</ul>
 				<ul class="contentList">
 					<li><input type="checkbox" name="check" id="check"> </li>
 					<li>1286</li>
@@ -262,7 +256,7 @@
 					<li>yuthgvf</li>
 					<li>2021/03/21</li>
 					<li class="wordCut"><a href="제목?">상품 추가 주문 가능한지 문의드려요 포도 세 박스 더 주문하고싶어요</a></li>
-					<li>미답변</li> 
+					<li>-</li> 
 				</ul>
 			</c:forEach>
 			 
@@ -286,21 +280,13 @@
 			   <a class="arrow nnext" href="#"></a>
 			</div>
 		 </div> 
-		 <div id="dateSearch">
-		 	<ul>
-		 		<li><input type="date" id="from"><div id="fromTo" style="color:black;">&nbsp;&nbsp;~</div></li>
-				<li><input type="date" id="todate"></li> 
-			</ul>
-		</div>
 		 <div>
-			<form method="get" id="SearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<select name="searchKey">
-					<option value="" selected>채팅번호</option>
-	   				<option value="">주문번호</option> 
-	   				<option value="">구입상품</option> 
-	   				<option value="">구매자</option> 
-	   				<option value="">판매자</option> 
-	   				<option value="">내용</option> 
+					<option value="subject" selected>제목</option>
+	   				<option value="no">공지번호</option> 
+	   				<option value="who">대상</option> 
+	   				<option value="writedate">공지일</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
@@ -311,7 +297,7 @@
 		<!-- 신고된 채팅 보기 모달창 -->
 		<div id="modal">
 			<div id="modalHeader">
-				1:1 대화 보기
+				신고된 채팅 보기
 			</div>
 			<div id="modalList">
 				<ul>
@@ -320,20 +306,25 @@
 				</ul>
 				<ul>
 					<li style="display:flex; margin-left:20px;"><div>판매자 :&nbsp; </div><div>dlkfjhbu</div></li>
-					<li><div>주문을 했는데 결제 방법을 바꾸고 싶어요</div></li>
+					<li><div>맛이 없어요 포장은 또 왜이래요</div></li>
 				</ul>
 				<ul>
-					<li style="display:flex; margin-left:50px;">관리자</li>
-					<li>어떤 결제로 바꾸시려는지요?</li>
+					<li style="display:flex; margin-left:20px;"><div>구매자 :&nbsp; </div><div>aosihnf</div></li>
+					<li>신고합니다</li>
 				</ul>
 				<ul>
 					<li style="display:flex; margin-left:20px;"><div>판매자 :&nbsp; </div><div>dlkfjhbu</div></li>
-					<li><div>카드 결제요 번호 부르면 되나요?</div></li>
+					<li><div>고객님 안됩니다ㅠㅠ</div></li>
 				</ul> 
 			</div> 
-			<hr> 
-			<input type="text" style="margin-left:10px; width:315px;"> 
-			<button class="success" value="" name="" id="">보내기</button>
+			<hr>
+			<select name="reportChoice"> 
+				<option value="선택" selected>선택</option>
+		   		<option value="dlkfjhbu">dlkfjhbu</option>
+		   		<option value="aosihnf">aosihnf</option>
+		   	</select>
+			<input type="text">&nbsp; 일 &nbsp;
+			<button class="success" value="" name="" id="">정지</button>
 			<button class="success" value="" name="" id="">닫기</button>
 		</div> 
 </html>

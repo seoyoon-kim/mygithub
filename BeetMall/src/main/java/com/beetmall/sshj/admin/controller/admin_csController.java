@@ -63,7 +63,16 @@ public class admin_csController {
 		mav.addObject("list", adminService.noticeList());
 		mav.setViewName("/admin/csQOpen");
 		return mav;
-	}	
+	}	 
+	//채팅 보기
+	@RequestMapping("/csChat")
+	public ModelAndView csChat() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/csChat");
+		return mav;
+	} 
+	
 	//신고 목록 보기
 	@RequestMapping("/csreportListA")
 	public ModelAndView csreportListA() {
@@ -73,11 +82,11 @@ public class admin_csController {
 		return mav;
 	} 
 	//신고 채팅 보기
-	@RequestMapping("/csChat")
-	public ModelAndView csChat() {
+	@RequestMapping("/csReportChat")
+	public ModelAndView csReportChat() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/csChat");
+		mav.setViewName("/admin/csReportChat");
 		return mav;
 	} 
 	

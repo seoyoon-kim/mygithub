@@ -24,7 +24,7 @@
 		height:1780px;
 	}	
 	/*컨테이너 별로 묶은 박스 공통*/	
-	 #companyBox, #infoBox, #buyHistory, #reportBox{ 
+	 #companyBox, #infoBox, #buyHistory, #reportBox, #randomBox, #bannerContainer{ 
 	 	width:500px;
 	 	margin-left:35px;
 	 	border-radius:10px; 
@@ -33,14 +33,14 @@
 	 	-webkit-box-shadow: 4px 6px 15px -7px #C4C4C4; 
 		box-shadow: 4px 6px 15px -7px #C4C4C4;
 	 }
-	  #companyBox li, #infoBox li, #report li, #buyHistory li{
+	  #companyBox li, #infoBox li, #report li, #buyHistory li, #randomBox li, ##bannerContainer li{
 	  	padding-top:15px;
 	  } 
 	 #companyHeader, #infoHeader, #reportHeader, #buyHeader{ 
 	 	left:-40px;
 	 	width:250px !important;
 	 }
-	  #companyHeader li, #infoHeader li, #reportHeader li, #buyHeader li{
+	  #companyHeader li, #infoHeader li, #reportHeader li, #buyHeader li, #randomHeader li{
 	  	font-weight:bold;
 	  	padding-top:20px;
 	  }
@@ -49,8 +49,8 @@
 	  	left:400px;
 	  	padding-top:13px;
 	  }
-	  #companyTitle, #infoTitle, #reportTitle, #buyTitle{
-	  	padding-left:200px;
+	  #companyTitle, #infoTitle, #reportTitle, #buyTitle, #randomTitle, #bannerTitle{
+	  	text-align:center;
 	  	font-weight:bold;
 	  	font-size:16px;
 	  	letter-spacing:2px;

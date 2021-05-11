@@ -50,6 +50,14 @@ public class admin_boardController {
 		mav.setViewName("/admin/recipeWriteA");
 		return mav;
 	}
+	//디자인 관리
+	@RequestMapping("/boardDesignMng")
+	public ModelAndView boardDesignMng() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", adminService.noticeList());
+		mav.setViewName("/admin/boardDesignMng");
+		return mav;
+	}
 	
 	
 	

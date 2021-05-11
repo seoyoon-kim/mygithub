@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,13 +58,6 @@
 	#categoryList, #categoryListMiddle ul {
 		border-color:lightgray;
 	}
-	#calendarApply{
-		width:120px; 
-	}
-	#categorySearch_container{
-		position:relative;
-		top:-150px;
-	}
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -85,10 +77,9 @@
 	}
 	#excelList{
 		margin-left:0 !important;
-		width:978px !important;
 	}
 	#excelList li {
-    	flex-basis: 18%;
+    	flex-basis: 16.2%;
 		border:none;
 		border-right:1px solid #eee;
     }
@@ -108,7 +99,7 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="salesAnalasysA">매출 분석</a></strong></h5></li> 
+				<li><h5><strong><a href="salesCateAnalasysA">카테고리별 매출 분석</a></strong></h5></li> 
 			</ul> 
 		</div>  
    		<div id="contentBox">
@@ -116,7 +107,52 @@
 
 	<!-- 본문 시작 -->
 	<article>
-		<div class="wrap">    
+		<div class="wrap"> 
+			<!-- 카테고리 선택 -->
+			<div class="wrapTitle"><strong>카테고리</strong></div>
+			<div class="wrapContainer">
+				<div id="categoryList">
+					<div id="categoryListMiddle">
+						<!-- 대분류 카테고리!!!! -->
+						<ul id="category">
+							<!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
+							<c:if test="${cateList!=null}">
+								<!-- 변수 i를 선언해주고 -->
+								<c:set var="i" value="1" />
+								<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
+											i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
+								<c:forEach var="categoryList" items="${cateList}">
+									<c:if test="${categoryList.catenum==i}">
+										<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+										<c:set var="i" value="${i+1 }" />
+									</c:if>
+								</c:forEach>
+								<c:remove var="i" />
+							</c:if>
+						</ul>
+
+						<!-- 중분류 카테고리 -->
+						<ul id="mcategory"></ul>
+					</div>
+
+					<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
+					<ul id="categoryManagement"></ul>
+
+					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+					<div id="categorySearch_container">
+						<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+							<option value="년별">년별</option>
+							<option value="월별" selected>월별</option>
+							<option value="일별">일별</option>
+						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
+					</div>
+
+				</div>
+				<!-- categoryList 끝 -->
+			</div>
+			<!-- 카테고리 선택 끝 -->
+
 			<!-- 수익 매출 분석 -->
 			<div class="wrapTitle">
 				<strong>수익 매출분석</strong>
@@ -152,16 +188,7 @@
 			<!-- 수익 매출분석 끝 -->
 
 			<div class="wrapTitle">
-				<strong>매출분석</strong>
-				<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-					<div id="categorySearch_container">
-						<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-							<option value="년별">년별</option>
-							<option value="월별" selected>월별</option>
-							<option value="일별">일별</option>
-						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
-					</div>
+				<strong>카테고리별 매출분석</strong>
 				<button class="normalBtn" id="excelDown">엑셀 저장</button>
 				<select id="excelViewNum">
 					<option selected="selected">10</option>

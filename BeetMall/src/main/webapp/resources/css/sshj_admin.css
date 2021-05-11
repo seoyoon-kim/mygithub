@@ -9,7 +9,7 @@
 		font-family: 'Noto Sans KR', sans-serif;
 		font-size:15px;
 	}
-	#topBar, #topBar form, #noticeSearchFrm, #title, button, #contentBox, input[type=checkbox]{ 
+	#topBar, #topBar form, #searchFrm, #title, button, #contentBox, input[type=checkbox]{ 
 		position:relative; 
 	}
 	#blind, #edit{
@@ -120,7 +120,7 @@
 	  font-weight: 400;
 	  text-align: center;
 	  text-decoration: none;	  
-	  border: none;	  
+	  border: 1px solid gray; 
 	  border-radius: 5px;	  
 	  display: inline-block;
 	  width: auto;	   	  
@@ -178,11 +178,16 @@
 	.contentList>li{
 		padding:10px 0;
 		border-bottom:1px solid #E8E8E8;
-	} 
-	
-	#noticeSearchFrm{ 
+	}	
+	#searchFrm{ 
 		top:30px; left:252px; 
-		} 
+		}
+	#searchFrm input[type=submit]{
+		width:100px;
+	} 
+	#dateSearch{
+		margin:10px 0 0 0 200px;
+	}
 	form {
 	  display: flex; 
 	  align-items: center; 
@@ -211,10 +216,7 @@
 	}
 	#content li, label{list-style-type:none; padding-bottom:10px;}
 	#content select{height:28px;}
-	
-	
-	
-	
+	 
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
@@ -222,7 +224,7 @@
 	}
 	.page_nation {
 		display:inline-block;
-		padding-top:60px;
+		padding-top:70px;
 	}
 	.page_nation .none {
 		display:none;
