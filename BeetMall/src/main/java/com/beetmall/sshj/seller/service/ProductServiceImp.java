@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.seller.dao.ProductDAO;
+import com.beetmall.sshj.seller.vo.DiscountVO;
+import com.beetmall.sshj.seller.vo.OptionVO;
 import com.beetmall.sshj.seller.vo.ProductVO;
 import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 
@@ -35,14 +37,22 @@ public class ProductServiceImp implements ProductService {
 
 	@Override
 	public int totalProduct(SearchAndPageVO spvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return productDAO.totalProduct(spvo);
 	}
 
 	@Override
 	public List<ProductVO> onePageRecordSelect(SearchAndPageVO spvo) {
-		// TODO Auto-generated method stub
-		return null;
+		return productDAO.onePageRecordSelect(spvo);
+	}
+
+	@Override
+	public int discountInsert(DiscountVO dvo) {
+		return productDAO.discountInsert(dvo);
+	}
+
+	@Override
+	public int optionInsert(OptionVO ovo) {
+		return productDAO.optionInsert(ovo);
 	}
 
 

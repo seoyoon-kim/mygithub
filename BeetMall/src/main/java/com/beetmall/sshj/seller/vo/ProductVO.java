@@ -15,8 +15,9 @@ public class ProductVO {
 	private String productname; //상품명 
 	
 	private int productprice; //판매가격
-	private String saleselect; //할인여부
-	private String saleb; //b급 선택여부
+	private char saleselect; //할인여부
+	private char optionselect; //옵션여부
+	private char saleb; //b급 선택여부
 	private String sellstart;//판매시작일
 	private String sellfinish;//판매종료일
 	
@@ -112,18 +113,25 @@ public class ProductVO {
 	public void setProductprice(int productprice) {
 		this.productprice = productprice;
 	}
-	public String getSaleselect() {
+	public char getSaleselect() {
 		return saleselect;
 	}
-	public void setSaleselect(String saleselect) {
-		this.saleselect = saleselect;
+	public void setSaleselect(char setSaleselect) {
+		this.saleselect = setSaleselect;
 	}
-	public String getSaleb() {
+	public char getSaleb() {
 		return saleb;
 	}
-	public void setSaleb(String saleb) {
+	public void setSaleb(char saleb) {
 		this.saleb = saleb;
 	}
+	public char getOptionselect() {
+		return optionselect;
+	}
+	public void setOptionselect(char optionselect) {
+		this.optionselect = optionselect;
+	}
+	
 	public String getSellstart() {
 		return sellstart;
 	}
@@ -293,7 +301,7 @@ public class ProductVO {
 	public void setSellprice(int sellprice) {
 		this.sellprice = sellprice;
 	}
-	
+
 
 	
 	
