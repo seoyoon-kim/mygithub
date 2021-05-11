@@ -18,5 +18,7 @@ public interface ProductDAO {
 	
 	//상품 등록하기
 	public int productInsert(ProductVO vo);
+	//상품 수정하기 
+	public int productUpdate(ProductVO vo);
 	
 }

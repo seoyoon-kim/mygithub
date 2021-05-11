@@ -309,7 +309,7 @@ $(function(){
             }
         }
 //작은 썸네일 업로드 미리보기 (실패)
-	//함수들
+//등록페이지 
 	$(document).ready(function(){	
 	////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
 		$('#sale_check').click(function(){
@@ -381,7 +381,7 @@ $(function(){
 			history.back();
 		});
 	
-	});// 함수들 end		
+	});// 등록페이지srcipt end		
 //submit 등록하기 전 유효성검사
 $('submit').click(function(){
 	//유효성검사 
