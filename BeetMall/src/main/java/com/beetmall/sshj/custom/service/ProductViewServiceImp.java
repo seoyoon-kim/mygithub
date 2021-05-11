@@ -31,10 +31,12 @@ public class ProductViewServiceImp implements ProductViewService {
 	
 	
 	@Override
-	public ProductViewVO ProductViewSelectoption(int productnum) {
+	public List<ProductViewVO> ProductViewSelectoption(int productnum) {
 		return productVeiwDAO.ProductViewSelectoption(productnum);		
 	}
-	
+
+
+
 	
 	
 }

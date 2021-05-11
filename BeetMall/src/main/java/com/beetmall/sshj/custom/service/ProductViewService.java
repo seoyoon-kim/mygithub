@@ -10,6 +10,8 @@ public interface ProductViewService {
 	
     public ProductViewVO ProductViewSelectFarm(int productnum);
 	
-	public ProductViewVO ProductViewSelectoption(int productnum);
+    public List<ProductViewVO> ProductViewSelectoption(int productnum);
+    
+
 	
 }

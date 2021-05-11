@@ -5,16 +5,18 @@
   <mapper namespace="com.beetmall.sshj.custom.dao.ProductViewDAO">
   
     <select id="ProductViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-       select sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping from product where productnum=2
+       select sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,addimg,productcontent,productinfomation,prevention,deadline from product where productnum=#{param}
     </select>
     
     <select id="ProductViewSelectFarm" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
       select farmname,farmprofile from farm where storenum=(select storenum from seller 
-      where userid=(select userid from product where productnum=2));
+      where userid=(select userid from product where productnum=#{param}))
     </select>
   
     <select id="ProductViewSelectoption" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-      select optionnum,optionname,optionstock,optionprice from option where productnum=2
+      select optionnum,optionname,optionstock,optionprice from optiontbl where productnum=#{param}
     </select>
+    
+   
     
   </mapper>

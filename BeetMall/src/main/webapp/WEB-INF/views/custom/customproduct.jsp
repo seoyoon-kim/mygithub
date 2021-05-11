@@ -263,7 +263,7 @@ padding-left:10px;
 	margin-bottom: 10px;
 }
 
-.infoBtnb>input {
+.infoBtnb>a>input{
 	width: 150px;
 	height: 30px;
 	line-height: 30px;
@@ -401,6 +401,19 @@ padding-left:10px;
 	margin-bottom: 100px;
 }
 
+#pBigtxt2,#pBigtxt3 {
+	padding: 30px;
+	float: left;
+	width: 80%;
+	margin-bottom: 20px;
+}
+
+#pBigtxt3>img {
+	float: left;
+	width: 80%;
+}
+
+
 /* ---------------상세정보2 --------------------------------------------------------------------------------- */
 #productInfoPage2 {
 	width: 100%;
@@ -461,6 +474,7 @@ padding-left:10px;
 
 /* 리뷰이미지 설정*/
 #reviewImgbox {
+width:100%;
 	height: 100px;
 }
 
@@ -691,7 +705,7 @@ padding-left:10px;
 	
 	
 	
-	#infoBtn1:active,#infoBtn2:active,#infoBtn3:active{
+	#infoBtn1>a:active,#infoBtn2>a:active,#infoBtn3>a:active{
 	outline: 0;
 	}
 	
@@ -709,37 +723,56 @@ padding-left:10px;
     padding-left: 0px;
 }
 
+/*표*/
+
+table{
+	width:100%%;	
+	border-spacing: 0;
+	text-indent: initial;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+
+thead{
+	border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    width:100%;
+}
+tr{
+	display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    height:50px;
+}
+.td, .content{
+	padding-left:20px;
+}
+.content{
+	padding: 20px 0 20px;
+}
+td, .td{
+	height:50px;
+	width:930px;
+}
+.tr_head{
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+}
+.tr_head li{
+	float:left;
+}
+.menu, .th{
+	width:150px; text-align:center;
+}
+.td, .th{ line-height:50px;}
+.td{
+	width:930px; line-height:50px;
+}
+
+
 </style>
 <script>
 
-
-
-  $(document).ready(function(){
-	 
-	  
-	  $("#infoBtn1").click(function(){
-		  $("#productInfoPage1").show()
-		   $("#productInfoPage2").hide()
-		   $("#productInfoPage3").hide()
-
-	  })
-	  
-	  
-	  $("#infoBtn2").click(function(){
-		  $("#productInfoPage2").show()
-		   $("#productInfoPage1").hide()
-		   $("#productInfoPage3").hide()
-	  })
-	  
-	   $("#infoBtn3").click(function(){
-		  $("#productInfoPage3").show()
-		   $("#productInfoPage1").hide()
-		   $("#productInfoPage2").hide()
-	  })
-	  
-	
-  })
- 
 
 
 
@@ -749,48 +782,13 @@ padding-left:10px;
 <body>
 
 	<div class="section" id="productPageDiv">
-		<div id="mainName">
-			<h2>상품 품목별</h2>
-		</div>
+		
 
-		<!-- ------------------------------------카테고리이미지-------------------------------------------------------- -->
-		<ul id="category">
-			<li><span id="categoryAll"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />전체</span></li>
-			<li><span id="categoryarea"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />지역별</span></li>
-			<li><span id="categoryFruit"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />과일</span></li>
-			<li><span id="categoryVege"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />채소</span></li>
-			<li><span id="categorySall"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />쌀/잡곡</span></li>
-		</ul>
-		<!-- ------------------------------------카테고리 소분류--------------------------------------------------------- -->
-
-		<div id="categorySubmenu">
-			<ul>
-				<li>전체</li>
-				<li>쌀/찹쌀/흑미/현미</li>
-				<li>수수/보리/콩</li>
-				<li>께/기타잡곡</li>
-			</ul>
-		</div>
-		<!-- -------------------------------------정렬방식 -------------------------------------------------------- -->
-		<div id="selectOrderbox">
-			<select name="selectOrder">
-				<option>평점순</option>
-				<option>가격순</option>
-				<option>조회수순</option>
-			</select>
-		</div>
+		
 
 		<!-- ---------------------------------공유 아이콘 정렬------------------------------------------------------------ -->
 		<ul id=sharicon>
-			<li><a href="#"><img src="img/cicon01.png"></a></li>
-			<li><a href="#"><img src="img/cicon02.png"></a></li>
-			<li><a href="#"><img src="img/cicon03.png"></a></li>
-			<li><a href="#"><img src="img/cicon05.png"></a></li>
+			
 		</ul>
 
 		<!-- ------------------------------상품 박스--------------------------------------------------------------- -->
@@ -798,47 +796,50 @@ padding-left:10px;
 
 
 			<div id=productImgBox>
-				<img src="img/cr3.jfif">
-				<div id=ptime>06:48:17남음</div>
+				<img src="img/${pvo.thumbimg}"/>
 			</div>
 
 
 
 			<div id=pbox>
 				<div id=productMainTiltle>
-					<b>${plist.productname}</b>   <!-- 상품명 -->
+					<b>${pvo.productname}</b>   <!-- 상품명 -->
 				</div>
-				<div id=productPrice>${plist.productprice}</div>  <!-- 가격 -->
+				<div id=productPrice>${pvo.productprice}</div>  <!-- 가격 -->
 				<div id="sprofile">
-					<a href="#">${plist.farmname}</a>  <!--농장이름 -->
+					<a href="#">${fvo.farmname}</a>  <!--농장이름 -->
 				</div>
 				<div id="simg">
-					<a href="#"><img src="img/cprofile.png"></a>  <!-- 프사 -->
+					<a href="#"><img src="img/${fvo.farmprofile}"/></a>  <!-- 프사 -->
 				</div>
-
+				
 				<div id=productPrBox>
 					<ul>
 						<li>판매단위</li>  <!-- 1 -->
-						<li>${plist.selloption}</li> <!-- 2 -->
+						<li>${pvo.selloption}</li> <!-- 2 -->
 						<li>중량/용량</li> <!-- 3 -->
-						<li>${plist.sellweight}</li> <!-- 4 -->
+						<li>${pvo.sellweight}</li> <!-- 4 -->
 						<li>배송구분</li> <!-- 5 -->
-						<li>${plist.deliveryoption}<input type="button" id="mapbtn" value="픽업위치확인하기" /></li>  <!-- 6 -->
+						<li><c:if test="${pvo.deliveryoption==1}">픽업</c:if>
+						    <c:if test="${pvo.deliveryoption==2}">배송</c:if>
+						    <c:if test="${pvo.deliveryoption==3}">픽업/배송</c:if></li>  <!-- 6 -->
 						<li>원산지</li>  <!-- 7 -->
-						<li>${plist.origin}</li>  <!-- 8 -->
+						<li>${pvo.origin}</li>  <!-- 8 -->
 						<li>포장타입</li>  <!-- 9 -->
-						<li>${plist.wrapping}</li>  <!-- 10 -->
+						<li><c:if test="${pvo.wrapping==0}">실온</c:if>
+						    <c:if test="${pvo.wrapping==1}">냉장</c:if>
+						    <c:if test="${pvo.wrapping==2}">냉동</c:if></li>  <!-- 10 -->
 						
 						<li>구매수량</li>  <!-- 11 -->
-						<li><input type="button" class="pmbtn minibtn" value="-"/>1<input	type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
+						<li><input type="button" class="pmbtn minibtn" value="-"/><span>1</span><input	type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
 						<li>추가옵션</li>  <!-- 13 -->
 						<li></li>  <!-- 14 -->
 						<li><select name="selecOption" id="selecOption">  <!-- 15 -->
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
+						    <c:forEach var="ovodata" items="${ovo}">
+								<option>${ovodata.optionnum}${ovodata.optionname}</option>
+							</c:forEach>
 						</select></li>
-						<li><input type="button" class="pmbtn minibtn" value="-"/>1번<input	type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 16 -->
+						<li><input type="button" class="pmbtn minibtn" value="-"/><span id="optnum">1</span><input type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 16 -->
 					</ul>
 				</div>
 				<!--productPrBox  -->
@@ -860,108 +861,71 @@ padding-left:10px;
 		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 		<div class="infoBtnb">
-			<input type="button" id="infoBtn1" value="상품설명" class="btn" /> <input
-				type="button" id="infoBtn2" value="고객후기"  class="btn"/> <input type="button"
-				id="infoBtn3" value="상품문의"  class="btn"/>
+			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
 
 		<!-- -------------------------------------상세정보박스1-------------------------------------------------------- -->
 
 		<div id="productInfoPage">
 			<div id="productInfoPage1">
-				<div>해당 상품의 관련 상품들입니다.</div>
 
-				<div id="relativeBox">
-					<div class="relativeList">
-						<div class="relativeSetWidth">
-							<div class="relativeproduct" id="relativeProduct">
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-
-							</div>
-							<!-- ---relativeproduct   ----->
-						</div>
-						<!-- ---relativeSetWidth   ----->
-
-					</div>
-					<!-- ---relativeList   ----->
-					<!-- ---페이징처리------------------------------------   ----->
-
-
-					<div class="page_wrap2">
-						<div class="page_nation2">
-							<a class="arrow prev2" href="#">◁</a> <a href="#" class="active">●</a>
-							<a href="#">●</a> <a href="#">●</a> <a href="#">●</a> <a
-								class="arrow next2" href="#">▷</a>
-						</div>
-
-
-
-
-					</div>
-
-				</div>
 				<!-- relativeBox -->
 
-				<div id=pBigimg>
-					<img src="img/cr4.jfif">
+                <c:if test="${pvo.addimg!='null'}">
+	                <div id=pBigtxt3>
+	                   ${pvo.addimg}
+	                </div>
+                </c:if>
+                
+				<div id=pBigtxt2>
+                   ${pvo.productcontent}
+                </div>
+                
+                
+                
+               <div id=pBigtxt>
+                <table>
+				<tbody>
+					<tr class="tr_head">
+						<th class="menu">상품정보</th>
+						<td><span class="td" id="td">${pvo.productinfomation}</span></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">주의사항</th>
+						<td ><span class="td" id="td">${pvo.prevention}</span></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">유통기한</th>
+						<td ><span class="td" id="td">${pvo.deadline}</span></td>
+					</tr>
+				</tbody>
+				</table>	
 				</div>
-				<div id=pBigtxt>한국의 대표적인 후식으로 꼽히는 사과. 유럽에서 소시지나 돼지고기 요리에 곁들이는
-					튀긴 사과. 과일 자체로도 달콤한 맛이 좋은 인기만점 과일의 여왕 사과입니다. 사과는 수확시기에 따라 조생종, 중생종,
-					만생종으로 나뉜다. 8월 하순 이전이 최성수확기인 조생종에는 미광, 조홍, 서홍, 쓰가루(아오리) 등이 있고,
-					최성수확기가 9월 상순에서 10월 중순까지인 중생종에는 홍로, 홍월, 양광, 추광, 골든딜리셔스, 세계일, 조나골드,
-					시나노스위트 등이 있다. 10월 하순 이후가 최성수확기인 만생종에는 후지(부사), 홍옥, 감홍, 화홍 등이 있다.</div>
+                
+                
+                
+                
 				<!-- -pBigtxt -->
+			
 			</div>
 			<!-- -상세정보박스1-->
 		</div>
 		<!-- -상세정보박스-->
 		<!-- -------------------------------------상세정보박스1  끝-------------------------------------------------------- -->
-		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
+         <!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
+	<div class="infoBtnb">
+			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
+		</div>
 
 		<!-- -------------------------------------상세정보박스2  시작-------------------------------------------------------- -->
 
 		<div id="productInfoPage">
-			<div id="productInfoPage2" style="display:none">
+			<div id="productInfoPage2">
 				<div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
 
@@ -977,8 +941,7 @@ padding-left:10px;
 					<li>123</li>
 					<li>
 						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" /><img src="img/cr4.jfif" /><img
-								src="img/cr4.jfif" />
+							<img src="img/cr4.jfif" />
 						</div>
 						<div id="reviewtxtbox">너무 맛있어요! 빨간 맛 궁금해 Honey깨물면 점점 녹아든
 							스트로베리 그 맛코너 캔디 샵 찾아 봐</div>
@@ -992,8 +955,7 @@ padding-left:10px;
 					<li>123</li>
 					<li>
 						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" /><img src="img/cr4.jfif" /><img
-								src="img/cr4.jfif" />
+							<img src="img/cr4.jfif" />
 						</div>
 						<div id="reviewtxtbox">빨간 맛 궁금해 Honey</div>
 					</li>
@@ -1006,8 +968,7 @@ padding-left:10px;
 					<li>123</li>
 					<li>
 						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" /><img src="img/cr4.jfif" /><img
-								src="img/cr4.jfif" />
+							<img src="img/cr4.jfif" />
 						</div>
 						<div id="reviewtxtbox">너무 맛있어요! 빨간 맛 궁금해 Honey깨물면 점점 녹아든
 							스트로베리 그 맛코너 캔디 샵 찾아 봐</div>
@@ -1039,11 +1000,18 @@ padding-left:10px;
 		<!-- productInfoPage -->
 
 		<!--- -------------------------------------상세정보박스2  끝-------------------------------------------------------- -->
-		
+			<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
+
+
+        <div class="infoBtnb">
+			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
+		</div>
 	
 		<!-- -------------------------------------상세정보박스3  시작-------------------------------------------------------- -->
 		<div id="productInfoPage">
-			<div id="productInfoPage3" style="display:none">
+			<div id="productInfoPage3">
 
 				<div id="qtitle">상품에 대한 문의를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
@@ -1089,9 +1057,7 @@ padding-left:10px;
 
 				</ul>
 
-				<div id="qnaWriteBtn">
-					<input type="button" value="문의 작성" class="btn"/>
-				</div>
+				
 
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">

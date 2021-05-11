@@ -30,7 +30,7 @@ public class ProductViewVO {
 		
 		private String productcontent;//내용
 		
-		private String deliveryoption;//배송방법
+		private int deliveryoption;//배송방법
 		private int deliveryprice;//배송비
 		private String paymentoption;//배송비 결제방식
 		
@@ -39,7 +39,7 @@ public class ProductViewVO {
 		
 		private String origin;//원산지
 		
-		private String wrapping;//보관,포장타입
+		private int wrapping;//보관,포장타입
 		
 		private String productinfomation;//상품정보
 		private String prevention;//주의사항
@@ -190,10 +190,11 @@ public class ProductViewVO {
 		public void setProductcontent(String productcontent) {
 			this.productcontent = productcontent;
 		}
-		public String getDeliveryoption() {
+		
+		public int getDeliveryoption() {
 			return deliveryoption;
 		}
-		public void setDeliveryoption(String deliveryoption) {
+		public void setDeliveryoption(int deliveryoption) {
 			this.deliveryoption = deliveryoption;
 		}
 		public int getDeliveryprice() {
@@ -226,10 +227,11 @@ public class ProductViewVO {
 		public void setOrigin(String origin) {
 			this.origin = origin;
 		}
-		public String getWrapping() {
+		
+		public int getWrapping() {
 			return wrapping;
 		}
-		public void setWrapping(String wrapping) {
+		public void setWrapping(int wrapping) {
 			this.wrapping = wrapping;
 		}
 		public String getProductinfomation() {
