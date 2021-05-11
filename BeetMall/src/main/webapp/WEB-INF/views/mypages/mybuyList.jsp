@@ -693,7 +693,7 @@
 		location.href="monthmybuyList?month=12";
 	});
 	$(document).on('click', "#allmonths", function(){
-		location.href="mybuyList";
+		location.href="mybuyList"; 
 	});
 </script>
 <div class="section">
