@@ -11,23 +11,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beetmall.sshj.seller.service.FarmService;
-import com.beetmall.sshj.seller.service.SettleReviewService;
-import com.beetmall.sshj.seller.vo.SettleReviewVO;
+import com.beetmall.sshj.seller.service.SellerSalesService;
+import com.beetmall.sshj.seller.service.SellerReviewService;
+import com.beetmall.sshj.seller.vo.SellerReviewVO;
 
 @Controller
 public class SellerReviewController {
 	
 	@Autowired
-	FarmService FarmService;
+	SellerSalesService FarmService;
 	
 	@Autowired
-	SettleReviewService service;
+	SellerReviewService service;
 	
-	@RequestMapping("/seller_review")
+	@RequestMapping("/sellerReview")
 	public ModelAndView seller_review(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		SettleReviewVO vo = new SettleReviewVO();
+		SellerReviewVO vo = new SellerReviewVO();
 		// 카테고리 리스트를 불러와서 리스트에 담는다
 		mav.addObject("cateList",FarmService.allCategoryList());		
 		
@@ -36,11 +36,11 @@ public class SellerReviewController {
 		// 로그인 풀릴때가 있다 확인용
 		if(userid != null) {
 			
-			List<SettleReviewVO> list = service.breakdown(userid);
+			List<SellerReviewVO> list = service.breakdown(userid);
 			
 			// 가져온 데이터가 0이면 바로 return 시킨다.
 			if(list.size()==0) {
-				mav.setViewName("seller/seller_review");
+				mav.setViewName("seller/sellerReview");
 				return mav;
 			}
 			
@@ -56,7 +56,7 @@ public class SellerReviewController {
 			int newResult = 0;
 			int totalScore = 0;
 			for(int i = 0; i< list.size(); i++) {
-				SettleReviewVO dataCheck = list.get(i);
+				SellerReviewVO dataCheck = list.get(i);
 				// 미답변 갯수
 				if(dataCheck.getReviewanswer() != null ) {}
 				else {nullResult += 1;}
@@ -81,11 +81,15 @@ public class SellerReviewController {
 				vo.setTotalScore(Double.parseDouble(String.format("%.2f", (double)totalScore/list.size() )));
 			}
 			
+			vo.setUserid(userid);
+			System.out.println(vo.getUserid());
+			List<SellerReviewVO> test = service.reviewlist(vo);
+			System.out.println(test.get(1).getReviewanswer());
 			
-			mav.addObject("reviewList",list);
+			mav.addObject("reviewList",service.reviewlist(vo));
 			mav.addObject("resultData",vo);
 			
-			mav.setViewName("seller/seller_review");
+			mav.setViewName("seller/sellerReview");
 			return mav;
 		} else {
 			mav.setViewName("home");

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerReviewDAO">
+	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+		select to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewscore, reviewanswer 
+	    from review a join (select productnum, productname 
+		from product where userid=#{param1}) b on a.productnum = b.productnum order by reviewanswer desc, reviewwritedate desc
+	</select>
+	<select id="reviewlist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+		select * from ( 
+		select * from ( 
+		    select reviewnum, ordernum, a.productnum productnum, reviewcontent, userid, 
+		    to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewimg, 
+		    reviewscore, reviewreport, reviewanswer, productname
+		    from review a join (select productnum, productname 
+		from product where userid='${userid}') b on a.productnum = b.productnum order by reviewanswer desc, reviewwritedate desc) 
+		where rownum <![CDATA[ <= ]]> 10 order by reviewanswer asc, reviewwritedate asc) 
+		where rownum <![CDATA[ <= ]]> 10 order by reviewanswer desc, reviewwritedate desc
+	</select>
+	
+</mapper>

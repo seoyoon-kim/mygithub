@@ -176,6 +176,7 @@ a:hover,a:active,a:visited,a:link{
 
 #reviewList li{
 	flex: 1 1 14%;
+	height: 72.4px;
 	text-align: center;
 	border: 1px solid #ddd;
 	white-space: nowrap;
