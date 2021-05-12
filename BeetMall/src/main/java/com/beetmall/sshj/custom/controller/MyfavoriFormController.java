@@ -1,6 +1,7 @@
 package com.beetmall.sshj.custom.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +16,12 @@ public class MyfavoriFormController {
 	MyfavoriFormService myfavoriFormservies;
 	
 	@RequestMapping("myfavoriForm")
-	public ModelAndView myfavoriForm(String logId) {
+	public ModelAndView myfavoriForm(String logId, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", myfavoriFormservies.myfavoriFormTotal());
-		mav.addObject("list", myfavoriFormservies.myfavoriForm(logId));
+		String logId1 = (String)req.getSession().getAttribute("logId");
+		System.out.println("logId1 = " + logId1);
+		
+		mav.addObject("list", myfavoriFormservies.myfavoriForm(logId1));
 		mav.setViewName("mypages/myfavoriForm");
 		
 		return mav;

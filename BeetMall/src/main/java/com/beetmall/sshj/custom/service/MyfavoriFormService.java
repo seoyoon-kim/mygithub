@@ -6,8 +6,6 @@ import com.beetmall.sshj.custom.vo.MyfavoriFormVO;
 
 public interface MyfavoriFormService {
 
-	public List<MyfavoriFormVO> myfavoriForm(String logId);
-
-	public List<MyfavoriFormVO> myfavoriFormTotal();
+	public List<MyfavoriFormVO> myfavoriForm(String logId1);
 
 }

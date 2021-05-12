@@ -12,11 +12,17 @@ public interface CategoryService {
 
 	public List<CategoryVO> categorylist(PageSearchVO pageVO);
 
-	public List<CategoryVO> pickupCheckTure();
-
-	public List<CategoryVO> highhigh1();
-
-	public List<CategoryVO> lowlow1();
+//	public List<CategoryVO> pickupCheckTure();
+//
+//	public List<CategoryVO> highhigh1();
+//
+//	public List<CategoryVO> lowlow1();
 
 	public int categoryOnetotalRecord(PageSearchVO pageVO);
+
+	public List<CategoryVO> uglyItem(PageSearchVO pageVO);
+
+	public List<CategoryVO> payCategory(PageSearchVO pageVO);
+
+	public List<CategoryVO> categoryCharge(PageSearchVO pageVO);
 }

@@ -32,6 +32,8 @@
 	}
 	.page_nation {
 		display:inline-block;
+		padding-left: 300px;
+    	padding-right: 300px;
 	}
 	.page_nation .none {
 		display:none;
@@ -745,23 +747,26 @@
 					</ul>
 				</div>
 			</c:forEach>
+			<div class="page_wrap" style="text-align:center;">
+				<div class="page_nation">
+				   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+				   		<a class="arrow prev" href="/sshj/categoryCharge?pageNum=${pageVO.pageNum-1}"></a>
+				   </c:if>
+				   <!-- 페이지 번호                   1                                    5                     -->
+		           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+		              <c:if test="${p<=pageVO.totalPage}">
+		                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+		                    <a class="active">${p}</a>
+		                 </c:if>   
+		                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+		                    <a href="/sshj/categoryCharge?pageNum=${p}">${p}</a>
+		                 </c:if>
+		              </c:if>
+		           </c:forEach>
+		           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+		              <a class="arrow next" href="/sshj/categoryCharge?pageNum=${pageVO.pageNum+1}"></a>
+		           </c:if>
+				</div>
+			 </div>
 		</div>
-	    <div class="page_wrap">
-	        <div class="page_nation">
-	            <a class="arrow pprev" href="#"></a>
-	            <a class="arrow prev" href="#"></a>
-	            <a href="#" class="active">1</a>
-	            <a href="#">2</a>
-	            <a href="#">3</a>
-	            <a href="#">4</a>
-	            <a href="#">5</a>
-	            <a href="#">6</a>
-	            <a href="#">7</a>
-	            <a href="#">8</a>
-	            <a href="#">9</a>
-	            <a href="#">10</a>
-	            <a class="arrow next" href="#"></a>
-	            <a class="arrow nnext" href="#"></a>
-	        </div>
-	   </div>
 	  </div>

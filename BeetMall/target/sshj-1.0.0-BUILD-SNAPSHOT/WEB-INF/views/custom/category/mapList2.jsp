@@ -78,9 +78,16 @@
 		height:198px;
 		border-radius: 10%;
 	}
+	#productDiv>ul>li{
+		width:200px;
+		padding-top: 3px;
+	}
 	#productDiv>ul>li:nth-child(5n+2){
-	    font-size: xx-large;
+	    font-size: x-large;
 	    font-weight: bold;
+	}
+	#productDiv>ul>li:nth-child(5n+1){
+	    padding-top:15px;
 	}
 	
 	#categoryAll>img, #categoryFruit>img, #categoryVege>img, #categorySall>img{
@@ -128,167 +135,59 @@
 	<div class="main">
 			<hr/>
 		<div id="productMain">
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k018.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k019.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k020.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k021.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k022.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k018.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k019.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k020.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k021.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k022.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
+			<c:forEach var="data" items="${list}">
+				<div id="productDiv">
+					<ul style="width:200px;">
+						<li><img src="/sshj/img/${data.thumbimg}"></li>
+						<li>
+							<c:if test="${data.saleprice==null || data.saleprice=='' || data.salefinish=='1' || data.salestart=='1'}">
+								${data.productprice}원
+							</c:if>
+							<c:if test="${data.saleprice != null && data.saleprice != '' && data.salefinish !='1' && data.salestart !='1'}">
+								${data.proprice}원
+							</c:if>
+						</li>
+						<li>${data.productname}</li>
+						<c:if test="${data.totalscore==1}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==2}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==3}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==4}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
+						</c:if>
+						<c:if test="${data.totalscore==5}">
+							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
+						</c:if>
+						<li>${data.storeaddr}</li>
+						<li>${data.username}</li>
+					</ul>
+				</div>
+			</c:forEach>
 		</div>
-		<div class="page_wrap">
+		<div class="page_wrap" style="text-align:center;">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/categoryMain?pageNum=${pageVO.pageNum-1}"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/categoryMain?pageNum=${p}">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/categoryMain?pageNum=${pageVO.pageNum+1}"></a>
+	           </c:if>
 			</div>
 		 </div>
 	</div>
@@ -312,7 +211,7 @@
 		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 		
 		var marker = [];
-		<c:forEach items="${list}" var="data"> 
+		<c:forEach items="${list2}" var="data"> 
 		geocoder.addressSearch('${data.storeaddr}', function(result, status) {
 			// 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {

@@ -27,24 +27,39 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDAO.categorylist(pageVO);
 	}
 
-	@Override
-	public List<CategoryVO> pickupCheckTure() {
-		return categoryDAO.pickupCheckTure();
-	}
-	
-	@Override
-	public List<CategoryVO> highhigh1() {
-		return categoryDAO.highhigh1();
-	}
-
-	@Override
-	public List<CategoryVO> lowlow1() {
-		return categoryDAO.lowlow1();
-	}
+//	@Override
+//	public List<CategoryVO> pickupCheckTure() {
+//		return categoryDAO.pickupCheckTure();
+//	}
+//	
+//	@Override
+//	public List<CategoryVO> highhigh1() {
+//		return categoryDAO.highhigh1();
+//	}
+//
+//	@Override
+//	public List<CategoryVO> lowlow1() {
+//		return categoryDAO.lowlow1();
+//	}
 
 	@Override
 	public int categoryOnetotalRecord(PageSearchVO pageVO) {
 		return categoryDAO.categoryOnetotalRecord(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> uglyItem(PageSearchVO pageVO) {
+		return categoryDAO.uglyItem(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> payCategory(PageSearchVO pageVO) {
+		return categoryDAO.payCategory(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> categoryCharge(PageSearchVO pageVO) {
+		return categoryDAO.categoryCharge(pageVO);
 	}
 
 }

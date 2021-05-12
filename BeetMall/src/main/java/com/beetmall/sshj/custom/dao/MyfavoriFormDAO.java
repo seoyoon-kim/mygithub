@@ -8,6 +8,4 @@ public interface MyfavoriFormDAO {
 
 	public List<MyfavoriFormVO> myfavoriForm(String logId);
 
-	public List<MyfavoriFormVO> myfavoriFormTotal();
-
 }

@@ -13,42 +13,65 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
 <style>
-	body{ width:1280px; font-family: 'Nanum Gothic', sans-serif;   }
-	#topBox{ height:200px; margin:0; width:1280px; }
-	#top{ padding:25px 0px 0px 1050px; }
-	#dot{ font-size:18px; color:red; position:relative; top:-4px; left:-10px; }
-	#logout{ background-color:black; border-radius:100px; color:white; width:70px; margin-left:20px; padding:0px 10px; }
-	#topBox>h2{ text-align:center; font-weight:bold; margin-top:30px; } 
-	#topBox>h2 a{ color:black; }
-	#topBox>h2 a:link, a:visited, a:hover, a:active{ text-decoration:none; color:black; } 
-		/*버튼*/
-	button {
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
+	#body1{ 
+		width:1280px; 
+		font-family: 'Noto Sans KR', sans-serif;
+		 
 	}
-	/*버튼*/
-	button:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
+	h2{
+		font-size:30px;
 	}
-	
+	#topBox{ 
+		height:200px; 
+		margin:0; 
+		width:1280px;  
+	}
+	#top{ 
+		padding:8px 0px 0px 20px; 
+		height:40px;
+		font-size:15px;
+	}
+	#dot{ 
+		font-size:18px; 
+		color:red; 
+		position:relative; 
+		top:1px; 
+		left:-10px; 
+	}
+	#fromDot{
+		position:relative;
+		top:-25px;
+		left:1040px;
+	}
+	#logout{ 
+		background-color:black; 
+		border-radius:100px; 
+		color:white; 
+		width:70px; 
+		margin-left:20px; 
+		padding:0px 10px; 
+	}
+	#topBox>h2{ 
+		text-align:center; 
+		font-weight:bold; 
+		margin-top:30px; 
+	}  
+	#topBox>h2 a:link, a:visited, a:hover, a:active{ 
+		text-decoration:none; 
+		color:black; 
+	}  
 </style>
 </head>
 <body>
 	<div id="topBox">
 		<div id="top">
+			<span id="homeGo"><a href="<%=request.getContextPath()%>/">비트몰 홈페이지</a></span>
+			<div id="fromDot">
 			<span id="dot">●</span> 관리자 님 
 				 
 					<span id="logout">로그아웃</span>
+			</div>		
 				 
 		</div> 
-		<h2><a href="<%=request.getContextPath()%>/">관리자 페이지</a></h2>
+		<h2><a href="<%=request.getContextPath()%>/adminHome">비트몰 관리</a></h2>
 	</div> 

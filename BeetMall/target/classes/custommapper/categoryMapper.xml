@@ -41,13 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				    left outer join discount e
 				        on e.productnum=a.productnum
 				group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
-				order by productnum)
+				order by productnum desc)
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
         order by productnum desc
 	</select>
-	<select id="pickupCheckTure" resultType="com.beetmall.sshj.custom.vo.CategoryVO">
+	<!-- <select id="pickupCheckTure" resultType="com.beetmall.sshj.custom.vo.CategoryVO">
 		select a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, 
 				e.salestart, e.salefinish, avg(reviewscore) as totalscore, count(b.productnum) as sumreview, productprice-nvl(saleprice, 0) as proprice
 		from product a 
@@ -92,6 +92,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        on e.productnum=a.productnum
 		group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
 		order by totalscore
+	</select> -->
+	<select id="uglyItem" resultType="com.beetmall.sshj.custom.vo.CategoryVO" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO">
+		select * from(
+	    	select * from(
+				select a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, 
+						e.salestart, e.salefinish, avg(reviewscore) as totalscore, count(b.productnum) as sumreview, productprice-nvl(saleprice, 0) as proprice
+				from product a 
+				    join review b 
+				        on a.productnum=b.productnum 
+				    join member c
+				        on c.userid=a.userid
+				    join seller d
+				        on d.userid=a.userid
+				    left outer join discount e
+				        on e.productnum=a.productnum
+				group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
+				order by productnum desc)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by productnum desc
+	</select>
+	
+	<select id="payCategory" resultType="com.beetmall.sshj.custom.vo.CategoryVO" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO">
+		select * from(
+	    	select * from(
+				select a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, 
+						e.salestart, e.salefinish, avg(reviewscore) as totalscore, count(b.productnum) as sumreview, productprice-nvl(saleprice, 0) as proprice
+				from product a 
+				    join review b 
+				        on a.productnum=b.productnum 
+				    join member c
+				        on c.userid=a.userid
+				    join seller d
+				        on d.userid=a.userid
+				    left outer join discount e
+				        on e.productnum=a.productnum
+				group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
+				order by productnum desc)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by productnum desc
+	</select>
+	
+	<select id="categoryCharge" resultType="com.beetmall.sshj.custom.vo.CategoryVO" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO">
+		select * from(
+	    	select * from(
+				select a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, 
+						e.salestart, e.salefinish, avg(reviewscore) as totalscore, count(b.productnum) as sumreview, productprice-nvl(saleprice, 0) as proprice
+				from product a 
+				    join review b 
+				        on a.productnum=b.productnum 
+				    join member c
+				        on c.userid=a.userid
+				    join seller d
+				        on d.userid=a.userid
+				    left outer join discount e
+				        on e.productnum=a.productnum
+				group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
+				order by productnum desc)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by productnum desc
 	</select>
 	
 </mapper>

@@ -16,13 +16,8 @@ public class MyfavoriFormServiceImp implements MyfavoriFormService{
 	@Inject
 	MyfavoriFormDAO myfavoriFormDAO;
 
-	public List<MyfavoriFormVO> myfavoriForm(String logId) {
-		return myfavoriFormDAO.myfavoriForm(logId);
-	}
-
-	@Override
-	public List<MyfavoriFormVO> myfavoriFormTotal() {
-		return myfavoriFormDAO.myfavoriFormTotal();
+	public List<MyfavoriFormVO> myfavoriForm(String logId1) {
+		return myfavoriFormDAO.myfavoriForm(logId1);
 	}
 	
 }
