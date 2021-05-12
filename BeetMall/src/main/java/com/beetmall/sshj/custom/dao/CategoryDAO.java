@@ -24,4 +24,8 @@ public interface CategoryDAO {
 
 	public List<CategoryVO> categoryCharge(PageSearchVO pageVO);
 
+	public List<CategoryVO> Bestcategory(PageSearchVO pageVO);
+
+	public int BestcategoryOnetotalRecord(PageSearchVO pageVO);
+
 }

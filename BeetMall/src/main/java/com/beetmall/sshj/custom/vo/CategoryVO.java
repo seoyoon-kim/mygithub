@@ -28,6 +28,8 @@ public class CategoryVO {
 	private String salestart;//할인시작일
 	private String salefinish;//할인끝나는날
 	
+	//베스트 상품떄문에 필요한 칼럼
+	private int ordernum; //구매량
 	
 	//날짜함수
 	SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -124,4 +126,11 @@ public class CategoryVO {
 	public void setProprice(int proprice) {
 		this.proprice = proprice;
 	}
+	public int getOrdernum() {
+		return ordernum;
+	}
+	public void setOrdernum(int ordernum) {
+		this.ordernum = ordernum;
+	}
+	
 }

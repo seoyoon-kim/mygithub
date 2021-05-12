@@ -407,7 +407,7 @@
 				<ul id="menuListUl">
 					<li><span><img src="/sshj/img/dmenu3.png" id="menuImg" class="menuImg"/>카테고리</span></li>
 					<li><a href="categoryMain">신상품</a></li>
-					<li><a href="categoryMain">베스트</a></li>
+					<li><a href="Bestcategory">베스트</a></li>
 					<li><a href="uglyItem">못난이할인</a></li>
 					<li><a href="recipeHome">비트네</a></li>
 				</ul>

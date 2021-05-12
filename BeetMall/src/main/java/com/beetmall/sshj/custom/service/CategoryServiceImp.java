@@ -62,4 +62,14 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDAO.categoryCharge(pageVO);
 	}
 
+	@Override
+	public List<CategoryVO> Bestcategory(PageSearchVO pageVO) {
+		return categoryDAO.Bestcategory(pageVO);
+	}
+
+	@Override
+	public int BestcategoryOnetotalRecord(PageSearchVO pageVO) {
+		return categoryDAO.BestcategoryOnetotalRecord(pageVO);
+	}
+
 }

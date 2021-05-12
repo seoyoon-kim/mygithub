@@ -177,4 +177,28 @@ public class CategoryController {
 		
 		return mav;
 	}
+	
+	//베스트상품
+	@RequestMapping("/Bestcategory")
+	public ModelAndView Bestcategory(HttpServletRequest req, HttpServletResponse res) {
+		ModelAndView mav = new ModelAndView();
+		
+		String pageNumStr = req.getParameter("pageNum");
+		
+		PageSearchVO pageVO = new PageSearchVO();
+		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+		
+		mav.addObject("list", categoryService.Bestcategory(pageVO));
+		mav.setViewName("custom/category/Bestcategory");
+		mav.addObject("pageVO",pageVO);
+		
+		return mav;
+	}
 }
