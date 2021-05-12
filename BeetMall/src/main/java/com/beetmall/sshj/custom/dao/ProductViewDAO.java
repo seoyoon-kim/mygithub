@@ -19,4 +19,7 @@ public interface ProductViewDAO {
 	//////////////옵션가격 구하기
 	public String POprice(int optionnum);
 	
+	/////////////상품후기 구하기 REVIEW
+	public List<ProductViewVO> ProductViewReview(int productnum);
+	
 }

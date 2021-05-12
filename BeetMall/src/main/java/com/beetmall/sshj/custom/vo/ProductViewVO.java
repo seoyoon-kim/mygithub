@@ -67,7 +67,17 @@ public class ProductViewVO {
 		private String farmname;
 		private String farmprofile;
 		
-		
+		//리뷰 VO
+		private int reviewnum;
+		private int ordernum;
+		private String reviewcontent;
+		private String reviewwritedate;
+		private int reviewrecommend;
+		private String reviewimg;
+		private double reviewscore;
+		private int reviewreport;
+		private String reviewanswer;
+		private int reviewcount;
 		
 
 		public int getStorenum() {
@@ -311,6 +321,66 @@ public class ProductViewVO {
 		}
 		public void setSellprice(int sellprice) {
 			this.sellprice = sellprice;
+		}
+		public int getReviewnum() {
+			return reviewnum;
+		}
+		public void setReviewnum(int reviewnum) {
+			this.reviewnum = reviewnum;
+		}
+		public int getOrdernum() {
+			return ordernum;
+		}
+		public void setOrdernum(int ordernum) {
+			this.ordernum = ordernum;
+		}
+		public String getReviewcontent() {
+			return reviewcontent;
+		}
+		public void setReviewcontent(String reviewcontent) {
+			this.reviewcontent = reviewcontent;
+		}
+		public String getReviewwritedate() {
+			return reviewwritedate;
+		}
+		public void setReviewwritedate(String reviewwritedate) {
+			this.reviewwritedate = reviewwritedate;
+		}
+		public int getReviewrecommend() {
+			return reviewrecommend;
+		}
+		public void setReviewrecommend(int reviewrecommend) {
+			this.reviewrecommend = reviewrecommend;
+		}
+		public String getReviewimg() {
+			return reviewimg;
+		}
+		public void setReviewimg(String reviewimg) {
+			this.reviewimg = reviewimg;
+		}
+		public double getReviewscore() {
+			return reviewscore;
+		}
+		public void setReviewscore(double reviewscore) {
+			this.reviewscore = reviewscore;
+		}
+		public int getReviewreport() {
+			return reviewreport;
+		}
+		public void setReviewreport(int reviewreport) {
+			this.reviewreport = reviewreport;
+		}
+		public String getReviewanswer() {
+			return reviewanswer;
+		}
+		public void setReviewanswer(String reviewanswer) {
+			this.reviewanswer = reviewanswer;
+		}
+		public int getReviewcount() {
+			return reviewcount;
+		}
+		public void setReviewcount(int reviewcount) {
+			this.reviewcount = reviewcount;
 		}
 		
 		

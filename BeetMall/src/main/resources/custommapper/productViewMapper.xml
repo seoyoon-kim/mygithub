@@ -5,7 +5,7 @@
   <mapper namespace="com.beetmall.sshj.custom.dao.ProductViewDAO">
   
     <select id="ProductViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-       select sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,addimg,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
+       select userid,sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,addimg,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
     </select>
     
     <!--        농장 구하기           -->
@@ -33,7 +33,12 @@
     
     <!--        옵션가격 구하기           -->
     <select id="POprice" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-    select optionnum from option where optionnum=${param}
+    select optionnum from option where optionnum=${param1}
+    </select>
+    
+    <!--        상품 리뷰 구하기           -->
+    <select id="ProductViewReview" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+    select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review where productnum=${param1}
     </select>
     
    

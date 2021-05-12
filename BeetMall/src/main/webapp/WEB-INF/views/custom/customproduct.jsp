@@ -21,87 +21,9 @@ a:hover, a:active, a:visited, a:link {
 
 
 
-/*  상품 품목글자----------------------------------------------                 */
-#mainName {
-	text-align: center;
-	font-size: 1.5em;
-	margin: 0 auto 20px;
-	width: 100%;
-	text-align: center;
-}
-
-#mainName>h2 {
-	width: max-content;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	padding-left: 465px;
-}
-
-/*  카테고리이미지----------------------------------------------                 */
-#category {
-	text-align: center;
-	width: 1080px;
-	padding-right: 165px;
-	padding-left: 165px;
-	height: 120px;
-}
-
-#category>li {
-	width: 150px;
-}
-
-#category>li>span>img {
-	width: 70px;
-	height: 70px;
-	border-radius: 100%;
-}
-
-/*  카테고리 소분류----------------------------------------------                 */
-#categorySubmenu>ul {
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	floate: left;
-	width: 1080px;
-	line-height: 30px;
-	padding: 0 30px;
-}
-
-#categorySubmenu>ul>li {
-	width: 204px;
-}
-
-/*  정렬방식----------------------------------------------                 */
-#selectOrderbox {
-	width: 540px;
-	margin-top:30px;
-}
-
-#selectOrder {
-
-	width: 540px;
-
-}
-
-/*  공유 아이콘 정렬----------------------------------------------                 */
-#sharicon {
-	float: right;
-	width: 540px;
-	margin: 0;
-	padding-left: 420px;
-	text-align: right;
-	margin-bottom:30px;
-}
-
-#sharicon>li {
-	width: 30px;
-}
-
-#sharicon>li>a>img {
-	width: 25px;
-}
-
 /*  상품 박스------------이미지 부분----------------------------------                 */
 #productmainbox {
+   padding-top:30px;
    width: 1080px;
    float: left;
 }
@@ -110,23 +32,15 @@ a:hover, a:active, a:visited, a:link {
 	float: left;
 	margin-left:80px;
 	margin-top: 100px;
-	width: 250px;
-	height: 300px; 
+	width: 350px;
+	height: 400px; 
 }
 
 #productImgBox>img {
-	width: 250px;
-	height: 300px;
+	width: 350px;
+	height: 400px;
 }
 
-#ptime {
-	width: 250px;
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
-	background-color: red;
-	color: white;
-}
 
 /*  상품 박스------------텍스트 부분----------------------------------                 */
 #pbox {
@@ -134,6 +48,7 @@ a:hover, a:active, a:visited, a:link {
 	float: left;
 	margin-left: 40px;
 	margin-bottom: 40px;
+	padding-top:70px;
 }
 
 #productMainTiltle {
@@ -141,35 +56,48 @@ a:hover, a:active, a:visited, a:link {
 	height: 50px;
 	line-height: 50px;
 	float: left;
-	margin-right: 150px;
-	font-size:23px;
+	margin-right: 70px;
+	font-size:25px;
 }
 
 #productPrice {
 	float: left;
 	width: 50%;
-	height: 50px;
-	line-height: 50px;
-	font-size:20px;
+	height: 40px;
+	line-height: 40px;
+	font-size:17px;
+    color:red;
+    margin-bottom:20px;
+   
 }
 
 #sprofile {
 	float: left;
 	width: 30%;
-	height: 50px;
-	line-height: 50px;
+	height: 40px;
+	line-height: 40px;
+	padding-left:20px;
+	margin-bottom:20px;;
+	font-size:14px;
+	
+}
+
+#sprofile>a{
+color:gray;
 }
 
 #simg {
 	float: left;
 	with: 20%;
-	height: 50px;
-	line-height: 50px;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom:20px;
+	
 }
 
 #simg>a>img {
 	width: 50px;
-	line-height: 50px;
+	line-height: 40px;
 }
 
 #productPrBox>ul {
@@ -181,11 +109,10 @@ a:hover, a:active, a:visited, a:link {
 
 #productPrBox>ul>li {
 	float: left;
-	width: 45%;
+	width: 50%;
 	height: 35px;
 	line-height: 35px;
 	margin-bottom:10px;
-	margin-top:5px;
 	border-bottom:1px solid #eee;
 }
 
@@ -202,7 +129,7 @@ border-bottom:none;
 #productPrBox>ul>li:nth-child(16n+13){
 color:gray;
 font-size:17px;
-width: 55%;
+width: 50%;
 padding-left:10px;
 }
 
@@ -233,7 +160,6 @@ padding-left:10px;
 	line-height: 50px;
 	height: 50px;
 	font-size:30px;
-	font-weight: 700px;
 	padding-left:280px;
 	margin-bottom:15px;
 	color:red;
@@ -246,11 +172,11 @@ padding-left:10px;
 	float: left;
 	line-height: 15px;
 	height: 15px;
-	font-size:15px;
+	font-size:13px;
 	font-weight: 400px;
 	padding-left:280px;
 	margin-bottom:3px;
-	color:red;	
+	color:gray;		
 }
 
 #productTotalPrice3 {
@@ -259,11 +185,11 @@ padding-left:10px;
 	float: left;
 	line-height: 15px;
 	height: 15px;
-	font-size:15px;
+	font-size:13px;
 	font-weight: 400px;
 	padding-left:280px;
 	margin-bottom:15px;
-	color:red;	
+	color:gray;	
 }
 
 #productTotalPrice4 {
@@ -272,11 +198,11 @@ padding-left:10px;
 	float: left;
 	line-height: 15px;
 	height: 15px;
-	font-size:15px;
+	font-size:13px;
 	font-weight: 400px;
 	padding-left:280px;
 	margin-bottom:3px;
-	color:red;	
+	color:gray;		
 }
 
 #productBtn {
@@ -325,101 +251,6 @@ padding-left:10px;
 	float: left;
 }
 
-.relativeList {
-	padding-left: 80px;
-	padding-right: 80px;
-	margin-bottom: 20px;
-	float: left;
-	width: 100%;
-	height: 150px;
-	position: relative;
-	overflow: hidden;
-}
-
-.relativeproduct {
-	position: relative;
-}
-
-.relativeproduct, .relativeproduct>div {
-	float: left;
-}
-
-.relativePanel>div:nth-child(4n+1), .relativePanel img {
-	width: 190px;
-	height: 150px;
-}
-
-.relativePanel>div:nth-child(4n+2), .relativePanel>div:nth-child(4n+3) {
-	width: 195px;
-	height: 30px;
-	font-size: 1.1em;
-	font-weight: 800;
-}
-
-.relativePanel>div:nth-child(4n) {
-	width: 195px;
-	height: 30px;
-	font-size: 0.7em;
-	color: #999;
-}
-
-.relativePanel {
-	width: 195px;
-	height: 360px;
-	margin-left: 5px;
-	margin-right: 5px;
-}
-/*----------슬라이더------------*/
-
-/* ------------------페이징처리부분-------------------- */
-.page_wrap2 {
-	text-align: center;
-	font-size: 0;
-	padding-bottom: 5px;
-}
-
-.page_nation2 {
-	display: inline-block;
-}
-
-.page_nation2 .none {
-	display: none;
-}
-
-.page_nation2 a {
-	display: block;
-	margin: 0 3px;
-	float: left;
-	width: 15px;
-	height: 15px;
-	line-height: 15px;
-	text-align: center;
-	font-size: 13px;
-	color: #999999;
-	text-decoration: none;
-}
-
-.page_nation2 .arrow {
-	border: 1px solid #ccc;
-}
-
-.page_nation2 .prev {
-	background: #f8f8f8;
-	margin-right: 7px;
-}
-
-.page_nation2 .next {
-	background: #f8f8f8
-		url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat
-		center center;
-	margin-left: 7px;
-}
-
-.page_nation2 a.active {
-	color: red;
-}
-
-/* ---------------페이징 처리끝-------------------- */
 /* ---------------상세정보1 큰이미지랑 큰텍스트들-------------------- */
 #pBigimg {
 	margin-top: 50px;
@@ -458,10 +289,17 @@ padding-left:10px;
 	width: 100%;
 }
 
+
 #productInfoPage2>#retitle {
 	width: 100%;
 	float: left;
 	margin-bottom: 20px;
+}
+
+#noreview{
+   width: 100%;
+   float: left;
+   margin-bottom: 30px;
 }
 
 #reviewTitle, .reviewList {
@@ -672,8 +510,9 @@ width:100%;
 	height: 20px;
 }
 
-<!--
-문의 후기 버튼 -->#reviewWriteBtn {
+<!-- 문의 후기 버튼 -->
+
+#reviewWriteBtn {
 	
 }
 
@@ -811,12 +650,15 @@ td, .td{
 
 </style>
 <script>
+
+   
     var pcount=1; //상품갯수
     var ocount=1; //옵션갯수
     var prtprice=parseInt(${pvo.productprice}); //상품본래가격
     var dprtprice=parseInt(${Dprice}); //상품할인가격
     var tprice=prtprice-dprtprice;
     var submitprice;
+    
     
 	function pCount(){
 		pcount+=1;
@@ -825,7 +667,6 @@ td, .td{
 		optionstay();
 		opCount();
 		omCount();
-		
 		
 
 		//alert(dprtprice);
@@ -838,11 +679,11 @@ td, .td{
 		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
 		//alert(tprice);
 		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
 		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
 		
 		submitprice=tprice;
-		alert("총"+submitprice);
+		//alert("총"+submitprice);
 		//alert(tprice);
 		
 		
@@ -875,11 +716,11 @@ td, .td{
 		
 		
 		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
 		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
 		
 		submitprice=tprice;
-		alert("총"+submitprice);
+		//alert("총"+submitprice);
 		//alert(tprice);
 	}
 	
@@ -899,21 +740,24 @@ function optionstay(){
 function optionchange(){
 		 var opt=$('#selecOption').val();
 		 var optArr=opt.split('&'); 
-		 var optnum=optArr[0];   //옵션 숫자
+		 var optnum=parseInt(optArr[0]);   //옵션 숫자
 		 var optprice=parseInt(optArr[1]); //옵션 가격
 		 ocount=1;
+		 
+		
+		 
 		 $('#optnum').text(ocount);
 		 
 		 //alert(dprtprice);
 		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
 		 //alert(tprice);
-		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개"+"옵션가격:"+optprice+"원";
+		 document.getElementById("productTotalPrice3").innerHTML="옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)";
 		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
 		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
 		 
 		 submitprice=tprice;
-		 alert("총"+submitprice);
+		 //alert("총"+submitprice);
 		 //alert(tprice);
 
 };
@@ -926,20 +770,24 @@ function optionchange(){
 		
 		 var opt=$('#selecOption').val();
 		 var optArr=opt.split('&');
-		 var optnum=optArr[0];   //옵션 숫자
+		 var optnum=parseInt(optArr[0]);   //옵션 숫자
+		 
+		 
 		 var optprice=parseInt(optArr[1]); //옵션 가격
 		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
 		 
 		 $('#optnum').text(ocount);
 		 
-		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개 "+"옵션가격:"+(optprice*ocount)+"원";
+		 document.getElementById("productTotalPrice3").innerHTML="옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)";
 		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
 		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
 	
 		 submitprice=tprice;
-		 alert("총"+submitprice);
+		 //alert("총"+submitprice);
 		 //alert(tprice); 
+		 
+		
 		 
 	}
 		
@@ -958,26 +806,34 @@ function optionchange(){
 		 var optprice=parseInt(optArr[1]); //옵션 가격
 		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
 		 
-		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개 "+"옵션가격:"+(optprice*ocount)+"원";
+		 document.getElementById("productTotalPrice3").innerHTML="옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)";
 		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice4").innerHTML="상품가격:"+prtprice+"원 x"+pcount+"개";
 		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
 		 
 		 submitprice=tprice;
-		 alert("총"+submitprice);
+		 //alert("총"+submitprice);
 		 //alert(tprice);
 	}	    
 
 ///////////////////////총가격 변수에 저장해놓기
 function total(){
 	
-	alert("최종구매"+submitprice);
+	var opt=$('#selecOption').val();
+	var optArr=opt.split('&');
+	var optnum=parseInt(optArr[0]);   //옵션 숫자
+	
+	 if(optnum<=0){
+			alert("옵션을 선택해 주세요");			
+			 }
+
+	optionchange();
+	alert("최종구매 가격은"+submitprice+"입니다.");
+	
 	
 }
 
 
-
-//document.onload = optionchange
 
 
 </script>
@@ -1005,9 +861,10 @@ function total(){
 				<div id=productMainTiltle>
 					<b>${pvo.productname}</b>   <!-- 상품명 -->
 				</div>
-				<div id=productPrice>${pvo.productprice}</div>  <!-- 가격 -->
+				<div id=productPrice>원가: ${pvo.productprice}</div>  <!-- 가격 -->
 				<div id="sprofile">
 					<a href="#">${fvo.farmname}</a>  <!--농장이름 -->
+					<a href="#">${pvo.userid}</a>  <!-- 판매자 아이디 -->
 				</div>
 				<div id="simg">
 					<a href="#"><img src="img/${fvo.farmprofile}"/></a>  <!-- 프사 -->
@@ -1033,18 +890,19 @@ function total(){
 						<li>구매수량</li>  <!-- 11 -->
 						<li><input type="button" onclick="mCount()" class="pmbtn minibtn" value="-"/><span id="prtnum" name="prtnum">1</span><input type="button"  onclick="pCount()" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
 						<li>추가옵션</li>  <!-- 13 -->
-						<li></li>  <!-- 14 -->
-						
+						<li><c:if test="${empty ovo}">해당 상품은 옵션이 없습니다. </c:if></li>  <!-- 14 -->
+						 
 						
 							<li><select name="selecOption" id="selecOption" onchange="optionchange()">
-							    <c:if test="${not empty ovo}"> 
-							       <option value="0&0">옵션을 선택해 주세요</option>
+							   
+							    <c:if test="${empty ovo}">  
+							        <option value="1 & 0">- </option>
 							    </c:if>
 							    
-							    <c:if test="${empty ovo}">  
-							        <option value="0&0">옵션이 없습니다.</option>
-							    </c:if>
-							    						    
+							    <c:if test="${not empty ovo}">
+							        <option value="0 & 0">옵션을 선택해 주세요</option>
+							    </c:if>		
+							    				    
 						   	 <c:forEach var="ovodata" items="${ovo}">						   	       
 								   <option value="${ovodata.optionnum}&${ovodata.optionprice}">${ovodata.optionnum}${ovodata.optionname}</option> <!-- -----옵션선택하기----- -->
 							 </c:forEach>
@@ -1078,7 +936,7 @@ function total(){
 		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 		<div class="infoBtnb">
-			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
 			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
 			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
@@ -1134,7 +992,7 @@ function total(){
          <!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 	<div class="infoBtnb">
-			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
 			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
 			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
@@ -1153,47 +1011,32 @@ function total(){
 					<li><b>작성일</b></li>
 					<li><b>평점</b></li>
 				</ul>
-
-				<ul class="reviewList">
-					<li>123</li>
-					<li>
-						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" />
-						</div>
-						<div id="reviewtxtbox">너무 맛있어요! 빨간 맛 궁금해 Honey깨물면 점점 녹아든
-							스트로베리 그 맛코너 캔디 샵 찾아 봐</div>
-					</li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li>4</li>
-				</ul>
-
-				<ul class="reviewList">
-					<li>123</li>
-					<li>
-						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" />
-						</div>
-						<div id="reviewtxtbox">빨간 맛 궁금해 Honey</div>
-					</li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li>4</li>
-				</ul>
-
-				<ul class="reviewList">
-					<li>123</li>
-					<li>
-						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" />
-						</div>
-						<div id="reviewtxtbox">너무 맛있어요! 빨간 맛 궁금해 Honey깨물면 점점 녹아든
-							스트로베리 그 맛코너 캔디 샵 찾아 봐</div>
-					</li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li>4</li>
-				</ul>
+				
+                <c:if test="${empty reviewlist}">
+		             <div id="noreview">작성된 후기가 없습니다.</div>
+		        </c:if>
+		        
+              <c:forEach var="rlist" items="${reviewlist}">
+                 	
+		          	
+					<ul class="reviewList">
+						<li>${rlist.reviewnum}</li>
+						<li>
+							<div id="reviewImgbox">
+								<img src="img/${rlist.reviewimg}"/>
+							</div>
+							<div id="reviewtxtbox">
+														
+							     ${rlist.reviewcontent}
+							</div>
+						</li>
+						<li>${rlist.userid}</li>
+						<li>${rlist.reviewwritedate}</li>
+						<li>${rlist.reviewscore}</li>
+					</ul>
+               </c:forEach>
+               
+				
 
 				<div id="reviewWriteBtn">
 					<input type="button" value="후기 작성"  class="btn"/>
@@ -1221,7 +1064,7 @@ function total(){
 
 
         <div class="infoBtnb">
-			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
 			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
 			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>

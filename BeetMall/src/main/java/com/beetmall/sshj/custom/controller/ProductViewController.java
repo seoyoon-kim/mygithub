@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.ProductViewServiceImp;
+import com.beetmall.sshj.custom.vo.ProductViewVO;
 
 @Controller
 public class ProductViewController {
@@ -48,6 +49,13 @@ public class ProductViewController {
 			mav.addObject("Pyesno","no");
 		}
 	*/
+		
+		
+		//상품후기 구하기
+		mav.addObject("reviewlist",productViewService.ProductViewReview(productnum));
+		
+		
+		//구한것들 뷰페이지로 가지고 이동
 		mav.setViewName("custom/customproduct");
 		
 		return mav;
