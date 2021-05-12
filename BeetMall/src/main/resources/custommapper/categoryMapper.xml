@@ -16,10 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					        on d.userid=a.userid
 					    left outer join discount e
 					        on e.productnum=a.productnum
+					    <choose>
+							<when test = 'searchWord!=null'>
+								where a.productname like '%${searchWord}%'
+							</when>
+						</choose>
 					group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
 					order by productnum)
 	</select>
-	
 	<select id="mapAllRecord" resultType="com.beetmall.sshj.custom.vo.CategoryFarmVO">
 		select a.storenum, a.farmname, a.farmintro, a.farmprofile, a.productnum, b.storeaddr 
 		from farm a 
@@ -40,6 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				        on d.userid=a.userid
 				    left outer join discount e
 				        on e.productnum=a.productnum
+				<choose>
+					<when test = 'searchWord!=null'>
+						where a.productname like '%${searchWord}%'
+					</when>
+				</choose>
 				group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
 				order by productnum desc)
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)

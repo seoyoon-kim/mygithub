@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.CategoryService;
 import com.beetmall.sshj.custom.vo.PageSearchVO;
+import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 
 @Controller
 public class CategoryController {
@@ -42,14 +43,13 @@ public class CategoryController {
 		return mav;
 	}
 	
-	//카테고리메인
+	//카테고리전체
 	@RequestMapping("/categoryMain")
-	public ModelAndView categoryMain(HttpServletRequest req, HttpServletResponse res) {
+	public ModelAndView categoryMain(HttpServletRequest req, PageSearchVO pageVO) {
 		ModelAndView mav = new ModelAndView();
 		
 		String pageNumStr = req.getParameter("pageNum");
-		
-		PageSearchVO pageVO = new PageSearchVO();
+
 		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}
@@ -67,45 +67,78 @@ public class CategoryController {
 		return mav;
 	}
 	
-	//픽업여부체크시
-//	@RequestMapping("/pickupCheckTure")
-//	@ResponseBody
-//	public ModelAndView pickupCheckTure() {
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.pickupCheckTure());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
-//	
-//	//픽업여부 해제시>메인으로
-//	@RequestMapping("/pickupCheckFalse")
-//	@ResponseBody
-//	public ModelAndView pickupCheckFalse() {
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.categorylist());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
-//	
-//	//평점높은순
-//	@RequestMapping("/highhigh1")
-//	@ResponseBody
-//	public ModelAndView highhigh1(){
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.highhigh1());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
-//	
-//	//평점낮은순
-//	@RequestMapping("/lowlow1")
-//	@ResponseBody
-//	public ModelAndView lowlow1(){
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.lowlow1());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
+	//과일
+	@RequestMapping("/categoryFruit")
+	public ModelAndView categoryFruit(HttpServletRequest req, PageSearchVO pageVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		String pageNumStr = req.getParameter("pageNum");
+
+		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
+		
+		mav.addObject("list", categoryService.categorylist(pageVO));
+		mav.addObject("pageVO",pageVO);
+		
+		mav.setViewName("custom/category/categoryFruit");
+		
+		return mav;
+	}
+	
+	//채소
+	@RequestMapping("/categoryvegetable")
+	public ModelAndView categoryvegetable(HttpServletRequest req, PageSearchVO pageVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		String pageNumStr = req.getParameter("pageNum");
+
+		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
+		
+		mav.addObject("list", categoryService.categorylist(pageVO));
+		mav.addObject("pageVO",pageVO);
+		
+		mav.setViewName("custom/category/categoryvegetable");
+		
+		return mav;
+	}
+	
+	//쌀
+	@RequestMapping("/categoryRice")
+	public ModelAndView categoryRice(HttpServletRequest req, PageSearchVO pageVO) {
+		ModelAndView mav = new ModelAndView();
+		
+		String pageNumStr = req.getParameter("pageNum");
+
+		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
+		
+		mav.addObject("list", categoryService.categorylist(pageVO));
+		mav.addObject("pageVO",pageVO);
+		
+		mav.setViewName("custom/category/categoryRice");
+		
+		return mav;
+	}
+	
 	
 	//지역별보기
 	@RequestMapping("categoryCharge")
@@ -201,4 +234,44 @@ public class CategoryController {
 		
 		return mav;
 	}
+	
+	//픽업여부체크시
+//	@RequestMapping("/pickupCheckTure")
+//	@ResponseBody
+//	public ModelAndView pickupCheckTure() {
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("list", categoryService.pickupCheckTure());
+//		mav.setViewName("custom/category/category");
+//		return mav;
+//	}
+//	
+//	//픽업여부 해제시>메인으로
+//	@RequestMapping("/pickupCheckFalse")
+//	@ResponseBody
+//	public ModelAndView pickupCheckFalse() {
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("list", categoryService.categorylist());
+//		mav.setViewName("custom/category/category");
+//		return mav;
+//	}
+//	
+//	//평점높은순
+//	@RequestMapping("/highhigh1")
+//	@ResponseBody
+//	public ModelAndView highhigh1(){
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("list", categoryService.highhigh1());
+//		mav.setViewName("custom/category/category");
+//		return mav;
+//	}
+//	
+//	//평점낮은순
+//	@RequestMapping("/lowlow1")
+//	@ResponseBody
+//	public ModelAndView lowlow1(){
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("list", categoryService.lowlow1());
+//		mav.setViewName("custom/category/category");
+//		return mav;
+//	}
 }

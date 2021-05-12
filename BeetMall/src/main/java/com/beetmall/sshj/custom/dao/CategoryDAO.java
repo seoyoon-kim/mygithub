@@ -12,10 +12,6 @@ public interface CategoryDAO {
 
 	public List<CategoryVO> categorylist(PageSearchVO pageVO);
 
-//	public List<CategoryVO> pickupCheckTure();
-//	public List<CategoryVO> highhigh1();
-//	public List<CategoryVO> lowlow1();
-
 	public int categoryOnetotalRecord(PageSearchVO pageVO);
 
 	public List<CategoryVO> uglyItem(PageSearchVO pageVO);
@@ -27,5 +23,9 @@ public interface CategoryDAO {
 	public List<CategoryVO> Bestcategory(PageSearchVO pageVO);
 
 	public int BestcategoryOnetotalRecord(PageSearchVO pageVO);
+	
+//	public List<CategoryVO> pickupCheckTure();
+//	public List<CategoryVO> highhigh1();
+//	public List<CategoryVO> lowlow1();
 
 }

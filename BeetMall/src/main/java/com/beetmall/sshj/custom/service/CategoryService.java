@@ -12,12 +12,6 @@ public interface CategoryService {
 
 	public List<CategoryVO> categorylist(PageSearchVO pageVO);
 
-//	public List<CategoryVO> pickupCheckTure();
-//
-//	public List<CategoryVO> highhigh1();
-//
-//	public List<CategoryVO> lowlow1();
-
 	public int categoryOnetotalRecord(PageSearchVO pageVO);
 
 	public List<CategoryVO> uglyItem(PageSearchVO pageVO);
@@ -30,4 +24,11 @@ public interface CategoryService {
 
 	//베스트카테고리는 총갯수를 다르게 가져와야하기떄문에 새로칼럼팜
 	public int BestcategoryOnetotalRecord(PageSearchVO pageVO);
+	
+//---------------------내림차순
+//	public List<CategoryVO> pickupCheckTure();
+//
+//	public List<CategoryVO> highhigh1();
+//
+//	public List<CategoryVO> lowlow1();
 }

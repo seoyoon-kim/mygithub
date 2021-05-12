@@ -288,7 +288,7 @@ $(function(){
 </script>
 <div class="section">
 	<div class="main">
-		<div id="mainName"><h1>상품 품목별(전체)</h1></div>
+		<div id="mainName"><h1>상품 품목별(과일)</h1></div>
 			<ul id="category">
 				<li><a href="categoryMain"><span id="categoryAll" style="cursor:pointer"><img src="/sshj/img/kmain.png"><br/><br/>전체</span></a></li>
 				<li><a href="categoryFruit"><span id="categoryFruit" style="cursor:pointer"><img src="/sshj/img/kfruit.png"><br/><br/>과일</span></a></li>
@@ -350,7 +350,7 @@ $(function(){
 			<div class="page_wrap" style="text-align:center;">
 				<div class="page_nation">
 				   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
-				   		<a class="arrow prev" href="/sshj/categoryMain?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+				   		<a class="arrow prev" href="/sshj/categoryFruit?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
 				   </c:if>
 				   <!-- 페이지 번호                   1                                    5                     -->
 		           <c:forEach var="p" begin="${pageVO.startPageNum}" end="${(pageVO.startPageNum + pageVO.onePageNum)-1}">
@@ -358,16 +358,16 @@ $(function(){
 	            	<c:if test="${p<=pageVO.totalPage}">  
 						<!--현재페이지 :  현재보고있는 페이지 표시 -->
 		               <c:if test="${p==pageVO.pageNum}">
-		                  <a class="active" href="categoryMain?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+		                  <a class="active" href="categoryFruit?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
 		               </c:if>
 		               <!-- 현재페이지가 아닐 때 -->
 		               <c:if test="${p!=pageVO.pageNum}">
-		                  <a href="categoryMain?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+		                  <a href="categoryFruit?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
 		               </c:if>
 	            	</c:if>
         		</c:forEach>
 		           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
-		              <a class="arrow next" href="/sshj/categoryMain?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+		              <a class="arrow next" href="/sshj/categoryFruit?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
 		           </c:if>
 				</div>
 			 </div>

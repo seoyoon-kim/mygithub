@@ -174,7 +174,7 @@
 		<div class="page_wrap" style="text-align:center;">
 			<div class="page_nation">
 			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
-			   		<a class="arrow prev" href="/sshj/mapList2?pageNum=${pageVO.pageNum-1}"></a>
+			   		<a class="arrow prev" href="/sshj/mapping?pageNum=${pageVO.pageNum-1}"></a>
 			   </c:if>
 			   <!-- 페이지 번호                   1                                    5                     -->
 	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
@@ -183,12 +183,12 @@
 	                    <a class="active">${p}</a>
 	                 </c:if>   
 	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
-	                    <a href="/sshj/mapList2?pageNum=${p}">${p}</a>
+	                    <a href="/sshj/mapping?pageNum=${p}">${p}</a>
 	                 </c:if>
 	              </c:if>
 	           </c:forEach>
 	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
-	              <a class="arrow next" href="/sshj/mapList2?pageNum=${pageVO.pageNum+1}"></a>
+	              <a class="arrow next" href="/sshj/mapping?pageNum=${pageVO.pageNum+1}"></a>
 	           </c:if>
 			</div>
 		 </div>

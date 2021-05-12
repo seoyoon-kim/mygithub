@@ -27,21 +27,6 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDAO.categorylist(pageVO);
 	}
 
-//	@Override
-//	public List<CategoryVO> pickupCheckTure() {
-//		return categoryDAO.pickupCheckTure();
-//	}
-//	
-//	@Override
-//	public List<CategoryVO> highhigh1() {
-//		return categoryDAO.highhigh1();
-//	}
-//
-//	@Override
-//	public List<CategoryVO> lowlow1() {
-//		return categoryDAO.lowlow1();
-//	}
-
 	@Override
 	public int categoryOnetotalRecord(PageSearchVO pageVO) {
 		return categoryDAO.categoryOnetotalRecord(pageVO);
@@ -71,5 +56,22 @@ public class CategoryServiceImp implements CategoryService {
 	public int BestcategoryOnetotalRecord(PageSearchVO pageVO) {
 		return categoryDAO.BestcategoryOnetotalRecord(pageVO);
 	}
+
+	
+//------------------내림차순
+//	@Override
+//	public List<CategoryVO> pickupCheckTure() {
+//		return categoryDAO.pickupCheckTure();
+//	}
+//	
+//	@Override
+//	public List<CategoryVO> highhigh1() {
+//		return categoryDAO.highhigh1();
+//	}
+//
+//	@Override
+//	public List<CategoryVO> lowlow1() {
+//		return categoryDAO.lowlow1();
+//	}
 
 }

@@ -447,9 +447,9 @@
                <div id="kCateMain">
                   <div id="kmiddelname">상품 품목별</div>
                   <div><a href="categoryMain">전체</a></div>
-                  <div><a href="categoryMain">과일</a></div>
-                  <div><a href="categoryMain">채소</a></div>
-                  <div><a href="categoryMain">쌀/잡곡</a></div>
+                  <div><a href="categoryFruit">과일</a></div>
+                  <div><a href="categoryvegetable">채소</a></div>
+                  <div><a href="categoryRice">쌀/잡곡</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">지역별</div>
