@@ -97,6 +97,7 @@
 		line-height: 40px;
 		display:none;
 		position: absolute;
+		cursor:pointer;
 	}
 	#rollInfo{
 	}

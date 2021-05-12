@@ -33,12 +33,14 @@
 		background-color:rgb(252,118,45);
 		color:white;
 		margin:auto;
+		cursor:pointer;
 	}
 	#what_Type{
 		overflow: auto;
 	}
 	.radiusClass{
 		border-radius:5px;
+		 
 	}
 </style>
 <script>

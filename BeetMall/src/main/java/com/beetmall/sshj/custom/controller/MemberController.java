@@ -161,7 +161,8 @@ public class MemberController {
 	@RequestMapping(value="/sregiFinish", method= RequestMethod.POST)
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
 	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo, CategoryFarmVO cvo, @RequestParam MultipartFile file, HttpServletRequest req, HttpSession session) {
-		
+		String orgName = file.getOriginalFilename();
+		String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
 		ModelAndView mav = new ModelAndView();
 		String tel1 = req.getParameter("userphone1");
 		String tel2 = req.getParameter("userphone2");
@@ -201,10 +202,10 @@ public class MemberController {
 //			System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
 			
 			//////////////////// 파일 업로드
-			String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
+			
 //			System.out.println("path="+path);
 			String paramName = file.getName();
-			String orgName = file.getOriginalFilename();
+			
 //			System.out.println(paramName+", "+orgName);
 			
 			try {
@@ -235,12 +236,12 @@ public class MemberController {
 			int result3 = memberservice.sellerRegiFinishiOk(svo);
 			
 			////////////////////등록 실패시 파일 삭제
-			if(result3 <=0) {
-				if(orgName != null) {
-					File delf = new File(path, orgName);
-					delf.delete();
-				}
-			}
+//			if(result3 <=0) {
+//				if(orgName != null) {
+//					File delf = new File(path, orgName);
+//					delf.delete();
+//				}
+//			}
 			////////////////////파일 삭제 end)
 			
 			transactionManager.commit(status);
@@ -254,6 +255,10 @@ public class MemberController {
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("트랜잭션 문제.. 되게 골치아프니 주의..");
+			if(orgName != null) {
+				File delf = new File(path, orgName);
+				delf.delete();
+			}
 			mav.setViewName("redirect:sregister");
 		}
 		return mav;

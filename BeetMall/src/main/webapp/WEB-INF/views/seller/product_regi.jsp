@@ -309,7 +309,7 @@ $(function(){
             }
         }
 //작은 썸네일 업로드 미리보기 (실패)
-	//함수들
+//등록페이지 
 	$(document).ready(function(){	
 	////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
 		$('#sale_check').click(function(){
@@ -381,7 +381,7 @@ $(function(){
 			history.back();
 		});
 	
-	});// 함수들 end		
+	});// 등록페이지srcipt end		
 //submit 등록하기 전 유효성검사
 $('submit').click(function(){
 	//유효성검사 
@@ -485,43 +485,6 @@ $(function(){
 </script>
 <body>
 	<div class="main">
-	<!-- 가운데 content -->
-	<%--   <div id="seller_header">
-      <!-- 상단 메뉴 바 -->
-      <nav>
-         <div id="headerMember">
-            <c:if test="${logStatus != 'Y'}">
-               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
-                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
-                  <input type="button" value="로그인" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
-               </div>
-            </c:if>
-            <c:if test="${logStatus == 'Y' }">
-               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
-                  <c:if test="${logType==2}">
-                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
-                  </c:if>
-                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
-                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-               </div>
-            </c:if>
-         </div>   
-         <ul>
-            <li><a href="#">BEETMALL</a></li>
-            <li><a href="product_list">상품 관리</a></li>
-            <li><a href="product_regi">상품 등록</a></li>
-            <li><a href="order_management">주문 관리</a></li>
-            <li><a href="sale_manageement">판매 관리</a></li>
-            <li><a href="seller_sales">매출 관리</a></li>
-            <li><a href="#">정산 관리</a></li>
-            <li><a href="#">배송 관리</a></li>
-            <li><a href="seller_review">리뷰/문의 관리</a></li>
-            <li><a href="intro_farm">회원정보수정</a></li>
-         </ul>
-      </nav>
-   </div> --%>
 	<div id="article">
 	<div class="wrapTitle" style="font-size:20px">상품등록</div>
 		<!--검색하기 -->
@@ -592,8 +555,10 @@ $(function(){
 			<br/>
 			<li>
 				<label>할인여부 </label>&nbsp;
-				<input type="button" name="saleselect" class="btn" id="sale_check" value="설정">&nbsp;
-				<input type="button" name="saleselect"  class="btn" id="sale_uncheck" value="설정안함">
+				<!-- <input type="button" name="saleselect" class="btn" id="sale_check" value="설정">&nbsp; -->
+				<button class="btn" name="saleselect" value="1" id="sale_check">설정</button>&nbsp;
+				<!-- <input type="button" name="saleselect"  class="btn" id="sale_uncheck" value="설정안함"> -->
+				<button class="btn" name="saleselect" value="0" id="sale_uncheck">설정안함</button>
 			</li>
 			<ul id="sale_ul" style="display:none">
 				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" max="0"/><span>원</span>&nbsp;<span>할인</span></li>
@@ -606,12 +571,17 @@ $(function(){
 					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >9000</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
 					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
 				</li>
-				<li><input type="checkbox" name="saleb" id="saleb"/><span>못난이 할인 상품으로 등록</span></li>
+		<!-- <li><input type="checkbox" name="saleb" id="saleb"/><span>못난이 할인 상품으로 등록</span></li> -->
+				<li><button name="saleb" id="saleb" value='1' class="btn">못난이 할인 상품으로 등록</button></li>
+				<!-- value = 0은 어떻게 넘겨줄것인가? : script? button이 클릭되지 않으면 value = 0으로 넘기기? -->
 			</ul>
-			<li>
+			<li> 
 				<label>판매기간</label>&nbsp;&nbsp;
-				<input type="button" name="selldate" class="btn" id="sell_check"  value="설정"/ >&nbsp;
-				<input type="button" name="selldate" class="btn" id="sell_uncheck" value="설정안함"/>
+				<!-- <input type="button" name="selldate" class="btn" id="sell_check"  value="설정"/ >&nbsp; -->
+				<button name="selldate" class="btn" id="sell_check" value="1">설정</button>&nbsp; 
+				<!-- <input type="button" name="selldate" class="btn" id="sell_uncheck" value="설정안함"/> -->
+				<button name="selldate" class="btn" id="sell_uncheck" value="0">설정안함</button>
+				<!-- 이건 버튼으로 변경안해도 되는데.. 설정안함 하면 sellstart 현재날짜, sellfinish 2099.01.01 로 변경 -->
 			</li>
 			<li id="date_group"><label>기간설정</label><div id="btn_group">
 				<input type="button" name="" class="btn" value="5일"/>
@@ -637,8 +607,12 @@ $(function(){
 	<div class="category_title">옵션</div>
 	<div class="category_wrap">
 			<ul class="regi_option_wrap">
+				<li>
+					<button name="optionselect" value="1" class="btn" >옵션추가</button>&nbsp; 
+					<button name="optionselect" value="0" class="btn" >추가안함</button>
+				</li>
 				<li><label>옵션 갯수</label>&nbsp;
-					<select id="select_option" name="selectoption">
+					<select id="select_option" name="option_count"> 
 						<option selected value='0'>적용안함</option>
 						<option value='1'>1</option>
 						<option value='2'>2</option>
@@ -694,7 +668,7 @@ $(function(){
 			<ul>
 				<li><label>대표이미지</label><br/>
 					<img name="thumbimg" id="thumbimg"src="#" alt="image upload" style="width:400px;"/><br/>
-					<input type="file" id="thumbimg_upload" accept="img/*" onchange="readURL(this);" /></li>
+					<input type="file" id="thumbimg_upload" name = "" accept="img/*" onchange="readURL(this);" /></li>
 				<li>
 					<img name="addimg"   id="addimg" width="200" src="#" alt="image upload" />&nbsp;	
 					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" />&nbsp; 
@@ -706,7 +680,7 @@ $(function(){
  	<!-----------------------------------------------상세설명------------------------------------->
 	<div class="category_title">상세설명</div>
 	<div class="category_wrap">
-		<textarea id="summernote" name="editordata"></textarea>
+		<textarea id="summernote"  name="productcontent"></textarea> <!-- name="editordata" -->
 		</div>
 	<!-----------------------------------------------배송----------------------------------------->
 	<div class="category_title">배송</div>
@@ -735,14 +709,14 @@ $(function(){
 				<li><label for="">판매단위</label>&nbsp;
 					<input type="number" name="selloption" id="selloption"  min="0"/>
 					<select id="select_unit" name="selloption" >
-						<option value="단위없음">해당없음</option>
+						<option value="-">해당없음</option>
 						<option value="팩">팩</option>
 						<option value="박스">박스</option>
 					</select>
 				</li>
 				<li><label for="">중량/용량</label>&nbsp;
 					<input type="number" name="sellweight" id="sellweight" />
-					<select id="select_weight" name="sellweight" >
+					<select id="select_weight" name="sellweight">
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>

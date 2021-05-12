@@ -43,6 +43,8 @@
 	}
 	#search_btn{padding:5px;border-left:1px solid lightgray;}
 	#sel{margin-top:10px;}
+	/*답변대기중*/
+	#no_answer{color:rgb(224,102,102);}
 </style>
 <script>
 	//답변완료 답변대기중 select 
@@ -99,7 +101,7 @@
    </div> 
 	<!-- 가운데 메인 div -->
 	<div id="article">
-		<!-- 문의하기 주황색 윗부분 -->
+		<!-- 문의하기 -->
 			<div class="cs_wrapTitle">문의하기</div>
 		<!-- 문의하기 상단 메세지 -->	
 			<div class="cs_message">
@@ -129,31 +131,19 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach var="saavo" items="${list}">
 				<tr>
-					<td class="number">1</td>
-					<td class=><a href="<%=request.getContextPath()%>/ask_admin_view">상품등록했는데 등록이 안됐어요</a></td>
-					<td>등록일</td>
-					<td><span class="answer_span" id="answer">답변완료</span></td>				
+					<td class="number">${saavo.qmnum}</td>
+					<td class=><a href="<%=request.getContextPath()%>/ask_admin_view?qmnum=${saavo.qmnum}">${saavo.qmtitle}</a></td>
+					<td>${saavo.qmdate }</td>
+					<c:if test="${saavo.qmanswer!=null && saavo.qmanswer!=''}">
+						<td><span class="answer_span" id="answer">답변완료</span></td>				
+					</c:if>
+					<c:if test="${saavo.qmanswer==null && saavo.qmanswer==''}">
+						<td><span class="answer_span" id="answer">답변대기중</span></td>				
+					</c:if>
 				</tr>
-				<!-- 임시로 넣은 정보 -->
-				<tr>
-					<td>2</td>
-					<td><a href="">질문1</a></td>
-					<td>등록일</td>
-					<td><span  class="answer_span" id="no_answer">답변대기중</span></td>				
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="">질문2</a></td>
-					<td>등록일</td>
-					<td><span  class="answer_span" id="answer">답변완료</span></td>					
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="">질문3</a></td>
-					<td>등록일</td>
-					<td><span  class="answer_span" id="no_answer">답변대기중</span></td>			
-				</tr>
+			</c:forEach>	
 			</tbody>
 		</table>
 		<div  id="select_container">
@@ -164,20 +154,36 @@
 					<option value="no_answer">답변대기중</option>
 				</select>
 		</div>
-			<!-- 페이징 by kangsan -->
+		<!-------------- 페이징------------------>
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+				
+			  	<!--맨앞으로-->
+  				<a class="arrow_pprev" href="ask_admin_list?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--앞으로-->
+        		<a class="arrow_prev" href="ask_admin_list?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
+         		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
+	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
+	            	<c:if test="${p<=sapvo.totalPage}">  
+						<!--현재페이지 :  현재보고있는 페이지 표시 -->
+		               <c:if test="${p==sapvo.pageNum}">
+		                  <a class="on" href="ask_admin_list?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+		               <!-- 현재페이지가 아닐 때 -->
+		               <c:if test="${p!=sapvo.pageNum}">
+		                  <a href="ask_admin_list?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+	            	</c:if>
+        		</c:forEach>
+        		<!-- 다음 페이지가 있을 때 -->
+				<!--뒤로-->            
+	         	<a class="arrow next" href="ask_admin_list?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--맨뒤로-->
+	         	<a class="arrow nnext" href="ask_admin_list?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 			</div>
-		 </div>
+		 </div> 
+		 <!-------------- 페이징 끝 --------------->
 		</fieldset>
 		</div>
 	</div>

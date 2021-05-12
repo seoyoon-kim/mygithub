@@ -6,7 +6,7 @@
 	.main{width:1280px; display:flex; margin: 0 auto;}
 	.detail_modal{width:1280px; margin: 0 auto;}
 	#article{margin-top:120px;}
-	/* 제목*/
+	/*카테고리 제목*/
 	.wrapTitle{
 		margin:40px 40px 40px 0px;
 		text-align:center;
@@ -53,7 +53,7 @@
 		float: right;
 		background-color: #fff;
 	}
-	#search{
+	#search, #searchWord{
 		height: 25px;
 		text-indent: 0.2em;
 		border: white;
