@@ -227,22 +227,34 @@
 		opacity:60%;
 	}
 	#categoriSelect{
-		display:none;
+		display:block;
 		position:absolute;
 		z-index:10;
 		top:0px;
-		width:450px;
-		height:300px;
-		background-color: rgb(252,118,45);
+		left:-100px;
+		width:1280px;
+		height:0px;
+		background-color:white;
+		transition-duration:0.5s;
 	}
 	.cateTopCate{
 		height:60px;
 		width:150px;
 		background-color: white;
-		border-right:1px solid rgb(252,118,45);
 		text-align:center;
 		position: relative;
+		font-size:14px;
 		line-height: 60px;
+		z-index:15;
+	}
+	.cateMidCate{
+		height:60px;
+		width:150px;
+		background-color: white;
+		text-align:center;
+		font-size:14px;
+		line-height:60px;
+		z-index:15;
 	}
 	/* .cateTopCate>ul>li:first-child{
 		margin-top:40px;
@@ -250,29 +262,22 @@
 	#categoriSelect>ul>li:last-child li, #categoriSelect>ul>li:last-child{
 		border-right:none;
 	}
-	.cateMidCate{
-		height:60px;
-		width:150px;
-		background-color: rgb(252,118,45);
-		border-right:1px solid white;
-		text-align:center;
-		font-size:0.9em;
-		line-height:60px;
-	}
 	.cateTopCate>a:link, .cateTopCate>a:visited, .cateTopCate>a:hover, .cateTopCate>a:active{
 		text-decoration:none;
-		color:rgb(252,118,45);
-		font-size:21px;
+		color:black;
+		font-size:14px;
 		font-weight:bold;
 	}
 	.cateMidCate a:active, .cateMidCate a:link, .cateMidCate a:visited, .cateMidCate a:hover{
 		text-decoration:none;
-		color:white;
-		font-size:15px;
+		color:black;
+		font-size:14px;
 	}
 	#cateUl, #cateUl ul{
 		padding:0;
 		margin:0;
+		z-index:11;
+		background-colr
 	}
 	#cateUl>ul{
 		float:left;
@@ -379,15 +384,19 @@
 		
 		
 		$("#menuListUl>li:first-child").hover(function(){
-			$("#categoriSelect").css("display","block");
+			$("#categoriSelect").css("display","block").css("height","450px");
+			$(".cateTopCate").css("display",'block').css("height","450px");
+			$("#cateTopCate").css("display","block");
 		},function(){
-			$("#categoriSelect").css("display","none");
+			$("#categoriSelect").css("height","0px");
+			$(".cateTopCate").css("height","0px");
+			$("#cateTopCate").css("display","none");
 		});
 		
 		$("#categoriSelect").hover(function(){
-			$("#categoriSelect").css("display","block");
+			$("#categoriSelect").css("display","block").css("height","450px");
 		},function(){
-			$("#categoriSelect").css("display","none");
+			$("#categoriSelect").css("height","0px");
 		});
 		
 	})
@@ -435,6 +444,7 @@
 				<div><a href="custominfo">문의내역</a></div>
 				<div><a href="leaveMember">회원탈퇴</a></div>
 			</div>
+			 <!-- 카테고리 선택 -->
 			<div id="categoriSelect">
 				<ul id="cateUl"></ul>
 			</div>
@@ -492,10 +502,7 @@
             </div>
          </div>
          <!-- 고객센터왼쪽부분끝 -->
-		 <!-- 카테고리 선택 -->
-		 <div id="categoriSelect">
-			<ul id="cateUl"></ul>
-		 </div>
+		
 		 <!-- 오른쪽 배너광고 -->
 		 <div id="rightNav">
        		<div id="reghtNav">
