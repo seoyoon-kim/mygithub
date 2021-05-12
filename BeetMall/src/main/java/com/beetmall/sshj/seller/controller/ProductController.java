@@ -28,8 +28,6 @@ import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 @Controller
 public class ProductController {
 	@Autowired
-	SqlSession sqlSession;
-	@Autowired
 	private DataSourceTransactionManager transactionManager;
 	@Autowired
 	com.beetmall.sshj.seller.service.FarmService farmService;
