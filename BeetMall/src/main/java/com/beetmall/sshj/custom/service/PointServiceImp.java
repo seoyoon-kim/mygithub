@@ -36,4 +36,22 @@ public class PointServiceImp implements PointService{
 		return pointDAO.selectPointTypeMonth(userid, type, month);
 	}
 
+	@Override
+	public List<PointVO> countPointType(String userid, String type) {
+		
+		return pointDAO.countPointType(userid, type);
+	}
+
+	@Override
+	public List<PointVO> countPointMonth(String userid, int month) {
+		
+		return pointDAO.countPointMonth(userid, month);
+	}
+
+	@Override
+	public List<PointVO> countPointTypeMonth(String userid, String type, int month) {
+		
+		return pointDAO.countPointTypeMonth(userid, type, month);
+	}
+
 }

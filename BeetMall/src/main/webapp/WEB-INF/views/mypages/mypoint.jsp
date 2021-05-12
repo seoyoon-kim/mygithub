@@ -190,11 +190,42 @@
 				</c:forEach>
 			</ul>
 			<ul id="pageUl">
-				<c:forEach var="pageVO" items="${plist}">
+				<%-- <c:forEach var="pageVO" items="${pagelist}"><!-- 이전 페이지가 있을 때 -->
 					<c:if test="${pageVO.pageNum>1}">
-						<li><a href="mypoint?no=${pageVO.pageNum-1}"></a>
+						<li><a href="mypoint?no=${pageVO.pageNum-1}">이전</a></li>
 					</c:if> 
+					<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}"><!-- 페이징 -->
+						<c:if test="${p <=pageVO.totalPage}">
+							<c:if test="${p==pageVO.totalPage}">
+								<li><a href="mypoint?no=${p}" style="color:red">${p}</a></li>
+							</c:if>
+							<c:if test="${p!=pageVO.pageNum}">
+								<li><a href="mypoint?no=${p}" style="color:black">${p}</a></li>
+							</c:if>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+						<li><a href="mypoint?no=${pageVO.pageNum+1}">다음</a></li>
+					</c:if>
+				</c:forEach> --%>
+				<!-- 이전 페이지가 있을 때 -->
+				<c:if test="${pageVO.pageNum>1}">
+					<li><a href="mypoint?no=${pageVO.pageNum-1}">이전</a></li>
+				</c:if> 
+				<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}"><!-- 페이징 -->
+					<c:if test="${p <=pageVO.totalPage}">
+						<c:if test="${p==pageVO.totalPage}">
+							<li><a href="mypoint?no=${p}" style="color:red">${p}</a></li>
+						</c:if>
+						<c:if test="${p!=pageVO.pageNum}">
+							<li><a href="mypoint?no=${p}" style="color:black">${p}</a></li>
+						</c:if>
+					</c:if>
 				</c:forEach>
+				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
+					<li><a href="mypoint?no=${pageVO.pageNum+1}">다음</a></li>
+				</c:if>
+				
 			</ul>
 		</div>
 	</div>

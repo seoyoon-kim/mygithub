@@ -15,8 +15,8 @@
 		        on d.productnum = r.productnum
 		where p.userid=#{param1} 
 		order by p.ordernum desc
-		)where rownum<![CDATA[<=]]>#{param2} order by ordernum asc
-		)where rownum<![CDATA[<=]]>#{param3} order by ordernum desc
+		)where rownum<![CDATA[<=]]>${param2} order by ordernum asc
+		)where rownum<![CDATA[<=]]>${param3} order by ordernum desc
 	</select>
 	<select id="selectPointType" resultType="com.beetmall.sshj.custom.vo.PointVO">
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
@@ -56,5 +56,16 @@
 		        on d.productnum = r.productnum
 		where p.userid=#{param1} and changepoint ${param2} 0 and o.orderdate >= to_char(add_months(sysdate,-#{param3}),'YYYY/MM/DD')
 		order by p.ordernum desc
+	</select>
+	<select id="countPointType" resultType="Integer">
+		select count(*) from point where userid=#{param1} and changepoint ${param2} 0
+	</select>
+	<select id="countPointMonth" resultType="Integer">
+		select count(*) from point p join ordertbl o on o.ordernum = p.ordernum 
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate, -#{param2}),'YYYY/MM/DD')
+	</select>
+	<select id="countPointTypeMonth" resultType="Integer">
+		select count(*) from point p join ordertbl o on o.ordernum = p.ordernum 
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate, -#{param2}),'YYYY/MM/DD') and changepoint ${param3} 0
 	</select>
 </mapper>
