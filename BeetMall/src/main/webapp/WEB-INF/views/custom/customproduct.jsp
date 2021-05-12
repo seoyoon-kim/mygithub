@@ -226,7 +226,7 @@ padding-left:10px;
 	width: 80%;
 }
 
-#productTotalPrice>b {
+#productTotalPrice {
 	padding-left: 350px;
 	width: 100%;
 	float: left;
@@ -238,6 +238,45 @@ padding-left:10px;
 	margin-bottom:15px;
 	color:red;
 	
+}
+
+#productTotalPrice2 {
+	padding-left: 350px;
+	width: 100%;
+	float: left;
+	line-height: 15px;
+	height: 15px;
+	font-size:15px;
+	font-weight: 400px;
+	padding-left:280px;
+	margin-bottom:3px;
+	color:red;	
+}
+
+#productTotalPrice3 {
+	padding-left: 350px;
+	width: 100%;
+	float: left;
+	line-height: 15px;
+	height: 15px;
+	font-size:15px;
+	font-weight: 400px;
+	padding-left:280px;
+	margin-bottom:15px;
+	color:red;	
+}
+
+#productTotalPrice4 {
+	padding-left: 350px;
+	width: 100%;
+	float: left;
+	line-height: 15px;
+	height: 15px;
+	font-size:15px;
+	font-weight: 400px;
+	padding-left:280px;
+	margin-bottom:3px;
+	color:red;	
 }
 
 #productBtn {
@@ -772,18 +811,179 @@ td, .td{
 
 </style>
 <script>
+    var pcount=1; //상품갯수
+    var ocount=1; //옵션갯수
+    var prtprice=parseInt(${pvo.productprice}); //상품본래가격
+    var dprtprice=parseInt(${Dprice}); //상품할인가격
+    var tprice=prtprice-dprtprice;
+    var submitprice;
+    
+	function pCount(){
+		pcount+=1;
+		$('#prtnum').text(pcount);
+		
+		optionstay();
+		opCount();
+		omCount();
+		
+		
+
+		//alert(dprtprice);
+		
+		
+		//
+		
+	 
+		//var tprice=tpp*pcount;
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		//alert(tprice);
+		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
+		
+		submitprice=tprice;
+		alert("총"+submitprice);
+		//alert(tprice);
+		
+		
+		
+	}
+	
+	function mCount(){
+		pcount-=1;
+		
+		if(pcount<=0){	
+			alert("1개이상 구매해 주세요");	
+			pcount+=1;
+		}
+		
+		$('#prtnum').text(pcount);
+		
+		
+		optionstay();
+		opCount();
+		omCount();
+
+		
+		//var tprice=tpp*pcount;
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 
+		//alert(dprtprice);
+		//var tprice=tpp*pcount;
+		//var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		//alert(tprice);
+		
+		
+		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
+		
+		submitprice=tprice;
+		alert("총"+submitprice);
+		//alert(tprice);
+	}
+	
+
+
+	
+	
+///////////////////////옵션가격 구하기///////////////////////////
+function optionstay(){
+		var opt=$('#selecOption').val();
+		var optArr=opt.split('&'); 
+		var optnum=optArr[0];   //옵션 숫자
+	    var optprice=parseInt(optArr[1]); //옵션 가격
+  }
+
+	
+function optionchange(){
+		 var opt=$('#selecOption').val();
+		 var optArr=opt.split('&'); 
+		 var optnum=optArr[0];   //옵션 숫자
+		 var optprice=parseInt(optArr[1]); //옵션 가격
+		 ocount=1;
+		 $('#optnum').text(ocount);
+		 
+		 //alert(dprtprice);
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 //alert(tprice);
+		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개"+"옵션가격:"+optprice+"원";
+		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
+		 
+		 submitprice=tprice;
+		 alert("총"+submitprice);
+		 //alert(tprice);
+
+};
+
+
+////////////////////////옵션갯수 구하기///////////////////////////////////
+	function opCount(){
+		ocount+=1;
+		
+		
+		 var opt=$('#selecOption').val();
+		 var optArr=opt.split('&');
+		 var optnum=optArr[0];   //옵션 숫자
+		 var optprice=parseInt(optArr[1]); //옵션 가격
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 
+		 $('#optnum').text(ocount);
+		 
+		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개 "+"옵션가격:"+(optprice*ocount)+"원";
+		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
+	
+		 submitprice=tprice;
+		 alert("총"+submitprice);
+		 //alert(tprice);
+		 
+	}
+		
+	
+	function omCount(){
+		ocount-=1;
+		
+		if(ocount<=0){	
+			ocount+=1;
+			}
+		$('#optnum').text(ocount);
+		
+		 var opt=$('#selecOption').val();
+		 var optArr=opt.split('&');
+		 var optnum=optArr[0];   //옵션 숫자
+		 var optprice=parseInt(optArr[1]); //옵션 가격
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 
+		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개 "+"옵션가격:"+(optprice*ocount)+"원";
+		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
+		 
+		 submitprice=tprice;
+		 alert("총"+submitprice);
+		 //alert(tprice);
+	}	    
+
+///////////////////////총가격 변수에 저장해놓기
+function total(){
+	
+	alert("최종구매"+submitprice);
+	
+}
 
 
 
-
+//document.onload = optionchange
 
 
 </script>
 <body>
 
 	<div class="section" id="productPageDiv">
-		
-
 		
 
 		<!-- ---------------------------------공유 아이콘 정렬------------------------------------------------------------ -->
@@ -831,29 +1031,46 @@ td, .td{
 						    <c:if test="${pvo.wrapping==2}">냉동</c:if></li>  <!-- 10 -->
 						
 						<li>구매수량</li>  <!-- 11 -->
-						<li><input type="button" class="pmbtn minibtn" value="-"/><span>1</span><input	type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
+						<li><input type="button" onclick="mCount()" class="pmbtn minibtn" value="-"/><span id="prtnum" name="prtnum">1</span><input type="button"  onclick="pCount()" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
 						<li>추가옵션</li>  <!-- 13 -->
 						<li></li>  <!-- 14 -->
-						<li><select name="selecOption" id="selecOption">  <!-- 15 -->
-						    <c:forEach var="ovodata" items="${ovo}">
-								<option>${ovodata.optionnum}${ovodata.optionname}</option>
-							</c:forEach>
-						</select></li>
-						<li><input type="button" class="pmbtn minibtn" value="-"/><span id="optnum">1</span><input type="button" class="pmbtn minibtn" value="+"/></li>  <!-- 16 -->
+						
+						
+							<li><select name="selecOption" id="selecOption" onchange="optionchange()">
+							    <c:if test="${not empty ovo}"> 
+							       <option value="0&0">옵션을 선택해 주세요</option>
+							    </c:if>
+							    
+							    <c:if test="${empty ovo}">  
+							        <option value="0&0">옵션이 없습니다.</option>
+							    </c:if>
+							    						    
+						   	 <c:forEach var="ovodata" items="${ovo}">						   	       
+								   <option value="${ovodata.optionnum}&${ovodata.optionprice}">${ovodata.optionnum}${ovodata.optionname}</option> <!-- -----옵션선택하기----- -->
+							 </c:forEach>
+							</select></li>
+						
+						<c:if test="${not empty ovo}">
+							<li><input type="button" onclick="omCount()" class="pmbtn minibtn"  value="-"/><span id="optnum">1</span><input type="button" onclick="opCount()" class="pmbtn minibtn"  value="+"/></li>  <!-- 16 -->
+					    </c:if>
+					    
 					</ul>
 				</div>
 				<!--productPrBox  -->
-
-
-				<div id=productTotalPrice><b>총 상품금액:원</b></div>
+                <div id=productTotalPrice4></div>
+                <div id=productTotalPrice2>할인된가격:- ${Dprice} 원</div>
+                <div id=productTotalPrice3>옵션가격:</div>
+				<div id=productTotalPrice>구매가격: <script>document.write(tprice)</script> 원</div>
+				
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn"/>
 					<input type="button" value="장바구니 담기" class="btn"/>
-					<input type="button" value="구매하기"  class="btn"/>
+					<input type="button" value="구매하기"  class="btn" onclick="total()"/>
 				</div>
 			</div>
 			<!--pbox  -->
 
+        
 
 		</div>
 		<!-- productMainBox -->

@@ -12,6 +12,9 @@ public interface ProductViewService {
 	
     public List<ProductViewVO> ProductViewSelectoption(int productnum);
     
-
+	//////////////상품 할인가격 구하기
+	public int PDprice(int productnum);
 	
+	//////////////옵션가격 구하기
+	public String POprice(int optionnum);
 }

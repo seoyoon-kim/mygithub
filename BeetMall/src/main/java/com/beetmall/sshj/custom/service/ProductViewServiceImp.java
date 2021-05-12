@@ -37,6 +37,22 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 
+	@Override
+	public int PDprice(int productnum) {
+		
+		return productVeiwDAO.PDprice(productnum);
+	}
+
+
+
+	@Override
+	public String POprice(int optionnum) {
+		
+		return productVeiwDAO.POprice(optionnum);
+	}
+
+
+
 	
 	
 }

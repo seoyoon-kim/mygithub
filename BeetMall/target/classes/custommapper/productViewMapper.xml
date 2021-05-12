@@ -5,16 +5,35 @@
   <mapper namespace="com.beetmall.sshj.custom.dao.ProductViewDAO">
   
     <select id="ProductViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-       select sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,addimg,productcontent,productinfomation,prevention,deadline from product where productnum=#{param}
+       select sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,addimg,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
     </select>
+    
+    <!--        농장 구하기           -->
     
     <select id="ProductViewSelectFarm" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
       select farmname,farmprofile from farm where storenum=(select storenum from seller 
-      where userid=(select userid from product where productnum=#{param}))
+      where userid=(select userid from product where productnum=#{param1}))
     </select>
   
+    <!--        옵션 구하기           -->
+  
     <select id="ProductViewSelectoption" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-      select optionnum,optionname,optionstock,optionprice from optiontbl where productnum=#{param}
+       select o.productnum, p.productprice, o.optionprice, o.optionnum, o.optionnowstock, o.optionname 
+		from optiontbl o
+        join product p
+        on p.productnum = o.productnum
+        where p.productnum =#{param1}
+    </select>
+    
+    <!--        할인가격 구하기           -->
+    
+    <select id="PDprice" resultType="int">
+     select saleprice from discount where productnum=${param1}
+    </select>
+    
+    <!--        옵션가격 구하기           -->
+    <select id="POprice" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+    select optionnum from option where optionnum=${param}
     </select>
     
    

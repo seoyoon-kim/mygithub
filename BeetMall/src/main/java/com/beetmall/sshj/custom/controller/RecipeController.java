@@ -75,7 +75,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		ModelAndView mav = new ModelAndView();
 		
 		
- //   	String userid = (String)req.getSession().getAttribute("logId");
+    	//String userid = (String)req.getSession().getAttribute("logId");
 		//파일업로드
 		//저장 위치
 		String path = req.getSession().getServletContext().getRealPath("/upload");
