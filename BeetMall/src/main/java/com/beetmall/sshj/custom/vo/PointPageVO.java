@@ -3,13 +3,40 @@ package com.beetmall.sshj.custom.vo;
 public class PointPageVO {
 	private int pageNum = 1;
 	private int onePageNum = 5;
-	private int onePageRecord = 12;
+	private int onePageRecord = 10;
 	
 	private int totalRecord;
 	private int totalPage;
 	private int startPageNum=1;
 	
 	private int lastPageRecord;
+	private String userid;
+	private String type;
+	private int month;
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 
 	public int getPageNum() {
 		return pageNum;

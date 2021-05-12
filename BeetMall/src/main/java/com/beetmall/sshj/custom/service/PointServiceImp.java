@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.PointDAO;
+import com.beetmall.sshj.custom.vo.PointPageVO;
 import com.beetmall.sshj.custom.vo.PointVO;
 @Service
 public class PointServiceImp implements PointService{
@@ -14,26 +15,26 @@ public class PointServiceImp implements PointService{
 	PointDAO pointDAO;
 
 	@Override
-	public List<PointVO> selectPoint(String userid, int pageView, int lastPage) {
-		return pointDAO.selectPoint(userid,pageView, lastPage);
+	public List<PointVO> selectPoint(PointPageVO vo) {
+		return pointDAO.selectPoint(vo);
 	}
 
 	@Override
-	public List<PointVO> selectPointType(String userid, String type) {
+	public List<PointVO> selectPointType(PointPageVO vo) {
 		
-		return pointDAO.selectPointType(userid, type);
+		return pointDAO.selectPointType(vo);
 	}
 
 	@Override
-	public List<PointVO> selectPointMonth(String userid, int month) {
+	public List<PointVO> selectPointMonth(PointPageVO vo) {
 		
-		return pointDAO.selectPointMonth(userid, month);
+		return pointDAO.selectPointMonth(vo);
 	}
 
 	@Override
-	public List<PointVO> selectPointTypeMonth(String userid, String type, int month) {
+	public List<PointVO> selectPointTypeMonth(PointPageVO vo) {
 		
-		return pointDAO.selectPointTypeMonth(userid, type, month);
+		return pointDAO.selectPointTypeMonth(vo);
 	}
 
 	@Override
@@ -58,6 +59,12 @@ public class PointServiceImp implements PointService{
 	public int myPointView(String userid) {
 		
 		return pointDAO.myPointView(userid);
+	}
+
+	@Override
+	public int countPoint(String userid) {
+		
+		return pointDAO.countPoint(userid);
 	}
 
 }

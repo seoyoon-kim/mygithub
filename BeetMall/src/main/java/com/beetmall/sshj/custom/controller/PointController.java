@@ -17,70 +17,57 @@ public class PointController {
 	PointService pointservice;
 	
 	@RequestMapping("mypoint")
-	public ModelAndView myPoint(HttpSession session, HttpServletRequest req) {	// 마이포인트
-		ModelAndView mav = new ModelAndView();		
+	public ModelAndView myPoint(HttpSession session, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
 		String userid = (String)session.getAttribute("logId");
-		String type = null; 
-		int month=0;
-		// 페이지 설정
 		String pageNumStr = req.getParameter("pageNum");
-		PointPageVO vo = new PointPageVO();
-		if(pageNumStr != null) {
-			vo.setPageNum(Integer.parseInt(pageNumStr));
-		}
 		
-		// afsad
-		int pageView = vo.getPageNum() * vo.getOnePageRecord();
-		int lastPage = 0;
-		if(vo.getPageNum() == vo.getTotalPage()) {	// 마지막페이지
-			lastPage = vo.getLastPageRecord();
-		}else {
-			lastPage = vo.getOnePageRecord();
-		}
-		
-		String tag = "";
+		PointPageVO pageVO = new PointPageVO();
+		pageVO.setUserid(userid);
+		if(pageNumStr == null) {
+			pageVO.setPageNum(1);
+		}else if(pageNumStr != null) {
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		} 
+		String temp = "", type="";
+		int month=0;
 		// 타입 구분
 		if((String)req.getParameter("type")!=null) {
-			type = (String)req.getParameter("type");
-			if(type.equals("save")) {
-				tag = ">=";
-			}else if(type.equals("spend")) {
-				tag = "<";
+			temp = (String)req.getParameter("type");
+			if(temp.equals("save")) {
+				type = ">=";
+			}else if(temp.equals("spend")) {
+				type = "<";
 			}
 		}
 		// 월 선택 구분
 		if((req.getParameter("month") != null)){
 			month = Integer.parseInt(req.getParameter("month"));
 		}
-		// 타입 + 월 있는지 유무로 구분하는 부분
+		/////////////////////////////////////////////////////
 		if(type != null && !type.equals("") && month>0) {
-			System.out.println("1번째로 지나감");
-			mav.addObject("list", pointservice.selectPointTypeMonth(userid, tag, month));
-			vo.setTotalRecord(pointservice.countPointTypeMonth(userid, tag, month));
+			pageVO.setTotalRecord(pointservice.countPointTypeMonth(userid, type, month));
+			pageVO.setType(type);
+			pageVO.setMonth(month);
+			mav.addObject("list", pointservice.selectPointTypeMonth(pageVO));
 		}else if(type !=null && !type.equals("")) {
-			System.out.println("2번째로 지나감");
-			mav.addObject("list", pointservice.selectPointType(userid, tag));
-			vo.setTotalRecord(pointservice.countPointType(userid, tag));
+			pageVO.setTotalRecord(pointservice.countPointType(userid, type));
+			pageVO.setType(type);
+			mav.addObject("list", pointservice.selectPointTypeMonth(pageVO));
 		}else if(month>0){
-			System.out.println("3번째로 지나감");
-			mav.addObject("list", pointservice.selectPointMonth(userid, month));
-			vo.setTotalRecord(pointservice.countPointMonth(userid, month));
+			pageVO.setTotalRecord(pointservice.countPointMonth(userid, month));
+			pageVO.setMonth(month);
+			mav.addObject("list", pointservice.selectPointTypeMonth(pageVO));
 		}else {
-			System.out.println("4번째로 지나감");
-			System.out.println("pageView = "+pageView+" lastPage = "+lastPage);
-			mav.addObject("list", pointservice.selectPoint(userid, pageView, lastPage));
+			pageVO.setTotalRecord(pointservice.countPoint(userid));
+			mav.addObject("list", pointservice.selectPointTypeMonth(pageVO));
 		}
-		mav.addObject("type",type);
-		mav.addObject("month",month);
-		System.out.println("getLastPageRecord  = "+vo.getLastPageRecord());
-		System.out.println("getOnePageNum  = "+vo.getOnePageNum());
-		System.out.println("getOnePageRecord  = "+vo.getOnePageRecord());
-		System.out.println("getPageNum  = "+vo.getPageNum());
-		System.out.println("getStartPageNum  = "+vo.getStartPageNum());
-		System.out.println("getTotalPage  = "+vo.getTotalPage());
-		System.out.println("getTotalRecord  = "+vo.getTotalRecord());
-		mav.addObject("pageVO",vo);
+		////////////////////////////////////////////////////
+		
+		mav.addObject("pageVO", pageVO);
 		mav.addObject("mypoint", pointservice.myPointView(userid));
+		mav.addObject("type",temp);
+		mav.addObject("month",month);
 		mav.setViewName("mypages/mypoint");
 		
 		return mav;
