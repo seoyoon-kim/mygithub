@@ -939,7 +939,7 @@ function optionchange(){
 	
 		 submitprice=tprice;
 		 alert("총"+submitprice);
-		 //alert(tprice);
+		 //alert(tprice); 
 		 
 	}
 		
