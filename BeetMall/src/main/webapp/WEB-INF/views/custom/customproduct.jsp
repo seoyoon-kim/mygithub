@@ -235,7 +235,7 @@ padding-left:10px;
 	float:left;
 }
 
-/*  상세정보박스1 관련상품 -------------------------------------------------------- */
+/*  상세정보박스1  -------------------------------------------------------- */
 #productInfoPage {
 	width: 100%;
 	float: left;
@@ -293,23 +293,37 @@ padding-left:10px;
 #productInfoPage2>#retitle {
 	width: 100%;
 	float: left;
-	margin-bottom: 20px;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	padding-left:20px;
+	color:gray;
+	font-size:14px;
 }
 
 #noreview{
    width: 100%;
    float: left;
-   margin-bottom: 30px;
+   margin-top: 50px;
+   margin-bottom: 100px;
+   padding-left:100px;
+   color:gray;
+}
+
+
+
+#reviewTitle>li>b{
+color:gray;
 }
 
 #reviewTitle, .reviewList {
 	width: 100%;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .reviewList {
-	height: 200px;
-	margin-bottom: 30px;
+	height: 110px;
+	margin-bottom: 10px;
+	padding-bottom:10px;
 }
 
 #reviewTitle>li, .reviewList>li {
@@ -318,12 +332,18 @@ padding-left:10px;
 	border-bottom: 1px solid #ddd;
 	height: 30px;
 	line-height: 30px;
-	height: 30px;
+	padding-bottom:10px;
+}
+
+#reviewTitle>li{
+height:35px;
+padding-bottom:3px;
 }
 
 .reviewList>li {
-	height: 200px;
-	line-height: 150px;
+	height: 110px;
+	line-height: 100px;
+	padding-bottom:10px;
 }
 
 #reviewTitle>li:nth-child(5n+1), .reviewList>li:nth-child(5n+1) {
@@ -351,14 +371,15 @@ padding-left:10px;
 
 /* 리뷰이미지 설정*/
 #reviewImgbox {
-width:100%;
+   width:150px;
 	height: 100px;
+	float: left;
 }
 
 #reviewImgbox>img {
-	width: 30%;
+	width:150px;
 	height: 100px;
-	margin-right: 2%;
+	float: left;
 }
 
 #reviewImgbox>img:nth-child(3n+3) {
@@ -366,11 +387,19 @@ width:100%;
 }
 
 #reviewtxtbox {
-	width: 100%;
-	margin-top: 30px;
-	line-height: 20px;
-	height: 50px;
+    padding-left:15px;
+	width:390px;
+	height: 100px;
+	line-height: 100px;
 	float: left;
+}
+
+#nonebox{
+float:left;
+ width:100%;
+ height:30px;
+ line-height:30px;
+ margin:10px;
 }
 
 /* ------------------페이징처리부분-------------------- */
@@ -513,7 +542,9 @@ width:100%;
 <!-- 문의 후기 버튼 -->
 
 #reviewWriteBtn {
-	
+	width:100%;
+	padding-left:980px;
+	padding-right:10px;
 }
 
 #reviewWriteBtn>input {
@@ -521,9 +552,17 @@ width:100%;
 	width: 80px;
 	height: 25px;
 	line-height: 20px;
-}
-
-#qnaWriteBtn {
+	margin-left:1000px;
+	margin-bottom:20px;
+	
+	padding: 3px 5px;
+	color: #666666;
+	border-radius: 1px;
+	background:#eee;
+	text-align: center;
+ 	text-decoration: none;
+	display: inline-block;
+	border:1px solid #ddd;
 	
 }
 
@@ -1004,6 +1043,10 @@ function total(){
 				<div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
 
+            <div id="reviewWriteBtn">
+					<input type="button" value="후기 작성"  class="btn"/>
+			</div>
+
 				<ul id="reviewTitle">
 					<li><b>번호</b></li>
 					<li><b>내용</b></li>
@@ -1025,8 +1068,7 @@ function total(){
 							<div id="reviewImgbox">
 								<img src="img/${rlist.reviewimg}"/>
 							</div>
-							<div id="reviewtxtbox">
-														
+							<div id="reviewtxtbox">					
 							     ${rlist.reviewcontent}
 							</div>
 						</li>
@@ -1035,24 +1077,21 @@ function total(){
 						<li>${rlist.reviewscore}</li>
 					</ul>
                </c:forEach>
-               
-				
+    
+		       <div id="nonebox">   </div>
 
-				<div id="reviewWriteBtn">
-					<input type="button" value="후기 작성"  class="btn"/>
-				</div>
-
-				<!-- 페이징 표시--------- -->
-				<div class="page_wrap">
-					<div class="page_nation">
-						<a class="arrow pprev" href="#"></a> <a class="arrow prev"
-							href="#"></a> <a href="#" class="active">1</a> <a href="#">2</a>
-						<a href="#">3</a> <a href="#">4</a> <a class="arrow next" href="#"></a>
-						<a class="arrow nnext" href="#"></a>
+               <c:if test="${not empty reviewlist}">
+					<!-- 페이징 표시--------- -->
+					<div class="page_wrap">
+						<div class="page_nation">
+							<a class="arrow pprev" href="#"></a> <a class="arrow prev"
+								href="#"></a> <a href="#" class="active">1</a> <a href="#">2</a>
+							<a href="#">3</a> <a href="#">4</a> <a class="arrow next" href="#"></a>
+							<a class="arrow nnext" href="#"></a>
+						</div>
 					</div>
-				</div>
-				<!-- 페이징 표시--------- -->
-
+					<!-- 페이징 표시--------- -->
+              </c:if>
 
 			</div>
 			<!-- productInfoPage2 -->
@@ -1117,7 +1156,7 @@ function total(){
 
 				</ul>
 
-				
+				<div id="nonebox">   </div>
 
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">
