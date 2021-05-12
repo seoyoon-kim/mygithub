@@ -56,13 +56,15 @@ public class PointController {
 		if(type != null && !type.equals("") && month>0) {
 			System.out.println("1번째로 지나감");
 			mav.addObject("list", pointservice.selectPointTypeMonth(userid, tag, month));
-//			vo.setTotalRecord(pointservice.countPointTypeMonth(userid, type, month));
+			vo.setTotalRecord(pointservice.countPointTypeMonth(userid, tag, month));
 		}else if(type !=null && !type.equals("")) {
 			System.out.println("2번째로 지나감");
 			mav.addObject("list", pointservice.selectPointType(userid, tag));
+			vo.setTotalRecord(pointservice.countPointType(userid, tag));
 		}else if(month>0){
 			System.out.println("3번째로 지나감");
 			mav.addObject("list", pointservice.selectPointMonth(userid, month));
+			vo.setTotalRecord(pointservice.countPointMonth(userid, month));
 		}else {
 			System.out.println("4번째로 지나감");
 			System.out.println("pageView = "+pageView+" lastPage = "+lastPage);
@@ -78,6 +80,7 @@ public class PointController {
 		System.out.println("getTotalPage  = "+vo.getTotalPage());
 		System.out.println("getTotalRecord  = "+vo.getTotalRecord());
 		mav.addObject("pageVO",vo);
+		mav.addObject("mypoint", pointservice.myPointView(userid));
 		mav.setViewName("mypages/mypoint");
 		
 		return mav;

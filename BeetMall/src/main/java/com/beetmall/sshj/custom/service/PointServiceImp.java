@@ -37,21 +37,27 @@ public class PointServiceImp implements PointService{
 	}
 
 	@Override
-	public List<PointVO> countPointType(String userid, String type) {
+	public int countPointType(String userid, String type) {
 		
 		return pointDAO.countPointType(userid, type);
 	}
 
 	@Override
-	public List<PointVO> countPointMonth(String userid, int month) {
+	public int countPointMonth(String userid, int month) {
 		
 		return pointDAO.countPointMonth(userid, month);
 	}
 
 	@Override
-	public List<PointVO> countPointTypeMonth(String userid, String type, int month) {
+	public int countPointTypeMonth(String userid, String type, int month) {
 		
 		return pointDAO.countPointTypeMonth(userid, type, month);
+	}
+
+	@Override
+	public int myPointView(String userid) {
+		
+		return pointDAO.myPointView(userid);
 	}
 
 }

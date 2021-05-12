@@ -68,4 +68,7 @@
 		select count(*) from point p join ordertbl o on o.ordernum = p.ordernum 
 		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate, -#{param2}),'YYYY/MM/DD') and changepoint ${param3} 0
 	</select>
+	<select id="myPointView" resultType="Integer">
+		select point from member where userid=#{param1}
+	</select>
 </mapper>

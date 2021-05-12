@@ -148,7 +148,7 @@
 			<input type="hidden" id="month" value="${month}"/>
 		</c:if>
 		<h2>마이포인트</h2>
-		<h4>현재 포인트 : 1000p</h4>
+		<h4>현재 포인트 : ${mypoint}p</h4>
 		<div style="margin-bottom:20px;">
 			<b style="font-size:15px;">${logId}</b>님의 포인트 적립 현황입니다.<br/>
 			저희 비트몰에서는 구매가격의 1%를 포인트로 적립해드리고 있습니다.<br/> 
@@ -210,20 +210,20 @@
 				</c:forEach> --%>
 				<!-- 이전 페이지가 있을 때 -->
 				<c:if test="${pageVO.pageNum>1}">
-					<li><a href="mypoint?no=${pageVO.pageNum-1}">이전</a></li>
+					<li><a href="mypoint?pageNum=${pageVO.pageNum-1}">이전</a></li>
 				</c:if> 
 				<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum+pageVO.onePageNum-1}"><!-- 페이징 -->
 					<c:if test="${p <=pageVO.totalPage}">
 						<c:if test="${p==pageVO.totalPage}">
-							<li><a href="mypoint?no=${p}" style="color:red">${p}</a></li>
+							<li><a href="mypoint?pageNum=${p}" style="color:red">${p}</a></li>
 						</c:if>
 						<c:if test="${p!=pageVO.pageNum}">
-							<li><a href="mypoint?no=${p}" style="color:black">${p}</a></li>
+							<li><a href="mypoint?pageNum=${p}" style="color:black">${p}</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
-					<li><a href="mypoint?no=${pageVO.pageNum+1}">다음</a></li>
+					<li><a href="mypoint?pageNum=${pageVO.pageNum+1}">다음</a></li>
 				</c:if>
 				
 			</ul>

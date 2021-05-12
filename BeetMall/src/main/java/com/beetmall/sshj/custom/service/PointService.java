@@ -9,7 +9,9 @@ public interface PointService {
 	public List<PointVO> selectPointType(String userid, String type);
 	public List<PointVO> selectPointMonth(String userid, int month);
 	public List<PointVO> selectPointTypeMonth(String userid, String type, int month);
-	public List<PointVO> countPointType(String userid, String type);
-	public List<PointVO> countPointMonth(String userid, int month);
-	public List<PointVO> countPointTypeMonth(String userid, String type, int month);
+	public int countPointType(String userid, String type);
+	public int countPointMonth(String userid, int month);
+	public int countPointTypeMonth(String userid, String type, int month);
+	public int myPointView(String userid);
+	
 }
