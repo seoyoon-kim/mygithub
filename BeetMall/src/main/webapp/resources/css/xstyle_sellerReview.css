@@ -65,7 +65,7 @@ a:hover,a:active,a:visited,a:link{
 	height: 60px;
 	line-height: 50px;
 	text-align: center;
-	border: 1px solid #aaa;
+	border: 1px solid #ccc;
 }
 /* 카테고리 검색 */
 #categoryList{

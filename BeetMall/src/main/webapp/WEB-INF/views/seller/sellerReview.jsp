@@ -22,17 +22,20 @@
 
 <script>
 ////////////////////////////////전역변수 선언 /////////////////////////////////
-//선택된 날짜의 데이터를 저장해 높는 변수
-let startCalendarDataValue = "";
-let endCalendarDataValue = "";
 
+let sortStr = 0;// 정렬 기준을 위한 변수
 
-//날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
-let yearCheck="";
+let startCalendarDataValue = "";//선택된 날짜의 데이터를 저장해 높는 변수
+let endCalendarDataValue = "";//선택된 날짜의 데이터를 저장해 높는 변수
 
-//년별, 월별, 일별인지 체크하기 위한 변수 선언
-let dateCheck = "";
+let yearCheck="";//날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
+let dateCheck = "";//년별, 월별, 일별인지 체크하기 위한 변수 선언
 
+let startDate;// startDate 선택된 값을 가져온다.
+let endDate;// endDate 선택된 값을 가져온다.
+let mcatenumLength;// mcatenum에 데이터 선택된것이 몇개 있는지 확인한다.
+let searchTxt ="z";// 검색 데이터
+let mcatenumDataArr = new Array();
 
 //날짜를 년별, 월별, 일별을 바꿀 경우 그 조건에 맞게 input 박스를 change 한다.
 function typeChange(e){
@@ -131,172 +134,237 @@ $(document).on('click',"#category>li",function(){
 });
 
 
+
+// 중분류 카테고리 선택시 추가하는 기능 categoryManagement
+$(document).on('click', '#mcategory>li', function(){
+	/*========================  category에 포함  ==========================*/
+	
+	// 선택한 목록의 중분류 이름, 번호를 구한다.
+	let selectName = $(this).text();
+	let selectNum = $(this).children().val();
+	
+	// li 개수 구하여 10개 이상은 고르지 못하도록 막는다
+	let liLength = $('#categoryManagement>li').length;
+	if(liLength>=10){
+		return alert('최대 10개의 품목만 선택 가능합니다.');
+		
+	}
+	
+	
+	// li에 존재하는 품목 이름이 있으면 추가하지 못하도록 제한해야 한다.
+	for(let i=0; i<liLength; i++){
+		let getSelect = $('#categoryManagement>li:nth-child('+(i+1)+')').text();
+		let gtPosition = getSelect.indexOf(">")+1;
+		let boxPosition = getSelect.indexOf("⊠");
+		let result = getSelect.substring(gtPosition,boxPosition);
+		if(result===selectName){
+			return alert("선택되어 있는 품목은 추가 할 수 없습니다.");	
+		}
+	}
+	
+	// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
+	let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+"<a href='#' onclick='return false'>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
+	$('#categoryManagement').append(tag);
+	
+
+	
+});
+
+
+	/////////////////////////////////////// 중분류 삭제 할 때 사용할 기능
+//append로 값을 동적으로 추가해줄 경우 새로 html이 실행 된 것이 아니기 때문에 html에서는 그 값을 읽지 못한다.
+// 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제한다고 생각하면 된다.
+$(document).on('click','#categoryManagement>li',function(){
+	
+	// 삭제하기 위해서는 어떤 것이 선택되었는지?
+	// 그리고 삭제하는 데이터가 추가 된 것 중에 몇번째에 있는지 알 수 있어야 한다.
+	let liLength = $('#categoryManagement>li').length;
+	
+	// 선택된 목록의 이름과 번호를 구한다.
+	let selectName = $(this).text();
+	let selectNum = $(this).children().val();
+	
+	
+	// 선택된 아이템의 텍스트를 걸러야 한다.
+	let selectGtPosition = selectName.indexOf(">")+1;
+	let selectBoxPosition = selectName.indexOf("⊠");
+	let selectNameResult = selectName.substring(selectGtPosition,selectBoxPosition);
+	
+	// 이건 선택되서 아래에 내려온것들 클릭했을때 지워주는거 ex) 채소>땅콩
+	$(this).remove();
+	
+})// 삭제 함수 끝
+
+
+
+// 조회 누를경우 db 불러오기
 $(function(){
-	$('#calendarApply').click(function(){
+	$('#searchingBtn').click(function(){
 		// 월별 일별에 사용될 스플릿 값 저장할 전역변수 생성!
-		let startSplit = null;
-		let endSplit = null;
-
-		// 차이값에 대한 계산 결과를 저장하는데 사용할 전역변수 생성!
-		let gapResult = 0;
 		
-		// startDate, endDate 선택된 값을 가져온다.
-		let startDateCheck = $('#categoryCalendar_start').val();
-		let endDateCheck = $('#categoryCalendar_end').val();
 		
-
+		mcatenumDataArr = []; //초기화
+		dateCheck = $('#categoryDate option:selected').val();// dateCheck가 무엇이 되어있는지 확인한다.
+		startDate = $('#categoryCalendar_start').val();// startDate 선택된 값을 가져온다.
+		endDate = $('#categoryCalendar_end').val();// endDate 선택된 값을 가져온다.
+		mcatenumLength = $('#categoryManagement>li').length; // mcatenum에 데이터 선택된것이 몇개 있는지 확인한다.
+		searchTxt = $('#searchTxt').val();// 적은 텍스트를 확인한다.
 		//=======================제한사항 걸러내기 3가지 ===========================//
 		// 날짜 시작, 종료를 입력하지 않을 경우 걸러낸다.
-		if(startDateCheck == '' ||endDateCheck == ''){
+		if(startDate == '' ||endDate == ''){
 			alert('검색할 시작 날짜와 종료 날짜를 반드시 선택해야 합니다.');
 			return false;
 		}
 		
 		// 날짜 시작, 종료의 기준일을 반대로 누르는 사람 있으면 걸러야 한다..
-		if(startDateCheck > endDateCheck){
+		if(startDate > endDate){
 			alert('검색 시작 날짜를 종료 날짜보다 미래로 지정 할 수 없습니다.');
 			return false;
-		}
-		
+		}		
 		
 		//========================제한사항 걸러내기 끝 ===============================//
 		
-
-		if($('#categoryManagement>li').length != 0){
-
-			//데이터 컨트롤러 실행, 차트, 엑셀 재설정
-			dataController();	
-		
+		if(dateCheck== "년별"){
+			startDate = startDate+"-01-01";
+			endDate = endDate+"-12-31";
 		}
+		
+		if(dateCheck== "월별"){
+			let endSplit = endDate.split("-");
+			endSplit[0] = parseInt(endSplit[0],10);
+			endSplit[1] = parseInt(endSplit[1],10);
+			// 마지막 날짜 구하기
+			let lastDay = new Date(endSplit[0],endSplit[1],0).getDate();
+			
+			startDate = startDate+"-01";
+			endDate = endDate+"-"+lastDay;
+		}
+		
+		
+		if(mcatenumLength != 0){
+			for(let i = 0; i < mcatenumLength; i++){
+				mcatenumDataArr.push($('#categoryManagement>li:nth-child('+(i+1)+')').val());
+			}
+		} else {
+			mcatenumDataArr = [0];
+		}
+		if(searchTxt == ''){
+			searchTxt = "z";
+		}
+		
+		paging(1, sortStr, mcatenumDataArr, searchTxt, startDate, endDate);
+		
 		
 	})
-	//////////////////// 수익 매출분석에 들어갈 labels 끝 /////////////////////
-	
-	// 중분류 카테고리 선택시 추가하는 기능 categoryManagement
-	$(document).on('click', '#mcategory>li', function(){
-		/*========================  category에 포함  ==========================*/
-		
-		// 선택한 목록의 중분류 이름, 번호를 구한다.
-		let selectName = $(this).text();
-		let selectNum = $(this).children().val();
-		
-		// li 개수 구하여 10개 이상은 고르지 못하도록 막는다
-		let liLength = $('#categoryManagement>li').length;
-		if(liLength>=10){
-			return alert('최대 10개의 품목만 선택 가능합니다.');
-			
-		}
-		
-		
-		// li에 존재하는 품목 이름이 있으면 추가하지 못하도록 제한해야 한다.
-		for(let i=0; i<liLength; i++){
-			let getSelect = $('#categoryManagement>li:nth-child('+(i+1)+')').text();
-			let gtPosition = getSelect.indexOf(">")+1;
-			let boxPosition = getSelect.indexOf("⊠");
-			let result = getSelect.substring(gtPosition,boxPosition);
-			if(result===selectName){
-				return alert("선택되어 있는 품목은 추가 할 수 없습니다.");	
-			}
-		}
-		
-		// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
-		let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+"<a href='#' onclick='return false'>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
-		$('#categoryManagement').append(tag);
-		
-	
-		// 데이터 컨트롤러 실행
-		dataController();
-		
-	});
-	
-	function dataController(){
-		//계산은 언제 발동하는가?
-		// 중분류 카테고리가 눌렸을 때,
-		// 중분류 카테고리 삭제할 때
-		   // 이 두가지는 값이 들어왔을 때마다 리스트의 값을 받아서 확인하고 쿼리문을 돌리는 방식으로..?
-		// 날짜 적용 눌렀을 때
-		   // -> 날짜에 따른 데이터를 불러와야 함
-		
-		// 계산은 어떻게 해야하나?
-		// 월 단위인지, 년 단위인지, 일 단위인지에 따라서 계산되는 값이 달라져야 한다
-		
-		
-		// 년, 월 일때 합계를 계산하기 위해 저장할 맵
-		// ex) 년별을 골랐을때, 2018년 1월 01일 부터 ~ 2018년 12월 31일까지
-		// ex) 월별을 골랐을때, 2018년 03월 01일 부터 ~ 2018년 04월 41일까지
-		//let map = new Map();
-		//map.clear();// 두번째 실행할 경우 데이터가 들어있기 때문에 초기화 시켜준다
-		// 데이터의 날짜를 계산하기 위한 객체화  
-		let minDate = new Date(startCalendarDataValue);
-		
-		$.ajax({
-			type: "POST",
-			url: "getListData",
-			traditional : true,
-			data: {
-				"startCalendarDataValue":startCalendarDataValue,
-				"endCalendarDataValue":endCalendarDataValue
-			}, success: function(result){
-				// 엑셀 리스트를 초기화 시킨다.
-				let tag = "<li>매출일자</li>"
-						+ "<li>주문번호</li>"
-				  	    + "<li>상품명</li>"
-					    + "<li>수량</li>"
-					    + "<li>단가</li>"
-				        + "<li>매출금액</li>";
-				// 엑셀 리스트 li에 산출된 데이터 값을 넣는다.
-				let $result = $(result);
-				excelArrList = $result;
-				$result.each(function(idx,vo){
-				});
-			}
-		})
-	}
-	
-	
-	/////////////////////////////////////// 중분류 삭제 할 때 사용할 기능
-	//append로 값을 동적으로 추가해줄 경우 새로 html이 실행 된 것이 아니기 때문에 html에서는 그 값을 읽지 못한다.
-	// 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제한다고 생각하면 된다.
-	$(document).on('click','#categoryManagement>li',function(){
-		
-		// 삭제하기 위해서는 어떤 것이 선택되었는지?
-		// 그리고 삭제하는 데이터가 추가 된 것 중에 몇번째에 있는지 알 수 있어야 한다.
-		let liLength = $('#categoryManagement>li').length;
-		
-		// 선택된 목록의 이름과 번호를 구한다.
-		let selectName = $(this).text();
-		let selectNum = $(this).children().val();
-		
-		
-		// 선택된 아이템의 텍스트를 걸러야 한다.
-		let selectGtPosition = selectName.indexOf(">")+1;
-		let selectBoxPosition = selectName.indexOf("⊠");
-		let selectNameResult = selectName.substring(selectGtPosition,selectBoxPosition);
-		
-		// 이건 선택되서 아래에 내려온것들 클릭했을때 지워주는거 ex) 채소>땅콩
-		$(this).remove();
-		
-		
-		if($('#categoryManagement>li').length != 0){
-			
-			//데이터 컨트롤러 실행, 차트, 엑셀 재설정
-			dataController();	
-		
-		} else {
-			// 엑셀 리스트를 초기화 시킨다.
-			let tag = "<li>매출일자</li>"
-					+ "<li>주문번호</li>"
-			  	    + "<li>상품명</li>"
-				    + "<li>수량</li>"
-				    + "<li>단가</li>"
-			        + "<li>매출금액</li>";
-			
-			$('#excelList').html(tag);
-			$('#totalMoney').html('');
-		}
-	})// 삭제 함수 끝
 	
 })
+
+// 정렬방법 고르기
+function sortChange(result){
+	let resultData = $(result).val();
+
+	if(resultData == "최신순"){
+		sortStr = 0;
+		paging(1, sortStr);
+	} else if(resultData == "평점높은순"){
+		sortStr = 1;
+		paging(1, sortStr);
+	} else {
+		sortStr = 2;
+		paging(1, sortStr);
+	}
+	
+}
+
+//페이징
+function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate){
+	if(searchTxt == undefined){
+		searchTxt = "z";
+	}
+	if(sortStr == undefined){
+		sortStr = 0;
+	}
+	if(mcatenumDataArr == undefined){
+		mcatenumDataArr = [0];
+	}
+	if(startDate == undefined){
+		startDate = "z";
+		endDate = "z";
+	}
+	
+	let url = "SellerReviewPaging";
+	let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord}+"&sortStr="+sortStr;
+		param += "&mcatenumDataArr="+mcatenumDataArr+"&searchTxt="+searchTxt+"&startDate="+startDate+"&endDate="+endDate;
+	
+		
+		console.log(pageNum);
+		console.log(sortStr);
+		console.log(mcatenumDataArr);
+		console.log(searchTxt);
+		console.log(startDate);
+		console.log(endDate);
+	$.ajax({
+		url: url,
+		data: param,
+		type: "post",
+		success: function(result){
+			// 데이터 불러와 table 형식으로 만들기
+			let tag = "<li>상품명</li>";
+				tag += "<li>평점</li>";
+				tag += "<li>포토</li>";
+				tag += "<li>리뷰 내용</li>";
+				tag += "<li>등록자</li>";
+				tag += "<li>등록일</li>";
+				tag += "<li>답변 여부</li>";
+			console.log(result);
+			result2 = $(result[0]);
+			result2.each( function (idx, vo){
+				tag += "<li>" + vo.productname + "</li>";
+				tag += "<li>" + vo.reviewscore + "</li>";
+				if(vo.reviewimg != null){
+					let data = vo.reviewimg;
+					tag += "<li style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )></li>";
+				} else {
+					tag += "<li>-</li>";
+				}
+				tag += "<li><a href=''><input type='hidden' name='reviewnum' value='${result.reviewnum }' />"+vo.reviewcontent+"</a></li>";
+				tag += "<li>" + vo.userid + "</li>";
+				tag += "<li>" + vo.reviewwritedate + "</li>";
+				if(vo.reviewanswer != null){
+					tag += "<li>답변 완료</li>";
+				} else {
+					tag += "<li>미답변</li>";
+				}
+			})
+			$('#reviewList').html(tag);
+	
+	
+			let pagingTag = "";
+			// 페이징 처리
+			let pagingData = result[1];
+			if(pagingData.pageNum != 1){
+				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+','+mcatenumDataArr+','+ searchTxt +','+startDate+','+ endDate+')"></a>';
+				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+','+mcatenumDataArr+','+ searchTxt +','+startDate+','+ endDate+')"></a>';
+			}
+			for(let i = pagingData.startPageNum; i <= pagingData.totalPage; i++){
+				if(pagingData.pageNum == i){
+					pagingTag += '<a class="active" href="#" onclick="return false;">'+(i)+'</a>';
+				} else {
+					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+','+mcatenumDataArr+','+ searchTxt+','+startDate+','+ endDate+')">'+(i)+'</a>';
+				}
+			}
+			
+			if(pagingData.totalPage != pagingData.pageNum){
+				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+','+mcatenumDataArr+','+ searchTxt+','+startDate+','+ endDate+')"></a>';
+				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+','+mcatenumDataArr+','+ searchTxt+','+startDate+','+ endDate+')"></a>';
+			}
+
+			$('.page_nation').html(pagingTag);
+		}, error: function(){
+			console.log('페이징 실패');
+		}
+	})
+}
 </script>
 
 <section>
@@ -353,14 +421,23 @@ $(function(){
 					<ul id="categoryManagement"></ul>
 
 					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-					<div id="categorySearch_container">
-						<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-							<option value="년별">년별</option>
-							<option value="월별" selected>월별</option>
-							<option value="일별">일별</option>
-						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
+					<div id="categorySearch_container" style='display:flex; justify-content: space-between'>
+						<div>
+							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+								<option value="년별">년별</option>
+								<option value="월별" selected>월별</option>
+								<option value="일별">일별</option>
+							</select> 
+							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> 
+							<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> 
+							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+						</div>
+						<div>
+							<input type="text" id="searchTxt" name="searchTxt" placeholder="리뷰 내용"/>
+							<button id="searchingBtn" style='margin:0 10px'>조회</button>
+						</div>
 					</div>
+					
 
 				</div>
 				<!-- categoryList 끝 -->
@@ -368,12 +445,12 @@ $(function(){
 			<!-- 리뷰 검색 끝 -->
 
 			<!-- 리뷰 출력 -->
-			<!-- 정렬방법 고르기 -->
+
 			<div id="sortContainer">
-				<select id="sortSelect">
-					<option>최신순</option>
-					<option>평점 높은 순</option>
-					<option>평점 낮은 순</option>
+				<select id="sortSelect" onchange="javascript:sortChange(this)">
+					<option selected="selected" value="최신순">최신순</option>
+					<option value="평점높은순">평점높은순</option>
+					<option value="평점낮은순">평점낮은순</option>
 				</select>
 			</div>
 
@@ -408,49 +485,6 @@ $(function(){
 				</c:if>
 			</ul>
 			<!-- 리뷰 출력 끝 -->
-			<script>
-				function paging(pageNum){
-					let url = "SellerReviewPaging";
-					let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord};
-					
-					$.ajax({
-						url: url,
-						data: param,
-						success: function(result){
-							let tag = "<li>상품명</li>";
-								tag += "<li>평점</li>";
-								tag += "<li>포토</li>";
-								tag += "<li>리뷰 내용</li>";
-								tag += "<li>등록자</li>";
-								tag += "<li>등록일</li>";
-								tag += "<li>답변 여부</li>";
-							console.log(result);
-							result2 = $(result[1]);
-							result2.each( function (idx, vo){
-								tag += "<li>" + vo.productname + "</li>";
-								tag += "<li>" + vo.reviewscore + "</li>";
-								if(vo.reviewimg != null){
-									let data = vo.reviewimg;
-									tag += "<li style='background-image: url(<%=request.getContextPath()%>/resources/img/data); background-size: 100% 100%;' )></li>"
-								} else {
-									tag += "<li>-</li>";
-								}
-								tag += "<li><a href=''><input type='hidden' name='reviewnum' value='${result.reviewnum }' />"+vo.reviewcontent+"</a></li>";
-								tag += "<li>" + vo.userid + "</li>";
-								tag += "<li>" + vo.reviewwritedate + "</li>";
-								if(vo.reviewanswer != null){
-									tag += "<li>답변 완료</li>";
-								} else {
-									tag += "<li>미답변</li>";
-								}
-							})
-							$('#reviewList').html(tag);
-						}, error: function(){
-							console.log('페이징 실패');
-						}
-					})
-				}
-			</script>
 			<!--------------페이징 표시-------------------->
 			
 			<c:if test="${resultData != null }">

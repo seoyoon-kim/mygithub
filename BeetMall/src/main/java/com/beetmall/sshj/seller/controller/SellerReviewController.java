@@ -79,6 +79,7 @@ public class SellerReviewController {
 			vo.setTotalReview(list.size());
 			vo.setNullReview(nullResult);
 			vo.setNewReview(newResult);
+			vo.setStartDate("z");
 			if(totalScore == 0) {
 				vo.setTotalScore(totalScore);
 			} else {
@@ -88,8 +89,6 @@ public class SellerReviewController {
 			vo.setUserid(userid);
 			vo.setTotalRecord(list.size());
 
-			List<SellerReviewVO> test = service.reviewlist(vo);
-			
 			mav.addObject("reviewList",service.reviewlist(vo));
 			mav.addObject("resultData",vo);
 			
@@ -101,10 +100,16 @@ public class SellerReviewController {
 		}
 	}
 	
-	@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.GET)
+	//@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.GET)
+	@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<Object> reviewPaging(HttpSession session, SellerReviewVO vo, Model model) {
 		vo.setUserid((String)session.getAttribute("logId"));
+		
+		System.out.println(vo.getStartDate());
+		System.out.println(vo.getEndDate());
+		System.out.println(vo.getSearchTxt());
+		System.out.println(vo.getMcatenumDataArr()[0]);
 		ArrayList<Object> dataList = new ArrayList<Object>();
 		dataList.add(0, service.reviewlist(vo));
 		dataList.add(1, vo);

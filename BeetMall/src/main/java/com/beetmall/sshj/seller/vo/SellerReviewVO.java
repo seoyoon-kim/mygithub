@@ -19,6 +19,15 @@ public class SellerReviewVO {
 	private int newReview; // 새 리뷰 갯수
 	private double totalScore; // 총 별점
 	
+	private String startDate; // 시작날짜
+	private String endDate; // 종료날짜
+	private String searchTxt; // 검색어
+	private int[] mcatenumDataArr; // mcatenum 배열
+	
+	private int sortStr; // 정렬기준
+	
+	
+	
 	///////////////////////////////////////////////////////////////////////////
 	
 	//페이징
@@ -89,6 +98,48 @@ public class SellerReviewVO {
 	
 	///////////////////////////////// 페이징 ////////////////////////////////////
 
+	
+	
+	
+	
+	
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	public String getSearchTxt() {
+		return searchTxt;
+	}
+	public void setSearchTxt(String searchTxt) {
+		this.searchTxt = searchTxt;
+	}
+	public int[] getMcatenumDataArr() {
+		return mcatenumDataArr;
+	}
+	public void setMcatenumDataArr(int[] mcatenumDataArr) {
+		this.mcatenumDataArr = mcatenumDataArr;
+	}
+	
+	
+	
+	public int getSortStr() {
+		return sortStr;
+	}
+	
+	public void setSortStr(int sortStr) {
+		this.sortStr = sortStr;
+	}
+	
+	
+	
 	public int getTotalReview() {
 		return totalReview;
 	}
