@@ -25,6 +25,10 @@ public interface RecipeService {
 	
 	public int recigoodOnly(int num,String id);
 	
+    public int recigoodDelete(int num,String id);
+	
+	public int recikeepDelete(int num,String id);
+	
 	public int recikeepOk(int num,String id);
 	
 	public int recikeepOnly(int num,String id);

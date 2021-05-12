@@ -8,7 +8,7 @@
 /*  기본설정----------------------------------------------                 */
 .section {
 	width: 1080px;
-	background-color: white;
+	
 	margin: 0 auto;
 }
 
@@ -102,14 +102,14 @@ a:hover, a:active, a:visited, a:link {
 
 /*  상품 박스------------이미지 부분----------------------------------                 */
 #productmainbox {
-	width: 1080px;
+   width: 1080px;
    float: left;
 }
 
 #productImgBox {
 	float: left;
 	margin-left:80px;
-	margin-top: 80px;
+	margin-top: 100px;
 	width: 250px;
 	height: 300px; 
 }
@@ -121,8 +121,8 @@ a:hover, a:active, a:visited, a:link {
 
 #ptime {
 	width: 250px;
-	height: 40px;
-	line-height: 40px;
+	height: 50px;
+	line-height: 50px;
 	text-align: center;
 	background-color: red;
 	color: white;
@@ -142,6 +142,7 @@ a:hover, a:active, a:visited, a:link {
 	line-height: 50px;
 	float: left;
 	margin-right: 150px;
+	font-size:23px;
 }
 
 #productPrice {
@@ -149,6 +150,7 @@ a:hover, a:active, a:visited, a:link {
 	width: 50%;
 	height: 50px;
 	line-height: 50px;
+	font-size:20px;
 }
 
 #sprofile {
@@ -174,15 +176,36 @@ a:hover, a:active, a:visited, a:link {
 	float: left;
 	margin: 0 auto;
 	padding-left: 0px;
+	
 }
 
 #productPrBox>ul>li {
 	float: left;
-	width: 50%;
+	width: 45%;
 	height: 35px;
 	line-height: 35px;
 	margin-bottom:10px;
+	margin-top:5px;
+	border-bottom:1px solid #eee;
 }
+
+#productPrBox>ul>li:nth-child(16n+13),#productPrBox>ul>li:nth-child(16n+14),#productPrBox>ul>li:nth-child(16n+1),#productPrBox>ul>li:nth-child(16n+2){
+border-bottom:none;
+}
+
+#productPrBox>ul>li:nth-child(16n+1),
+#productPrBox>ul>li:nth-child(16n+3),
+#productPrBox>ul>li:nth-child(16n+5),
+#productPrBox>ul>li:nth-child(16n+7),
+#productPrBox>ul>li:nth-child(16n+9),
+#productPrBox>ul>li:nth-child(16n+11),
+#productPrBox>ul>li:nth-child(16n+13){
+color:gray;
+font-size:17px;
+width: 55%;
+padding-left:10px;
+}
+
 
 #mapbtn {
 	border: none;
@@ -203,7 +226,7 @@ a:hover, a:active, a:visited, a:link {
 	width: 80%;
 }
 
-#productTotalPrice>b {
+#productTotalPrice {
 	padding-left: 350px;
 	width: 100%;
 	float: left;
@@ -213,7 +236,47 @@ a:hover, a:active, a:visited, a:link {
 	font-weight: 700px;
 	padding-left:280px;
 	margin-bottom:15px;
+	color:red;
 	
+}
+
+#productTotalPrice2 {
+	padding-left: 350px;
+	width: 100%;
+	float: left;
+	line-height: 15px;
+	height: 15px;
+	font-size:15px;
+	font-weight: 400px;
+	padding-left:280px;
+	margin-bottom:3px;
+	color:red;	
+}
+
+#productTotalPrice3 {
+	padding-left: 350px;
+	width: 100%;
+	float: left;
+	line-height: 15px;
+	height: 15px;
+	font-size:15px;
+	font-weight: 400px;
+	padding-left:280px;
+	margin-bottom:15px;
+	color:red;	
+}
+
+#productTotalPrice4 {
+	padding-left: 350px;
+	width: 100%;
+	float: left;
+	line-height: 15px;
+	height: 15px;
+	font-size:15px;
+	font-weight: 400px;
+	padding-left:280px;
+	margin-bottom:3px;
+	color:red;	
 }
 
 #productBtn {
@@ -239,7 +302,7 @@ a:hover, a:active, a:visited, a:link {
 	margin-bottom: 10px;
 }
 
-.infoBtnb>input {
+.infoBtnb>a>input{
 	width: 150px;
 	height: 30px;
 	line-height: 30px;
@@ -377,6 +440,19 @@ a:hover, a:active, a:visited, a:link {
 	margin-bottom: 100px;
 }
 
+#pBigtxt2,#pBigtxt3 {
+	padding: 30px;
+	float: left;
+	width: 80%;
+	margin-bottom: 20px;
+}
+
+#pBigtxt3>img {
+	float: left;
+	width: 80%;
+}
+
+
 /* ---------------상세정보2 --------------------------------------------------------------------------------- */
 #productInfoPage2 {
 	width: 100%;
@@ -437,6 +513,7 @@ a:hover, a:active, a:visited, a:link {
 
 /* 리뷰이미지 설정*/
 #reviewImgbox {
+width:100%;
 	height: 100px;
 }
 
@@ -561,10 +638,12 @@ a:hover, a:active, a:visited, a:link {
 	height: 30px;
 	line-height: 30px;
 }
+
 #qnaTitle>li:nth-child(5n+1), #qnaList>li:nth-child(5n+1) {
 	text-align:center;
 	width: 90px;
 }
+
 #qnaTitle>li:nth-child(5n+2){
 	text-align:center;
 }
@@ -665,7 +744,7 @@ a:hover, a:active, a:visited, a:link {
 	
 	
 	
-	#infoBtn1:active,#infoBtn2:active,#infoBtn3:active{
+	#infoBtn1>a:active,#infoBtn2>a:active,#infoBtn3>a:active{
 	outline: 0;
 	}
 	
@@ -679,89 +758,237 @@ a:hover, a:active, a:visited, a:link {
 	}
 
 
+#productBtn{
+    padding-left: 0px;
+}
+
+/*표*/
+
+table{
+	width:100%%;	
+	border-spacing: 0;
+	text-indent: initial;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+
+thead{
+	border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    width:100%;
+}
+tr{
+	display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    height:50px;
+}
+.td, .content{
+	padding-left:20px;
+}
+.content{
+	padding: 20px 0 20px;
+}
+td, .td{
+	height:50px;
+	width:930px;
+}
+.tr_head{
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+}
+.tr_head li{
+	float:left;
+}
+.menu, .th{
+	width:150px; text-align:center;
+}
+.td, .th{ line-height:50px;}
+.td{
+	width:930px; line-height:50px;
+}
+
 
 </style>
 <script>
+    var pcount=1; //상품갯수
+    var ocount=1; //옵션갯수
+    var prtprice=parseInt(${pvo.productprice}); //상품본래가격
+    var dprtprice=parseInt(${Dprice}); //상품할인가격
+    var tprice=prtprice-dprtprice;
+    var submitprice;
+    
+	function pCount(){
+		pcount+=1;
+		$('#prtnum').text(pcount);
+		
+		optionstay();
+		opCount();
+		omCount();
+		
+		
 
-
-
-  $(document).ready(function(){
+		//alert(dprtprice);
+		
+		
+		//
+		
 	 
-	  
-	  $("#infoBtn1").click(function(){
-		  $("#productInfoPage1").show()
-		   $("#productInfoPage2").hide()
-		   $("#productInfoPage3").hide()
-
-	  })
-	  
-	  
-	  $("#infoBtn2").click(function(){
-		  $("#productInfoPage2").show()
-		   $("#productInfoPage1").hide()
-		   $("#productInfoPage3").hide()
-	  })
-	  
-	   $("#infoBtn3").click(function(){
-		  $("#productInfoPage3").show()
-		   $("#productInfoPage1").hide()
-		   $("#productInfoPage2").hide()
-	  })
-	  
+		//var tprice=tpp*pcount;
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		//alert(tprice);
+		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
+		
+		submitprice=tprice;
+		alert("총"+submitprice);
+		//alert(tprice);
+		
+		
+		
+	}
 	
-  })
- 
+	function mCount(){
+		pcount-=1;
+		
+		if(pcount<=0){	
+			alert("1개이상 구매해 주세요");	
+			pcount+=1;
+		}
+		
+		$('#prtnum').text(pcount);
+		
+		
+		optionstay();
+		opCount();
+		omCount();
+
+		
+		//var tprice=tpp*pcount;
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 
+		//alert(dprtprice);
+		//var tprice=tpp*pcount;
+		//var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		//alert(tprice);
+		
+		
+		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
+		
+		submitprice=tprice;
+		alert("총"+submitprice);
+		//alert(tprice);
+	}
+	
+
+
+	
+	
+///////////////////////옵션가격 구하기///////////////////////////
+function optionstay(){
+		var opt=$('#selecOption').val();
+		var optArr=opt.split('&'); 
+		var optnum=optArr[0];   //옵션 숫자
+	    var optprice=parseInt(optArr[1]); //옵션 가격
+  }
+
+	
+function optionchange(){
+		 var opt=$('#selecOption').val();
+		 var optArr=opt.split('&'); 
+		 var optnum=optArr[0];   //옵션 숫자
+		 var optprice=parseInt(optArr[1]); //옵션 가격
+		 ocount=1;
+		 $('#optnum').text(ocount);
+		 
+		 //alert(dprtprice);
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 //alert(tprice);
+		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개"+"옵션가격:"+optprice+"원";
+		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
+		 
+		 submitprice=tprice;
+		 alert("총"+submitprice);
+		 //alert(tprice);
+
+};
+
+
+////////////////////////옵션갯수 구하기///////////////////////////////////
+	function opCount(){
+		ocount+=1;
+		
+		
+		 var opt=$('#selecOption').val();
+		 var optArr=opt.split('&');
+		 var optnum=optArr[0];   //옵션 숫자
+		 var optprice=parseInt(optArr[1]); //옵션 가격
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 
+		 $('#optnum').text(ocount);
+		 
+		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개 "+"옵션가격:"+(optprice*ocount)+"원";
+		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
+	
+		 submitprice=tprice;
+		 alert("총"+submitprice);
+		 //alert(tprice);
+		 
+	}
+		
+	
+	function omCount(){
+		ocount-=1;
+		
+		if(ocount<=0){	
+			ocount+=1;
+			}
+		$('#optnum').text(ocount);
+		
+		 var opt=$('#selecOption').val();
+		 var optArr=opt.split('&');
+		 var optnum=optArr[0];   //옵션 숫자
+		 var optprice=parseInt(optArr[1]); //옵션 가격
+		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		 
+		 document.getElementById("productTotalPrice3").innerHTML=optprice+"x"+ocount+"개 "+"옵션가격:"+(optprice*ocount)+"원";
+		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
+		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"x"+pcount+"개";
+		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
+		 
+		 submitprice=tprice;
+		 alert("총"+submitprice);
+		 //alert(tprice);
+	}	    
+
+///////////////////////총가격 변수에 저장해놓기
+function total(){
+	
+	alert("최종구매"+submitprice);
+	
+}
 
 
 
+//document.onload = optionchange
 
 
 </script>
 <body>
 
 	<div class="section" id="productPageDiv">
-		<div id="mainName">
-			<h2>상품 품목별</h2>
-		</div>
-
-		<!-- ------------------------------------카테고리이미지-------------------------------------------------------- -->
-		<ul id="category">
-			<li><span id="categoryAll"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />전체</span></li>
-			<li><span id="categoryarea"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />지역별</span></li>
-			<li><span id="categoryFruit"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />과일</span></li>
-			<li><span id="categoryVege"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />채소</span></li>
-			<li><span id="categorySall"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />쌀/잡곡</span></li>
-		</ul>
-		<!-- ------------------------------------카테고리 소분류--------------------------------------------------------- -->
-
-		<div id="categorySubmenu">
-			<ul>
-				<li>전체</li>
-				<li>쌀/찹쌀/흑미/현미</li>
-				<li>수수/보리/콩</li>
-				<li>께/기타잡곡</li>
-			</ul>
-		</div>
-		<!-- -------------------------------------정렬방식 -------------------------------------------------------- -->
-		<div id="selectOrderbox">
-			<select name="selectOrder">
-				<option>평점순</option>
-				<option>가격순</option>
-				<option>조회수순</option>
-			</select>
-		</div>
+		
 
 		<!-- ---------------------------------공유 아이콘 정렬------------------------------------------------------------ -->
 		<ul id=sharicon>
-			<li><a href="#"><img src="img/cicon01.png"></a></li>
-			<li><a href="#"><img src="img/cicon02.png"></a></li>
-			<li><a href="#"><img src="img/cicon03.png"></a></li>
-			<li><a href="#"><img src="img/cicon05.png"></a></li>
+			
 		</ul>
 
 		<!-- ------------------------------상품 박스--------------------------------------------------------------- -->
@@ -769,63 +996,81 @@ a:hover, a:active, a:visited, a:link {
 
 
 			<div id=productImgBox>
-				<img src="img/cr3.jfif">
-				<div id=ptime>06:48:17남음</div>
+				<img src="img/${pvo.thumbimg}"/>
 			</div>
 
 
 
 			<div id=pbox>
 				<div id=productMainTiltle>
-					<b>국산 100% 볶음참깨 160g 80g 볶음참깨 당일생산 당일 배송!!</b>
+					<b>${pvo.productname}</b>   <!-- 상품명 -->
 				</div>
-				<div id=productPrice>가격 : 8,900</div>
+				<div id=productPrice>${pvo.productprice}</div>  <!-- 가격 -->
 				<div id="sprofile">
-					<a href="#">경북예천 홍길동</a>
+					<a href="#">${fvo.farmname}</a>  <!--농장이름 -->
 				</div>
 				<div id="simg">
-					<a href="#"><img src="img/cprofile.png"></a>
+					<a href="#"><img src="img/${fvo.farmprofile}"/></a>  <!-- 프사 -->
 				</div>
-
-
+				
 				<div id=productPrBox>
 					<ul>
-						<li>판매단위</li>
-						<li>1통</li>
-						<li>중량/용량</li>
-						<li>160g</li>
-						<li>배송구분</li>
-						<li>픽업/배송<input type="button" id="mapbtn" value="픽업위치확인하기" /></li>
-						<li>원산지</li>
-						<li>국산</li>
-						<li>포장타입</li>
-						<li>냉장/종이포장</li>
-						<li>안내사항</li>
-						<li>어쩌구저쩌구</li>
-						<li>구매수량</li>
-						<li><input type="button" class="pmbtn minibtn" value="-"/>1통<input	type="button" class="pmbtn minibtn" value="+"/></li>
-						<li>추가옵션</li>
-						<li></li>
-						<li><select name="selecOption" id="selecOption">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-						</select></li>
-						<li><input type="button" class="pmbtn minibtn" value="-"/>1번<input	type="button" class="pmbtn minibtn" value="+"/></li>
+						<li>판매단위</li>  <!-- 1 -->
+						<li>${pvo.selloption}</li> <!-- 2 -->
+						<li>중량/용량</li> <!-- 3 -->
+						<li>${pvo.sellweight}</li> <!-- 4 -->
+						<li>배송구분</li> <!-- 5 -->
+						<li><c:if test="${pvo.deliveryoption==1}">픽업</c:if>
+						    <c:if test="${pvo.deliveryoption==2}">배송</c:if>
+						    <c:if test="${pvo.deliveryoption==3}">픽업/배송</c:if></li>  <!-- 6 -->
+						<li>원산지</li>  <!-- 7 -->
+						<li>${pvo.origin}</li>  <!-- 8 -->
+						<li>포장타입</li>  <!-- 9 -->
+						<li><c:if test="${pvo.wrapping==0}">실온</c:if>
+						    <c:if test="${pvo.wrapping==1}">냉장</c:if>
+						    <c:if test="${pvo.wrapping==2}">냉동</c:if></li>  <!-- 10 -->
+						
+						<li>구매수량</li>  <!-- 11 -->
+						<li><input type="button" onclick="mCount()" class="pmbtn minibtn" value="-"/><span id="prtnum" name="prtnum">1</span><input type="button"  onclick="pCount()" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
+						<li>추가옵션</li>  <!-- 13 -->
+						<li></li>  <!-- 14 -->
+						
+						
+							<li><select name="selecOption" id="selecOption" onchange="optionchange()">
+							    <c:if test="${not empty ovo}"> 
+							       <option value="0&0">옵션을 선택해 주세요</option>
+							    </c:if>
+							    
+							    <c:if test="${empty ovo}">  
+							        <option value="0&0">옵션이 없습니다.</option>
+							    </c:if>
+							    						    
+						   	 <c:forEach var="ovodata" items="${ovo}">						   	       
+								   <option value="${ovodata.optionnum}&${ovodata.optionprice}">${ovodata.optionnum}${ovodata.optionname}</option> <!-- -----옵션선택하기----- -->
+							 </c:forEach>
+							</select></li>
+						
+						<c:if test="${not empty ovo}">
+							<li><input type="button" onclick="omCount()" class="pmbtn minibtn"  value="-"/><span id="optnum">1</span><input type="button" onclick="opCount()" class="pmbtn minibtn"  value="+"/></li>  <!-- 16 -->
+					    </c:if>
+					    
 					</ul>
 				</div>
 				<!--productPrBox  -->
-
-
-				<div id=productTotalPrice><b>총 상품금액:8,900원</b></div>
+                <div id=productTotalPrice4></div>
+                <div id=productTotalPrice2>할인된가격:- ${Dprice} 원</div>
+                <div id=productTotalPrice3>옵션가격:</div>
+				<div id=productTotalPrice>구매가격: <script>document.write(tprice)</script> 원</div>
+				
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn"/>
 					<input type="button" value="장바구니 담기" class="btn"/>
-					<input type="button" value="구매하기"  class="btn"/>
+					<input type="button" value="구매하기"  class="btn" onclick="total()"/>
 				</div>
 			</div>
 			<!--pbox  -->
 
+        
 
 		</div>
 		<!-- productMainBox -->
@@ -833,108 +1078,71 @@ a:hover, a:active, a:visited, a:link {
 		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 		<div class="infoBtnb">
-			<input type="button" id="infoBtn1" value="상품설명" class="btn" /> <input
-				type="button" id="infoBtn2" value="고객후기"  class="btn"/> <input type="button"
-				id="infoBtn3" value="상품문의"  class="btn"/>
+			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
 
 		<!-- -------------------------------------상세정보박스1-------------------------------------------------------- -->
 
 		<div id="productInfoPage">
 			<div id="productInfoPage1">
-				<div>해당 상품의 관련 상품들입니다.</div>
 
-				<div id="relativeBox">
-					<div class="relativeList">
-						<div class="relativeSetWidth">
-							<div class="relativeproduct" id="relativeProduct">
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-								<div class="relativePanel">
-									<div>
-										<a href="error"><img src="img/cr4.jfif" /></a>
-									</div>
-								</div>
-
-							</div>
-							<!-- ---relativeproduct   ----->
-						</div>
-						<!-- ---relativeSetWidth   ----->
-
-					</div>
-					<!-- ---relativeList   ----->
-					<!-- ---페이징처리------------------------------------   ----->
-
-
-					<div class="page_wrap2">
-						<div class="page_nation2">
-							<a class="arrow prev2" href="#">◁</a> <a href="#" class="active">●</a>
-							<a href="#">●</a> <a href="#">●</a> <a href="#">●</a> <a
-								class="arrow next2" href="#">▷</a>
-						</div>
-
-
-
-
-					</div>
-
-				</div>
 				<!-- relativeBox -->
 
-				<div id=pBigimg>
-					<img src="img/cr4.jfif">
+                <c:if test="${pvo.addimg!='null'}">
+	                <div id=pBigtxt3>
+	                   ${pvo.addimg}
+	                </div>
+                </c:if>
+                
+				<div id=pBigtxt2>
+                   ${pvo.productcontent}
+                </div>
+                
+                
+                
+               <div id=pBigtxt>
+                <table>
+				<tbody>
+					<tr class="tr_head">
+						<th class="menu">상품정보</th>
+						<td><span class="td" id="td">${pvo.productinfomation}</span></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">주의사항</th>
+						<td ><span class="td" id="td">${pvo.prevention}</span></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">유통기한</th>
+						<td ><span class="td" id="td">${pvo.deadline}</span></td>
+					</tr>
+				</tbody>
+				</table>	
 				</div>
-				<div id=pBigtxt>한국의 대표적인 후식으로 꼽히는 사과. 유럽에서 소시지나 돼지고기 요리에 곁들이는
-					튀긴 사과. 과일 자체로도 달콤한 맛이 좋은 인기만점 과일의 여왕 사과입니다. 사과는 수확시기에 따라 조생종, 중생종,
-					만생종으로 나뉜다. 8월 하순 이전이 최성수확기인 조생종에는 미광, 조홍, 서홍, 쓰가루(아오리) 등이 있고,
-					최성수확기가 9월 상순에서 10월 중순까지인 중생종에는 홍로, 홍월, 양광, 추광, 골든딜리셔스, 세계일, 조나골드,
-					시나노스위트 등이 있다. 10월 하순 이후가 최성수확기인 만생종에는 후지(부사), 홍옥, 감홍, 화홍 등이 있다.</div>
+                
+                
+                
+                
 				<!-- -pBigtxt -->
+			
 			</div>
 			<!-- -상세정보박스1-->
 		</div>
 		<!-- -상세정보박스-->
 		<!-- -------------------------------------상세정보박스1  끝-------------------------------------------------------- -->
-		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
+         <!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
+	<div class="infoBtnb">
+			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
+		</div>
 
 		<!-- -------------------------------------상세정보박스2  시작-------------------------------------------------------- -->
 
 		<div id="productInfoPage">
-			<div id="productInfoPage2" style="display:none">
+			<div id="productInfoPage2">
 				<div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
 
@@ -950,8 +1158,7 @@ a:hover, a:active, a:visited, a:link {
 					<li>123</li>
 					<li>
 						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" /><img src="img/cr4.jfif" /><img
-								src="img/cr4.jfif" />
+							<img src="img/cr4.jfif" />
 						</div>
 						<div id="reviewtxtbox">너무 맛있어요! 빨간 맛 궁금해 Honey깨물면 점점 녹아든
 							스트로베리 그 맛코너 캔디 샵 찾아 봐</div>
@@ -965,8 +1172,7 @@ a:hover, a:active, a:visited, a:link {
 					<li>123</li>
 					<li>
 						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" /><img src="img/cr4.jfif" /><img
-								src="img/cr4.jfif" />
+							<img src="img/cr4.jfif" />
 						</div>
 						<div id="reviewtxtbox">빨간 맛 궁금해 Honey</div>
 					</li>
@@ -979,8 +1185,7 @@ a:hover, a:active, a:visited, a:link {
 					<li>123</li>
 					<li>
 						<div id="reviewImgbox">
-							<img src="img/cr4.jfif" /><img src="img/cr4.jfif" /><img
-								src="img/cr4.jfif" />
+							<img src="img/cr4.jfif" />
 						</div>
 						<div id="reviewtxtbox">너무 맛있어요! 빨간 맛 궁금해 Honey깨물면 점점 녹아든
 							스트로베리 그 맛코너 캔디 샵 찾아 봐</div>
@@ -1012,11 +1217,18 @@ a:hover, a:active, a:visited, a:link {
 		<!-- productInfoPage -->
 
 		<!--- -------------------------------------상세정보박스2  끝-------------------------------------------------------- -->
-		
+			<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
+
+
+        <div class="infoBtnb">
+			<a href="#productInfoPage1"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
+		</div>
 	
 		<!-- -------------------------------------상세정보박스3  시작-------------------------------------------------------- -->
 		<div id="productInfoPage">
-			<div id="productInfoPage3" style="display:none">
+			<div id="productInfoPage3">
 
 				<div id="qtitle">상품에 대한 문의를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
@@ -1062,9 +1274,7 @@ a:hover, a:active, a:visited, a:link {
 
 				</ul>
 
-				<div id="qnaWriteBtn">
-					<input type="button" value="문의 작성" class="btn"/>
-				</div>
+				
 
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">

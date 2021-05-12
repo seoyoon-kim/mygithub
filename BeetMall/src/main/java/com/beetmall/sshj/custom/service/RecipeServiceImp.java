@@ -108,6 +108,18 @@ public class RecipeServiceImp implements RecipeService {
 		return RecipeDAO.recigoodOnly(num,id);
 	}
 
+	@Override
+	public int recigoodDelete(int num, String id) {
+		
+		return RecipeDAO.recigoodDelete(num, id);
+	}
+
+	@Override
+	public int recikeepDelete(int num, String id) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.recikeepDelete(num, id);
+	}
+
 
 	
 }
