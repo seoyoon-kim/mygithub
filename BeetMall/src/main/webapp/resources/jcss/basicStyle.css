@@ -20,6 +20,7 @@
  		text-decoration: none;
 		display: inline-block;
 		border:1px solid lightgray;
+		border-radius: 0px;
 	}
 	/*테이블헤더*/
 	th{

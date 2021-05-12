@@ -107,6 +107,7 @@
 	}
 	input{height:40px; border:1px solid lightgray; font-size:12px;}
 	input[type="text"]{width:200px;}
+	#searchWord{height:40px; border: 1px solid lightgray;}
 	#searchBtn{margin-left:-1px; background:white; width:50px;}
 	.btn{float:left;}
  	#remove_product{margin-right:10px;}

@@ -2,6 +2,7 @@ package com.beetmall.sshj.seller.controller;
 
 import java.io.File;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,14 +29,12 @@ import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 @Controller
 public class ProductController {
 	@Autowired
-	SqlSession sqlSession;
-	@Autowired
 	private DataSourceTransactionManager transactionManager;
 	@Autowired
 	com.beetmall.sshj.seller.service.FarmService farmService;
 	@Autowired
 	ProductService productService;
-	
+
 	//판매상품 목록
 	  @RequestMapping("/product_list") 
 	  public ModelAndView product_list(ProductVO vo, SearchAndPageVO spvo, HttpSession session) { 

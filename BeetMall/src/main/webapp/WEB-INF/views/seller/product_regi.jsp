@@ -191,7 +191,7 @@ $(function(){
          
          // 카테고리 리스트가 널이 아닐경우
          <c:if test="${cateList!=null }">
-            //  카테고리 넘버가 무엇인지에 따라서 불러온다, 카테고리 넘버가 1이면 중분류 카테고리 1번의 값들을 불러오기
+            //  카테고리 번호가 무엇인지에 따라서 불러온다, 카테고리 번호가 1이면 중분류 카테고리 1번의 값들을 불러오기
             <c:forEach var="mcateList" items="${cateList}">
                if(${mcateList.catenum}==cateNum){
                   tag += "<li value='${mcateList.catename}'>"
@@ -223,7 +223,7 @@ $(function(){
       
       //3. 선택한 중분류 삭제
       //append로 값을 동적으로 추가해줄 경우 새로 html이 실행 된 것이 아니기 때문에 html에서는 그 값을 읽지 못한다.
-      // 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제한다고 생각하면 된다.
+      // 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제
       $(document).on('click','#categoryManagement>li',function(){
              
          // 삭제하기 위해서는 어떤 것이 선택되었는지?
@@ -248,6 +248,7 @@ $(function(){
 		e.stopPropagation();
 		return false;
 	});
+
 //상품명
 	//글자 수 입력에 대한 글자수 변경
 	//100자 넘으면 alert 
@@ -311,15 +312,29 @@ $(function(){
 //작은 썸네일 업로드 미리보기 (실패)
 //등록페이지 
 	$(document).ready(function(){	
+		$('.btn').click(function(){
+			$('btn').css('border','3px solid black');
+		})
 	////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
 		$('#sale_check').click(function(){
+			//버튼 색상
+			$('#sale_check').css('background-color','lightgray')
+			$('#sale_uncheck').css('background-color','white')
+			//세일 정보 입력 ul
 			$('#sale_ul').css('display','block');
 			$('#sale_period').css('display','none');
 		});
+		//특정기간할인 선택하기
 		$('#sale_period_btn').click(function(){
+			$(this).css('background-color','lightgray')
+			//특정기간할인적용 날짜 
 			$('#sale_period').css('display','block');
 		});
 		$('#sale_uncheck').click(function(){
+			//버튼색상
+			$('#sale_check').css('background-color','white')
+			$('#sale_uncheck').css('background-color','lightgray')
+			//세일정보 입력ul 숨기기
 			$('#sale_ul').css('display','none');
 		});
 		//특정기간만 할인 클릭 시 날짜 선택 나오기 
@@ -382,6 +397,7 @@ $(function(){
 		});
 	
 	});// 등록페이지srcipt end		
+
 //submit 등록하기 전 유효성검사
 $('submit').click(function(){
 	//유효성검사 
@@ -446,7 +462,7 @@ $('submit').click(function(){
 $(function(){
 	console.log('aa')
 	$('.start_date').datepicker({minDate:0});
-	 var dateFormat ="yyyy/mm/dd",
+	 var dateFormat ="YY/MM/DD",
 	 from = $('.start_date').datepicker({
 		 showOn:"both",
 		 defalutDate:"+1w",
@@ -537,7 +553,7 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label for="">상품명</label>&nbsp;
-					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/><span id="count"></span>/<span id="max_count">100</span><br/>
+					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
 					<span class="notice">
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.<br/>
 					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
@@ -551,7 +567,7 @@ $(function(){
 	<div class="category_title">판매가격</div>
 	<div class="category_wrap">		
 		<ul>
-			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/><span>원</span></li>
+			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
 			<br/>
 			<li>
 				<label>할인여부 </label>&nbsp;
@@ -561,18 +577,18 @@ $(function(){
 				<button class="btn" name="saleselect" value="0" id="sale_uncheck">설정안함</button>
 			</li>
 			<ul id="sale_ul" style="display:none">
-				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" max="0"/><span>원</span>&nbsp;<span>할인</span></li>
-				<li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/><span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li>
+				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min="0"/>&nbsp;<span>원</span>&nbsp;<span>할인</span></li>
+				<li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/>&nbsp;<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li>
 				<li id="sale_period">
 					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
 					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
 				</li>
 				<li>
-					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >9000</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
+					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >--할인금액--</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
 					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
 				</li>
-		<!-- <li><input type="checkbox" name="saleb" id="saleb"/><span>못난이 할인 상품으로 등록</span></li> -->
-				<li><button name="saleb" id="saleb" value='1' class="btn">못난이 할인 상품으로 등록</button></li>
+		<li><input type="checkbox" name="saleb" id="saleb"/><span>못난이 할인 상품으로 등록</span></li> 
+				<!-- <li><button name="saleb" id="saleb" value='1' class="btn">못난이 할인 상품으로 등록</button></li> -->
 				<!-- value = 0은 어떻게 넘겨줄것인가? : script? button이 클릭되지 않으면 value = 0으로 넘기기? -->
 			</ul>
 			<li> 
@@ -599,7 +615,7 @@ $(function(){
 	 <div class="category_title">재고수량</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0"/><span>개</span></li>
+				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0"/>&nbsp;<span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
@@ -673,7 +689,7 @@ $(function(){
 					<img name="addimg"   id="addimg" width="200" src="#" alt="image upload" />&nbsp;	
 					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" />&nbsp; 
 					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" /></br>
-		 			<input type="file" id="thumb_image_uplaod" accept="img/*" multiple/>
+		 			<input type="file" name ="file" id="sellerProductImgs" accept="img/*" multiple/>
 		 		</li>
 		   </ul>	
 		</div>
@@ -692,7 +708,7 @@ $(function(){
 				</li>
 				<ul id="delivery_option">
 					<li><label>배송비</label>&nbsp;
-						<input type="number" name="deliveryprice" id="delivery_price"/><span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
+						<input type="number" name="deliveryprice" id="delivery_price"/>&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 					</li>
 					<li id="pay"><label>결제방식</label>&nbsp;
 						<input type="radio" name="paymentoption" id="delivery_price_option" value="착불"/><label for="착불">착불</label>&nbsp;
