@@ -31,10 +31,10 @@ let endCalendarDataValue = "";//선택된 날짜의 데이터를 저장해 높�
 let yearCheck="";//날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
 let dateCheck = "";//년별, 월별, 일별인지 체크하기 위한 변수 선언
 
-let startDate;// startDate 선택된 값을 가져온다.
-let endDate;// endDate 선택된 값을 가져온다.
-let mcatenumLength;// mcatenum에 데이터 선택된것이 몇개 있는지 확인한다.
-let searchTxt ="z";// 검색 데이터
+let startDate =null;// startDate 선택된 값을 가져온다.
+let endDate = null;// endDate 선택된 값을 가져온다.
+let mcatenumLength = null;// mcatenum에 데이터 선택된것이 몇개 있는지 확인한다.
+let searchTxt =null;// 검색 데이터
 let mcatenumDataArr = new Array();
 
 //날짜를 년별, 월별, 일별을 바꿀 경우 그 조건에 맞게 input 박스를 change 한다.
@@ -248,9 +248,6 @@ $(function(){
 		} else {
 			mcatenumDataArr = [0];
 		}
-		if(searchTxt == ''){
-			searchTxt = "z";
-		}
 		
 		paging(1, sortStr, mcatenumDataArr, searchTxt, startDate, endDate);
 		
@@ -278,31 +275,26 @@ function sortChange(result){
 
 //페이징
 function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate){
-	if(searchTxt == undefined){
-		searchTxt = "z";
-	}
+	// 제한사항 걸러내기....
 	if(sortStr == undefined){
 		sortStr = 0;
 	}
 	if(mcatenumDataArr == undefined){
 		mcatenumDataArr = [0];
 	}
-	if(startDate == undefined){
-		startDate = "z";
-		endDate = "z";
+	if(searchTxt == undefined || searchTxt == "!$#@%"){
+		searchTxt = "";
 	}
+	if(startDate == undefined || startDate == "!$#@%"){
+		startDate = "";
+		endDate = "";
+	}
+	
 	
 	let url = "SellerReviewPaging";
 	let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord}+"&sortStr="+sortStr;
 		param += "&mcatenumDataArr="+mcatenumDataArr+"&searchTxt="+searchTxt+"&startDate="+startDate+"&endDate="+endDate;
 	
-		
-		console.log(pageNum);
-		console.log(sortStr);
-		console.log(mcatenumDataArr);
-		console.log(searchTxt);
-		console.log(startDate);
-		console.log(endDate);
 	$.ajax({
 		url: url,
 		data: param,
@@ -339,8 +331,19 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 			$('#reviewList').html(tag);
 	
 	
+			// 시작하기 전, startDate가 값이 없으면 paging 누를때 에러가 발생하기 때문에 임의의 특수문자로 설정해놓는다.
+			if(startDate == null || startDate == '' ){
+				startDate = "!$#@%";
+				endDate = "!$#@%";
+			}
+			if(searchTxt == null || searchTxt == '' ){
+				searchTxt = "!$#@%";
+			}
+	
+			
+			// 페이징 처리	
 			let pagingTag = "";
-			// 페이징 처리
+
 			let pagingData = result[1];
 			if(pagingData.pageNum != 1){
 				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+','+mcatenumDataArr+','+ searchTxt +','+startDate+','+ endDate+')"></a>';

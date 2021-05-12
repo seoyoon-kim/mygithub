@@ -4,9 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerReviewDAO">
 	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
-		select to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewscore, reviewanswer 
-	    from review a join (select productnum, productname 
-		from product where userid=#{param1}) b on a.productnum = b.productnum order by reviewanswer desc, reviewwritedate desc
+		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
+			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
+			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
+		
+		where a.userid='${userid}') c join review d on c.productnum = d.productnum 
+		
 	</select>
 	<select id="reviewlist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
 		select * from ( 
@@ -19,7 +23,7 @@
 		where 
 		
 		<choose>
-			<when test="mcatenumDataArr !=null">
+			<when test="mcatenumDataArr != ''">
 				<if test="mcatenumDataArr[0] != 0">
 					b.mcatenum in 
 					<foreach item="arr" open="(" close=")" separator="," 
@@ -32,17 +36,21 @@
 		a.userid='${userid}') c join review d on c.productnum = d.productnum 
 		
 		<choose>
-			<when test="'z'.equals(searchTxt)">where reviewcontent like '%%'</when>
-			<when test="searchTxt != null">
+			<when test="searchTxt != '' ">
 				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
 				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				
+				<if test="startDate != ''">
+					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
 			</when>
-			<otherwise>where reviewcontent like '%%'</otherwise>
+			<when test="searchTxt == ''">
+				<if test="startDate != ''">
+					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
 		</choose>
 		
-		<if test="!'z'.equals(startDate)">
-			and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
-		</if>
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc)</when>
@@ -69,6 +77,46 @@
 			<when test="sortStr == 1">order by reviewscore desc</when>
 			<when test="sortStr == 2">order by reviewscore asc</when>
 		</choose>
+
+	</select>
+	
+	<select id="reviewlistRecord" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
+			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
+			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
+		
+		where 
+		
+		<choose>
+			<when test="mcatenumDataArr != ''">
+				<if test="mcatenumDataArr[0] != 0">
+					b.mcatenum in 
+					<foreach item="arr" open="(" close=")" separator="," 
+					collection="mcatenumDataArr">#{arr}</foreach>
+					 and
+			 	</if>
+			</when>
+		</choose>
+		
+		a.userid='${userid}') c join review d on c.productnum = d.productnum 
+		
+		<choose>
+			<when test="searchTxt != '' ">
+				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
+				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				
+				<if test="startDate != ''">
+					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+			<when test="searchTxt == ''">
+				<if test="startDate != ''">
+					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+		</choose>
+		
 
 	</select>
 	

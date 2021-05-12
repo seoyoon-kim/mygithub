@@ -3,8 +3,10 @@ package com.beetmall.sshj.seller.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,12 +76,16 @@ public class SellerReviewController {
 				totalScore += dataCheck.getReviewscore();
 			}
 			
-			
+			int initialArr[] = {0};
 			// 전체 리뷰 갯수
 			vo.setTotalReview(list.size());
 			vo.setNullReview(nullResult);
 			vo.setNewReview(newResult);
-			vo.setStartDate("z");
+			vo.setStartDate("");
+			vo.setSearchTxt("");
+			vo.setMcatenumDataArr(initialArr);
+			vo.setSortStr(0);
+			
 			if(totalScore == 0) {
 				vo.setTotalScore(totalScore);
 			} else {
@@ -103,13 +109,25 @@ public class SellerReviewController {
 	//@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.GET)
 	@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<Object> reviewPaging(HttpSession session, SellerReviewVO vo, Model model) {
+	public ArrayList<Object> reviewPaging(HttpServletRequest req, HttpSession session, SellerReviewVO vo, Model model) {
 		vo.setUserid((String)session.getAttribute("logId"));
 		
-		System.out.println(vo.getStartDate());
-		System.out.println(vo.getEndDate());
-		System.out.println(vo.getSearchTxt());
-		System.out.println(vo.getMcatenumDataArr()[0]);
+		Enumeration e = req.getParameterNames();
+		while(e.hasMoreElements()) {
+			String name = (String)e.nextElement();
+			String[] values = req.getParameterValues(name);
+			for(String value : values) {
+				System.out.println("name = " + name + ", value = " + value);
+			}
+		}
+		List<SellerReviewVO> total = service.reviewlistRecord(vo);
+		System.out.println(vo.getUserid());
+		System.out.println(vo.getStartDate()=="");
+		System.out.println(vo.getEndDate()=="");
+		System.out.println(vo.getSearchTxt()=="");
+		System.out.println(vo.getMcatenumDataArr()[0]==0);
+		System.out.println(total.size());
+		vo.setTotalRecord(total.size());
 		ArrayList<Object> dataList = new ArrayList<Object>();
 		dataList.add(0, service.reviewlist(vo));
 		dataList.add(1, vo);

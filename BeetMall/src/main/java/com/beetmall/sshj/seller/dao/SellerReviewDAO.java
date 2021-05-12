@@ -9,4 +9,6 @@ public interface SellerReviewDAO {
 	public List<SellerReviewVO> breakdown(String userid);
 	// 리뷰 리스트 rownum (paging용) 가져오기
 	public List<SellerReviewVO> reviewlist(SellerReviewVO vo);
+	// ajax 사용시 리스트 record 알기 위해서 사용
+	public List<SellerReviewVO> reviewlistRecord(SellerReviewVO vo);
 }
