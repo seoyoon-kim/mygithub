@@ -40,8 +40,8 @@ public class SellerAskAdminServiceImp implements SellerAskAdminService {
 	}
 	
 	@Override
-	public int totalRecord(SearchAndPageVO spvo) {
-		return sellerAskAdminDAO.totalRecord(spvo);
+	public int totalRecord(SearchAndPageVO sapvo) {
+		return sellerAskAdminDAO.totalRecord(sapvo);
 	}
 
 }

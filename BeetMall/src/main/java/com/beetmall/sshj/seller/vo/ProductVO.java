@@ -25,7 +25,6 @@ public class ProductVO {
 	private int nowstock;//현재재고수량 ( count(productnum) from orderdetail)
 	
 	private String thumbimg;//썸네일이미지
-	private String addimg;// 추가이미지
 	
 	private String productcontent;//내용
 	
@@ -161,12 +160,6 @@ public class ProductVO {
 	}
 	public void setThumbimg(String thumbimg) {
 		this.thumbimg = thumbimg;
-	}
-	public String getAddimg() {
-		return addimg;
-	}
-	public void setAddimg(String addimg) {
-		this.addimg = addimg;
 	}
 	public String getProductcontent() {
 		return productcontent;

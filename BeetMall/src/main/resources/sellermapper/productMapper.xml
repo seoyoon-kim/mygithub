@@ -3,8 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.ProductDAO">
-	<select id="searchList" resultType="com.beetmall.sshj.seller.vo.ProductVO">
-		select  p.productnum,c.catenum,c.catename,m.mcatenum,m.mcatename,p.productname,p.thumbimg,p.productprice,p.totalstock,
+	<select id="productAllSelect" resultType="com.beetmall.sshj.seller.vo.ProductVO" >
+	select  p.productnum,c.catenum,c.catename,m.mcatenum,m.mcatename,p.productname, p.thumbimg ,p.productprice,p.totalstock,
+				to_number(p.productprice - d.saleprice) sellprice,
+				to_char(p.sellstart, 'YY/MM/DD') sellstart , to_char(p.sellfinish, 'YY/MM/DD') sellfinish, 
+             	d.saleprice, floor(( d.saleprice/p.productprice)*100) as salepercent, 
+             	to_char(d.salestart, 'YY/MM/DD') salestart, to_char(d.salefinish, 'YY/MM/DD') salefinish
+		from product p
+		join mcategory m on m.mcatenum = p.mcatenum
+		join category c on c.catenum = m.catenum
+		join discount d on d.productnum = p.productnum
+		
+		
+        where p.userid = '${getuserid}'
+		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,d.saleprice,d.salestart,d.salefinish 
+		order by p.productnum desc 
+		
+	</select>
+	<select id="searchList" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="com.beetmall.sshj.seller.vo.ProductVO">
+		select*from
+		(select*from
+		(select  p.productnum,c.catenum,c.catename,m.mcatenum,m.mcatename,p.productname,p.thumbimg,p.productprice,p.totalstock,
 				to_number(p.productprice - d.saleprice) sellprice,
 				to_char(p.sellstart, 'YY/MM/DD') sellstart , to_char(p.sellfinish, 'YY/MM/DD') sellfinish, 
              	d.saleprice, floor(( d.saleprice/p.productprice)*100) as salepercent, 
@@ -24,35 +43,27 @@
                     or sellstart like '%${searchWord}%'
                     or sellstart like '%${searchWord}%'
         group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,d.saleprice,d.salestart,d.salefinish 
-		order by p.productnum desc 
+		order by p.productnum desc )
+		 <![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by productnum)
+        <![CDATA[where rownum<=]]>
+        <if test="pageNum==totalPage">${lastPageRecord}</if>
+        <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by productnum desc
 	</select>
-	<select id="productAllSelect" resultType="com.beetmall.sshj.seller.vo.ProductVO">
-	 	select  p.productnum,c.catenum,c.catename,m.mcatenum,m.mcatename,p.productname,p.thumbimg,p.productprice,p.totalstock,
-				to_number(p.productprice - d.saleprice) sellprice,
-				to_char(p.sellstart, 'YY/MM/DD') sellstart , to_char(p.sellfinish, 'YY/MM/DD') sellfinish, 
-             	d.saleprice, floor(( d.saleprice/p.productprice)*100) as salepercent, 
-             	to_char(d.salestart, 'YY/MM/DD') salestart, to_char(d.salefinish, 'YY/MM/DD') salefinish
-		from product p
-		join mcategory m on m.mcatenum = p.mcatenum
-		join category c on c.catenum = m.catenum
-		join discount d on d.productnum = p.productnum
-        where p.userid = #{param1}
-		group by c.catenum,c.catename,m.mcatenum,m.mcatename,p.productnum,p.productname,p.thumbimg ,p.productprice,p.totalstock,p.sellstart,p.sellfinish,d.saleprice,d.salestart,d.salefinish 
-		order by p.sellstart desc 
+	<select id="totalRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="int">
+		select count(productnum) totalRecord from product 
 	</select>
-	<select id="totalProduct" resultType="com.beetmall.sshj.seller.vo.ProductVO">
-		select count(*)  from product
-	</select>
+	
 	<insert id="productInsert" parameterType="com.beetmall.sshj.seller.vo.ProductVO">
 		insert into product (productnum, userid, mcatenum, productname, productprice, saleselect, saleb, optionselect,
 								to_char(sellstart,'YY/MM/DD') sellstart , to_char(sellfinish, 'YY/MM/DD') sellfinish ,
-								totalstock, nowstock, thumbimg, addimg,
-                    			productcontent, deliveryoption, deliverprice, paymentoption, selloption, sellweight,
+								totalstock, nowstock, thumbimg, 
+                    			productcontent, deliveryoption, deliveryprice, paymentoption, selloption, sellweight,
                      			origin, wrapping, productinfomation, prevention, deadline)
                      			
        	values(productsq.nextval, #{productnum}, #{userid}, #{mcatenum}, #{productname}, #{productprice}, #{saleselect}, #{saleb}, #{optionselect}
-       			#{sellsatart},#{sellfinish},#{totalstock},#{nowstock},#{thumbimg},#{addimg},
-       			#{productcontent}, #{deliveryoption}, #{deliverprice}, #{paymentoption}, #{selloption}, #{sellweight}, 
+       			#{sellstart},#{sellfinish},#{totalstock},#{nowstock},#{thumbimg},
+       			#{productcontent}, #{deliveryoption}, #{deliveryprice}, #{paymentoption}, #{selloption}, #{sellweight}, 
        			#{origin}, #{wrapping}, #{productinformation}, #{prevention}, #{deadline})       				
 	</insert>
 	<insert id="discountInsert" parameterType="com.beetmall.sshj.seller.vo.DiscountVO">

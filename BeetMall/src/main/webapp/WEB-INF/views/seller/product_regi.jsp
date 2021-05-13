@@ -34,6 +34,7 @@
 		border:1px solid lightgray; 
 		font-size:14px;
 	}
+	input{padding:2px}
 	input,select,button{height:30px;}
 	textarea{
 		width:100%;
@@ -300,11 +301,17 @@ $(function(){
 		});
 	}	
 //썸네일 메인이미지 업로드 미리보기
+$('#thumbimg').on('change',function(){
+	console.log('함수 확인 이미지 ㅇ미ㅣ지')
+	readURL(this);
+});
 	function readURL(input) {
+		console.log('이미지 읽기 함수 이동 확인');
          if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function(event) {
-                    $('#thumb_image').attr('src', event.target.result);
+        	 		console.log('img 미리보기 확인');
+                    $('#thumbimg1').attr('src', event.target.result);
                 }
               reader.readAsDataURL(input.files[0]); //in
             }
@@ -343,20 +350,28 @@ $(function(){
 //국내산, 수입산
 		$('#import').on('click',function(){
 			$('#import_wrap').css('display','block');
+			$(this).css('background-color','lightgray')
+			$('#domestic').css('background-color','white')
 		});
 		$('#domestic').click(function(){
+			$(this).css('background-color','lightgray')
+			$('#import').css('background-color','white')
 			$('#import_wrap').css('display','none');
 		}); //국내산,수입산 end
 		
 //택배
-		$('#delivery').on('click',function(){
-			$('#delivery_option').css('display','block');
-		});
-		$('#pickup').click(function(){
-			$('#delivery_option').css('display','none');
-		}); //택배, 픽업 end
-		
+		$('#deliverysel').change(function(){
+			var option = $(this).val();
+
+			if(option=='1'){ //답변완료
+				$('#delivery_option').css('display','none');
+			}			
+			if(option=='2' || option==''3){ //답변대기중
+				$('#delivery_option').css('display','block');
+			}
+		}
 	
+
 //판매기간 설정
 			$('#sell_start_finish').css('display','none');
 			$('#date_group').css('display','none');
@@ -376,6 +391,17 @@ $(function(){
 //기간설정하면 달력날짜 바꾸기
 
 //옵션 적용안함 이면 표 비활성화
+		$('#add_option').click(function(){
+			$('#add_option').css('background','lightgray');
+			$('#none_option').css('background','white');
+			$('#add_option_ul').css('display','block');
+		});
+		$('#none_option').click(function(){
+			$(this).css('background','lightgray');
+			$('#add_option').css('background','white');
+			$('#add_option_ul').css('display','none');
+		});
+		
 		if($('#select_option').val()=='적용안함'){
 			$('#regi_option_table').css('display','none');
 		}
@@ -515,7 +541,7 @@ $(function(){
 		<!-- 배송 -->
 		<!-- 상품내용 -->
 		<!-- 취소 저장하기 버튼 -->
-	<form method="post" name="product_regi_form" id="product_regi_form" action="product_regi_ok">
+	<form method="post" name="product_regi_form" id="product_regi_form" action="product_regi_ok" enctype="multipart/form-data">
 	<!------------------------------------------ 카테고리------------------------------------------------->
 	 <div class="category_title">카테고리</div>
 		<div class="category_wrap">
@@ -594,7 +620,7 @@ $(function(){
 			<li> 
 				<label>판매기간</label>&nbsp;&nbsp;
 				<!-- <input type="button" name="selldate" class="btn" id="sell_check"  value="설정"/ >&nbsp; -->
-				<button name="selldate" class="btn" id="sell_check" value="1">설정</button>&nbsp; 
+				<a name="selldate" class="btn" id="sell_check" value="1">설정</a>&nbsp; 
 				<!-- <input type="button" name="selldate" class="btn" id="sell_uncheck" value="설정안함"/> -->
 				<button name="selldate" class="btn" id="sell_uncheck" value="0">설정안함</button>
 				<!-- 이건 버튼으로 변경안해도 되는데.. 설정안함 하면 sellstart 현재날짜, sellfinish 2099.01.01 로 변경 -->
@@ -624,9 +650,10 @@ $(function(){
 	<div class="category_wrap">
 			<ul class="regi_option_wrap">
 				<li>
-					<button name="optionselect" value="1" class="btn" >옵션추가</button>&nbsp; 
-					<button name="optionselect" value="0" class="btn" >추가안함</button>
+					<button name="optionselect" value="1" id="add_option" class="btn" >옵션추가</button>&nbsp; 
+					<button name="optionselect" value="0" id="none_option" class="btn" >추가안함</button>
 				</li>
+				<ul id="add_option_ul">
 				<li><label>옵션 갯수</label>&nbsp;
 					<select id="select_option" name="option_count"> 
 						<option selected value='0'>적용안함</option>
@@ -675,6 +702,7 @@ $(function(){
 						</tbody>
 					</table>
 				</li>
+				</ul>
 				<li><span class="notice">상세페이지에 예시) 호박고구마 1kg (+3000원)으로 표기됩니다.</span></li>
 			</ul>
 			</div>
@@ -683,14 +711,10 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label>대표이미지</label><br/>
-					<img name="thumbimg" id="thumbimg"src="#" alt="image upload" style="width:400px;"/><br/>
-					<input type="file" id="thumbimg_upload" name = "" accept="img/*" onchange="readURL(this);" /></li>
-				<li>
-					<img name="addimg"   id="addimg" width="200" src="#" alt="image upload" />&nbsp;	
-					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" />&nbsp; 
-					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" /></br>
-		 			<input type="file" name ="file" id="sellerProductImgs" accept="img/*" multiple/>
-		 		</li>
+					<span class="notice">홈페이지에 연출되는 대표 이미지를 업로드해주세요.</span><br/>
+					<img name="thumbimg1" id="thumbimg1" src="#" alt="image upload" style="width:400px;"/><br/>
+					<input type="file" id="thumbimg" name ="file" accept="img/*" />
+				</li>
 		   </ul>	
 		</div>
  	<!-----------------------------------------------상세설명------------------------------------->
@@ -703,12 +727,18 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label>배송방법</label>&nbsp; 
-					<input type="button" name="deliveryoption" class="btn" id="delivery" value="택배"/>
-					<input type="button" name="deliveryoption" class="btn" id="pickup" value="픽업">
+			<!-- 		<button name="deliveryoption" class="btn" id="pickup" value="1">픽업</button>
+					<button name="deliveryoption" class="btn" id="delivery" value="2">택배</button>
+					<button name="deliveryoption" class="btn" id="delandpick" value="3">택배/픽업</button> -->
+					<select name="deliveryoption" id="deliverysel" >
+						<option value="1" id="pickup">픽업</option>
+						<option value="2" id="delivery">택배</option>
+						<option value="3" id="delandpick">택배/픽업</option>
+					</select>
 				</li>
 				<ul id="delivery_option">
 					<li><label>배송비</label>&nbsp;
-						<input type="number" name="deliveryprice" id="delivery_price"/>&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
+						<input type="number" name="deliveryprice" id="deliveryprice"/>&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 					</li>
 					<li id="pay"><label>결제방식</label>&nbsp;
 						<input type="radio" name="paymentoption" id="delivery_price_option" value="착불"/><label for="착불">착불</label>&nbsp;
@@ -725,13 +755,13 @@ $(function(){
 				<li><label for="">판매단위</label>&nbsp;
 					<input type="number" name="selloption" id="selloption"  min="0"/>
 					<select id="select_unit" name="selloption" >
-						<option value="-">해당없음</option>
+						<option value="단위없음">해당없음</option>
 						<option value="팩">팩</option>
 						<option value="박스">박스</option>
 					</select>
 				</li>
 				<li><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweight" id="sellweight" />
+					<input type="number" name="sellweight" id="sellweight" min="0"/>
 					<select id="select_weight" name="sellweight">
 						<option value="g">g</option>
 						<option value="kg">kg</option>

@@ -17,7 +17,7 @@ public interface SellerAskAdminService {
 	//수정하기
 	public int askEditOk(SellerAskAdminVO saavo);
 	//총 레코드 수 구하기
-	public int totalRecord(SearchAndPageVO spvo);
+	public int totalRecord(SearchAndPageVO sapvo);
 	//서머노트 이미지 업로드
 	
 }

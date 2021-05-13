@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.seller.service.ProductService;
@@ -37,22 +38,34 @@ public class ProductController {
 
 	//판매상품 목록
 	  @RequestMapping("/product_list") 
-	  public ModelAndView product_list(ProductVO vo, SearchAndPageVO spvo, HttpSession session) { 
+	  public ModelAndView product_list(ProductVO vo, SearchAndPageVO sapvo, HttpSession session, HttpServletRequest req) { 
 		  
-		  ModelAndView mav = new ModelAndView();
-		  vo.setUserid((String)session.getAttribute("logId"));
-		  mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
+		 ModelAndView mav = new ModelAndView();
+		 vo.setUserid((String)session.getAttribute("logId"));
+		
 			
-		  if(spvo.getSearchWord()!=null) { //%% like 연산자
-				//spvo.setSearchWord("%"+spvo.getSearchWord()+"%");
-				spvo.setSearchWord(spvo.getSearchWord());
-				mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
-				mav.addObject("productList", productService.searchList(spvo)); 
-				System.out.println("word=" + spvo.getSearchWord());
-		  }
+		//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
+		String reqPageNum = req.getParameter("pageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
+		if(reqPageNum != null) {
+			sapvo.setPageNum(Integer.parseInt(reqPageNum)); 
+		}
+		//검색어
+		sapvo.setSearchWord(sapvo.getSearchWord());
+		
+		//총 레코드 수 구하기 
+		sapvo.setTotalRecord(productService.totalRecord(sapvo));
+		
+		//검색어와 페이징를 담기
+		mav.addObject("sapvo",sapvo);
+		mav.addObject("productList", productService.searchList(sapvo)); 
+		//상품목록 담기
+		mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
+				
+		System.out.println("word=" + sapvo.getSearchWord());
 		  
-		  mav.setViewName("seller/product_list"); 
-		  return mav; 
+		  
+		mav.setViewName("seller/product_list"); 
+		return mav; 
 	  }
 	
 	//판매상품 삭제 시 진행중인 주문있으면 불가능
@@ -70,16 +83,26 @@ public class ProductController {
 	}
 	
 	//판매상품등록 (할인o, 옵션o)
-	@RequestMapping("/transactionForm")
+	/*
+	 * @RequestMapping("/transactionForm")
+	 * 
+	 * @Transactional(rollbackFor= {Exception.class, RuntimeException.class}) public
+	 * String frm() { return "seller/product_regi"; }
+	 */
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
-	public String frm() {
-		return "seller/product_regi";
-	}
 	@RequestMapping(value="/product_regi_ok", method=RequestMethod.POST)
-	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req, @RequestParam MultipartFile file) {
+	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {
+		System.out.println("product_regi_ok까지는 넘어옴");
+		//첨부파일 받아오기 
+				MultipartHttpServletRequest multireq = (MultipartHttpServletRequest)req;
+				MultipartFile file = multireq.getFile("file");
+				System.out.println("multireq ->"+multireq);
+				System.out.println("file -> "+file);
 		//이미지 파일 변수
 		String orgName = file.getOriginalFilename();
+		System.out.println("orgName ->"+ orgName);
 		String path = req.getSession().getServletContext().getRealPath("resources/sellerProductImgs");
+		System.out.println("path ->"+ path);
 		ModelAndView mav = new ModelAndView();
 	
 		//session userid
@@ -90,9 +113,8 @@ public class ProductController {
 		DiscountVO dvo = new DiscountVO();
 		//옵션
 		OptionVO ovo = new OptionVO();
-		//할인, 옵션 없는 productVO
-		ProductVO pvo = new ProductVO();
 		
+		System.out.println("컨트롤러 vo 통과");
 		//[commit을 도와주는 객체 생성]
 		//transaction 구현을 위한 객체생성
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -105,23 +127,13 @@ public class ProductController {
 		int result3 = 0;
 		
 		try {
-			//상품등록 
-			int result = productService.productInsert(vo);
-			
-			//할인이 있을 때,
-			if(vo.getSaleselect() == '1') {
-				result2 = productService.discountInsert(dvo);
-			}
-			// 옵션이 있을 때, 
-			if(vo.getOptionselect() == '1') {
-				result3 = productService.optionInsert(ovo);
-			}
-			
-			//-------------------이미지 등록 (파일 업로드)-------------------------
+	
+//-----------------------이미지 등록 (파일 업로드)--------------------------------
 			String paramName = file.getName();
-
+			System.out.println(paramName + " - 업로드 과정");
 			try {
 				if(orgName != null) {
+					System.out.println("이미지 업로드 try catch");
 					File f = new File(path, orgName);
 					int i = 1;
 					while(f.exists()) {
@@ -130,9 +142,11 @@ public class ProductController {
 						String extName = orgName.substring(point+1);
 						
 						f = new File(path, name+"_"+ i++ + "." + extName);
+						System.out.println("f->"+f);
 					}// while
 					orgName = f.getName();
-					
+						System.out.println("orgName->"+orgName);
+					//vo.setThumbimg(orgName);
 					try {
 						file.transferTo(new File(path,orgName));
 					}catch (Exception e) {
@@ -142,10 +156,43 @@ public class ProductController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+			//추가하지 않으면 값을 지정해서 넣어준다. 
 			vo.setThumbimg(orgName);
-			//----------------이미지 등록 끝-----------------------------
+			System.out.println("vo에 set해주는 이미지 이름 orgName -> "+orgName);
+			if(vo.getDeliveryoption()=="1") {
+				vo.setPaymentoption("0");
+				vo.setDeliveryprice(0);
+			}
+			System.out.println("확인");
+			System.out.println("userid ->"+vo.getUserid());
+			System.out.println("totalstock ->"+vo.getTotalstock());
+			System.out.println("deliveryoption ->"+vo.getDeliveryoption());
+			System.out.println("deliveryprice ->"+vo.getDeliveryprice());
+			System.out.println("saleselect ->"+vo.getSaleselect());
+			System.out.println("optionselect ->"+vo.getOptionselect());
+			System.out.println("sellstart ->"+vo.getSellstart());
+			System.out.println("saleprice ->"+vo.getSaleprice());
+			System.out.println("productnum ->"+vo.getProductcontent());
 			
-			//insert 결과 확인
+			
+//---------------------------이미지 등록 끝-----------------------------------------		
+			//상품등록 
+			int result = productService.productInsert(vo);
+			System.out.println("상품 insert + "+ result);
+		
+			//할인이 있을 때,
+			if(vo.getSaleselect() == '1') {
+				result2 = productService.discountInsert(dvo);
+				System.out.println("vo.getSaleSelect -> " + vo.getSaleselect());
+				System.out.println("할인 insert +" + result2);
+			}
+			// 옵션이 있을 때, 
+			if(vo.getOptionselect() == '1') {
+				result3 = productService.optionInsert(ovo);
+				System.out.println("vo.getOpionSelect ->" + vo.getOptionselect());
+				System.out.println("옵션 insert + "+ result3);
+			}
+//---------------------------insert 결과 확인--------------------------------------
 			// 상품등록 확인
 			if(result>0) {
 				System.out.println("[상품 등록 완료]");
@@ -166,7 +213,7 @@ public class ProductController {
 			}else {
 				System.out.println("[옵션 상품등록 실패 - 다시 확인해주세요.]");
 			}
-			//정상 구현되면 commit 실행 (commit에 필요한 개체들은 상단에 미리 호출)
+//----------정상 구현되면 commit 실행 (commit에 필요한 개체들은 상단에 미리 호출)-----------------
 			transactionManager.commit(status); 
 		}catch(Exception e){
 			System.out.println("<<상품등록 트랜잭션 에러 발생>>");
