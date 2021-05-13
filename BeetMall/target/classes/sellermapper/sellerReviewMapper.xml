@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerReviewDAO">
+	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+		select reviewnum, ordernum, c.productnum productnum, reviewcontent, 
+			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
+			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
+		
+		where a.userid='${userid}') c join review d on c.productnum = d.productnum 
+		
+	</select>
+	<select id="reviewlist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+		select * from ( 
+		select * from ( 
+		select reviewnum, ordernum, c.productnum productnum, reviewcontent, d.userid, 
+			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
+			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
+		
+		where 
+		
+		<choose>
+			<when test="mcatenumDataArr != ''">
+				<if test="mcatenumDataArr[0] != 0">
+					b.mcatenum in 
+					<foreach item="arr" open="(" close=")" separator="," 
+					collection="mcatenumDataArr">#{arr}</foreach>
+					 and
+			 	</if>
+			</when>
+		</choose>
+		
+		a.userid='${userid}') c join review d on c.productnum = d.productnum 
+		
+		<choose>
+			<when test="searchTxt != '' ">
+				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
+				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				
+				<if test="startDate != ''">
+					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+			<when test="searchTxt == ''">
+				<if test="startDate != ''">
+					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+		</choose>
+		
+		
+		<choose>
+			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc)</when>
+			<when test="sortStr == 1">order by reviewscore desc)</when>
+			<when test="sortStr == 2">order by reviewscore asc)</when>
+		</choose>
+		
+		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} 
+		
+		<choose>
+			<when test="sortStr == 0">order by reviewanswer asc, reviewwritedate asc)</when>
+			<when test="sortStr == 1">order by reviewscore asc)</when>
+			<when test="sortStr == 2">order by reviewscore desc)</when>
+		</choose>
+
+		
+		<choose>
+			<when test="#{totalPage} == #{pageNum}">where rownum <![CDATA[ <= ]]> ${lastPageRecord} </when>
+			<when test="#{totalPage} != #{pageNum}">where rownum <![CDATA[ <= ]]> ${onePageRecord}</when>
+		</choose>
+		
+		<choose>
+			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc</when>
+			<when test="sortStr == 1">order by reviewscore desc</when>
+			<when test="sortStr == 2">order by reviewscore asc</when>
+		</choose>
+
+	</select>
+	
+	<select id="reviewlistRecord" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
+			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
+			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
+		
+		where 
+		
+		<choose>
+			<when test="mcatenumDataArr != ''">
+				<if test="mcatenumDataArr[0] != 0">
+					b.mcatenum in 
+					<foreach item="arr" open="(" close=")" separator="," 
+					collection="mcatenumDataArr">#{arr}</foreach>
+					 and
+			 	</if>
+			</when>
+		</choose>
+		
+		a.userid='${userid}') c join review d on c.productnum = d.productnum 
+		
+		<choose>
+			<when test="searchTxt != '' ">
+				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
+				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				
+				<if test="startDate != ''">
+					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+			<when test="searchTxt == ''">
+				<if test="startDate != ''">
+					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+		</choose>
+
+	</select>
+
+	<update id="answerUpdate" parameterType="int">
+		update review set reviewanswer = #{reviewanswer} where userid = #{userid} and reviewnum = ${reviewnum}
+	</update>
+	
+	<update id="reviewReportUpdate" parameterType="int">
+		update review set reviewreport = 1 where reviewnum = ${reviewnum}
+	</update>
+	
+	<insert id="reportInsert" parameterType="int">
+		
+		insert into report(reportnum, userid, reporteduser 
+			,reportboard, reportboardnum, reportreason
+			,reportcontent, reportdate, reportselect)
+		values (reportsq.nextval, #{sellerId}, #{userid}
+			, '리뷰', ${reviewnum}, #{reportReason}
+			, #{reportContent}, sysdate, 1)
+	</insert>
+	
+</mapper>

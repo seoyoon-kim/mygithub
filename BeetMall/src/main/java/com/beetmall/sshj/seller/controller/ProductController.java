@@ -19,7 +19,7 @@ import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 public class ProductController {
 	
 	@Autowired
-	com.beetmall.sshj.seller.service.FarmService farmService;
+	com.beetmall.sshj.seller.service.SellerSalesService farmService;
 	@Autowired
 	ProductService productService;
 	
