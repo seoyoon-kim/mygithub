@@ -489,10 +489,11 @@ $('submit').click(function(){
 	//-------상품내용-------------
 	//판매단위를 입력하지 않은 경우
 	//중량/용량 과 g/kg 중 하나라도 입력하지 않은 경우
-	$('input[name="sellweight"]').val().replace(/,/g, '');
-	$('select[name="sellweight"]').val().replace(/,/g, '');
-	$('input[name="selloption"]').val().replace(/,/g, '');
-	$('select[name="selloption"]').val().replace(/,/g, '');
+	$('input[name="sellweight"]').val($('input[name="sellweight"]').replace(/,/g, ''));
+	$('select[name="sellweight"]').val($('select[name="sellweight"]').val().replace(/,/g, ''));
+	$('input[name="selloption"]').val($('input[name="selloption"]').val().replace(/,/g, ''));
+	$('select[name="selloption"]').val($('select[name="selloption"]').val().replace(/,/g, ''));
+	
 	//원산지 선택하지 않은 경우
 	//보간/포장타입을 선택하지 않은 경우
 	//상품정보, 주의사항, 보관방법, 유통기한이 빈칸일 경우

@@ -131,6 +131,7 @@ $(function(){
 		}
 		return true;
 	});
+});	
 //select 
 $(document).ready(function(){
 	$('#selectList').change(function(){
