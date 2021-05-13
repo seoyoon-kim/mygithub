@@ -12,7 +12,7 @@
 		where a.userid='${userid}') c join review d on c.productnum = d.productnum 
 		
 	</select>
-	<select id="asklist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+	<select id="reviewlist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
 		select * from ( 
 		select * from ( 
 		select reviewnum, ordernum, c.productnum productnum, reviewcontent, d.userid, 
@@ -54,16 +54,16 @@
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc)</when>
-			<when test="sortStr == 1">order by reviewscore desc)</when>
-			<when test="sortStr == 2">order by reviewscore asc)</when>
+			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc)</when>
+			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate desc)</when>
 		</choose>
 		
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} 
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer asc, reviewwritedate asc)</when>
-			<when test="sortStr == 1">order by reviewscore asc)</when>
-			<when test="sortStr == 2">order by reviewscore desc)</when>
+			<when test="sortStr == 1">order by reviewscore asc, reviewwritedate desc)</when>
+			<when test="sortStr == 2">order by reviewscore desc, reviewwritedate desc)</when>
 		</choose>
 
 		
@@ -74,16 +74,14 @@
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc</when>
-			<when test="sortStr == 1">order by reviewscore desc</when>
-			<when test="sortStr == 2">order by reviewscore asc</when>
+			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc</when>
+			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate desc</when>
 		</choose>
 
 	</select>
 	
 	<select id="reviewlistRecord" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
-		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
-			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		select reviewnum
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where 

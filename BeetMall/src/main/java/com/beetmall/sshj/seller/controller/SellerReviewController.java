@@ -119,10 +119,10 @@ public class SellerReviewController {
 		}
 	}
 	
-	//리뷰 페이징
+	//리뷰 페이징,, + 모든 데이터 조합하기
 	@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<Object> reviewPaging(HttpServletRequest req, HttpSession session, SellerReviewVO vo, Model model) {
+	public ArrayList<Object> reviewPaging(HttpServletRequest req, HttpSession session, SellerReviewVO vo) {
 		vo.setUserid((String)session.getAttribute("logId"));
 		
 //		넘어온 파라미터 키와 밸류 값을 확인
@@ -134,11 +134,13 @@ public class SellerReviewController {
 //				System.out.println("name = " + name + ", value = " + value);
 //			}
 //		}
-		
+		System.out.println(vo.getTotalPage());
+		System.out.println(vo.getTotalRecord());
 		List<SellerReviewVO> total = service.reviewlistRecord(vo);
 		
 		// 총 record 갯수를 구한 값을 vo에 넣어준다.
 		vo.setTotalRecord(total.size());
+		System.out.println(total.size());
 		ArrayList<Object> dataList = new ArrayList<Object>();
 		dataList.add(0, service.reviewlist(vo));
 		dataList.add(1, vo);

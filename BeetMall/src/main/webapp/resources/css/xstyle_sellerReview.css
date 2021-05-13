@@ -275,7 +275,7 @@ a:hover,a:active,a:visited,a:link{
 	flex-direction: column;
 }
 
-#reivewManagement>li{
+#reviewManagement>li{
 	width: 100%;
 	height: 40px;
 	line-height: 40px;

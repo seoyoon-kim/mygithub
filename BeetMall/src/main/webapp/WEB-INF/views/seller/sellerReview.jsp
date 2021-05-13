@@ -280,7 +280,7 @@ function sortChange(result){
 	
 }
 
-//페이징
+//페이징,, DB 데이터 전부다 불러오는 기능이 들어가 있다
 function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate){
 	// 제한사항 걸러내기....
 	if(sortStr == undefined){
@@ -298,6 +298,12 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		endDate = "";
 	}
 	
+	console.log(pageNum);
+	console.log(sortStr);
+	console.log(mcatenumDataArr);
+	console.log(searchTxt);
+	console.log(startDate);
+	console.log(endDate);
 	
 	let url = "SellerReviewPaging";
 	let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord}+"&sortStr="+sortStr;
@@ -354,20 +360,20 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 
 			let pagingData = result[1];
 			if(pagingData.pageNum != 1){
-				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
-				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 			for(let i = pagingData.startPageNum; i <= pagingData.totalPage; i++){
 				if(pagingData.pageNum == i){
 					pagingTag += '<a class="active" href="#" onclick="return false;">'+(i)+'</a>';
 				} else {
-					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')">'+(i)+'</a>';
+					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')">'+(i)+'</a>';
 				}
 			}
 			
 			if(pagingData.totalPage != pagingData.pageNum){
-				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
-				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 
 			$('.page_nation').html(pagingTag);

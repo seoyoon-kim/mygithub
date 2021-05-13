@@ -70,6 +70,7 @@ nav>ul>li:nth-child(1)>a{
 	line-height: 40px;
 	border: 1px solid #aaa;
 	display: none;
+	background-color: #fff;
 }
 #sellerHeaderSubMenu>li:first-child{
 	border-bottom: 1px solid #ddd;

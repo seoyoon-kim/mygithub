@@ -270,7 +270,7 @@ function sortChange(result){
 	if(resultData == "최신순"){
 		sortStr = 0;
 		paging(1, 0, mcatenumDataArr, searchTxt, startDate, endDate);
-	} else if(resultData == "평점높은순"){
+	} else if(resultData == "미답변"){
 		sortStr = 1;
 		paging(1, 1, mcatenumDataArr, searchTxt, startDate, endDate);
 	} else {
@@ -280,7 +280,7 @@ function sortChange(result){
 	
 }
 
-//페이징
+//페이징,, DB에서 데이터 불러오기
 function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate){
 	// 제한사항 걸러내기....
 	if(sortStr == undefined){
@@ -309,18 +309,18 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		type: "post",
 		success: function(result){
 			// 데이터 불러와 table 형식으로 만들기
+			
 			let tag = "<li>상품명</li>";
-				tag += "<li>평점</li>";
-				tag += "<li>포토</li>";
-				tag += "<li>문의 내용</li>";
-				tag += "<li>등록자</li>";
-				tag += "<li>등록일</li>";
+				tag += "<li>제목</li>";
+				tag += "<li>작성자</li>";
+				tag += "<li>작성일</li>";
 				tag += "<li>답변 여부</li>";
 
 			result2 = $(result[0]);
 			result2.each( function (idx, vo){
 				tag += "<li>" + vo.productname + "</li>";
-				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='qnum' value='"+vo.qnum+"' />"+vo.qcontent+"</a></li>";
+				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'>";
+				tag += "<input type='hidden' name='qnum' value='"+vo.qnum+"' /><input type='hidden' name='qcontent' value='" + vo.qcontent + "'>"+vo.title+"</a></li>";
 				tag += "<li>" + vo.userid + "</li>";
 				tag += "<li>" + vo.qwritedate + "</li>";
 				if(vo.qanswer != null){
@@ -377,6 +377,7 @@ function popupOpen(data){
 	// 상품명
 	let qnum = $(data).children().val();
 	let productname = $(data).parent().prev().prev().prev().text();
+	let qtitle = "";
 	let qcontent = $(data).text().trim();
 	let userid = $(data).parent().next().text();
 	let qwritedate = $(data).parent().next().next().text();
@@ -684,8 +685,8 @@ function reportUpdate(){
 			<div id="sortContainer">
 				<select id="sortSelect" onchange="javascript:sortChange(this)">
 					<option selected="selected" value="최신순">최신순</option>
-					<option value="평점높은순">평점높은순</option>
-					<option value="평점낮은순">평점낮은순</option>
+					<option value="미답변">미답변</option>
+					<option value="답변완료">답변완료</option>
 				</select>
 			</div>
 

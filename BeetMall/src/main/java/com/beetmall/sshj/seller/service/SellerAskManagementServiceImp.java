@@ -23,9 +23,9 @@ public class SellerAskManagementServiceImp implements SellerAskManagementService
 	}
 
 	@Override
-	public List<SellerAskManagementVO> reviewlist(SellerAskManagementVO vo) {
+	public List<SellerAskManagementVO> asklist(SellerAskManagementVO vo) {
 		// TODO Auto-generated method stub
-		return dao.reviewlist(vo);
+		return dao.asklist(vo);
 	}
 
 	@Override

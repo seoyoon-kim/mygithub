@@ -180,12 +180,12 @@ a:hover,a:active,a:visited,a:link{
 	flex-wrap: wrap;
 }
 
-#askList li:nth-child(n+1):nth-child(-n+7){
+#askList li:nth-child(n+1):nth-child(-n+5){
 	background-color:#bbb;
 }
 
 #askList li{
-	flex: 1 1 14%;
+	flex: 1 1 20%;
 	height: 72.4px;
 	text-align: center;
 	border: 1px solid #ddd;

@@ -10,12 +10,11 @@
 		join userqboard d on c.productnum = d.productnum
 		
 	</select>
-	<select id="reviewlist" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
+	<select id="asklist" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
 		select * from ( 
 		select * from ( 
-		select reviewnum, ordernum, c.productnum productnum, reviewcontent, d.userid, 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
-			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		select qnum, d.productnum productnum, d.userid, qcontent, qtitle,
+				to_char(qwritedate, 'yyyy-MM-dd') qwritedate, qopen, qanswer, productname
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where 
@@ -31,37 +30,37 @@
 			</when>
 		</choose>
 		
-		a.userid='${userid}') c join review d on c.productnum = d.productnum 
+		a.userid='${userid}') c join userqboard d on c.productnum = d.productnum
 		
 		<choose>
 			<when test="searchTxt != '' ">
-				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
-				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				<if test="''.equals(searchTxt)">where qtitle like '%%'</if>
+				<if test="!''.equals(searchTxt)">where qtitle like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
-					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					and qwritedate BETWEEN '${startDate}' and '${endDate}'
 				</if>
 			</when>
 			<when test="searchTxt == ''">
 				<if test="startDate != ''">
-					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					where qwritedate BETWEEN '${startDate}' and '${endDate}'
 				</if>
 			</when>
 		</choose>
 		
 		
 		<choose>
-			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc)</when>
-			<when test="sortStr == 1">order by reviewscore desc)</when>
-			<when test="sortStr == 2">order by reviewscore asc)</when>
+			<when test="sortStr == 0">order by qanswer desc, qwritedate desc)</when>
+			<when test="sortStr == 1">order by qanswer desc)</when>
+			<when test="sortStr == 2">order by qanswer asc)</when>
 		</choose>
 		
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} 
 		
 		<choose>
-			<when test="sortStr == 0">order by reviewanswer asc, reviewwritedate asc)</when>
-			<when test="sortStr == 1">order by reviewscore asc)</when>
-			<when test="sortStr == 2">order by reviewscore desc)</when>
+			<when test="sortStr == 0">order by qanswer asc, qwritedate asc)</when>
+			<when test="sortStr == 1">order by qanswer asc)</when>
+			<when test="sortStr == 2">order by qanswer desc)</when>
 		</choose>
 
 		
@@ -71,14 +70,14 @@
 		</choose>
 		
 		<choose>
-			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc</when>
-			<when test="sortStr == 1">order by reviewscore desc</when>
-			<when test="sortStr == 2">order by reviewscore asc</when>
+			<when test="sortStr == 0">order by qanswer desc, qwritedate desc</when>
+			<when test="sortStr == 1">order by qanswer desc</when>
+			<when test="sortStr == 2">order by qanswer asc</when>
 		</choose>
 
 	</select>
 	
-	<select id="reviewlistRecord" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
+	<select id="asklistRecord" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
 		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
 			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
 			reviewimg, reviewscore, reviewreport, reviewanswer, productname

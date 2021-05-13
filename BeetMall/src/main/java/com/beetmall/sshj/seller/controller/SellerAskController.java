@@ -1,9 +1,11 @@
 package com.beetmall.sshj.seller.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +96,20 @@ public class SellerAskController {
 			mav.setViewName("seller/sellerAskManagement");
 			return mav;
 		}
+	}
+	
+	// 문의내역 페이징,, + 모든 데이터 조합하기
+	public ArrayList<Object> SellerAskPaging(HttpServletRequest req, HttpSession session, SellerAskManagementVO vo ){
+		vo.setUserid((String)session.getAttribute("logId"));
+		
+		List<SellerReviewVO> total = service.reviewlistRecord(vo);
+		
+		// 총 record 갯수를 구한 값을 vo에 넣어준다.
+		vo.setTotalRecord(total.size());
+		ArrayList<Object> dataList = new ArrayList<Object>();
+		dataList.add(0, service.asklist(vo));
+		dataList.add(1, vo);
+		
+		return dataList;
 	}
 }
