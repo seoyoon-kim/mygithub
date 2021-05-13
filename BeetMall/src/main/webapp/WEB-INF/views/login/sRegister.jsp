@@ -63,9 +63,10 @@
 		background-color:white;
 		border:rgb(252,118,45);
 		color:black;
-		line-height:50px;
 		font-size:25px;
 		padding-left:10px;
+		line-height:30px;
+		overflow-x:hidden;
 	}
 	.btnClass{
 		background-color:rgb(252,118,45);
@@ -543,8 +544,8 @@
 		}
 		
 		// 계좌번호 검사
-		var accountreg = /^[0-9]{11~15}$/;
-		if(!accountreg.test(document.getElementById("bankaccount ").value)){
+		var accountreg = /^[0-9]{11,15}$/;
+		if(!accountreg.test(document.getElementById("bankaccount").value)){
 			alert("계좌번호는 숫자만 입력해주세요");
 			return false;
 		}

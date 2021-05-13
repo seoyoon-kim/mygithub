@@ -12,6 +12,14 @@ public class ReviewVO {
 	private double reviewscore;
 	private int reviewreport;
 	private String reviewanswer;
+	private int reviewcount;
+	
+	public int getReviewlike() {
+		return reviewcount;
+	}
+	public void setReviewlike(int reviewcount) {
+		this.reviewcount = reviewcount;
+	}
 	public int getReviewnum() {
 		return reviewnum;
 	}
