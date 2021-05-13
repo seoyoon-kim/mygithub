@@ -13,6 +13,7 @@
             left join review rev
                 on det.ordernum = rev.ordernum
 		where ord.userid=#{param1}
+		order by ord.orderdate desc, ord.ordernum desc
 	</select>
 	<update id="orderCommit">
 		update orderdetail set orderstatus = '구매완료' where ordernum=#{param1}
@@ -78,5 +79,6 @@
             left join review rev
                 on det.ordernum = rev.ordernum
 		where ord.userid=#{param1} and ord.orderdate >= to_char(add_months(sysdate,-#{param2}),'YYYY/MM/DD')
+		order by ord.orderdate desc, ord.ordernum desc
 	</select>
 </mapper>
