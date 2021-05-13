@@ -249,6 +249,7 @@ $(function(){
 		e.stopPropagation();
 		return false;
 	});
+ 
 
 //상품명
 	//글자 수 입력에 대한 글자수 변경
@@ -322,30 +323,28 @@ $('#thumbimg').on('change',function(){
 		$('.btn').click(function(){
 			$('btn').css('border','3px solid black');
 		})
-	////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
-		$('#sale_check').click(function(){
-			//버튼 색상
-			$('#sale_check').css('background-color','lightgray')
-			$('#sale_uncheck').css('background-color','white')
+////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
+	
+	$('input[name="saleselect"]').change(function(){
+		if($('input[name="saleselect"]:checked').val()=="1"){
+			console.log($('input[name="saleselect"]:checked').val());
 			//세일 정보 입력 ul
 			$('#sale_ul').css('display','block');
-			$('#sale_period').css('display','none');
-		});
-		//특정기간할인 선택하기
-		$('#sale_period_btn').click(function(){
-			$(this).css('background-color','lightgray')
-			//특정기간할인적용 날짜 
-			$('#sale_period').css('display','block');
-		});
-		$('#sale_uncheck').click(function(){
-			//버튼색상
-			$('#sale_check').css('background-color','white')
-			$('#sale_uncheck').css('background-color','lightgray')
+			
+		}
+		if($('input[name="saleselect"]:checked').val()=="0"){
+			console.log($('input[name="saleselect"]:checked').val());
 			//세일정보 입력ul 숨기기
 			$('#sale_ul').css('display','none');
-		});
-		//특정기간만 할인 클릭 시 날짜 선택 나오기 
-		
+		}
+	});
+	//특정기간할인 선택하기
+/* 	$('#sale_period_btn').click(function(){
+		$(this).css('background-color','lightgray')
+		//특정기간할인적용 날짜 
+		$('#sale_period').css('display','block');
+	});
+	 */
 
 //국내산, 수입산
 		$('#import').on('click',function(){
@@ -359,6 +358,19 @@ $('#thumbimg').on('change',function(){
 			$('#import_wrap').css('display','none');
 		}); //국내산,수입산 end
 		
+		$('input[name="origin"]').change(function(){
+			if($('input[name="origin"]:checked').val()=="수입산"){
+				console.log($('input[name="origin"]:checked').val());
+				//세일 정보 입력 ul
+				$('#import_wrap').css('display','block');
+				
+			}
+			if($('input[name="origin"]:checked').val()=="국내산"){
+				console.log($('input[name="origin"]:checked').val());
+				//세일정보 입력ul 숨기기
+				$('#import_wrap').css('display','none');
+			}
+		});
 //택배
 		$('#deliverysel').change(function(){
 			var option = $(this).val();
@@ -366,24 +378,14 @@ $('#thumbimg').on('change',function(){
 			if(option=='1'){ //답변완료
 				$('#delivery_option').css('display','none');
 			}			
-			if(option=='2' || option==''3){ //답변대기중
+			if(option=='2' || option=='3'){ //답변대기중
 				$('#delivery_option').css('display','block');
 			}
-		}
+		});
 	
 
 //판매기간 설정
-			$('#sell_start_finish').css('display','none');
-			$('#date_group').css('display','none');
-		$('#sell_uncheck').on('click',function(){
-			$('#sell_start_finish').css('display','none');
-			$('#date_group').css('display','none');
-		});
-		$('#sell_check').on('click',function(){
-			$('#sell_start_finish').css('display','block');
-			$('#date_group').css('display','block');
-		});//판매기간 설정 설정안함 선택 end
-	
+
 //특정기간만 할인 날짜 가져오기
 
 //할인판매가 계산
@@ -391,20 +393,6 @@ $('#thumbimg').on('change',function(){
 //기간설정하면 달력날짜 바꾸기
 
 //옵션 적용안함 이면 표 비활성화
-		$('#add_option').click(function(){
-			$('#add_option').css('background','lightgray');
-			$('#none_option').css('background','white');
-			$('#add_option_ul').css('display','block');
-		});
-		$('#none_option').click(function(){
-			$(this).css('background','lightgray');
-			$('#add_option').css('background','white');
-			$('#add_option_ul').css('display','none');
-		});
-		
-		if($('#select_option').val()=='적용안함'){
-			$('#regi_option_table').css('display','none');
-		}
 		$('#select_option').change(function(){
 			var option = $(this).val();
 			console.log(option);
@@ -416,16 +404,42 @@ $('#thumbimg').on('change',function(){
 			}
 	
 		});// 옵션 선택 end
-		
+		$('input[name="optionselect"]').change(function(){
+			if($('input[name="optionselect"]:checked').val()=="1"){
+				console.log($('input[name="optionselect"]:checked').val());
+				//세일 정보 입력 ul
+				$('#add_option_ul').css('display','block');
+				
+			}
+			if($('input[name="optionselect"]:checked').val()=="0"){
+				console.log($('input[name="optionselect"]:checked').val());
+				//세일정보 입력ul 숨기기
+				$('#add_option_ul').css('display','none');
+			}
+		});// 옵션 선택 end
+// 못난이할인
+	 	if($('#saleb').val()!='1'){
+	 		$('$saleb').val() =='0';
+	 	}
+// 상품정보 sellweight와 selloption 에서 DB로 값 넘어갈 때 ',' 제거하기
+
+	$('#sellweight').val().replace(/,/g, '');
+	$('#selloption').val().replace(/,/g, '');
+	$('input[name="sellweight"]').val().replace(/,/g, '');
+	$('select[name="sellweight"]').val().replace(/,/g, '');
+	$('input[name="selloption"]').val().replace(/,/g, '');
+	$('select[name="selloption"]').val().replace(/,/g, '');
+	
 //취소 버튼 클릭 시 뒤로 가기
 		$('#cancel_btn').click(function(){
 			history.back();
 		});
-	
+
 	});// 등록페이지srcipt end		
 
 //submit 등록하기 전 유효성검사
 $('submit').click(function(){
+	
 	//유효성검사 
 	//전체
 	//선택한 날짜가 오늘 이전일 경우 넘어가지 않기 메세지 띄우기
@@ -475,6 +489,10 @@ $('submit').click(function(){
 	//-------상품내용-------------
 	//판매단위를 입력하지 않은 경우
 	//중량/용량 과 g/kg 중 하나라도 입력하지 않은 경우
+	$('input[name="sellweight"]').val().replace(/,/g, '');
+	$('select[name="sellweight"]').val().replace(/,/g, '');
+	$('input[name="selloption"]').val().replace(/,/g, '');
+	$('select[name="selloption"]').val().replace(/,/g, '');
 	//원산지 선택하지 않은 경우
 	//보간/포장타입을 선택하지 않은 경우
 	//상품정보, 주의사항, 보관방법, 유통기한이 빈칸일 경우
@@ -486,9 +504,8 @@ $('submit').click(function(){
 
 //판매기간/ 할인기간 날짜 설정
 $(function(){
-	console.log('aa')
 	$('.start_date').datepicker({minDate:0});
-	 var dateFormat ="YY/MM/DD",
+	 var dateFormat ="yy/mm/dd",
 	 from = $('.start_date').datepicker({
 		 showOn:"both",
 		 defalutDate:"+1w",
@@ -496,7 +513,8 @@ $(function(){
 		 numberOfMonths:2,
 		 changeMonth: true,
 	     changeYear: true,
-	     buttonText: "날짜선택"
+	     buttonText: "날짜선택",
+	     format: 'YY/MM/DD'
 	 });
 	 from = $('.start_date').on('change', function(){
 		 to.datepicker('option','minDate',getDate(this));
@@ -508,7 +526,8 @@ $(function(){
 		 numberOfMonths:2,
 		 changeMonth: true,
 	     changeYear: true,
-	     buttonText: "날짜선택"
+	     buttonText: "날짜선택",
+	     format: 'YY/MM/DD'
 	 })
 	 to=$('.finish_date').on('change',function(){
 		 from.datepicker('option','maxDate',getDate(this));
@@ -524,6 +543,17 @@ $(function(){
 	      return date;
 	    }
 });
+
+// 콤마 제거 (제거값리턴)
+function removeCommaReturn(obj){
+var val = obj.value;
+console.log(val);
+ if(val != ""){
+  val = val.replace(/,/g, "");
+ }
+ return val;
+}
+
 </script>
 <body>
 	<div class="main">
@@ -597,14 +627,16 @@ $(function(){
 			<br/>
 			<li>
 				<label>할인여부 </label>&nbsp;
-				<!-- <input type="button" name="saleselect" class="btn" id="sale_check" value="설정">&nbsp; -->
+				<!-- 	
 				<button class="btn" name="saleselect" value="1" id="sale_check">설정</button>&nbsp;
-				<!-- <input type="button" name="saleselect"  class="btn" id="sale_uncheck" value="설정안함"> -->
 				<button class="btn" name="saleselect" value="0" id="sale_uncheck">설정안함</button>
+				 -->
+				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정">설정</label>
+				<input type="radio" value="0" name="saleselect" id="sale_uncheck"><label for="설정안함">설정안함</label>
 			</li>
 			<ul id="sale_ul" style="display:none">
 				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min="0"/>&nbsp;<span>원</span>&nbsp;<span>할인</span></li>
-				<li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/>&nbsp;<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li>
+				<!-- <li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/>&nbsp;<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li> -->
 				<li id="sale_period">
 					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
 					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
@@ -613,27 +645,34 @@ $(function(){
 					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >--할인금액--</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
 					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
 				</li>
-		<li><input type="checkbox" name="saleb" id="saleb"/><span>못난이 할인 상품으로 등록</span></li> 
-				<!-- <li><button name="saleb" id="saleb" value='1' class="btn">못난이 할인 상품으로 등록</button></li> -->
-				<!-- value = 0은 어떻게 넘겨줄것인가? : script? button이 클릭되지 않으면 value = 0으로 넘기기? -->
+		<li><input type="checkbox" name="saleb" id="saleb" value="1"/><span>못난이 할인 상품으로 등록</span></li> 
+				<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
 			</ul>
 			<li> 
 				<label>판매기간</label>&nbsp;&nbsp;
-				<!-- <input type="button" name="selldate" class="btn" id="sell_check"  value="설정"/ >&nbsp; -->
-				<a name="selldate" class="btn" id="sell_check" value="1">설정</a>&nbsp; 
-				<!-- <input type="button" name="selldate" class="btn" id="sell_uncheck" value="설정안함"/> -->
+			<!-- 	
+				<button name="selldate" class="btn" id="sell_check" value="1">설정</button>&nbsp; 
 				<button name="selldate" class="btn" id="sell_uncheck" value="0">설정안함</button>
-				<!-- 이건 버튼으로 변경안해도 되는데.. 설정안함 하면 sellstart 현재날짜, sellfinish 2099.01.01 로 변경 -->
+				이건 버튼으로 변경안해도 되는데.. 설정안함 하면 sellstart 현재날짜, sellfinish 2099.01.01 로 변경
+				
+				<input type="radio" value="1" name="selldate" id="sale_check"><label for="설정">설정</label>
+				<input type="radio" value="0" name="selldate" id="sale_uncheck"><label for="설정안함">설정안함</label>
+				 -->
 			</li>
-			<li id="date_group"><label>기간설정</label><div id="btn_group">
-				<input type="button" name="" class="btn" value="5일"/>
-				<input type="button" name="" class="btn" value="10일"/>
-				<input type="button" name="" class="btn" value="15일"/>
-				<input type="button" name="" class="btn" value="30일"/>
-				<input type="button" name="" class="btn" value="60일"/>
+		<div style="border:1px solid lightgray; margin-left:20px;">
+		<ul >
+			<li id="date_group">&nbsp;&nbsp;<label>기간설정</label>
+				<div id="btn_group">
+					<input type="button" name="" class="btn" value="5일"/>
+					<input type="button" name="" class="btn" value="10일"/>
+					<input type="button" name="" class="btn" value="15일"/>
+					<input type="button" name="" class="btn" value="30일"/>
+					<input type="button" name="" class="btn" value="60일"/>
 				</div>
 			</li>
-			<li id="sell_start_finish"><label for="start_date">판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
+			<li id="sell_start_finish">&nbsp;&nbsp;<label for="start_date">판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
+		</ul>	
+		</div>
 		</ul>
 		</div>
 	
@@ -650,8 +689,8 @@ $(function(){
 	<div class="category_wrap">
 			<ul class="regi_option_wrap">
 				<li>
-					<button name="optionselect" value="1" id="add_option" class="btn" >옵션추가</button>&nbsp; 
-					<button name="optionselect" value="0" id="none_option" class="btn" >추가안함</button>
+					<input type="radio" value="1" name="optionselect" id="add_option"><label for="옵션추가">옵션추가</label>
+					<input type="radio" value="0" name="optionselect" id="none_option"><label for="추가안함">추가안함</label>
 				</li>
 				<ul id="add_option_ul">
 				<li><label>옵션 갯수</label>&nbsp;
@@ -753,21 +792,34 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label for="">판매단위</label>&nbsp;
-					<input type="number" name="selloption" id="selloption"  min="0"/>
-					<select id="select_unit" name="selloption" >
-						<option value="단위없음">해당없음</option>
+					<input type="number" name="selloption" id="selloption"  min="0" onchange="javascript:removeCommaReturn(this);"/>
+					<select id="select_unit" name="selloption" onchange="javascript:removeCommaReturn(this);">
+						<option value=" ">해당없음</option>
 						<option value="팩">팩</option>
 						<option value="박스">박스</option>
 					</select>
 				</li>
 				<li><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweight" id="sellweight" min="0"/>
-					<select id="select_weight" name="sellweight">
+					<input type="number" name="sellweight" id="sellweight" min="0" onchange="javascript:removeCommaReturn(this);"/>
+					<select id="select_weight" name="sellweight" onchange="javascript:removeCommaReturn(this);">
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>
 				</li>
 				<li><label for="">원산지</label>&nbsp;
+					<input type="radio" value="국내산" name="origin" id="domestic"><label for="국내산">국내산</label>
+					<input type="radio" value="수입산" name="origin" id="import"><label for="수입산">수입산</label>
+					<div id="import_wrap" style="display:none; background-color:#fcfcfc;">
+						<input type="radio" value="중국산" name="origin" id="china"><label for="중국산">중국산</label>
+						<input type="radio" value="일본산" name="origin" id="japan"><label for="일본산">일본산</label>
+						<input type="radio" value="말레이시아산" name="origin" id="malaysia"><label for="말레이시아산">말레이시아산</label>
+						<input type="radio" value="필리핀산" name="origin" id="philippines"><label for="필리핀산">필리핀산</label>
+						<input type="radio" value="베트남산" name="origin" id="vietnam"><label for="베트남산">베트남산</label>
+						<input type="radio" value="칠레산" name="origin" id="chile"><label for="칠레산">칠레산</label>
+					</div>
+				</li>
+				
+				<!-- <li><label for="">원산지</label>&nbsp;
 					<input type="button" name="origin" class="btn" id="domestic" value="국내산"/> <input type="button" name="origin" class="btn" id="import" value="수입산"/>
 					<div id="import_wrap" style="display:none">
 						<input type="button" name="origin" id="china" class="btn" class="import_nation" value="중국산"/>
@@ -777,7 +829,7 @@ $(function(){
 						<input type="button" name="origin" id="vietnam" class="btn" class="import_nation" value="베트남산">
 						<input type="button" name="origin" id="chile" class="btn" class="import_nation" value="칠레산"> 
 					</div>
-				</li>
+				</li> -->
 				<li><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
 					<select id="select_packing" name="wrapping">
 						<option value='실온'>실온</option>
@@ -786,7 +838,7 @@ $(function(){
 					</select>
 				</li>
 				<li><label for="">상품정보</label><br/>
-					<textarea placeholder="간략한 상품정보를 입력해주세요." name="productinformation"></textarea>
+					<textarea placeholder="간략한 상품정보를 입력해주세요." name="productinfomation"></textarea>
 				</li>
 				<li><label for="">주의사항</label><br/>
 					<textarea placeholder="주의사항을 입력해주세요." name="prevention"></textarea>

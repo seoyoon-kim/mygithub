@@ -23,6 +23,7 @@ public class ProductVO {
 	
 	private int totalstock;//총재고수량  
 	private int nowstock;//현재재고수량 ( count(productnum) from orderdetail)
+	private int soldstock; //팔린 재고 (orderdetail에서 가져오기)
 	
 	private String thumbimg;//썸네일이미지
 	
@@ -154,6 +155,12 @@ public class ProductVO {
 	}
 	public void setNowstock(int nowstock) {
 		this.nowstock = nowstock;
+	}
+	public int getSoldstock() {
+		return soldstock;
+	}
+	public void setSoldstock(int soldstock) {
+		this.soldstock = soldstock;
 	}
 	public String getThumbimg() {
 		return thumbimg;

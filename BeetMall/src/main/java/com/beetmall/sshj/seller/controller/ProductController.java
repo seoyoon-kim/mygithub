@@ -164,15 +164,22 @@ public class ProductController {
 				vo.setDeliveryprice(0);
 			}
 			System.out.println("확인");
+			System.out.println("mcatenum -> "+ vo.getMcatenum());
+			System.out.println("productname -> " +vo.getProductname());
 			System.out.println("userid ->"+vo.getUserid());
 			System.out.println("totalstock ->"+vo.getTotalstock());
 			System.out.println("deliveryoption ->"+vo.getDeliveryoption());
 			System.out.println("deliveryprice ->"+vo.getDeliveryprice());
 			System.out.println("saleselect ->"+vo.getSaleselect());
 			System.out.println("optionselect ->"+vo.getOptionselect());
+			System.out.println("saleb -> "+ vo.getSaleb());
 			System.out.println("sellstart ->"+vo.getSellstart());
+			System.out.println("sellfinish ->"+vo.getSellfinish());
 			System.out.println("saleprice ->"+vo.getSaleprice());
 			System.out.println("productnum ->"+vo.getProductcontent());
+			System.out.println("origin ->" +vo.getOrigin());
+			System.out.println("sellWeight->"+vo.getSellweight());
+			System.out.println("wrapping -> "+ vo.getWrapping());
 			
 			
 //---------------------------이미지 등록 끝-----------------------------------------		
@@ -181,16 +188,20 @@ public class ProductController {
 			System.out.println("상품 insert + "+ result);
 		
 			//할인이 있을 때,
-			if(vo.getSaleselect() == '1') {
+			if(vo.getSaleselect() == '1' || vo.getSaleselect() == 1) {
 				result2 = productService.discountInsert(dvo);
 				System.out.println("vo.getSaleSelect -> " + vo.getSaleselect());
 				System.out.println("할인 insert +" + result2);
 			}
 			// 옵션이 있을 때, 
-			if(vo.getOptionselect() == '1') {
+			if(vo.getOptionselect() == '1' || vo.getOptionselect() == 1) {
 				result3 = productService.optionInsert(ovo);
 				System.out.println("vo.getOpionSelect ->" + vo.getOptionselect());
 				System.out.println("옵션 insert + "+ result3);
+			}
+			// 못난이 할인을 선택하지 않았을 때,
+			if(vo.getSaleb()!='1') {
+				vo.setSaleb('0');
 			}
 //---------------------------insert 결과 확인--------------------------------------
 			// 상품등록 확인

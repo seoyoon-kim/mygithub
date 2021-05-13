@@ -112,7 +112,7 @@
 	.btn{float:left;}
  	#remove_product{margin-right:10px;}
  	.option_wrap{margin:8px 0 20px 0;} 
- 	
+ 	img{width:100px; height: 100px;}
 </style>
 <script>
 //체크박스 전체선택
@@ -189,7 +189,7 @@ $(document).ready(function(){
 						<th class="listMenu">판매시작일</th>
 						<th class="listMenu">판매가</th>
 						<th class="listMenu">할인금액</th>
-						<th class="listMenu">할인적용판매가</th>
+						<th class="listMenu">할인판매가</th>
 						<th class="listMenu">할인율</th>
 						<th class="listMenu">할인기간</th>
 						<th class="listMenu">판매상태</th>
@@ -220,19 +220,19 @@ $(document).ready(function(){
 								<input type="hidden" value="${vo.mcatenum}"/>
 							</div>
 						</td>
-						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="">${vo.productname}</a></span></div></td>	
-						<td class="tbl_line_cell"><div id="thumbnail"><img src="${vo.thumbimg}"/></div></td>
-						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">90</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
+						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="custom/customproduct?productnum=${vo.productnum}">${vo.productname}</a></span></div></td>	
+						<td class="tbl_line_cell"><div id="thumbnail"><img src="<%=request.getContextPath()%>/resources/sellerProductImgs/${vo.thumbimg}"/></div></td>
+						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">${vo.nowstock}</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
 						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
 						<td class="tbl_line_cell"><div id="productprice"><span id="price_num">${vo.productprice }</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="saleprice"><span id="price_num">${vo.saleprice}</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="sellprice"><span id="price_num">${vo.sellprice}</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="salepercent"><span id="salepercent">${vo.salepercent}</span>%</div></td>
 						<td class="tbl_line_cell"><div id="saleperiod"><span id="salestart">${vo.salestart }</span> ~ <span id="salefinish">${vo.salefinish }</span></div></td>
-						<c:if test="">
+						<c:if test="${vo.nowstock!=0}">
 						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText">판매중</span></div></td>
 						</c:if>
-						<c:if test ="">
+						<c:if test ="${vo.nowstock==0}">
 						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText" style="color:red">판매종료</span></div></td>
 						</c:if>
 					</tr>
