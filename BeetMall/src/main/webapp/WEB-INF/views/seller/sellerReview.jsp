@@ -16,10 +16,6 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_sellerReview.css">
 
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
 <script>
 ////////////////////////////////전역변수 선언 /////////////////////////////////
 
@@ -260,15 +256,26 @@ $(function(){
 function sortChange(result){
 	let resultData = $(result).val();
 
+	if(startDate == null || startDate == '' ){
+		startDate = "!$#@%";
+		endDate = "!$#@%";
+	}
+	if(searchTxt == null || searchTxt == '' ){
+		searchTxt = "!$#@%";
+	}
+	if(mcatenumDataArr == null || mcatenumDataArr == '' ){
+		mcatenumDataArr = [0];
+	}
+	
 	if(resultData == "최신순"){
 		sortStr = 0;
-		paging(1, sortStr);
+		paging(1, 0, mcatenumDataArr, searchTxt, startDate, endDate);
 	} else if(resultData == "평점높은순"){
 		sortStr = 1;
-		paging(1, sortStr);
+		paging(1, 1, mcatenumDataArr, searchTxt, startDate, endDate);
 	} else {
 		sortStr = 2;
-		paging(1, sortStr);
+		paging(1, 2, mcatenumDataArr, searchTxt, startDate, endDate);
 	}
 	
 }
@@ -279,9 +286,10 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 	if(sortStr == undefined){
 		sortStr = 0;
 	}
-	if(mcatenumDataArr == undefined){
+	if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
 		mcatenumDataArr = [0];
 	}
+	
 	if(searchTxt == undefined || searchTxt == "!$#@%"){
 		searchTxt = "";
 	}
@@ -308,7 +316,7 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 				tag += "<li>등록자</li>";
 				tag += "<li>등록일</li>";
 				tag += "<li>답변 여부</li>";
-			console.log(result);
+
 			result2 = $(result[0]);
 			result2.each( function (idx, vo){
 				tag += "<li>" + vo.productname + "</li>";
@@ -319,11 +327,11 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 				} else {
 					tag += "<li>-</li>";
 				}
-				tag += "<li><a href=''><input type='hidden' name='reviewnum' value='${result.reviewnum }' />"+vo.reviewcontent+"</a></li>";
+				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a></li>";
 				tag += "<li>" + vo.userid + "</li>";
 				tag += "<li>" + vo.reviewwritedate + "</li>";
 				if(vo.reviewanswer != null){
-					tag += "<li>답변 완료</li>";
+					tag += "<li><input type='hidden' value='"+vo.reviewanswer+"' >답변 완료</li>";
 				} else {
 					tag += "<li>미답변</li>";
 				}
@@ -346,20 +354,20 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 
 			let pagingData = result[1];
 			if(pagingData.pageNum != 1){
-				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+','+mcatenumDataArr+','+ searchTxt +','+startDate+','+ endDate+')"></a>';
-				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+','+mcatenumDataArr+','+ searchTxt +','+startDate+','+ endDate+')"></a>';
+				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 			for(let i = pagingData.startPageNum; i <= pagingData.totalPage; i++){
 				if(pagingData.pageNum == i){
 					pagingTag += '<a class="active" href="#" onclick="return false;">'+(i)+'</a>';
 				} else {
-					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+','+mcatenumDataArr+','+ searchTxt+','+startDate+','+ endDate+')">'+(i)+'</a>';
+					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')">'+(i)+'</a>';
 				}
 			}
 			
 			if(pagingData.totalPage != pagingData.pageNum){
-				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+','+mcatenumDataArr+','+ searchTxt+','+startDate+','+ endDate+')"></a>';
-				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+','+mcatenumDataArr+','+ searchTxt+','+startDate+','+ endDate+')"></a>';
+				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 
 			$('.page_nation').html(pagingTag);
@@ -475,11 +483,16 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 						<c:if test="${result.reviewimg == null }">
 							<li>-</li>
 						</c:if>
-						<li><a href=""><input type="hidden" name="reviewnum" value="${result.reviewnum }" />${result.reviewcontent }</a></li>
+						<li>
+							<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
+								<input type="hidden" name="reviewnum" value="${result.reviewnum }" />
+									${result.reviewcontent }
+							</a>
+							</li>
 						<li>${result.userid }</li>
 						<li>${result.reviewwritedate }</li>
 						<c:if test="${result.reviewanswer != null }">
-							<li>답변 완료</li>
+							<li><input type="hidden" value="${result.reviewanswer }" >답변 완료</li>
 						</c:if>
 						<c:if test="${result.reviewanswer == null }">
 							<li>미답변</li>
@@ -517,73 +530,232 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		</div>
 	</article>
 	<!-- 본문 끝 -->
-
-
-	<!-- 팝업 시작 -->
-	<div id="popup">
-		<div class="wrapContainer_Edit1">
-			<form method="" action="">
-				<div class="wrapTitle">리뷰</div>
-				<ul id="reivewManagement">
-					<li><b>구매상품</b> <img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png" id="repMenu_img" />
-						<div>싸고 맛있는 빵빠레빵빠빵</div></li>
-					<li><b>등록자</b> tkaudeotk00</li>
-					<li><b>등록일</b> 2021.05.02</li>
-					<li><b>평점</b>
-						<div>★★★★★</div> <img src="<%=request.getContextPath() %>/resources/img/xgood.png" id="good_img" /> : 2</li>
-				</ul>
-				<div>
-					<br />
-					<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />
-					<div id="reviewContent">
-						<p>이제 드디어 대저 토마토 먹을 수 있네요 대저 토마토 처음 먹어봤는데요 너무 맛있어요</p>
-						<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img" />
-					</div>
-				</div>
-
-				<!-- 섬머노트 -->
-				<div id="summernote">
-					<p></p>
-				</div>
-				<script>
-				    $(document).ready(function() {
-				        $('#summernote').summernote({
-				        	placeholder: '300자 이내로 입력해주세요',
-				        	tabsize: 2,
-				            height: 150
-				        });
-				    });
-				  </script>
-				<div id="popupBtnContainer">
-					<input type="submit" name="popupOk" value="확인" /> <input type="submit" name="popupClose" value="닫기" /> <input type="submit" name="popupDeclaration" value="신고">
-				</div>
-			</form>
-		</div>
-	</div>
-	<!-- 리뷰 보기 팝업 끝 -->
-
-	<!-- 신고하기 -->
-	<div id="declaration">
-		<div class="wrapContainer_Edit1">
-			<div class="wrapTitle">신고하기</div>
-			<form method="" action="" id="declarationFrm">
-				<div>2021/03/26</div>
-				<div>
-					신고 대상 리뷰 : 21.03.02<br /> 신고 대상 아이디 : tkaudeotk02<br /> 구매품명: 대저짭짤이 토마토(10Kg)
-				</div>
-				<div>
-					<select>
-						<option>신고 사유</option>
-						<option>비방/욕설</option>
-						<option>허위</option>
-						<option>성희롱</option>
-						<option>기타</option>
-					</select>
-				</div>
-				<div>
-					<input type="text" width="200px" placeholder="300자 이내로 작성"> <input type="submit" value="보내기" />
-				</div>
-			</form>
-		</div>
-	</div>
+	
 </section>
+<div id="modal"></div>
+<div id="popup"></div>
+<div id="report"></div>
+<script>
+	// 팝업창 만들기! 
+	function popupOpen(data){
+		
+		// 상품명
+		let reviewnum = $(data).children().val();
+		let productname = $(data).parent().prev().prev().prev().text();
+		let reviewscore = $(data).parent().prev().prev().text();
+		let reviewcontent = $(data).text().trim();
+		let userid = $(data).parent().next().text();
+		let reviewwritedate = $(data).parent().next().next().text();
+		let reviewanswer = $(data).parent().next().next().next().text();
+		
+		console.log(reviewnum);
+		
+		if(reviewanswer == '답변 완료'){
+			reviewanswer = $(data).parent().next().next().next().children('input').val();
+		}
+		console.log(reviewanswer);
+		
+		let tag = '<div class="wrapContainer_Edit1">';
+			tag += '<form method="post" action="javascript:reviewAnswer()" id="popupFrm">';
+			tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
+			tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
+			tag += '<ul id="reivewManagement">';
+			tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
+			tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>등록자</b> ' + userid + '</li>';
+			tag += '<li><b>등록일</b> ' + reviewwritedate + '</li>';
+			tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
+			tag += '</ul>';	
+			tag += '<div>';
+			tag += '<br />';
+			tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
+			tag += '<div id="reviewContent">';
+			tag += '<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img" />';
+			tag += '<p>' + reviewcontent + '</p>';
+			tag += '</div>';
+			tag += '</div>';
+			tag += '<div id="reviewAnswer">';
+				if( reviewanswer == '미답변'){
+					tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
+				} else {
+					tag += '<div style="border-top:1px solid #ddd;">';
+					tag += '<p style="margin: 20px 10px ">' + reviewanswer + '<p>';
+					tag += '</div>';
+				}
+			tag += '<div id="popupBtnContainer">';
+				if( reviewanswer == '미답변'){
+					tag += '<input class="normalBtn" type="submit" value="확인" >';
+					tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
+					tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				} else {
+					tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
+					tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				}
+				tag += '</div>';
+			tag += '</div>';
+
+			tag += '</form>';
+			tag += '</div>';
+		
+		$('#popup').html(tag);
+		
+		let windowWidth = $(window).scrollLeft();
+		let windowHeight = $(window).scrollTop() + (window.innerHeight/2) - 250;
+		
+		$('body').css('overflow','hidden');
+		$('#modal').css('display','block').css('top', $(window).scrollTop() +"px").css('left',windowWidth+'px');
+		$('#popup').css('display','block').css('top',windowHeight+'px').css('left',windowWidth+'px');
+		
+	}
+	
+	// 팝업창 닫기
+	function popupClose(){
+		$('body').css('overflow','auto');
+		$('#modal').css('display','none');
+		$('#popup').css('display','none');
+	}
+	
+	// 신고 창 띄우기
+	function popupreport(reviewnum, userid){
+		
+		let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto;">';
+			tag += '<form method="post" action="javascript:reportUpdate()" id="reportFrm">';
+			tag += '<input type="hidden" name="userid" value="' + userid + '" >';
+			tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
+			tag += '<div class="wrapTitle">신고하기</div>';
+			tag += '<div id="reportReason">';
+			tag += '<p>신고사유</p>';
+			tag += '<select name="reportReason">';
+			tag += '<option>비방/욕설</option>';
+			tag += '<option>허위</option>';
+			tag += '<option>성희롱</option>';
+			tag += '<option>기타</option>';
+			tag += '</select>';
+			tag += '</div>';
+			tag += '<div>';
+			tag += '<textarea rows="10" cols="40" id="reportContent" name="reportContent"></textarea>';
+			tag += '</div>';
+			tag += '<div id="reportBtn">';
+			tag += '<input type="submit" class="normalBtn" value="보내기" />';
+			tag += '<input type="button" class="normalBtn" value="취소" onclick="reportClose()"/>';
+			tag += '</div>';
+			tag += '</form>';
+			tag += '</div>';
+			
+		$('#report').html(tag);
+		
+		
+		let windowWidth = $(window).scrollLeft();
+		let windowHeight = $(window).scrollTop() + (window.innerHeight/2)-100;
+		$('#report').css('display','block').css('left',windowWidth+"px").css('top',windowHeight+"px");
+	}
+	
+	//신고창 닫기
+	function reportClose(){
+		$('#report').css('display','none');
+	}
+	
+	// 리뷰 답변 등록하기
+	function reviewAnswer(){
+		let strLength = $('#reviewanswer').val().length;
+		
+		if( strLength > 300 ){
+			alert('글자수는 300자를 초과 할 수 없습니다');
+		}
+		
+		
+		// 제한사항 걸러내기....
+		if(sortStr == undefined){
+			sortStr = 0;
+		}
+		if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
+			mcatenumDataArr = [0];
+		}
+		
+		if(searchTxt == undefined || searchTxt == "!$#@%"){
+			searchTxt = "";
+		}
+		if(startDate == undefined || startDate == "!$#@%"){
+			startDate = "";
+			endDate = "";
+		}
+		
+		if(startDate == null || startDate == '' ){
+			startDate = "!$#@%";
+			endDate = "!$#@%";
+		}
+		if(searchTxt == null || searchTxt == '' ){
+			searchTxt = "!$#@%";
+		}
+
+		
+		let url = "SellerReviewAnswer";
+		let param = $('#popupFrm').serialize();
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: param,
+			success:function(){
+				alert('답변이 성공적으로 등록되었습니다')
+				popupClose();
+				paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
+			} ,
+			error:function(){
+				alert('답변 등록이 실패하였습니다');
+			}
+		})
+	}
+	
+	// 신고 접수
+	function reportUpdate(){
+		let strLength = $('#reportContent').val().length;
+		
+		if( strLength > 300 ){
+			alert('글자수는 300자를 초과 할 수 없습니다');
+		}
+		
+		
+		// 제한사항 걸러내기....
+		if(sortStr == undefined){
+			sortStr = 0;
+		}
+		if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
+			mcatenumDataArr = [0];
+		}
+		
+		if(searchTxt == undefined || searchTxt == "!$#@%"){
+			searchTxt = "";
+		}
+		if(startDate == undefined || startDate == "!$#@%"){
+			startDate = "";
+			endDate = "";
+		}
+		
+		if(startDate == null || startDate == '' ){
+			startDate = "!$#@%";
+			endDate = "!$#@%";
+		}
+		if(searchTxt == null || searchTxt == '' ){
+			searchTxt = "!$#@%";
+		}
+
+		console.log()
+		
+		let url = "SellerReviewReport";
+		let param = $('#reportFrm').serialize();
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: param,
+			success:function(){
+				alert('신고가 접수되었습니다')
+				reportClose();
+				paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
+			} ,
+			error:function(){
+				alert('신고 접수에 실패하였습니다');
+			}
+		})
+	}
+</script>
+
+

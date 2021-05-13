@@ -11,4 +11,10 @@ public interface SellerReviewService {
 	public List<SellerReviewVO> reviewlist(SellerReviewVO vo);
 	// ajax 사용시 리스트 record 알기 위해서 사용
 	public List<SellerReviewVO> reviewlistRecord(SellerReviewVO vo);
+	// 리뷰 답변 업데이트
+	public int answerUpdate(SellerReviewVO vo);
+	// 리뷰 신고 업데이트
+	public int reviewReportUpdate(SellerReviewVO vo);
+	// 신고 테이블 업데이트
+	public int reportInsert(SellerReviewVO vo);
 }

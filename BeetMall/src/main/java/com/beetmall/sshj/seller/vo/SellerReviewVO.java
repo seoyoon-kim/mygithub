@@ -25,8 +25,9 @@ public class SellerReviewVO {
 	private int[] mcatenumDataArr; // mcatenum 배열
 	
 	private int sortStr; // 정렬기준
-	
-	
+	private String sellerId; // sellerid를 저장할 vo
+	private String reportReason; //신고사유 받을 vo
+	private String reportContent; //신고 내용 받을 vo
 	
 	///////////////////////////////////////////////////////////////////////////
 	
@@ -98,14 +99,33 @@ public class SellerReviewVO {
 	
 	///////////////////////////////// 페이징 ////////////////////////////////////
 
+	public String getReportContent() {
+		return reportContent;
+	}
+	public void setReportContent(String reportContent) {
+		this.reportContent = reportContent;
+	}
 	
+	public String getReportReason() {
+		return reportReason;
+	}
+
+	public void setReportReason(String reportReason) {
+		this.reportReason = reportReason;
+	}
 	
-	
+	public String getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
+	}
 	
 	
 	public String getStartDate() {
 		return startDate;
 	}
+
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}

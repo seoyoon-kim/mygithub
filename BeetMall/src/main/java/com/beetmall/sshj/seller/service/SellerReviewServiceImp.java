@@ -31,5 +31,23 @@ public class SellerReviewServiceImp implements SellerReviewService{
 		// TODO Auto-generated method stub
 		return dao.reviewlistRecord(vo);
 	}
+
+	@Override
+	public int answerUpdate(SellerReviewVO vo) {
+		// TODO Auto-generated method stub
+		return dao.answerUpdate(vo);
+	}
+
+	@Override
+	public int reviewReportUpdate(SellerReviewVO vo) {
+		// TODO Auto-generated method stub
+		return dao.reviewReportUpdate(vo);
+	}
+
+	@Override
+	public int reportInsert(SellerReviewVO vo) {
+		// TODO Auto-generated method stub
+		return dao.reportInsert(vo);
+	}
 	
 }
