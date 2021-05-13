@@ -104,6 +104,7 @@ public class SellerReviewController {
 				vo.setTotalScore(Double.parseDouble(String.format("%.2f", (double)totalScore/list.size() )));
 			}
 			
+			// totalrecord와 userid를 vo에 넣어서 데이터를 불러온다
 			vo.setUserid(userid);
 			vo.setTotalRecord(list.size());
 
@@ -118,7 +119,7 @@ public class SellerReviewController {
 		}
 	}
 	
-	//@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.GET)
+	//리뷰 페이징
 	@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<Object> reviewPaging(HttpServletRequest req, HttpSession session, SellerReviewVO vo, Model model) {
@@ -145,6 +146,7 @@ public class SellerReviewController {
 		return dataList;
 	}
 	
+	// 리뷰 답변 등록
 	@RequestMapping(value = "/SellerReviewAnswer",method = RequestMethod.POST)
 	@ResponseBody
 	public void answerUpdate(SellerReviewVO vo) {
@@ -158,6 +160,7 @@ public class SellerReviewController {
 		
 	}
 	
+	// 리뷰 신고 접수
 	@RequestMapping(value = "/SellerReviewReport",method = RequestMethod.POST)
 	@ResponseBody
 	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})

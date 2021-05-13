@@ -4,15 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerReviewDAO">
 	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
-		select reviewnum, ordernum, c.productnum productnum, reviewcontent, 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
-			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		select 
+			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, 
+			reviewscore, reviewanswer
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where a.userid='${userid}') c join review d on c.productnum = d.productnum 
 		
 	</select>
-	<select id="reviewlist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+	<select id="asklist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
 		select * from ( 
 		select * from ( 
 		select reviewnum, ordernum, c.productnum productnum, reviewcontent, d.userid, 

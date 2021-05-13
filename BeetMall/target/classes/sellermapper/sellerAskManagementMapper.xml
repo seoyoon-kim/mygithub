@@ -2,17 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.beetmall.sshj.seller.dao.SellerReviewDAO">
-	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
-		select 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, 
-			reviewscore, reviewanswer
-		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
-		
-		where a.userid='${userid}') c join review d on c.productnum = d.productnum 
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerAskManagementDAO">
+	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
+		select to_char(qwritedate,'yyyy-MM-dd') qwritedate, qanswer from (
+		select * from product a join mcategory b 
+		on a.mcatenum = b.mcatenum where a.userid='${userid}') c 
+		join userqboard d on c.productnum = d.productnum
 		
 	</select>
-	<select id="asklist" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+	<select id="reviewlist" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
 		select * from ( 
 		select * from ( 
 		select reviewnum, ordernum, c.productnum productnum, reviewcontent, d.userid, 
@@ -80,7 +78,7 @@
 
 	</select>
 	
-	<select id="reviewlistRecord" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
+	<select id="reviewlistRecord" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
 		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
 			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
 			reviewimg, reviewscore, reviewreport, reviewanswer, productname

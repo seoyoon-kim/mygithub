@@ -14,7 +14,7 @@
 	<fmt:formatDate value="${today }" pattern="yyyy" />
 </c:set>
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_sellerReview.css">
+<link rel='stylesheet' href='<%=request.getContextPath()%>/resources/css/xstyle_sellerAskManagement.css'>
 
 <script>
 ////////////////////////////////전역변수 선언 /////////////////////////////////
@@ -299,7 +299,7 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 	}
 	
 	
-	let url = "SellerReviewPaging";
+	let url = "SellerAskPaging";
 	let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord}+"&sortStr="+sortStr;
 		param += "&mcatenumDataArr="+mcatenumDataArr+"&searchTxt="+searchTxt+"&startDate="+startDate+"&endDate="+endDate;
 	
@@ -312,31 +312,24 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 			let tag = "<li>상품명</li>";
 				tag += "<li>평점</li>";
 				tag += "<li>포토</li>";
-				tag += "<li>리뷰 내용</li>";
-				tag += "<li>작성자</li>";
-				tag += "<li>작성일</li>";
+				tag += "<li>문의 내용</li>";
+				tag += "<li>등록자</li>";
+				tag += "<li>등록일</li>";
 				tag += "<li>답변 여부</li>";
 
 			result2 = $(result[0]);
 			result2.each( function (idx, vo){
 				tag += "<li>" + vo.productname + "</li>";
-				tag += "<li>" + vo.reviewscore + "</li>";
-				if(vo.reviewimg != null){
-					let data = vo.reviewimg;
-					tag += "<li style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )></li>";
-				} else {
-					tag += "<li>-</li>";
-				}
-				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a></li>";
+				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='qnum' value='"+vo.qnum+"' />"+vo.qcontent+"</a></li>";
 				tag += "<li>" + vo.userid + "</li>";
-				tag += "<li>" + vo.reviewwritedate + "</li>";
-				if(vo.reviewanswer != null){
-					tag += "<li><input type='hidden' value='"+vo.reviewanswer+"' >답변 완료</li>";
+				tag += "<li>" + vo.qwritedate + "</li>";
+				if(vo.qanswer != null){
+					tag += "<li><input type='hidden' value='"+vo.qanswer+"' >답변 완료</li>";
 				} else {
 					tag += "<li>미답변</li>";
 				}
 			})
-			$('#reviewList').html(tag);
+			$('#askList').html(tag);
 	
 	
 			// 시작하기 전, startDate가 값이 없으면 paging 누를때 에러가 발생하기 때문에 임의의 특수문자로 설정해놓는다.
@@ -382,55 +375,53 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 function popupOpen(data){
 	
 	// 상품명
-	let reviewnum = $(data).children().val();
+	let qnum = $(data).children().val();
 	let productname = $(data).parent().prev().prev().prev().text();
-	let reviewscore = $(data).parent().prev().prev().text();
-	let reviewcontent = $(data).text().trim();
+	let qcontent = $(data).text().trim();
 	let userid = $(data).parent().next().text();
-	let reviewwritedate = $(data).parent().next().next().text();
-	let reviewanswer = $(data).parent().next().next().next().text();
+	let qwritedate = $(data).parent().next().next().text();
+	let qanswer = $(data).parent().next().next().next().text();
 	
-	console.log(reviewnum);
+	console.log(qnum);
 	
-	if(reviewanswer == '답변 완료'){
-		reviewanswer = $(data).parent().next().next().next().children('input').val();
+	if(qanswer == '답변 완료'){
+		qanswer = $(data).parent().next().next().next().children('input').val();
 	}
-	console.log(reviewanswer);
+	console.log(qanswer);
 	
 	let tag = '<div class="wrapContainer_Edit1">';
-		tag += '<form method="post" action="javascript:reviewAnswer()" id="popupFrm">';
-		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
-		tag += '<ul id="reivewManagement">';
+		tag += '<form method="post" action="javascript:qanswer()" id="popupFrm">';
+		tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
+		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 문의</div>';
+		tag += '<ul id="askManagement">';
 		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
-		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
-		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
-		tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
+		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>등록자</b> ' + userid + '</li>';
+		tag += '<li><b>등록일</b> ' + qwritedate + '</li>';
 		tag += '</ul>';	
 		tag += '<div>';
 		tag += '<br />';
-		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
-		tag += '<div id="reviewContent">';
+		tag += '<b>&nbsp;&nbsp;&nbsp;문의 내용</b><br />';
+		tag += '<div id="qcontent">';
 		tag += '<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img" />';
-		tag += '<p>' + reviewcontent + '</p>';
+		tag += '<p>' + qcontent + '</p>';
 		tag += '</div>';
 		tag += '</div>';
-		tag += '<div id="reviewAnswer">';
-			if( reviewanswer == '미답변'){
-				tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
+		tag += '<div id="qAnswer">';
+			if( qanswer == '미답변'){
+				tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
 			} else {
 				tag += '<div style="border-top:1px solid #ddd;">';
-				tag += '<p style="margin: 20px 10px ">' + reviewanswer + '<p>';
+				tag += '<p style="margin: 20px 10px ">' + qanswer + '<p>';
 				tag += '</div>';
 			}
 		tag += '<div id="popupBtnContainer">';
-			if( reviewanswer == '미답변'){
+			if( qanswer == '미답변'){
 				tag += '<input class="normalBtn" type="submit" value="확인" >';
 				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
 			} else {
 				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
 			}
 			tag += '</div>';
 		tag += '</div>';
@@ -457,12 +448,12 @@ function popupClose(){
 }
 
 // 신고 창 띄우기
-function popupreport(reviewnum, userid){
+function popupreport(qnum, userid){
 	
 	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto;">';
 		tag += '<form method="post" action="javascript:reportUpdate()" id="reportFrm">';
 		tag += '<input type="hidden" name="userid" value="' + userid + '" >';
-		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
+		tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
 		tag += '<div class="wrapTitle">신고하기</div>';
 		tag += '<div id="reportReason">';
 		tag += '<p>신고사유</p>';
@@ -496,9 +487,9 @@ function reportClose(){
 	$('#report').css('display','none');
 }
 
-// 리뷰 답변 등록하기
-function reviewAnswer(){
-	let strLength = $('#reviewanswer').val().length;
+// 문의 답변 등록하기
+function qanswer(){
+	let strLength = $('#qanswer').val().length;
 	
 	if( strLength > 300 ){
 		alert('글자수는 300자를 초과 할 수 없습니다');
@@ -535,7 +526,7 @@ function reviewAnswer(){
 	}
 
 	
-	let url = "SellerReviewAnswer";
+	let url = "Sellerqanswer";
 	let param = $('#popupFrm').serialize();
 	$.ajax({
 		type: "POST",
@@ -593,7 +584,7 @@ function reportUpdate(){
 
 	console.log()
 	
-	let url = "SellerReviewReport";
+	let url = "SellerAskReport";
 	let param = $('#reportFrm').serialize();
 	$.ajax({
 		type: "POST",
@@ -617,27 +608,25 @@ function reportUpdate(){
 	<%@include file="/WEB-INF/views/inc/sellerHeader.jsp"%>
 	<!-- 본문 시작 -->
 	<article>
-		<div class='seller_title'>리뷰관리</div>
+		<div class='seller_title'>문의관리</div>
 		<div class="wrap">
-			<!-- 리뷰 보기 -->
-			<div class="wrapTitle">리뷰보기</div>
+			<!-- 문의 보기 -->
+			<div class="wrapTitle">문의보기</div>
 			<div class="wrapContainer">
 
-				<ul id="reviewInfo">
-					<li style="font-weight: bold;">새 리뷰</li>
-					<li>${resultData.newReview }건</li>
+				<ul id="askInfo">
+					<li style="font-weight: bold;">새 문의</li>
+					<li>${resultData.newAsk }건</li>
 					<li style="font-weight: bold;">미답변</li>
-					<li>${resultData.nullReview }건</li>
-					<li style="font-weight: bold;">사용자 총 평점</li>
-					<li>${resultData.totalScore }/5</li>
-					<li style="font-weight: bold;">전체 리뷰 수</li>
-					<li>${resultData.totalReview }건</li>
+					<li>${resultData.nullAsk }건</li>
+					<li style="font-weight: bold;">전체 문의 수</li>
+					<li>${resultData.totalAsk }건</li>
 				</ul>
 			</div>
-			<!-- 리뷰 보기 끝 -->
+			<!-- 문의 보기 끝 -->
 
-			<!-- 리뷰 검색 -->
-			<div class="wrapTitle">리뷰 검색</div>
+			<!-- 문의 검색 -->
+			<div class="wrapTitle">문의 검색</div>
 			<div class="wrapContainer">
 				<div id="categoryList">
 					<div id="categoryListMiddle">
@@ -679,7 +668,7 @@ function reportUpdate(){
 							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
 						</div>
 						<div>
-							<input type="text" id="searchTxt" name="searchTxt" placeholder="리뷰 내용"/>
+							<input type="text" id="searchTxt" name="searchTxt" placeholder="문의 내용"/>
 							<button id="searchingBtn" style='margin:0 10px'>조회</button>
 						</div>
 					</div>
@@ -688,9 +677,9 @@ function reportUpdate(){
 				</div>
 				<!-- categoryList 끝 -->
 			</div>
-			<!-- 리뷰 검색 끝 -->
+			<!-- 문의 검색 끝 -->
 
-			<!-- 리뷰 출력 -->
+			<!-- 문의 출력 -->
 
 			<div id="sortContainer">
 				<select id="sortSelect" onchange="javascript:sortChange(this)">
@@ -700,42 +689,33 @@ function reportUpdate(){
 				</select>
 			</div>
 
-			<ul id="reviewList">
+			<ul id="askList">
 				<li>상품명</li>
-				<li>평점</li>
-				<li>포토</li>
-				<li>리뷰 내용</li>
+				<li>제목</li>
 				<li>작성자</li>
 				<li>작성일</li>
 				<li>답변 여부</li>
-				<c:if test="${reviewList != null }">
-					<c:forEach var="result" items="${reviewList}" varStatus="i">
+				<c:if test="${askList != null }">
+					<c:forEach var="result" items="${askList}" varStatus="i">
 						<li>${result.productname }</li>
-						<li>${result.reviewscore }</li>
-						<c:if test="${result.reviewimg != null }">
-							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )></li>
-						</c:if>
-						<c:if test="${result.reviewimg == null }">
-							<li>-</li>
-						</c:if>
 						<li>
 							<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
-								<input type="hidden" name="reviewnum" value="${result.reviewnum }" />
-									${result.reviewcontent }
+								<input type="hidden" name="qnum" value="${result.qnum }" />
+									${result.qtitle}
 							</a>
-							</li>
+						</li>
 						<li>${result.userid }</li>
-						<li>${result.reviewwritedate }</li>
-						<c:if test="${result.reviewanswer != null }">
-							<li><input type="hidden" value="${result.reviewanswer }" >답변 완료</li>
+						<li>${result.qwritedate }</li>
+						<c:if test="${result.qanswer != null }">
+							<li><input type="hidden" value="${result.qanswer }" >답변 완료</li>
 						</c:if>
-						<c:if test="${result.reviewanswer == null }">
+						<c:if test="${result.qanswer == null }">
 							<li>미답변</li>
 						</c:if>
 					</c:forEach>
 				</c:if>
 			</ul>
-			<!-- 리뷰 출력 끝 -->
+			<!-- 문의 출력 끝 -->
 			<!--------------페이징 표시-------------------->
 			
 			<c:if test="${resultData != null }">
@@ -770,4 +750,3 @@ function reportUpdate(){
 <div id="modal"></div>
 <div id="popup"></div>
 <div id="report"></div>
-
