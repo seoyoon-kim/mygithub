@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
- <style> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<style> 
 	 #container li{ 
 		 list-style-type:none; 
 		 float:left; 
@@ -21,11 +8,7 @@
 	 }  
 	 #container li:nth-of-type(6){ 
 	 	padding:10px 0 10px 20px;
-	 }
-	#contentBox{ 
-		top:20px; 
-		margin-left:10px;
-	}  
+	 } 
 	#contentBox li:nth-of-type(9n-8){ 
 		width:0%; 
 	}
@@ -275,6 +258,12 @@
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="customerListA">리뷰 목록</a></strong></h5></li> 
+				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
+				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
+			</ul> 
+		</div>  
+		<div id="sortBox">
+			<ul>
 				<li><select name="sort" > 
 		   				<option value="상품번호" selected>상품번호</option>
 		   				<option value="상품명">상품명</option>
@@ -297,10 +286,8 @@
 	   			</li> 
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
-				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
-			</ul> 
-		</div>  
+			 </ul>
+		</div>
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
@@ -480,7 +467,7 @@
 			</div>
 		 </div> 
 		 <div>
-			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

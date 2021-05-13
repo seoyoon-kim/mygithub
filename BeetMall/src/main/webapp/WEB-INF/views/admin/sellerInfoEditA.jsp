@@ -1,42 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-  
-<!-- include libraries(jQuery, bootstrap, ajax) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+ 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-<!-- font -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
  
-<!-- css --> 
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+<!-- css -->  
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
 <style> 
 	 #contentBox{
 	 	height:1780px;
+	 	top:30px;
 	 }
+	 #infoBox {
+    	top: -350px !important;
+    }
 	 #infoHeader{
-	 	padding-top:20px;
+	 	padding-top:10px;
 	 } 
 	 #info{
-	 	top:-278px;
+	 	top:-285px;
 	 	left:-250px;
 	 }
 	  #info li:nth-of-type(5){
 	 	padding-left:460px;
 	 } /*좌하 신고 정보*/
 	 #reportBox{
-	 	top:-470px; 
+	 	top:-470px !important; 
 	 	height:120px;
 	 	left:0;
 	 }
@@ -45,22 +37,38 @@
 	 	top:0;
 	 	left:0;
 	 	width:500px;
+	 	padding-top:10px;
 	 } 
 	 #reportHeader{
+	 	display:flex;
 	 	top:10px;
 	 	left:-70px;
+	 	margin-left:100px !important;
 	 }
-	#reportHeader>li:nth-of-type(2){
-	 	top:-43px;
-	 	left:165px;
+	#reportHeader>li:nth-of-type(2){ 
+	 	left:100px;
 	 }
 	 #report{
-	 	top:-80px;
+	 	top:-35px;
 	 	left:100px;
 	 }
 	 #reportBox button{
-	 	top:-155px;
+	 	top:-105px;
 	 	left:370px;
+	 }
+	 #sellerEdit{
+	 	box-shadow: 4px 6px 15px -7px #C4C4C4;
+	 	position:relative;
+	 	top:-320px; 
+	 	border-radius:10px;
+	 	height:1000px;
+	 }
+	 #bottommm{
+	 	margin-top:20px !important;
+	 	left:-50px !important;
+	 }
+	 hr{
+	 	border-color:dimgray !important;
 	 }
 </style>
 <script>
@@ -136,52 +144,54 @@
 		 	</div>
 		 	<div id="farmInfo"><h5><strong>판매자 농장 정보</strong></h5></div>
 				<!-- info 컨테이너 묶기 width:700px 고정 -->
-			<div id="info_container">
-				<div id="profile_box">
-					<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png"/><br/>
-					<input type="text" id="farmname" name="farmname" style="width:100px;height:25px" value="작은 농부 이강산"/>
-					<div>
-						방문자수 : ${farmvisitor }23명<br/>
-						즐겨찾기 수 : 54명
-					</div>
-				</div><!-- profile_box 종료 -->
-				<hr/>
-				<div id="farm_info">
-					<div>INFO</div>
-					<textarea rows="5" cols="80" name="farmintro" >제가 키운건 자부심 있습니다.제 아들, 딸, 손주까지 먹입니다! 한번드셔보이소</textarea>
-				</div><!-- farm_info 종료 -->
-				<div id="farm_contact">
-					<div>CONTACT</div>
-					<div id="contact_content">
-						<b>스토어 정보</b>
-						<div><span>상호명</span><input type="text" name="storename" style="width:400px" value="금강산 푸르게 푸르게"/></div>
-						<div><span>대표자</span><input type="text" name="sellername" style="width:400px" value="금강산"/></div>
-						<div><span>사업자등록번호</span><input type="text" style="width:400px" name="sellerreginum" value="622-220-11234" readonly></div>
-						<div><span>사업장 소재지</span><input type="text" style="width:400px" name="storeaddr" value="서울특별시 영등포구 ..." readonly></div>
-						<div><span>은행명</span><input type="text" name="bank" style="width:400px" value="신한은행"/></div>
-						<div><span>예금주</span><input type="text" name="bankname" style="width:400px" value="이강산"/></div>
-						<div><span>계좌번호</span><input type="text" name="bankaccount" style="width:400px" value="5453654-1535454-21"/></div>
-						<div><span>E-Mail</span><input type="text" name="storeemail" style="width:400px" value="aijimi1983@google.com"/></div>
-					</div>
-				</div><!-- farm_contact 종료 -->
-				<div id="farm_repMenu">
-					<input type="hidden" name="productnum" value="productnum"/> 
-					<div>대표메뉴</div>
-					<div id="repMenu_content">
-						<img src="<%=request.getContextPath()%>/resources/img/xeggplant.jpg" name="thumbimg"/>
-						<div>
-							<div><span name="">14%</span>&nbsp;<p name="saleprice">50,000원</p></div>
-							<p name="productname">상추 품평회에서 대상 수상한 정말 맛있는 상추 설탕 먹여서 키움</p>
+				<div id="sellerEdit">
+					<div id="info_container">
+						<div id="profile_box">
+							<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png"/><br/>
+							<input type="text" id="farmname" name="farmname" style="width:100px;height:25px" value="작은 농부 이강산"/>
+							<div>
+								방문자수 : ${farmvisitor }23명<br/>
+								즐겨찾기 수 : 54명
+							</div>
+						</div><!-- profile_box 종료 -->
+						<hr/>
+						<div id="farm_info">
+							<div>INFO</div>
+							<textarea rows="5" cols="80" name="farmintro" >제가 키운건 자부심 있습니다.제 아들, 딸, 손주까지 먹입니다! 한번드셔보이소</textarea>
+						</div><!-- farm_info 종료 -->
+						<div id="farm_contact">
+							<div>CONTACT</div>
+							<div id="contact_content">
+								<b>스토어 정보</b>
+								<div><span>상호명</span><input type="text" name="storename" style="width:400px" value="금강산 푸르게 푸르게"/></div>
+								<div><span>대표자</span><input type="text" name="sellername" style="width:400px" value="금강산"/></div>
+								<div><span>사업자등록번호</span><input type="text" style="width:400px" name="sellerreginum" value="622-220-11234" readonly></div>
+								<div><span>사업장 소재지</span><input type="text" style="width:400px" name="storeaddr" value="서울특별시 영등포구 ..." readonly></div>
+								<div><span>은행명</span><input type="text" name="bank" style="width:400px" value="신한은행"/></div>
+								<div><span>예금주</span><input type="text" name="bankname" style="width:400px" value="이강산"/></div>
+								<div><span>계좌번호</span><input type="text" name="bankaccount" style="width:400px" value="5453654-1535454-21"/></div>
+								<div><span>E-Mail</span><input type="text" name="storeemail" style="width:400px" value="aijimi1983@google.com"/></div>
+							</div>
+						</div><!-- farm_contact 종료 -->
+						<div id="farm_repMenu">
+							<input type="hidden" name="productnum" value="productnum"/> 
+							<div>대표메뉴</div>
+							<div id="repMenu_content">
+								<img src="<%=request.getContextPath()%>/resources/img/xeggplant.jpg" name="thumbimg"/>
+								<div>
+									<div><span name="">14%</span>&nbsp;<p name="saleprice">50,000원</p></div>
+									<p name="productname">상추 품평회에서 대상 수상한 정말 맛있는 상추 설탕 먹여서 키움</p>
+								</div>
+							</div>
 						</div>
+						<div id="bottommm">
+						<input type="submit" value="수정하기" class="btn write_btn" id="write_btn"/>	
+						<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn"/>
+						<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
+									
 					</div>
+					</div><!-- info_container 종료 -->
 				</div>
-				<div id="bottommm">
-				<input type="submit" value="수정하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn"/>
-				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-							
-			</div>
-			</div><!-- info_container 종료 -->
 		</div>
 		
 		<!-- 사업자 등록증 모달창 -->

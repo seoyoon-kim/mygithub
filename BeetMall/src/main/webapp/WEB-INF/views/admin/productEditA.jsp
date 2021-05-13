@@ -1,29 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
  <style> 
 	 #container li{ 
 		 list-style-type:none; 
 		 float:left;  
 	 }   
 	#contentBox{ 
-		top:20px; 
-		margin-left:10px;
+		margin-top:80px !important;		
 	}  
 	#topBar h5{
-		width:200px;
+		width:200px !important;
 		position:relative;
 		left:-25px;
 	} 
@@ -140,7 +126,7 @@
 		float: left;
 		margin: 0 auto;
 		padding-left: 0px;
-		width:550px;
+		width:550px !important;
 	}
 	
 	#productPrBox>ul>li {
@@ -167,8 +153,8 @@
 		width: 20px;
 		height:20px;
 	}
-	#title li:nth-of-type(5), #contentBox li:nth-of-type(5) {
-		width:50%;	
+	#title li:nth-of-type(5), #productPrBox li:nth-of-type(5) {
+		width:50% !important;	
 	}
 	#selecOption {
 		width: 80%;
@@ -365,10 +351,7 @@
 	.reviewList {
 		height: 200px;
 		margin-bottom: 30px;
-	}
-	.reviewList>li:nth-of-type(5){
-		width:90px !important;
-	}
+	} 
 	#reviewTitle>li, .reviewList>li {
 		width: 10%;
 		float: left;
@@ -390,7 +373,7 @@
 		text-align:center;
 	}
 	#reviewTitle>li:nth-child(5n+2), .reviewList>li:nth-child(5n+2) {
-		width: 540px;
+		width: 400px;
 	}
 	#reviewTitle>li:nth-child(5n+3), .reviewList>li:nth-child(5n+3) {
 		text-align:center;
@@ -540,7 +523,7 @@
 		text-align:center;
 	}
 	#qnaTitle>li:nth-child(5n+2), #qnaList>li:nth-child(5n+2) {
-		width: 540px;
+		width: 400px;
 	}
 	
 	#qnaTitle>li:nth-child(5n+3), #qnaList>li:nth-child(5n+3) {
@@ -554,7 +537,7 @@
 	}
 	#qnaTitle>li:nth-child(5n), #qnaList>li:nth-child(5n) {
 		text-align:center;
-		width: 90px;
+		width: 162px;
 	}
 	#qnaList a:link, #qnaList a:active, #qnaList a:visited, #qnaList a:hover{
 		color:black;
@@ -562,34 +545,12 @@
 	#qnaList>li>img {
 		width: 20px;
 		height: 20px;
-	}
-	#qnaWriteBtn>input[type=button] {
-		margin-top:30px;
-	}
+	} 
 	
 	<!--
 	문의 후기 버튼 -->#reviewWriteBtn {
 		
-	}
-	
-	#reviewWriteBtn>input {
-		float: right;
-		width: 80px;
-		height: 25px;
-		line-height: 20px;
-	}
-	
-	#qnaWriteBtn {
-		
-	}
-	
-	#qnaWriteBtn>input {
-		float: right;
-		width: 80px;
-		height: 25px;
-		line-height: 20px;
-	}
-	
+	}   
 	#productPageDiv {
 		font-size: 17px;
 	}
@@ -664,7 +625,7 @@ $(document).ready(function(){
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="productDetailA">상품 상세보기</a></strong></h5></li>  
+				<li><h5><strong><a href="productDetailA">상품 수정</a></strong></h5></li>  
 			</ul> 
 		</div>  
    		<div id="contentBox">  
@@ -920,12 +881,7 @@ $(document).ready(function(){
 					<li>goguma123</li>
 					<li>2020.01.23</li>
 					<li>4</li>
-				</ul>
-
-				<div id="reviewWriteBtn">
-					<input type="button" value="후기 작성"  class="btn" disabled/>
-				</div>
-
+				</ul> 
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">
 					<div class="page_nation">
@@ -998,21 +954,27 @@ $(document).ready(function(){
 					<li>2020.01.23</li>
 					<li><img src="img/ciconlock2.png"></li>
 
-				</ul>
-
-				<div id="qnaWriteBtn">
-					<input type="button" value="문의 작성" class="btn" disabled/>
-				</div>
+				</ul> 
 
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">
-					<div class="page_nation">
-						<a class="arrow pprev" href="#"></a> <a class="arrow prev"
-							href="#"></a> <a href="#" class="active">1</a> <a href="#">2</a>
-						<a href="#">3</a> <a href="#">4</a> <a class="arrow next" href="#"></a>
-						<a class="arrow nnext" href="#"></a>
+					<div class="page_nation"> 
+					   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
+					   <a class="arrow prev" href="#"></a>
+					   <a href="#" class="active">1</a>
+					   <a href="#">2</a>
+					   <a href="#">3</a>
+					   <a href="#">4</a>
+					   <a href="#">5</a>
+					   <a href="#">6</a>
+					   <a href="#">7</a>
+					   <a href="#">8</a>
+					   <a href="#">9</a>
+					   <a href="#">10</a>
+					   <a class="arrow next" href="#"></a>
+					   <a class="arrow nnext" href="#"></a>
 					</div>
-				</div>
+		 		</div>  
 				<!-- 페이징 표시--------- -->
 
 

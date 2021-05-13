@@ -15,6 +15,9 @@
 	#claim,#secondBox{
 		top:-120px;
 	} 
+	#imgBox img{
+		height:75px;
+	}
 	#imgs{
 		list-style-type:none; 
 		display:flex; 

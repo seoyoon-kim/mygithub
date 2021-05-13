@@ -44,11 +44,12 @@ public class admin_sellerController {
 			return mav;
 		} 
 	//판매자 정보 수정
-		@RequestMapping("/boardSellerInfoEdit")
-		public ModelAndView boardSellerInfoEdit() {
+		@RequestMapping("/sellerInfoEditA")
+		public ModelAndView sellerInfoEditA() {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("list", adminService.noticeList());
-			mav.setViewName("/admin/boardSellerInfoEdit");
+			mav.setViewName("/admin/sellerInfoEditA"
+					+ "");
 			return mav;
 		} 
 		 

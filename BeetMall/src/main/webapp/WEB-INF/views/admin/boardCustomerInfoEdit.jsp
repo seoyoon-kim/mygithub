@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
 <style>
 	/*맨 위 top Bar*/
@@ -23,6 +10,10 @@
 	} 
 	#contentBox{
 		height:3200px;
+		top:50px;
+	}
+	table{
+		-webkit-box-shadow: 4px 6px 15px -7px #C4C4C4; 
 	}
 	/*회원정보 전체*/
 	#infoBox, button, #infoTitle>p{
@@ -47,14 +38,11 @@
 	} 
 	thead{
 		border-bottom:1px solid gray;	
-	}
-	table{
-		border-radius:10px;
-	}
-	.tg .mileTop:nth-of-type(1), .tg .favoriteTop:nth-of-type(1), .tg .tg-yrou:nth-of-type(1){ 
+	} 
+	.tgr .mileTop:nth-of-type(1), .tga .favoriteTop:nth-of-type(1), .tgc .tg-yrou:nth-of-type(1){ 
 		border-radius:10px 0 0 0 ;
 	}
-	.tg .mileTop:nth-of-type(5), .tg .favoriteTop:nth-of-type(4), .tg .tg-yrou:nth-of-type(3){ 
+	.tgr .mileTop:nth-of-type(5), .tga .favoriteTop:nth-of-type(4), .tgc .tg-yrou:nth-of-type(3){ 
 		border-radius:0 10px 0 0 ;
 	} 
 	tr{
@@ -62,17 +50,26 @@
 	 	background-color:white;
 	}
 	#infoTitle>p{ 
-		top:-40px;
+		top:-10px;
 	}
 	 #info{
-	 	top:-385px;
-	 	left:-250px;
+	 	top:-383px;
+	 	left:-230px;
 	 }
+	 #contentBox li:nth-of-type(5) {
+	 	width:250px !important;
+	 }
+	 #contentBox ul {
+    	margin-left: 0 !important; 
+	}
 	/*회원정보 항목 */
 	#infoHeader{ 
 		top:11px;
 		left:-60px;
 	}    
+	#infoHeader li{
+    	padding-top: 22px !important;
+	}
 	  /*회원정보 내용 */
 	  #info li:nth-of-type(5){
 	 	padding-left:390px;
@@ -105,22 +102,22 @@
 	 	color:white;
 	   }
 	  /*회원정보 버튼*/
-	  #btns{
+	  .btns{
 	  	position:relative;
 	  	float:left;
-	  	top:-345px;
-	  	left:65px; 
+	  	top:-355px;
+		left:65px;
 	  	font-size:15px;  
 	  }
-	  #btns>button{
+	  .btns>button{
 	  	margin-right:30px;  
 	  } 
 	  
 	 /*오른쪽 구매현황*/	 
 	 #buyHistory{
 	 	position:relative;
-	 	top:-550px;
-	 	left:-10px;
+	 	top:-550px !important;
+	 	left:555px;
 	 	height:320px;
 	 }
 	 #buyTitle{
@@ -179,8 +176,8 @@
 	  #reportBox{
 	  	height:205px;
 	  	position:relative;
-	  	top:-550px;
-	  	left:-10px;
+	  	top:-550px !important;
+	  	left:555px;
 	  }
 	   #reportsBox{
 	   	position:relative;
@@ -189,8 +186,7 @@
 	  #stopNum, #stopDays{
 	  	display:flex;  
 	  	position:relative;
-	  	width:180px;
-	  	top:20px;
+	  	width:180px; 
 	  }
 	  #stopNum{ 
 	  	left:60px;
@@ -223,6 +219,9 @@
 	 	width:200px;
 	 	top:-10px;
 	 }
+	 #mileHistory button{
+	 	border-color:lightgray;
+	 }
 	 #mileBigBtn{
 	 	margin:150px 0 0 80px;
 	 }
@@ -249,7 +248,7 @@
 		border-color:#aaa;
 		border-spacing:0;
 	}
-	.tg td{
+	.tgr td{
 		border-bottom-width:1px;
 		border-color:#aaa;
 		border-style:solid;
@@ -261,31 +260,31 @@
 		padding:10px 5px;
 		word-break:normal;
 	}
-	.tg th{
-		background-color:lightgray;
+	.tgr th{
+		background-color:#FAF9F6;
 		border-bottom-width:1px #aaa solid; 
 		border-top-width:1px;
 	    border-width:0px;
-	    color:#fff;
+	    color:#404040;
 	    font-size:14px;
 	    font-weight:normal;
 	    overflow:hidden;
 	    padding:10px 5px;
 	    word-break:normal;
 	 }
-	.tg .mileTop{
+	.tgr .mileTop{
 		font-weight:bold;
 		text-align:center;
 		vertical-align:middle
 	}
-	.tg .tg-vj7v, .tg .mileDate, .tg .mileRow, .tg .tg-xpxz, .tg .tg-0ok3{
+	.tgr .tgr-vj7v, .tgr .mileDate, .tgr .mileRow, .tgr .tgr-xpxz, .tgr .tgr-0ok3{
 		text-align:center;
 		vertical-align:middle; 
 	}
-	.tg .tg-vj7v, .tg .tg-xpxz{
+	.tgr .tgr-vj7v, .tgr .tg-xpxz{
 		color:#3531ff;
 	}   
-	.tg .tg-0ok3{
+	.tgr .tgr-0ok3{
 		border-color:inherit;
 		color:#fe0000;
 	}  
@@ -316,16 +315,16 @@
 	 }
 	 
 	 /*즐겨찾기 농장 테이블*/ 
-	.tg  {border:none;border-collapse:collapse;border-color:#aaa;border-spacing:0;}
-	.tg td{background-color:#fff;border-color:#aaa;border-style:solid;border-width:0px;color:#333;
+	.tga  {border:none;border-collapse:collapse;border-color:#aaa;border-spacing:0;}
+	.tga td{background-color:#fff;border-color:#aaa;border-style:solid;border-width:0px;color:#333;
 	  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-	.tg th{background-color:lightgray;border-color:#aaa;border-style:solid;border-width:0px;color:#fff;
+	.tga th{background-color:#FAF9F6;border:#aaa solid;border-width:0px;color:#404040;
 	  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-	.tg .tg-uron{border-color:#ffffff;color:#000000;font-size:15px;text-align:center;vertical-align:middle}
-	.tg .favoriteTop{font-size:15px;font-weight:bold;text-align:center;vertical-align:middle}
-	.tg .tg-8goc{font-size:15px;text-align:center;vertical-align:middle}
-	.tg .favoriteIntro{border-color:#ffffff;font-size:15px;text-align:left;vertical-align:middle}
-	.tg .tg-3hmd{border-color:#ffffff;font-size:15px;text-align:center;vertical-align:middle}
+	.tga .tg-uron{border-color:#ffffff;color:#000000;font-size:15px;text-align:center;vertical-align:middle}
+	.tga .favoriteTop{font-size:15px;font-weight:bold;text-align:center;vertical-align:middle}
+	.tga .tg-8goc{font-size:15px;text-align:center;vertical-align:middle}
+	.tga .favoriteIntro{border-color:#ffffff;font-size:15px;text-align:left;vertical-align:middle}
+	.tga .tg-3hmd{border-color:#ffffff;font-size:15px;text-align:center;vertical-align:middle}
 	#favoriteFarm button{
 		width:80px;
 	}		
@@ -352,17 +351,17 @@
 	}
 	
 	 /*장바구니 테이블*/
-	.tg  {border:none;border-collapse:collapse;border-color:#aaa;border-spacing:0;}
-	.tg td{background-color:#fff;border-color:#aaa;border-style:solid;border-width:0px;color:#333;
+	.tgc  {border:none;border-collapse:collapse;border-color:#aaa;border-spacing:0;}
+	.tgc td{background-color:#fff;border-color:#aaa;border-style:solid;border-width:0px;color:#333;
 	  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-	.tg th{background-color:lightgray;border-color:#aaa;border-style:solid;border-width:0px;color:black;
+	.tgc th{background-color:#FAF9F6;border:#aaa solid;border-width:0px;color:#404040;
 	  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-	.tg .tg-yrou{border-color:inherit;font-size:15px;font-weight:bold;text-align:center;vertical-align:middle}
-	.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
-	.tg .tg-hysb{border-color:inherit;text-align:center;vertical-align:middle}
-	.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-	.tg .favoriteIntro{border-color:#ffffff;font-size:15px;text-align:left;vertical-align:middle}
-	.tg .tg-3hmd{border-color:#ffffff;font-size:15px;text-align:center;vertical-align:middle}
+	.tgc .tg-yrou{border-color:inherit;font-size:15px;font-weight:bold;text-align:center;vertical-align:middle}
+	.tgc .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+	.tgc .tg-hysb{border-color:inherit;text-align:center;vertical-align:middle}
+	.tgc .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+	.tgc .favoriteIntro{border-color:#ffffff;font-size:15px;text-align:left;vertical-align:middle}
+	.tgc .tg-3hmd{border-color:#ffffff;font-size:15px;text-align:center;vertical-align:middle}
 	 /*장바구니 테이블*/
 	#cartTbl{
 		position:relative;
@@ -395,7 +394,7 @@
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
 	}
-	.page_nation .nnext {
+	.page_nation .nnext {  
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
@@ -435,7 +434,7 @@
 					<li><input type="text" value="563-3"/></li>
 					<li><input type="text" value="2021/11/01"/></li>  
 		 		</ul>
-		 		<div id="btns">
+		 		<div class="btns">
 					<button class="success" value="회원 목록" name="customerList" >회원 목록</button>
 					<button class="success" value="수정" name="edit" >수정</button>
 					<button class="success" value="삭제" name="del" >삭제</button>
@@ -477,7 +476,7 @@
 					</div>
 				</div>
 				<div id="mileTbl">  
-					<table class="tg" style="undefined;table-layout: fixed; width: 912px">
+					<table class="tgr" style="undefined;table-layout: fixed; width: 912px">
 					<colgroup>
 					<col style="width: 83px">
 					<col style="width: 91px">
@@ -515,7 +514,7 @@
 						    <div class="mileDetail" style="color:#9B9B9B">맛깔나는 쌀의 설명입니다</div>
 					    </td>
 					    <td class="mileRow">11,980원</td>
-					    <td class="tg-vj7v">19p 적립</td>
+					    <td class="tgr-vj7v">19p 적립</td>
 					    <td class="mileRow">213p</td>
 					  </tr>
 					  <tr>
@@ -526,7 +525,7 @@
 						    <div class="mileDetail" style="color:#9B9B9B">생일 축하합니다!</div>
 					    </td>
 					    <td class="mileRow">-</td>
-					    <td class="tg-xpxz">1000p적립</td>
+					    <td class="tgr-xpxz">1000p적립</td>
 					    <td class="mileRow">202p</td>
 					  </tr>
 					  <tr>
@@ -537,7 +536,7 @@
 						    <div class="mileDetail" style="color:#9B9B9B">결제시 포인트를 사용하여 할인받았습니다</div>
 					    </td>
 					    <td class="mileRow">-</td>
-					    <td class="tg-0ok3">1000p 사용</td>
+					    <td class="tgr-0ok3">1000p 사용</td>
 					    <td class="mileRow">3000p</td>
 					  </tr>
 					  <tr>
@@ -578,7 +577,7 @@
 	 		<div id="favoriteFarm">
 				<div id="favoriteFarmBar"><strong>회원 즐겨찾기 농장</strong></div>
 				<div id="favoriteFarmTbl">
-					<table class="tg" style="undefined;table-layout: fixed; width: 1021px">
+					<table class="tga" style="undefined;table-layout: fixed; width: 1021px">
 						<colgroup>
 						<col style="width: 103px">
 						<col style="width: 465px">
@@ -648,7 +647,7 @@
 	 		<div id="cart">
 	 		<div id="cartBar"><strong>회원 장바구니</strong></div>
 				<div id="cartTbl">
-					<table class="tg" style="undefined;table-layout: fixed; width: 973px">
+					<table class="tgc" style="undefined;table-layout: fixed; width: 973px">
 					<colgroup>
 					<col style="width: 130px">
 					<col style="width: 93px">

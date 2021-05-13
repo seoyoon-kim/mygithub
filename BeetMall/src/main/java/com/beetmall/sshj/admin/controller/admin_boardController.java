@@ -35,11 +35,11 @@ public class admin_boardController {
 		return mav;
 	}
 	//레시피 목록 보기
-	@RequestMapping("/recipeListA")
-	public ModelAndView recipeListA() {
+	@RequestMapping("/boardRecipeListA")
+	public ModelAndView boardRecipeListA() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/recipeListA");
+		mav.setViewName("/admin/boardRecipeListA");
 		return mav;
 	}
 	//레시피 작성하기

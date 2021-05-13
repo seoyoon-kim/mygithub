@@ -1,28 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
- <style> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<style> 
 	 #container li{ 
 		 list-style-type:none; 
 		 float:left; 
 		 width:15%; 
-	 }  
-	#contentBox{ 
-		top:20px; 
-		margin-left:10px;
-	}
+	 }   
 	#contentBox li:nth-of-type(6n-5){ 
 		width:0%; 
 	}
@@ -98,6 +81,11 @@
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="customerListA">고객 문의</a></strong></h5></li> 
+				<li><button class="success" value="del" name="del" id="delBtn">비공개</button></li>
+			</ul> 
+		</div>  
+		<div id="sortBox">
+			<ul>
 				<li><select name="sort" > 
 		   				<option value="전체" selected>전체</option>
 		   				<option value="미답변">미답변</option>
@@ -112,9 +100,8 @@
 	   			</li>   
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li> 
-				<li><button class="success" value="del" name="del" id="delBtn">비공개</button></li>
-			</ul> 
-		</div>  
+		 	</ul>
+		</div>
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
@@ -241,47 +228,9 @@
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>
-		 </div>
-
-	<!-- 
-	 <ul class="breadcrumb pagination-md">
-	 	 % if(nowNum>1){%>
-	 		<li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=nowNum-1%> %
-	 		if(searchWord!=null && !searchWord.equals("")){
-	 			out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" 
-				class="page-link">Prev</a></li>
-		 % }else{%>
-			<li class="page-item disabled"><a href="#" class="page-link">Prev</a></li>
-		 % }
-	 		//페이지 번호 매기기                  
-	 		for(int p=startPage; p<startPage+onePageSize; p++){
-				if(p<=totalPage){
-		 			if(nowNum==p){//현재 보고있는 페이지에 표시하기
-		%>		 	
-	 				<li class="page-item active"><a href="noticeBoardList.jsp?nowNum= %=p%> %
-			if(searchWord!=null && !searchWord.equals("")){
-				out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" class="page-link"> %=p%></a></li>
-		  
-		 % 		}else{//현재 보고있는 페이지가 아닐 때 표시하기
-		    %>
-        <li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=p %> %if(searchWord!=null && !searchWord.equals("")){out.write("&searchKey="+searchKey+"&searchWord="+searchWord);} %>" class="page-link"> %=p %></a></li>   
-           %   }
-          }/// totalPage
-      }
-
-	 	if(nowNum==totalPage){ //마지막 페이지
-	 	%>
-	 		<li class="page-item disabled"><a href="#" class="page-link">Next</a></li>	
-	 	 % }else{ %>
-	 	 	<li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=nowNum+1%> %
-	 	if(searchWord!=null && !searchWord.equals("")){
-	 		out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" class="page-link">Next</a></li>
-	 	 % } %>
-	 </ul>		
- -->
- 
+		 </div> 
 		 <div>
-			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

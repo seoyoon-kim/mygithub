@@ -1,83 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style>
 	button{
 		border-radius:5px;
 	}
-	/*맨 위 top Bar*/
-	#topBar li{
-		width:12%;
-	}	
-	#topBar li:not(#topBar li:nth-of-type(1)), 
-	#topBar li>input, 
-	#topBar li>button{
-		margin-right:10px;
-	}
-	#topBar li>button{
-		color:dimgray;
-		border-radius:2px;
-	}
-	#topBar li:nth-of-type(2){
-		margin-left:108px;
-	} 
-	#topBar li:nth-of-type(2)>span{
-		color:white;
-		position:relative;
-		top:-23px;
-		left:120px;
-	}
-	#topBar li:nth-of-type(2)>input, #topBar li:nth-of-type(3)>input{
-		width:110px;
-	}
-	#topBar li:nth-of-type(3){
-		width:11%;
-	}
-	#topBar li:nth-of-type(4){
-		width:20%;
-	} 
-	#topBar li:nth-of-type(4)>button{
-		width:120px; 
-	}
-	#topBar li:nth-of-type(5){
-		width:10%;
-	}
+	/*맨 위 top Bar*/ 
 	#topBar input::placeholder {
 	  color: lightgray; 
-	}
-	
-	#topBar input[type=text]{
-		width:200px;
-	} 
-	#topBar li:nth-of-type(7){
-		position:relative; left:215px; top:-28px;
 	}  
-	#topBar li:nth-of-type(8){
-		position:relative; left:1135px; top:-56px;
-	}    
 	#title>ul,.contentList{
 		position:relative; left:-40px;
 	} 
 	#title li:nth-of-type(5), #contentBox li:nth-of-type(5){ 
 		width:19%; 
+	}   
+	#sortBox {
+		margin-left:50px;
 	} 
-	
-	#ascBtn, #descBtn{
-		width:40px;
-	} 
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(3){
+		margin:30px 80px 0 10px;
+	}
+	#sortBox li:nth-of-type(5){
+		margin:30px 10px 0 10px;
+	}
+	#sortBox li:nth-of-type(5)>input{
+		width:200px;
+	}
+	#sortBox li:nth-of-type(6)>button{
+		width:50px;
+		margin-right:10px;
+	}
 	/* 본문 정렬*/
 	#container li{ 
 		list-style-type:none;
@@ -135,18 +90,18 @@
 		display:flex;
 		padding-left:90px;
 	}
-	.tg  {
+	.tbl  {
 		border-collapse:collapse;
 		border-spacing:0;
 	}
-	.tg td{
+	.tbl td{
 		border:lightray solid 1px; 
 		font-size:14px;
 		overflow:hidden;
 		padding:10px 5px;
 		word-break:normal;
 	}
-	.tg th{
+	.tbl th{
 		border:lightray solid 1px; 
 		font-size:14px;
 		font-weight:normal;
@@ -154,24 +109,24 @@
 		padding:10px 5px;
 		word-break:normal;
 	}
-	.tg .settleHeader{
+	.tbl .settleHeader{
 		background-color:lightgray;
 		font-size:16px;
 		font-weight:bold;
 		text-align:center;
 		vertical-align:top
 	}
-	.tg .settleHeader:nth-of-type(1){
+	.tbl .settleHeader:nth-of-type(1){
 		border-radius:10px 0 0 0 ;
 	}
-	.tg .settleHeader:nth-of-type(3){
+	.tbl .settleHeader:nth-of-type(3){
 		border-radius:0 10px 0 0 ;
 	}
-	.settleHeader:not(.settleHeader:nth-of-type(3)),
-	.settleContent:not(.settleContent:nth-of-type(3)){
-		border-right:1px solid #DFDFDF;
+	.settleHeader:not(.settleHeader:nth-of-type(1), .settleHeader:nth-of-type(3)),
+	.settleContent{
+		border:1px solid #DFDFDF;
 	}
-	.tg .settleContent{
+	.tbl .settleContent{
 		font-size:18px;
 		text-align:center;
 		vertical-align:top
@@ -204,22 +159,27 @@
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="/settleMng">정산 관리</a></strong></h5></li> 
+			</ul> 
+		</div>  
+		<div id="sortBox">
+			<ul>
 				<li><input type="date"/>   <span>~&nbsp;</span></li>
 				<li><input type="date"/></li>
 				<li><button class="success" value="" name="" id="confirmBtn">구매확정 목록</button></li>
 				<li><select name="sort" > 
-				<option value="구매번호" selected>구매번호</option>  
+				<option value="검색분야" selected>검색분야</option>  
+						<option value="구매번호" >구매번호</option>  
 		   				<option value="상품명">상품명</option>
-		   				<option value="구매자 아이디">구매자 아이디</option>   
 		   				<option value="판매자 아이디">판매자 아이디</option>   
+		   				<option value="법인명">법인명</option>   
 		   				<option value="금융사명">금융사명</option>         
 		   			 </select>
 	   			</li> 
 	   			<li><input type="text" placeholder="검색어를 입력해주세요"/></li>
 	   			<li><button class="success" value="" name="" id="searchBtn">검색</button></li>
 				<li><button class="success" value="" name="" id="excelBtn">엑셀로 다운</button></li>  
-			</ul> 
-		</div>  
+			 </ul>
+		</div>
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul> 
@@ -360,7 +320,7 @@
 		 </div>
 		 <hr id="hr"/>
 		<div id="settleBox"> 
-			<table class="tg" style="undefined;table-layout: fixed; width: 900px">
+			<table class="tbl" style="undefined;table-layout: fixed; width: 900px">
 			<colgroup>
 			<col style="width: 200px">
 			<col style="width: 200px">

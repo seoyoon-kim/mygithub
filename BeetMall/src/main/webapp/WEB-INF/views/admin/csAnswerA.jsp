@@ -3,20 +3,11 @@
 <%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+ 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<!-- font -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
-
+ 
 <style>
 	#mypageMenubar{
 		display:block;
@@ -60,10 +51,10 @@
   		border:none;
   		font-weight:normal;
   	}
-   /*표*/
+   /*표*/ 
    form{
 	   	position:absolute;
-	   	top:119px;
+	   	top:70px;
 	   	left:180px;
 	   	width:1351px;
    }
@@ -81,6 +72,7 @@
 		border-top:2px solid lightgray;
 		border-bottom:2px solid lightgray;
 		font-size:15px;
+		margin-left:30px; 
 	}
 	th, .th{
 		height:40px;
@@ -131,9 +123,10 @@
 	}
 	#bottommm{
 		text-align:center;  
-		margin-top: 1350px;
+		margin: 1550px 0 40px 0;
 		position:relative;
-		left:-782px;
+		left:-670px;
+		top:-70px;
 	}
 	#bottommm>input{
 		border:1px solid gray;
@@ -144,10 +137,8 @@
 	#write_btn{
 		width:150px;
 	}
-	#cancel_btn{
-		position:relative;
-		top:-40px;
-		left:260px;
+	#cancel_btn{ 
+		margin-left:20px;
 	}
 	
 	input[type="submit"].btn:hover, input[type="button"].btn:hover, input[type="reset"].btn:hover{
@@ -168,6 +159,7 @@
 	.empty{
 		background-color:white;
 		border-right:none !important;
+		height:25px;
 	}
 </style>
 <div id="body1">
@@ -233,7 +225,7 @@
 						</div>
 					</td>
 				</tr>  
-				<tr class="tr_head">
+				<tr class="tr_head empty">
 					<th class="menu empty"></th>
 					<td  class="td empty">
 					</td>
@@ -252,8 +244,7 @@
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
 				<input type="reset" value="다시쓰기" class="btn write_btn id="reset_btn"/>
 				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-							
-			</div>
+			 </div>
 		</form>
 		</div>
 </div>

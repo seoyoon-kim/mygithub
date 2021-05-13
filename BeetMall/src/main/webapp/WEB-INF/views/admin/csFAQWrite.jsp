@@ -3,20 +3,11 @@
 <%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<!-- font -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
-
+ 
 <style>
 	#mypageMenubar{
 		display:block;
@@ -63,9 +54,10 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:168px;
-	   	left:180px;
+	   	top:180px;
+	   	left:210px;
 	   	width:1351px;
+	   	height:1100px;
    }
    
    th, .th{
@@ -75,7 +67,7 @@
 	  background-color:#F8F7F7;
 	} 
 	table{
-		width:1080px;	
+		width:770px;	
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
@@ -131,10 +123,11 @@
 	}
 	#bottommm{ 
 		display:flex;
-		margin-top: 950px;
+		margin:950px 0 40px 0;
 		position:relative;
-		left:-800px;
+		left:-650px;
 		width:1000px;
+		top:50px;
 	}
 	#bottommm>input{
 		border:1px solid gray;

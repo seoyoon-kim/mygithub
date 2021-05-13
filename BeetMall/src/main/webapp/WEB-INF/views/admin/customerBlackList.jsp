@@ -1,32 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style>
-	 #container li{ 
-		 list-style-type:none; 
+	 #container li{  
 		 float:left; 
 		 width:13%; 
-	 }  
-	 #contentBox{ 
-		top:20px; 
-		margin-left:10px;
-	}
+	 }   
 	/*회색 바*/ 
 	#topBar h5{
-		width:120px;
+		width:130px !important;
 	}
 	#topBar li:nth-of-type(1){   
 		position:relative;
@@ -36,13 +17,27 @@
 		margin-left:98px; 
 	}
 	/*회색 바와 데이터 제목, 데이터 내용*/
-	#contentBox li:nth-of-type(9n+1){ width:0%; }  
+	#contentBox li:nth-of-type(9n+1){ 
+		width:0%; 
+		margin-top: 4px;
+	}  
+	#title{
+		padding-top:0 !important;
+	} 
  	/*데이터 내용의 topBar*/
  	#title li:nth-of-type(5), #contentBox li:nth-of-type(5){ 
 		width:13%; 
 	}  
 	#btns a>button, button:nth-of-type(4){ margin-left:900px; }  
-	 
+	#sortBox {
+		margin-left:900px;
+	}
+	#sortBox li:nth-of-type(1){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(2){
+		width:38px;
+	}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
@@ -78,6 +73,16 @@
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="/customerBlackList">블랙리스트</a></strong></h5></li> 
+				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
+				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
+			</ul> 
+		</div>   
+		<div id="choose">
+			<a href="customerBlackList"><button class="success" value="" name="" id="" style="background-color:lightgray;">일반회원</button></a>
+			<a href="sellerBlackList"><button class="success" value="" name="" id="">판매자회원</button></a>
+		</div> 
+		<div id="sortBox">
+			<ul>
 				<li><select name="sort" > 
 		   				<option value="신고번호" selected>신고번호</option>
 		   				<option value="이름">이름</option>
@@ -90,10 +95,8 @@
 	   			</li> 
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
-				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
-			</ul> 
-		</div>  
+			</ul>
+		</div>	
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
@@ -229,66 +232,7 @@
 				<li>2021-05-23</li>
 				<li>2021-02-16<br/></li> 
 			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">customerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">customerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">customerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">customerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">customerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">customerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
+		 
 		
 		<c:forEach var="data" items="${list}">
 			<ul class="contentList">
@@ -360,7 +304,7 @@
  -->
  
 		 <div>
-			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
