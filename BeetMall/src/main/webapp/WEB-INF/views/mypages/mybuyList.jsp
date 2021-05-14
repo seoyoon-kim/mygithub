@@ -4,12 +4,13 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	#cMyPageLeft{
 		display: block;
 	}
 	#mypointList{
-		height:3500px;
+		height:1500px;
 		overflow:auto;
 		position: relative;
 	}
@@ -44,15 +45,24 @@
 		margin:5px 0;
 		text-align:center;
 	}
-	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4), #pointUl>li:nth-child(5), #pointUl>li:nth-child(6){
-		border-bottom:1px solid rgb(252,118,45);
-		
+	
+	#pointUl>li:nth-child(6n+1){
+		line-height:20px;
+		padding-top:10px;
+	}
+	
+	#pointUl>li:nth-child(6n+2){
+		width:105px;
 	}
 	#pointUl>li:nth-child(6n){
-		width:240px;
+		width:270px;
 	}
+	
 	#pointUl>li:nth-child(6n+3){
 		width:300px;
+	}
+	#pointUl>li:nth-child(6n+3)>span{
+		padding-left:5px;
 	}
 	.buyttitle, .buydetail{
 		line-height:30px;
@@ -64,6 +74,11 @@
 		line-height:60px;
 		float:left;
 	}
+	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4), #pointUl>li:nth-child(5), #pointUl>li:nth-child(6){
+		border-bottom:1px solid rgb(252,118,45);
+		line-height: 20px;
+		padding-top:10px;
+	}
 	#pointUl img{
 		height:58px;
 		width:58px;
@@ -74,6 +89,12 @@
 	}
 	.buytitle{
 		font-size:1.1em;
+	}
+	.buyttitle a:link, .buyttitle a:hover, .buyttitle a:visited, .buyttitle a:active{
+		color:black;
+	}
+	.buydetail a:link, .buydetail a:hover, .buydetail a:visited, .buydetail a:active{
+		color:#999;
 	}
 	.buydetail{
 		font-size:0.9em;
@@ -157,8 +178,8 @@
 		display: none;
 	}
 	#buyReturnInput{	/* 반품 클릭시 */
-		font-size:21px;
-		line-height:40px;
+		font-size:17px;
+		/* line-height:40px; */
 		display: none;
 	}
 	#buyCancelNotice{	/* 취소 클릭시 */
@@ -175,9 +196,9 @@
 	
 	.warningInfo{
 		color:red;
+		font-size:14px;
 	}
 	.addInput{
-		height:30px;
 		width:675px;
 	}
 	.thumbsupYes{
@@ -187,7 +208,7 @@
 		height:28px;
 		width:28px;
 		float:left;
-		transition-duration:1s;
+		transition-duration:0.5s;
 		margin-right: 7px;
 	}
 	.thumbsupNo{
@@ -197,7 +218,7 @@
 		height:28px;
 		width:28px;
 		float:left;
-		transition-duration:1s;
+		transition-duration:0.5s;
 		margin-right: 7px;
 	}
 	
@@ -222,14 +243,18 @@
 		margin-bottom: 10px;
 	}
 	#buyReviewtxt{
-		width:610px;
-		height:400px;
+		width:660px;
+		height:467px;
 		overflow:auto;
-		margin-left:36px;
-		margin-right:36px;
+		margin-left:10px;
+		margin-right:10px;
 		background-color: white;
 		font-size: 18px;
 		padding:5px;
+		margin-bottom:15px;
+	}
+	.buyListContent>input:last-child{
+		margin-top:15px;
 	}
 	#reviewWrite{
 		width:610px;
@@ -282,7 +307,9 @@
 	#buyProductImg>input{
 		float:left;
 	}
-	
+	#buyReviewWrite{
+		display:none;
+	}
 	#reviewSubmit{
 		width:100px;
 		height:60px;
@@ -320,6 +347,82 @@
 		color:white;
 		display: inline-block;
 	}
+	.nonBtn{
+		
+	}
+	.redstar{
+		color:red;
+		text-size:13px;
+	}
+	.reviewContentDiv{
+		height:880px;
+		overflow:scroll;
+		width:1080px;
+	}
+	#infoInput>li:nth-child(2n+1){
+		width:200px;
+		float:left;
+	}
+	#infoInput>li:nth-child(2n){
+		width:839px;
+		float:left;
+	}
+	.normalFont{
+		font-size:14px;
+		line-height: 15px;
+	}
+	.normalFont>input{
+		margin-top:3px;
+	}
+	#tradeDiv, #refundDiv{
+		padding-left:10px;
+	}
+	#returnUl>li:nth-child(2n+1){
+		width:200px;
+		text-align:left;
+		padding-left:10px;
+		border-bottom:1px solid rgb(250, 250, 250);
+	}
+	#returnUl>li:nth-child(2n){
+		width:348px;
+		border-bottom:1px solid rgb(250, 250, 250);
+	}
+	#returnUl>li:last-child{
+		width:548px;
+		height:410px;
+		background-color: rgb(250, 250, 250);
+		overflow:auto;
+		padding-top:5px;
+		padding-left:10px;
+		padding-right:10px;
+	}
+	#returnDiv{
+		display:none;
+	}
+	#questionUl>li:nth-child(2n+1){
+		width:200px;
+		text-align:left;
+		padding-left:10px;
+		border-bottom:1px solid rgb(250, 250, 250);
+		font-size:17px;
+	}
+	#questionUl>li:nth-child(2n){
+		width:348px;
+		border-bottom:1px solid rgb(250, 250, 250);
+		font-size:17px;
+	}
+	#questionUl>li:last-child{
+		width:548px;
+		height:530px;		
+		background-color: rgb(250, 250, 250);
+		padding-top:5px;
+		padding-left:10px;
+		padding-right:10px;
+		margin-bottom:15px;
+	}
+	#questionDiv{
+		display:none;
+	}
 </style>
 <script>
 	$(function(){
@@ -337,28 +440,272 @@
 			$(this).toggleClass("thumbsupNo");
 			$(this).toggleClass("thumbsupYes");
 		})
+		$(".nonBtn").attr("readonly",true);
+		$("#divcloseBtn").click(function(){
+			$("#buyCancelRollBack").css("display","none");
+		})
 	})
-	$(document).ready(function(){
-		$("#summernote").summernote({
-			height:660,
-			minHeight:660,
-			maxHeight:660,
-			focus:true,
-			lang:"ko-KR",
-			placeholder:'리뷰를 작성해주세요'
+	
+	$(document).on('click','#invoiceCloseBtn', function(){
+		$("#buyListdeliverySearch").css("display","none");
+	})
+	$(document).on('click',"input[value=취소하기]", function(){
+		var num = $(this).parent().prev().children().val();
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();
+		$("#buyCancelNotice").css("display","block");
+		$("#cancelNoticeVal").val(ordernum);
+    });
+	$(document).on('click','#cancelNoticeBtn', function(){
+		var ordernum = $("#cancelNoticeVal").val();
+		var url = "orderCancel";
+		$.ajax({
+			url : url,
+			data : "ordernum="+ordernum,
+			success : function(result){
+				$("#buyCancelNotice").css("display","none");
+				if(result == 1){
+					location.href="mybuyList";
+				}else if(result == -1){
+					$("#buyCancelRollBack").css("display","block");
+				}else{
+					alert('취소에 실패했습니다 고객센터로 연락 부탁드립니다 \n error_code:02');
+				}
+			}, error : function(){
+				alert('취소에 실패했습니다 고객센터로 연락 부탁드립니다 \n error_code:02');
+			}
 		});
+	})
+	$(document).on('click','input[value=배송조회]', function(){
+		var num = $(this).parent().prev().children().val();
+		$("#buyListdeliverySearch").css("display","block");
+		var invoicenum = $(this).prev().val();
+		$("#invoiceIframe").attr("src","https://www.ilogen.com/web/personal/trace/"+invoicenum);
+		// 주소 : https://www.ilogen.com/web/personal/trace/123131564
+	});
+	$(document).on('click','input[value=구매확정]', function(){
+		var num = $(this).parent().prev().children().val();
+		$("#buyCommit").css("display","block");
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();
+		$("#orderCommitHidden").val(ordernum);
+		
+	});
+	$(document).on('click','#ordercommit', function(){
+		var num = $("#orderCommitHidden").val();
+		var url = "orderCommit";
+		var param = "num="+num;
+		$.ajax({
+			url : url,
+			data : param,
+			success(result){
+				if(result>=1){
+					$("#buyCommit").css("display","none");
+					location.href="mybuyList";
+				}
+			}, error(){
+				alert("구매확정 오류 \n error:code-07");
+			}
+		})
+	});
+	var date = new Date();
+	var today = date.getFullYear()+"/"+addZero(date.getMonth()+1)+"/"+addZero(date.getDate());
+	function addZero(value){
+		if(value<10){
+			return "0"+value;
+		}else{
+			return value;
+		}
+	}
+	var reviewCheck = 0;
+	$(document).on('click','input[value=리뷰작성]', function(){
+		var num = $(this).parent().prev().children().val();
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();
+		$("#buyReviewWrite").css("display","block");
+		$("#buyReviewView").css("display","none");
+		
+		$.ajax({
+			url : "productInfo",
+			data : "productNum="+num,
+			success:function(result){
+				
+				$("#reviewImg").attr("src","/sshj/resources/sellerProductImgs/"+result.thumbimg);
+				$("#reviewTitle").html(result.productname);
+				$("#reviewordernum").val(ordernum);
+				$("#reviewproductnum").val(num);
+				
+			}, error : function(){
+			alert("리뷰작성 오류가 발생했습니다. \n error-code:13")
+			}
+		});
+	});
+	$(document).on('click','input[value=리뷰작성완료]', function(){
+		var num = $(this).parent().prev().children().val();
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();
+		$("#buyReviewView").css("display","block");
+		$("#buyReviewWrite").css("display","none");
+		var reviewnum = -1;
+		$.ajax({
+			url : "reviewSelect",
+			data : "ordernum="+ordernum,
+			success:function(result){
+				var tag = "<li>번호</li> <li>"+result.reviewnum+"</li>";
+				tag	+= "<li>작성자</li> <li>"+result.userid+"</li>";
+				tag	+= "<li>작성일</li> <li>"+result.reviewwritedate+"</li>";
+				tag	+= "<li>리뷰 좋아요</li> <li><div class='thumbsupNo'></div><span id='reviewCountNum'>"+result.reviewcount+"</span></li>";
+				$("#buyReviewtxt").html(result.reviewcontent);
+				$("#infoInput").empty().append(tag);
+				reviewnum = result.reviewnum;
+				
+				// 2중 ajax
+				$.ajax({
+					url : "goodCheck",
+					data : "reviewnum="+reviewnum,
+					success: function(result){
+						if(result == 0){
+							
+						}else if(result > 0){
+							$(".thumbsupNo").toggleClass("thumbsupNo").toggleClass("thumbsupYes");
+						}else if(result == -1){
+							alert('서버에 문제가 있어 불러오기에 실패했습니다\n잠시후 다시 시도하세요\n error_code:03');
+						}
+					}, error : function(){
+						alert('서버에 문제가 있어 불러오기에 실패했습니다\n잠시후 다시 시도하세요\n error_code:03');
+					}
+				});
+				//
+			}, error : function(){
+				alert('서버에 문제가 있어 불러오기에 실패했습니다\n잠시후 다시 시도하세요\n error_code:03');
+			}
+		});
+	})
+	
+	$(document).on('click','input[value="반품/환불신청"]', function(){
+		var num = $(this).parent().prev().children().val();
+		var ordernum = $(this).prev().prev().prev().val();
+		$("#buyReturnInput").css("display","block");
+		$("#returnProductnum").val(num);
+		$("#returnOrdernum").val(ordernum); 
+	});
+	$(document).on('click','input[value=재구매]', function(){
+		var num = $(this).prev().prev().val();
+		location.href="customproduct?no="+num;
+	});
+	$(document).on('click','input[value=문의작성]', function(){
+		var ordernum = $(this).parent().prev().prev().prev().prev().html();
+		var productnum = $(this).parent().prev().children().val();
+		$("#qboardnum").val(productnum);
+		$(".qsetNum").html(productnum);
+		$("#questionDiv").css("display","block");
+		
+		
+	});
+	$(document).on('click','#questionBtn', function(){
+		$("#questionForm").submit();
+	});
+	$(document).on('click','#questionCloseBtn', function(){
+		$("#questionDiv").css("display","none");
+	});
+	$(document).on('click','input[value=환불확정]', function(){
+		var ordernum = $(this).prev().prev().val();
+		if(confirm('환불을 확정하시겠습니까? 환불확정 된 주문은 모든 환불 절차가 끝난 것입니다.')){
+			location.href="returnSubmit?ordernum="+ordernum;
+		}
+	})
+	$(document).on('click','input[value="환불내역 보기"]', function(){
+		var num = $(this).parent().prev().children().val();
+		$("#returnDiv").css("display","block");
+		var ordernum = $(this).prev().val();
+		$.ajax({
+			url:"returnView",
+			data : "ordernum="+ordernum,
+			success: function(result){
+				var type = "";
+				if(result.claimkind==1){
+					type="환불"
+				}else if(result.claimkind == 2){
+					type="반품"
+				}
+				var tag = "<li>주문번호</li><li>"+result.ordernum+"</li>";
+				tag += "<li>상태</li><li>"+type+"</li>";
+				tag += "<li>"+type+"사유</li><li>"+result.claimstatus+"</li>";
+				tag += "<li>택배사</li><li>"+result.delivery+"</li>";
+				tag += "<li>송장번호</li><li>"+result.invoice+"</li>";
+				tag += "<li>접수일</li><li>"+result.claimdate+"</li>";
+				tag += "<li>"+result.claimcontent+"</li>"
+				
+				$("#returnUl").empty();
+				$("#returnUl").append(tag);
+			}, error:function(){
+				
+			}
+		})
+	});
+	
+	
+	$(document).on('click','.thumbsupYes', function(){
+		var reviewnum = $(this).parent().prev().prev().prev().prev().prev().prev().text();
+		$(this).toggleClass('thumbsupNo');
+		$(this).toggleClass('thumbsupYes');
+		$.ajax({
+			url : 'reviewgoodcancel',
+			data : 'reviewnum='+reviewnum,
+			success : function(result){
+				$("#reviewCountNum").text($("#reviewCountNum").text()-1);
+			}, error : function(){
+				alert('서버에 문제가 있어 좋아요에 실패했습니다\n잠시후 다시 시도하세요')
+			}
+		})
+	});
+	$(document).on('click','.thumbsupNo', function(){
+		var reviewnum = $(this).parent().prev().prev().prev().prev().prev().prev().text();
+		$(this).toggleClass('thumbsupNo');
+		$(this).toggleClass('thumbsupYes');
+		$.ajax({
+			url : 'reviewgoodOk',
+			data : 'reviewnum='+reviewnum,
+			success : function(result){
+				$("#reviewCountNum").text(Number($("#reviewCountNum").text())+1);
+			}, error : function(){
+				alert("좋아요에 실패했습니다.. \n서버에 문제가 있으니 잠시후 다시 시도하세요");
+			}
+		})
+	});
+ 	$(document).on('click', "#refund", function(){
+ 		$(".change").text('환불');
+	});
+ 	
+	$(document).on('click', "#trade", function(){
+ 		$(".change").text('반품');
+	}); 
+	$(document).on('click', ".anotherCompany", function(){
+		
+		$(".anotherSelect").css("display","block").attr("disabled", false);
+	});
+	$(document).on('click', "#returnBtn", function(){
+		$("#returnDiv").css("display","none");
+	});
+	$(document).on('click', "#3months", function(){
+		location.href="monthmybuyList?month=3";
+	});
+	$(document).on('click', "#6months", function(){
+		location.href="monthmybuyList?month=6";
+	});
+	$(document).on('click', "#12months", function(){
+		location.href="monthmybuyList?month=12";
+	});
+	$(document).on('click', "#allmonths", function(){
+		location.href="mybuyList"; 
 	});
 </script>
 <div class="section">
 	<div id="mypointList">
 		<h2>구매내역</h2>
 		<div id="pointSelect">
-			<div class="btn">전체</div>
+			<div class="btn" id="allmonths">전체</div>
 		</div>
 		<div id="pointSelectDate">
-			<div class="btn">3개월</div>
-			<div class="btn">6개월</div>
-			<div class="btn">1년</div>
+			<div class="btn" id="3months">3개월</div>
+			<div class="btn" id="6months">6개월</div>
+			<div class="btn" id="12months">1년</div>
 		</div>
 		<div>
 			<ul id="pointUl">
@@ -369,110 +716,123 @@
 				<li>상태</li>
 				<li>&nbsp;</li>
 				
-				<!-- 구분용 -->
-				<li><span class="pointdate">2021-03-25 13:00</span></li>
-				<li>12345678</li>
-				<li>
-				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="pointprice">17,980</span>원</li>
-				<li>배송중</li>
-				<li><input type="button" class="btn" value="배송조회"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="취소"/></li>
+				<c:forEach var="vo" items="${list}">
+					<li><span class="pointdate">${vo.orderdate}</span></li>
+					<li>${vo.ordernum}</li>
+					<li>
+					<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productcontent}</a></span>
+					</li>
+					<li><span class="pointprice">${vo.orderprice}</span>원</li>
+					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
+					<c:if test="${vo.orderstatus == '준비중'}">
+					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '배송중'}">
+					<li><input type="hidden" value="${vo.invoice}"/><input type="button" class="btn" value="배송조회"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn nonBtn" value="취소하기"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '배송완료'}">
+					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="구매확정"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="반품/환불신청"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '환불'}">
+					<li><input type="button" class="btn" value="문의작성"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '취소'}">
+					<li></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '환불 진행중'}">
+					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="환불내역 보기"/><input type="button" class="btn" value="환불확정"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '반품 진행중'}">
+					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="환불내역 보기"/></li>
+					</c:if>
+					
+					<c:if test="${vo.orderstatus == '구매확정'}">
+						<c:if test="${vo.ordercnt == null || vo.ordercnt <=0}">
+						<li><input type="hidden" value="${vo.productnum}"/><input type="button" class="btn" value="리뷰작성"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>
+						</c:if>
+						<c:if test="${vo.ordercnt != null && vo.ordercnt>=1 }">
+						<li><input type="hidden" value="${vo.productnum}"/><input type="button" class="btn" value="리뷰작성완료"/><input type="button" class="btn" value="재구매"/><input type="button" class="btn" value="문의작성"/></li>						
+						</c:if>
+					</c:if>					
+				</c:forEach>
 				
 				<!-- 구분용 -->
-				<li><span class="pointdate">2021-03-25 13:00</span></li>
-				<li>12345678</li>
-				<li>
-				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="pointprice">17,980</span>원</li>
-				<li>배송완료</li>
-				<li><input type="button" class="btn" value="구매확정"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="반품신청"/></li>
 				
-				<!-- 구분용 -->
-				<li><span class="pointdate">2021-03-25 13:00</span></li>
-				<li>12345678</li>
-				<li>
-				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="pointprice">17,980</span>원</li>
-				<li>취소</li>
-				<li></li>
-				
-				<!-- 구분용 -->
-				<li><span class="pointdate">2021-03-25 13:00</span></li>
-				<li>12345678</li>
-				<li>
-				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="pointprice">17,980</span>원</li>
-				<li>환불</li>
-				<li><input type="button" class="btn" value="뭐넣지?"/><input type="button" class="btn" value="환불확정"/></li>
-				
-				<!-- 구분용 -->
-				<li><span class="pointdate">2021-03-25 13:00</span></li>
-				<li>12345678</li>
-				<li>
-				<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="pointprice">17,980</span>원</li>
-				<li>준비중</li>
-				<li><input type="button" class="btn" value="취소하기"/><input type="button" class="btn" value="문의작성"/></li>
 			</ul>
 		</div>
-		
-		<div class="buyListDiv" id="buyListdeliverySearch">
-			<div class="buyListBar" style="font-size:21px;">배송 조회</div><div class="buyListBarClose">&times;</div>
-			<div class="buyListContent" style="text-align:center;padding-top:100px;">
-				<div>배송조회 iframe</div>
-				<input type="button" value="확인" class="btn"/>
+		</div>
+		<div class="buyListDiv" id="buyListdeliverySearch" style="overflow-x:hidden; width:1300px;z-index:80;">
+			<div class="buyListBar" style="font-size:21px; width:1300px;">배송 조회</div><div class="buyListBarClose" style="left:1250px;">&times;</div>
+			<div class="buyListContent" style="text-align:center;padding-top:47px; width:1300px;">
+			<iframe src="https://www.ilogen.com/web/personal/tkSearch" height="548px" width="1298px"  frameborder="no" id="invoiceIframe">
+			
+			</iframe><br/>
+				<input type="button" value="확인" class="btn" id="invoiceCloseBtn"/>
 			</div>
 		</div>
-		
+		<div class="section">
 		<div class="buyListDiv" id="buyCommit">
 			<div class="buyListBar" style="font-size:21px;">구매 확정</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:300px;">
+				<input type="hidden" value="" id="orderCommitHidden"/>
 				<h3>구매확정 하시겠습니까?</h3>
 				<h3>배송완료 후 구매확정이 가능합니다.</h3>				
-				<input type="button" value="확인" class="btn" style="top:220px;" />
+				<input type="button" value="확인" class="btn" style="top:220px;" id="ordercommit" />
 			</div>
 		</div>
 		
 		<div class="buyListDiv" id="buyReturnInput">
-			<div class="buyListBar" style="font-size:21px;">반품 신청</div><div class="buyListBarClose">&times;</div>
-			<div class="buyListContent" style="height:600px;">
-				<h3 style="text-align: center">해당 제품을 반품하시겠습니까?</h3>
+			<div class="buyListBar" style="margin-left:0px;font-size:21px;"><span class="change">반품/환불</span> 신청</div><div class="buyListBarClose">&times;</div>
+			<!-- 반품신청 -->
+			<div class="buyListContent" style="height:750px;" id="tradeDiv">
+			
+			<form method="post" action='tradeCommit'>
+				<input type="hidden" name="ordernum" id="returnOrdernum"/>
+				<input type="hidden" name="productnum" id="returnProductnum"/>
+				
+				<div style="background-color: rgb(250, 250, 250); text-align:center;height: 100px;margin-left:-10px;padding-top: 7px;">
+					<input type="radio" name="claimkind" value="1" id="trade" style="margin-top:60px;" checked/><span style=" margin-right:5px;">반품 신청</span>
+					<input type="radio" name="claimkind" value="2" id="refund"/><span style="margin-left:5px;">환불 신청</span>
+				</div>
+				<h3 style="text-align: center">해당 제품을 <span class="change">반품</span>하시겠습니까?</h3>
+				<h5><span class="change">반품</span>사유를 선택해주세요</h5>
 				<select name="whyReturn">
-					<option value="단순변심" >단순변심</option>
-					<option value="상품의 상태가 이상해서" >상품의 상태가 이상해서</option>
-					<option value="사진과 너무 달라서" >사진과 너무 달라서</option>
-					<option value="상품이 손상 또는 파손되어서" >상품이 손상 또는 파손되어서</option>
+					<option value="구매의사취소">구매의사취소</option>
+					<option value="종류 및 크기 변경">종류 및 크기 변경</option>
+					<option value="다른 상품 잘못 주문">다른 상품 잘못 주문</option>
+					<option value="서비스 불만족">서비스 불만족</option>
+					<option value="배송지연">배송지연</option>
+					<option value="배송누락">배송누락</option>
+					<option value="상품파손">상품파손</option>
+					<option value="상품정보 상이">상품정보 상이</option>
+					<option value="오배송">오배송</option>
+					<option value="색상 등 다른상품 잘못 배송">색상 등 다른상품 잘못 배송</option>
 				</select>
 				<div>
-					<span class="warningInfo">제품 반품시 발생하는 배송비는 소비자 부담입니다.<br/></span>
-					<span class="warningInfo">단, 상품의 변질, 파손으로 인해 발생된 반품 및 교환은 판매자가 부담합니다.</span>
+					<span class="warningInfo">제품 <span class="change">반품</span>시 발생하는 배송비는 소비자 부담입니다.<br/></span>
+					<span class="warningInfo">단, 상품의 변질, 파손으로 인해 발생된 <span class="change">반품</span> 배송비는 판매자가 부담합니다.</span>
 				</div>
-				이미지도 첨부해주세요
-				<input type="file" name="filename">
-				<div id="companyDiv">
-				<input type="radio" name="companyRadio" value="기존 택배사 이용"/>기존택배사 이용<br/>
-					<input type="text" name="address" class="addInput" placeholder="주소를 입력해주세요"/><br/>
-				<input type="radio" name="companyRadio" value="기타 택배사 이용"/>기타 택배사 이용<br/>
-					<select>
-						<option>우체국 택배</option>
-						<option>CJ대한통운</option>
+				<div class="companyDiv">
+				<span class="normalFont" style="margin-right:10px;">택배사를 선택해주세요</span>
+					<select class="normalFont" name="delivery">
+						<option value="우체국택배">우체국 택배</option>
+						<option value="CJ대한통운">CJ대한통운</option>
 					</select><br/>
-					<input type="text" name="address" class="addInput" placeholder="주소를 입력해주세요"/>			
-				</div>	
-				<input type="button" value="확인" class="btn" style="top:520px;"/>
+				</div>
+				<div class="normalFont" style="padding-bottom:10px;">
+				<span style="margin-right:10px;">송장 번호 </span><input type="text" name="invoice" style="margin-left:80px;"/>
+				</div>
+				<textarea class="summernote" name="claimcontent"></textarea>
+				<div style="text-align:center;margin-top:10px;"><input type="submit" value="반품 신청" class="btn" style="top:520px;"/></div>
+			</form>
 			</div>
 		</div>
-		
 		<div class="buyListDiv" id="buyCancelNotice">
 			<div class="buyListBar" style="font-size:21px;">배송 취소</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align:center;padding-top:100px; height:300px;">
 				<h2>선택하신 주문을 취소하시겠습니까?</h2>
-				<input type="button" value="확인" class="btn" style="top:220px"/>
+				<input type="hidden" value="" id="cancelNoticeVal"/>
+				<input type="button" value="확인" class="btn" style="top:220px" id="cancelNoticeBtn"/>
 			</div>
 		</div>
 		
@@ -481,23 +841,21 @@
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:340px;">
 				<h2>배송중 / 배송완료 상품은 취소할 수 없습니다.</h2>
 				<h2>판매자에게 문의해주세요</h2>
-				<input type="button" value="확인" class="btn" style="top:240px"/>
+				<input type="button" value="확인" class="btn" style="top:240px" id="divcloseBtn"/>
 			</div>
 		</div>
 		
 		<div class="buyListDiv" id="buyReviewView">
-			<div class="buyListBar" style="font-size:21px;">상품리뷰 보기</div><div class="buyListBarClose">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:700px;background-color: #ddd;">
-				<ul>
+			<div class="buyListBar" style="font-size:21px;width:1080px;">상품리뷰 보기</div><div class="buyListBarClose" style="left:1030px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:730px;background-color: #ddd; text-align: center;width:1080px;">
+				<ul id="infoInput" style="text-align:left;">
 					<li>번호</li> 	<li>100</li>
 					<li>작성자</li> 	<li>rabbit123</li>
 					<li>작성일</li>	<li>2021-04-02</li>
 					<li>추천</li>	<li>4<div class="thumbsupYes"></div></li>
 				</ul>
-				<div id="buyReviewtxt">
-					굉장히 긴 문장
-				</div>
-				<input type="button" value="확인" class="btn" style="top:630px;"/>
+				<div id="buyReviewtxt" style="width:1060px;"></div>
+				<input type="button" value="닫기" class="btn" style="top:600px;" />
 			</div>
 		</div>
 		
@@ -507,24 +865,158 @@
 			<div class="buyListContent" style="padding-top:60px; height:1200px;">
 			<div id="buyProduct">
 				<span class="buyListleftMenu">구매상품</span>
-				<img src="/sshj/img/dsweetpotato2.jpg"/>
-				<div>[매당 약 190원]KF94 대형 100매 국산원재료 지퍼형 5매입</div>
-				<div>[옵션]1개</div>
+				<img src="/sshj/" id="reviewImg"/>
+				<div id="reviewTitle" style="font-size: 17px;padding-left:5px;">불러오는 중입니다...</div>
+				<div></div>
 			</div>
-			<div id="buyProductStar">
-				<span class="buyListleftMenu">상품평가</span>
-				<div id="reviewStars">별별별별별</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
-			</div>
-			<div id="buyProductImg">
-				<span class="buyListleftMenu" style="float:left">첨부이미지</span><input type="file" name="filename"/>&nbsp;
-			</div>
-			<textarea name="reviewcontent" id="summernote">
-				서머노트 사용해야 할 부분
-			</textarea>
-			<input type="button" value="작성하기" class="btnSubmit"/>
+			<form method="post" name="reviewFrm" enctype="multipart/form-data" action="reviewWrite" >
+					<input type="hidden" name="ordernum" value="" id="reviewordernum"/>
+					<input type="hidden" name="productnum" value="" id="reviewproductnum"/>
+				<div id="buyProductStar">
+					<span class="buyListleftMenu">상품평가</span>
+					<div id="reviewStars">
+						<span class="redstar">
+							<select name="reviewscore">
+								<option value="5">★★★★★</option>
+								<option value="4">★★★★</option>
+								<option value="3">★★★</option>
+								<option value="2">★★</option>
+								<option value="1">★</option>
+							</select>
+						</span>
+					</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
+				</div>
+				<div id="buyProductImg">
+					<span class="buyListleftMenu" style="float:left">첨부이미지</span><input type="file" name="file"/>&nbsp;
+				</div>
+				<textarea name="reviewcontent" id="summernote">
+					
+				</textarea>
+				<input type="submit" value="리뷰 제출하기" class="btnSubmit" id="reviewSubmitBtn"/>
+			</form>
 			</div>
 		</div>
-		
-		
+		<div class="buyListDiv" id="returnDiv">
+			<div class="buyListBar" style="font-size:21px;width:550px;">환불정보</div><div class="buyListBarClose" style="left:500px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:730px;background-color:white; text-align: center;width:550px;">
+				<ul id="returnUl" style="text-align:left;">
+					<li>주문번호</li>		<li></li>
+					<li>상태</li>		<li></li>
+					<li>환불사유</li> 	<li></li>
+					<li>택배사</li>		<li></li>
+					<li>송장번호</li>		<li></li>
+					<li>접수일</li>		<li></li>
+					<li></li>
+				</ul>
+				<div id="" style="width:1060px;"></div>
+				<input type="button" value="닫기" class="btn" style="top:600px;" id="returnBtn" />
+			</div>
+		</div>
+		<div class="buyListDiv" id="questionDiv">
+			<div class="buyListBar" style="font-size:21px;width:550px;">문의하기</div><div class="buyListBarClose" style="left:500px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:730px;background-color:white; text-align: center;width:550px;">
+			<form id="questionForm" action="questionWrite" method="post">
+				<input type="hidden" name="productnum" value="" id="qboardnum"/>
+				<ul id="questionUl" style="text-align:left;">
+					<li>제목</li>		<li><input type="text" name="qtitle" style="width:335px;" placeholder="제목을 작성해주세요" maxlength="100"/></li>
+					<li>상품번호</li>		<li><span id="productnum" class="qsetNum"></span></li>
+					<li>공개비공개 설정하기</li> 	<li>
+										<select name="qopen">
+											<option value="1">공개</option>
+											<option value="0">비공개</option>
+										</select>
+										</li>
+					<li><textarea id="summernoteQuestion" name="qcontent"></textarea></li>
+				</ul> 
+				
+				<div id="" style="width:1060px;"></div>
+				<input type="button" value="문의하기" class="btn" style="top:660px;" id="questionBtn"/>
+				<input type="button" value="닫기" class="btn" style="top:600px;margin-top: 0px;" id="questionCloseBtn"/>
+			</form>
+			</div>
+		</div>
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+	  $('#summernote').summernote({
+		  height: 660,                 // 에디터 높이
+		  maxHeight:660,
+		  minHeight:660,
+		  focus: true,
+		  placeholder:'고객님의 리뷰를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 리뷰는 숨김처리 될 수 있습니다.',
+		  //콜백 함수
+        callbacks : { 
+        	onImageUpload : function(files, editor, welEditable) {
+        // 파일 업로드(다중업로드를 위해 반복문 사용)
+        for (var i = files.length - 1; i >= 0; i--) {
+        uploadSummernoteImageFile(files[i],
+        this);
+        		}
+        	}
+        }
+	  });
+	});
+$(document).ready(function() {
+	  $('.summernote').summernote({
+		  height: 330,                 // 에디터 높이
+		  maxHeight:330,
+		  minHeight:330,
+		  width:660,
+		  focus: true,
+		  placeholder:'가로+세로+높이=120cm, 10kg 규격 초과 시 현장수거 불가할 수 있으며, 강제수거요청 시 판매자가 추가비용 별도 청구할 수 있습니다. <br/> 이미지를 끌어서 놓으시면 이미지도 첨부가 가능합니다.',
+		  //콜백 함수
+      callbacks : { 
+      	onImageUpload : function(files, editor, welEditable) {
+      // 파일 업로드(다중업로드를 위해 반복문 사용)
+      for (var i = files.length - 1; i >= 0; i--) {
+      uploadSummernoteImageFile(files[i],
+      this);
+      		}
+      	}
+      }
+	  });
+	});
+$(document).ready(function() {
+	  $('#summernoteQuestion').summernote({
+		  height: 430,                 // 에디터 높이
+		  maxHeight:430,
+		  minHeight:430,
+		  width:530,
+		  focus: true,
+		  placeholder:'고객님의 문의를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 문의는 숨김처리 또는 삭제 될 수 있습니다.',
+		  //콜백 함수
+      callbacks : { 
+      	onImageUpload : function(files, editor, welEditable) {
+      // 파일 업로드(다중업로드를 위해 반복문 사용)
+      for (var i = files.length - 1; i >= 0; i--) {
+      uploadSummernoteImageFile(files[i],
+      this);
+      		}
+      	}
+      }
+	  });
+	});
+
+</script>
+
+<script>
+function uploadSummernoteImageFile(file, el) {
+	data = new FormData();
+	data.append("file", file);
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : "uploadSummernoteImageFile",
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(data) {
+			$(el).summernote('editor.insertImage', data.url);
+		}, error: function(){
+			
+		}
+	});
+}
+</script>

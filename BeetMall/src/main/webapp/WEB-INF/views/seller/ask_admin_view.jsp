@@ -120,8 +120,10 @@
 		</fieldset>
 			<div class="bottom_wrap">
 				<input type="button" value="확인" id="btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+			<c:if test="${question_content ==''}">
 				<input type="button"  value="수정하기" id="btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_edit'"/>
 				<input type="button" value="삭제하기" id="btn" onClick=""/>
+			</c:if>	
 			</div>
 		</div>
 	</div>

@@ -48,11 +48,15 @@ public class MemberController {
 		return "login/register";
 	}
 	@RequestMapping("cregister")
-	public String cResigter() {	// 구매자 회원가입
+	public String cResigter(HttpSession session) {	// 구매자 회원가입
+		session.removeAttribute("emailCode");
+		session.removeAttribute("emailCodeSeller");
 		return "login/cRegister";
 	}
 	@RequestMapping("sregister")
-	public String sRegister() {	// 판매자 회원가입
+	public String sRegister(HttpSession session) {	// 판매자 회원가입
+		session.removeAttribute("emailCode");
+		session.removeAttribute("emailCodeSeller");
 		return "login/sRegister";	
 	}
 	@RequestMapping("registerFinish")
@@ -61,7 +65,6 @@ public class MemberController {
 	}
 	@RequestMapping("/loginCheck")
 	public ModelAndView loginCheck() {
-		
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
@@ -81,7 +84,7 @@ public class MemberController {
 	@ResponseBody
 	public String infoSelect(HttpServletRequest req) {
 		String info = req.getParameter("infoname");
-		System.out.println(info);
+//		System.out.println(info);
 		String result = memberservice.infoSelect(info);
 		return result;
 	}
@@ -158,7 +161,9 @@ public class MemberController {
 	// 판매자 회원가입
 	@RequestMapping(value="/sregiFinish", method= RequestMethod.POST)
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
-	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo, CategoryFarmVO cvo, @RequestParam MultipartFile file, HttpServletRequest req) {
+	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo, CategoryFarmVO cvo, @RequestParam MultipartFile file, HttpServletRequest req, HttpSession session) {
+		String orgName = file.getOriginalFilename();
+		String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
 		ModelAndView mav = new ModelAndView();
 		String tel1 = req.getParameter("userphone1");
 		String tel2 = req.getParameter("userphone2");
@@ -198,11 +203,11 @@ public class MemberController {
 //			System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
 			
 			//////////////////// 파일 업로드
-			String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
-			System.out.println("path="+path);
+			
+//			System.out.println("path="+path);
 			String paramName = file.getName();
-			String orgName = file.getOriginalFilename();
-			System.out.println(paramName+", "+orgName);
+			
+//			System.out.println(paramName+", "+orgName);
 			
 			try {
 				if(orgName != null) {
@@ -232,12 +237,12 @@ public class MemberController {
 			int result3 = memberservice.sellerRegiFinishiOk(svo);
 			
 			////////////////////등록 실패시 파일 삭제
-			if(result3 <=0) {
-				if(orgName != null) {
-					File delf = new File(path, orgName);
-					delf.delete();
-				}
-			}
+//			if(result3 <=0) {
+//				if(orgName != null) {
+//					File delf = new File(path, orgName);
+//					delf.delete();
+//				}
+//			}
 			////////////////////파일 삭제 end)
 			
 			transactionManager.commit(status);
@@ -251,6 +256,10 @@ public class MemberController {
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("트랜잭션 문제.. 되게 골치아프니 주의..");
+			if(orgName != null) {
+				File delf = new File(path, orgName);
+				delf.delete();
+			}
 			mav.setViewName("redirect:sregister");
 		}
 		return mav;
@@ -307,6 +316,7 @@ public class MemberController {
 	@RequestMapping(value="emailSendSeller", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
 	@ResponseBody
 	public String sendemailSeller(HttpSession session, HttpServletRequest req) {
+		
 		String userEmail = req.getParameter("SendToEmail");
 		UUID random = UUID.randomUUID();
 		String uuid = random.toString();

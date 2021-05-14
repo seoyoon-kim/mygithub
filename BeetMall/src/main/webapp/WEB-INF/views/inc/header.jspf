@@ -33,6 +33,7 @@
 		width:1080px;
 		margin:0 auto;
 		padding-top:40px;
+		z-index:50;
 	}
 	#logoImg{
 		text-align:center;
@@ -97,6 +98,7 @@
 		line-height: 40px;
 		display:none;
 		position: absolute;
+		cursor:pointer;
 	}
 	#rollInfo{
 	}
@@ -132,8 +134,12 @@
 			var scroll = window.scrollY;
 			if(scroll>255){
 				$("#menuBar").css("position","absolute").css("top",scroll).css("z-index","90");
+				$("#categoriList").css("top",scroll+40);
+				
+				
 			}else {
 				$("#menuBar").css("position","static");
+				$("#categoriList").css("top","285px")
 			}
 		});
 		
