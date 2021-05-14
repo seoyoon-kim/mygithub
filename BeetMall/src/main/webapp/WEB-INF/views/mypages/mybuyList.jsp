@@ -927,7 +927,7 @@
 										</select>
 										</li>
 					<li><textarea id="summernoteQuestion" name="qcontent"></textarea></li>
-				</ul>
+				</ul> 
 				
 				<div id="" style="width:1060px;"></div>
 				<input type="button" value="문의하기" class="btn" style="top:660px;" id="questionBtn"/>
