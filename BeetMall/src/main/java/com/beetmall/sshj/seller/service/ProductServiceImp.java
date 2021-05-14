@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.seller.dao.ProductDAO;
@@ -21,8 +22,8 @@ public class ProductServiceImp implements ProductService {
 	ProductDAO productDAO;
 
 	
-	 @Override public List<ProductVO> searchList(SearchAndPageVO spvo) { 
-		 return productDAO.searchList(spvo); 
+	 @Override public List<ProductVO> searchList(SearchAndPageVO sapvo) { 
+		 return productDAO.searchList(sapvo); 
 	 }
 	 
 	@Override
@@ -31,18 +32,17 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> productAllSelect(String userid) {
-		return productDAO.productAllSelect(userid) ;
+	public List<ProductVO> productAllSelect(String userid){
+		return productDAO.productAllSelect(userid);
+	}
+	@Override
+	public int totalRecord(SearchAndPageVO sapvo) {
+		return productDAO.totalRecord(sapvo);
 	}
 
 	@Override
-	public int totalProduct(SearchAndPageVO spvo) {
-		return productDAO.totalProduct(spvo);
-	}
-
-	@Override
-	public List<ProductVO> onePageRecordSelect(SearchAndPageVO spvo) {
-		return productDAO.onePageRecordSelect(spvo);
+	public List<ProductVO> onePageRecordSelect(SearchAndPageVO sapvo) {
+		return productDAO.onePageRecordSelect(sapvo);
 	}
 
 	@Override

@@ -107,11 +107,12 @@
 	}
 	input{height:40px; border:1px solid lightgray; font-size:12px;}
 	input[type="text"]{width:200px;}
+	#searchWord{height:40px; border: 1px solid lightgray;}
 	#searchBtn{margin-left:-1px; background:white; width:50px;}
 	.btn{float:left;}
  	#remove_product{margin-right:10px;}
  	.option_wrap{margin:8px 0 20px 0;} 
- 	
+ 	img{width:100px; height: 100px;}
 </style>
 <script>
 //체크박스 전체선택
@@ -130,6 +131,7 @@ $(function(){
 		}
 		return true;
 	});
+});	
 //select 
 $(document).ready(function(){
 	$('#selectList').change(function(){
@@ -178,7 +180,7 @@ $(document).ready(function(){
 				<thead>
 					<!-- table 메뉴 14개-->
 					<tr>
-						<th class="listMenu"><input type="checkbox" checked id="productCheck" name="" value=" title="판매상품 전체 선택"></th>
+						<th class="listMenu"><input type="checkbox" checked id="productCheck" name="productCheck" value=""title="판매상품 전체 선택"></th>
 						<th class="listMenu">상품번호</th>
 						<th class="listMenu">대분류</th>
 						<th class="listMenu">중분류</th>
@@ -188,7 +190,7 @@ $(document).ready(function(){
 						<th class="listMenu">판매시작일</th>
 						<th class="listMenu">판매가</th>
 						<th class="listMenu">할인금액</th>
-						<th class="listMenu">할인적용판매가</th>
+						<th class="listMenu">할인판매가</th>
 						<th class="listMenu">할인율</th>
 						<th class="listMenu">할인기간</th>
 						<th class="listMenu">판매상태</th>
@@ -219,16 +221,21 @@ $(document).ready(function(){
 								<input type="hidden" value="${vo.mcatenum}"/>
 							</div>
 						</td>
-						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="">${vo.productname}</a></span></div></td>	
-						<td class="tbl_line_cell"><div id="thumbnail"><img src="${vo.thumbimg}"/></div></td>
-						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">90</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
+						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="custom/customproduct?productnum=${vo.productnum}">${vo.productname}</a></span></div></td>	
+						<td class="tbl_line_cell"><div id="thumbnail"><img src="<%=request.getContextPath()%>/resources/sellerProductImgs/${vo.thumbimg}"/></div></td>
+						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">${vo.nowstock}</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
 						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
 						<td class="tbl_line_cell"><div id="productprice"><span id="price_num">${vo.productprice }</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="saleprice"><span id="price_num">${vo.saleprice}</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="sellprice"><span id="price_num">${vo.sellprice}</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="salepercent"><span id="salepercent">${vo.salepercent}</span>%</div></td>
 						<td class="tbl_line_cell"><div id="saleperiod"><span id="salestart">${vo.salestart }</span> ~ <span id="salefinish">${vo.salefinish }</span></div></td>
+						<c:if test="${vo.nowstock!=0}">
 						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText">판매중</span></div></td>
+						</c:if>
+						<c:if test ="${vo.nowstock==0}">
+						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText" style="color:red">판매종료</span></div></td>
+						</c:if>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -252,19 +259,36 @@ $(document).ready(function(){
 					
 		
 			</div>
-			<!-- 페이징-->
-				<div class="page_wrap">
-				<div class="page_nation">
-				   <a class="arrow pprev" href="#"></a>
-				   <a class="arrow prev" href="#"></a>
-				   <a href="#" class="active">1</a>
-				   <a href="#">2</a>
-				   <a href="#">3</a>
-				   <a class="arrow next" href="#"></a>
-				   <a class="arrow nnext" href="#"></a>
-				</div>
-		 	</div>
-			<!-- 페이징 end -->
+			<!-------------- 페이징------------------>
+		<div class="page_wrap">
+			<div class="page_nation">
+				
+			  	<!--맨앞으로-->
+  				<a class="arrow_pprev" href="product_list?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--앞으로-->
+        		<a class="arrow_prev" href="product_list?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
+         		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
+	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
+	            	<c:if test="${p<=sapvo.totalPage}">  
+						<!--현재페이지 :  현재보고있는 페이지 표시 -->
+		               <c:if test="${p==sapvo.pageNum}">
+		                  <a class="on" href="product_list?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+		               <!-- 현재페이지가 아닐 때 -->
+		               <c:if test="${p!=sapvo.pageNum}">
+		                  <a href="product_list?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+	            	</c:if>
+        		</c:forEach>
+        		<!-- 다음 페이지가 있을 때 -->
+				<!--뒤로-->            
+	         	<a class="arrow next" href="product_list?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--맨뒤로-->
+	         	<a class="arrow nnext" href="product_list?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+			</div>
+		 </div> 
+		 <!-------------- 페이징 끝 --------------->
 			</div><!-- table wrap end -->
 		</fieldset>	
 	</div><!-- article div end -->

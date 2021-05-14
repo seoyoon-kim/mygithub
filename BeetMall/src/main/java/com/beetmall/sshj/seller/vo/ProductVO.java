@@ -23,9 +23,9 @@ public class ProductVO {
 	
 	private int totalstock;//총재고수량  
 	private int nowstock;//현재재고수량 ( count(productnum) from orderdetail)
+	private int soldstock; //팔린 재고 (orderdetail에서 가져오기)
 	
 	private String thumbimg;//썸네일이미지
-	private String addimg;// 추가이미지
 	
 	private String productcontent;//내용
 	
@@ -34,7 +34,11 @@ public class ProductVO {
 	private String paymentoption;//배송비 결제방식
 	
 	private String selloption;//판매단위
+	private String selloptionnum; //판매단위 숫자
+	private String selloptionunit; //판매단위 단위
 	private String sellweight;//중량/용량
+	private String sellweightnum; //중량용량 숫자
+	private String sellweightunit; //중량용량 단위
 	
 	private String origin;//원산지
 	
@@ -156,17 +160,17 @@ public class ProductVO {
 	public void setNowstock(int nowstock) {
 		this.nowstock = nowstock;
 	}
+	public int getSoldstock() {
+		return soldstock;
+	}
+	public void setSoldstock(int soldstock) {
+		this.soldstock = soldstock;
+	}
 	public String getThumbimg() {
 		return thumbimg;
 	}
 	public void setThumbimg(String thumbimg) {
 		this.thumbimg = thumbimg;
-	}
-	public String getAddimg() {
-		return addimg;
-	}
-	public void setAddimg(String addimg) {
-		this.addimg = addimg;
 	}
 	public String getProductcontent() {
 		return productcontent;
@@ -192,18 +196,50 @@ public class ProductVO {
 	public void setPaymentoption(String paymentoption) {
 		this.paymentoption = paymentoption;
 	}
+	//상품내용
 	public String getSelloption() {
+		this.selloption = selloptionnum + selloptionunit;
 		return selloption;
 	}
 	public void setSelloption(String selloption) {
-		this.selloption = selloption;
+		this.selloption = selloptionnum + selloptionunit;
 	}
 	public String getSellweight() {
+		this.sellweight = sellweightnum + sellweightunit;
 		return sellweight;
 	}
 	public void setSellweight(String sellweight) {
-		this.sellweight = sellweight;
+		this.sellweight = sellweightnum + sellweightunit;
 	}
+	
+	//상품내용 숫자+단위
+	public String getSelloptionnum() { 
+		return selloptionnum;
+	}
+	public void setSelloptionnum(String selloptionnum) {
+		this.selloptionnum = selloptionnum;
+	}
+	public String getSelloptionunit() {
+		return selloptionunit;
+	}
+	public void setSelloptionunit(String selloptionunit) {
+		this.selloptionunit = selloptionunit;
+	}
+	public String getSellweightnum() {
+		return sellweightnum;
+	}
+	public void setSellweightnum(String sellweightnum) {
+		this.sellweightnum = sellweightnum;
+	}
+	public String getSellweightunit() {
+		return sellweightunit;
+	}
+	public void setSellweightunit(String sellweightunit) {
+		this.sellweightunit = sellweightunit;
+	}
+	//상품내용
+	
+	
 	public String getOrigin() {
 		return origin;
 	}
@@ -302,7 +338,8 @@ public class ProductVO {
 		this.sellprice = sellprice;
 	}
 
-
+	
+	
 	
 	
 }
