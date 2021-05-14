@@ -34,7 +34,11 @@ public class ProductVO {
 	private String paymentoption;//배송비 결제방식
 	
 	private String selloption;//판매단위
+	private String selloptionnum; //판매단위 숫자
+	private String selloptionunit; //판매단위 단위
 	private String sellweight;//중량/용량
+	private String sellweightnum; //중량용량 숫자
+	private String sellweightunit; //중량용량 단위
 	
 	private String origin;//원산지
 	
@@ -192,18 +196,50 @@ public class ProductVO {
 	public void setPaymentoption(String paymentoption) {
 		this.paymentoption = paymentoption;
 	}
+	//상품내용
 	public String getSelloption() {
+		this.selloption = selloptionnum + selloptionunit;
 		return selloption;
 	}
 	public void setSelloption(String selloption) {
-		this.selloption = selloption;
+		this.selloption = selloptionnum + selloptionunit;
 	}
 	public String getSellweight() {
+		this.sellweight = sellweightnum + sellweightunit;
 		return sellweight;
 	}
 	public void setSellweight(String sellweight) {
-		this.sellweight = sellweight;
+		this.sellweight = sellweightnum + sellweightunit;
 	}
+	
+	//상품내용 숫자+단위
+	public String getSelloptionnum() { 
+		return selloptionnum;
+	}
+	public void setSelloptionnum(String selloptionnum) {
+		this.selloptionnum = selloptionnum;
+	}
+	public String getSelloptionunit() {
+		return selloptionunit;
+	}
+	public void setSelloptionunit(String selloptionunit) {
+		this.selloptionunit = selloptionunit;
+	}
+	public String getSellweightnum() {
+		return sellweightnum;
+	}
+	public void setSellweightnum(String sellweightnum) {
+		this.sellweightnum = sellweightnum;
+	}
+	public String getSellweightunit() {
+		return sellweightunit;
+	}
+	public void setSellweightunit(String sellweightunit) {
+		this.sellweightunit = sellweightunit;
+	}
+	//상품내용
+	
+	
 	public String getOrigin() {
 		return origin;
 	}
@@ -302,7 +338,8 @@ public class ProductVO {
 		this.sellprice = sellprice;
 	}
 
-
+	
+	
 	
 	
 }

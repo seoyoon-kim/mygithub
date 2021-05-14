@@ -22,15 +22,16 @@ public class SellerFaqController {
 		if(reqPageNum != null) {
 			sapvo.setPageNum(Integer.parseInt(reqPageNum)); 
 		}
-		//총 레코드 수 구하기 
-		sapvo.setTotalRecord(sellerfaqService.totalRecord(sapvo));
-		System.out.println("totalrecord ->" +  sellerfaqService.totalRecord(sapvo));
 		
 		ModelAndView mav = new ModelAndView();
 		
 		//검색어와 검색키가 있을 때,
 		sapvo.setSearchWord(sapvo.getSearchWord());
 		sapvo.setSearchKey(sapvo.getSearchKey());
+		//총 레코드 수 구하기 
+		sapvo.setTotalRecord(sellerfaqService.totalRecord(sapvo));
+		System.out.println("totalrecord ->" +  sellerfaqService.totalRecord(sapvo));
+				
 		mav.addObject("sapvo",sapvo);
 		mav.addObject("faqList", sellerfaqService.sellerfaqAllRecord(sapvo));
 		mav.setViewName("seller/faq");

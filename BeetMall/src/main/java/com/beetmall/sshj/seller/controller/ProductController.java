@@ -52,12 +52,13 @@ public class ProductController {
 		//검색어
 		sapvo.setSearchWord(sapvo.getSearchWord());
 		
-		//총 레코드 수 구하기 
-		sapvo.setTotalRecord(productService.totalRecord(sapvo));
 		
 		//검색어와 페이징를 담기
 		mav.addObject("sapvo",sapvo);
 		mav.addObject("productList", productService.searchList(sapvo)); 
+
+		//총 레코드 수 구하기 
+		sapvo.setTotalRecord(productService.totalRecord(sapvo));
 		//상품목록 담기
 		mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
 				
@@ -159,13 +160,12 @@ public class ProductController {
 			//추가하지 않으면 값을 지정해서 넣어준다. 
 			vo.setThumbimg(orgName);
 			System.out.println("vo에 set해주는 이미지 이름 orgName -> "+orgName);
-			if(vo.getDeliveryoption()=="1") {
-				vo.setPaymentoption("0");
-				vo.setDeliveryprice(0);
-			}
+			
+			
 			System.out.println("확인");
 			System.out.println("mcatenum -> "+ vo.getMcatenum());
 			System.out.println("productname -> " +vo.getProductname());
+			System.out.println("productprice -> " +vo.getProductprice());
 			System.out.println("userid ->"+vo.getUserid());
 			System.out.println("totalstock ->"+vo.getTotalstock());
 			System.out.println("deliveryoption ->"+vo.getDeliveryoption());
@@ -176,8 +176,9 @@ public class ProductController {
 			System.out.println("sellstart ->"+vo.getSellstart());
 			System.out.println("sellfinish ->"+vo.getSellfinish());
 			System.out.println("saleprice ->"+vo.getSaleprice());
-			System.out.println("productnum ->"+vo.getProductcontent());
+			System.out.println("productcontent ->"+vo.getProductcontent());
 			System.out.println("origin ->" +vo.getOrigin());
+			System.out.println("selloption->"+vo.getSelloption());
 			System.out.println("sellWeight->"+vo.getSellweight());
 			System.out.println("wrapping -> "+ vo.getWrapping());
 			
@@ -185,7 +186,7 @@ public class ProductController {
 //---------------------------이미지 등록 끝-----------------------------------------		
 			//상품등록 
 			int result = productService.productInsert(vo);
-			System.out.println("상품 insert + "+ result);
+			System.out.println("상품 insert -> "+ result);
 		
 			//할인이 있을 때,
 			if(vo.getSaleselect() == '1' || vo.getSaleselect() == 1) {
@@ -203,11 +204,17 @@ public class ProductController {
 			if(vo.getSaleb()!='1') {
 				vo.setSaleb('0');
 			}
+			//배송옵션이 0이면 나머지 다 0으로 세팅
+			
+			 if(vo.getDeliveryoption()=="1") { vo.setPaymentoption("0");
+			 vo.setDeliveryprice(0); }
+			 
 //---------------------------insert 결과 확인--------------------------------------
 			// 상품등록 확인
 			if(result>0) {
 				System.out.println("[상품 등록 완료]");
-				mav.setViewName("redirect:product_list");
+				transactionManager.commit(status); 
+				mav.setViewName("redirect:product_list");			
 			}else {
 				System.out.println("[상품 등록 실패 - 다시 확인해주세요.]");
 				mav.setViewName("redirect:product_regi");
@@ -215,17 +222,19 @@ public class ProductController {
 			// 할인 적용 확인
 			if(result2>0) {
 				System.out.println("[할인 적용 완료]");
+				transactionManager.commit(status); 
 			}else {
 				System.out.println("[할인 적용 실패 - 다시 확인해주세요.]");
 			}
 			// 옵션 상품 등록 확인 
 			if(result3>0) {
 				System.out.println("[옵션 상품 등록 완료]");
+				transactionManager.commit(status); 
 			}else {
 				System.out.println("[옵션 상품등록 실패 - 다시 확인해주세요.]");
 			}
 //----------정상 구현되면 commit 실행 (commit에 필요한 개체들은 상단에 미리 호출)-----------------
-			transactionManager.commit(status); 
+			//transactionManager.commit(status); 
 		}catch(Exception e){
 			System.out.println("<<상품등록 트랜잭션 에러 발생>>");
 			e.printStackTrace();

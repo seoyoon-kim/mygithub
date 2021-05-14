@@ -505,7 +505,9 @@ $('submit').click(function(){
 
 //판매기간/ 할인기간 날짜 설정
 $(function(){
-	$('.start_date').datepicker({minDate:0});
+/* 	$('.start_date').datepicker({dateFormat:'YY/MM/DD'});
+	$('.finish_date').datepicker({dateFormat:'YY/MM/DD'}); */
+	/* $('.start_date').datepicker({minDate:0}); */
 	 var dateFormat ="yy/mm/dd",
 	 from = $('.start_date').datepicker({
 		 showOn:"both",
@@ -515,7 +517,8 @@ $(function(){
 		 changeMonth: true,
 	     changeYear: true,
 	     buttonText: "날짜선택",
-	     format: 'YY/MM/DD'
+	     dateFormat: 'yy/mm/dd',
+	     language:'kr'
 	 });
 	 from = $('.start_date').on('change', function(){
 		 to.datepicker('option','minDate',getDate(this));
@@ -528,7 +531,8 @@ $(function(){
 		 changeMonth: true,
 	     changeYear: true,
 	     buttonText: "날짜선택",
-	     format: 'YY/MM/DD'
+	     dateFormat: 'yy/mm/dd',
+	     language:'kr'
 	 })
 	 to=$('.finish_date').on('change',function(){
 		 from.datepicker('option','maxDate',getDate(this));
@@ -545,15 +549,6 @@ $(function(){
 	    }
 });
 
-// 콤마 제거 (제거값리턴)
-function removeCommaReturn(obj){
-var val = obj.value;
-console.log(val);
- if(val != ""){
-  val = val.replace(/,/g, "");
- }
- return val;
-}
 
 </script>
 <body>
@@ -626,41 +621,11 @@ console.log(val);
 		<ul>
 			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
 			<br/>
-			<li>
-				<label>할인여부 </label>&nbsp;
-				<!-- 	
-				<button class="btn" name="saleselect" value="1" id="sale_check">설정</button>&nbsp;
-				<button class="btn" name="saleselect" value="0" id="sale_uncheck">설정안함</button>
-				 -->
-				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정">설정</label>
-				<input type="radio" value="0" name="saleselect" id="sale_uncheck"><label for="설정안함">설정안함</label>
-			</li>
-			<ul id="sale_ul" style="display:none">
-				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min="0"/>&nbsp;<span>원</span>&nbsp;<span>할인</span></li>
-				<!-- <li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/>&nbsp;<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li> -->
-				<li id="sale_period">
-					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
-					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
-				</li>
-				<li>
-					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >--할인금액--</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
-					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
-				</li>
-		<li><input type="checkbox" name="saleb" id="saleb" value="1"/><span>못난이 할인 상품으로 등록</span></li> 
-				<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
-			</ul>
+			
 			<li> 
 				<label>판매기간</label>&nbsp;&nbsp;
-			<!-- 	
-				<button name="selldate" class="btn" id="sell_check" value="1">설정</button>&nbsp; 
-				<button name="selldate" class="btn" id="sell_uncheck" value="0">설정안함</button>
-				이건 버튼으로 변경안해도 되는데.. 설정안함 하면 sellstart 현재날짜, sellfinish 2099.01.01 로 변경
-				
-				<input type="radio" value="1" name="selldate" id="sale_check"><label for="설정">설정</label>
-				<input type="radio" value="0" name="selldate" id="sale_uncheck"><label for="설정안함">설정안함</label>
-				 -->
 			</li>
-		<div style="border:1px solid lightgray; margin-left:20px;">
+		<div>
 		<ul >
 			<li id="date_group">&nbsp;&nbsp;<label>기간설정</label>
 				<div id="btn_group">
@@ -674,6 +639,28 @@ console.log(val);
 			<li id="sell_start_finish">&nbsp;&nbsp;<label for="start_date">판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
 		</ul>	
 		</div>
+			<li>
+				<label>할인여부 </label>&nbsp;
+				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정">설정</label>
+				<input type="radio" value="0" name="saleselect" id="sale_uncheck"><label for="설정안함">설정안함</label>
+			</li>
+			<ul id="sale_ul" style="display:none; background-color:#fcfcfc;">
+				<li>
+					<label>전체할인 </label>&nbsp;
+					<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min="0"/>&nbsp;<span>원</span>&nbsp;<span>할인</span>
+				</li>
+				<!-- <li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/>&nbsp;<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li> -->
+				<li id="sale_period">
+					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
+					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
+				</li>
+				<li>
+					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >--할인금액--</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
+					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
+				</li>
+				<li><input type="checkbox" name="saleb" id="saleb" value="1"/><span>못난이 할인 상품으로 등록</span></li> 
+				<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
+			</ul>
 		</ul>
 		</div>
 	
@@ -693,7 +680,7 @@ console.log(val);
 					<input type="radio" value="1" name="optionselect" id="add_option"><label for="옵션추가">옵션추가</label>
 					<input type="radio" value="0" name="optionselect" id="none_option"><label for="추가안함">추가안함</label>
 				</li>
-				<ul id="add_option_ul">
+				<ul id="add_option_ul" style="display:none; background-color:#fcfcfc;">
 				<li><label>옵션 갯수</label>&nbsp;
 					<select id="select_option" name="option_count"> 
 						<option selected value='0'>적용안함</option>
@@ -767,23 +754,20 @@ console.log(val);
 	<div class="category_wrap">
 			<ul>
 				<li><label>배송방법</label>&nbsp; 
-			<!-- 		<button name="deliveryoption" class="btn" id="pickup" value="1">픽업</button>
-					<button name="deliveryoption" class="btn" id="delivery" value="2">택배</button>
-					<button name="deliveryoption" class="btn" id="delandpick" value="3">택배/픽업</button> -->
 					<select name="deliveryoption" id="deliverysel" >
 						<option value="1" id="pickup">픽업</option>
 						<option value="2" id="delivery">택배</option>
 						<option value="3" id="delandpick">택배/픽업</option>
 					</select>
 				</li>
-				<ul id="delivery_option">
+				<ul id="delivery_option" style="display:none; background-color:#fcfcfc;">
 					<li><label>배송비</label>&nbsp;
 						<input type="number" name="deliveryprice" id="deliveryprice"/>&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 					</li>
 					<li id="pay"><label>결제방식</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="착불"/><label for="착불">착불</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="선결제"/><label for="선결제">선결제</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option"  value="착불 또는 선결제"/><label for="착불또는선결제">착불 또는 선결제</label>
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="1"/><label for="착불">착불</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="2"/><label for="선결제">선결제</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option"  value="3"/><label for="착불또는선결제">착불 또는 선결제</label>
 					</li>
 				</ul>
 			</ul>
@@ -793,19 +777,21 @@ console.log(val);
 	<div class="category_wrap">
 			<ul>
 				<li><label for="">판매단위</label>&nbsp;
-					<input type="number" name="selloption" id="selloption"  min="0" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_unit" name="selloption" onchange="javascript:removeCommaReturn(this);">
+					<input type="number" name="selloptionnum" id="selloption"  min="0" onchange="javascript:removeCommaReturn(this);"/>
+					<select id="select_unit" name="selloptionunit" onchange="javascript:removeCommaReturn(this);">
 						<option value=" ">해당없음</option>
 						<option value="팩">팩</option>
 						<option value="박스">박스</option>
 					</select>
+					<input type="hidden" name="selloption" id="selloption_hidden"/>
 				</li>
 				<li><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweight" id="sellweight" min="0" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_weight" name="sellweight" onchange="javascript:removeCommaReturn(this);">
+					<input type="number" name="sellweightnum" id="sellweight" min="0" onchange="javascript:removeCommaReturn(this);"/>
+					<select id="select_weight" name="sellweightunit" onchange="javascript:removeCommaReturn(this);">
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>
+					<input type="hidden" name="sellweight" id="sellweight_hidden"/>
 				</li>
 				<li><label for="">원산지</label>&nbsp;
 					<input type="radio" value="국내산" name="origin" id="domestic"><label for="국내산">국내산</label>
@@ -819,23 +805,12 @@ console.log(val);
 						<input type="radio" value="칠레산" name="origin" id="chile"><label for="칠레산">칠레산</label>
 					</div>
 				</li>
-				
-				<!-- <li><label for="">원산지</label>&nbsp;
-					<input type="button" name="origin" class="btn" id="domestic" value="국내산"/> <input type="button" name="origin" class="btn" id="import" value="수입산"/>
-					<div id="import_wrap" style="display:none">
-						<input type="button" name="origin" id="china" class="btn" class="import_nation" value="중국산"/>
-						<input type="button" name="origin" id="japan" class="btn" class="import_nation" value="일본산"/>
-						<input type="button" name="origin"  id="malaysia" class="btn" class="import_nation" value="말레이시아산"/>
-						<input type="button" name="origin" id="philippines" class="btn" class="import_nation" value="필리핀산"/>
-						<input type="button" name="origin" id="vietnam" class="btn" class="import_nation" value="베트남산">
-						<input type="button" name="origin" id="chile" class="btn" class="import_nation" value="칠레산"> 
-					</div>
-				</li> -->
+			
 				<li><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
 					<select id="select_packing" name="wrapping">
-						<option value='실온'>실온</option>
-						<option value='냉장'>냉장</option>
-						<option value='냉동'>냉동</option>
+						<option value='0'>실온</option>
+						<option value='1'>냉장</option>
+						<option value='2'>냉동</option>
 					</select>
 				</li>
 				<li><label for="">상품정보</label><br/>
