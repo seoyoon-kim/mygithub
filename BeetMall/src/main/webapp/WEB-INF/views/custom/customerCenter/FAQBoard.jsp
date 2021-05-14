@@ -113,9 +113,10 @@
 		float:left; 
 		height:40px;
 		width:130px;
-		margin-top:20px;
-		margin-left:180px;
+		margin-top:30px;
+		margin-left:300px;
 		border-radius: 8px 0px 0px 8px;
+		border : 1px solid lightgray;
 	}
 	table, fieldset{
 		width:100%;
@@ -171,6 +172,21 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	#searchWord{
+		height:40px;
+		width:400px;
+		text-indent: 0.2em;
+		border: white;
+		float: center;
+		border:1px solid lightgray; 
+		border-radius: 0px 8px 8px 0px;
+		margin:30px 0px 60px -2px;	
+		margin-right:320px;
+	}
+	th{
+	    border-bottom-width: 1px;
+	    border-top-width: 1px;
+	}
 </style>
 <script>
 
@@ -198,7 +214,17 @@
   			}	
   		});
 
- 
+ 		$("#searchWord").keydown(function(key){
+ 			if(key.keyCode ==13){
+ 				$('#searchFrm').submit(function(){
+ 					if($("#searchWord").val()==null){
+ 						alert("검색어를 입력해주세요");
+ 						return false;
+ 					}
+ 					return true;
+ 				});
+ 			}
+ 		});
  });
 </script>
 <div class="section">
@@ -206,18 +232,20 @@
 		<div class="wrapTitle">자주 묻는 질문</div>
 		<div id="cs_search_container">	
 			<span id="cs_search_q">자주묻는 질문을 검색해보세요.<br/></span>
-			<select id="sel">
-				<option value="total">전체</option>
-				<option value="product">상품</option>
-				<option value="member">회원/포인트</option>
-				<option value="sale">판매</option>
-				<option value="order">주문/결제</option>
-				<option value="delivary">배송</option>
-				<option value="claim">교환/반품/환불</option>
-			</select>
-			<span id="cs_search_box">
-				<input type="text" id="search" name="search" placeholder="궁금하신 내용을 입력해주세요.">
-			</span>
+			<form method="get" action="FAQBoard" id="searchFrm">
+				<select id="sel" id="searchKey">
+					<option value="전체">전체</option>
+					<option value="상품">상품</option>
+					<option value="회원/포인트">회원/포인트</option>
+					<option value="판매">판매</option>
+					<option value="주문/결제">주문/결제</option>
+					<option value="배송">배송</option>
+					<option value="교환/반품/환불">교환/반품/환불</option>
+				</select>
+				<span id="cs_search_box">
+					<input type="text" id="searchWord" name="searchWord" placeholder="궁금하신 내용을 입력해주세요." style="margin-right: 250px;">
+				</span>
+			</form>
 		</div>
 		<!-- 자주묻는질문 테이블-->
 		<fieldset>
@@ -255,21 +283,21 @@
 		<div class="page_wrap">
 			<div class="page_nation">
 			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
-			   		<a class="arrow prev" href="/sshj/FAQBoard?pageNum=${pageVO.pageNum-1}"></a>
+			   		<a class="arrow prev" href="/sshj/FAQBoard?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
 			   </c:if>
 			   <!-- 페이지 번호                   1                                    5                     -->
 	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
 	              <c:if test="${p<=pageVO.totalPage}">
-	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
 	                    <a class="active">${p}</a>
 	                 </c:if>   
 	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
-	                    <a href="/sshj/FAQBoard?pageNum=${p}">${p}</a>
+	                    <a href="/sshj/FAQBoard?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
 	                 </c:if>
 	              </c:if>
 	           </c:forEach>
 	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
-	              <a class="arrow next" href="/sshj/FAQBoard?pageNum=${pageVO.pageNum+1}"></a>
+	              <a class="arrow next" href="/sshj/FAQBoard?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
 	           </c:if>
 			</div>
 		 </div>

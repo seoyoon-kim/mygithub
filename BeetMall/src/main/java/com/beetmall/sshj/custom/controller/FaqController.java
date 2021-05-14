@@ -29,6 +29,7 @@ public class FaqController {
 		
 		//검색어, 검색키
 		pageVO.setSearchKey(req.getParameter("searchKey"));
+		System.out.println("setSearchKey" + pageVO.getSearchKey());
 		pageVO.setSearchWord(req.getParameter("searchWord"));
 		pageVO.setTotalRecord(faqService.faqOnetotalRecord(pageVO));
 		

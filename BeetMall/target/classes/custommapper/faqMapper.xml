@@ -7,8 +7,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from(
 	    	select * from(
 				select faqnum, faqcate, faqtitle, faqcontent, faqoption 
-				from faq 
-				where faqoption = 1 
+				from faq  
+				<choose>
+					<when test ='searchWord!=null and searchKey!=null'>
+						where faqcate = '${searchKey}' and faqtitle like '%${searchWord}%' and faqoption = 1
+					</when>
+					<when test ='searchKey!=null and searchWord==null'>
+						where faqcate = '${searchKey}' and faqoption = 1
+					</when>
+					<when test ='searchWord!=null'>
+						where faqtitle like '%${searchWord}%' and faqoption = 1
+					</when>
+					<when test ='searchWord==null'>
+						where faqoption = 1
+					</when>
+				</choose>
 				order by faqnum desc)
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by faqnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
@@ -16,6 +29,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by faqnum desc		
 	</select>
 	<select id="faqOnetotalRecord" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO" resultType="int">
-		select count(faqnum) from faq where faqoption=1
+		select count(faqnum) from faq 
+		<choose>
+			<when test = 'searchWord!=null and searchKey!=null'>
+				where faqtitle like '%${searchWord}%' and faqoption=1 and faqcate=${searchKey}
+			</when>
+			<when test = 'searchWord!=null'>
+				where faqtitle like '%${searchWord}%' and faqoption=1 
+			</when>
+			<when test = 'searchWord==null'>
+				where faqoption=1
+			</when>
+		</choose>
 	</select>
 </mapper>
