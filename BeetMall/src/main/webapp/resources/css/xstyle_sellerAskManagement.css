@@ -63,18 +63,19 @@ a:hover,a:active,a:visited,a:link{
 	border: 1px solid #aaa;	
 }
 
+
 /* 리뷰보기 */
-#reviewInfo{
+#askInfo{
 	display: flex;
 	flex-wrap: wrap;
 }
 
-#reviewInfo li{
-	width: 25%;
+#askInfo li{
 	height: 60px;
 	line-height: 50px;
 	text-align: center;
 	border: 1px solid #ccc;
+	flex-grow: 1;
 }
 /* 카테고리 검색 */
 #categoryList{
@@ -173,19 +174,19 @@ a:hover,a:active,a:visited,a:link{
 	float: right;
 }
 
-#reviewList{
+#askList{
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 }
 
-#reviewList li:nth-child(n+1):nth-child(-n+7){
-	background-color: #bbb;
+#askList li:nth-child(n+1):nth-child(-n+5){
+	background-color:#bbb;
 	font-weight: bold;
 }
 
-#reviewList li{
-	flex: 1 1 14%;
+#askList li{
+	flex: 1 1 20%;
 	height: 72.4px;
 	text-align: center;
 	border: 1px solid #ddd;
@@ -195,9 +196,10 @@ a:hover,a:active,a:visited,a:link{
 	padding: 20px 0;
 }
 
-#reviewList a{
+#askList a{
 	color: #0080ff;
 }
+
 
 /* 페이징처리부분 */
 .page_wrap {
@@ -270,13 +272,13 @@ a:hover,a:active,a:visited,a:link{
 }
 
 
-#reviewManagement{
+#askManagement{
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
 
-#reviewManagement>li{
+#askManagement>li{
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
@@ -284,16 +286,16 @@ a:hover,a:active,a:visited,a:link{
 	display: flex;
 	align-items:center;
 	border-bottom: 1px solid #ccc;
-	padding:14px;
+
 }
 
-#reviewManagement>li>b{
+#askManagement>li>b{
 	width: 20%;
 	font-weight: bold;
 	margin-right: 10px;
 }
 
-#reviewContent{
+#askContent{
 	width: 95%;
 	height: 100px;
 	background-color: #ddd;
@@ -301,13 +303,9 @@ a:hover,a:active,a:visited,a:link{
 	margin: 10px auto;
 }
 
-#reviewContent p{
+#qContent p{
 	flex-basis: 2;
-	margin: 10px;
-}
-
-#reviewContent img{
-	flex-basis: 1;
+	padding: 10px 14px;
 }
 
 #popupBtnContainer{

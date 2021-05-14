@@ -49,5 +49,11 @@ public class SellerReviewServiceImp implements SellerReviewService{
 		// TODO Auto-generated method stub
 		return dao.reportInsert(vo);
 	}
+
+	@Override
+	public int reviewAnswerUpdate(SellerReviewVO vo) {
+		// TODO Auto-generated method stub
+		return dao.reviewAnswerUpdate(vo);
+	}
 	
 }

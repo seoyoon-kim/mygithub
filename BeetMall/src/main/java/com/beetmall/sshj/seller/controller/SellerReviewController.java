@@ -104,6 +104,7 @@ public class SellerReviewController {
 				vo.setTotalScore(Double.parseDouble(String.format("%.2f", (double)totalScore/list.size() )));
 			}
 			
+			// totalrecord와 userid를 vo에 넣어서 데이터를 불러온다
 			vo.setUserid(userid);
 			vo.setTotalRecord(list.size());
 
@@ -118,10 +119,10 @@ public class SellerReviewController {
 		}
 	}
 	
-	//@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.GET)
+	//리뷰 페이징,, + 모든 데이터 조합하기
 	@RequestMapping(value = "/SellerReviewPaging",method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<Object> reviewPaging(HttpServletRequest req, HttpSession session, SellerReviewVO vo, Model model) {
+	public ArrayList<Object> reviewPaging(HttpServletRequest req, HttpSession session, SellerReviewVO vo) {
 		vo.setUserid((String)session.getAttribute("logId"));
 		
 //		넘어온 파라미터 키와 밸류 값을 확인
@@ -133,11 +134,13 @@ public class SellerReviewController {
 //				System.out.println("name = " + name + ", value = " + value);
 //			}
 //		}
-		
+		System.out.println(vo.getTotalPage());
+		System.out.println(vo.getTotalRecord());
 		List<SellerReviewVO> total = service.reviewlistRecord(vo);
 		
 		// 총 record 갯수를 구한 값을 vo에 넣어준다.
 		vo.setTotalRecord(total.size());
+		System.out.println(total.size());
 		ArrayList<Object> dataList = new ArrayList<Object>();
 		dataList.add(0, service.reviewlist(vo));
 		dataList.add(1, vo);
@@ -145,6 +148,7 @@ public class SellerReviewController {
 		return dataList;
 	}
 	
+	// 리뷰 답변 등록
 	@RequestMapping(value = "/SellerReviewAnswer",method = RequestMethod.POST)
 	@ResponseBody
 	public void answerUpdate(SellerReviewVO vo) {
@@ -158,6 +162,7 @@ public class SellerReviewController {
 		
 	}
 	
+	// 리뷰 신고 접수
 	@RequestMapping(value = "/SellerReviewReport",method = RequestMethod.POST)
 	@ResponseBody
 	@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
@@ -191,5 +196,17 @@ public class SellerReviewController {
 		}
 		
 	}
-
+	
+	// review answer update
+	@RequestMapping(value = "/SellerReviewAnswerEdit",method = RequestMethod.POST)
+	@ResponseBody
+	public void SellerReviewAnswerEdit(SellerReviewVO vo) {
+		int result = service.reviewAnswerUpdate(vo);
+		
+		if(result == 1) {
+			System.out.println("리뷰 등록 성공");
+		} else {
+			System.out.println("리뷰 답변 등록 실패");
+		}
+	}
 }

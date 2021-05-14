@@ -43,7 +43,7 @@ nav{
 	padding: 0 0 0 5px;
 }
 
-nav ul{
+nav>ul{
 	display: flex;
 	width: 1280px;
 	height: 100px;
@@ -53,15 +53,27 @@ nav ul{
 	justify-content: space-between;
 }
 
-nav li{
+nav>ul>li{
 	font-size: 16px;
 	text-align: center;
 }
 
-nav li:nth-child(1)>a{
+nav>ul>li:nth-child(1)>a{
 	color: black;
 	font-size: 28px;
 	font-weight: bold;
+}
+
+#sellerHeaderSubMenu{
+	width: 100px;
+	height: 80px;
+	line-height: 40px;
+	border: 1px solid #aaa;
+	display: none;
+	background-color: #fff;
+}
+#sellerHeaderSubMenu>li:first-child{
+	border-bottom: 1px solid #ddd;
 }
 
 footer{
@@ -75,6 +87,15 @@ footer{
 		location.href = "/sshj";
 	</script>
 </c:if>
+<script>
+ 	$( () => {
+		$('#headerSelectMenu').hover( function(){
+			$(this).children('ul').css('display','block');
+		}, function(){
+			$(this).children('ul').css('display','none');
+		})
+	}) 
+</script>
 <div id="seller_header">
 	<!-- 상단 메뉴 바 -->
 	<nav>
@@ -105,7 +126,12 @@ footer{
 			<li><a href="sellerSales">매출 관리</a></li>
 			<li><a href="sellerSettle">정산 관리</a></li>
 			<li><a href="sellerIntroFarm">농장 관리</a></li>
-			<li><a href="sellerReview">리뷰/문의 관리</a></li>
+			<li id="headerSelectMenu"><a href="sellerReview">리뷰/문의 관리</a>
+				<ul id="sellerHeaderSubMenu">
+					<li><a href="sellerReview">리뷰 관리</a></li>
+					<li><a href="sellerAskManagement">문의 관리</a></li>
+				</ul>
+			</li>
 			<li><a href="#">회원정보수정</a></li>
 		</ul>
 	</nav>

@@ -17,4 +17,6 @@ public interface SellerReviewService {
 	public int reviewReportUpdate(SellerReviewVO vo);
 	// 신고 테이블 업데이트
 	public int reportInsert(SellerReviewVO vo);
+	// 리뷰 답글 수정
+	public int reviewAnswerUpdate(SellerReviewVO vo);
 }
