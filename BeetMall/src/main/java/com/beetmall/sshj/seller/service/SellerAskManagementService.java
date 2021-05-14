@@ -10,11 +10,9 @@ public interface SellerAskManagementService {
 	// 리뷰 리스트 rownum (paging용) 가져오기
 	public List<SellerAskManagementVO> asklist(SellerAskManagementVO vo);
 	// ajax 사용시 리스트 record 알기 위해서 사용
-	public List<SellerAskManagementVO> reviewlistRecord(SellerAskManagementVO vo);
-	// 리뷰 답변 업데이트
-	public int answerUpdate(SellerAskManagementVO vo);
-	// 리뷰 신고 업데이트
-	public int reviewReportUpdate(SellerAskManagementVO vo);
+	public List<SellerAskManagementVO> asklistRecord(SellerAskManagementVO vo);
+	// 문의 답변 업데이트
+	public int askUpdate(SellerAskManagementVO vo);
 	// 신고 테이블 업데이트
 	public int reportInsert(SellerAskManagementVO vo);
 }

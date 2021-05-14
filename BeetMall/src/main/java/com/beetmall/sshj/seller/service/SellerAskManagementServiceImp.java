@@ -29,27 +29,21 @@ public class SellerAskManagementServiceImp implements SellerAskManagementService
 	}
 
 	@Override
-	public List<SellerAskManagementVO> reviewlistRecord(SellerAskManagementVO vo) {
-		// TODO Auto-generated method stub
-		return dao.reviewlistRecord(vo);
-	}
-
-	@Override
-	public int answerUpdate(SellerAskManagementVO vo) {
-		// TODO Auto-generated method stub
-		return dao.answerUpdate(vo);
-	}
-
-	@Override
-	public int reviewReportUpdate(SellerAskManagementVO vo) {
-		// TODO Auto-generated method stub
-		return dao.reviewReportUpdate(vo);
-	}
-
-	@Override
 	public int reportInsert(SellerAskManagementVO vo) {
 		// TODO Auto-generated method stub
 		return dao.reportInsert(vo);
+	}
+
+	@Override
+	public List<SellerAskManagementVO> asklistRecord(SellerAskManagementVO vo) {
+		// TODO Auto-generated method stub
+		return dao.asklistRecord(vo);
+	}
+
+	@Override
+	public int askUpdate(SellerAskManagementVO vo) {
+		// TODO Auto-generated method stub
+		return dao.askUpdate(vo);
 	}
 	
 }

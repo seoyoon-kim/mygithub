@@ -182,6 +182,7 @@ a:hover,a:active,a:visited,a:link{
 
 #askList li:nth-child(n+1):nth-child(-n+5){
 	background-color:#bbb;
+	font-weight: bold;
 }
 
 #askList li{
@@ -196,7 +197,7 @@ a:hover,a:active,a:visited,a:link{
 }
 
 #askList a{
-	color: #000;
+	color: #0080ff;
 }
 
 
@@ -288,7 +289,7 @@ a:hover,a:active,a:visited,a:link{
 
 }
 
-#reivewManagement>li>b{
+#askManagement>li>b{
 	width: 20%;
 	font-weight: bold;
 	margin-right: 10px;
@@ -304,11 +305,7 @@ a:hover,a:active,a:visited,a:link{
 
 #qContent p{
 	flex-basis: 2;
-	margin: 10px;
-}
-
-#qContent img{
-	flex-basis: 1;
+	padding: 10px 14px;
 }
 
 #popupBtnContainer{
@@ -318,21 +315,14 @@ a:hover,a:active,a:visited,a:link{
 	background-color: #fff;
 }
 
-#popupBtnContainer input:nth-child(1){
-	background-color: pink;
-	border: 1px solid pink;
-	border-radius: 5px;
+#popupBtnContainer>input[value="닫기"]{
+	margin: 0 10px;
+	background-color: #ddd;
 }
 
-#popupBtnContainer input:nth-child(2){
-	border: 1px solid #ddd;
-	border-radius: 5px;
-}
-
-#popupBtnContainer input:nth-child(3){
-	background-color: gray;
-	border: 1px solid gray;
-	border-radius: 5px;
+#popupBtnContainer>input[value="신고"]{
+	background-color: #ff9999;
+	color: #fff;
 }
 
 /* 신고하기 */

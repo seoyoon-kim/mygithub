@@ -10,7 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.seller.service.SellerAskManagementService;
@@ -87,7 +93,7 @@ public class SellerAskController {
 			vo.setUserid(userid);
 			vo.setTotalRecord(list.size());
 
-			mav.addObject("askList",service.reviewlist(vo));
+			mav.addObject("askList",service.asklist(vo));
 			mav.addObject("resultData",vo);
 			
 			mav.setViewName("seller/sellerAskManagement");
@@ -99,10 +105,12 @@ public class SellerAskController {
 	}
 	
 	// 문의내역 페이징,, + 모든 데이터 조합하기
+	@RequestMapping(value = "/SellerAskPaging", method = RequestMethod.POST)
+	@ResponseBody
 	public ArrayList<Object> SellerAskPaging(HttpServletRequest req, HttpSession session, SellerAskManagementVO vo ){
 		vo.setUserid((String)session.getAttribute("logId"));
 		
-		List<SellerReviewVO> total = service.reviewlistRecord(vo);
+		List<SellerAskManagementVO> total = service.asklistRecord(vo);
 		
 		// 총 record 갯수를 구한 값을 vo에 넣어준다.
 		vo.setTotalRecord(total.size());
@@ -111,5 +119,37 @@ public class SellerAskController {
 		dataList.add(1, vo);
 		
 		return dataList;
+	}
+	
+	// 문의 답변 등록
+	@RequestMapping(value = "/SellerAskAnswer",method = RequestMethod.POST)
+	@ResponseBody
+	public void answerUpdate(SellerAskManagementVO vo) {
+		int result = service.askUpdate(vo);
+		
+		if(result == 1) {
+			System.out.println("문의 등록 성공");
+		} else {
+			System.out.println("문의 답변 등록 실패");
+		}
+		
+	}
+	
+	// 문의 신고 접수
+	@RequestMapping(value = "/SellerAskReport",method = RequestMethod.POST)
+	@ResponseBody
+	public void declarationUpdate(HttpSession session, SellerAskManagementVO vo) {
+		// sellerId를 저장한다.
+		vo.setSellerId((String)session.getAttribute("logId"));
+		
+		//문의 테이블에 신고 여부 넣기 1
+		int result = service.reportInsert(vo);
+		
+		if(result == 1) {
+			System.out.println("문의 등록 성공");
+		} else {
+			System.out.println("문의 답변 등록 실패");
+		}
+		
 	}
 }

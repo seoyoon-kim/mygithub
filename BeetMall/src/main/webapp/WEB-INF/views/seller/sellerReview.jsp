@@ -329,9 +329,9 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 				tag += "<li>" + vo.reviewscore + "</li>";
 				if(vo.reviewimg != null){
 					let data = vo.reviewimg;
-					tag += "<li style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )></li>";
+					tag += "<li value=\'"+data+"\' style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )><input type='hidden' value=\'"+data+"\'></li>";
 				} else {
-					tag += "<li>-</li>";
+					tag += "<li><input type='hidden' value=\'"+data+"\'>-</li>";
 				}
 				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a></li>";
 				tag += "<li>" + vo.userid + "</li>";
@@ -395,7 +395,8 @@ function popupOpen(data){
 	let userid = $(data).parent().next().text();
 	let reviewwritedate = $(data).parent().next().next().text();
 	let reviewanswer = $(data).parent().next().next().next().text();
-	
+	let reviewimg = $(data).parent().prev().children().val();
+	console.log(reviewimg);
 	console.log(reviewnum);
 	
 	if(reviewanswer == '답변 완료'){
@@ -407,7 +408,7 @@ function popupOpen(data){
 		tag += '<form method="post" action="javascript:reviewAnswer()" id="popupFrm">';
 		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
 		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
-		tag += '<ul id="reivewManagement">';
+		tag += '<ul id="reviewManagement">';
 		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
 		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
 		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
@@ -417,7 +418,9 @@ function popupOpen(data){
 		tag += '<br />';
 		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
 		tag += '<div id="reviewContent">';
-		tag += '<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img" />';
+				if( reviewimg != ''){
+					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" id="repMenu_img" />';
+				}
 		tag += '<p>' + reviewcontent + '</p>';
 		tag += '</div>';
 		tag += '</div>';
@@ -431,11 +434,11 @@ function popupOpen(data){
 			}
 		tag += '<div id="popupBtnContainer">';
 			if( reviewanswer == '미답변'){
-				tag += '<input class="normalBtn" type="submit" value="확인" >';
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
+				tag += '<input class="normalBtn" type="submit" value="등록" >';
+				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
 				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			} else {
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
+				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
 				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			}
 			tag += '</div>';
@@ -617,6 +620,8 @@ function reportUpdate(){
 }
 
 
+
+
 </script>
 
 <section>
@@ -719,10 +724,10 @@ function reportUpdate(){
 						<li>${result.productname }</li>
 						<li>${result.reviewscore }</li>
 						<c:if test="${result.reviewimg != null }">
-							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )></li>
+							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )><input type="hidden" value="${result.reviewimg }"></li>
 						</c:if>
 						<c:if test="${result.reviewimg == null }">
-							<li>-</li>
+							<li><input type="hidden" value="${result.reviewimg }">-</li>
 						</c:if>
 						<li>
 							<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">

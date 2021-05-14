@@ -320,7 +320,8 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 			result2.each( function (idx, vo){
 				tag += "<li>" + vo.productname + "</li>";
 				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'>";
-				tag += "<input type='hidden' name='qnum' value='"+vo.qnum+"' /><input type='hidden' name='qcontent' value='" + vo.qcontent + "'>"+vo.title+"</a></li>";
+					tag += "<input type='hidden' name='qnum' value='"+vo.qnum+"' />"+vo.qtitle+"</a>";
+					tag += "<input type='hidden' name='qcontent' value='" + vo.qcontent + "'></li>";
 				tag += "<li>" + vo.userid + "</li>";
 				tag += "<li>" + vo.qwritedate + "</li>";
 				if(vo.qanswer != null){
@@ -347,20 +348,20 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 
 			let pagingData = result[1];
 			if(pagingData.pageNum != 1){
-				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
-				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 			for(let i = pagingData.startPageNum; i <= pagingData.totalPage; i++){
 				if(pagingData.pageNum == i){
 					pagingTag += '<a class="active" href="#" onclick="return false;">'+(i)+'</a>';
 				} else {
-					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')">'+(i)+'</a>';
+					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')">'+(i)+'</a>';
 				}
 			}
 			
 			if(pagingData.totalPage != pagingData.pageNum){
-				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
-				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 
 			$('.page_nation').html(pagingTag);
@@ -376,18 +377,22 @@ function popupOpen(data){
 	
 	// 상품명
 	let qnum = $(data).children().val();
-	let productname = $(data).parent().prev().prev().prev().text();
-	let qtitle = "";
-	let qcontent = $(data).text().trim();
+	let productname = $(data).parent().prev().text();
+	let qtitle = $(data).text().trim();
+	let qcontent = $(data).next().val().trim();
 	let userid = $(data).parent().next().text();
 	let qwritedate = $(data).parent().next().next().text();
 	let qanswer = $(data).parent().next().next().next().text();
 	
-	console.log(qnum);
-	
 	if(qanswer == '답변 완료'){
 		qanswer = $(data).parent().next().next().next().children('input').val();
 	}
+	console.log(qnum);
+	console.log(productname);
+	console.log(qtitle);
+	console.log(qcontent);
+	console.log(userid);
+	console.log(qwritedate);
 	console.log(qanswer);
 	
 	let tag = '<div class="wrapContainer_Edit1">';
@@ -395,15 +400,14 @@ function popupOpen(data){
 		tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
 		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 문의</div>';
 		tag += '<ul id="askManagement">';
-		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
-		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>등록자</b> ' + userid + '</li>';
-		tag += '<li><b>등록일</b> ' + qwritedate + '</li>';
+		tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
+		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+		tag += '<li><b>작성일</b> ' + qwritedate + '</li>';
 		tag += '</ul>';	
 		tag += '<div>';
 		tag += '<br />';
 		tag += '<b>&nbsp;&nbsp;&nbsp;문의 내용</b><br />';
-		tag += '<div id="qcontent">';
-		tag += '<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img" />';
+		tag += '<div id="qContent">';
 		tag += '<p>' + qcontent + '</p>';
 		tag += '</div>';
 		tag += '</div>';
@@ -411,13 +415,14 @@ function popupOpen(data){
 			if( qanswer == '미답변'){
 				tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
 			} else {
-				tag += '<div style="border-top:1px solid #ddd;">';
+				tag += '<div style="border-top:1px solid #ddd; padding: 10px 0">';
+				tag += '<b>&nbsp;&nbsp;&nbsp;답변 내용</b><br />';
 				tag += '<p style="margin: 20px 10px ">' + qanswer + '<p>';
 				tag += '</div>';
 			}
 		tag += '<div id="popupBtnContainer">';
 			if( qanswer == '미답변'){
-				tag += '<input class="normalBtn" type="submit" value="확인" >';
+				tag += '<input class="normalBtn" type="submit" value="등록" >';
 				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
 				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
 			} else {
@@ -527,7 +532,7 @@ function qanswer(){
 	}
 
 	
-	let url = "Sellerqanswer";
+	let url = "SellerAskAnswer";
 	let param = $('#popupFrm').serialize();
 	$.ajax({
 		type: "POST",
@@ -704,6 +709,7 @@ function reportUpdate(){
 								<input type="hidden" name="qnum" value="${result.qnum }" />
 									${result.qtitle}
 							</a>
+							<input type='hidden' name='qcontent' value=' ${result.qcontent }'>
 						</li>
 						<li>${result.userid }</li>
 						<li>${result.qwritedate }</li>

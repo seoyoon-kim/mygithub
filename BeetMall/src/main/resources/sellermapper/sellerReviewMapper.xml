@@ -54,16 +54,16 @@
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc)</when>
-			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc)</when>
-			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate desc)</when>
+			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc, reviewanswer desc)</when>
+			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate asc, reviewanswer asc)</when>
 		</choose>
 		
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} 
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer asc, reviewwritedate asc)</when>
-			<when test="sortStr == 1">order by reviewscore asc, reviewwritedate desc)</when>
-			<when test="sortStr == 2">order by reviewscore desc, reviewwritedate desc)</when>
+			<when test="sortStr == 1">order by reviewscore asc, reviewwritedate asc, reviewanswer asc)</when>
+			<when test="sortStr == 2">order by reviewscore desc, reviewwritedate desc, reviewanswer desc)</when>
 		</choose>
 
 		
@@ -74,8 +74,8 @@
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc</when>
-			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc</when>
-			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate desc</when>
+			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc, reviewanswer desc</when>
+			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate asc, reviewanswer asc</when>
 		</choose>
 
 	</select>

@@ -50,17 +50,17 @@
 		
 		
 		<choose>
-			<when test="sortStr == 0">order by qanswer desc, qwritedate desc)</when>
-			<when test="sortStr == 1">order by qanswer desc)</when>
-			<when test="sortStr == 2">order by qanswer asc)</when>
+			<when test="sortStr == 0">order by qwritedate desc, qanswer desc , qtitle desc)</when>
+			<when test="sortStr == 1">order by qanswer desc, qwritedate desc)</when>
+			<when test="sortStr == 2">order by qanswer asc, qwritedate asc)</when>
 		</choose>
 		
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} 
 		
 		<choose>
-			<when test="sortStr == 0">order by qanswer asc, qwritedate asc)</when>
-			<when test="sortStr == 1">order by qanswer asc)</when>
-			<when test="sortStr == 2">order by qanswer desc)</when>
+			<when test="sortStr == 0">order by qwritedate asc, qanswer asc, qtitle asc)</when>
+			<when test="sortStr == 1">order by qanswer asc, qwritedate asc)</when>
+			<when test="sortStr == 2">order by qanswer desc, qwritedate desc)</when>
 		</choose>
 
 		
@@ -70,17 +70,16 @@
 		</choose>
 		
 		<choose>
-			<when test="sortStr == 0">order by qanswer desc, qwritedate desc</when>
-			<when test="sortStr == 1">order by qanswer desc</when>
-			<when test="sortStr == 2">order by qanswer asc</when>
+			<when test="sortStr == 0">order by qwritedate desc, qanswer desc, qtitle desc</when>
+			<when test="sortStr == 1">order by qanswer desc, qwritedate desc</when>
+			<when test="sortStr == 2">order by qanswer asc, qwritedate asc</when>
 		</choose>
 
 	</select>
 	
 	<select id="asklistRecord" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
-		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
-			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		select qnum, d.productnum productnum, d.userid, qcontent, qtitle,
+				to_char(qwritedate, 'yyyy-MM-dd') qwritedate, qopen, qanswer, productname
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where 
@@ -96,41 +95,36 @@
 			</when>
 		</choose>
 		
-		a.userid='${userid}') c join review d on c.productnum = d.productnum 
+		a.userid='${userid}') c join userqboard d on c.productnum = d.productnum
 		
 		<choose>
 			<when test="searchTxt != '' ">
-				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
-				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				<if test="''.equals(searchTxt)">where qtitle like '%%'</if>
+				<if test="!''.equals(searchTxt)">where qtitle like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
-					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					and qwritedate BETWEEN '${startDate}' and '${endDate}'
 				</if>
 			</when>
 			<when test="searchTxt == ''">
 				<if test="startDate != ''">
-					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					where qwritedate BETWEEN '${startDate}' and '${endDate}'
 				</if>
 			</when>
 		</choose>
 
 	</select>
 
-	<update id="answerUpdate" parameterType="int">
-		update review set reviewanswer = #{reviewanswer} where userid = #{userid} and reviewnum = ${reviewnum}
-	</update>
-	
-	<update id="reviewReportUpdate" parameterType="int">
-		update review set reviewreport = 1 where reviewnum = ${reviewnum}
+	<update id="askUpdate" parameterType="int">
+		update userqboard set qanswer = #{qanswer} where userid = #{userid} and qnum = ${qnum}
 	</update>
 	
 	<insert id="reportInsert" parameterType="int">
-		
 		insert into report(reportnum, userid, reporteduser 
 			,reportboard, reportboardnum, reportreason
 			,reportcontent, reportdate, reportselect)
 		values (reportsq.nextval, #{sellerId}, #{userid}
-			, '리뷰', ${reviewnum}, #{reportReason}
+			, '문의', ${qnum}, #{reportReason}
 			, #{reportContent}, sysdate, 1)
 	</insert>
 	
