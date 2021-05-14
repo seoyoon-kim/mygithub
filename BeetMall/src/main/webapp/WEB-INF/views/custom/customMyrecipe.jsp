@@ -138,12 +138,12 @@ a:hover, a:active, a:visited, a:link {
 
 #myrecipeTop {
 	float: left;
-	width: 440px;
+	width: 970px;
 }
 
 #myrecipeTop2 {
 	float: left;
-	width: 500px;
+	width: 60px;
 }
 
 #myrecipeTop2>li,#myrecipeTop2>input {
@@ -388,15 +388,8 @@ $(document).ready(function(){
 						type="button" id="goodrbtn" value="즐겨찾기 레시피" />
 				</div>
 				<ul id="myrecipeTop2">
-					<li><select name="selectOrder">
-							<option>최신순</option>
-							<option>추천순</option>
-							<option>조회수순</option>
-					</select></li>
 					<li id="norebtnli"><input type="button" id="norebtnmy" value="선택제거" /></li>
-					<li><span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-				</span></li>
+					<li></li>
 				</ul>
 			</div>
 		

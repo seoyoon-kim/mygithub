@@ -5,7 +5,7 @@
   <mapper namespace="com.beetmall.sshj.custom.dao.ProductViewDAO">
   
     <select id="ProductViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-       select userid,sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,addimg,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
+       select productnum,userid,sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
     </select>
     
     <!--        농장 구하기           -->
@@ -41,6 +41,13 @@
     select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review where productnum=${param1}
     </select>
     
+    <!--        해당 상품의, 해당 리뷰글 눌렀을때 뷰어 보기    -->    
+    <select id="reviewViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+       select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review 
+       where productnum=${param1} and reviewnum=${param2}
+    </select>
+    
+
    
     
   </mapper>

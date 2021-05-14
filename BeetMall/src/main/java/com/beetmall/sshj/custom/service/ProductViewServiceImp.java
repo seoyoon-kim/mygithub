@@ -61,6 +61,17 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 
+	@Override
+	public ProductViewVO reviewViewSelect(int pnum, int rnum) {
+		
+		return productVeiwDAO.reviewViewSelect(pnum,rnum);
+	}
+
+
+
+
+
+
 	
 	
 }

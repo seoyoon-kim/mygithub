@@ -3,7 +3,7 @@ package com.beetmall.sshj.custom.dao;
 import java.util.List;
 
 import com.beetmall.sshj.custom.vo.ProductViewVO;
-import com.beetmall.sshj.custom.vo.RecipeVO;
+
 
 public interface ProductViewDAO {
 
@@ -21,5 +21,9 @@ public interface ProductViewDAO {
 	
 	/////////////상품후기 구하기 REVIEW
 	public List<ProductViewVO> ProductViewReview(int productnum);
+	
+	////////////리뷰글 상세보기
+	public ProductViewVO reviewViewSelect(int pnum,int rnum);
+	
 	
 }

@@ -1,7 +1,10 @@
 package com.beetmall.sshj.custom.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.ProductViewServiceImp;
 import com.beetmall.sshj.custom.vo.ProductViewVO;
+
 
 @Controller
 public class ProductViewController {
@@ -55,10 +59,25 @@ public class ProductViewController {
 		mav.addObject("reviewlist",productViewService.ProductViewReview(productnum));
 		
 		
+		
+		
 		//구한것들 뷰페이지로 가지고 이동
 		mav.setViewName("custom/customproduct");
 		
 		return mav;
+	}
+	
+	
+  ////////////////리뷰 팝업창///////////////////
+	
+	@RequestMapping("reviewViewSelect")
+	@ResponseBody
+	public ProductViewVO reviewViewSelect(int pnum,int rnum) {
+		System.out.println(pnum+"//"+rnum);
+		
+		ProductViewVO rvov = productViewService.reviewViewSelect(pnum,rnum);
+		System.out.println("요기까지 실행");
+		return rvov;
 	}
 	
 	

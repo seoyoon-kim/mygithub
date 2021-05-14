@@ -33,12 +33,12 @@ a:hover, a:active, a:visited, a:link {
 	margin-left:80px;
 	margin-top: 100px;
 	width: 350px;
-	height: 400px; 
+	height: 500px; 
 }
 
 #productImgBox>img {
 	width: 350px;
-	height: 400px;
+	height: 500px;
 }
 
 
@@ -66,7 +66,6 @@ a:hover, a:active, a:visited, a:link {
 	height: 40px;
 	line-height: 40px;
 	font-size:17px;
-    color:red;
     margin-bottom:20px;
    
 }
@@ -100,6 +99,16 @@ color:gray;
 	line-height: 40px;
 }
 
+
+#yesdiscount{
+width:100%;
+float:left;
+line-height: 40px;
+height: 40px;
+font-size:13px;
+color:gray;
+}
+
 #productPrBox>ul {
 	float: left;
 	margin: 0 auto;
@@ -113,6 +122,8 @@ color:gray;
 	height: 35px;
 	line-height: 35px;
 	margin-bottom:10px;
+	padding-bottom:5px;
+	margin-top:5px;
 	border-bottom:1px solid #eee;
 }
 
@@ -159,10 +170,11 @@ padding-left:10px;
 	float: left;
 	line-height: 50px;
 	height: 50px;
-	font-size:30px;
+	font-size:25px;
 	padding-left:280px;
 	margin-bottom:15px;
-	color:red;
+	font-weight:bold;
+
 	
 }
 
@@ -321,7 +333,7 @@ color:gray;
 }
 
 .reviewList {
-	height: 110px;
+	height: 60px;
 	margin-bottom: 10px;
 	padding-bottom:10px;
 }
@@ -341,8 +353,8 @@ padding-bottom:3px;
 }
 
 .reviewList>li {
-	height: 110px;
-	line-height: 100px;
+	height: 60px;
+	line-height: 50px;
 	padding-bottom:10px;
 }
 
@@ -369,22 +381,26 @@ padding-bottom:3px;
 	width: 90px;
 }
 
+
+#reviewViewbox{
+width:100%;
+float:left;
+padding-left:30px;
+}
+
 /* 리뷰이미지 설정*/
 #reviewImgbox {
-   width:150px;
-	height: 100px;
-	float: left;
+   width:100%;
+   float: left;
+   padding-left:50px;
 }
 
 #reviewImgbox>img {
-	width:150px;
-	height: 100px;
+	width:600px;
+	height: 400px;
 	float: left;
 }
 
-#reviewImgbox>img:nth-child(3n+3) {
-	margin-right: 6%;
-}
 
 #reviewtxtbox {
     padding-left:15px;
@@ -392,6 +408,7 @@ padding-bottom:3px;
 	height: 100px;
 	line-height: 100px;
 	float: left;
+	padding-left:50px;
 }
 
 #nonebox{
@@ -686,17 +703,126 @@ td, .td{
 	width:930px; line-height:50px;
 }
 
+<!-- 리뷰 팝업창---------------------------------------- -->
+	#buyReviewView{
+		display: none;	
+	}
+	
+	.buyListDiv{
+		position:absolute;
+		top:1000px;
+		background-color: white;
+	}
+	
+	.buyListDiv, .buyListBar, .buyListContent{
+		width:300px;
+	}
+	
+	.buyListBar{		
+		height:40px;
+		background-color: rgb(252,118,45);
+		position:absolute;
+		color:white;
+		text-align: center;
+		line-height: 40px;
+	}
+	.buyListBarClose{
+		height:40px;
+		width:50px;
+		background-color: white;
+		position:absolute;
+		font-size:40px;
+		line-height:30px;
+		text-align:center;
+		left:630px;
+	}
+	.buyListContent{
+		height:700px;
+		
+	}
+	
+	.thumbsupYes{
+		background-image: url("/sshj/img/dthumbsupYes.png");
+		background-repeat:no-repeat;
+		background-size:contain;
+		height:28px;
+		width:28px;
+		float:left;
+		transition-duration:0.5s;
+		margin-right: 7px;
+	}
+	.thumbsupNo{
+		background-image: url("/sshj/img/dthumbsupNo.png");
+		background-repeat:no-repeat;
+		background-size:contain;
+		height:28px;
+		width:28px;
+		float:left;
+		transition-duration:0.5s;
+		margin-right: 7px;
+	}
+	.buyListContent>ul>li{
+	float:left;
+	}
+	
+	.buyListContent>ul>li:nth-child(2n+1){
+		float:left;
+		width:226px;
+		text-align: center;
+		font-size:17px;
+		line-height:28px;
+		height:30px;
+		margin-bottom:1px;
+	}
+	.buyListContent>ul>li:nth-child(2n){
+		float:left;
+		width:452px;
+		font-size:17px;
+		line-height:28px;
+		height:30px;
+		margin-bottom:1px;
+	}
+	.buyListContent>ul{
+		margin-bottom: 10px;
+	}
+	#buyReviewtxt{
+		width:660px;
+		height:467px;
+		overflow:auto;
+		margin-left:10px;
+		margin-right:10px;
+		background-color: white;
+		font-size: 18px;
+		padding:5px;
+		margin-bottom:15px;
+	}
+	.buyListContent>input:last-child{
+		margin-top:15px;
+	}
+	
+	#infoInput>li:nth-child(2n+1){
+		width:200px;
+		float:left;
+	}
+	#infoInput>li:nth-child(2n){
+		width:839px;
+		float:left;
+	}
+	
+	#buyListContent{
+	
+	}
+
 
 </style>
 <script>
-
    
     var pcount=1; //상품갯수
     var ocount=1; //옵션갯수
     var prtprice=parseInt(${pvo.productprice}); //상품본래가격
     var dprtprice=parseInt(${Dprice}); //상품할인가격
     var tprice=prtprice-dprtprice;
-    var submitprice;
+    var submitprice = 0;
     
     
 	function pCount(){
@@ -781,7 +907,7 @@ function optionchange(){
 		 var optArr=opt.split('&'); 
 		 var optnum=parseInt(optArr[0]);   //옵션 숫자
 		 var optprice=parseInt(optArr[1]); //옵션 가격
-		 ocount=1;
+		 //ocount=1;
 		 
 		
 		 
@@ -851,7 +977,7 @@ function optionchange(){
 		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
 		 
 		 submitprice=tprice;
-		 //alert("총"+submitprice);
+		 alert("총"+submitprice);
 		 //alert(tprice);
 	}	    
 
@@ -866,13 +992,54 @@ function total(){
 			alert("옵션을 선택해 주세요");			
 			 }
 
+
 	optionchange();
 	alert("최종구매 가격은"+submitprice+"입니다.");
 	
 	
 }
 
+////////////////////////////리뷰글
+/* @@  */
 
+
+//선택한 faq tr열고 닫히기	 
+//수정할 것: this만 열리도록 고치기
+//function reviewView(r){
+	
+	//alert(r);속성값 가져옴 //r넘버임
+	
+	//리뷰아이디#reviewViewbtn 에서 값이 000인 값을 고르면, 해당 아이디reviewViewbox의 박스중에 값이 000인 것이 열림
+	//$('#reviewViewbox').val(ra).css("display", " "); 
+    // $('#reviewViewbox').val(ra).css("display", "hide"); 
+ 
+	//$(this).parent().next().toggle(
+	//			function(){
+	//				$('#reviewViewbox').val(r).parent().next().css("display", " "); 
+	//			},
+	//			function(){
+	//				$('#reviewViewbox').val(r).parent().next().css("display", "hide"); 
+	//			}
+	//		);
+    
+    
+  	//};	
+  	
+//$(document).on('click', ".reviewViewbtn>input.val()",function(){
+	
+//	console.log($(this).children().val());
+//})
+
+//$(document).on('click', ".reviewViewbtn>input.val()",function(){
+	
+//	console.log($(this).children().val());
+//})
+
+
+
+//선택한 faq tr열고 닫히기	 
+//수정할 것: this만 열리도록 고치기
+  
 
 
 </script>
@@ -900,6 +1067,11 @@ function total(){
 				<div id=productMainTiltle>
 					<b>${pvo.productname}</b>   <!-- 상품명 -->
 				</div>
+				
+				<c:if test="${Dprice!=null}">
+				<div id="yesdiscount">해당 상품은 할인이 적용중입니다.</div>
+				</c:if>
+				
 				<div id=productPrice>원가: ${pvo.productprice}</div>  <!-- 가격 -->
 				<div id="sprofile">
 					<a href="#">${fvo.farmname}</a>  <!--농장이름 -->
@@ -908,6 +1080,8 @@ function total(){
 				<div id="simg">
 					<a href="#"><img src="img/${fvo.farmprofile}"/></a>  <!-- 프사 -->
 				</div>
+				
+				
 				
 				<div id=productPrBox>
 					<ul>
@@ -987,11 +1161,7 @@ function total(){
 
 				<!-- relativeBox -->
 
-                <c:if test="${pvo.addimg!='null'}">
-	                <div id=pBigtxt3>
-	                   ${pvo.addimg}
-	                </div>
-                </c:if>
+              
                 
 				<div id=pBigtxt2>
                    ${pvo.productcontent}
@@ -1043,9 +1213,6 @@ function total(){
 				<div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
 
-            <div id="reviewWriteBtn">
-					<input type="button" value="후기 작성"  class="btn"/>
-			</div>
 
 				<ul id="reviewTitle">
 					<li><b>번호</b></li>
@@ -1064,18 +1231,25 @@ function total(){
 		          	
 					<ul class="reviewList">
 						<li>${rlist.reviewnum}</li>
-						<li>
+						<li id="reviewViewbtn" class="reviewViewbtn">
+							<input type="hidden" value="${rlist.reviewnum}"/><!-- onclick="reviewView('r${rlist.reviewnum}' -->
+							후기 자세히 보기 ▼
+						</li>
+						<li>${rlist.userid}</li>
+						<li>${rlist.reviewwritedate}</li>
+						<li>${rlist.reviewscore}</li> 
+					</ul>
+					
+					   <div id="reviewViewbox" style="display:none" >
+					      <input type="hidden" value="r${rlist.reviewnum}"/>
 							<div id="reviewImgbox">
 								<img src="img/${rlist.reviewimg}"/>
 							</div>
 							<div id="reviewtxtbox">					
 							     ${rlist.reviewcontent}
 							</div>
-						</li>
-						<li>${rlist.userid}</li>
-						<li>${rlist.reviewwritedate}</li>
-						<li>${rlist.reviewscore}</li>
-					</ul>
+					   </div>
+					   
                </c:forEach>
     
 		       <div id="nonebox">   </div>
@@ -1099,6 +1273,12 @@ function total(){
 		<!-- productInfoPage -->
 
 		<!--- -------------------------------------상세정보박스2  끝-------------------------------------------------------- -->
+		
+		<!-- ---------------------------------------상품후기 글 팝업창---------------------------------------------------------------------- -->
+		
+		 
+
+		
 			<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 

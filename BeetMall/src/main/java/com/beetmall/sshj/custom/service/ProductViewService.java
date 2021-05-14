@@ -20,4 +20,8 @@ public interface ProductViewService {
 	
 	/////////////상품후기 구하기 REVIEW
 	public List<ProductViewVO> ProductViewReview(int productnum);
+	
+	////////////리뷰글 상세보기
+	public ProductViewVO reviewViewSelect(int pnum,int rnum);
+	
 }

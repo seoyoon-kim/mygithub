@@ -26,7 +26,7 @@ public class ProductViewVO {
 		private int nowstock;//현재재고수량 ( count(productnum) from orderdetail)
 		
 		private String thumbimg;//썸네일이미지
-		private String addimg;// 추가이미지
+		
 		
 		private String productcontent;//내용
 		
@@ -79,7 +79,18 @@ public class ProductViewVO {
 		private String reviewanswer;
 		private int reviewcount;
 		
+		//리뷰 좋아요 누른 테이블
+        private int reviewgood;
+		
 
+        
+        
+		public int getReviewgood() {
+			return reviewgood;
+		}
+		public void setReviewgood(int reviewgood) {
+			this.reviewgood = reviewgood;
+		}
 		public int getStorenum() {
 			return storenum;
 		}
@@ -188,12 +199,7 @@ public class ProductViewVO {
 		public void setThumbimg(String thumbimg) {
 			this.thumbimg = thumbimg;
 		}
-		public String getAddimg() {
-			return addimg;
-		}
-		public void setAddimg(String addimg) {
-			this.addimg = addimg;
-		}
+		
 		public String getProductcontent() {
 			return productcontent;
 		}
