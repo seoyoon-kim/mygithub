@@ -2,6 +2,8 @@ package com.beetmall.sshj.seller.dao;
 
 import java.util.List;
 
+import com.beetmall.sshj.seller.vo.DiscountVO;
+import com.beetmall.sshj.seller.vo.OptionVO;
 import com.beetmall.sshj.seller.vo.ProductVO;
 import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 
@@ -18,5 +20,11 @@ public interface ProductDAO {
 	
 	//상품 등록하기
 	public int productInsert(ProductVO vo);
+	//할인 등록하기
+	public int discountInsert(DiscountVO dvo);
+	//옵션 등록하기
+	public int optionInsert(OptionVO ovo);
+	//상품 수정하기 
+	public int productUpdate(ProductVO vo);
 	
 }

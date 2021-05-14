@@ -124,7 +124,7 @@ $(function(){
 $(function(){
 	$("#searchForm").submit(function(){
 		//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
-		if($('#searchWord').val()=="" || '#searchWord').val()==null){
+		if($('#searchWord').val()=="" || $('#searchWord').val()==null){
 			alert("검색어를 입력하세요.");
 			return false;
 		}

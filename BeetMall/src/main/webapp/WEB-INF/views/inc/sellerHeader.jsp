@@ -91,7 +91,7 @@ footer{
 					<c:if test="${logType==2}">
 						<input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons" />
 					</c:if>
-					<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span> <input type="button" value="로그아웃" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" onClick="location.href='<%=request.getContextPath()%>/ask_admin_list'" />
+					<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span> <input type="button" value="로그아웃" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" onClick="location.href='<%=request.getContextPath()%>/notice'" />
 				</div>
 			</c:if>
 		</div>
