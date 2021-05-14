@@ -32,8 +32,6 @@
 	}
 	.page_nation {
 		display:inline-block;
-		padding-left: 300px;
-    	padding-right: 300px;
 	}
 	.page_nation .none {
 		display:none;
@@ -115,8 +113,32 @@
 		border-radius:80%;
 		object-fit:cover;
 	}
-	#coloor{
-		color:red;
+	#taag:link,#taag:visited,#taag:hover,#taag:active{
+		color:black;
+	}
+	#search_container{
+		width: 100%;
+    	margin: 0 auto;
+    	margin-bottom: 10px;
+    	overflow: auto;
+    	padding-right: 50px;
+	}
+	#searchForm{
+	    float: right;
+	    margin-right: 220px;
+	}
+	#search_box{
+		border: none;
+	}
+	#searchWord{
+		height: 30px;
+	}
+	#searchBtn{
+	    margin-left: -1px;
+	    background: white;
+	    width: 50px;
+	    height: 30px;
+        border: 1px solid black;
 	}
 	/* 상품페이지 부분 css끝 */
 	
@@ -329,74 +351,89 @@
                 }
             }
         });
-        $("#kAreamMall").children().children().click(function(){
-            var name= $(this).text();
-            $(this).css("color","red");
-            $("#kContent").append("<div style='padding-left: 10px; letter-spacing: 1px;'><span>"+name+"</span><span class='arrea' style='cursor: pointer;'>&times;</span>"+"&nbsp;&nbsp;</div>");
-        });
-       
-        $(document).on('click',"#kContent>div", function(){
-        	$(this).remove();
-        });
-        
-        //서버로보낼값
-        $('#boardUpddate').submit(function(){
-        	
-        });
-    });
-    $(document).ready(function(){
- 		$('#Sequence').change(function(){
+	        $("#kAreamMall").children().children().click(function(){
+	            var name= $(this).text();
+	            $(this).css("color","red");
+	            $("#kContent").append("<div style='padding-left: 10px; letter-spacing: 1px;'><span>"+name+
+	            					  "</span><span class='arrea' style='cursor: pointer;'>&times;</span>"+"&nbsp;&nbsp;</div>"+
+	            					  "<input type='hidden' name='"+name+"' value="+name);
+	        });
+	       
+	        $(document).on('click',"#kContent>div", function(){
+	        	$(this).remove();
+	        });
+	        
+	        //서버로보낼값
+	        $('#boardUpddate').submit(function(){
+	        	console.log("여기오냐?")
+	        	//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+				if($('#kContent').text()==""){
+					alert("검색어를 입력하세요.");
+					return false;
+				}
+				return true;
+	        });
+    
+	       ///여기바꿔야함///////////////////////////////////////////////////////////////////////
+		$('#Sequence').change(function(){
 	   		if($('#Sequence option:selected').val() == "평점높은순"){
-	            var url = "/sshj/highhigh1";		
-	            $.ajax({
-	            	url:url,
-	    			success:function(result){
-	    				console.log('평점높은순 가져오기 성공');
-	    				$("#productMain").empty();
-	    				$("#productMain").html(result);
-	    				console.log("result = "+result);
-	    			},error:function(e){
-	    				console.log(e.responseText);
-	    				console.log("평점높은순 가져오기 실패");
-	    			}
-	            });
+	            if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
+	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=1"
+	            }else{
+	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=1"
+	            }
 	   		}else if($('#Sequence option:selected').val() == "평점낮은순"){
-	            var url = "/sshj/lowlow1";		
-	            $.ajax({
-	            	url:url,
-	    			success:function(result){
-	    				console.log('평점낮은순 가져오기 성공');
-	    				$("#productMain").empty();
-	    				$("#productMain").html(result);
-	    				console.log("result = "+result);
-	    			},error:function(e){
-	    				console.log(e.responseText);
-	    				console.log("평점낮은순 가져오기 실패");
-	    			}
-	            });
-	   		}else if($('#Sequence option:selected').val() == "가격높은순"){
-/* 	   			var url = "/sshj/lowlow1";		
-	            $.ajax({
-	            	url:url,
-	    			success:function(result){
-	    				console.log('평점낮은순 가져오기 성공');
-	    				$("#productMain").empty();
-	    				$("#productMain").html(result);
-	    				console.log("result = "+result);
-	    			},error:function(e){
-	    				console.log(e.responseText);
-	    				console.log("평점낮은순 가져오기 실패");
-	    			}
-	            }); */
-	   		}else if($('#Sequence option:selected').val() == "가격낮은순"){
-	   			alert("가격낮은순");
+	   		 	if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
+	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=2"
+	            }else{
+	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=2"
+	            }
+	   		}else if($('#Sequence option:selected').val() == "리뷰많은순"){
+	   		 	if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
+	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=3"
+	            }else{
+	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=3"
+	            }
+	   		}else if($('#Sequence option:selected').val() == "리뷰적은순"){
+	   			if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
+	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=4"
+	            }else{
+	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=4"
+	            }
 	   		}
- 		});
+		});
+	
+		//타입1로넘어오면 설정하기
+	    if($('#type').val()=='1'){
+	    	$('#Sequence').val('평점높은순').prop("selected",true);
+	    }else if($('#type').val()=='2'){
+	    	$('#Sequence').val('평점낮은순').prop("selected",true);
+	    }else if($('#type').val()=='3'){
+	    	$('#Sequence').val('리뷰많은순').prop("selected",true);
+	    }else if($('#type').val()=='4'){
+	    	$('#Sequence').val('리뷰적은순').prop("selected",true);
+	    }
+
  	});
 </script>
 	<div class="section">
 		<div id="main">
 	        <h1>지역별 보기</h1>
+	        <c:if test="${pageVO.type != null}">
+				<input type="hidden" id="type" value="${pageVO.type}"/>
+			</c:if>
+			<c:if test="${pageVO.area != null}">
+				<input type="hidden" id="area" value="${pageVO.area}"/>
+			</c:if>
+			<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">
+				<input type="hidden" id="searchWord" value="${pageVO.searchWord}"/>
+			</c:if>
+			<c:if test="${pageVO.pageNum != null && pageVO.pageNum != ''}">
+				<input type="hidden" id="pageNum" value="${pageVO.pageNum}"/>
+			</c:if>
+			<c:if test="${pageVO.pageNum != null && pageVO.pageNum != ''}">
+				<input type="hidden" id="pageNum" value="${pageVO.pageNum}"/>
+			</c:if>
 	        <div id="kareaM">
 	            <div id="kAareaMain">
 	                <div style="padding-top: 20px;">전체</div>
@@ -699,7 +736,7 @@
 	                </div>
 	            </div>
 	        </div>
-	        <form>
+	        <form method="get" action="categoryCharge" id="searchForm">
 		        <div id="kContent">
 				
 		        </div>
@@ -708,65 +745,70 @@
 	    </div>
 	    <hr/>
 	    <select id="Sequence">
-	        <option value="평점높은순" selected="selected">평점높은순</option>
+	        <option value="평점높은순">평점높은순</option>
 			<option value="평점낮은순">평점낮은순</option>
-			<option value="가격높은순">가격높은순</option>
-			<option value="가격낮은순">가격낮은순</option>
+			<option value="리뷰많은순">리뷰많은순</option>
+			<option value="리뷰적은순">리뷰적은순</option>
 	    </select>
 	    <div id="productMain">
 			<c:forEach var="data" items="${list}">
-				<div id="productDiv">
-					<ul style="width:200px;">
-						<li><img src="/sshj/img/${data.thumbimg}"></li>
-						<li>
-							<c:if test="${data.saleprice==null || data.saleprice=='' || data.salefinish=='1' || data.salestart=='1'}">
-								${data.productprice}원
+				<a href="/sshj/customproduct?productnum=${data.productnum}" id="taag">
+					<div id="productDiv">
+						<ul style="width:200px;">
+							<li><img src="/sshj/img/${data.thumbimg}"></li>
+							<li>
+								<c:if test="${data.saleprice==null || data.saleprice=='' || data.salefinish=='1' || data.salestart=='1'}">
+									${data.productprice}원
+								</c:if>
+								<c:if test="${data.saleprice != null && data.saleprice != '' && data.salefinish !='1' && data.salestart !='1'}">
+									${data.proprice}원
+								</c:if>
+							</li>
+							<li>${data.productname}</li>
+							<c:if test="${data.totalscore==1}">
+								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
 							</c:if>
-							<c:if test="${data.saleprice != null && data.saleprice != '' && data.salefinish !='1' && data.salestart !='1'}">
-								${data.proprice}원
+							<c:if test="${data.totalscore==2}">
+								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
 							</c:if>
-						</li>
-						<li>${data.productname}</li>
-						<c:if test="${data.totalscore==1}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==2}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==3}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==4}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==5}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
-						</c:if>
-						<li>${data.storeaddr}</li>
-						<li>${data.username}</li>
-					</ul>
-				</div>
+							<c:if test="${data.totalscore==3}">
+								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
+							</c:if>
+							<c:if test="${data.totalscore==4}">
+								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
+							</c:if>
+							<c:if test="${data.totalscore==5}">
+								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
+							</c:if>
+							<li>${data.storeaddr}</li>
+							<li>${data.username}</li>
+						</ul>
+					</div>
+				</a>
 			</c:forEach>
-			<div class="page_wrap" style="text-align:center;">
-				<div class="page_nation">
-				   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
-				   		<a class="arrow prev" href="/sshj/categoryCharge?pageNum=${pageVO.pageNum-1}"></a>
-				   </c:if>
-				   <!-- 페이지 번호                   1                                    5                     -->
-		           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
-		              <c:if test="${p<=pageVO.totalPage}">
-		                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
-		                    <a class="active">${p}</a>
-		                 </c:if>   
-		                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
-		                    <a href="/sshj/categoryCharge?pageNum=${p}">${p}</a>
-		                 </c:if>
-		              </c:if>
-		           </c:forEach>
-		           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
-		              <a class="arrow next" href="/sshj/categoryCharge?pageNum=${pageVO.pageNum+1}"></a>
-		           </c:if>
-				</div>
-			 </div>
 		</div>
-	  </div>
+		<div class="page_wrap" style="text-align:center;">
+			<div class="page_nation">
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:prevPage()"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" end="${(pageVO.startPageNum + pageVO.onePageNum)-1}">
+         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
+            	<c:if test="${p<=pageVO.totalPage}">  
+					<!--현재페이지 :  현재보고있는 페이지 표시 -->
+	               <c:if test="${p==pageVO.pageNum}">
+	                  <a class="active" href="javascript:clickPage()">${p}</a>
+	               </c:if>
+	               <!-- 현재페이지가 아닐 때 -->
+	               <c:if test="${p!=pageVO.pageNum}">
+	                  <a href="javascript:void(0)" onclick="javascript:clickPage(${p})">${p}</a>
+	               </c:if>
+            	</c:if>
+       		</c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">   
+	              <a class="arrow next" href="javascript:nextPage()"></a>
+	           </c:if>
+			</div>
+		 </div>
+		</div>

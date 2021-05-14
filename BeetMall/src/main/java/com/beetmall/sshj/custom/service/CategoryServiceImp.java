@@ -57,21 +57,13 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDAO.BestcategoryOnetotalRecord(pageVO);
 	}
 
-	
-//------------------내림차순
 //	@Override
-//	public List<CategoryVO> pickupCheckTure() {
-//		return categoryDAO.pickupCheckTure();
-//	}
-//	
-//	@Override
-//	public List<CategoryVO> highhigh1() {
-//		return categoryDAO.highhigh1();
+//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item, String type) {
+//		return categoryDAO.categoryOnetotalRecord(pageVO, item, type);
 //	}
 //
 //	@Override
-//	public List<CategoryVO> lowlow1() {
-//		return categoryDAO.lowlow1();
+//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item) {
+//		return categoryDAO.categoryOnetotalRecord(pageVO, item);
 //	}
-
 }

@@ -16,6 +16,19 @@ public class PageSearchVO {
 	private String searchKey;//검색키
 	private String searchWord;//검색어
 	
+	//과일,분류,픽업,베스트상품, 신상품떄문에 나눈것
+	private String item; //과일,채소,쌀잡곡등 품목들
+	private	String type; //평점낮은순, 평점높은순, 가격순, 가격낮은순 
+	private String pick; //픽업
+	
+	//돈카테고리때문에 나눈것
+	private String pay; //돈
+	private String payStart; //돈시작
+	private String payfinish; //돈끝
+	
+	//지역카테고리때문에 나눈것
+	private String area;
+	private String searchAreaList;
 	
 	public int getPageNum() {
 		return pageNum;
@@ -85,5 +98,53 @@ public class PageSearchVO {
 	}
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
+	}
+	public String getItem() {
+		return item;
+	}
+	public void setItem(String item) {
+		this.item = item;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getPick() {
+		return pick;
+	}
+	public void setPick(String pick) {
+		this.pick = pick;
+	}
+	public String getPay() {
+		return pay;
+	}
+	public void setPay(String pay) {
+		this.pay = pay;
+	}
+	public String getPayStart() {
+		return payStart;
+	}
+	public void setPayStart(String payStart) {
+		this.payStart = payStart;
+	}
+	public String getPayfinish() {
+		return payfinish;
+	}
+	public void setPayfinish(String payfinish) {
+		this.payfinish = payfinish;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getSearchAreaList() {
+		return searchAreaList;
+	}
+	public void setSearchAreaList(String searchAreaList) {
+		this.searchAreaList = searchAreaList;
 	}
 }

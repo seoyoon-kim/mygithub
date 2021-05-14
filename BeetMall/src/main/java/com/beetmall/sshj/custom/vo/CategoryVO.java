@@ -2,7 +2,6 @@ package com.beetmall.sshj.custom.vo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class CategoryVO {
@@ -30,7 +29,7 @@ public class CategoryVO {
 	
 	//베스트 상품떄문에 필요한 칼럼
 	private int ordernum; //구매량
-	
+
 	//날짜함수
 	SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Date now = new Date();

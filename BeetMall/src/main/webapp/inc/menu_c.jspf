@@ -447,9 +447,9 @@
                <div id="kCateMain">
                   <div id="kmiddelname">상품 품목별</div>
                   <div><a href="categoryMain">전체</a></div>
-                  <div><a href="categoryFruit">과일</a></div>
-                  <div><a href="categoryvegetable">채소</a></div>
-                  <div><a href="categoryRice">쌀/잡곡</a></div>
+                  <div><a href="categoryMain?item=Fruit">과일</a></div>
+                  <div><a href="categoryMain?item=vegetable">채소</a></div>
+                  <div><a href="categoryMain?item=Rice">쌀/잡곡</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">지역별</div>
@@ -468,10 +468,10 @@
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">가격대별</div>
-                  <div><a href="payCategory">5,000원이하</a></div>
-                  <div><a href="payCategory">10,000원 이하</a></div>
-                  <div><a href="payCategory">50,000원 이하</a></div>
-                  <div><a href="payCategory">50,000원 이상</a></div>
+                  <div><a href="/sshj/payCategory?pay=5000">5,000원이하</a></div>
+                  <div><a href="/sshj/payCategory?pay=10000">10,000원 이하</a></div>
+                  <div><a href="/sshj/payCategory?pay=50000">50,000원 이하</a></div>
+                  <div><a href="/sshj/payCategory?pay=50001">50,000원 이상</a></div>
                </div>
             </div>
          </div>
