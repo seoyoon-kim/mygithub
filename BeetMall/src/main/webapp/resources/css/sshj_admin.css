@@ -64,6 +64,8 @@
 		margin-top:3px;
 		color:white; 
 		width:400px;
+		position:relative;
+		left:-95px;
 	} 
 	#topBar>ul{
 		margin:0 auto;
@@ -126,8 +128,7 @@
 	  background:#fff;   
 	  color: gray;	  
 	  margin: 0;
-	  padding: 3px 10px;  
-	  font-size: 1rem;
+	  padding: 3px 10px;   
 	  font-weight: 400;
 	  text-align: center;
 	  text-decoration: none;	  
@@ -584,9 +585,14 @@
 	 }
 	 /*회원관리*/
 	 #choose{
-	 	margin:70px 0 0 30px;
-	 	margin-left:340px; 
+	 	margin:90px 0 0 20px; 
+	 	width:1100px;
 	 }
 	 #choose button{
 	 	font-size:15px;
+	 	width:49%;
+	 	height:50px;
+	 	font-size:16px;
+	 	font-weight:bold;
+	 	color:dimgray;
 	 }

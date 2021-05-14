@@ -19,18 +19,27 @@
 	#title{
 		padding-top:0 !important;
 	} 
-	.searchFrm{
-		margin-left:150px ! important;
-	}
-	#sortBox {
-		margin-left:900px;
-	}
-	#sortBox li:nth-of-type(1){
-		width:108px;
-	}
-	#sortBox li:nth-of-type(2){
-		width:38px;
-	}
+#sortBox {
+	margin: 30px 0 0 20px;
+} 
+#sortBox>ul{
+	width:1110px !important;
+}
+#sortBox li:nth-of-type(2) {
+	width: 6%;
+}
+#sortBox li:nth-of-type(4) {
+	margin-right:45px;
+}
+#sortBox li:nth-of-type(6) {
+	margin-left:340px;
+}
+#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+	width: 4%;
+}
+#fromTo{
+	margin-left:90px;
+}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
@@ -76,6 +85,16 @@
 		</div> 
 		<div id="sortBox">
 			<ul>
+				<li>
+					<select name="searchDate">  
+						<option value="birthdate">생년월일</option> 
+						<option value="regDate">탈퇴일</option>
+					</select>  
+				</li>
+				<li><input type="date" id="from"></li>
+				<li><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>
+				<li><input type="submit" value="검색" /></li>
 				<li><select name="sort" > 
 		   				<option value="이름" selected>이름</option>
 		   				<option value="아이디">아이디</option>
@@ -236,13 +255,11 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate">  
 				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+					<option value="" selected>이름</option>
+	   				<option value="">아이디</option> 
+	   				<option value="">이메일</option> 
+	   				<option value="">주소</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
