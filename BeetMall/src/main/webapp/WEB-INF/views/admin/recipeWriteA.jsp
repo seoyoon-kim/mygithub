@@ -138,7 +138,7 @@
 	.write_btn{
 		height:40px;
 	}
-	#write_btn{
+	.write_btn{
 		width:150px;
 	} 
 	input[type="submit"].btn:hover, input[type="button"].btn:hover{
@@ -226,7 +226,7 @@ $(document).ready(function(){
 		</table>
 			<div id="bottommm">
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시 쓰기" class="btn write_btn" id="write_btn"/>	
+				<input type="reset" value="다시 쓰기" class="btn write_btn" id="reWrite_btn"/>	
 				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
 			</div>
 		</form>

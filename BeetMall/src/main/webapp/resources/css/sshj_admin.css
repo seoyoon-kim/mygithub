@@ -22,6 +22,9 @@
 	.searchFrm{
 		margin:20px 0 30px 300px;
 	}
+	.searchFrm>input[type=date]{
+		border-color:lightgray;
+	}
 	#blind, #edit{
 		position:absolute;
 	}
@@ -58,10 +61,14 @@
 	
 	/*남색 topBar*/
 	#topBar h5{
-		margin:3px 0 0 62px;
+		margin-top:3px;
 		color:white; 
 		width:400px;
 	} 
+	#topBar>ul{
+		margin:0 auto;
+		width:1280px;
+	}
 	#topBar a{
 		color:white;
 	}
@@ -75,10 +82,7 @@
 	}  
 	#topBar button{
 		border-radius:2.5px;
-	} 
-	#topBar li:nth-of-type(1){
-		margin-left:180px;
-	}
+	}  
 	#blind{
 		top:10px; 
 		left:1040px; 
@@ -152,10 +156,10 @@
 		position:absolute;
 		width:100px;
 		top:11px;
-		left:1170px;
+		left:1470px;
 	}
 	#addBtn{
-		left:1060px;
+		left:1350px;
 	}
 	#editBtn{
 		left:950px;
@@ -226,7 +230,8 @@
 	}
 	.page_nation {
 		display:inline-block;
-		padding-top:70px;
+		padding-top:50px;
+		margin-bottom:15px;
 	}
 	.page_nation .none {
 		display:none;
@@ -272,7 +277,9 @@
 	/* 페이징처리끝 */
 	
 	/*컨테이너 별로 묶은 박스 공통*/	
-	 #companyBox, #infoBox, #buyHistory, #reportBox, #randomBox, #bannerContainer, #todayContainer, #cateContainer, #popContainer, #useInfoContainer, #infoHandleContainer, #useTermsContainer, #financialContainer{ 
+	 #companyBox, #infoBox, #buyHistory, #reportBox, #randomBox, #bannerContainer, #todayContainer, 
+	 #cateContainer, #popContainer, #useInfoContainer, #infoHandleContainer, #useTermsContainer, 
+	 #financialContainer, #salesBox1, #salesBox2, #salesCateBox{ 
 	 	width:500px;
 	 	margin-left:35px;
 	 	border-radius:10px; 
@@ -293,6 +300,7 @@
 	  	padding-top:20px;
 	  }
 	
+	/*섬머노트 버튼*/
 	
 	/*====================디자인 게시판========================*/
 	.randomUl{
@@ -337,7 +345,7 @@
 	input{
 		border:1px solid gray;  
 	}
-	button{
+	#infoBox button{
 		color:black; 
 	  	height:30px;
 	  	width:100px; 
@@ -577,7 +585,7 @@
 	 /*회원관리*/
 	 #choose{
 	 	margin:70px 0 0 30px;
-	 	text-align:center; 
+	 	margin-left:340px; 
 	 }
 	 #choose button{
 	 	font-size:15px;

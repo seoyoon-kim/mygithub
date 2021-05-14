@@ -6,6 +6,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 <style>
+	#menuContainer{
+		margin:0 auto;
+	}
 	.menu { 
 		margin: 50px 20px 0px 0px; 
 		padding: 0; width:180px; 
@@ -114,6 +117,7 @@ $(function(){
 </script>
 </head>
 <body>  
+<div id="menuContainer">
 	<div class="menu">
 	  <label for="menu_bar01">회원 관리 <div id="tri"><img id="more" src="<%=request.getContextPath()%>/img/y_more_gray.png"></div></label>
 	  <input type="checkbox" id="menu_bar01" class="accordion" />
@@ -171,3 +175,4 @@ $(function(){
 		    <li><a href="">상세판매내역(아직)</a></li>  
 		  </ul>
 </div> 
+</div>

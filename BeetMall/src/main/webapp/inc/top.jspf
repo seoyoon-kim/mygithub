@@ -34,20 +34,27 @@
 	#topBox{ 
 		height:200px; 
 		margin:0; 
-		width:1280px;  
+		width:1920px;  
 	}
 	#top{ 
 		padding:5px 0px 0px 20px; 
 		height:30px;
 		font-size:15px;
-		width:1920px;
-		background-color:#eee;
+		width:500px;
 		display:flex;
+	}
+	#topCenter{
+		width:1280px;
+		margin:0 auto;
+	}
+	#back{
+		background-color:#eee; 
 	}
 	#imgBox{
 		width:1280px;
 		text-align:center;
 		padding-top:10px;
+		margin:0 auto;
 	}
 	#logo{
 		position:relative;
@@ -84,13 +91,17 @@
 </head>
 <body>
 	<div id="topBox">
-		<div id="top">
-			<span id="homeGo"><a href="<%=request.getContextPath()%>/">비트몰 홈페이지</a></span>
-			<div id="fromDot">
-			 	관리자 님  
-			<span id="logout">로그아웃</span>
-			</div>		 
-		</div> 
+	<div id="back">
+		<div id="topCenter">
+			<div id="top">
+				<span id="homeGo"><a href="<%=request.getContextPath()%>/">비트몰 홈페이지</a></span>
+				<div id="fromDot">
+				 	관리자 님  
+				<span id="logout">로그아웃</span>
+				</div>		 
+			</div> 
+		</div>
+	</div>
 		<div id="imgBox">
 			<a href="<%=request.getContextPath()%>/adminHome">
 				<img id="logo" src="<%=request.getContextPath()%>/img/y_logo.png"/>

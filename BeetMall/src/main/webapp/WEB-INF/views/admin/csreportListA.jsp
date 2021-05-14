@@ -24,20 +24,32 @@
 		height:29px;
 		border-radius:3px;
 	}
-	#from{
-		width:80px;
+	#from{ 
+		margin-right:20px;
 	}
-	#todate{
-		width:80px;
+	#todate{ 
 		position:relative;
 		left:-15px;
 	}
 	#fromTo{
-		color:white;
-		position:relative;
-		left:87px;
-		top:-25px;
+		color:black;
+		position:relative;  
+		left:-15px;
+		margin:0 10px;
 	}
+	#sortBox {
+		margin-left:800px;
+	}
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(2){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(3){
+		width:38px;
+	}
+	
 	/*내용 전체 정렬*/
 	#topBar li:nth-of-type(7){
 		position:relative; left:-80px;
@@ -51,7 +63,7 @@
 	#contentBox li:nth-of-type(3) {
     	width: 8%;
 	} 
-	#container li:nth-of-type(4):not(#topBar li:nth-of-type(4)){
+	#container li:nth-of-type(4):not(#sortBox li:nth-of-type(4)){
 		width:20%;	
 	}
 	#title>ul,.contentList{
@@ -76,13 +88,7 @@
 	#contentList>ul{
 		float:left;
 		margin-bottom:0px;
-	}
-	/*데이터 내용*/
-	.wordCut{
-		white-space:nowrap; 
-		overflow:hidden;
-		text-overflow:ellipsis;
-	}
+	} 
 	/*페이징 이미지 링크*/
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -100,6 +106,9 @@
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}  
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	/*모달*/
 	#modal{
 		border:1px solid gray;
@@ -167,15 +176,25 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/reportListA">신고 목록</a></strong></h5></li> 
+				<li><h5><strong><a href="/reportListA">신고 관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
 				<li><button class="success" value="del" name="del" id="edit">정지</button></li> 
 			</ul> 
 		</div>  
 		<div id="sortBox">
 			<ul>
+				<li><select name="sort"   id="cateSort"> 
+		   				<option value="카테고리" selected>카테고리</option>
+		   				<option value="건과류">건과류</option>		   				
+		   				<option value="견과류">견과류</option>  
+		   				<option value="제목">과일</option> 
+		   				<option value="채소">채소</option> 
+		   				<option value="쌀/잡곡">쌀/잡곡</option> 
+			  		</select> 
+	   			</li>  
 				<li><select name="sort"> 
-						<option value="상품번호" selected>번호</option>
+						<option value="정렬하기" selected>정렬하기</option>
+						<option value="상품번호">번호</option>
 		   				<option value="게시판">게시판</option>
 		   				<option value="내용">내용</option> 
 		   				<option value="신고일">신고일</option>  
@@ -187,19 +206,7 @@
 	   			</li> 
 	   			<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-				<li><input type="date" id="from"><div id="fromTo">~</div></li>
-				<li><input type="date" id="todate"></li>
-				<li><button class="success" value="search" name="search" id="search">검색</button></li> 
-				<li><select name="sort"   id="cateSort"> 
-		   				<option value="번호" selected>카테고리</option>
-		   				<option value="건과류">건과류</option>		   				
-		   				<option value="견과류">견과류</option>  
-		   				<option value="제목">과일</option> 
-		   				<option value="채소">채소</option> 
-		   				<option value="쌀/잡곡">쌀/잡곡</option> 
-			  		</select> 
-	   			</li>  
-	   		</ul>
+			</ul>
 		</div>
    		<div id="contentBox"> 	
 		<div id="title">
@@ -264,7 +271,9 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<select name="searchKey">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate"> 
+			 	<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
 	   				<option value="who">대상</option> 

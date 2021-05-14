@@ -27,20 +27,16 @@
 		margin-left:40px;
 		height:29px;
 		border-radius:3px;
-	}
-	#from{
-		width:80px;
-	}
-	#todate{
-		width:80px;
+	} 
+	#todate{ 
 		position:relative;
 		left:-15px;
 	}
 	#fromTo{
-		color:white;
+		color:black;
 		position:relative;
-		left:87px;
-		top:-25px;
+		left:-12px; 
+		margin:0 5px;
 	}
 	/*내용 전체 정렬*/
 	#title{
@@ -78,6 +74,19 @@
 	#container li:nth-of-type(5):not(#topBar li:nth-of-type(5)){
 		width:11%;
 	} 
+	#sortBox {
+		margin-left:900px;
+	}
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(1){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(2){
+		width:38px;
+	}
+	
 	 
 	/* 본문 정렬*/
 	#container li{ 
@@ -112,6 +121,9 @@
 	} 
 	form input[type=text]{
 		width:300px
+	} 
+	.searchFrm{
+		margin-left:150px ! important;
 	}
 	/*페이징 이미지 링크*/
 	.page_nation .pprev {
@@ -276,16 +288,12 @@
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>
-		 </div> 
-		 <div id="dateSearch">
-		 	<ul>
-		 		<li><input type="date" id="from"><div id="fromTo" style="color:black;">&nbsp;&nbsp;~</div></li>
-				<li><input type="date" id="todate"></li> 
-			</ul>
-		</div>
+		 </div>  
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<select name="searchKey">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate">  
+					<select name="searchKey">
 					<option value="" selected>채팅번호</option>
 	   				<option value="">주문번호</option> 
 	   				<option value="">구입상품</option> 

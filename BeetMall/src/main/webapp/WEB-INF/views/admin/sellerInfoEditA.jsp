@@ -5,11 +5,13 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
- 
 <!-- css -->  
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
 <style> 
+	#topBar>h5{
+		margin-left:270px !important;
+	}
 	 #contentBox{
 	 	height:1780px;
 	 	top:30px;
@@ -63,6 +65,9 @@
 	 	border-radius:10px;
 	 	height:1000px;
 	 }
+	 #farmInfo>h5{
+	 	margin:5px 0 0 10px;
+	 }
 	 #bottommm{
 	 	margin-top:20px !important;
 	 	left:-50px !important;
@@ -78,7 +83,7 @@
 <%@ include file="/inc/leftBar.jspf" %>
 	<div id="container">
 		<div id="topBar">
-			<h5><strong>판매자 정보</strong></h5>
+			<h5><strong>판매자 정보 수정</strong></h5>
 		</div>  
    		<div id="contentBox">
 		 	<div id="companyBox">

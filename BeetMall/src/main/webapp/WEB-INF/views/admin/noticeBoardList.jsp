@@ -47,6 +47,9 @@
 	#content select{
 		height:28px;
 	} 
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	/*버튼*/
 	#btns{ 
 		top:-115px; 
@@ -275,6 +278,8 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

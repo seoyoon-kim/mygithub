@@ -55,6 +55,21 @@
 	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
 	}  
+	#sortBox {
+		margin-left:900px;
+	}
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(1){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(2){
+		width:38px;
+	} 
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
@@ -260,6 +275,8 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

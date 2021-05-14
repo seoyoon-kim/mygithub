@@ -21,12 +21,7 @@
 	} 
 	#topBar li:nth-of-type(4){
 		width:14%;
-	}      
-	#subjectLine{
-		white-space:nowrap; 
-		overflow:hidden;
-		text-overflow:ellipsis;
-	}
+	}     
 	#content input, textarea, select, #noticeSearchFrm input{
 		border:1px solid lightgray; 
 		border-radius: 3px;
@@ -36,7 +31,10 @@
 	}
 	#content select{
 		height:28px;
-	}  
+	}   
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	/*버튼*/
 	#btns{ 
 		top:-115px; 
@@ -67,7 +65,7 @@
 	}
 	.page_nation .prev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
-		margin-right:7px;
+		margin-right:7px; 
 	}
 	.page_nation .next {        
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
@@ -283,11 +281,14 @@
 		 </div>  
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate"> 
+			 	<select name="searchKey">
+					<option value="userid" selected>아이디</option>
+	   				<option value="email">이메일</option> 
+	   				<option value="birthdate">생년월일</option> 
+	   				<option value="addr">주소</option> 
+	   				<option value="regDate">가입일</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 

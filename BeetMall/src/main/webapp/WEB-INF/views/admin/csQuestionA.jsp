@@ -35,6 +35,18 @@
 	#content select{
 		height:28px;
 	} 
+	#sortBox {
+		margin-left:800px;
+	}
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(2){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(3){
+		width:38px;
+	}
 	/*버튼*/
 	#btns{ 
 		top:-115px; 
@@ -48,8 +60,10 @@
 	#topBar Button:nth-of-type(3),
 	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
-	}  
-	
+	}   
+	.searchFrm{
+		margin-left:150px ! important;
+	} 
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -231,6 +245,8 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

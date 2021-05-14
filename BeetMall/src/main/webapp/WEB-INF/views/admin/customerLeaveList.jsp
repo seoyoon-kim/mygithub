@@ -19,6 +19,9 @@
 	#title{
 		padding-top:0 !important;
 	} 
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	#sortBox {
 		margin-left:900px;
 	}
@@ -230,47 +233,11 @@
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>
-		 </div>
-
-	<!-- 
-	 <ul class="breadcrumb pagination-md">
-	 	 % if(nowNum>1){%>
-	 		<li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=nowNum-1%> %
-	 		if(searchWord!=null && !searchWord.equals("")){
-	 			out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" 
-				class="page-link">Prev</a></li>
-		 % }else{%>
-			<li class="page-item disabled"><a href="#" class="page-link">Prev</a></li>
-		 % }
-	 		//페이지 번호 매기기                  
-	 		for(int p=startPage; p<startPage+onePageSize; p++){
-				if(p<=totalPage){
-		 			if(nowNum==p){//현재 보고있는 페이지에 표시하기
-		%>		 	
-	 				<li class="page-item active"><a href="noticeBoardList.jsp?nowNum= %=p%> %
-			if(searchWord!=null && !searchWord.equals("")){
-				out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" class="page-link"> %=p%></a></li>
-		  
-		 % 		}else{//현재 보고있는 페이지가 아닐 때 표시하기
-		    %>
-        <li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=p %> %if(searchWord!=null && !searchWord.equals("")){out.write("&searchKey="+searchKey+"&searchWord="+searchWord);} %>" class="page-link"> %=p %></a></li>   
-           %   }
-          }/// totalPage
-      }
-
-	 	if(nowNum==totalPage){ //마지막 페이지
-	 	%>
-	 		<li class="page-item disabled"><a href="#" class="page-link">Next</a></li>	
-	 	 % }else{ %>
-	 	 	<li class="page-item"><a href="noticeBoardList.jsp?nowNum= %=nowNum+1%> %
-	 	if(searchWord!=null && !searchWord.equals("")){
-	 		out.write("&searchKey="+searchKey+"&searchWord="+searchWord);}%>" class="page-link">Next</a></li>
-	 	 % } %>
-	 </ul>		
- -->
- 
+		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

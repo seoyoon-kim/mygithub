@@ -37,6 +37,9 @@
 	#sortBox li:nth-of-type(2){
 		width:38px;
 	}
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
@@ -226,7 +229,9 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<select name="searchKey">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate"> 
+			 	<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
 	   				<option value="who">대상</option> 

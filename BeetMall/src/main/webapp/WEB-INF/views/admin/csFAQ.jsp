@@ -58,6 +58,21 @@
 	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
 	}  
+	#sortBox {
+		margin-left:800px;
+	}
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(2){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(3){
+		width:38px;
+	} 
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
@@ -91,6 +106,7 @@
 			<ul>
 				<li><h5><strong><a href="customerListA">자주 묻는 질문</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li> 
+				<li><button class="success" value="add" name="add" id="editBtn">수정</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
 		</div>  
@@ -113,7 +129,6 @@
 	   			</li>   
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-				<li><button class="success" value="add" name="add" id="editBtn">수정</button></li>
 			 </ul>
 		</div>
    		<div id="contentBox"> 	
@@ -230,6 +245,8 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

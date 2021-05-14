@@ -27,20 +27,35 @@
 		height:29px;
 		border-radius:3px;
 	}
-	#from{
-		width:80px;
+	.searchFrm{
+		margin-left:150px ! important;
 	}
-	#todate{
-		width:80px;
+	#from{ 
+		margin-right:20px;
+	}
+	#todate{ 
 		position:relative;
 		left:-15px;
 	}
 	#fromTo{
-		color:white;
-		position:relative;
-		left:87px;
-		top:-25px;
+		color:black;
+		position:relative;  
+		left:-15px;
+		margin:0 10px;
 	}
+	#sortBox {
+		margin-left:900px;
+	}
+	#sortBox li{
+		margin:30px 0 5px 0;
+	}
+	#sortBox li:nth-of-type(1){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(2), #sortBox li:nth-of-type(3){
+		width:38px;
+	}
+	
 	/*내용 전체 정렬*/
 	#title{
 		margin-top:20px;
@@ -95,13 +110,7 @@
 	} 
 	#contentList>ul{
 		float:left; 
-	}
-	/*데이터 내용*/
-	.wordCut{
-		white-space:nowrap; 
-		overflow:hidden;
-		text-overflow:ellipsis;
-	}
+	} 
 	/*페이징 이미지 링크*/
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -183,7 +192,7 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/reportListA">신고 채팅</a></strong></h5></li> 
+				<li><h5><strong><a href="/reportListA">신고 채팅 관리</a></strong></h5></li> 
 					<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
 				<li><button class="success" value="del" name="del" id="edit">정지</button></li> 
 			</ul> 
@@ -203,14 +212,10 @@
 	   			</li> 
 	   			<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-				<li><input type="date" id="from"><div id="fromTo">~</div></li>
-				<li><input type="date" id="todate"></li>
-				<li><input type="text" placeholder="검색어를 입력해주세요"  style="width:160px;"/></li>
-				<li><button class="success" value="search" name="search" id="search">검색</button></li> 
-			 </ul>
+			</ul>
 		</div>
    		<div id="contentBox"> 	
-   		<div style="float:right;">신고 채팅은 노란색으로 표시됩니다</div>
+   		<div style="float:right; margin-right:25px;">* 신고 채팅은 노란색으로 표시됩니다</div>
 		<div id="title">
 			<ul>
 				<li><input type="checkbox" name="check"></li>
@@ -272,7 +277,9 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<select name="searchKey">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate"> 
+			 	<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
 	   				<option value="who">대상</option> 

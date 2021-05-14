@@ -28,8 +28,7 @@
 		width:1080px;
 		position:relative;
 		top:-130px;
-		left:-20px;
-		background-color:rgb(239,241,231);
+		left:-20px; 
 		z-index:-1;
 	}
 	.wrapContainer {
@@ -38,6 +37,11 @@
 		border-color:lightgray;
 	 	-webkit-box-shadow: 4px 6px 15px -7px #C4C4C4; 
 		box-shadow: 4px 6px 15px -7px #C4C4C4;
+		margin:50px 30px;
+		width:95% !important;
+	}
+	#pdfDown{
+		margin-right:20px;
 	}
 	button{
 		border-radius:5px;
@@ -51,6 +55,7 @@
 	#categorySearch_container{
 		position:relative;
 		top:-150px;
+		left:25px;
 	}
 	b{
 		position:relative;
@@ -59,6 +64,9 @@
 	#excelViewNum, #excelDown{
 		position:relative;
 		top:-135px;
+	}
+	#salesBox1{
+		width:100%;
 	}
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
@@ -79,7 +87,7 @@
 	}
 	#excelList{
 		margin-left:0 !important;
-		width:978px !important;
+		width:929px !important;
 	}
 	#excelList li {
     	flex-basis: 18%;
@@ -92,6 +100,51 @@
     #excelList li:nth-of-type(6) {
     	border-radius:0 10px 0 0 ;
     }
+    
+    /*수익 매출분석 컨테이너*/
+    #salesBox1, #salesBox2{
+    	width:980px !important;
+    	margin-top:40px;
+    	height:630px;
+    } 
+    #sales1Title{
+	  	text-align:center;
+	  	font-weight:bold;
+	  	font-size:16px;
+	  	letter-spacing:2px;
+	  	border-bottom:1px solid lightgray;
+		border-radius: 10px 10px 0px 0px;
+	  	background-color:#FAF9F6;
+	  	height:40px; 
+	  } 
+	  #sales1Title strong, #sales2Title strong{
+	  	position:relative;
+	  	top:-10px;
+	  }
+	  #calendarApply>div{
+	  	position:relative;
+	  	top:-17px;
+	  }
+	  /*매출분석*/
+	#excelViewNum, #excelDown{
+		margin:70px 20px 0 0;
+	}  
+	#excelContainer{
+		position:relative;
+		top:-110px;
+	}
+	/*임시*/
+	#sales2Title{
+	  	text-align:center;
+	  	font-weight:bold;
+	  	font-size:16px;
+	  	letter-spacing:2px;
+	  	border-bottom:1px solid lightgray;
+		border-radius: 10px 10px 0px 0px;
+	  	background-color:#FAF9F6;
+	  	height:40px;
+	  }
+	  
 </style>
 <script>
  
@@ -112,57 +165,60 @@
 	<article>
 		<div class="wrap">    
 			<!-- 수익 매출 분석 -->
-			<div class="wrapTitle">
-				<strong>수익 매출분석</strong>
-				<button class="normalBtn" id="pdfDown">PDF 저장</button>
-			</div>
-			<div class="wrapContainer">
-				<div id="chartContainer">
-					<canvas id="myChart" style="width: 400px; height: 200px;"></canvas>
-
-					<script> // 차트 선언, 카테고리, 날짜, 차트, 엑셀 관여하는 스크립트
-					
-					let ctx = document.getElementById("myChart").getContext("2d");
-					myChart = new Chart(ctx, {
-						type: 'line',
-						data:{
-							labels: [], // 몇년 몇월 몇일 표시하는 데이터
-							datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
-						},
-						options: {
-							scales:{
-								y:{
-									beginAtZero: true // 차트 숫자는 0부터 표시
+			<div id="salesBox1">
+				<div class="wrapTitle">
+					<div id="sales1Title"><p><strong>수익 매출분석</strong></p></div> 
+					<button class="normalBtn" id="pdfDown">PDF 저장</button>
+				</div>
+				<div class="wrapContainer">
+					<div id="chartContainer">
+						<canvas id="myChart" style="width: 400px; height: 200px;"></canvas>
+	
+						<script> // 차트 선언, 카테고리, 날짜, 차트, 엑셀 관여하는 스크립트
+						
+						let ctx = document.getElementById("myChart").getContext("2d");
+						myChart = new Chart(ctx, {
+							type: 'line',
+							data:{
+								labels: [], // 몇년 몇월 몇일 표시하는 데이터
+								datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
+							},
+							options: {
+								scales:{
+									y:{
+										beginAtZero: true // 차트 숫자는 0부터 표시
+									}
+									
 								}
 								
 							}
-							
-						}
-					});
-					
-					</script>
+						});
+						
+						</script>
+					</div>
 				</div>
 			</div>
 			<!-- 수익 매출분석 끝 -->
-
-			<div class="wrapTitle">
-				<strong>매출분석</strong>
-				<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-					<div id="categorySearch_container">
-						<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-							<option value="년별">년별</option>
-							<option value="월별" selected>월별</option>
-							<option value="일별">일별</option>
-						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
-					</div>
-				<button class="normalBtn" id="excelDown">엑셀 저장</button>
-				<select id="excelViewNum">
-					<option selected="selected">10</option>
-					<option>50</option>
-					<option>100</option>
-				</select>
-			</div>
+			<!-- 매출분석 시작 -->
+			<div id="salesBox2">
+				<div class="wrapTitle">
+					<div id="sales2Title"><p><strong>매출분석</strong></p></div>
+					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+						<div id="categorySearch_container">
+							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+								<option value="년별">년별</option>
+								<option value="월별" selected>월별</option>
+								<option value="일별">일별</option>
+							</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+							<button id="calendarApply" style="margin-left: 10px;"><div>날짜 적용</div></button>
+						</div>
+					<button class="normalBtn" id="excelDown">엑셀 저장</button>
+					<select id="excelViewNum">
+						<option selected="selected">10</option>
+						<option>50</option>
+						<option>100</option>
+					</select>
+				</div>
 			<div class="wrapContainer">
 				<div id="excelContainer">
 					<ul id="excelList">
@@ -182,7 +238,7 @@
 					</div>
 				</div>
 			</div>
-
+			</div>
 		</div>
 	</article> 
 </section>

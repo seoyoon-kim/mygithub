@@ -34,12 +34,19 @@
 	#contentBox li:nth-of-type(2){ 
 		width:13%; 
 	}   
-	/*데이터 내용*/
-	.subjectLine{
-		white-space:nowrap; 
-		overflow:hidden;
-		text-overflow:ellipsis;
+	#sortBox {
+		margin-left:900px;
 	}
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(1){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(2){
+		width:38px;
+	}
+	/*데이터 내용*/ 
 	.cartImg{
 		margin-left:10px;
 		height:15%;
@@ -74,8 +81,10 @@
 	#topBar Button:nth-of-type(3),
 	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
-	}  
-	
+	}   
+	.searchFrm{
+		margin-left:150px ! important;
+	}
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -143,7 +152,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -154,7 +163,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -165,7 +174,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -176,7 +185,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -187,7 +196,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -198,7 +207,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -209,7 +218,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -220,7 +229,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -231,7 +240,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -242,7 +251,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -253,7 +262,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
@@ -264,7 +273,7 @@
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li>1569723</li>
-				<li class="subjectLine"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
 				<li>12</li>
 				<li>1362</li>
 				<li>123<img class="cartImg" src="./img/y_heart.png" ></li> 
@@ -307,6 +316,8 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<input type="date" id="from"><div id="fromTo">~</div>
+				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
