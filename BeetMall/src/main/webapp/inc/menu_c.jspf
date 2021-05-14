@@ -539,7 +539,7 @@
 					<div id="cateFooter"><div class="section"style="text-align:right;"><a href="#" id="recigogo">레시피 바로가기</a></div></div>
 				</div>
 			</div>
-			<div class="section">
+			<div class="section" style="position:relative;">
          <!-- 여기부터 상품카테고리부분시작 -->
          <div id="leftMenu">
             <div id="kcategoryMain">
