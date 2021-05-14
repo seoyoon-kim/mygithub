@@ -1,29 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
  <style> 
 	 #container li{ 
 		 list-style-type:none; 
 		 float:left;  
 	 }   
 	#contentBox{ 
-		top:20px; 
-		margin-left:10px;
+		margin-top:80px !important;		
 	}  
 	#topBar h5{
-		width:200px;
+		width:200px !important;
 		position:relative;
 		left:-25px;
 	} 
@@ -32,8 +18,42 @@
 		border-radius: 3px;
 	}  
 	
-	/*상품정보 파트*/
 
+	/*  카테고리 소분류----------------------------------------------                 */
+	#categorySubmenu>ul { 
+		floate: left;
+		width: 1080px;
+		line-height: 30px;
+		padding: 0 30px;
+	}
+	
+	#categorySubmenu>ul>li {
+		width: 204px;
+	}
+	
+	/*상품정보 파트*/
+	/*  공유 아이콘 정렬----------------------------------------------                 */
+	#sharicon {
+		float: right;
+		width: 540px;
+		margin: 0;
+		padding: 10px 0 0 950px;
+		text-align: right;
+	}
+	
+	#sharicon>li {
+		width: 30px;
+	}
+	
+	#sharicon>li>a>img {
+		width: 25px;
+	}
+	#topLine{
+		border-bottom:1px solid gray;
+		padding-top:75px;
+		width:1070px;
+		margin:10px 0;
+	}
 	/*  상품 박스------------이미지 부분----------------------------------                 */
 	#productmainbox {
 		width: 850px;
@@ -63,7 +83,7 @@
 	
 	/*  상품 박스------------텍스트 부분----------------------------------                 */
 	#pbox {
-		width: 550px;
+		width: 500px;
 		float: left;
 		margin-bottom: 40px;
 	}
@@ -106,6 +126,7 @@
 		float: left;
 		margin: 0 auto;
 		padding-left: 0px;
+		width:550px !important;
 	}
 	
 	#productPrBox>ul>li {
@@ -113,6 +134,7 @@
 		width: 50%;
 		height: 35px;
 		line-height: 35px;
+		text-align:left;
 	}
 	
 	#mapbtn {
@@ -123,26 +145,30 @@
 		height: 25px;
 		line-height: 15px;
 	}
-	
+	.reviewList, #reviewTitle, #qnaTitle, #qnaList{
+		margin-left:0 !important;
+	}
 	#productPrBox>ul>li>#ppbtn, #productPrBox>ul>li>.pmbtn {
 		line-height: 10px;
 		width: 20px;
 		height:20px;
 	}
-	
+	#title li:nth-of-type(5), #productPrBox li:nth-of-type(5) {
+		width:50% !important;	
+	}
 	#selecOption {
 		width: 80%;
 	}
 	
 	#productTotalPrice {
 		padding-left: 350px;
-		width: 100%;
+		width: 130%;
 		float: left;
 		line-height: 50px;
 		height: 50px;
 		font-size:30px;
 		font-weight: 700px;
-		padding-left:280px;
+		padding-left:200px;
 		margin-bottom:15px;
 	}
 	
@@ -150,8 +176,7 @@
 		width: 100%;
 		height: 50px;
 		line-height: 30px;
-		float: left;
-		padding-left:85px;
+		float: left; 
 	}
 	
 	#productBtn>input {
@@ -326,8 +351,7 @@
 	.reviewList {
 		height: 200px;
 		margin-bottom: 30px;
-	}
-	
+	} 
 	#reviewTitle>li, .reviewList>li {
 		width: 10%;
 		float: left;
@@ -342,15 +366,14 @@
 		line-height: 150px;
 	}
 	
-	#reviewTitle>li:nth-child(5n+1), .reviewList>li:nth-child(5n+1) {
-		text-align:center;
+	#reviewTitle>li:nth-child(5n+1), .reviewList>li:nth-child(5n+1) { 
 		width: 90px;
 	}
 	#reviewTitle>li:nth-child(5n+2){
 		text-align:center;
 	}
 	#reviewTitle>li:nth-child(5n+2), .reviewList>li:nth-child(5n+2) {
-		width: 540px;
+		width: 400px;
 	}
 	#reviewTitle>li:nth-child(5n+3), .reviewList>li:nth-child(5n+3) {
 		text-align:center;
@@ -490,6 +513,7 @@
 		border-bottom: 1px solid #ddd;
 		height: 30px;
 		line-height: 30px;
+		margin:5px 0;
 	}
 	#qnaTitle>li:nth-child(5n+1), #qnaList>li:nth-child(5n+1) {
 		text-align:center;
@@ -499,7 +523,7 @@
 		text-align:center;
 	}
 	#qnaTitle>li:nth-child(5n+2), #qnaList>li:nth-child(5n+2) {
-		width: 540px;
+		width: 400px;
 	}
 	
 	#qnaTitle>li:nth-child(5n+3), #qnaList>li:nth-child(5n+3) {
@@ -513,7 +537,7 @@
 	}
 	#qnaTitle>li:nth-child(5n), #qnaList>li:nth-child(5n) {
 		text-align:center;
-		width: 90px;
+		width: 162px;
 	}
 	#qnaList a:link, #qnaList a:active, #qnaList a:visited, #qnaList a:hover{
 		color:black;
@@ -521,31 +545,12 @@
 	#qnaList>li>img {
 		width: 20px;
 		height: 20px;
-	}
+	} 
 	
 	<!--
 	문의 후기 버튼 -->#reviewWriteBtn {
 		
-	}
-	
-	#reviewWriteBtn>input {
-		float: right;
-		width: 80px;
-		height: 25px;
-		line-height: 20px;
-	}
-	
-	#qnaWriteBtn {
-		
-	}
-	
-	#qnaWriteBtn>input {
-		float: right;
-		width: 80px;
-		height: 25px;
-		line-height: 20px;
-	}
-	
+	}   
 	#productPageDiv {
 		font-size: 17px;
 	}
@@ -580,23 +585,12 @@
 			background: gray;
 			color:white;
 			display: inline-block;
-		}
-</style>	 
+		} 
 </style> 
-<%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
-		<div id="topBar">
-			<ul>
-				<li><h5><strong><a href="productDetailA">상품 상세보기</a></strong></h5></li>  
-			</ul> 
-		</div>  
-   		<div id="contentBox">  
-
+<script>
 /*
 
-  $(document).ready(function(){
+$(document).ready(function(){
 	 
 	  
 	  $("#infoBtn1").click(function(){
@@ -620,34 +614,26 @@
 	  })
 	  
 	
-  })
- 
+})
+
 */
 
-
-
-
 </script>
-<body>
-
+<%@ include file="/inc/top.jspf" %>
+<%@ include file="/inc/leftBar.jspf" %>
+<div id="body1">
+	<div id="container">
+		<div id="topBar">
+			<ul>
+				<li><h5><strong><a href="productDetailA">상품 수정</a></strong></h5></li>  
+			</ul> 
+		</div>  
+   		<div id="contentBox">  
 	<div class="section" id="productPageDiv">
-		<div id="mainName">
-			<h2>상품 품목별</h2>
+		<div id="mainName"> 
 		</div>
 
-		<!-- ------------------------------------카테고리이미지-------------------------------------------------------- -->
-		<ul id="category">
-			<li><span id="categoryAll"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />전체</span></li>
-			<li><span id="categoryarea"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />지역별</span></li>
-			<li><span id="categoryFruit"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />과일</span></li>
-			<li><span id="categoryVege"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />채소</span></li>
-			<li><span id="categorySall"><img
-					src="<%=request.getContextPath()%>/img/cicon04.png"><br />쌀/잡곡</span></li>
-		</ul>
+		 
 		<!-- ------------------------------------카테고리 소분류--------------------------------------------------------- -->
 
 		<div id="categorySubmenu">
@@ -658,23 +644,14 @@
 				<li>께/기타잡곡</li>
 			</ul>
 		</div>
-		<!-- -------------------------------------정렬방식 -------------------------------------------------------- -->
-		<div id="selectOrderbox">
-			<select name="selectOrder">
-				<option>평점순</option>
-				<option>가격순</option>
-				<option>조회수순</option>
-			</select>
-		</div>
-
 		<!-- ---------------------------------공유 아이콘 정렬------------------------------------------------------------ -->
+		<div id="topLine"></div>
 		<ul id=sharicon>
 			<li><a href="#"><img src="img/cicon01.png"></a></li>
 			<li><a href="#"><img src="img/cicon02.png"></a></li>
 			<li><a href="#"><img src="img/cicon03.png"></a></li>
 			<li><a href="#"><img src="img/cicon05.png"></a></li>
 		</ul>
-
 		<!-- ------------------------------상품 박스--------------------------------------------------------------- -->
 		<div id=productMainBox>
 
@@ -904,12 +881,7 @@
 					<li>goguma123</li>
 					<li>2020.01.23</li>
 					<li>4</li>
-				</ul>
-
-				<div id="reviewWriteBtn">
-					<input type="button" value="후기 작성"  class="btn"/>
-				</div>
-
+				</ul> 
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">
 					<div class="page_nation">
@@ -982,21 +954,27 @@
 					<li>2020.01.23</li>
 					<li><img src="img/ciconlock2.png"></li>
 
-				</ul>
-
-				<div id="qnaWriteBtn">
-					<input type="button" value="문의 작성" class="btn"/>
-				</div>
+				</ul> 
 
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">
-					<div class="page_nation">
-						<a class="arrow pprev" href="#"></a> <a class="arrow prev"
-							href="#"></a> <a href="#" class="active">1</a> <a href="#">2</a>
-						<a href="#">3</a> <a href="#">4</a> <a class="arrow next" href="#"></a>
-						<a class="arrow nnext" href="#"></a>
+					<div class="page_nation"> 
+					   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
+					   <a class="arrow prev" href="#"></a>
+					   <a href="#" class="active">1</a>
+					   <a href="#">2</a>
+					   <a href="#">3</a>
+					   <a href="#">4</a>
+					   <a href="#">5</a>
+					   <a href="#">6</a>
+					   <a href="#">7</a>
+					   <a href="#">8</a>
+					   <a href="#">9</a>
+					   <a href="#">10</a>
+					   <a class="arrow next" href="#"></a>
+					   <a class="arrow nnext" href="#"></a>
 					</div>
-				</div>
+		 		</div>  
 				<!-- 페이징 표시--------- -->
 
 
@@ -1018,5 +996,5 @@
  
 	</div>   
 </div> 
-
+</div>
 </html>

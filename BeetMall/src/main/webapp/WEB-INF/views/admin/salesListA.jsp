@@ -1,26 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css">  
-<style>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<style> 
 	/*맨 위 회색 top Bar*/
 	#topBar li{
 		width:12%;
 	} 
 	#topBar li:nth-of-type(2){
 		margin-left:108px;
+	}  
+	/*정렬 컨테이너*/
+	#sortBox {
+		margin-left:900px;
+	}
+	#sortBox li{
+		margin-top:30px;
+	}
+	#sortBox li:nth-of-type(1){
+		width:108px;
+	}
+	#sortBox li:nth-of-type(2){
+		width:38px;
 	} 
 	/*내용 전체 정렬*/
 	#topBar li:nth-of-type(4){
@@ -248,7 +247,7 @@
 	}
 	#searchBox{
 		position:relative;
-		left:-1310px;
+		left:-1075px;
 		top:-10px;
 	}
 	#searchBox label{
@@ -294,13 +293,10 @@
 	table{
 		width:1070px;
 		position:relative;
-		left:-10px;
-		top:-23px;
+		left:-20px; 
 	}
 	input[type=checkbox]{
-		background-color:lightgray;
-		
-		zoom: 1.2;
+		background-color:lightgray; 
 		top:0px;	
 	}
 	a:link{
@@ -328,9 +324,14 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/salesListA">판매 내역</a></strong></h5></li> 
+				<li><h5><strong><a href="salesListA">판매 내역</a></strong></h5></li> 
+			</ul> 
+		</div>  
+		<div id="sortBox">
+			<ul>
 				<li><select name="sort" > 
-				<option value="구매번호" selected>구매번호</option>  
+				<option value="정렬하기" selected>정렬하기</option>  
+						<option value="구매번호" >구매번호</option>  
 		   				<option value="주문현황">주문현황</option>   
 		   				<option value="배송현황">배송현황</option>   
 		   				<option value="상품명">상품명</option>   
@@ -341,8 +342,8 @@
 	   			</li> 
 	   			<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>  
-			</ul> 
-		</div>  
+			 </ul>
+   		</div> 
    		<div id="contentBox"> 	
 		  <!-- 상단 검색 옵션 : 접수일/ 카테고리/ 주문번호/ 고객ID/ 검색 -->
 		<form id="searchBox">
@@ -484,7 +485,7 @@
 						</table>	
 					</form>
 				</div>
-				<div class="option_change"style="text-align:right; padding-right:10px;">
+				<div class="option_change"style="text-align:right; padding-right:30px;">
 					<select id="option_sel">
 						<option>-</option>
 						<option>배송준비중</option>
