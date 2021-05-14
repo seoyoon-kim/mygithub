@@ -277,6 +277,7 @@ public class MyBuyListController {
 		System.out.println("N으로 옴 잘온거-->"+vo.getQopen());
 		System.out.println("널 맞음 sysdate-->"+vo.getQwritedate());
 		System.out.println("아이디 잘옴-->"+vo.getUserid());
+		System.out.println("qtitle"+vo.getQtitle());
 		mybuylistservice.qboardInsert(vo);
 		mav.setViewName("redirect:mybuyList");
 		return mav;

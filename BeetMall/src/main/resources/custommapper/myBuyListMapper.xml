@@ -61,8 +61,8 @@
 		select ordernum, claimkind, claimstatus, claimcontent, claimdate, delivery, invoice from claim where ordernum=#{param1} 
 	</select>
 	<insert id="qboardInsert" parameterType="com.beetmall.sshj.custom.vo.UserQBoardVO">
-		insert into userqboard(qnum, productnum, userid, qcontent, qwritedate, qopen, qanswer)
-		values(userqboardsq.nextval, #{productnum},#{userid} , #{qcontent}, sysdate, #{qopen}, null)
+		insert into userqboard(qnum, productnum, userid, qcontent, qwritedate, qopen, qanswer, qtitle)
+		values(userqboardsq.nextval, #{productnum},#{userid} , #{qcontent}, sysdate, #{qopen}, null, #{qtitle})
 	</insert>
 	<update id="returnFinish">
 		update orderdetail set orderstatus = '환불' where ordernum = #{param1}
