@@ -152,4 +152,17 @@ public class SellerAskController {
 		}
 		
 	}
+	
+	// ask answer update
+	@RequestMapping(value = "/SellerAskAnswerEdit",method = RequestMethod.POST)
+	@ResponseBody
+	public void SellerAskAnswerEdit(SellerAskManagementVO vo) {
+		int result = service.askAnswerUpdate(vo);
+		
+		if(result == 1) {
+			System.out.println("리뷰 등록 성공");
+		} else {
+			System.out.println("리뷰 답변 등록 실패");
+		}
+	}
 }

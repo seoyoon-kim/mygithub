@@ -45,5 +45,11 @@ public class SellerAskManagementServiceImp implements SellerAskManagementService
 		// TODO Auto-generated method stub
 		return dao.askUpdate(vo);
 	}
+
+	@Override
+	public int askAnswerUpdate(SellerAskManagementVO vo) {
+		// TODO Auto-generated method stub
+		return dao.askAnswerUpdate(vo);
+	}
 	
 }

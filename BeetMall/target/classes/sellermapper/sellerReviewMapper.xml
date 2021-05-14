@@ -135,4 +135,8 @@
 			, #{reportContent}, sysdate, 1)
 	</insert>
 	
+	<update id="reviewAnswerUpdate" parameterType="int">
+		update review set reviewanswer = #{reviewanswer} where userid = #{userid} and reviewnum = ${reviewnum} 
+	</update>
+	
 </mapper>

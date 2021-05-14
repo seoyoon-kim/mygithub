@@ -15,4 +15,6 @@ public interface SellerAskManagementDAO {
 	public int askUpdate(SellerAskManagementVO vo);
 	// 신고 테이블 업데이트
 	public int reportInsert(SellerAskManagementVO vo);
+	// 신고 답변 수정
+	public int askAnswerUpdate(SellerAskManagementVO vo);
 }

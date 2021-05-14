@@ -426,10 +426,64 @@ function popupOpen(data){
 				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
 				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
 			} else {
+				tag += '<input class="normalBtn" type="submit" onclick="answerEdit(\''+qnum+'\',\''productname+'\',\''qtitle+'\',\''qcontent+'\',\''userid+'\',\''qwritedate+'\',\''qanswer+'\')" value="수정" >';
 				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
 				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
 			}
 			tag += '</div>';
+		tag += '</div>';
+
+		tag += '</form>';
+		tag += '</div>';
+	
+	$('#popup').html(tag);
+	
+	let windowWidth = $(window).scrollLeft();
+	let windowHeight = $(window).scrollTop() + (window.innerHeight/2) - 250;
+	
+	$('body').css('overflow','hidden');
+	$('#modal').css('display','block').css('top', $(window).scrollTop() +"px").css('left',windowWidth+'px');
+	$('#popup').css('display','block').css('top',windowHeight+'px').css('left',windowWidth+'px');
+	
+}
+
+//팝업창 수정 만들기! 
+function popupOpen(qnum, productname, qtitle, qcontent, userid, qwritedate, qanswer){
+	
+	// 상품명
+	let qnum = $(data).children().val();
+	let productname = $(data).parent().prev().text();
+	let qtitle = $(data).text().trim();
+	let qcontent = $(data).next().val().trim();
+	let userid = $(data).parent().next().text();
+	let qwritedate = $(data).parent().next().next().text();
+	let qanswer = $(data).parent().next().next().next().text();
+	
+	if(qanswer == '답변 완료'){
+		qanswer = $(data).parent().next().next().next().children('input').val();
+	}
+
+	let tag = '<div class="wrapContainer_Edit1">';
+		tag += '<form method="post" action="javascript:qanswerEdit()" id="popupFrm">';
+		tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
+		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 문의</div>';
+		tag += '<ul id="askManagement">';
+		tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
+		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+		tag += '<li><b>작성일</b> ' + qwritedate + '</li>';
+		tag += '</ul>';	
+		tag += '<div>';
+		tag += '<br />';
+		tag += '<b>&nbsp;&nbsp;&nbsp;문의 내용</b><br />';
+		tag += '<div id="qContent">';
+		tag += '<p>' + qcontent + '</p>';
+		tag += '</div>';
+		tag += '</div>';
+		tag += '<div id="qAnswer">';
+			tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:670px; margin:0 15px;">'+qanswer+'</textarea>';
+		tag += '<div id="popupBtnContainer">';
+			tag += '<input class="normalBtn" type="submit" value="수정" >';
+			tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
 		tag += '</div>';
 
 		tag += '</form>';
@@ -548,6 +602,63 @@ function qanswer(){
 		}
 	})
 }
+
+//문의 답변 수정 등록하기
+function qanswerEdit(){
+	let strLength = $('#qanswer').val().length;
+	
+	if( strLength > 300 ){
+		alert('글자수는 300자를 초과 할 수 없습니다');
+		return false;
+	}
+	
+	if( strLength == 0){
+		alert('내용을 입력해주시기 바랍니다.');	
+		return false;
+	}
+	
+	// 제한사항 걸러내기....
+	if(sortStr == undefined){
+		sortStr = 0;
+	}
+	if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
+		mcatenumDataArr = [0];
+	}
+	
+	if(searchTxt == undefined || searchTxt == "!$#@%"){
+		searchTxt = "";
+	}
+	if(startDate == undefined || startDate == "!$#@%"){
+		startDate = "";
+		endDate = "";
+	}
+	
+	if(startDate == null || startDate == '' ){
+		startDate = "!$#@%";
+		endDate = "!$#@%";
+	}
+	if(searchTxt == null || searchTxt == '' ){
+		searchTxt = "!$#@%";
+	}
+
+	
+	let url = "SellerAskAnswerEdit";
+	let param = $('#popupFrm').serialize();
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: param,
+		success:function(){
+			alert('답변이 성공적으로 수정되었습니다')
+			popupClose();
+			paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
+		} ,
+		error:function(){
+			alert('답변 수정이 실패하였습니다');
+		}
+	})
+}
+
 
 // 신고 접수
 function reportUpdate(){

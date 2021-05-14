@@ -196,5 +196,17 @@ public class SellerReviewController {
 		}
 		
 	}
-
+	
+	// review answer update
+	@RequestMapping(value = "/SellerReviewAnswerEdit",method = RequestMethod.POST)
+	@ResponseBody
+	public void SellerReviewAnswerEdit(SellerReviewVO vo) {
+		int result = service.reviewAnswerUpdate(vo);
+		
+		if(result == 1) {
+			System.out.println("리뷰 등록 성공");
+		} else {
+			System.out.println("리뷰 답변 등록 실패");
+		}
+	}
 }
