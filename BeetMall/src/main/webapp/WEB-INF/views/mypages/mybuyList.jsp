@@ -918,11 +918,12 @@
 			<form id="questionForm" action="questionWrite" method="post">
 				<input type="hidden" name="productnum" value="" id="qboardnum"/>
 				<ul id="questionUl" style="text-align:left;">
+					<li>제목</li>		<li><input type="text" name="qtitle" style="width:335px;" placeholder="제목을 작성해주세요" maxlength="100"/></li>
 					<li>상품번호</li>		<li><span id="productnum" class="qsetNum"></span></li>
 					<li>공개비공개 설정하기</li> 	<li>
 										<select name="qopen">
-											<option value="Y">공개</option>
-											<option value="N">비공개</option>
+											<option value="1">공개</option>
+											<option value="0">비공개</option>
 										</select>
 										</li>
 					<li><textarea id="summernoteQuestion" name="qcontent"></textarea></li>

@@ -8,6 +8,13 @@ public class UserQBoardVO {
 	private String qwritedate;
 	private String qopen;
 	private String qanswer;
+	private String qtitle;
+	public String getQtitle() {
+		return qtitle;
+	}
+	public void setQtitle(String qtitle) {
+		this.qtitle = qtitle;
+	}
 	public int getQnum() {
 		return qnum;
 	}
