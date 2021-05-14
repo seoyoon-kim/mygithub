@@ -6,12 +6,22 @@
 <meta charset="UTF-8">
 <title>Beetmall 관리자 페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
+<!-- font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
+
+<!-- pagination -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+
+<!-- css -->
+<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
 <style>
 	#body1{ 
 		width:1280px; 
@@ -24,32 +34,46 @@
 	#topBox{ 
 		height:200px; 
 		margin:0; 
-		width:1280px;  
+		width:1920px;  
 	}
 	#top{ 
-		padding:8px 0px 0px 20px; 
-		height:40px;
+		padding:5px 0px 0px 20px; 
+		height:30px;
 		font-size:15px;
+		width:500px;
+		display:flex;
 	}
-	#dot{ 
-		font-size:18px; 
-		color:red; 
-		position:relative; 
-		top:1px; 
-		left:-10px; 
+	#topCenter{
+		width:1280px;
+		margin:0 auto;
 	}
-	#fromDot{
+	#back{
+		background-color:#eee; 
+	}
+	#imgBox{
+		width:1280px;
+		text-align:center;
+		padding-top:10px;
+		margin:0 auto;
+	}
+	#logo{
 		position:relative;
-		top:-25px;
-		left:1040px;
+		margin:20px auto;
+		top:10px;
+		width:20%;
+	} 
+	#fromDot{
+		position:relative; 
+		left:950px;
 	}
 	#logout{ 
 		background-color:black; 
 		border-radius:100px; 
 		color:white; 
-		width:70px; 
-		margin-left:20px; 
+		width:80px; 
+		margin-left:10px; 
 		padding:0px 10px; 
+		text-align:center;
 	}
 	#topBox>h2{ 
 		text-align:center; 
@@ -60,18 +84,27 @@
 		text-decoration:none; 
 		color:black; 
 	}  
+	.page_wrap{
+		margin-top:30px;
+	}
 </style>
 </head>
 <body>
 	<div id="topBox">
-		<div id="top">
-			<span id="homeGo"><a href="<%=request.getContextPath()%>/">비트몰 홈페이지</a></span>
-			<div id="fromDot">
-			<span id="dot">●</span> 관리자 님 
-				 
-					<span id="logout">로그아웃</span>
-			</div>		
-				 
-		</div> 
-		<h2><a href="<%=request.getContextPath()%>/adminHome">비트몰 관리</a></h2>
+	<div id="back">
+		<div id="topCenter">
+			<div id="top">
+				<span id="homeGo"><a href="<%=request.getContextPath()%>/">비트몰 홈페이지</a></span>
+				<div id="fromDot">
+				 	관리자 님  
+				<span id="logout">로그아웃</span>
+				</div>		 
+			</div> 
+		</div>
+	</div>
+		<div id="imgBox">
+			<a href="<%=request.getContextPath()%>/adminHome">
+				<img id="logo" src="<%=request.getContextPath()%>/img/y_logo.png"/>
+			</a>
+		</div>
 	</div> 

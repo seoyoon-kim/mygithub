@@ -25,7 +25,21 @@ public class admin_salesController {
 		ModelAndView mav = new ModelAndView(); 
 		mav.setViewName("/admin/salesListA");
 		return mav;
+	}  	
+	//매출 분석
+	@RequestMapping("/salesAnalasysA")
+	public ModelAndView salesAnalasysA() {
+		ModelAndView mav = new ModelAndView(); 
+		mav.setViewName("/admin/salesAnalasysA");
+		return mav;
+	} 	
+	//카테고리별 매출 분석
+	@RequestMapping("/salesCateAnalasysA")
+	public ModelAndView salesCateAnalasysA() {
+		ModelAndView mav = new ModelAndView(); 
+		mav.setViewName("/admin/salesCateAnalasysA");
+		return mav;
 	} 
 		
-	 
+	
 }

@@ -2,21 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %> 
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+ 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<!-- font -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
-
 <style>
 	#mypageMenubar{
 		display:block;
@@ -63,8 +52,8 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:127px;
-	   	left:180px;
+	   	top:180px;
+	   	left:210px;
 	   	width:1351px;
    }
    
@@ -131,23 +120,22 @@
 	}
 	#bottommm{
 		text-align:center;  
-		margin-top: 950px;
+		margin: 980px 0 40px 0 ;
 		position:relative;
-		left:-782px;
+		left:-722px;
 	}
 	#bottommm>input{
 		border:1px solid gray;
 	}
 	.write_btn{
-		height:40px;
+		height:40px; 
 	}
 	#write_btn{
 		width:150px;
 	}
 	#cancle_btn{
-		position:relative;
-		top:38px;
-		left:200px;
+		position:relative; 
+		left:80px;
 	} 
 	input[type="submit"].btn:hover, input[type="button"].btn:hover{
    	  background: #b3b3b3;
@@ -164,10 +152,14 @@
 		font-size:14px;
 		color:black;
 		background-color:lightgray;
-		padding:7px 0;
+		padding-left:7px;
 		border:1px solid gray;
-		border-radius:3px;
-		margin-right:10px;
+		border-radius:3px; 
+		font-weight:normal;
+	}
+	#attach>span{
+		position:relative;
+		top:-5px;
 	}
 </style>
 <script>
@@ -210,7 +202,7 @@ $(document).ready(function(){
 					<td  class="td">
 						<div style="display:flex;">
 							<label for="file" id="attach"> 
-								파일 첨부하기
+								<span>파일 첨부하기</span>
 							</label>
 							<input type="file" style="width: 500px;" id="file">
 							<input class="uploadFile" style="width: 500px;" id="uploadFile" value="">
@@ -229,9 +221,10 @@ $(document).ready(function(){
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>				
-			</div>
+				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
+				<input type="reset" value="다시쓰기" class="btn write_btn id="reset_btn"/>
+				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
+			 </div>
 		</form>
 		</div>
 </div>

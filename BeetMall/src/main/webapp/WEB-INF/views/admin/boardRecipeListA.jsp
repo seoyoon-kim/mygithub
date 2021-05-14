@@ -1,39 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
- <style> 
-	 #container li{  
-		 float:left; 
-		 width:10%; 
-	 }   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<style> 
+	 /*회색 바*/   
+	#topBar h5{
+		width:120px;
+		position:relative;
+		left:-7px;
+	}
+	#topBar li:nth-of-type(1){   
+		position:relative;
+		left:-8px;
+	}
+	#topBar li:nth-of-type(2){   
+		margin-left:56px;
+	}
+	#topBar li:nth-of-type(4){
+		width:6%;
+	}  
+	/*전체*/
+	 #container li{ 
+		 list-style-type:none; 
+		 float:left;  
+	 }       
+	#contentBox li, #contentBox li:nth-of-type(5){ 
+		width:11%;
+	}
 	#contentBox li:nth-of-type(9n-8){ 
 		width:0%; 
 	}
-	#contentBox li:nth-of-type(4){ 
-		width:20%; 
-	}   
-	#topBar li:nth-of-type(3){
-		width:12%;
-	} 
-	#topBar li:nth-of-type(4){
-		width:6%;
+	#contentBox li:nth-of-type(3){ 
+		width:28%; 
+	}  
+	#contentBox li:nth-of-type(2){ 
+		width:13%; 
 	}   
 	#sortBox {
-		margin-left:800px;
+		margin-left:900px;
 	}
 	#sortBox li{
-		margin:30px 0 20px 0;
+		margin-top:30px;
 	}
 	#sortBox li:nth-of-type(1){
 		width:108px;
 	}
-	#sortBox li:nth-of-type(3){
+	#sortBox li:nth-of-type(2){
 		width:38px;
 	}
 	/*데이터 내용*/ 
 	.cartImg{
 		margin-left:10px;
-		height:20%;
-		width:25%;
+		height:15%;
+		width:20%;
 	}
 	#content input, textarea, select, #noticeSearchFrm input{
 		border:1px solid lightgray; 
@@ -45,8 +62,11 @@
 	#content select{
 		height:28px;
 	} 
-	.contentList>li:nth-of-type(7){
-		padding-top:3px;
+	.contentList:nth-of-type(2n-1)>li:nth-of-type(6){
+		padding:8.5px 0;
+	}
+	.contentList:nth-of-type(2n)>li:nth-of-type(6){
+		padding:9px 0;
 	}
 	/*버튼*/
 	#btns{ 
@@ -61,10 +81,10 @@
 	#topBar Button:nth-of-type(3),
 	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
-	}  
+	}   
 	.searchFrm{
 		margin-left:150px ! important;
-	} 
+	}
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -95,186 +115,176 @@
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="customerListA">상품 목록</a></strong></h5></li> 
+				<li><h5><strong><a href="customerListA">레시피 목록</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
-		</div>   
+		</div>  
 		<div id="sortBox">
 			<ul>
 				<li><select name="sort" > 
-		   				<option value="카테고리" selected>카테고리</option>
-		   				<option value="과일">과일</option>  
-		   				<option value="건과류">건과류</option>   
-		   				<option value="채소">채소</option>  
-		   				<option value="쌀">쌀</option> 
-		   				<option value="잡곡">잡곡</option>   
-		   				<option value="견과류">견과류</option>     
-				  	</select> 
-		   		</li> 
-		   		<li><select name="sort" > 
-		   				<option value="정렬하기" selected>정렬하기</option>
-		   				<option value="상품번호">상품번호</option>
+		   				<option value="레시피번호" selected>레시피번호</option>
 		   				<option value="제목">제목</option>
-		   				<option value="법인명">법인명</option>
-		   				<option value="판매자">판매자</option>
-		   				<option value="장바구니">장바구니</option>
+		   				<option value="추천수">추천수</option>
 		   				<option value="조회수">조회수</option>
+		   				<option value="즐겨찾기">즐겨찾기</option>
+		   				<option value="작성자">작성자</option>
 		   				<option value="등록일">등록일</option> 
 			  		</select> 
-	   			</li> 
+	   			</li>  
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-		 	</ul>
+			 </ul>
 		</div>
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
 				<li><input type="checkbox" name="check"></li>
-				<li>상품번호</li>
-				<li>카테고리</li>
+				<li>레시피번호</li>
 				<li>제목</li>
-				<li>법인명</li>
-				<li>판매자</li>
-				<li>장바구니</li>
+				<li>추천수</li>
 				<li>조회수</li>
+				<li>즐겨찾기</li>
+				<li>작성자</li>
 				<li>등록일</li> 
 			</ul>
-		</div>  
-		
+		</div>      
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
+			
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
+			<ul class="contentList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
+				<li>12</li>
+				<li>1362</li>
+				<li>123<img class="cartImg" src="./img/y_heart.png" ></li> 
+				<li>greenlike</li>
+				<li>2021/04/26</li> 
+			</ul> 
 		 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul>  
+		 
+
+
+ 
 		<!--  
 		<c:forEach var="data" items="${list}">
 			<ul class="contentList">
@@ -303,9 +313,7 @@
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>
-		 </div>
- 
- 
+		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<input type="date" id="from"><div id="fromTo">~</div>

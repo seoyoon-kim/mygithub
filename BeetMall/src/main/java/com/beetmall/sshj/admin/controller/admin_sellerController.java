@@ -43,12 +43,13 @@ public class admin_sellerController {
 			mav.setViewName("/admin/sellerBlackList");
 			return mav;
 		} 
-	//판매자 블랙리스트 보기
+	//판매자 정보 수정
 		@RequestMapping("/sellerInfoEditA")
 		public ModelAndView sellerInfoEditA() {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("list", adminService.noticeList());
-			mav.setViewName("/admin/sellerInfoEditA");
+			mav.setViewName("/admin/sellerInfoEditA"
+					+ "");
 			return mav;
 		} 
 		 
