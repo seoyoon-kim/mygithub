@@ -226,56 +226,114 @@
 		margin-right:8px;
 		opacity:60%;
 	}
-	#categoriSelect{
+ 	/* #categoriSelect{ 
 		display:none;
 		position:absolute;
 		z-index:10;
 		top:0px;
-		width:450px;
-		height:300px;
-		background-color: rgb(252,118,45);
+		left:-100px;
+		width:1280px;
+		height:0px;
+		background-color:white;
+		transition-duration:0.5s;
 	}
 	.cateTopCate{
 		height:60px;
 		width:150px;
 		background-color: white;
-		border-right:1px solid rgb(252,118,45);
 		text-align:center;
 		position: relative;
+		font-size:14px;
 		line-height: 60px;
+		z-index:15;
 	}
+	.cateMidCate{
+		height:60px;
+		width:150px;
+		background-color: white;
+		text-align:center;
+		font-size:14px;
+		line-height:60px;
+		z-index:15;
+	} */
+	
 	/* .cateTopCate>ul>li:first-child{
 		margin-top:40px;
 	} */
 	#categoriSelect>ul>li:last-child li, #categoriSelect>ul>li:last-child{
 		border-right:none;
 	}
-	.cateMidCate{
-		height:60px;
-		width:150px;
-		background-color: rgb(252,118,45);
-		border-right:1px solid white;
-		text-align:center;
-		font-size:0.9em;
-		line-height:60px;
-	}
 	.cateTopCate>a:link, .cateTopCate>a:visited, .cateTopCate>a:hover, .cateTopCate>a:active{
 		text-decoration:none;
-		color:rgb(252,118,45);
-		font-size:21px;
+		color:black;
+		font-size:14px;
 		font-weight:bold;
 	}
 	.cateMidCate a:active, .cateMidCate a:link, .cateMidCate a:visited, .cateMidCate a:hover{
 		text-decoration:none;
-		color:white;
-		font-size:15px;
+		color:black;
+		font-size:14px;
 	}
 	#cateUl, #cateUl ul{
 		padding:0;
 		margin:0;
+		z-index:11;
+		background-colr
 	}
 	#cateUl>ul{
 		float:left;
+	}
+	/* 카테고리 시작 */
+	#categoriList{
+		height:272px;
+		width:100%;
+		background-color:white;
+		padding-top:20px;
+		padding-bottom:20px;
+		box-shadow: rgb(0 0 0 / 40%) 0px 0px 53px;
+		top:285px;
+		left:0px;
+		z-index:90;
+		transition-duration:0.4s;
+		display:none;
+	}
+	#cateFooter{
+		background-color:rgb(250, 230, 210);
+		height:40px;
+		position:absolute;
+		width:100%;
+		top:212px;
+		transition-duration:0.5s;
+	}
+	.categoriTop{
+		height:50px;
+		width:200px;
+		/* background-color:skyblue; */
+		line-height:50px;
+		transition-duration:0.6s;
+		border-bottom:3px solid rgb(252,118,45);
+		margin-right:10px;
+		margin-bottom:5px;
+		padding-left:10px;
+	}
+	.categoriMid{
+		height:30px;
+		width:200px;
+		/* background-color:yellow; */
+		line-height:30px;
+		transition-duration:0.6s;
+		margin-right:10px;
+		padding-left:10px;
+	}
+	.categoriTop a:active, .categoriTop a:link, .categoriTop a:visited{
+		text-decoration:none;
+		color:black;
+		font-size:15px;
+	}
+	.categoriTop a:hover{
+		text-decoration:none;
+		color:rgb(252,118,45);
+		font-size:15px;
 	}
 	/* 리모콘 시작 */
 	#rightNav{
@@ -340,6 +398,13 @@
     #rollDiv{
     	display:block;
     }
+    
+    #recigogo{
+    	font-size:15px;
+    	line-height:40px;
+    	color:rgb(252,118,45);
+    	font-weight:900;
+    }
 </style>
 <script>
 	$(function(){
@@ -368,27 +433,50 @@
 		var cate_mid = [["전체", "과일", "채소", "쌀/잡곡"],
 						["지역별 보기", "지도로 찾는 동네농장"],
 						["5,000원 이하", "10,000원 이하", "50,000원 이하", "50,000원 이상"]];
-		cate_top.map(function(value, index){
-			var cate_top_menu = "<li class='cateTopCate'><a href='#'>"+value+"</a><ul>";
+		/* cate_top.map(function(value, index){
+			var cate_top_menu = "<li class='cateTopCate'><a href='#'><b>"+value+"</b></a><ul>";
 			cate_mid[index].map(function(mid_value, mid_index){
 				cate_top_menu += "<li class='cateMidCate'><a href='#'>"+mid_value+"</a></li>";
 			});
 			cate_top_menu += "</ul></li>";
 			$("#cateUl").append(cate_top_menu);
+		}); */
+		cate_top.map(function(value, index){
+			var cate_top_menu = "<li class='categoriTop'><a href='#'><b>"+value+"</b></a><ul>";
+			cate_mid[index].map(function(mid_value, mid_index){
+				cate_top_menu += "<li class='categoriMid'><a href='#'>"+mid_value+"</a></li>";
+			});
+			cate_top_menu += "</ul></li>";
+			$("#categoriUl").append(cate_top_menu);
 		});
-		
 		
 		$("#menuListUl>li:first-child").hover(function(){
-			$("#categoriSelect").css("display","block");
+			$("#categoriList").css("height","272px").css("padding-top","20px").css("padding-bottom","20px").css("display","block").css("transition-duration","0.5s");
+			$("#caterel").css("height","0px");
+			$("#cateFooter").css("display","block").css("top","212px");
+			$(".categoriTop").css("display","block");
+			$(".categoriMid").css("display","block");
 		},function(){
-			$("#categoriSelect").css("display","none");
+			$("#categoriList").css("height","0px").css("padding","0px").css("display","none");
+			$("#caterel").css("height","0px");
+			$("#cateFooter").css("display","none").css("top","0");
+			$(".categoriTop").css("display","none");
+			$(".categoriMid").css("display","none");
 		});
 		
-		$("#categoriSelect").hover(function(){
-			$("#categoriSelect").css("display","block");
+		$("#categoriList").hover(function(){
+			$("#categoriList").css("height","272px").css("padding-top","20px").css("padding-bottom","20px").css("display","block").css("transition-duration","0.5s");
+			$("#caterel").css("height","0px");
+			$("#cateFooter").css("display","block").css("top","212px");
+			$(".categoriTop").css("display","block");
+			$(".categoriMid").css("display","block");
 		},function(){
-			$("#categoriSelect").css("display","none");
-		});
+			$("#categoriList").css("height","0px").css("padding","0px").css("display","none");
+			$("#caterel").css("height","0px");
+			$("#cateFooter").css("display","none").css("top","0");
+			$(".categoriTop").css("display","none");
+			$(".categoriMid").css("display","none");
+ 		});
 		
 	})
 	
@@ -406,9 +494,9 @@
 				<div class="section">
 				<ul id="menuListUl">
 					<li><span><img src="/sshj/img/dmenu3.png" id="menuImg" class="menuImg"/>카테고리</span></li>
-					<li><a href="kangsan">신상품</a></li>
-					<li><a href="kangsan">베스트</a></li>
-					<li><a href="kangsan2">못난이할인</a></li>
+					<li><a href="categoryMain">신상품</a></li>
+					<li><a href="Bestcategory">베스트</a></li>
+					<li><a href="uglyItem">못난이할인</a></li>
 					<li><a href="recipeHome">비트네</a></li>
 				</ul>
 				<div id="menuImgs">
@@ -435,9 +523,23 @@
 				<div><a href="custominfo">문의내역</a></div>
 				<div><a href="leaveMember">회원탈퇴</a></div>
 			</div>
+			 <!-- 카테고리 선택 -->
 			<div id="categoriSelect">
 				<ul id="cateUl"></ul>
 			</div>
+			</div>
+			<div id="categoriList" style="position:absolute">
+				<div id="caterel" style="position:relative;">
+				<div class="section">
+					<ul id="categoriUl">
+					
+						
+					</ul>
+				</div>
+					<div id="cateFooter"><div class="section"style="text-align:right;"><a href="#" id="recigogo">레시피 바로가기</a></div></div>
+				</div>
+			</div>
+			<div class="section" style="position:relative;">
          <!-- 여기부터 상품카테고리부분시작 -->
          <div id="leftMenu">
             <div id="kcategoryMain">
@@ -446,32 +548,32 @@
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">상품 품목별</div>
-                  <div><a href="kangsan">전체</a></div>
-                  <div><a href="kangsan">과일</a></div>
-                  <div><a href="kangsan">채소</a></div>
-                  <div><a href="kangsan">쌀/잡곡</a></div>
+                  <div><a href="categoryMain">전체</a></div>
+                  <div><a href="categoryMain?item=Fruit">과일</a></div>
+                  <div><a href="categoryMain?item=vegetable">채소</a></div>
+                  <div><a href="categoryMain?item=Rice">쌀/잡곡</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">지역별</div>
-                  <div id="karea"><a href="#">지역별보기</a></div>
+                  <div id="karea"><a style="cursor:pointer">지역별보기</a></div>
                   <div style="display: none;" id="kareaMenu">
-                     <div><a href="kangsan3">전체</a></div>
-                     <div><a href="kangsan3">수도권</a></div>
-                     <div><a href="kangsan3">강원도</a></div>
-                     <div><a href="kangsan3">충청도</a></div>
-                     <div><a href="kangsan3">경상도</a></div>
-                     <div><a href="kangsan3">전라도</a></div>
-                     <div><a href="kangsan3">제주도</a></div>
+                     <div><a href="categoryCharge">전체</a></div>
+                     <div><a href="categoryCharge">수도권</a></div>
+                     <div><a href="categoryCharge">강원도</a></div>
+                     <div><a href="categoryCharge">충청도</a></div>
+                     <div><a href="categoryCharge">경상도</a></div>
+                     <div><a href="categoryCharge">전라도</a></div>
+                     <div><a href="categoryCharge">제주도</a></div>
                   </div>
                   <br/>
                   <div><a href="mapping">지도로 찾기</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">가격대별</div>
-                  <div><a href="kangsan4">5,000원이하</a></div>
-                  <div><a href="kangsan4">10,000원 이하</a></div>
-                  <div><a href="kangsan4">50,000원 이하</a></div>
-                  <div><a href="kangsan4">50,000원 이상</a></div>
+                  <div><a href="/sshj/payCategory?pay=5000">5,000원이하</a></div>
+                  <div><a href="/sshj/payCategory?pay=10000">10,000원 이하</a></div>
+                  <div><a href="/sshj/payCategory?pay=50000">50,000원 이하</a></div>
+                  <div><a href="/sshj/payCategory?pay=50001">50,000원 이상</a></div>
                </div>
             </div>
          </div>
@@ -492,10 +594,7 @@
             </div>
          </div>
          <!-- 고객센터왼쪽부분끝 -->
-		 <!-- 카테고리 선택 -->
-		 <div id="categoriSelect">
-			<ul id="cateUl"></ul>
-		 </div>
+		
 		 <!-- 오른쪽 배너광고 -->
 		 <div id="rightNav">
        		<div id="reghtNav">

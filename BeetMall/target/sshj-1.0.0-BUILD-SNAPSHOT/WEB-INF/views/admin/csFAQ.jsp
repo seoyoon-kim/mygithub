@@ -11,150 +11,261 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-<style>
-	/*맨 위 회색 top Bar*/
-	#topBar li:nth-of-type(1){
+ <style> 
+	 #container li{ 
+		 list-style-type:none; 
+		 float:left; 
+	 }  
+	#contentBox{ 
+		top:20px; 
+		margin-left:10px;
+	}
+	#topBar h5{
+		width:155px;
 		margin-left:30px;
+	}
+	#contentBox li:nth-of-type(6n-5){ 
+		width:0%; 
+	}
+	#contentBox li{
+		width:25%;
+	}
+	#contentBox li:nth-of-type(4){ 
+		width:37%; 
+	}
+	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1){  
+		width:30%; 
+		padding-left:20px; 
+	}    
+	#topBar li{
+		 width:15%;
 	}  
 	#topBar li:nth-of-type(2){
-		margin-left:60px;
+		margin-left:77px;
 	}  
+	#topBar li:nth-of-type(3){
+		width:12%;
+	} 
 	#topBar li:nth-of-type(4){
-		margin-left:60px;
-	}  
-	#topBar li:nth-of-type(5){
-		margin-left:290px;
-	}  
-	#topBar li:nth-of-type(6){
-		position:relative;
-		left:960px;
-		top:-30px;
-		with:100px;
-	}  
-	#edit{
-		left:900px;
-	}
-	#addBtn{
-		left:530px;
-		top:-24px;
-		width:100px;
-	} 
-	#delBtn{
-		left:-670px;
-		top:6px;
-	}
-	/*내용 전체 정렬*/
-	#topBar li:nth-of-type(7){
-		position:relative; left:-80px;
+		width:6%;
 	}   
-	#contentBox li:nth-of-type(9n-2) {
-    	width: 8%;
+	#content input, textarea, select, #noticeSearchFrm input{
+		border:1px solid lightgray; 
+		border-radius: 3px;
+	}#content li, label{
+		list-style-type:none; 
+		padding-bottom:10px;
 	}
-	#contentBox li:nth-of-type(9n+1) {
-    	width: 2%;
+	#content select{
+		height:28px;
+	} 
+	/*버튼*/
+	#btns{ 
+		top:-115px; 
+		left:460px; 
+	} 
+	#btns a>button, button:nth-of-type(4){ 
+		margin-left:900px; 
+	} 
+	#topBar Button:nth-of-type(1),
+	#topBar Button:nth-of-type(2),
+	#topBar Button:nth-of-type(3),
+	#topBar Button:nth-of-type(4){
+		padding:2px 7px;
 	}  
-	#container li:nth-of-type(4):not(#topBar li:nth-of-type(4)){
-		width:20%;	
-	}
-	#title>ul,.productList{
-		position:relative; left:-20px;
-	}
-	#container li:nth-of-type(2):not(#topBar li:nth-of-type(2)){
-		margin-left:20px;
-	} 
-	 
-	/* 본문 정렬*/
-	#container li{ 
-		width:13%; 
-		list-style-type:none;
-		float:left;
-	} 
-	#container li:nth-of-type(5){
-		width:35%;
-	}
-	.productList:nth-of-type(1){ 
-		margin-top:10px;
-	}
-	#contentList>ul{
-		float:left;
-		margin-bottom:0px;
-	}
 	
-	/*페이징 이미지 링크*/
+	/* 페이징처리부분 */ 
 	.page_nation .pprev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_pprev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
 	}
 	.page_nation .prev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_prev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
 		margin-right:7px;
 	}
 	.page_nation .next {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_next.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
 	}
 	.page_nation .nnext {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_nnext.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
-	}  
-</style>
-<script>
- 
-</script>
-</head>
-<body>
+	}
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/* 페이징처리끝 */
+</style> 
 <%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %>
+<div id="body1">
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong>FAQ</strong></h5></li> 
+				<li><h5><strong><a href="customerListA">자주 묻는 질문</a></strong></h5></li> 
 				<li><select name="sort" > 
-				<option value="전체" selected>전체</option>
-		   				<option value="구매자">구매자</option>
-		   				<option value="판매자">판매자</option>
-		   			</select>
-	   			</li> 
-		   				<!-- FAQ 카테고리 추가,수정하기 -->
-	   			<li><select name="sortCate" > 
-				<option value="전체" selected>카테고리</option>
-		   				<option value="주문">주문</option>
-		   				<option value="결제">결제</option>
+		   				<option value="구매자" selected>구매자</option>
+		   				<option value="판매자">판매자</option>  
+			  		</select> 
+	   			</li>
+	   			<li><select name="sort" > 
+		   				<option value="카테고리" selected>카테고리</option>
+		   				<option value="상품">상품</option>
+		   				<option value="회원/포인트">회원/포인트</option>   
+		   				<option value="판매">판매</option>
+		   				<option value="주문/결제">주문/결제</option>
 		   				<option value="배송">배송</option>
-		   				<option value="회원정보">회원정보</option>
-		   			</select>
-	   			</li>  
-	   			<li><button class="success" value="add" name="edit" id="edit">수정</button></li> 
-	   			<li><button class="success" value="asc" name="add" id="addBtn">추가</button></li>
-				<li><button class="success" value="desc" name="del" id="delBtn">삭제</button></li>
+		   				<option value="교환/반품/환불">교환/반품/환불</option>
+			  		</select> 
+	   			</li>   
+				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
+				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
+				<li><button class="success" value="add" name="add" id="editBtn">수정</button></li>
+				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li> 
+				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
 		</div>  
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
 				<li><input type="checkbox" name="check"></li>
-				<li>질문번호</li>
+				<li>문의번호</li>
 				<li>카테고리</li>
-				<li>대상</li>
 				<li>제목</li> 
-				<li>작성일</li> 
 			</ul>
 		</div>  
-		<div id="contentList">
-			<c:forEach var="data" items="${list}">
-				<ul class="productList">
-					<li><input type="checkbox" name="check" id="check"> </li>
-					<li>QNo?</li>
-					<li>cate?</li>
-					<li>who?</li>
-					<li><a href="answer?">title?</a></li>  
-					<li>Qdate?</li> 
-				</ul>
-			</c:forEach>
-			</div>
+		
+		 
+			<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul> 
+		 
+
+
+ 
+		<!--  
+		<c:forEach var="data" items="${list}">
+			<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>주문/결제</li>
+				<li class="subjectLine"><a href="회원정보?">Q. 결제 시 얼마 이상 무료배송인가요?</a></li>
+				
+			</ul>
+		</c:forEach>-->
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
@@ -174,7 +285,6 @@
 			   <a class="arrow nnext" href="#"></a>
 			</div>
 		 </div>
-
 
 	<!-- 
 	 <ul class="breadcrumb pagination-md">
@@ -213,20 +323,18 @@
 	 </ul>		
  -->
  
-	 <div>
-		<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-			<select name="searchKey">
-				<option value="subject" selected>제목</option>
-   				<option value="content">내용</option> 
-   				<option value="qnumber">문의번호</option> 
-   				<option value="customer">구매자</option> 
-   				<option value="seller">판매자</option>  
-			</select>			
-			<input type="text" name="searchWord" id="searchWord"/>
-			<input type="submit" value="검색"/> 
-		</form>
-		
-	</div>  
-		</div>
-</body>
+		 <div>
+			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<select name="searchKey">
+					<option value="subject" selected>제목</option>
+	   				<option value="no">공지번호</option> 
+	   				<option value="who">대상</option> 
+	   				<option value="writedate">공지일</option> 
+				</select>			
+				<input type="text" name="searchWord" id="searchWord"/>
+				<input type="submit" value="검색"/> 
+			</form> 
+		</div>  
+	</div>
+</div> 
 </html>

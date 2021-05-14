@@ -2,6 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 /* 판매자 페이지는 header, footer 따로쓰기위해 display none */
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
 header{
 	display: none;
 }
@@ -65,6 +69,12 @@ footer{
 }
 
 </style>
+<c:if test="${logType!=2}">
+	<script>
+		alert('판매자만 페이지에 접속 할 수 있습니다.');
+		location.href = "/sshj";
+	</script>
+</c:if>
 <div id="seller_header">
 	<!-- 상단 메뉴 바 -->
 	<nav>
@@ -87,15 +97,16 @@ footer{
 		</div>
 		<ul>
 			<li><a href="#">BEETMALL</a></li>
-			<li><a href="#">상품 관리</a></li>
-			<li><a href="#">상품 등록</a></li>
-			<li><a href="#">주문 관리</a></li>
-			<li><a href="#">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="#">정산 관리</a></li>
+			<li><a href="product_list">상품 관리</a></li>
+			<li><a href="product_regi">상품 등록</a></li>
+			<li><a href="order_management">주문 관리</a></li>
+			<li><a href="sale_management">판매 관리</a></li>
 			<li><a href="#">배송 관리</a></li>
+			<li><a href="seller_sales">매출 관리</a></li>
+			<li><a href="settle">정산 관리</a></li>
+			<li><a href="intro_farm">농장 관리</a></li>
 			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
+			<li><a href="#">회원정보수정</a></li>
 		</ul>
 	</nav>
 </div>

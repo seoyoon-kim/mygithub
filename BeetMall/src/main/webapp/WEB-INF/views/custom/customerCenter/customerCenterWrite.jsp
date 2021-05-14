@@ -21,6 +21,7 @@
 	    width: 90%;
 	    margin-bottom: 20px;
 	    float: left;
+    	margin-top: 100px;
 	}
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; font-size:14px;}
 	#NoticeleftMenu{
@@ -32,7 +33,7 @@
     a{color:black;}
 	answer_line{width:100%; 	background-color:#f6f6f6; height:20px; }
 	#qmtitle, select{border:none;}
-	#qmtitle{width:300px; color:lightgray;}
+	#qmtitle{width:300px; color:black;}
 	#qmtitle{width:500px}
 	#write_btn{width:150px; margin-left:20px;}
 	a{color:black;}
@@ -41,8 +42,8 @@
 		width:100%;	
 		border-spacing: 0;
 		text-indent: initial;	
-		border-top:2px solid lightgray;
-		border-bottom:2px solid lightgray;
+		border-top:1px solid lightgray;
+		border-bottom:1px solid lightgray;
 		font-size:15px;
 	}
 	th, .th{
@@ -57,8 +58,8 @@
    		/*#fcfcfc*/
 	}
 	thead, .answer_content, .td{
-		border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
 	    width:100%;
 	}
 	tr{

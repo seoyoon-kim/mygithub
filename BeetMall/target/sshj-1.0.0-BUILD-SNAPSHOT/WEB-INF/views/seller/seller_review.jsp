@@ -8,33 +8,15 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <section>
-	<!-- 사이드바 -->
-	<nav>
-		<ul>
-			<li><a href="#">상품 관리</a></li>
-			<li><a href="#">상품 등록</a></li>
-			<li><a href="#">주문 관리</a></li>
-			<li><a href="#">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="#">정산 관리</a></li>
-			<li><a href="#">배송 관리</a></li>
-			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
-		</ul>
-	</nav>
+	<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %>
 	<!-- 본문 시작 -->
 	<article>
-		<!-- 검색창 -->
-		<div id="search_container">
-			<span id="search_box">
-				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-			</span>
-		</div>
-		
+		<div class='seller_title'>리뷰관리</div>
 		<div class="wrap">
 			<!-- 리뷰 보기 -->
+			<div class="wrapTitle">리뷰보기</div>
 			<div class="wrapContainer">
-				<div class="wrapTitle">리뷰보기</div>
+				
 				<ul id="reviewInfo">
 					<li>새 리뷰</li>
 					<li>3건</li>
@@ -48,8 +30,8 @@
 			</div><!-- 리뷰 보기 끝 -->
 			
 			<!-- 리뷰 검색 -->
+			<div class="wrapTitle">리뷰 검색</div>
 			<div class="wrapContainer">
-				<div class="wrapTitle">리뷰 검색</div>
 				<div id="categoryList">
 					<strong>&nbsp;&nbsp;카테고리</strong>
 					

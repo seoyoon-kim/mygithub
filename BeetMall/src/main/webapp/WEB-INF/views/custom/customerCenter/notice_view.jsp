@@ -21,8 +21,8 @@
 		border-spacing: 0;
 		text-indent: initial;
 		margin-left:50px;
-		border-top:2px solid lightgray;
-		border-bottom:2px solid lightgray;
+		border-top:1px solid lightgray;
+		border-bottom:1px solid lightgray;
 	}
 	th, .th{
 		display: table-cell;
@@ -33,8 +33,8 @@
    		/*#fcfcfc*/
 	}
 	thead{
-		border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
 	    width:100%;
 	}
 	tr{
@@ -70,6 +70,7 @@
 		overflow:auto;
 		width:100%;
 		margin:20px 0px 0px 50px;
+   	 	margin-top: 100px;
 	}
 	.prev_next_wrap li{
 		width:100%;
@@ -90,7 +91,9 @@
    .prev_next_ul{
    		width: 900px;
    }
-   
+   fieldset{
+    	margin-top: 150px;
+   }
 </style>
 <script>
 //테이블 collapse
@@ -128,8 +131,18 @@
 			</table>
 			<div class="prev_next_wrap">
 				<ul class="prev_next_ul">
-					<li class="prev"><strong>&#9651;이전글</strong><a href="">이전글이 없습니다.</a></li>
-					<li class="next"><strong>&#9661;다음글</strong><a href="">다음글이 없습니다.</a></li>
+					<c:if test="${vo.prevNo==0}">
+						${vo.prevSubject}
+					</c:if>
+					<c:if test="${vo.prevNo>0}">
+						<li class="prev"><strong>&#9651;  이전글</strong><a href="notice_view2?infonum=${vo.prevNo}">${vo.prevSubject}</a></li>
+					</c:if>
+					<c:if test="${vo.nextNo>0}">
+						<li class="next"><strong>&#9661;  다음글</strong><a href="notice_view2?infonum=${vo.nextNo}">${vo.nextSubject}</a></li>
+					</c:if>
+					<c:if test="${vo.nextNo==0}">
+						${vo.nextSubject}
+					</c:if>
 				</ul>
 			</div>
 			</fieldset>

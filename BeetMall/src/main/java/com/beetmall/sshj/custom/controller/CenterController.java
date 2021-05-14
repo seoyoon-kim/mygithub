@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.CenterServiceImp;
 import com.beetmall.sshj.custom.vo.CenterVO;
+import com.beetmall.sshj.custom.vo.PageSearchVO;
 import com.google.gson.JsonObject;
 
 ////관리자에게 문의하기 VO=CenterVO
@@ -49,11 +51,25 @@ public class CenterController {
 	}
 	//1:1 목록가져오기 customerCenter부분
 	@RequestMapping("/customerCenter")
-	public ModelAndView qmboardList() {
+	public ModelAndView qmboardList(HttpServletRequest req, HttpServletResponse res) {
 		ModelAndView mav = new ModelAndView();
+		String pageNumStr = req.getParameter("pageNum");
 		
-		mav.addObject("list",centerService.centerAllRecord());
+		PageSearchVO pageVO = new PageSearchVO();
+		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		pageVO.setTotalRecord(centerService.centerOnetotalRecord(pageVO));
+		
+		mav.addObject("list",centerService.centerAllRecord(pageVO));
+		mav.addObject("pageVO",pageVO);
+		
 		mav.setViewName("custom/customerCenter/customerCenter");
+		
 		return mav;
 	}
 	

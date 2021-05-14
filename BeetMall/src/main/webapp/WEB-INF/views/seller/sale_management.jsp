@@ -509,7 +509,7 @@
 						<option value="반품진행중">반품진행중</option>
 						<option value="반품완료">반품완료</option>
 					</select>
-					<button id="change_option" >변경</button>
+					<button >변경</button>
 				</div>
 		<!-- 페이징-->
 				<div class="page_wrap">

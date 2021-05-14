@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerFaqDAO">
+	<select id="sellerfaqAllRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="com.beetmall.sshj.seller.vo.SellerFaqVO">
+		select*from
+		(select*from
+		(select faqnum, faqcate, faqtitle, faqcontent, faqoption 
+		from faq 
+		<choose>
+			<when test ='searchWord!=null and searchKey!=null'>
+				where faqcate = '${searchKey}' and faqtitle like '%${searchWord}%' and faqoption = 2
+			</when>
+			<when test ='searchKey!=null &amp;&amp; searchWord==null'>
+				where faqcate = '${searchKey}' and faqoption = 2
+			</when>
+			<when test ='searchWord!=null'>
+				where faqtitle like '%${searchWord}%' and faqoption = 2
+			</when>
+			<when test ='searchWord==null'>
+				where faqoption = 2
+			</when>
+		</choose>		
+		order by faqnum desc)
+		 <![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by faqnum)
+        <![CDATA[where rownum<=]]>
+        <if test="pageNum==totalPage">${lastPageRecord}</if>
+        <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by faqnum desc
+	</select>
+	<select id="totalRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="int">
+		select count(faqnum) totalRecord from faq where faqoption=2
+	</select>
+	
+</mapper>

@@ -14,15 +14,18 @@
 <style>
 
 /*  기본설정----------------------------------------------                 */
+a:hover, a:active, a:visited, a:link {
+    text-decoration: none;
+    color: black;
+}
+
 #main {
 	font-size: 20px;
 }
 
 .section {
 	width: 1080px;
-	background-color: white;
 	margin: 0 auto;
-	font-family: 'Nanum Gothic', sans-serif;
 }
 
 #searchBtn {
@@ -33,6 +36,19 @@
 #cMyPageLeft {
 	display: block;
 }
+
+ .wrapTitle{
+	   margin-top: 30px;
+	   height: 30px;
+	   line-height: 30px;
+	   /* color: #fff; */
+	   color:black;
+	   font-weight:bold;
+	   font-size:1em;
+	   text-indent: 0.4em;
+	   /* background-color: rgb(224,102,102); */
+	   margin-bottom:30px;
+	}
 
 /* ------------------페이징처리부분-------------------- */
 .page_wrap {
@@ -122,20 +138,20 @@
 
 #myrecipeTop {
 	float: left;
-	width: 500px;
-}
-
-#myrecipeTop2 {
-	float: right;
 	width: 440px;
 }
 
-#myrecipeTop2>li {
+#myrecipeTop2 {
+	float: left;
+	width: 500px;
+}
+
+#myrecipeTop2>li,#myrecipeTop2>input {
 	padding-right: 10px;
 }
 
 /*------------------------하단 게시판메뉴-----------------------------------*/
-#recimainbox {
+#recimainbox,#recimainbox2 {
 	float: left;
 	width: 100%;
 	padding-left: 10px;
@@ -143,39 +159,43 @@
 	margin-top:20px;
 }
 
-#recipebox {
+#recipebox,#recipebox2{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	width: 30%;
 	float: left;
 }
 
-#recipebox>ul>li>a>img {
+#recipebox2>ul{
+float:left;
+}
+
+#recipebox>ul>li>a>img,#recipebox2>ul>li>a>img{
 	width: 270px;
 	height: 170px;
 	border-radius: 3px;
 }
 
-#recipebox>ul>li:nth-child(5n+1) {
+#recipebox>ul>li:nth-child(5n+1),#recipebox2>ul>li:nth-child(5n+1){
 	width: 100%;
 }
 
-#recipebox>ul>li:nth-child(5n+2) {
+#recipebox>ul>li:nth-child(5n+2),#recipebox2>ul>li:nth-child(5n+2){
 	width: 100%;
 	font-weight: bold;
 	margin-top: 5px;
 }
 
-#recipebox>ul>li:nth-child(5n+3) {
+#recipebox>ul>li:nth-child(5n+3),#recipebox2>ul>li:nth-child(5n+3){
 	width: 100%;
 }
 
-#recipebox>ul>li:nth-child(5n+4) {
+#recipebox>ul>li:nth-child(5n+4),#recipebox2>ul>li:nth-child(5n+4){
 	width: 80%;
 	font-size: 0.5em;
 }
 
-#recipebox>ul>li:nth-child(5n+5) {
+#recipebox>ul>li:nth-child(5n+5),#recipebox2>ul>li:nth-child(5n+5){
 	width: 10%;
 }
 
@@ -217,12 +237,77 @@
 	display: inline-block;
 }
 </style>
+<script>
+function logno(){
+	if(${logId==null}){
+		if(confirm("로그인후 이용해주세요")){
+			location.href="login"
+		}
+	}
+};
 
-<body>
+
+$(document).ready(function(){
+	 
+	  
+	  $("#myrbtn").click(function(){
+		  $("#recimainbox").show()
+		   $("#recimainbox2").hide()
+		   $("#myrbtn").css("background-color","#eee")
+		   $("#goodrbtn").css("background-color","#fff")
+	  })
+	  
+	  
+	  $("#goodrbtn").click(function(){
+		  
+		   $("#recimainbox").hide()
+		    $("#recimainbox2").show()
+		    $("#myrbtn").css("background-color","#fff")
+		   $("#goodrbtn").css("background-color","#eee")
+		   
+		var url = "customMyrecipe2";		
+		var data2= "id=${logId}";
+		console.log(url,data2);
+		
+		
+		$.ajax({
+			url:url,
+			data:data2,
+			success:function(result){
+				   
+				   var $result=$(result);
+				  
+				    
+				   $result.each(function(idx,data2){
+  
+					   $("#recimainbox2").append(							   
+							   "<div id='recipebox2'><ul><li><a href='recipeView?recipenum="+data2.recipenum+"'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
+					           "<li><a href='recipeView?recipenum="+data2.recipenum+"'>"+data2.recipetitle+"</a></li>"+   
+					           "<li>"+data2.userid+"</li>"+
+							   "<li>추천수("+data2.reciperecommend+")  조회수"+data2.recipehit+"</li>"+
+							   "<li><input type='checkbox' name='recipeCheckBox' value='' /></li></ul></div>"				   
+					   );
+					   
+				   });				  
+				
+				
+	},error:function(e){
+	console.log(e.responseText);
+	console.log("장바구니 불러오기 실패");
+			}
+		})
+		  
+
+	  })
+
+  })
+</script>
+
+<body onload="logno()">
 	<div class="section" id="main">
-		<div>
+		
 			<div id="reciTitle">
-				<h1>마이레시피</h1>
+				<div class="wrapTitle">${logId}님의 마이레시피 내역입니다.</div>				
 			</div>
 
 			<!--------------상단 메뉴바들-------------------->
@@ -238,61 +323,41 @@
 							<option>조회수순</option>
 					</select></li>
 					<li><input type="button" id="norebtn" value="선택즐겨찾기제거" /></li>
-					<li><input type="text" id="search" name="search"
-						placeholder="검색하기"></li>
+					<li><span id="search_box">
+					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
+				</span></li>
 				</ul>
 			</div>
+		
+		<!--------------마이레시피 게시판 이미지들-------------------->
+		
+		
+		<div id="recimainbox" >
+		   <c:forEach var="data" items="${list}">
+		       <c:if test="${logId==data.userid}"> 
+					<div id="recipebox">
+									<ul>
+										<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+										<li>${data.userid}</li>
+										<li>추천수(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
+										<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
+									</ul>
+					</div> 
+			   </c:if>
+			</c:forEach>
+        
 		</div>
-		<!--------------게시판 이미지들-------------------->
-		<div id="recimainbox">
-			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
-			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
-			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
-			<div id="recipebox">
-				<ul>
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">멋진토마토 레시피 만들기</a></li>
-					<li>닉네임</li>
-					<li>★★★★★(15) 조회수 25</li>
-					<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
-				</ul>
-			</div>
-
-
-
+		
+		<!--------------즐겨찾기 게시판 이미지들-------------------->
+	    <div id="recimainbox2" style="display:none">
+	    
+	
+		   
+		    
+			
+			
+        
 		</div>
 		<!--------------페이징 표시-------------------->
 
@@ -306,10 +371,6 @@
 					class="arrow next" href="#"></a> <a class="arrow nnext" href="#"></a>
 			</div>
 		</div>
-
-
-
-
 
 
 

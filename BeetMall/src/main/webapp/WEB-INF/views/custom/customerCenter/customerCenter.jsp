@@ -40,8 +40,8 @@
 	    vertical-align: inherit;
 	    font-weight: bold;
 	    text-align: -internal-center;
-	    border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
    		background-color: #fcfcfc;
    		font-size: 16px;
 	}
@@ -77,20 +77,19 @@
 	button, .btn {
 	    padding: 3px 10px;
 	    color: #666666;
-	    border-radius: 8px;
 	    background: #fff;
-	    box-shadow: 0 0px 3px 0 rgb(0 0 0 / 50%);
 	    text-align: center;
 	    text-decoration: none;
 	    display: inline-block;
-	    border: none;
+	    border: 1px solid black;
 	    margin-left: 5px;
+        width: 130px;
 	}
 	.cs_message {
 	    margin: 0 auto;
 	    font-size: 15px;
 	    width: 90%;
-	    margin-bottom: 20px;
+	    margin-bottom: 30px;
 	}
 	select {
 	    float: right;
@@ -173,6 +172,33 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	#search_container{
+    	margin: 0 auto;
+    	margin-bottom: 10px;
+    	overflow: auto;
+    	padding-right: 50px;
+    	margin-left: 738px;
+	}
+	#searchForm{
+	    float: right;
+	}
+	#search_box{
+		border: none;
+	}
+	#searchWord{
+		height: 30px;
+	}
+	#searchBtn{
+	    margin-left: -1px;
+	    background: white;
+	    width: 50px;
+	    height: 30px;
+        border: 1px solid black;
+	}
+	#searchDiv>a, #searchDiv>div{
+		float:left;
+	}
+	
 </style>
 <script>
 	//답변완료 답변대기중 select 
@@ -207,15 +233,19 @@
 				<br/>
 				고객님께서 비트몰에 문의하신 내용을 확인할 수 있습니다.<br/>
 			</div>
-		<!-- 검색/ 문의하기 버튼 -->
-			<div id="search_container">
-			<!--문의하기 버튼 -->
-			<a href="<%=request.getContextPath()%>/customerCenterWrite" class="btn" id="ask_btn">문의하기</a>
-	
-			<!-- 검색하기 -->
-				<span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-				</span>
+			<!-- 검색/ 문의하기 버튼 -->
+			<div id="searchDiv">
+				<!--문의하기 버튼 -->
+				<a href="<%=request.getContextPath()%>/customerCenterWrite" class="btn" id="ask_btn">문의하기</a>
+		
+				<!-- 검색하기 -->
+				<div id="search_container">
+					<form method="get" action="customerCenter" id="searchForm">
+						<span id="search_box">
+							<input type="text" id="searchWord" name="searchWord" placeholder="검색하기"><input type="submit" id="searchBtn" value="검색"/>
+						</span>
+					</form>
+				</div>
 			</div>
 		<fieldset>
 		<table>
@@ -253,18 +283,27 @@
 					<option value="no_answer">답변대기중</option>
 				</select>
 		</div>
-			<!-- 페이징 by kangsan -->
+		
+		<!-- 페이징 by kangsan -->
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/customerCenter?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/customerCenter?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/customerCenter?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	           </c:if>
 			</div>
 		 </div>
 		</fieldset>

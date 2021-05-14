@@ -19,9 +19,10 @@
 <style>
 	#mypageMenubar{
 		display:block;
+		font-size:17px;
 	}
 	
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; font-size:14px;}
+	*{margin:0px; padding:0px; list-style-type :none; font-size:14px;}
 
 	a:hover, a:active, a:visited, a:link {
    		color: black;
@@ -97,7 +98,7 @@
 <div class="section">
 	
 		
-	<form method="post" action="recipeView">
+	<form method="post" action="/sshj/recipeWriteOk" enctype="multipart/form-data">
 		<table>
 			<tbody>
 				<tr>
@@ -105,29 +106,30 @@
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >제목</th>
-					<td class="td" colspan="3"><input type="text" name="qmtitle" id="qmtitle" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<td class="td" colspan="3"><input type="text" name="recipetitle" id="recipetitle" placeholder="문의사항 제목을 입력해주세요."/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span>로그인한 아이디</span></td>
+					<td  class="td"><span></span></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">대표이미지</th>
-					<td  class="td"><input type="file" value="파일첨부하기" style="width: 500px;"></td>
+					<td  class="td"><input type="file" value="파일첨부하기" name="file" style="width: 500px;"></td>
 				</tr>
 				<tr>
 					<th colspan="4">레시피 내용</th>
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="recipecontent" name="recipecontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-				<input type="submit" value="작성하기" class="btn" id="write_btn"/>				
+				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/recipeList'"/>
+				<input type="submit" value="작성하기" class="btn" id="write_btn"/>		
+						
 			</div>
 		</form>
 </div>
@@ -136,37 +138,34 @@ $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
 		  focus: true,
-		  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
-				onImageUpload : function(files) {
-					uploadSummernoteImageFile(files[0],this);
-				},
-				onPaste: function (e) {
-					var clipboardData = e.originalEvent.clipboardData;
-					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-						var item = clipboardData.items[0];
-						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-							e.preventDefault();
-						}
-					}
-				}
-			}
+		  //콜백 함수
+        callbacks : { 
+        	onImageUpload : function(files, editor, welEditable) {
+        // 파일 업로드(다중업로드를 위해 반복문 사용)
+        for (var i = files.length - 1; i >= 0; i--) {
+        uploadSummernoteImageFile(files[i],
+        this);
+        		}
+        	}
+        }
 	  });
 	});
-/**
-* 이미지 파일 업로드
-*/
-function uploadSummernoteImageFile(file, editor) {
+	
+</script>
+
+<script>
+function uploadSummernoteImageFile(file, el) {
 	data = new FormData();
 	data.append("file", file);
 	$.ajax({
 		data : data,
 		type : "POST",
-		url : "/uploadSummernoteImageFile",
+		url : "uploadSummernoteImageFile",
 		contentType : false,
+		enctype : 'multipart/form-data',
 		processData : false,
 		success : function(data) {
-        	//항상 업로드된 파일의 url이 있어야 한다.
-			$(editor).summernote('insertImage', data.url);
+			$(el).summernote('editor.insertImage', data.url);
 		}
 	});
 }
