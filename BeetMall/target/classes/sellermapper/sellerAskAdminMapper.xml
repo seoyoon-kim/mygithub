@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="askWrite" parameterType="com.beetmall.sshj.seller.vo.SellerAskAdminVO">
 			insert into qmboard(qmnum, userid, qmtitle, qmContent, qmdate, qmanswer, qmoption)
-  			values(qmboardsq.nextval, #{userid}, #{qmtitle}, #{qmcontent}, sysdate, null, #{param2})
+  			values(qmboardsq.nextval, #{userid}, #{qmtitle}, #{qmcontent}, sysdate, null, '2')
 	</insert>
 	<delete id="askDelete">
 		delete from qmboard where qmnum=#{param1}

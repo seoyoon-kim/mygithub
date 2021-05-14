@@ -66,7 +66,7 @@ public class PointController {
 		
 		mav.addObject("pageVO", pageVO);
 		mav.addObject("mypoint", pointservice.myPointView(userid));
-		mav.addObject("type",temp);
+		mav.addObject("type",temp); 
 		mav.addObject("month",month);
 		mav.setViewName("mypages/mypoint");
 		

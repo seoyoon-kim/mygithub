@@ -1,0 +1,191 @@
+@charset "UTF-8";
+/*================ 기본 설정 시작 =================*/
+section{
+	width: 100%;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+article{
+	width: 1280px;
+	border-bottom: #ddd;
+	padding: 50px;
+	margin: 120px auto 0 auto;
+}
+
+ul,li{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+a:hover,a:active,a:visited,a:link{
+	text-decoration: none; 
+	color: #aaa;
+}
+/*================ 본문 시작 =================*/
+
+/*---------- 본문 컨테이너 -----------*/
+.seller_title{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 50px;
+}
+#info_container{
+	width: 80%;
+	margin: 0 auto 30px auto;
+}
+#info_container>div{
+	margin-bottom: 30px;
+}
+/* 프로필 이미지*/
+#profile_box{
+	width: 100%;
+	text-align: center;
+	margin: 0px auto 30px auto;
+	padding: 20px 0;
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
+#farmname{
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+#profile_box img{
+	width: 100px;
+	height: 110px;
+	margin: 10px auto 0 auto;
+}
+
+/* 농장 소개 */
+#farm_info>div,#farm_contact>div:nth-child(1),#farm_repMenu>div:nth-child(2){
+	width: 150px;
+	font-size: 20px;
+	font-family: 나눔고딕;
+	font-weight: bold;
+}
+#farm_info,#farm_contact,#farm_repMenu{
+	display: flex;
+}
+#contact_content{
+	width: 90%;
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+#contact_content div{
+	overflow: auto;
+	margin-top: 5px;
+}
+#contact_content span{
+	width: 130px;
+	float: left;
+}
+#contact_content p{
+	float: left;
+	margin: 0;
+}
+
+/* 대표 메뉴 */
+#repMenu_content{
+	width: 90%;
+	display: flex;
+	border: 1px solid #ddd;
+	overflow: hidden;
+}
+#repMenu_content img{
+	width: 150px;
+	height: 150px;
+	float: left;
+}
+#repMenu_content>div>div{
+	display:flex;
+}
+#repMenu_content>div>div{
+	margin: 10px;
+}
+#repMenu_content>div>p{
+	margin: 0 10px 10px 10px;
+	font-weight: bold;
+}
+
+#repMenu_content span{
+	color: red;
+}
+
+#info_frm>div:last-child{
+	width: auto;
+	text-align: center;
+}
+#edit_btn{
+	display: inline;
+	margin: 0 auto;
+	padding: 5px 10px;
+	color: #fff;
+	background-color: #aaa;
+	border: 0px;
+}
+
+
+/*---------- 본문 컨테이너 끝 -----------*/
+
+/* 테이블 */
+.product_table,.table_wrap{
+	width:100%
+}
+.product_table thead{
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+}
+/*테이블 상단*/
+.product_table th{
+	width:1280px;
+	height:60px;
+	vertical-align:inherit;
+	font-weight:bold;	
+   	color:#666666;	
+	font-size:12px;
+	text-align:center;
+	
+}
+.product_table td{
+	font-size:12px;
+}
+.product_table, .tbl_line{
+	border-bottom: 1px solid lightgray;
+	padding:0px;
+}
+.product_table{
+	display: table-row;	
+	border-collapse: collapse;
+	empty-cells: show;
+	text-indent: initial;
+  		border-spacing: 2px;
+  		text-align:center;
+}
+
+.tbl_line{
+	vertical-align:inherit;
+	height: 50px; 	
+}
+.tbl_line_cell{
+	display: table-cell;
+	text-align:center;
+	font-size:12px;
+	padding:1px 5px 1px 5px;
+	/*border-left:1px solid lightgray;*/
+}
+.product_table td:first-child{border-left:none}
+/*테이블 폭 조정*/
+.productCheck, .productNum, .product_table th:first-child, .product_table th:nth-child(2) {
+	width:4%;
+}
+.product_table th:nth-child(3){width:7%}
+.product_table th:nth-child(4){width:7%}
+.product_table th:nth-child(5){width:16%}
+.product_table th:nth-child(12){width:4%}
+.product_table th:nth-child(13){width:12%}
+/*상품 이름*/
+.productName a{color:gray; font-weight:bold; }

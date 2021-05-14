@@ -30,7 +30,7 @@ public class ProductController {
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
 	@Autowired
-	com.beetmall.sshj.seller.service.FarmService farmService;
+	com.beetmall.sshj.seller.service.SellerSalesService farmService;
 	@Autowired
 	ProductService productService;
 	

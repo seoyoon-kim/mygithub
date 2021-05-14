@@ -38,11 +38,7 @@ a{
 		text-align: center;
 		color:gray
 	}
-	.cs_title{
-		color:white;
-		font-weight:bold;
-		
-	}
+
 	/*고객센터 상단 title bar & 판매자 페이지 상단title bar*/
 	.cs_message{
 		margin: 0 auto;
@@ -140,7 +136,7 @@ a{
 	a{color:black;}
 	answer_line{width:100%; 	background-color:#f6f6f6; height:20px; }
 	#subject,  select{border:none;}
-	#subject{width:300px; color:lightgray;}
+	#subject{width:300px; }
 	#subject{border:none; width:500px}
 	a{color:black;}
 	.menu{width:150px}
