@@ -23,6 +23,10 @@ public class SearchAndPageVO {
 	private int nextNo;//다음글번호
 	private String nextSubject;//다음글제목
 	
+	// 정렬 
+	private String sortRecord;
+	
+	
 	//getter setter
 	//검색
 	public String getSearchKey() {
@@ -123,5 +127,12 @@ public class SearchAndPageVO {
 	public void setNextSubject(String nextSubject) {
 		this.nextSubject = nextSubject;
 	}
-
+	//정렬
+	public String getSortRecord() {
+		return sortRecord;
+	}
+	public void setSortRecord(String sortRecord) {
+		this.sortRecord = sortRecord;
+	}
+	
 }

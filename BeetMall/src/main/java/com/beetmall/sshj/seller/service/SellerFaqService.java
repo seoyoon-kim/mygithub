@@ -8,7 +8,7 @@ import com.beetmall.sshj.seller.vo.SellerFaqVO;
 public interface SellerFaqService {
 	
 	//자주묻는질문 전체보기
-	public List<SellerFaqVO> sellerfaqAllRecord(SearchAndPageVO spvo);
+	public List<SellerFaqVO> sellerfaqAllRecord(SearchAndPageVO sapvo);
 	//총 레코드 수 구하기 
-	public int totalRecord(SearchAndPageVO spvo);
+	public int totalRecord(SearchAndPageVO sapvo);
 }

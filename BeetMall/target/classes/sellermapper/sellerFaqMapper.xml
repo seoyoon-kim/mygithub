@@ -15,10 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<when test ='searchKey!=null &amp;&amp; searchWord==null'>
 				where faqcate = '${searchKey}' and faqoption = 2
 			</when>
-			<when test ='searchWord!=null &amp;&amp; searchKey=="전체"'>
+			<when test ='searchWord!=null'>
 				where faqtitle like '%${searchWord}%' and faqoption = 2
 			</when>
-			<when test ='searchWord==null or searchKey=="전체" '>
+			<when test ='searchWord==null'>
 				where faqoption = 2
 			</when>
 		</choose>		

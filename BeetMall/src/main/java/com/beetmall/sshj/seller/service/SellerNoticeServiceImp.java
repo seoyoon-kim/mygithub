@@ -14,8 +14,8 @@ public class SellerNoticeServiceImp implements SellerNoticeService {
 	@Inject
 	SellerNoticeDAO sellerNoticeDAO;
 	@Override
-	public List<SellerNoticeVO> sellerNoticeAllRecord(SearchAndPageVO spvo) {
-		return sellerNoticeDAO.sellerNoticeAllRecord(spvo);
+	public List<SellerNoticeVO> sellerNoticeAllRecord(SearchAndPageVO sapvo) {
+		return sellerNoticeDAO.sellerNoticeAllRecord(sapvo);
 	}
 	@Override
 	public SellerNoticeVO sellerNoticeSelect(int infonum) {
@@ -30,8 +30,8 @@ public class SellerNoticeServiceImp implements SellerNoticeService {
 		return sellerNoticeDAO.lagLeadSelect(infonum);
 	}
 	@Override
-	public int totalRecord(SearchAndPageVO spvo) {
-		return sellerNoticeDAO.totalRecord(spvo);
+	public int totalRecord(SearchAndPageVO sapvo) {
+		return sellerNoticeDAO.totalRecord(sapvo);
 	}
 
 }
