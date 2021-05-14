@@ -13,6 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        select qmnum, userid, qmtitle, qmcontent, to_char(qmdate,'MM-DD HH:MI') as qmdate, qmanswer, qmoption 
 		        from qmboard 
 		        where qmoption = 1 
+		        <choose>
+					<when test = 'searchWord!=null'>
+						and qmtitle like '%${searchWord}%' 
+					</when>
+				</choose>
 		        order by qmnum desc)
 		    where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qmnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
@@ -29,6 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update qmboard set qmtitle=#{qmtitle}, qmcontent=#{qmcontent} where qmnum=#{qmnum}
 	</update>
 	<select id="centerOnetotalRecord" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO" resultType="int">
-		select count(qmnum) from qmboard
+		select count(qmnum) from qmboard where qmoption = 1 
+		<choose>
+			<when test = 'searchWord!=null'>
+				and qmtitle like '%${searchWord}%' 
+			</when>
+		</choose>
 	</select>
 </mapper>

@@ -37,8 +37,8 @@
 	    vertical-align: inherit;
 	    font-weight: bold;
 	    text-align: -internal-center;
-	    border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
    		background-color: #fcfcfc;
    		font-size: 16px;
 	}
@@ -158,7 +158,7 @@ function showHideFaq(){
 				<c:forEach var="data" items="${list}">
 					<tr>
 						<td>${data.infonum}</td>
-						<td><a href="notice_view2?infonum=${data.infonum}"><strong>${data.infocontent}</strong></a></td>
+						<td><a href="notice_view2?infonum=${data.infonum}"><strong>${data.infotitle}</strong></a></td>
 						<td>${data.infowritedate}</td>
 					</tr>
 				</c:forEach>

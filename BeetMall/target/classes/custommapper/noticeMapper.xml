@@ -16,7 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by infonum desc
 	</select>
 	<select id="noticeSelect" resultType="com.beetmall.sshj.custom.vo.NoticeVO">
-		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach from notice where infonum=#{param1}
+	select * from 
+		(select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach,
+		lag(infonum, 1, 0) over (order by infonum desc) as prevNo,
+		lag(infotitle, 1, '이전글이 없습니다.') over (order by infonum desc) as prevSubject,
+		lead(infonum, 1, 0) over (order by infonum desc) as nextNo,
+		lead(infotitle, 1, '다음글이 없습니다.') over (order by infonum desc) as nextSubject
+		from notice)
+	where infonum=#{param1} and infotype = 1
 	</select>
 	<update id="noticeHit">
   		update notice set infohit=infohit+1 where infonum=#{param1}

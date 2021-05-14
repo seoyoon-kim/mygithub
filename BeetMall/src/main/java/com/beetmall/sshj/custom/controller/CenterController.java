@@ -64,7 +64,6 @@ public class CenterController {
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
 		pageVO.setTotalRecord(centerService.centerOnetotalRecord(pageVO));
-		System.out.println("pageVO222 = " + pageVO.getTotalPage());
 		
 		mav.addObject("list",centerService.centerAllRecord(pageVO));
 		mav.addObject("pageVO",pageVO);

@@ -159,7 +159,6 @@
 			<c:if test="${sapvo.nextNo==0}">
 				${sapvo.nextSubject}
 			</c:if>
-			
 			</ul>
 		</div>
 		</fieldset>
