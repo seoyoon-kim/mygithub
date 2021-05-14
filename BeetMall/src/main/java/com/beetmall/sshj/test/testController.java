@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class testController {
 	
-	@RequestMapping("myfavoriForm")
-	public String myfavoriForm() {
-		return "mypages/myfavoriForm";
-	}
 	@RequestMapping("chargeAPI")
 	public String chargeAPI() {
 		return "mypages/chargeAPI";

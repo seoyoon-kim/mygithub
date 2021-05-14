@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.beetmall.sshj.custom.dao.CategoryDAO;
 import com.beetmall.sshj.custom.vo.CategoryFarmVO;
 import com.beetmall.sshj.custom.vo.CategoryVO;
+import com.beetmall.sshj.custom.vo.PageSearchVO;
 
 @Service
 public class CategoryServiceImp implements CategoryService {
@@ -22,8 +23,47 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryVO> categorylist() {
-		return categoryDAO.categorylist();
+	public List<CategoryVO> categorylist(PageSearchVO pageVO) {
+		return categoryDAO.categorylist(pageVO);
 	}
-	
+
+	@Override
+	public int categoryOnetotalRecord(PageSearchVO pageVO) {
+		return categoryDAO.categoryOnetotalRecord(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> uglyItem(PageSearchVO pageVO) {
+		return categoryDAO.uglyItem(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> payCategory(PageSearchVO pageVO) {
+		return categoryDAO.payCategory(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> categoryCharge(PageSearchVO pageVO) {
+		return categoryDAO.categoryCharge(pageVO);
+	}
+
+	@Override
+	public List<CategoryVO> Bestcategory(PageSearchVO pageVO) {
+		return categoryDAO.Bestcategory(pageVO);
+	}
+
+	@Override
+	public int BestcategoryOnetotalRecord(PageSearchVO pageVO) {
+		return categoryDAO.BestcategoryOnetotalRecord(pageVO);
+	}
+
+//	@Override
+//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item, String type) {
+//		return categoryDAO.categoryOnetotalRecord(pageVO, item, type);
+//	}
+//
+//	@Override
+//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item) {
+//		return categoryDAO.categoryOnetotalRecord(pageVO, item);
+//	}
 }

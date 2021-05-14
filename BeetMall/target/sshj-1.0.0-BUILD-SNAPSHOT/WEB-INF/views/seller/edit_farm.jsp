@@ -1,29 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_editFarm.css">
 <section>
-	<!-- 사이드바 -->
-	<nav>
-		<ul>
-			<li><a href="#">상품 관리</a></li>
-			<li><a href="#">상품 등록</a></li>
-			<li><a href="#">주문 관리</a></li>
-			<li><a href="#">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="#">정산 관리</a></li>
-			<li><a href="#">배송 관리</a></li>
-			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
-		</ul>
-	</nav>
-	<!-- 본문 시작 -->
 	<article>
-		<div id="search_container">
-			<span id="search_box">
-				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-			</span>
-		</div>
-		
+		<div class='seller_title'>농장소개 수정</div>
 		<form method="post" action="farmInfo_Edit" id="info_frm">
 			<input type="hidden" name="storenum" value="${storenum}"/>
 			<!-- info 컨테이너 묶기 width:700px 고정 -->

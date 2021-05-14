@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -12,34 +11,31 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
+		<!-- include summernote css/js -->
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<!-- font -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<!-- font-family: 'Nanum Gothic', sans-serif; -->
-		
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
+	
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
+
 <style>
 	/*판매자 왼쪽 카테고리*/
 	.option_change, .page_wrap, table, .search, .management_container, .detail_modal {margin:0 auto;}
-	.search, .management_container, table, .option_change, .detail_modal{width:95%;}
+	.search, .management_container, table, .option_change, .detail_modal{width:100%;}
 
 	/*테이블 페이징*/
+	a{  color: #555;}	
 	fieldset{width:100%;}
-	a{  color: #555;}
 	.search_btn, .save_excel{
 		width:85.7px;
 		height:30px;
 		margin-bottom:10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-		
+		background:white;
 	}
 	button{
 		padding: 3px 10px;
@@ -53,46 +49,43 @@
 		border:none;
 		height:30px;
 	}	
-	button:hover, .save_excel:hover, .search_btn:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
-	}
-	/*주문관리 검색*/
-	select, input, .search_num{
+	/*판매관리 검색*/
+	select, input, .search_num, search_id, .save_excel, .search_btn{
 		color:gray;
 		height:30px;
 		border:0.8px solid lightgray;
 		width:100px;
-		border-radius: 8px;
+		border-radius: 5px;
 	}
-
 	.search{
 		margin-top:20px;
 		height:130px;
 		font-size:14px;
 	}
 	.search_num, .search_id{
-		width:160px;
+		width:170px;
 	}
 	.search_date, .search_category, .search_sub_category{
+		width:140px;
+	}
+	.search_date, .search_category, .search_sub_category, .search_num, .search_id{
 		font-size:12px;
-		width:125px;
 	}
 	label{
 		font-size:16px;
-		margin-bottom:8px;
+		margin-bottom:18px;
 	}
 	.search_wrap>li{
 		margin-top:25px;
 		float:left;
-		width:17%;
+		width:18%;
+		text-align:center;
 	}
 	.search_wrap>li:first-child, .search_wrap li:nth-child(2) {
 		width:26%;
 	}
 	.search_wrap>li:last-child{
-		width:13%;
+		width:12%;
 	}
 	/*주문관리 탭*/
 	.management_category{
@@ -155,7 +148,7 @@
 		width:35px;
 	}
 	thead{
-		border-bottom:2px solid gray;
+		border-bottom:1px solid lightgray;
 		background:#EEE;
 	}
 	tr{
@@ -376,22 +369,7 @@
 </script>		
 <body>
 	<div class="main" onkeyup="endModal()">
-	
-	<!-- 사이드바 -->
-	<nav>
-		<ul>
-			<li><a href="<%=request.getContextPath()%>/product_list">상품관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/product_regi">상품등록</a></li>
-			<li><a href="<%=request.getContextPath()%>/order_management">주문 관리</a></li>
-			<li><a href="<%=request.getContextPath()%>/sale_management">판매 관리</a></li>
-			<li><a href="seller_sales">매출 관리</a></li>
-			<li><a href="#">정산 관리</a></li>
-			<li><a href="#">배송 관리</a></li>
-			<li><a href="seller_review">리뷰/문의 관리</a></li>
-			<li><a href="intro_farm">회원정보수정</a></li>
-		</ul>
-	</nav>
-	
+
 	<!-- 가운데 content -->
 	<div id="article">
 	<div class="wrapTitle">판매관리</div>

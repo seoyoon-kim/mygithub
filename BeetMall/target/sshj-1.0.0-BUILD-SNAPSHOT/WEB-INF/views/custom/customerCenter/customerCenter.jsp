@@ -213,9 +213,9 @@
 			<a href="<%=request.getContextPath()%>/customerCenterWrite" class="btn" id="ask_btn">문의하기</a>
 	
 			<!-- 검색하기 -->
-				<span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-				</span>
+			<span id="search_box">
+				<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
+			</span>
 			</div>
 		<fieldset>
 		<table>
@@ -253,18 +253,27 @@
 					<option value="no_answer">답변대기중</option>
 				</select>
 		</div>
-			<!-- 페이징 by kangsan -->
+		
+		<!-- 페이징 by kangsan -->
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="sshj/customerCenter?pageNum=${pageVO.pageNum-1}"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/customerCenter?pageNum=${p}">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/customerCenter?pageNum=${pageVO.pageNum+1}"></a>
+	           </c:if>
 			</div>
 		 </div>
 		</fieldset>

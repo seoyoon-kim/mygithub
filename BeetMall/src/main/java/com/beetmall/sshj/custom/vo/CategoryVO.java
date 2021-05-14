@@ -2,7 +2,6 @@ package com.beetmall.sshj.custom.vo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class CategoryVO {
@@ -11,6 +10,7 @@ public class CategoryVO {
 	private String productname;//상품이름
 	private int productprice;//상품가격
 	private String thumbimg;//이미지
+	private int proprice;//실가격
 	
 	//리뷰
 	private String totalscore; //별점
@@ -27,7 +27,9 @@ public class CategoryVO {
 	private String salestart;//할인시작일
 	private String salefinish;//할인끝나는날
 	
-	
+	//베스트 상품떄문에 필요한 칼럼
+	private int ordernum; //구매량
+
 	//날짜함수
 	SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Date now = new Date();
@@ -91,12 +93,10 @@ public class CategoryVO {
 		return salestart;
 	}
 	public void setSalestart(String salestart) {
-		
 		try {
 			Date todaytimeee = today.parse(salestart);
 			if(now.getTime() <= todaytimeee.getTime()) {
-				System.out.println("찍힘?");
-				salestart = "1";
+				this.salestart = "1";
 			}else{
 				this.salestart = salestart;
 			}
@@ -111,14 +111,25 @@ public class CategoryVO {
 		try {
 			Date todaytimeee = today.parse(salefinish);
 			if(now.getTime() >= todaytimeee.getTime()) {
-				salefinish = "1";
+				this.salefinish = "1";
 			}else{
 				this.salefinish = salefinish;
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println(salefinish);
-		
 	}
+	public int getProprice() {
+		return proprice;
+	}
+	public void setProprice(int proprice) {
+		this.proprice = proprice;
+	}
+	public int getOrdernum() {
+		return ordernum;
+	}
+	public void setOrdernum(int ordernum) {
+		this.ordernum = ordernum;
+	}
+	
 }

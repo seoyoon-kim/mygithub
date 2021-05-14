@@ -37,8 +37,8 @@
 	    vertical-align: inherit;
 	    font-weight: bold;
 	    text-align: -internal-center;
-	    border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
    		background-color: #fcfcfc;
    		font-size: 16px;
 	}
@@ -83,6 +83,58 @@
    #NoticeleftMenu{
    		display:block;
    }
+   /* 페이징처리부분 */
+	.page_wrap {
+		text-align:center;
+		font-size:0;
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+	.page_nation {
+		display:inline-block;
+	}
+	.page_nation .none {
+		display:none;
+	}
+	.page_nation a {
+		display:block;
+		margin:0 3px;
+		float:left;
+		border:1px solid #e6e6e6;
+		width:35px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		background-color:#fff;
+		font-size:13px;
+		color:#999999;
+		text-decoration:none;
+	}
+	.page_nation .arrow {
+		border:1px solid #ccc;
+	}
+	.page_nation .pprev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
+		margin-left:0;
+	}
+	.page_nation .prev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
+		margin-right:7px;
+	}
+	.page_nation .next {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
+		margin-left:7px;
+	}
+	.page_nation .nnext {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
+		margin-right:0;
+	}
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/* 페이징처리끝 */
 </style>
 <script>
 
@@ -106,20 +158,35 @@ function showHideFaq(){
 				<c:forEach var="data" items="${list}">
 					<tr>
 						<td>${data.infonum}</td>
-						<td><a href="notice_view2?infonum=${data.infonum}"><strong>${data.infocontent}</strong></a></td>
+						<td><a href="notice_view2?infonum=${data.infonum}"><strong>${data.infotitle}</strong></a></td>
 						<td>${data.infowritedate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 			
 		</table>
-		<div class="wrap_paging">
-			<div class="paging">
-				<a href="#" title="" class=""><span style="cursor:pointer;">&#10094;</span></a>
-				<a href="#" title="" class=""><span style="cursor:pointer;">1</span></a>
-				<a href="#" title="" class=""><span style="cursor:pointer;">&#10095;</span></a>
+		<!-- 페이징 by kangsan -->
+		<div class="page_wrap">
+			<div class="page_nation">
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/noticeMain?pageNum=${pageVO.pageNum-1}"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/noticeMain?pageNum=${p}">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/noticeMain?pageNum=${pageVO.pageNum+1}"></a>
+	           </c:if>
 			</div>
-		</div>
+		 </div>
 		</fieldset>
 		<br/>
 	<br/>

@@ -13,53 +13,80 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-<style>
-	#addBtn, #delBtn{position:absolute;}
-	#container{ position:absolute; top:200px; left:190px; width:1080px; padding:0; }
-	#container ul{ width:1080px; } 
-	#container li{ list-style-type:none; float:left; width:15%; }
-	#contentBox li:nth-of-type(5n+1){ width:2%;} 
-	#contentBox li:nth-of-type(5n-1){ width:35%; padding-left:30px; } 
-	#contentBox li:not(:nth-of-type(5n-1)){ text-align:center; } 
-	#topBar li{ width:7%;}   
-	#topBar li:nth-of-type(4){width:3%;} 
-	#topBar li:nth-of-type(5){width:24%;}  
-	#contentBox{ top:20px; margin-left:10px;}
-	#title{ width: 1080px; font-weight:bold; padding:65px 0 25px 0; border-bottom:gray 1px solid;}
-	#title li:nth-of-type(4){ padding-left: 250px; }
-	
-	
-
-	#topBar Button:nth-of-type(1),#topBar Button:nth-of-type(2),#topBar Button:nth-of-type(3),#topBar Button:nth-of-type(4){
+ <style> 
+	 #container li{ 
+		 list-style-type:none; 
+		 float:left; 
+		 width:20%; 
+	 }  
+	#contentBox{ 
+		top:20px; 
+		margin-left:10px;
+	}
+	#contentBox li:nth-of-type(5n-4){ 
+		width:0%; 
+	}
+	#contentBox li:nth-of-type(4){ 
+		width:37%; 
+	}
+	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1){  
+		width:30%; 
+		padding-left:20px; 
+	}    
+	#topBar li:nth-of-type(2){
+		margin-left:22px;
+	}  
+	#topBar li:nth-of-type(3){
+		width:12%;
+	} 
+	#topBar li:nth-of-type(4){
+		width:6%;
+	}   
+	#subjectLine{
+		white-space:nowrap; 
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
+	#content input, textarea, select, #noticeSearchFrm input{
+		border:1px solid lightgray; 
+		border-radius: 3px;
+	}#content li, label{
+		list-style-type:none; 
+		padding-bottom:10px;
+	}
+	#content select{
+		height:28px;
+	} 
+	/*버튼*/
+	#btns{ 
+		top:-115px; 
+		left:460px; 
+	} 
+	#btns a>button, button:nth-of-type(4){ 
+		margin-left:900px; 
+	} 
+	#topBar Button:nth-of-type(1),
+	#topBar Button:nth-of-type(2),
+	#topBar Button:nth-of-type(3),
+	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
-	}
-	#addBtn{
-		top:10px; 
-		left:1040px; 
-		width:100px;
-	}
-	#delBtn{
-		top:10px; 
-		left:1150px; 
-		width:100px; 
-	}
-	#content select{height:28px;}
+	}  
 	
-	
+	/* 페이징처리부분 */ 
 	.page_nation .pprev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_pprev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
 	}
 	.page_nation .prev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_prev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
 		margin-right:7px;
 	}
 	.page_nation .next {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_next.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
 	}
 	.page_nation .nnext {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_nnext.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
 	.page_nation a.active {
@@ -68,30 +95,27 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
-</style>
-<script>
- 
-</script>
-</head>
-<body>
+</style> 
 <%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %>
+<div id="body1">
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong>공지 목록</strong></h5></li> 
+				<li><h5><strong><a href="customerListA">공지 목록</a></strong></h5></li> 
 				<li><select name="sort" > 
-		   				<option value="all" selected>전체</option>
-		   				<option value="seller">판매자</option>
-		   				<option value="customer">소비자</option> 
+		   				<option value="전체" selected>전체</option>
+		   				<option value="판매자">판매자</option>
+		   				<option value="구매자">구매자</option>   
 			  		</select> 
-	   			</li>
-				<li><select name="sort" > 
-		   				<option value="no" selected>글번호</option>
-		   				<option value="subject" >제목</option>
-		   				<option value="writedate" >등록일</option> 
-	   			  	</select> 
-	   			</li>
+	   			</li> 
+	   			<li><select name="sort" > 
+		   				<option value="공지 번호" selected>공지 번호</option>
+		   				<option value="대상">대상</option>
+		   				<option value="제목">제목</option>  
+		   				<option value="등록일">등록일</option>      
+			  		</select> 
+	   			</li> 
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
@@ -101,22 +125,141 @@
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
-				<li><input type="checkbox" name="check"  ></li>
-				<li>번호</li>
+				<li><input type="checkbox" name="check"></li>
+				<li>공지번호</li>
 				<li>대상</li>
 				<li>제목</li>
 				<li>등록일</li> 
 			</ul>
 		</div>  
+		
+		 
+			<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
+			</ul> 
+		 
+
+
+ 
+		<!--  
 		<c:forEach var="data" items="${list}">
 			<ul class="noticeList">
-				<li><input type="checkbox" name="check"></li>
-				<li>${data.no}?</li>
-				<li>판매자?</li>
-				<li id="subjectLine"><a href="boardView?no=${data.no}">${data.subject}?</a></li>  
-				<li>${data.writedate}등록일?</li><br/>
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>판매자</li>
+				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
+				<li>2021/05/23</li> 
 			</ul>
-		</c:forEach>
+		</c:forEach>-->
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
@@ -174,19 +317,18 @@
 	 </ul>		
  -->
  
-	 <div>
-		<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-			<select name="searchKey">
-				<option value="subject" selected>제목</option>
-   				<option value="no">공지번호</option> 
-   				<option value="who">대상</option> 
-   				<option value="writedate">공지일</option> 
-			</select>			
-			<input type="text" name="searchWord" id="searchWord"/>
-			<input type="submit" value="검색"/> 
-		</form>
-		
-	</div>  
-		</div>
-</body>
+		 <div>
+			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<select name="searchKey">
+					<option value="subject" selected>제목</option>
+	   				<option value="no">공지번호</option> 
+	   				<option value="who">대상</option> 
+	   				<option value="writedate">공지일</option> 
+				</select>			
+				<input type="text" name="searchWord" id="searchWord"/>
+				<input type="submit" value="검색"/> 
+			</form> 
+		</div>  
+	</div>
+</div> 
 </html>
