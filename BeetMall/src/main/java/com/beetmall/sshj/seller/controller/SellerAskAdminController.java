@@ -65,14 +65,14 @@ public class SellerAskAdminController {
 		saavo.setUserid((String)session.getAttribute("logId"));
 		mav.setViewName("seller/ask_admin_write");
 		
-	
 		return mav;
 		}	
 	//문의하기 
 	@RequestMapping(value="/ask_admin_write_ok", method=RequestMethod.POST)
 	public ModelAndView askWrite(SellerAskAdminVO saavo, HttpServletRequest req, HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		
+		saavo.setUserid((String)session.getAttribute("logId"));
+		mav.addObject("list", sellerAskAdminService.askAllRecord(saavo.getUserid()));
 		int result = sellerAskAdminService.askWrite(saavo);
 		if(result>0) {
 			mav.setViewName("redirect:ask_admin_list");

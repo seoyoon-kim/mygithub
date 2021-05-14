@@ -136,12 +136,13 @@
 					<td class="number">${saavo.qmnum}</td>
 					<td class=><a href="<%=request.getContextPath()%>/ask_admin_view?qmnum=${saavo.qmnum}">${saavo.qmtitle}</a></td>
 					<td>${saavo.qmdate }</td>
-					<c:if test="${saavo.qmanswer!=null && saavo.qmanswer!=''}">
+					<c:if test="${ssavo.qmanswer!=null && ssavo.qmanswer!=''}">
 						<td><span class="answer_span" id="answer">답변완료</span></td>				
 					</c:if>
-					<c:if test="${saavo.qmanswer==null && saavo.qmanswer==''}">
+					<c:if test="${ssavo.qmanswer==null && saavo.qmanswer==''}">
 						<td><span class="answer_span" id="answer">답변대기중</span></td>				
 					</c:if>
+					<td><span class="answer_span" id="answer">답변대기중</span></td>	
 				</tr>
 			</c:forEach>	
 			</tbody>
