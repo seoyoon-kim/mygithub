@@ -92,7 +92,7 @@ $(document).ready(function() {
 					<th class="menu" >제목</th>
 					<td class="td"><input type="text" name="qmtitle" id="subject" placeholder="문의사항 제목을 입력해주세요."/></td>
 					<th class="menu">작성자</th>
-					<td  class="td"><span>${saavo.userid}</span></td>	
+					<td  class="td"><span>${list.userid}</span></td>	
 				</tr>
 				
 				<tr>
