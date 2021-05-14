@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.PointDAO">
+	<select id="selectPoint" resultType="com.beetmall.sshj.custom.vo.PointVO" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select * from(
+		select * from(
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{userid} 
+		order by p.ordernum desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by ordernum asc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if> 
+		order by ordernum desc
+	</select>
+	<select id="countPoint" resultType="Integer">
+		select count(*)
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{param1} 
+		order by p.ordernum desc
+	</select>
+	<select id="selectPointType" resultType="com.beetmall.sshj.custom.vo.PointVO">
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{param1} and changepoint ${param2} 0
+		order by p.ordernum desc
+	</select>
+	<select id="selectPointMonth" resultType="com.beetmall.sshj.custom.vo.PointVO">
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate,-#{param2}),'YYYY/MM/DD')
+		order by p.ordernum desc
+	</select>
+		<select id="selectPointTypeMonth" resultType="com.beetmall.sshj.custom.vo.PointVO">
+		select * from(
+		select * from(
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{userid} 
+		<if test="type!=null">and changepoint ${type} 0 </if> 
+		<if test="month>0">and o.orderdate >= to_char(add_months(sysdate,-#{month}),'YYYY/MM/DD')</if>
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by ordernum asc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by ordernum desc
+	</select>
+	
+	<select id="countPointType" resultType="Integer">
+		select count(*) from point where userid=#{param1} and changepoint ${param2} 0
+	</select>
+	<select id="countPointMonth" resultType="Integer">
+		select count(*) from point p join ordertbl o on o.ordernum = p.ordernum 
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate, -#{param2}),'YYYY/MM/DD')
+	</select>
+	<select id="countPointTypeMonth" resultType="Integer">
+		select count(*) from point p join ordertbl o on o.ordernum = p.ordernum 
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate, -#{param3}),'YYYY/MM/DD') and changepoint ${param2} 0
+	</select>
+	<select id="myPointView" resultType="Integer">
+		select point from member where userid=#{param1}
+	</select>
+</mapper>
