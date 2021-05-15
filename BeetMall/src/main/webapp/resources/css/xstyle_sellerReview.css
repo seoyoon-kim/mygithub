@@ -8,7 +8,7 @@ section{
 article{
 	width: 1280px;
 	border-bottom: #ddd;
-	padding: 50px;
+	padding: 50px 0;
 	margin: 120px auto 0 auto;
 }
 
@@ -27,6 +27,12 @@ a:hover,a:active,a:visited,a:link{
 .wrap{
 	width: 100%;
 	margin: 0 auto;
+}
+
+.marginDiv{
+	width:100%;
+	margin: 0 auto;
+	padding: 20px 0;
 }
 
 .wrapContainer{
@@ -65,20 +71,36 @@ a:hover,a:active,a:visited,a:link{
 	color: white;
 	border: 1px solid #aaa;	
 }
-/* 리뷰보기 */
+/* 리뷰내역 */
 #reviewInfo{
 	flex-basis: 50%;
 	display: flex;
 	flex-wrap: wrap;
+	padding-top: 20px;
 }
 
 #reviewInfo li{
-	width: 25%;
-	height: 60px;
-	line-height: 50px;
+	flex-basis: 25%;
 	text-align: center;
-	border: 1px solid #ccc;
 }
+
+#reviewInfo li>:nth-child(2){
+	font-weight: bold;
+	margin-top:30px;
+}
+
+#reviewInfo li>:nth-child(3){
+	font-size: 18px;
+	font-weight: bold;
+	color: red;
+}
+
+#reviewInfo li>img{
+	width: 100px;
+	height: 110px;
+	padding: 20px 0;
+}
+
 /* 카테고리 검색 */
 #categoryList{
 	flex-basis: 50%;
@@ -171,38 +193,96 @@ a:hover,a:active,a:visited,a:link{
 
 /* 리뷰 출력 */
 #sortContainer{
-	width: 100%;
+	width: 93%;
 	height: 30px;
-	margin-bottom: 5px;
 }
 
 #sortSelect{
 	float: right;
 }
 
-#reviewList{
+table{
 	width: 100%;
+	margin: 20px 0;
+}
+
+table tr{
 	display: flex;
-	flex-wrap: wrap;
 }
 
-#reviewList li:nth-child(n+1):nth-child(-n+7){
-	background-color: #bbb;
+table th:nth-child(1){
+	flex-basis: 15%;
+}
+
+table th:nth-child(2){
+	flex-basis: 55% 
+}
+
+table th:nth-child(3), table th:nth-child(4){
+	flex-basis: 15%;
+}
+
+table th{
+	background-color: #eee;
 	font-weight: bold;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
 }
 
-#reviewList li{
-	flex: 1 1 14%;
-	height: 72.4px;
+tbody tr{
+	height: 120px;
+	align-items:center;
+	border-bottom: 1px solid #ddd;
+}
+
+table td{
 	text-align: center;
-	border: 1px solid #ddd;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding: 20px 0;
 }
 
-#reviewList a{
+table td:nth-child(1){
+	flex-basis: 15%;
+	color: red;
+	height: 80px;
+	line-height: 80px;
+	border-right: 1px solid #ddd;
+}
+
+table td:nth-child(2){
+	flex-basis: 55%;
+	display: flex;
+}
+
+table td:nth-child(2)>div:nth-child(1){
+	width:80px;
+	height:80px;
+	margin: auto 10px auto 10px;
+}
+
+table td:nth-child(2)>div>div{
+	text-align: left;
+	font-weight: bold;
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+table td:nth-child(3), table td:nth-child(4){
+	flex-basis: 15%;
+}
+
+table td:nth-child(3)>div:nth-child(1){
+	font-size: 16px;
+	font-weight: bold;
+}
+
+table tr:hover{
+	background-color: #F0F8FF;
+}
+
+.tableATag{
 	color: #0080ff;
 }
 
@@ -274,6 +354,7 @@ a:hover,a:active,a:visited,a:link{
 	margin: auto;
 	overflow: auto;
 	background-color: #fff;
+	padding: 20px;
 }
 
 

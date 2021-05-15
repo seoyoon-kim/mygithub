@@ -7,9 +7,8 @@ section{
 
 article{
 	width: 1280px;
-	hegith: 100px;
 	border-bottom: #ddd;
-	padding: 50px;
+	padding: 50px 0;
 	margin: 120px auto 0 auto;
 }
 
@@ -81,24 +80,13 @@ a:hover,a:active,a:visited,a:link{
 	padding:0 5px;
 }
 
-#searchingBtnContainer input:nth-child(1){
+#searchingBtnContainer input{
 	height: 30px;
 	line-height: 30px;
 	padding: 0 5px;
-	background-color: #aaa;
-	color: white;
+	background-color: #fff;
 	border: 1px solid #aaa;	
 }
-
-#searchingBtnContainer input:nth-child(2){
-	height: 30px;
-	line-height: 30px;
-	padding: 0 5px;
-	background-color: #aaa;
-	color: white;
-	border: 1px solid #aaa;	
-}
-
 #searchingStandard, #searchingTerm{
 	margin-top: 30px;
 }

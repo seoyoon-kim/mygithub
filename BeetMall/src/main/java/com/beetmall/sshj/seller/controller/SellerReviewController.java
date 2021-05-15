@@ -134,13 +134,12 @@ public class SellerReviewController {
 //				System.out.println("name = " + name + ", value = " + value);
 //			}
 //		}
-		System.out.println(vo.getTotalPage());
-		System.out.println(vo.getTotalRecord());
+
 		List<SellerReviewVO> total = service.reviewlistRecord(vo);
 		
 		// 총 record 갯수를 구한 값을 vo에 넣어준다.
 		vo.setTotalRecord(total.size());
-		System.out.println(total.size());
+
 		ArrayList<Object> dataList = new ArrayList<Object>();
 		dataList.add(0, service.reviewlist(vo));
 		dataList.add(1, vo);
