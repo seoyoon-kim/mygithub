@@ -173,7 +173,7 @@ public class SellerSettleController {
 			// 셀 스타일
 			CellStyle style = xssfwb.createCellStyle();
 			style.setFont(font);
-			style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+			style.setFillForegroundColor(IndexedColors.LIME.getIndex());
 			style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			style.setVerticalAlignment(VerticalAlignment.CENTER);
 			style.setAlignment(HorizontalAlignment.CENTER);
@@ -478,8 +478,8 @@ public class SellerSettleController {
 		
 
 		
-		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"/Downloads/BEETMALL 정산관리.xlsx");
-		File file = new File(System.getProperty("user.home")+"/Downloads/BEETMALL 정산관리.xlsx");
+		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"\\Downloads\\BEETMALL 정산관리.xlsx");
+		File file = new File(System.getProperty("user.home")+"\\Downloads\\BEETMALL 정산관리.xlsx");
 		try {
 			// file의 경로로 엑셀 outputStream
 			FileOutputStream fos = new FileOutputStream(file);

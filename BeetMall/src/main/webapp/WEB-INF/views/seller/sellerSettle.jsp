@@ -304,10 +304,10 @@ $(()=>{
 							<input type="date" id="startDate" name="startDate" min="2018-01-01" max="${datePtn}"/>
 							~&nbsp;&nbsp;
 							<input type="date" id="endDate" name="endDate" min="2018-01-01" max="${datePtn}"/>
-						</div>
-						<div id="searchingBtnContainer">
-							<input class="normalBtn" type="submit" value="검색"/>
-							<input class="normalBtn" type="reset" value="초기화"/>
+							<div id="searchingBtnContainer">
+								<input type="submit" value="검색"/>
+								<input type="reset" value="초기화"/>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -330,7 +330,6 @@ $(()=>{
 							</tr>
 						</thead>
 					</table>
-					<hr>
 					<div id="totalMoney"></div>
 					<div class="page_wrap">
 						<div class="page_nation">

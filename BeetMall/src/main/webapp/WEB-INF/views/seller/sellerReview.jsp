@@ -740,25 +740,35 @@ function reportUpdate(){
 		<div class='seller_title'>리뷰관리</div>
 		<div class="wrap">
 			<!-- 리뷰 보기 -->
-			<div class="wrapTitle">리뷰보기</div>
-			<div class="wrapContainer">
+			<div class="wrapTitle" style="display:flex;border:none;">
+				<div style="flex-basis:48%; margin-right:23px; border-bottom: 1px solid #bbb">리뷰내역</div>
+				<div style="flex-basis:50%; border-bottom: 1px solid #bbb">카테고리 & 조회</div>
+			</div>
+			<div class="wrapContainer" style="display:flex;">
 
 				<ul id="reviewInfo">
-					<li style="font-weight: bold;">새 리뷰</li>
-					<li>${resultData.newReview }건</li>
-					<li style="font-weight: bold;">미답변</li>
-					<li>${resultData.nullReview }건</li>
-					<li style="font-weight: bold;">사용자 총 평점</li>
-					<li>${resultData.totalScore }/5</li>
-					<li style="font-weight: bold;">전체 리뷰 수</li>
-					<li>${resultData.totalReview }건</li>
+					<li style="font-weight: bold;">
+						새 리뷰
+						<li>${resultData.newReview }건</li>	
+					</li>
+					
+					<li style="font-weight: bold;">
+						미답변
+						<li>${resultData.nullReview }건</li>
+					</li>
+					
+					<li style="font-weight: bold;">
+						사용자 총 평점
+						<li>${resultData.totalScore }/5</li>
+					</li>
+					
+					<li style="font-weight: bold;">
+						전체 리뷰 수
+						<li>${resultData.totalReview }건</li>
+					</li>
+					
 				</ul>
-			</div>
-			<!-- 리뷰 보기 끝 -->
-
-			<!-- 리뷰 검색 -->
-			<div class="wrapTitle">리뷰 검색</div>
-			<div class="wrapContainer">
+				
 				<div id="categoryList">
 					<div id="categoryListMiddle">
 						<!-- 대분류 카테고리!!!! -->
@@ -799,16 +809,15 @@ function reportUpdate(){
 							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
 						</div>
 						<div>
-							<input type="text" id="searchTxt" name="searchTxt" placeholder="리뷰 내용"/>
+							<input type="text" id="searchTxt" name="searchTxt" size="13em" placeholder="리뷰 내용"/>
 							<button id="searchingBtn" style='margin:0 10px'>조회</button>
 						</div>
 					</div>
 					
 
 				</div>
-				<!-- categoryList 끝 -->
 			</div>
-			<!-- 리뷰 검색 끝 -->
+			<!-- 리뷰 보기 끝 -->
 
 			<!-- 리뷰 출력 -->
 

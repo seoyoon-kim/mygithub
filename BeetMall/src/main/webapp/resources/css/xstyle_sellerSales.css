@@ -7,11 +7,9 @@ section{
 
 
 article{
-	width: 1280px;
-	hegith: 100px;
+	width: 100%;
 	border-bottom: #ddd;
-	padding: 50px;
-	margin: 120px auto 0 auto;
+	margin-top: 170px;
 }
 
 ul,li{
@@ -31,19 +29,27 @@ a:hover,a:active,a:visited,a:link{
 	margin: 0 auto;
 }
 
+.marginDiv{
+	width:1280px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
 .wrapContainer{
 	width: 100%;
-	margin-bottom: 100px;
-	border: 1px solid #aaa;
+	margin-top: 20px;
+	margin-bottom: 50px;
 }
 
 .wrapTitle{
 	margin: 0 auto;
 	width: 100%;
-	height: 60px;
-	line-height: 60px;
+	height: 40px;
+	line-height: 40px;
 	color: black;
 	font-size: 16px;
+	border-bottom: 1px solid #bbb;
+	text-indent: 1em;
 }
 
 .seller_title{
@@ -53,13 +59,48 @@ a:hover,a:active,a:visited,a:link{
 	font-size: 20px;
 	font-weight: bold;
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
+}
+
+.normalBtn{
+	float: right;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+	background-color: #aaa;
+	color: white;
+	border: 1px solid #aaa;	
+}
+
+/* 간단한 매출내역 */
+#performance{
+	flex-basis: 50%;
+}
+#performance>ul{
+	display: flex;
+}
+
+#performance li{
+	width:100%;
+	flex-basis: 50%;
+	text-align: center;
+}
+
+#performance img{
+	width: 140px;
+	height: 150px;
+	padding: 20px 0;
+}
+
+#performance li:nth-child(1)>p:last-child,#performance li:nth-child(2)>p:last-child{
+	font-size: 18px;
+	font-weight: bold;
+	color: red;
 }
 
 /* 카테고리 검색 */
 #categoryList{
-	width: 90%;
-	margin: 50px auto;
+	flex-basis: 50%;
 	border: 1px solid #aaa;
 }
 
@@ -91,7 +132,12 @@ a:hover,a:active,a:visited,a:link{
 	width: 100%;
 	text-indent: 0.4em;
 	display: flex;
-	margin-top:5px;
+	padding: 3px 0;
+}
+
+
+#categoryListMiddle li:hover{
+	background-color: #eee;
 }
 
 #categoryListMiddle span{
@@ -142,38 +188,26 @@ a:hover,a:active,a:visited,a:link{
 	color: black;
 }
 
-/* 수익 매출분석 */
-#chartContainer{
-	width: 95%;
-	margin: 0 auto;
-}
 
-.normalBtn{
-	float: right;
-	height: 30px;
-	line-height: 30px;
-	padding: 0 5px;
-	background-color: white;
-	margin-top: 15px;
-	border: 1px solid #aaa;	
-}
+/* 수익 매출분석 */
 
 #totalMoney{
 	width:100%;
-	height: 30px;
-	line-height: 30px;
 	text-align: right;
 	margin: 5px 5px 5px 0;
 	font-weight: bold;
+	
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px;
 }
 
-/* 카테고리별 매출분석*/
+
 #excelViewNum{
 	float: right;
 	height: 30px;
 	line-height: 30px;
 	padding: 0 5px;
-	margin-top: 15px;
 	margin-right: 5px;
 }
 
@@ -201,11 +235,24 @@ a:hover,a:active,a:visited,a:link{
 }
 
 #excelList li:nth-child(n+1):nth-child(-n+6){
-	background-color: #bbb;
+	background-color: #eee;
+	font-weight: bold;
 }
 
 #excelList li:nth-child(6n+2){
+	flex-basis: 14%;
+}
+
+#excelList li:nth-child(6n+4){
 	flex-basis: 10%;
+}
+
+#excelList li:nth-child(6n+1),#excelList li:nth-child(6n+5){
+	flex-basis: 15%;
+}
+
+#excelList li:nth-child(6n+3){
+	flex-basis: 28%
 }
 
 /* 페이징처리부분 */
