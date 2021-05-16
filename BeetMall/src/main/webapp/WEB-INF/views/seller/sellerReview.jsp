@@ -341,7 +341,9 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 						}
 						tag += "<div>";
 						tag += "<div>" + vo.productname + "</div>";
-						tag += "<a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a>";
+						tag += "<div>"
+							tag += "<a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a>";
+							tag += "</div>";
 						tag += "</div>";
 						tag += "</td>";
 					tag += "<td>"; 
@@ -405,55 +407,50 @@ function popupOpen(data){
 	// 상품명
 	let reviewnum = $(data).children().val();
 	let reviewcontent = $(data).text().trim();
-	let productname = $(data).prev().text();
-	let reviewscore = $(data).parent().parent().prev().text();
-	let userid = $(data).parent().parent().next().children('div:first-child').text();
-	let reviewwritedate = $(data).parent().parent().next().children('div:last-child').text();
-	let reviewanswer = $(data).parent().parent().next().next().children('p').text();
-	let reviewimg = $(data).parent().prev().children().val();
+	let productname = $(data).parent().prev().text();
+	let reviewscore = $(data).parent().parent().parent().prev().text().trim();
+	let userid = $(data).parent().parent().parent().next().children('div:first-child').text();
+	let reviewwritedate = $(data).parent().parent().parent().next().children('div:last-child').text();
+	let reviewanswer = $(data).parent().parent().parent().next().next().children('p').text();
+	let reviewimg = $(data).parent().parent().prev().children().val();
 	
 	if(reviewanswer == '답변완료'){
-		reviewanswer = $(data).parent().parent().next().next().children('input').val();
+		reviewanswer = $(data).parent().parent().parent().next().next().children('input').val();
 	}
-	console.log(reviewanswer);
 	
 	let tag = '<div class="wrapContainer_Edit1">';
 		tag += '<form method="post" action="javascript:reviewAnswer()" id="popupFrm">';
 		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">리뷰 & 답변</div>';
+		tag += '<div class="wrapTitle" style="text-align: center; border:none;">리뷰 & 답변</div>';
 		tag += '<ul id="reviewManagement">';
-		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
-		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
-		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
-		tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
+			tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
+			tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+			tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
+			tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
 		tag += '</ul>';	
-		tag += '<div>';
-		tag += '<br />';
-		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
-		tag += '<div id="reviewContent">';
-				if( reviewimg != ''){
-					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" id="repMenu_img" />';
-				}
+		tag += '<div class="popupContentTitle">리뷰 내용</div>';
+		tag += '<div id="reviewContent" style="height:auto">';
 		tag += '<p>' + reviewcontent + '</p>';
-		tag += '</div>';
+			if( reviewimg != ''){
+				tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" style="width:140px;height:140px;" id="repMenu_img" />';
+			}
 		tag += '</div>';
 		tag += '<div id="reviewAnswer">';
+		tag += '<div class="popupContentTitle">답글 내용</div>';
 			if( reviewanswer == '미답변'){
-				tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
+				tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:100%;"></textarea>';
 			} else {
-				tag += '<div style="border-top:1px solid #ddd;">';
-				tag += '<p style="margin: 20px 10px ">' + reviewanswer + '<p>';
-				tag += '</div>';
+				tag += '<p>' + reviewanswer + '<p>';
 			}
 		tag += '<div id="popupBtnContainer">';
 			if( reviewanswer == '미답변'){
-				tag += '<input class="normalBtn" type="submit" value="등록" >';
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="answerBtn" type="submit" value="등록" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
+				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			} else {
-				tag += '<input class="normalBtn" type="button" onclick="answerEdit(\''+ reviewnum+'\',\''+productname+'\',\''+reviewscore+'\',\''+reviewcontent+'\',\''+userid+'\',\''+reviewwritedate+'\',\''+reviewanswer+'\',\''+reviewimg +'\')" value="수정" >';
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="answerBtn" type="button" onclick="answerEdit(\''+ reviewnum+'\',\''+productname+'\',\''+reviewscore+'\',\''+reviewcontent+'\',\''+userid+'\',\''+reviewwritedate+'\',\''+reviewanswer+'\',\''+reviewimg +'\')" value="수정" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
+				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			}
 			tag += '</div>';
 		tag += '</div>';
@@ -475,41 +472,31 @@ function popupOpen(data){
 
 //팝업창 수정 만들기! 
 function answerEdit(reviewnum, productname, reviewscore, reviewcontent, userid, reviewwritedate, reviewanswer, reviewimg){
-	//$('body').css('overflow','auto');
-	//$('#modal').css('display','none');
-	//$('#popup').css('display','none');
-	
-	if(reviewanswer == '답변 완료'){
-		reviewanswer = $(data).parent().next().next().next().children('input').val();
-	}
-	console.log(reviewanswer);
 	
 	let tag = '<div class="wrapContainer_Edit1">';
 		tag += '<form method="post" action="javascript:reviewEdit()" id="popupFrm">';
 		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
+		tag += '<div class="wrapTitle" style="text-align: center; border:none;">리뷰 & 답변</div>';
 		tag += '<ul id="reviewManagement">';
-		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
+		tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
 		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
 		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
 		tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
 		tag += '</ul>';	
-		tag += '<div>';
-		tag += '<br />';
-		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
-		tag += '<div id="reviewContent">';
-				if( reviewimg != ''){
-					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" id="repMenu_img" />';
-				}
+		tag += '<div class="popupContentTitle">리뷰 내용</div>';
+		tag += '<div id="reviewContent" style="height:auto">';
 		tag += '<p>' + reviewcontent + '</p>';
-		tag += '</div>';
+				if( reviewimg != ''){
+					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" style="width:140px;height:140px;" id="repMenu_img" />';
+				}
 		tag += '</div>';
 		tag += '<div id="reviewAnswer">';
-			tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;">'+reviewanswer+'</textarea>';
-		tag += '<div id="popupBtnContainer">';
-			tag += '<input class="normalBtn" type="submit" value="수정" >';
-			tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
-		tag += '</div>';
+		tag += '<div class="popupContentTitle">답글 내용</div>';
+			tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:100%;">'+reviewanswer+'</textarea>';
+			tag += '<div id="popupBtnContainer">';
+				tag += '<input class="answerBtn" type="submit" value="등록" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
+			tag += '</div>';
 		tag += '</div>';
 
 		tag += '</form>';
@@ -536,11 +523,11 @@ function popupClose(){
 // 신고 창 띄우기
 function popupreport(reviewnum, userid){
 	
-	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto;">';
+	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto; padding:0; border: 1px solid #ddd">';
 		tag += '<form method="post" action="javascript:reportUpdate()" id="reportFrm">';
 		tag += '<input type="hidden" name="userid" value="' + userid + '" >';
 		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-		tag += '<div class="wrapTitle">신고하기</div>';
+		tag += '<div class="wrapTitle" style="border:none;">신고하기</div>';
 		tag += '<div id="reportReason">';
 		tag += '<p>신고사유</p>';
 		tag += '<select name="reportReason">';
@@ -551,11 +538,11 @@ function popupreport(reviewnum, userid){
 		tag += '</select>';
 		tag += '</div>';
 		tag += '<div>';
-		tag += '<textarea rows="10" cols="40" id="reportContent" name="reportContent"></textarea>';
+		tag += '<textarea id="reportContent" name="reportContent"></textarea>';
 		tag += '</div>';
 		tag += '<div id="reportBtn">';
-		tag += '<input type="submit" class="normalBtn" value="보내기" />';
-		tag += '<input type="button" class="normalBtn" value="취소" onclick="reportClose()"/>';
+		tag += '<input type="submit" class="normalBtn" style="background-color:#0080ff" value="보내기" />';
+		tag += '<input type="button" class="normalBtn" style="background-color:#ddd;" value="취소" onclick="reportClose()"/>';
 		tag += '</div>';
 		tag += '</form>';
 		tag += '</div>';
@@ -876,10 +863,13 @@ function reportUpdate(){
 								</c:if>
 								<div>
 									<div>${result.productname}</div>
-									<a class="tableATag" href="javascript:void(0)" onclick="javascript:popupOpen(this)">
-										<input type="hidden" name="reviewnum" value="${result.reviewnum }" />
-										${result.reviewcontent}
-									</a>
+									<div>
+										<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
+											<input type="hidden" name="reviewnum" value="${result.reviewnum }" />
+											${result.reviewcontent}
+										</a>
+									</div>
+									
 								</div>
 							</td>
 							<td>
