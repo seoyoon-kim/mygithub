@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		lag(infotitle, 1, '이전글이 없습니다.') over (order by infonum desc) as prevSubject,
 		lead(infonum, 1, 0) over (order by infonum desc) as nextNo,
 		lead(infotitle, 1, '다음글이 없습니다.') over (order by infonum desc) as nextSubject
-		from notice)
+		from notice where infotype = 1)
 	where infonum=#{param1} and infotype = 1
 	</select>
 	<update id="noticeHit">

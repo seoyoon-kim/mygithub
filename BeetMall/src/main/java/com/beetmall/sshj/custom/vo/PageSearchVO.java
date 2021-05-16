@@ -1,5 +1,7 @@
 package com.beetmall.sshj.custom.vo;
 
+import java.util.Arrays;
+
 public class PageSearchVO {
 //	필요한정보를 세팅
 	private int pageNum=1;//현재페이지
@@ -27,7 +29,12 @@ public class PageSearchVO {
 	private String payfinish; //돈끝
 	
 	//지역카테고리때문에 나눈것
-	private String area;
+	private String area[];
+	private String area1;
+	private String area2;
+	private String area3;
+	private String area4;
+	private String area5;
 	private String searchAreaList;
 	
 	public int getPageNum() {
@@ -135,16 +142,111 @@ public class PageSearchVO {
 	public void setPayfinish(String payfinish) {
 		this.payfinish = payfinish;
 	}
-	public String getArea() {
+	public String[] getArea() {
 		return area;
 	}
-	public void setArea(String area) {
+	public void setArea(String[] area) {
+		System.out.println("setArea = " + Arrays.toString(area));
 		this.area = area;
+		if(area !=null) {
+			int areaint = area.length;
+			if(areaint==5) {
+				setArea1(area[0]);
+				setArea2(area[1]);
+				setArea3(area[2]);
+				setArea4(area[3]);
+				setArea5(area[4]);
+			}else if(areaint==4) {
+				setArea1(area[0]);
+				setArea2(area[1]);
+				setArea3(area[2]);
+				setArea4(area[3]);
+			}else if(areaint==3) {
+				setArea1(area[0]);
+				setArea2(area[1]);
+				setArea3(area[2]);
+			}else if(areaint==2) {
+				setArea1(area[0]);
+				setArea2(area[1]);
+			}else{
+				setArea1(area[0]);
+			}
+		}
 	}
 	public String getSearchAreaList() {
 		return searchAreaList;
 	}
 	public void setSearchAreaList(String searchAreaList) {
 		this.searchAreaList = searchAreaList;
+	}
+	public String getArea1() {
+		return area1;
+	}
+	public void setArea1(String area1) {
+		int karea = area1.length();
+		if(karea >= 5) {
+			String[] kkk = area1.split("/");
+			area1 = kkk[0];
+			if(area1.equals("전체")){
+				area1 = "%";
+			}
+		}
+		this.area1 = area1;
+	}
+	public String getArea2() {
+		return area2;
+	}
+	public void setArea2(String area2) {
+		int karea = area2.length();
+		if(karea >= 5) {
+			String[] kkk = area2.split("/");
+			area2 = kkk[0];
+			if(area2.equals("전체")){
+				area2 = "%";
+			}
+		}
+		this.area2 = area2;
+	}
+	public String getArea3() {
+		return area3;
+	}
+	public void setArea3(String area3) {
+		int karea = area3.length();
+		if(karea >= 5) {
+			String[] kkk = area3.split("/");
+			area3 = kkk[0];
+			if(area3.equals("전체")){
+				area3 = "%";
+			}
+		}
+		this.area3 = area3;
+	}
+	public String getArea4() {
+		return area4;
+	}
+	public void setArea4(String area4) {
+		int karea = area4.length();
+		if(karea >= 5) {
+			String[] kkk = area4.split("/");
+			area4 = kkk[0];
+			if(area4.equals("전체")){
+				area4 = "%";
+			}
+		}
+		this.area4 = area4;
+	}
+	public String getArea5() {
+		return area5;
+	}
+	public void setArea5(String area5) {
+		int karea = area5.length();
+		if(karea >= 5) {
+			String[] kkk = area5.split("/");
+			area5 = kkk[0];
+			if(area5.equals("전체")){
+				area5 = "%";
+			}
+		}
+		this.area5 = area5;
 	}
 }

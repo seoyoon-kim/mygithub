@@ -128,6 +128,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=675d2e2b842e770a2d48d54759ba1d32&libraries=services,clusterer,drawing"></script>
 <script>
 	var ajaax; //ajax를쓰기위한 Title값 받아오기
+	
 </script>
 <div class="section">
 	<div id="mainName"><h1>지도로 찾는 동네 농장</h1></div>
@@ -137,61 +138,8 @@
 	<div class="main">
 			<hr/>
 		<div id="productMain">
-			<c:forEach var="data" items="${list}">
-				<div id="productDiv">
-					<ul style="width:200px;">
-						<li><img src="/sshj/img/${data.thumbimg}"></li>
-						<li>
-							<c:if test="${data.saleprice==null || data.saleprice=='' || data.salefinish=='1' || data.salestart=='1'}">
-								${data.productprice}원
-							</c:if>
-							<c:if test="${data.saleprice != null && data.saleprice != '' && data.salefinish !='1' && data.salestart !='1'}">
-								${data.proprice}원
-							</c:if>
-						</li>
-						<li>${data.productname}</li>
-						<c:if test="${data.totalscore==1}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==2}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==3}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==4}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
-						</c:if>
-						<c:if test="${data.totalscore==5}">
-							<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
-						</c:if>
-						<li>${data.storeaddr}</li>
-						<li>${data.username}</li>
-					</ul>
-				</div>
-			</c:forEach>
+			
 		</div>
-		<div class="page_wrap" style="text-align:center;">
-			<div class="page_nation">
-			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
-			   		<a class="arrow prev" href="/sshj/mapping?pageNum=${pageVO.pageNum-1}"></a>
-			   </c:if>
-			   <!-- 페이지 번호                   1                                    5                     -->
-	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
-	              <c:if test="${p<=pageVO.totalPage}">
-	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
-	                    <a class="active">${p}</a>
-	                 </c:if>   
-	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
-	                    <a href="/sshj/mapping?pageNum=${p}">${p}</a>
-	                 </c:if>
-	              </c:if>
-	           </c:forEach>
-	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
-	              <a class="arrow next" href="/sshj/mapping?pageNum=${pageVO.pageNum+1}"></a>
-	           </c:if>
-			</div>
-		 </div>
 	</div>
 </div>
 
@@ -271,7 +219,23 @@
 				kakao.maps.event.addListener(marker${data.storenum}, 'click', function() {
 				      console.log(marker${data.storenum}.getTitle());
 				      ajaax = marker${data.storenum}.getTitle();
+				      console.log(ajaax)
+				      var params = "name="+ajaax;
+				      $.ajax({
+				    	  url: "/sshj/mapclick",
+				    	  data: params,
+				    	  success:function(result){
+							  console.log("성공");
+							  $("#productMain").empty();
+							  $("#productMain").html(result);
+						  },error:function(e){
+							  console.log(e.responseText);
+							  console.log("가져오기 실패");
+						  }		    	  
+				      });
 				      overlay.setMap(map);
+				      
+				      
 				});
 				////////////마커 클릭이벤트끝////////////////////////////////
 		     }
@@ -448,11 +412,9 @@
 		            drawingOverlay.setMap(map);
 		            
 		        } else { 
-		            
 		            drawingCircle.setMap(null);
 		            drawingLine.setMap(null);    
 		            drawingOverlay.setMap(null);
-		            
 		        }
 		    }     
 		});     
@@ -572,17 +534,17 @@
 		    // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
 		    var content = '<ul class="info2">';
 		    content += '    <li>';
-		    content += '        <span class="label2">총거리</span><span class="number2">' + distance + '</span>m';
-		    content += '    </li>';
+		    content += '        <span class="label2">총거리</span><span class="number2">' + distance + '</span>';
+		    content += '    </li><br/>';
 		    content += '    <li>';
 		    content += '        <span class="label2">도보</span>' + walkHour + walkMin;
-		    content += '    </li>';
+		    content += '    </li><br/>';
 		    content += '    <li>';
 		    content += '        <span class="label2">자전거</span>' + bycicleHour + bycicleMin;
-		    content += '    </li>';
+		    content += '    </li><br/>';
 		    content += '</ul>'
 		
 		    return content;
 		}
-	///////////////////////영역설정하기 끝///////////////////////////////////
+		///////////////////////영역설정하기 끝///////////////////////////////////
 </script>
