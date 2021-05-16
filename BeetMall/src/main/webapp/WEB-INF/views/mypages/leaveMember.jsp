@@ -97,6 +97,9 @@
 		color:white;
 		display: inline-block;
 	}
+	#buyCancelRollBack{
+		display:none;
+	}
 </style>
 <script>
 	$(function(){
@@ -106,6 +109,30 @@
 		$(".leaveListBarClose").click(function(){
 			$(this).parent().css("display","none");
 		})
+		$("#leaveCancel").click(function(){
+			location.href="/sshj";
+		})
+		$("#leaveCheck").click(function(){
+			$.ajax({
+				url : 'leaveMemberOk',
+				data : 'userpwd='+$("#pwdInput").val(),
+				success: function(result){
+					console.log("result = "+result);
+					if(result == 0){
+						alert('잘못 입력하였습니다.');
+					}else if(result == -1){
+						$("#buyCancelRollBack").css("display","block");
+					}else if(result == -2){
+						alert("회원탈퇴에 실패하였습니다.")
+					}else if(result == 1){
+						alert("회원탈퇴에 성공하였습니다. \n 이용해주셔서 감사합니다.");
+						location.href="logout";
+					}
+				}, error: function(){
+					console.log("에러")
+				}
+			});
+		});
 	});
 </script>
 <div class="section" id="leaveDiv">
@@ -113,9 +140,9 @@
 	<h4>정말로 탈퇴하시겠습니까?</h4>
 	<div>
 		<h3>비밀번호를 입력해주세요</h3>
-		<form method="post" action="leaveMemberOk">
-			<input type="password" placeholder="비밀번호를 입력해주세요" id="pwdInput"/><br/>
-			<input type="submit" value="탈퇴" id="leaveCheck" class="btn"/>
+		<form method="post">
+			<input type="password" placeholder="비밀번호를 입력해주세요" id="pwdInput" name="userpwd"/><br/>
+			<input type="button" value="탈퇴" id="leaveCheck" class="btn"/>
 			<input type="button" value="취소" id="leaveCancel" class="btn"/>
 		</form>
 	</div>
