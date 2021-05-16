@@ -61,11 +61,9 @@ public class testController {
 	}
 
 	
+
 	
-	@RequestMapping("/customproduct")
-	public String customproduct() {
-		return "custom/customproduct";
-	}
+
 	
 	@RequestMapping("/custompay")
 	public String custompay() {

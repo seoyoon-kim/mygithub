@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.beetmall.sshj.custom.dao.ProductViewDAO">
+  
+    <select id="ProductViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+       select productnum,userid,sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
+    </select>
+    
+    <!--        농장 구하기           -->
+    
+    <select id="ProductViewSelectFarm" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+      select farmname,farmprofile from farm where storenum=(select storenum from seller 
+      where userid=(select userid from product where productnum=#{param1}))
+    </select>
+  
+    <!--        옵션 구하기           -->
+  
+    <select id="ProductViewSelectoption" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+       select o.productnum, p.productprice, o.optionprice, o.optionnum, o.optionnowstock, o.optionname 
+		from optiontbl o
+        join product p
+        on p.productnum = o.productnum
+        where p.productnum =#{param1}
+    </select>
+    
+    <!--        할인가격 구하기           -->
+    
+    <select id="PDprice" resultType="int">
+     select saleprice from discount where productnum=${param1}
+    </select>
+    
+    <!--        옵션가격 구하기           -->
+    <select id="POprice" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+    select optionnum from option where optionnum=${param1}
+    </select>
+    
+    <!--        상품 리뷰 구하기           -->
+    <select id="ProductViewReview" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+    select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review where productnum=${param1}
+    </select>
+    
+    <!--        해당 상품의, 해당 리뷰글 눌렀을때 뷰어 보기    -->    
+    <select id="reviewViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+       select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review 
+       where productnum=${param1} and reviewnum=${param2}
+    </select>
+    
+    <!--       상품문의 구하기        -->
+    <select id="ProductViewFaq" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+     select qnum,userid,qcontent,to_char(qwritedate,'MM-DD HH:MI')qwritedate,qopen,qanswer,qtitle
+     from userqboard where productnum=${param1}
+    </select>
+   
+    
+  </mapper>

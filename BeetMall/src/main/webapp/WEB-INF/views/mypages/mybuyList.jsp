@@ -537,6 +537,7 @@
 			}
 		});
 	});
+	/* @@ */
 	$(document).on('click','input[value=리뷰작성완료]', function(){
 		var num = $(this).parent().prev().children().val();
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
@@ -844,7 +845,7 @@
 				<input type="button" value="확인" class="btn" style="top:240px" id="divcloseBtn"/>
 			</div>
 		</div>
-		
+		<!-- @@ -->
 		<div class="buyListDiv" id="buyReviewView">
 			<div class="buyListBar" style="font-size:21px;width:1080px;">상품리뷰 보기</div><div class="buyListBarClose" style="left:1030px;">&times;</div>
 			<div class="buyListContent" style="padding-top:60px; height:730px;background-color: #ddd; text-align: center;width:1080px;">
@@ -858,7 +859,7 @@
 				<input type="button" value="닫기" class="btn" style="top:600px;" />
 			</div>
 		</div>
-		
+		<!--  -->
 		
 		<div class="buyListDiv" id="buyReviewWrite">
 			<div class="buyListBar" style="font-size:21px;">상품리뷰 작성하기</div><div class="buyListBarClose">&times;</div>

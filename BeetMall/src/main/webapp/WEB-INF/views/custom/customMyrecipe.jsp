@@ -138,12 +138,12 @@ a:hover, a:active, a:visited, a:link {
 
 #myrecipeTop {
 	float: left;
-	width: 440px;
+	width: 970px;
 }
 
 #myrecipeTop2 {
 	float: left;
-	width: 500px;
+	width: 60px;
 }
 
 #myrecipeTop2>li,#myrecipeTop2>input {
@@ -212,7 +212,7 @@ float:left;
 	border: none;
 }
 
-#norebtn {
+#norebtnmy,#norebtnkeep{
 	padding: 3px 10px;
 	color: #fff;
 	border-radius: 5px;
@@ -238,33 +238,46 @@ float:left;
 }
 </style>
 <script>
-function logno(){
+
+$(document).ready(function logno(){
 	if(${logId==null}){
 		if(confirm("로그인후 이용해주세요")){
 			location.href="login"
 		}
 	}
-};
+});
+	
+////////////////로그인 했는지 체크/////////내가쓴 레시피///////////////
 
 
-$(document).ready(function(){
 	 
-	  
+$(document).ready(function(){		  
 	  $("#myrbtn").click(function(){
-		  $("#recimainbox").show()
+		   $("#recimainbox").show()
 		   $("#recimainbox2").hide()
 		   $("#myrbtn").css("background-color","#eee")
 		   $("#goodrbtn").css("background-color","#fff")
+		   
+		   	var btnchange1="<input type='button' id='norebtnmy' value='선택제거' />"
+		    document.getElementById("norebtnli").innerHTML=btnchange1;
+	
 	  })
 	  
+});
 	  
+//////////////장바구니 레시피////////////	  
+$(document).ready(function(){
 	  $("#goodrbtn").click(function(){
 		  
 		   $("#recimainbox").hide()
-		    $("#recimainbox2").show()
-		    $("#myrbtn").css("background-color","#fff")
+		   $("#recimainbox2").show()
+		   $("#myrbtn").css("background-color","#fff")
 		   $("#goodrbtn").css("background-color","#eee")
 		   
+		   var btnchange2="<input type='button' id='norebtnkeep' value='즐겨찾기제거' />"
+		   document.getElementById("norebtnli").innerHTML=btnchange2;
+		   	
+		
 		var url = "customMyrecipe2";		
 		var data2= "id=${logId}";
 		console.log(url,data2);
@@ -279,13 +292,13 @@ $(document).ready(function(){
 				  
 				    
 				   $result.each(function(idx,data2){
-  
+   
 					   $("#recimainbox2").append(							   
-							   "<div id='recipebox2'><ul><li><a href='recipeView?recipenum="+data2.recipenum+"'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
-					           "<li><a href='recipeView?recipenum="+data2.recipenum+"'>"+data2.recipetitle+"</a></li>"+   
+							   "<div id='recipebox2'><ul><li><a href='recipeView?recipenum="+data2.recipenum+"&id=${logId}'><img src='img/"+data2.recipemainimg+"'id='rtitleImg'/></a></li>"+
+					           "<li><a href='recipeView?recipenum="+data2.recipenum+"&id=${logId}'>"+data2.recipetitle+"</a></li>"+   
 					           "<li>"+data2.userid+"</li>"+
 							   "<li>추천수("+data2.reciperecommend+")  조회수"+data2.recipehit+"</li>"+
-							   "<li><input type='checkbox' name='recipeCheckBox' value='' /></li></ul></div>"				   
+							   "<li><input type='checkbox' name='recipeCheckBox' id='myrcheck2' value='recipenum="+data2.recipenum+"' /></li><ul></div>"		   
 					   );
 					   
 				   });				  
@@ -300,11 +313,69 @@ $(document).ready(function(){
 
 	  })
 
-  })
+ });	
+     
+ ///////////내가쓴 레시피 제거/////////////// 
+$(document).ready(function(){	
+        $('#norebtnmy').click(function () {
+
+          //var check = $('input:checkbox[id="#myrcheck"]').is(':checked');
+
+          
+         
+          
+  		  var url = "recipeDelete";		
+		  var data = $('#myrcheck1').val();
+			console.log(url,data);
+			$.ajax({
+				url:url,
+				data:data,
+				success:function(result){
+					console.log('내가쓴 레시피 삭제 성공');
+					
+					
+				},error:function(e){
+					console.log(e.responseText);
+					console.log("내가쓴 레시피 삭제 실패");
+				}
+			})
+          
+          
+        });
+    });
+ 
+ /////////////장바구니 레시피 제거////////////
+/*
+        $('#norebtnkeep').click(function () {
+
+          //var check = $('input:checkbox[id="#myrcheck"]').is(':checked');
+         
+  		  var url = "recikeepDelete";		
+		  var  = $('#myrcheck2').val();
+		  
+			console.log(url,data);
+			$.ajax({
+				url:url,
+				data:data,
+				success:function(result){
+					console.log('내가 담은 레시피 삭제 성공');
+					
+					
+				},error:function(e){
+					console.log(e.responseText);
+					console.log("내가 담은 레시피 삭제 실패");
+				}
+			})
+          
+          
+        });
+  */ 
+ 
+  
 </script>
 
-<body onload="logno()">
-	<div class="section" id="main">
+<body>
+	<div class="section" id="main" >
 		
 			<div id="reciTitle">
 				<div class="wrapTitle">${logId}님의 마이레시피 내역입니다.</div>				
@@ -317,15 +388,8 @@ $(document).ready(function(){
 						type="button" id="goodrbtn" value="즐겨찾기 레시피" />
 				</div>
 				<ul id="myrecipeTop2">
-					<li><select name="selectOrder">
-							<option>최신순</option>
-							<option>추천순</option>
-							<option>조회수순</option>
-					</select></li>
-					<li><input type="button" id="norebtn" value="선택즐겨찾기제거" /></li>
-					<li><span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-				</span></li>
+					<li id="norebtnli"><input type="button" id="norebtnmy" value="선택제거" /></li>
+					<li></li>
 				</ul>
 			</div>
 		
@@ -336,13 +400,15 @@ $(document).ready(function(){
 		   <c:forEach var="data" items="${list}">
 		       <c:if test="${logId==data.userid}"> 
 					<div id="recipebox">
+					      
 									<ul>
-										<li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-										<li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 										<li>${data.userid}</li>
 										<li>추천수(${data.reciperecommend}) 조회수 ${data.recipehit}</li>
-										<li><input type="checkbox" name="recipeCheckBox" value="" /></li>
+										<li><input type="checkbox" name="recipeCheckBox" id="myrcheck1" value="recipenum=${data.recipenum}&id=${logId}" /></li>
 									</ul>
+						  
 					</div> 
 			   </c:if>
 			</c:forEach>
