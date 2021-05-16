@@ -28,4 +28,6 @@ public interface CategoryDAO {
 
 	public int categoryChargeOnetotalRecord(PageSearchVO pageVO);
 
+	public int uglycategoryOnetotalRecord(PageSearchVO pageVO);
+
 }

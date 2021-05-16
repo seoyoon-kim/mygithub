@@ -28,4 +28,6 @@ public interface CategoryService {
 	public List<CategoryVO> mapclick(String name);
 
 	public int categoryChargeOnetotalRecord(PageSearchVO pageVO);
+
+	public int uglycategoryOnetotalRecord(PageSearchVO pageVO);
 }

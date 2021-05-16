@@ -66,4 +66,9 @@ public class CategoryServiceImp implements CategoryService {
 	public int categoryChargeOnetotalRecord(PageSearchVO pageVO) {
 		return categoryDAO.categoryChargeOnetotalRecord(pageVO);
 	}
+
+	@Override
+	public int uglycategoryOnetotalRecord(PageSearchVO pageVO) {
+		return categoryDAO.uglycategoryOnetotalRecord(pageVO);
+	}
 }

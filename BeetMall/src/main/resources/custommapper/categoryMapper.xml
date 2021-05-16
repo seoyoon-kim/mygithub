@@ -128,12 +128,78 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				        on d.userid=a.userid
 				    left outer join discount e
 				        on e.productnum=a.productnum
+				    join mcategory f
+                            on a.mcatenum = f.mcatenum
+				    where 1=1 and a.saleb = 1
+				<choose>
+					<when test = 'searchWord!=null'>
+						and a.productname like '%${searchWord}%'
+					</when>
+				</choose>
 				group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
-				order by productnum desc)
-			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
+				order by 
+				<if test="type!=null">
+				    <if test="type==1">totalscore desc</if>
+				    <if test="type==2">totalscore</if>
+				    <if test="type==3">sumreview desc</if>
+				    <if test="type==4">sumreview</if>
+				</if>
+				<if test="type == null">
+					productnum desc
+				</if>
+				)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by 
+																<if test="type!=null">
+																    <if test="type==1">totalscore</if>
+																    <if test="type==2">totalscore desc</if>
+																    <if test="type==3">sumreview</if>
+																    <if test="type==4">sumreview desc</if>
+																</if>
+																<if test="type==null">
+																	productnum
+																</if>
+																)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
-        order by productnum desc
+        order by <if test="type!=null">
+				    <if test="type==1">totalscore desc</if>
+				    <if test="type==2">totalscore</if>
+				    <if test="type==3">sumreview desc</if>
+				    <if test="type==4">sumreview</if>
+				</if>
+				<if test="type==null">
+					productnum desc
+				</if>
+	</select>
+	<select id="uglycategoryOnetotalRecord" resultType="int" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO">
+		select count(productnum) from(
+	        select a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, 
+							e.salestart, e.salefinish, avg(reviewscore) as totalscore, count(b.productnum) as sumreview, productprice-nvl(saleprice, 0) as proprice
+					from product a 
+					    left outer join review b 
+					        on a.productnum=b.productnum 
+					    join member c
+					        on c.userid=a.userid
+					    join seller d
+					        on d.userid=a.userid
+					    left outer join discount e
+					        on e.productnum=a.productnum
+					    join mcategory f
+                            on a.mcatenum = f.mcatenum
+					    where 1=1 and a.saleb = 1
+					    <if test="item!=null">
+						    <if test="item=='Fruit'">and f.mcatenum between '22' and '50'</if>
+						    <if test="item=='vegetable'">and f.mcatenum between '69' and '104'</if>
+						    <if test="item=='Rice'">and f.mcatenum between '51' and '68'</if>
+						    <if test="item=='sinsang'"></if>
+						</if>
+					    <choose>
+							<when test = 'searchWord!=null'>
+								and a.productname like '%${searchWord}%'
+							</when>
+						</choose>
+					group by a.productnum, a.productname, a.productprice, a.thumbimg, c.username, d.storeaddr, e.saleprice, e.salestart, e.salefinish
+					order by productnum)
 	</select>
 	
 	<select id="payCategory" resultType="com.beetmall.sshj.custom.vo.CategoryVO" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO">
