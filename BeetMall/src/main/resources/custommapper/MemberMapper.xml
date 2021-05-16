@@ -22,4 +22,23 @@
 		insert into seller(userid, storenum, storename, sellername, sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname, bankaccount)
 		values(#{userid}, farmsq.currval, #{storename}, #{sellername}, #{sellerreginum}, #{sellerregiimg}, 0, null, #{storezipcode}, #{storeaddr}, #{storedetailaddr}, #{storeemail}, #{bank}, #{bankname}, #{bankaccount})
 	</insert>
+	<select id="selectDelOk" resultType="Integer">
+		select count(*) from member m
+	    left join ordertbl o
+	        on o.userid = m.userid
+	    left join orderdetail t
+	        on t.ordernum = o.ordernum
+	    left join product p
+	        on p.userid = m.userid
+	     where (t.orderstatus in ('배송중', '배송완료') and m.userid=#{param1}) or (m.userid = #{param1} and p.sellfinish >= sysdate)
+	</select>
+	<update id="deleteId">
+		update member set usertype=4 where userid=#{param1}
+	</update>
+	<select id="selectId" resultType="Integer">
+		select count(*) from member where userid=#{param1} and userpwd =#{param2}
+	</select>
+	<select id="stopdate" resultType="String">
+		select to_char(reportfin, 'YYYY/MM/DD') from reporttbl where userid=#{param1} and  rownum=1 order by reportfin desc
+	</select>
 </mapper>

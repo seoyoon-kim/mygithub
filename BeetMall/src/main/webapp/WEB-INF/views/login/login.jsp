@@ -59,8 +59,6 @@
 		background-color:rgb(29, 200, 0);
 		color:white;
 		font-weight:700;
-
-		
 	}
 	#kakaoLogin{
 		background-color:rgb(255, 235, 0);
@@ -77,14 +75,19 @@
 		<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput" value="qwer"/><br/>
 		<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput" value="qwer"/><br/>
 		<div id="logStatus">
-			<input type="checkbox" name="logalways"/>로그인상태유지
+			<!-- <input type="checkbox" name="logalways"/>로그인상태유지 -->
 			<div><a href="searchId" id="searchId">아이디찾기</a> | <a href="searchPwd" id="searchPwd">비밀번호찾기</a></div>
 		</div>
 		<input type="submit" value="로그인" id="loginBtn"/>
 		<input type="button" value="회원가입" id="registerBtn"/>
-		<input type="button" value="Google 로그인" id="googleLogin" class="loginBtn"/>
+		<c:if test="${logStop != null}">
+			<script>alert(" 정지된 아이디 입니다...\n 정지 해제 예정일 : ${stopdate}")</script>
+		</c:if>
+		<c:if test="${Type != null}">
+			<script>alert(" 탈퇴한 아이디 입니다...")</script>
+		</c:if>
+		<!-- <input type="button" value="Google 로그인" id="googleLogin" class="loginBtn"/>
 		<input type="button" value="네이버 로그인" id="naverLogin" class="loginBtn"/>
-		<input type="button" value="Kakao 로그인" id="kakaoLogin" class="loginBtn"/>
+		<input type="button" value="Kakao 로그인" id="kakaoLogin" class="loginBtn"/> -->
 	</form>
-	
 </div>

@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beetmall.sshj.custom.service.MyBuyListService;
 import com.beetmall.sshj.custom.vo.ClaimVO;
 import com.beetmall.sshj.custom.vo.MyBuyListVO;
+import com.beetmall.sshj.custom.vo.PointPageVO;
 import com.beetmall.sshj.custom.vo.ReviewVO;
 import com.beetmall.sshj.custom.vo.UserQBoardVO;
 import com.google.gson.JsonObject;
@@ -37,9 +38,35 @@ public class MyBuyListController {
 	public ModelAndView myBuyList(HttpSession session, HttpServletRequest req, MyBuyListVO mvo) {	// 구매내역
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)session.getAttribute("logId");
-		//System.out.println("유저아이디="+userid);
+		String pageNumStr = req.getParameter("pageNum");
+		PointPageVO pageVO = new PointPageVO();
+		pageVO.setUserid(userid);
+		if(pageNumStr == null) {
+			pageVO.setPageNum(1);
+		}else if(pageNumStr != null) {
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		int month = 0;
+		if(req.getParameter("month")!= null) {
+			month = Integer.parseInt(req.getParameter("month"));
+		}
+		System.out.println("month="+month);
 		
-		mav.addObject("list", mybuylistservice.selectBuyList(userid));
+		if(month > 0) {
+			System.out.println("1로 들어옴");
+			pageVO.setTotalRecord(mybuylistservice.returnPageRecordMonth(userid, month));
+			System.out.println("결과="+pageVO.getTotalRecord());
+		}else {
+			System.out.println("2로 들어옴");
+			pageVO.setTotalRecord(mybuylistservice.returnPageRecord(userid));
+			System.out.println("결과="+pageVO.getTotalRecord());
+		}
+
+		pageVO.setMonth(month);
+		mav.addObject("pageVO", pageVO);
+		mav.addObject("month",month);
+		mav.addObject("list", mybuylistservice.selectBuyList(pageVO));
+		System.out.println("list="+(mybuylistservice.selectBuyList(pageVO)).size());
 		mav.setViewName("mypages/mybuyList");
 		return mav;
 	}
@@ -48,10 +75,10 @@ public class MyBuyListController {
 	@ResponseBody
 	public int orderCommit(HttpServletRequest req) {
 		int num = Integer.parseInt(req.getParameter("num"));
-		System.out.println("num="+num);
+//		System.out.println("num="+num);
 		int result = 0;
 		result = mybuylistservice.orderCommit(num);
-		System.out.println("리턴 : "+result);
+//		System.out.println("리턴 : "+result);
 		
 		return result;
 	}
@@ -61,8 +88,8 @@ public class MyBuyListController {
 	public int orderCancel(HttpServletRequest req) {
 		int result = 0;
 		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
-		System.out.println("ordernum="+ordernum);
-		System.out.println("ordercancel="+mybuylistservice.orderCancel(ordernum));
+//		System.out.println("ordernum="+ordernum);
+//		System.out.println("ordercancel="+mybuylistservice.orderCancel(ordernum));
 		
 		if(mybuylistservice.orderCancel(ordernum)>=1) {
 			result = -1;	// 배송중/배송완료인 상품
@@ -94,7 +121,7 @@ public class MyBuyListController {
 	@ResponseBody
 	public MyBuyListVO productImgName(HttpServletRequest req) {
 		int productNum = Integer.parseInt(req.getParameter("productNum"));
-		System.out.println("producntnum"+productNum);
+//		System.out.println("producntnum"+productNum);
 		MyBuyListVO vo = mybuylistservice.selectReviewProduct(productNum);
 		return vo;
 	}
@@ -147,8 +174,8 @@ public class MyBuyListController {
 		vo.setReviewimg(orgName);
 		int result = mybuylistservice.reviewWrite(vo);
 		//////////////////// 파일 업로드 end)
-		System.out.println("reviewcontent == "+vo.getReviewcontent());	//첨부한 이미지까지 여기 같이 있음
-		System.out.println("reviewimg == "+vo.getReviewimg());	// 널
+//		System.out.println("reviewcontent == "+vo.getReviewcontent());	//첨부한 이미지까지 여기 같이 있음
+//		System.out.println("reviewimg == "+vo.getReviewimg());	// 널
 		
 		////////////////////등록 실패시 파일 삭제
 		if(result <=0) {
@@ -183,7 +210,7 @@ public class MyBuyListController {
 	@ResponseBody
 	public int reviewCheck(HttpSession session, HttpServletRequest req) {
 		int result = -1;
-		System.out.println(req.getParameter("reviewnum"));
+//		System.out.println(req.getParameter("reviewnum"));
 		if(req.getParameter("reviewnum") == null) {
 			result = 0;
 		}else if(req.getParameter("reviewnum") != null) {
@@ -225,9 +252,9 @@ public class MyBuyListController {
 		vo.setProductnum(productnum);
 		vo.setOrdernum(ordernum);
 		vo.setClaimkind(claimkind);
-		System.out.println("getClaimcontent -->"+vo.getClaimcontent());	// ㅇㅇ
-		System.out.println("getClaimdate -->"+vo.getClaimdate());		// 널 요거는 sysdate
-		System.out.println("getClaimkind -->"+vo.getClaimkind());		// ㅇㅇ 이거로 조절하면 될듯
+//		System.out.println("getClaimcontent -->"+vo.getClaimcontent());	// ㅇㅇ
+//		System.out.println("getClaimdate -->"+vo.getClaimdate());		// 널 요거는 sysdate
+//		System.out.println("getClaimkind -->"+vo.getClaimkind());		// ㅇㅇ 이거로 조절하면 될듯
 		
 		int kind = Integer.parseInt(vo.getClaimkind());
 		String status = "";
@@ -242,11 +269,11 @@ public class MyBuyListController {
 		}else {
 			vo.setClaimstatus("오류");
 		}
-		System.out.println("getClaimstatus -->"+vo.getClaimstatus());	// ㄴㄴ
-		System.out.println("getDelivery -->"+vo.getDelivery());			// ㅇㅇ
-		System.out.println("getInvoice -->"+vo.getInvoice());			// ㅇㅇ
-		System.out.println("getOrdernum -->"+vo.getOrdernum());			// ㅇㅇ
-		System.out.println("getProductnum -->"+vo.getProductnum());		//ㅇㅇ
+//		System.out.println("getClaimstatus -->"+vo.getClaimstatus());	// ㄴㄴ
+//		System.out.println("getDelivery -->"+vo.getDelivery());			// ㅇㅇ
+//		System.out.println("getInvoice -->"+vo.getInvoice());			// ㅇㅇ
+//		System.out.println("getOrdernum -->"+vo.getOrdernum());			// ㅇㅇ
+//		System.out.println("getProductnum -->"+vo.getProductnum());		//ㅇㅇ
 		
 		
 		mybuylistservice.claimInsert(vo);
@@ -261,7 +288,7 @@ public class MyBuyListController {
 	@RequestMapping("returnView")
 	@ResponseBody
 	public ClaimVO returnSelect(int ordernum, ClaimVO vo) {
-		System.out.println("주문번호"+ordernum);
+//		System.out.println("주문번호"+ordernum);
 		vo = mybuylistservice.returnSelect(ordernum);
 		
 		return vo;
@@ -270,14 +297,14 @@ public class MyBuyListController {
 	public ModelAndView questionWrite(int productnum, HttpSession session, UserQBoardVO vo) {
 		ModelAndView mav = new ModelAndView();
 		vo.setUserid((String)session.getAttribute("logId"));
-		System.out.println("productnum-->"+vo.getProductnum());
-		System.out.println("답변은 원래 널-->"+vo.getQanswer());
-		System.out.println("내용-->"+vo.getQcontent());
-		System.out.println("q넘버 시퀀스라 노상관-->"+vo.getQnum());
-		System.out.println("N으로 옴 잘온거-->"+vo.getQopen());
-		System.out.println("널 맞음 sysdate-->"+vo.getQwritedate());
-		System.out.println("아이디 잘옴-->"+vo.getUserid());
-		System.out.println("qtitle"+vo.getQtitle());
+//		System.out.println("productnum-->"+vo.getProductnum());
+//		System.out.println("답변은 원래 널-->"+vo.getQanswer());
+//		System.out.println("내용-->"+vo.getQcontent());
+//		System.out.println("q넘버 시퀀스라 노상관-->"+vo.getQnum());
+//		System.out.println("N으로 옴 잘온거-->"+vo.getQopen());
+//		System.out.println("널 맞음 sysdate-->"+vo.getQwritedate());
+//		System.out.println("아이디 잘옴-->"+vo.getUserid());
+//		System.out.println("qtitle"+vo.getQtitle());
 		mybuylistservice.qboardInsert(vo);
 		mav.setViewName("redirect:mybuyList");
 		return mav;
@@ -286,7 +313,7 @@ public class MyBuyListController {
 	public ModelAndView returnFinish(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
-		System.out.println("ordernum ="+ordernum);
+//		System.out.println("ordernum ="+ordernum);
 		mybuylistservice.returnFinish(ordernum);
 		
 		mav.setViewName("redirect:mybuyList");
@@ -298,7 +325,7 @@ public class MyBuyListController {
 		ModelAndView mav = new ModelAndView();		
 		String userid = (String)session.getAttribute("logId");
 		int month = Integer.parseInt(req.getParameter("month"));
-		System.out.println("month-"+month);
+//		System.out.println("month-"+month);
 		mav.addObject("list", mybuylistservice.monthSelectBuyList(userid, month));
 		mav.setViewName("mypages/mybuyList");
 		return mav;

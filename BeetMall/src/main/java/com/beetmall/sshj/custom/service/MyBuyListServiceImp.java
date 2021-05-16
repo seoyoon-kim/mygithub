@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.beetmall.sshj.custom.dao.MyBuyListDAO;
 import com.beetmall.sshj.custom.vo.ClaimVO;
 import com.beetmall.sshj.custom.vo.MyBuyListVO;
+import com.beetmall.sshj.custom.vo.PointPageVO;
 import com.beetmall.sshj.custom.vo.ReviewVO;
 import com.beetmall.sshj.custom.vo.UserQBoardVO;
 
@@ -18,9 +19,9 @@ public class MyBuyListServiceImp implements MyBuyListService {
 	MyBuyListDAO mybuylistDAO;
 
 	@Override
-	public List<MyBuyListVO> selectBuyList(String userid) {
+	public List<MyBuyListVO> selectBuyList(PointPageVO vo) {
 		
-		return mybuylistDAO.selectBuyList(userid);
+		return mybuylistDAO.selectBuyList(vo);
 	}
 
 	@Override
@@ -123,6 +124,20 @@ public class MyBuyListServiceImp implements MyBuyListService {
 		
 		return mybuylistDAO.monthSelectBuyList(userid, month);
 	}
+
+	@Override
+	public int returnPageRecord(String userid) {
+		
+		return mybuylistDAO.returnPageRecord(userid);
+	}
+
+	@Override
+	public int returnPageRecordMonth(String userid, int month) {
+		
+		return mybuylistDAO.returnPageRecordMonth(userid, month);
+	}
+
+	
 
 
 }
