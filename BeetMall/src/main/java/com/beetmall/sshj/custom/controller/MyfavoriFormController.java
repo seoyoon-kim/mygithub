@@ -19,7 +19,6 @@ public class MyfavoriFormController {
 	public ModelAndView myfavoriForm(String logId, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String logId1 = (String)req.getSession().getAttribute("logId");
-		System.out.println("logId1 = " + logId1);
 		
 		mav.addObject("list", myfavoriFormservies.myfavoriForm(logId1));
 		mav.setViewName("mypages/myfavoriForm");

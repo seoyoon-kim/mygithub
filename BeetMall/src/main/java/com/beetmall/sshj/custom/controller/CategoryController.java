@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.CategoryService;
@@ -34,10 +35,21 @@ public class CategoryController {
 		pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 		
 		mav.addObject("list", categoryService.categorylist(pageVO));
-		
 		mav.addObject("list2", categoryService.mapAllRecord());
 		mav.setViewName("custom/category/mapList2");
 		mav.addObject("pageVO",pageVO);
+		
+		return mav;
+	}
+	
+	//지도에서 아이템 가져오기
+	@RequestMapping("/mapclick")
+	@ResponseBody
+	public ModelAndView mapclick(String name) {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", categoryService.mapclick(name));
+		mav.setViewName("custom/category/category");
 		
 		return mav;
 	}
@@ -46,7 +58,7 @@ public class CategoryController {
 	@RequestMapping("/categoryMain")
 	public ModelAndView categoryMain(HttpServletRequest req, PageSearchVO pageVO) {
 		ModelAndView mav = new ModelAndView();
-		String item = "", //과일,채소,쌀잡곡등 품목들
+		String item = "", //과일,채소,쌀잡곡, 베스트 상품, 신상품등 품목들
 				type="", //평점낮은순, 평점높은순, 가격순, 가격낮은순 
 				pick=""; //픽업여부
 		
@@ -72,6 +84,8 @@ public class CategoryController {
 				item = "vegetable";
 			}else if(itemlist.equals("Rice")) {
 				item = "Rice";
+			}else if(itemlist.equals("sinsang")) {
+				item = "sinsang";
 			}
 			pageVO.setItem(item);
 		}else {
@@ -152,6 +166,8 @@ public class CategoryController {
 				mav.setViewName("custom/category/categoryvegetable");
 			}else if(itemlist.equals("Rice")) {
 				mav.setViewName("custom/category/categoryRice");
+			}else if(itemlist.equals("sinsang")) {
+				mav.setViewName("custom/category/sinsang");
 			}
 		}else {
 			mav.setViewName("custom/category/categoryMain");
@@ -165,19 +181,44 @@ public class CategoryController {
 	public ModelAndView categoryCharge(HttpServletRequest req, HttpServletResponse res) {
 		ModelAndView mav = new ModelAndView();
 		
-		String pageNumStr = req.getParameter("pageNum");
+		String type="";
 		
 		PageSearchVO pageVO = new PageSearchVO();
+		String pageNumStr = req.getParameter("pageNum");
+		String[] area = req.getParameterValues("area");
+		String typelist = req.getParameter("type");
+		
+		if(area != null) {
+			pageVO.setArea(area);
+		}
+		
 		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//타입 평점낮은순, 높은순 등등
+		if(typelist != null) {
+			if(typelist.equals("1")) {
+				type = "1";
+			}if(typelist.equals("2")) {
+				type = "2";
+			}if(typelist.equals("3")) {
+				type = "3";
+			}if(typelist.equals("4")) {
+				type = "4";
+			}
+			pageVO.setType(type);
+		}else {
+			pageVO.setType(null);
 		}
 		
 		//검색어, 검색키
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
-		pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
+		pageVO.setTotalRecord(categoryService.categoryChargeOnetotalRecord(pageVO));
 		
 		mav.addObject("list", categoryService.categoryCharge(pageVO));
+		
 		mav.setViewName("custom/category/categoryCharge");
 		mav.addObject("pageVO",pageVO);
 		
@@ -256,12 +297,19 @@ public class CategoryController {
 	}
 	//못난이할인
 	@RequestMapping("/uglyItem")
-	public ModelAndView uglyItem(HttpServletRequest req, HttpServletResponse res) {
+	public ModelAndView uglyItem(HttpServletRequest req, PageSearchVO pageVO) {
 		ModelAndView mav = new ModelAndView();
 		
-		String pageNumStr = req.getParameter("pageNum");
+		String item = "", //과일,채소,쌀잡곡, 베스트 상품, 신상품등 품목들
+				type="", //평점낮은순, 평점높은순, 가격순, 가격낮은순 
+				pick=""; //픽업여부
 		
-		PageSearchVO pageVO = new PageSearchVO();
+		String pageNumStr = req.getParameter("pageNum");
+		String itemlist = req.getParameter("item");
+		String typelist = req.getParameter("type");
+		String picklist = req.getParameter("pick");
+		
+		//페이지
 		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}
@@ -269,8 +317,93 @@ public class CategoryController {
 		//검색어, 검색키
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
-		pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 		
+		//품목
+		if(itemlist != null) {
+			if(itemlist.equals("Fruit")) {
+				item = "Fruit";
+			}else if(itemlist.equals("vegetable")) {
+				item = "vegetable";
+			}else if(itemlist.equals("Rice")) {
+				item = "Rice";
+			}else if(itemlist.equals("sinsang")) {
+				item = "sinsang";
+			}
+			pageVO.setItem(item);
+		}else {
+			pageVO.setItem(null);
+		}
+
+		//타입 평점낮은순, 높은순 등등
+		if(typelist != null) {
+			if(typelist.equals("1")) {
+				type = "1";
+			}if(typelist.equals("2")) {
+				type = "2";
+			}if(typelist.equals("3")) {
+				type = "3";
+			}if(typelist.equals("4")) {
+				type = "4";
+			}
+			pageVO.setType(typelist);
+		}else {
+			pageVO.setType(null);
+		}
+		
+		if(picklist != null){
+			pageVO.setPick("1");
+		}else {
+			pageVO.setPick(null);
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		
+		if(type != null && !type.equals("") && item != null && !item.equals("") && pick != null && !pick.equals("")) { // 다 널이아닐때
+			System.out.println("1");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			pageVO.setItem(item);
+			pageVO.setPick("1");
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}else if(type != null && !type.equals("") && item != null && !item.equals("")) { //타입이랑 품목만 널이아닐때
+			System.out.println("2");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			pageVO.setItem(item);
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}else if(item != null && !item.equals("") && pick != null && !pick.equals("")) { // 품목과 픽업여부만 널이아닐때
+			System.out.println("3");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			pageVO.setItem(item);
+			pageVO.setPick("1");
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}else if(type != null && !type.equals("") && pick != null && !pick.equals("")) { // 타입과 픽업여부가 널이아닐때
+			System.out.println("4");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			pageVO.setPick("1");
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}else if(type != null && !type.equals("")) { // 타입만 널이아닐때
+			System.out.println("5");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}else if(item != null && !item.equals("")) { // 품목만 널이아닐때
+			System.out.println("6");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}else if(pick != null && !pick.equals("")) { // 픽업여부만 널이아닐때
+			System.out.println("7");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			pageVO.setPick("1");
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}else { //전부다 널일때
+			System.out.println("8");
+			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
+			mav.addObject("list", categoryService.uglyItem(pageVO));
+		}
 		mav.addObject("list", categoryService.uglyItem(pageVO));
 		mav.setViewName("custom/category/uglyItem");
 		mav.addObject("pageVO",pageVO);
@@ -280,12 +413,18 @@ public class CategoryController {
 	
 	//베스트상품
 	@RequestMapping("/Bestcategory")
-	public ModelAndView Bestcategory(HttpServletRequest req, HttpServletResponse res) {
+	public ModelAndView Bestcategory(HttpServletRequest req, PageSearchVO pageVO) {
 		ModelAndView mav = new ModelAndView();
+		String item = "", //과일,채소,쌀잡곡, 베스트 상품, 신상품등 품목들
+				type="", //평점낮은순, 평점높은순, 가격순, 가격낮은순 
+				pick=""; //픽업여부
 		
 		String pageNumStr = req.getParameter("pageNum");
+		String itemlist = req.getParameter("item");
+		String typelist = req.getParameter("type");
+		String picklist = req.getParameter("pick");
 		
-		PageSearchVO pageVO = new PageSearchVO();
+		//페이지
 		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}
@@ -293,52 +432,104 @@ public class CategoryController {
 		//검색어, 검색키
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
-		pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 		
-		mav.addObject("list", categoryService.Bestcategory(pageVO));
-		mav.setViewName("custom/category/Bestcategory");
+		//품목
+		if(itemlist != null) {
+			if(itemlist.equals("Fruit")) {
+				item = "Fruit";
+			}else if(itemlist.equals("vegetable")) {
+				item = "vegetable";
+			}else if(itemlist.equals("Rice")) {
+				item = "Rice";
+			}else if(itemlist.equals("sinsang")) {
+				item = "sinsang";
+			}
+			pageVO.setItem(item);
+		}else {
+			pageVO.setItem(null);
+		}
+
+		//타입 평점낮은순, 높은순 등등
+		if(typelist != null) {
+			if(typelist.equals("1")) {
+				type = "1";
+			}if(typelist.equals("2")) {
+				type = "2";
+			}if(typelist.equals("3")) {
+				type = "3";
+			}if(typelist.equals("4")) {
+				type = "4";
+			}
+			pageVO.setType(typelist);
+		}else {
+			pageVO.setType(null);
+		}
+		
+		if(picklist != null){
+			pageVO.setPick("1");
+		}else {
+			pageVO.setPick(null);
+		}
+		
+		if(type != null && !type.equals("") && item != null && !item.equals("") && pick != null && !pick.equals("")) { // 다 널이아닐때
+			System.out.println("1");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			pageVO.setItem(item);
+			pageVO.setPick("1");
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}else if(type != null && !type.equals("") && item != null && !item.equals("")) { //타입이랑 품목만 널이아닐때
+			System.out.println("2");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			pageVO.setItem(item);
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}else if(item != null && !item.equals("") && pick != null && !pick.equals("")) { // 품목과 픽업여부만 널이아닐때
+			System.out.println("3");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			pageVO.setItem(item);
+			pageVO.setPick("1");
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}else if(type != null && !type.equals("") && pick != null && !pick.equals("")) { // 타입과 픽업여부가 널이아닐때
+			System.out.println("4");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			pageVO.setPick("1");
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}else if(type != null && !type.equals("")) { // 타입만 널이아닐때
+			System.out.println("5");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			pageVO.setType(type);
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}else if(item != null && !item.equals("")) { // 품목만 널이아닐때
+			System.out.println("6");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}else if(pick != null && !pick.equals("")) { // 픽업여부만 널이아닐때
+			System.out.println("7");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			pageVO.setPick("1");
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}else { //전부다 널일때
+			System.out.println("8");
+			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
+			mav.addObject("list", categoryService.Bestcategory(pageVO));
+		}
+		
+		if(itemlist != null) {
+			if(itemlist.equals("Fruit")) {
+				mav.setViewName("custom/category/categoryFruit");
+			}else if(itemlist.equals("vegetable")) {
+				mav.setViewName("custom/category/categoryvegetable");
+			}else if(itemlist.equals("Rice")) {
+				mav.setViewName("custom/category/categoryRice");
+			}else if(itemlist.equals("sinsang")) {
+				mav.setViewName("custom/category/sinsang");
+			}
+		}else {
+			mav.setViewName("custom/category/Bestcategory");
+		}
 		mav.addObject("pageVO",pageVO);
-		
 		return mav;
 	}
-	
-	//픽업여부체크시
-//	@RequestMapping("/pickupCheckTure")
-//	@ResponseBody
-//	public ModelAndView pickupCheckTure() {
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.pickupCheckTure());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
-//	
-//	//픽업여부 해제시>메인으로
-//	@RequestMapping("/pickupCheckFalse")
-//	@ResponseBody
-//	public ModelAndView pickupCheckFalse() {
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.categorylist());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
-//	
-//	//평점높은순
-//	@RequestMapping("/highhigh1")
-//	@ResponseBody
-//	public ModelAndView highhigh1(){
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.highhigh1());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
-//	
-//	//평점낮은순
-//	@RequestMapping("/lowlow1")
-//	@ResponseBody
-//	public ModelAndView lowlow1(){
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", categoryService.lowlow1());
-//		mav.setViewName("custom/category/category");
-//		return mav;
-//	}
 }

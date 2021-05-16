@@ -24,8 +24,10 @@ public interface CategoryDAO {
 
 	public int BestcategoryOnetotalRecord(PageSearchVO pageVO);
 
-//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item, String type);
-//
-//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item);
+	public List<CategoryVO> mapclick(String name);
+
+	public int categoryChargeOnetotalRecord(PageSearchVO pageVO);
+
+	public int uglycategoryOnetotalRecord(PageSearchVO pageVO);
 
 }

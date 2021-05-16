@@ -429,12 +429,16 @@
         
   	 });
 	$(function(){
+		var cate_href = ["/sshj/categoryMain","/sshj/categoryCharge","/sshj/payCategory"]
+		var cate_midhref = [["/sshj/categoryMain", "/sshj/categoryMain?item=Fruit", "/sshj/categoryMain?item=vegetable", "/sshj/categoryMain?item=Rice"],
+							["/sshj/categoryCharge?area=전체/전체", "/sshj/mapping"],
+							["/sshj/payCategory?pay=5000", "/sshj/payCategory?pay=10000", "/sshj/payCategory?pay=50000", "/sshj/payCategory?pay=50001"]];
 		var cate_top = ["상품품목별", "지역별", "가격대별"];
 		var cate_mid = [["전체", "과일", "채소", "쌀/잡곡"],
 						["지역별 보기", "지도로 찾는 동네농장"],
 						["5,000원 이하", "10,000원 이하", "50,000원 이하", "50,000원 이상"]];
 		/* cate_top.map(function(value, index){
-			var cate_top_menu = "<li class='cateTopCate'><a href='#'><b>"+value+"</b></a><ul>";
+			var cate_top_menu = "<li class='cateTopCate'><a href=''><b>"+value+"</b></a><ul>";
 			cate_mid[index].map(function(mid_value, mid_index){
 				cate_top_menu += "<li class='cateMidCate'><a href='#'>"+mid_value+"</a></li>";
 			});
@@ -442,9 +446,9 @@
 			$("#cateUl").append(cate_top_menu);
 		}); */
 		cate_top.map(function(value, index){
-			var cate_top_menu = "<li class='categoriTop'><a href='#'><b>"+value+"</b></a><ul>";
+			var cate_top_menu = "<li class='categoriTop'><a href='"+cate_href[index]+"'><b>"+value+"</b></a><ul>";
 			cate_mid[index].map(function(mid_value, mid_index){
-				cate_top_menu += "<li class='categoriMid'><a href='#'>"+mid_value+"</a></li>";
+				cate_top_menu += "<li class='categoriMid'><a href='"+cate_midhref[index][mid_index]+"'>"+mid_value+"</a></li>";
 			});
 			cate_top_menu += "</ul></li>";
 			$("#categoriUl").append(cate_top_menu);
@@ -494,7 +498,7 @@
 				<div class="section">
 				<ul id="menuListUl">
 					<li><span><img src="/sshj/img/dmenu3.png" id="menuImg" class="menuImg"/>카테고리</span></li>
-					<li><a href="categoryMain">신상품</a></li>
+					<li><a href="categoryMain?item=sinsang">신상품</a></li>
 					<li><a href="Bestcategory">베스트</a></li>
 					<li><a href="uglyItem">못난이할인</a></li>
 					<li><a href="recipeHome">비트네</a></li>
@@ -557,13 +561,13 @@
                   <div id="kmiddelname">지역별</div>
                   <div id="karea"><a style="cursor:pointer">지역별보기</a></div>
                   <div style="display: none;" id="kareaMenu">
-                     <div><a href="categoryCharge">전체</a></div>
-                     <div><a href="categoryCharge">수도권</a></div>
-                     <div><a href="categoryCharge">강원도</a></div>
-                     <div><a href="categoryCharge">충청도</a></div>
-                     <div><a href="categoryCharge">경상도</a></div>
-                     <div><a href="categoryCharge">전라도</a></div>
-                     <div><a href="categoryCharge">제주도</a></div>
+                     <div><a href="/sshj/categoryCharge?area=전체/전체">전체</a></div>
+                     <div><a href="/sshj/categoryCharge?area=서울/전체&area=경기/전체">수도권</a></div>
+                     <div><a href="/sshj/categoryCharge?area=강원도/전체">강원도</a></div>
+                     <div><a href="/sshj/categoryCharge?area=충북/전체&area=충남/전체">충청도</a></div>
+                     <div><a href="/sshj/categoryCharge?area=경북/전체&area=경남/전체">경상도</a></div>
+                     <div><a href="/sshj/categoryCharge?area=전북/전체&area=전남/전체">전라도</a></div>
+                     <div><a href="/sshj/categoryCharge?area=제주도/전체">제주도</a></div>
                   </div>
                   <br/>
                   <div><a href="mapping">지도로 찾기</a></div>

@@ -57,13 +57,18 @@ public class CategoryServiceImp implements CategoryService {
 		return categoryDAO.BestcategoryOnetotalRecord(pageVO);
 	}
 
-//	@Override
-//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item, String type) {
-//		return categoryDAO.categoryOnetotalRecord(pageVO, item, type);
-//	}
-//
-//	@Override
-//	public int categoryOnetotalRecord(PageSearchVO pageVO, String item) {
-//		return categoryDAO.categoryOnetotalRecord(pageVO, item);
-//	}
+	@Override
+	public List<CategoryVO> mapclick(String name) {
+		return categoryDAO.mapclick(name);
+	}
+
+	@Override
+	public int categoryChargeOnetotalRecord(PageSearchVO pageVO) {
+		return categoryDAO.categoryChargeOnetotalRecord(pageVO);
+	}
+
+	@Override
+	public int uglycategoryOnetotalRecord(PageSearchVO pageVO) {
+		return categoryDAO.uglycategoryOnetotalRecord(pageVO);
+	}
 }

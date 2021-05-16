@@ -118,7 +118,7 @@
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span>로그인한 아이디</span></td>
+					<td  class="td"><span>${logId}</span></td>
 				</tr>
 				<tr>
 					<th colspan="4">문의 내용</th>
