@@ -19,7 +19,7 @@
 
 .section {
 	width: 1080px;
-	background-color: white;
+	
 	margin: 0 auto;
 }
 

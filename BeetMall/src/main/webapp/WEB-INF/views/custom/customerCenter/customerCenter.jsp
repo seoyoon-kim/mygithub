@@ -236,8 +236,9 @@
 			<!-- 검색/ 문의하기 버튼 -->
 			<div id="searchDiv">
 				<!--문의하기 버튼 -->
-				<a href="<%=request.getContextPath()%>/customerCenterWrite" class="btn" id="ask_btn">문의하기</a>
-		
+				<c:if test="${logId !=null}">
+					<a href="<%=request.getContextPath()%>/customerCenterWrite" class="btn" id="ask_btn">문의하기</a>
+				</c:if>
 				<!-- 검색하기 -->
 				<div id="search_container">
 					<form method="get" action="customerCenter" id="searchForm">

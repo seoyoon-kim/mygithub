@@ -124,8 +124,8 @@
     	padding-right: 50px;
 	}
 	#searchForm{
-	    float: right;
-	    margin-right: 220px;
+        float: right;
+    	margin-right: 115px;
 	}
 	#search_box{
 		border: none;
@@ -146,17 +146,17 @@
         overflow:auto;
     }
     #main{
-        padding-left: 250px;
-        border: 1px solid lightgray;
-        margin-top:80px;
+        padding-left: 160px;
+	    border: 1px solid lightgray;
+	    margin-top: 80px;
     }
     h1{
-        padding-left: 200px;
-        padding-bottom: 20px;
+        padding-left: 295px;
+    	padding-bottom: 20px;
     }
     #kareaM{
         overflow:auto;
-        width: 600px;
+        width: 800px;
     }
     #kareaM>div{
         float:left;
@@ -164,24 +164,32 @@
     #kAareaMain, #kAreamMall{
         border: 1px solid gray;
         overflow: auto;
-        width:300px;
+        width:200px;
         height:230px;
     }
     #productDiv>ul>li>img{
 		width:197px;
 	}
-    #kAareaMain>div, #kAreamMall>div{
+    #kAareaMain>div{
         float: left;
-	    padding-left: 30px;
-	    padding-top: 10px;
+	    margin-left: 30px;
+	    margin-top: 10px;
 	    letter-spacing: 2px;
 	    width: 50%;
 	    cursor: pointer;
     }
+    #kAreamMall>div{
+    	float: left;
+    /* margin-left: 30px; */
+	    margin-top: 10px;
+	    letter-spacing: 2px;
+	    width: 100%;
+	    cursor: pointer;
+    }
     #kContent{
-        width: 600px;
+        width: 802px;
 	    height: 100px;
-	    background-color: rgb(245,245,245);
+	    background-color: rgb(250, 230, 210);
 	    overflow: auto;
 	    margin-top: 10px;
     }
@@ -203,8 +211,8 @@
 		appearance: none;
 	}
 	#boardUpddate{
-		margin-left: 533px;
-		margin-top: 10px;
+	    margin-left: 726px;
+    	margin-top: 10px;
 	}
 	
 	#searchBtn{
@@ -213,6 +221,16 @@
 	}
 	#kAreamMall>div>div {
     	padding-top: 10px;
+	    float: left;
+	    /* margin-left: 30px; */
+	    width: 32%;
+	    padding-left: 55px;
+	}
+	#coloor{
+		color:red;
+	}
+	#kAreamMall{
+		width:600px;
 	}
 </style>
 <script>
@@ -330,17 +348,17 @@
                 }
             }
             if(font == '경북'){
-                areaid = $("#kAreaMsanboak").attr('id');
-                area= $("#kAreaMsanboak").attr("style");
+                areaid = $("#kAreaMchangbunk").attr('id');
+                area= $("#kAreaMchangbunk").attr("style");
                 if(area =='display: none;'){
-                    $("#kAreaMsanboak").css("display","block")
+                    $("#kAreaMchangbunk").css("display","block")
                 }
             }
             if(font == '경남'){
-                areaid = $("#kAreaMsannam").attr('id');
-                area= $("#kAreaMsannam").attr("style");
+                areaid = $("#kAreaMchangnum").attr('id');
+                area= $("#kAreaMchangnum").attr("style");
                 if(area =='display: none;'){
-                    $("#kAreaMsannam").css("display","block")
+                    $("#kAreaMchangnum").css("display","block")
                 }
             }
             if(font == '제주도'){
@@ -351,54 +369,121 @@
                 }
             }
         });
-	        $("#kAreamMall").children().children().click(function(){
-	            var name= $(this).text();
-	            $(this).css("color","red");
-	            $("#kContent").append("<div style='padding-left: 10px; letter-spacing: 1px;'><span>"+name+
-	            					  "</span><span class='arrea' style='cursor: pointer;'>&times;</span>"+"&nbsp;&nbsp;</div>"+
-	            					  "<input type='hidden' name='"+name+"' value="+name);
-	        });
-	       
-	        $(document).on('click',"#kContent>div", function(){
-	        	$(this).remove();
-	        });
-	        
-	        //서버로보낼값
-	        $('#boardUpddate').submit(function(){
-	        	console.log("여기오냐?")
-	        	//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
-				if($('#kContent').text()==""){
-					alert("검색어를 입력하세요.");
-					return false;
-				}
-				return true;
-	        });
+        $("#kAareaMain").children().click(function(){
+        	$(this).css("font-weight","bold");
+        });
+        
+        $("#kAreamMall").children().children().click(function(){
+            var name= $(this).text();
+            /* $(this).css("color","red"); */
+            $("#kContent").append("<div style='padding-left: 10px; padding-top: 10px; letter-spacing: 1px;'><span>"+name+
+            					  "</span><input type='hidden' name='area' value="+name+"><span class='arrea' style='cursor: pointer;'>&times;</span>"+"&nbsp;&nbsp;</div>");
+            /* $("#gdro").append("<input type='text' name="++"value="+name+">"); */
+        });
+       
+        $(document).on('click',"#kContent>div", function(){
+        	$(this).remove();
+        });
+        
+        $("#searchForm").submit(function(){
+        	console.log(area);
+        }); 
     
-	       ///여기바꿔야함///////////////////////////////////////////////////////////////////////
+       ///여기바꿔야함///////////////////////////////////////////////////////////////////////
+       
+       //지역넣어줄값
+       
+       
 		$('#Sequence').change(function(){
+			var hrefff ="/sshj/categoryCharge?"
 	   		if($('#Sequence option:selected').val() == "평점높은순"){
-	            if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
-	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=1"
+	            if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
+	            	hrefff += "area="+$("#area1").val();
+	            	if($("#area2").val() != null && $("#area2").val()!=''){
+	            		hrefff += "area="+$("#area2").val();
+	            		
+	            		if($("#area3").val() != null && $("#area3").val()!=''){
+	            			hrefff += "area="+$("#area3").val();
+	            			
+	            			if($("#area4").val() != null && $("#area4").val()!=''){
+		            			hrefff += "area="+$("#area4").val();
+		            			
+		            			if($("#area5").val() != null && $("#area5").val()!=''){
+			            			hrefff += "area="+$("#area5").val();
+				            	}
+			            	}
+		            	}
+	            	}
+	            	hrefff += "&type=1";
+	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=1"
+	            	location.href="/sshj/categoryCharge?type=1"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "평점낮은순"){
-	   		 	if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
-	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=2"
+	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
+	            	hrefff += "area="+$("#area1").val();
+	            	if($("#area2").val() != null && $("#area2").val()!=''){
+	            		hrefff += "area="+$("#area2").val();
+	            		
+	            		if($("#area3").val() != null && $("#area3").val()!=''){
+	            			hrefff += "area="+$("#area3").val();
+	            			
+	            			if($("#area4").val() != null && $("#area4").val()!=''){
+		            			hrefff += "area="+$("#area4").val();
+		            			
+		            			if($("#area5").val() != null && $("#area5").val()!=''){
+			            			hrefff += "area="+$("#area5").val();
+				            	}
+			            	}
+		            	}
+	            	}
+	            	hrefff += "&type=2";
+	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=2"
+	            	location.href="/sshj/categoryCharge?type=2"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰많은순"){
-	   		 	if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
-	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=3"
+	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
+	            	hrefff += "area="+$("#area1").val();
+	            	if($("#area2").val() != null && $("#area2").val()!=''){
+	            		hrefff += "area="+$("#area2").val();
+	            		
+	            		if($("#area3").val() != null && $("#area3").val()!=''){
+	            			hrefff += "area="+$("#area3").val();
+	            			
+	            			if($("#area4").val() != null && $("#area4").val()!=''){
+		            			hrefff += "area="+$("#area4").val();
+		            			
+		            			if($("#area5").val() != null && $("#area5").val()!=''){
+			            			hrefff += "area="+$("#area5").val();
+				            	}
+			            	}
+		            	}
+	            	}
+	            	hrefff += "&type=3";
+	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=3"
+	            	location.href="/sshj/categoryCharge?type=3"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰적은순"){
-	   			if($("#payStart").val() != null && $("#payStart").val()!=''){//페이시작이 널이아닐때
-	            	location.href="/sshj/categoryCharge?payStart="+$("#payStart").val()+"&payfinish="+$("#payfinish").val()+"&type=4"
+	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
+	            	hrefff += "area="+$("#area1").val();
+	            	if($("#area2").val() != null && $("#area2").val()!=''){
+	            		hrefff += "area="+$("#area2").val();	            		
+	            		if($("#area3").val() != null && $("#area3").val()!=''){
+	            			hrefff += "area="+$("#area3").val();	            			
+	            			if($("#area4").val() != null && $("#area4").val()!=''){
+		            			hrefff += "area="+$("#area4").val();		
+		            			if($("#area5").val() != null && $("#area5").val()!=''){
+			            			hrefff += "area="+$("#area5").val();
+				            	}
+			            	}
+		            	}
+	            	}
+	            	hrefff += "&type=4";
+	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?pay="+$("#pay").val()+"&type=4"
+	            	location.href="/sshj/categoryCharge?type=4";
 	            }
 	   		}
 		});
@@ -413,8 +498,151 @@
 	    }else if($('#type').val()=='4'){
 	    	$('#Sequence').val('리뷰적은순').prop("selected",true);
 	    }
-
  	});
+    
+  	//이전페이지 가기
+	function prevPage(){
+		var loca = "/sshj/categoryCharge?";
+		if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
+			loca += "area="+$("#area1").val();
+        	if($("#area2").val() != null && $("#area2").val()!=''){
+        		loca += "area="+$("#area2").val();	            		
+        		if($("#area3").val() != null && $("#area3").val()!=''){
+        			loca += "area="+$("#area3").val();	            			
+        			if($("#area4").val() != null && $("#area4").val()!=''){
+        				loca += "area="+$("#area4").val();		
+            			if($("#area5").val() != null && $("#area5").val()!=''){
+            				loca += "area="+$("#area5").val();
+		            	}
+	            	}
+            	}
+        	}
+		}
+		if($("#type").val() != null && $("#type").val()!=''){
+			if($("#area").val() != null && $("#area").val()!=''){
+				loca += "&type="+$("#type").val();
+			}else{
+				loca += "type="+$("#type").val();
+			}
+		}
+		if($("#pageNum").val() != null && $("#pageNum").val()!=''){
+			if($("#area").val() != null && $("#area").val()!='' ||
+			   $("#type").val() != null && $("#type").val()!=''){
+				var pagenumgg = Number($("#pageNum").val())-1
+				loca += "&pageNum="+ pagenumgg ;
+			}else{
+				var pagenumgg = Number($("#pageNum").val())-1
+				loca += "pageNum="+ pagenumgg;
+			}
+		}
+		if($("#searchWord").val() != null && $("#searchWord").val()!=''){
+			if($("#area").val() != null && $("#area").val()!='' ||
+			   $("#type").val() != null && $("#type").val()!='' ||
+			   $("#pageNum").val() != null && $("#pageNum").val()!=''){
+				loca += "&searchWord="+$("#searchWord").val();
+			}else{
+				loca += "searchWord="+$("#searchWord").val();
+			}
+		}
+		location.href=loca;
+		return loca;
+	}
+	
+	//다음페이지 가기
+	function nextPage(){
+		var loca = "/sshj/categoryCharge?";
+		if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
+			loca += "area="+$("#area1").val();
+        	if($("#area2").val() != null && $("#area2").val()!=''){
+        		loca += "area="+$("#area2").val();	            		
+        		if($("#area3").val() != null && $("#area3").val()!=''){
+        			loca += "area="+$("#area3").val();	            			
+        			if($("#area4").val() != null && $("#area4").val()!=''){
+        				loca += "area="+$("#area4").val();		
+            			if($("#area5").val() != null && $("#area5").val()!=''){
+            				loca += "area="+$("#area5").val();
+		            	}
+	            	}
+            	}
+        	}
+		}
+		if($("#type").val() != null && $("#type").val()!=''){
+			if($("#area").val() != null && $("#area").val()!=''){
+				loca += "&type="+$("#type").val();
+			}else{
+				loca += "type="+$("#type").val();
+			}
+		}
+		if($("#pageNum").val() != null && $("#pageNum").val()!=''){
+			if($("#area").val() != null && $("#area").val()!='' ||
+			   $("#type").val() != null && $("#type").val()!=''){
+				var pagenumgg = Number($("#pageNum").val())+1
+				loca += "&pageNum="+ pagenumgg ;
+			}else{
+				var pagenumgg = Number($("#pageNum").val())+1
+				loca += "pageNum="+ pagenumgg;
+			}
+		}
+		if($("#searchWord").val() != null && $("#searchWord").val()!=''){
+			if($("#area").val() != null && $("#area").val()!='' ||
+			   $("#type").val() != null && $("#type").val()!='' ||
+			   $("#pageNum").val() != null && $("#pageNum").val()!=''){
+				loca += "&searchWord="+$("#searchWord").val();
+			}else{
+				loca += "searchWord="+$("#searchWord").val();
+			}
+		}
+		location.href=loca;
+		return loca;
+	}
+	
+	//클릭한 페이지 이동하기
+	function clickPage(click){
+		var loca = "/sshj/categoryCharge?";
+		if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
+			loca += "area="+$("#area1").val();
+        	if($("#area2").val() != null && $("#area2").val()!=''){
+        		loca += "area="+$("#area2").val();	            		
+        		if($("#area3").val() != null && $("#area3").val()!=''){
+        			loca += "area="+$("#area3").val();	            			
+        			if($("#area4").val() != null && $("#area4").val()!=''){
+        				loca += "area="+$("#area4").val();		
+            			if($("#area5").val() != null && $("#area5").val()!=''){
+            				loca += "area="+$("#area5").val();
+		            	}
+	            	}
+            	}
+        	}
+		}
+		if($("#type").val() != null && $("#type").val()!=''){
+			if($("#area").val() != null && $("#area").val()!=''){
+				loca += "&type="+$("#type").val();
+			}else{
+				loca += "type="+$("#type").val();
+			}
+		}
+		if($("#pageNum").val() != null && $("#pageNum").val()!=''){
+			if($("#area").val() != null && $("#area").val()!='' ||
+			   $("#type").val() != null && $("#type").val()!=''){
+				console.log(this);
+				loca += "&pageNum="+ click;
+			}else{
+				console.log(this);
+				loca += "pageNum="+ click;
+			}
+		}
+		if($("#searchWord").val() != null && $("#searchWord").val()!=''){
+			if($("#area").val() != null && $("#area").val()!='' ||
+			   $("#type").val() != null && $("#type").val()!='' ||
+			   $("#pageNum").val() != null && $("#pageNum").val()!=''){
+				loca += "&searchWord="+$("#searchWord").val();
+			}else{
+				loca += "searchWord="+$("#searchWord").val();
+			}
+		}
+		location.href=loca;
+		return loca;
+	}
 </script>
 	<div class="section">
 		<div id="main">
@@ -434,10 +662,25 @@
 			<c:if test="${pageVO.pageNum != null && pageVO.pageNum != ''}">
 				<input type="hidden" id="pageNum" value="${pageVO.pageNum}"/>
 			</c:if>
+			<c:if test="${pageVO.area1 != null}">
+				<input type="hidden" id="area1" value="${pageVO.area1}"/>
+			</c:if>
+			<c:if test="${pageVO.area2 != null}">
+				<input type="hidden" id="area2" value="${pageVO.area2}"/>
+			</c:if>
+			<c:if test="${pageVO.area3 != null}">
+				<input type="hidden" id="area3" value="${pageVO.area3}"/>
+			</c:if>
+			<c:if test="${pageVO.area4 != null}">
+				<input type="hidden" id="area4" value="${pageVO.area4}"/>
+			</c:if>
+			<c:if test="${pageVO.area5 != null}">
+				<input type="hidden" id="area5" value="${pageVO.area5}"/>
+			</c:if>
 	        <div id="kareaM">
 	            <div id="kAareaMain">
-	                <div style="padding-top: 20px;">전체</div>
-	                <div style="padding-top: 20px;">서울</div>
+	                <div style="margin-top: 20px;">전체</div>
+	                <div>서울</div>
 	                <div>부산</div>
 	                <div>대구</div>
 	                <div>인천</div>
@@ -460,7 +703,7 @@
 	                    <div id="kAreamAllAll">전체/전체</div>
 	                </div>
 	                <div id="kAreaMseoul" style="display: none;">
-	                    <div>전체</div>
+	                    <div>서울/전체</div>
 	                    <div>강남구</div>
 	                    <div>강동구</div>
 	                    <div>강북구</div>
@@ -737,9 +980,9 @@
 	            </div>
 	        </div>
 	        <form method="get" action="categoryCharge" id="searchForm">
-		        <div id="kContent">
+		        <table id="kContent">
 				
-		        </div>
+		        </table>
 		        <input type="submit" value="검색하기" id="boardUpddate" class="btn" style="margin-bottom: 20px;"/>
 	      	</form>
 	    </div>

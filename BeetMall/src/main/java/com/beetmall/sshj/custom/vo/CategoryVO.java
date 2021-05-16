@@ -29,7 +29,10 @@ public class CategoryVO {
 	
 	//베스트 상품떄문에 필요한 칼럼
 	private int ordernum; //구매량
-
+	
+	//이름떄문에 필요한칼럼
+	private String farmname; //농장이름
+	
 	//날짜함수
 	SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	Date now = new Date();
@@ -131,5 +134,10 @@ public class CategoryVO {
 	public void setOrdernum(int ordernum) {
 		this.ordernum = ordernum;
 	}
-	
+	public String getFarmname() {
+		return farmname;
+	}
+	public void setFarmname(String farmname) {
+		this.farmname = farmname;
+	}
 }
