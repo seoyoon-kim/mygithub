@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerReviewDAO">
 	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
-		select reviewnum, ordernum, c.productnum productnum, reviewcontent, 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
-			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		select 
+			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, 
+			reviewscore, reviewanswer
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where a.userid='${userid}') c join review d on c.productnum = d.productnum 
@@ -54,16 +54,16 @@
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc)</when>
-			<when test="sortStr == 1">order by reviewscore desc)</when>
-			<when test="sortStr == 2">order by reviewscore asc)</when>
+			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc, reviewanswer desc)</when>
+			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate asc, reviewanswer asc)</when>
 		</choose>
 		
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} 
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer asc, reviewwritedate asc)</when>
-			<when test="sortStr == 1">order by reviewscore asc)</when>
-			<when test="sortStr == 2">order by reviewscore desc)</when>
+			<when test="sortStr == 1">order by reviewscore asc, reviewwritedate asc, reviewanswer asc)</when>
+			<when test="sortStr == 2">order by reviewscore desc, reviewwritedate desc, reviewanswer desc)</when>
 		</choose>
 
 		
@@ -74,16 +74,14 @@
 		
 		<choose>
 			<when test="sortStr == 0">order by reviewanswer desc, reviewwritedate desc</when>
-			<when test="sortStr == 1">order by reviewscore desc</when>
-			<when test="sortStr == 2">order by reviewscore asc</when>
+			<when test="sortStr == 1">order by reviewscore desc, reviewwritedate desc, reviewanswer desc</when>
+			<when test="sortStr == 2">order by reviewscore asc, reviewwritedate asc, reviewanswer asc</when>
 		</choose>
 
 	</select>
 	
 	<select id="reviewlistRecord" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
-		select reviewnum, ordernum, c.productnum productnum, reviewcontent, c.userid, 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
-			reviewimg, reviewscore, reviewreport, reviewanswer, productname
+		select reviewnum
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where 
@@ -136,5 +134,9 @@
 			, '리뷰', ${reviewnum}, #{reportReason}
 			, #{reportContent}, sysdate, 1)
 	</insert>
+	
+	<update id="reviewAnswerUpdate" parameterType="int">
+		update review set reviewanswer = #{reviewanswer} where userid = #{userid} and reviewnum = ${reviewnum} 
+	</update>
 	
 </mapper>

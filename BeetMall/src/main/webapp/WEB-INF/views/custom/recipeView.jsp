@@ -106,10 +106,13 @@ ul>li {
 	list-style-type: none;
 }
 
+
 #reciList, #recivb, #reciContenView {
 	padding: 0px;
 	margin: 0px;
 }
+
+
 
 #recipettile>b {
 	float: left;
@@ -118,6 +121,7 @@ ul>li {
 	height: 20px;
 	margin-top: 10px;
 }
+
 
 /*  큰제목----------------------------------------------                 */
 #recit {
@@ -313,7 +317,7 @@ td, .td{
 
 </style>
 
-<body>
+<body onload="countg()">
 
 	<div class="section">
 
@@ -390,7 +394,7 @@ td, .td{
 		
 
 		<!-- ------------------------하단 표시들----------------------------------- -->
-		<c:if test="${logId==vo.userid}">
+		<c:if test="${logId!=null}">
 			
 		
 		<ul id="recivb">
@@ -422,6 +426,18 @@ function Deletebtn(){
 	
 };
 
+function countg(){
+	if(${countrg>=1}){
+		  var good="<div id='nogoodid' onclick='nogoodset()'>추천해요<img src='img/dlike.png' id='nogoodimg'></div>"
+		  document.getElementById("goodidli").innerHTML=good;
+	}
+	
+	if(${countrk>=1}){
+		 var keep="<div id='nokeepid' onclick='nokeepset()''>즐겨찾기<img src='img/ccart.png' id='nokeepimg'></div>"
+		 document.getElementById("keepidli").innerHTML=keep;
+	}
+	
+}
 
 function goodset(){
 	
@@ -464,6 +480,23 @@ function goodset(){
 function nogoodset(){
 	  var good="<div id='goodid' onclick='goodset()'>추천해요<img src='img/dunlike.png' id='goodimg'></div>"
 	  document.getElementById("goodidli").innerHTML=good;
+	  
+		 var url = "recigoodDelete";		
+		 var data= "id=${logId}&num=${vo.recipenum}";
+		console.log(url,data);
+		$.ajax({
+			url:url,
+			data:data,
+			success:function(result){
+				console.log('추천기록 빼기 성공---> ');
+				
+			},error:function(e){
+				console.log(e.responseText);
+				console.log("추천기록 빼기 실패");
+			}
+		})
+		
+		
 	  }
 
 
@@ -493,6 +526,23 @@ function keepset(){
 function nokeepset(){
 	var keep="<div id='keepid' onclick='keepset()''>즐겨찾기<img src='img/ccart2.png' id='keepimg'></div>"
 	document.getElementById("keepidli").innerHTML=keep;
+	
+	var url = "recikeepDelete";		
+	 var data= "id=${logId}&num=${vo.recipenum}";
+	console.log(url,data);
+	$.ajax({
+		url:url,
+		data:data,
+		success:function(result){
+			console.log('장바구니 빼기 성공---> ');
+			
+		},error:function(e){
+			console.log(e.responseText);
+			console.log("장바구니 빼기 실패");
+		}
+	})
+	
+	
 	  }
 
 	  

@@ -27,10 +27,10 @@ public class admin_customerController {
 		return mav;
 	}
 	//회원정보 수정
-	@RequestMapping("/customerInfoEditA")
-	public ModelAndView customerInfoEditA() {
+	@RequestMapping("/boardCustomerInfoEdit")
+	public ModelAndView boardCustomerInfoEdit() {
 		ModelAndView mav = new ModelAndView(); 
-		mav.setViewName("/admin/customerInfoEditA");
+		mav.setViewName("/admin/boardCustomerInfoEdit");
 		return mav;
 	}
 	//탈퇴회원보기

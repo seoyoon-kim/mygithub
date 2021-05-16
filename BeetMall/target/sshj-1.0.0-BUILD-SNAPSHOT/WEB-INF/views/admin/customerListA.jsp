@@ -14,64 +14,73 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
  <style> 
-	 #container li{ list-style-type:none; float:left; width:10%; } 
-	#ascBtn, #descBtn{ top:-2px; } 
-	#contentBox{ top:20px; margin-left:10px;}
-	#contentBox li{ text-align:center; } 
-	#contentBox li:nth-of-type(8n-7){ width:0%; }
-	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1){  width:30%; padding-left:20px; } 
-	#title li:nth-of-type(5), #contentBox li:nth-of-type(5){ width:15%; }
-	#title li:nth-of-type(6){padding-left:18px;} 
-	#topBar{ 
-		background-color:lightgray; 
-		float:left; 
-		height:50px; 
-		padding:10px 0 0 0px;  
-		width:1280px;
-		left:-200px;
+	 #container li{ 
+		 list-style-type:none; 
+		 float:left; 
+		 width:10%; 
+	 }  
+	#contentBox{ 
+		top:20px; 
+		margin-left:10px;
 	}
-	#topBar li:nth-of-type(2){
-		margin-left:70px; 
-		width:12%;
+	#contentBox li:nth-of-type(8n-7){ 
+		width:0%; 
 	}
-	#topBar li:nth-of-type(3){width:5.5%;} 
-	#topBar li:nth-of-type(4){width:14%;}   
-	select{width:100px;}
-	#btns{ top:-115px; left:460px; } 
-	#btns a>button, button:nth-of-type(4){ margin-left:900px; }  
-	#title{ width: 1080px; font-weight:bold; padding:65px 0 25px 0; border-bottom:gray 1px solid;}
-	.noticeList{ padding-top:5px; position:relative; left:-20px;} 
-	.noticeList:nth-of-type(1){ padding-top:10px;}
-	.noticeList:nth-child(2){ margin-left:10px;}
-	#noticeSearchFrm{ top:30px; left:360px; }
-	input[type=checkbox] {zoom: 1.8;} 
-	#subjectLine{white-space:nowrap; overflow:hidden;text-overflow:ellipsis;}
+	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1){  
+		width:30%; 
+		padding-left:20px; 
+	}    
+	#topBar li:nth-of-type(3){
+		width:5.5%;
+	} 
+	#topBar li:nth-of-type(4){
+		width:14%;
+	}      
+	#subjectLine{
+		white-space:nowrap; 
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
 	#content input, textarea, select, #noticeSearchFrm input{
 		border:1px solid lightgray; 
-		border-radius: 8px;
-	}#content li, label{list-style-type:none; padding-bottom:10px;}
-	#content select{height:28px;}
-		
-	#topBar Button:nth-of-type(1),#topBar Button:nth-of-type(2),#topBar Button:nth-of-type(3),#topBar Button:nth-of-type(4){
-		padding:2px 7px;
+		border-radius: 3px;
+	}#content li, label{
+		list-style-type:none; 
+		padding-bottom:10px;
 	}
+	#content select{
+		height:28px;
+	} 
+	/*버튼*/
+	#btns{ 
+		top:-115px; 
+		left:460px; 
+	} 
+	#btns a>button, button:nth-of-type(4){ 
+		margin-left:900px; 
+	} 
+	#topBar Button:nth-of-type(1),
+	#topBar Button:nth-of-type(2),
+	#topBar Button:nth-of-type(3),
+	#topBar Button:nth-of-type(4){
+		padding:2px 7px;
+	}  
 	
-	/* 페이징처리부분 */
-	
+	/* 페이징처리부분 */ 
 	.page_nation .pprev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_pprev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
 	}
 	.page_nation .prev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_prev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
 		margin-right:7px;
 	}
 	.page_nation .next {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_next.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
 	}
 	.page_nation .nnext {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_nnext.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
 	.page_nation a.active {
@@ -80,18 +89,14 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
-</style>
-<script>
- 
-</script>
-</head>
-<body>
+</style> 
 <%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %>
+<div id="body1">
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong>일반회원</strong></h5></li> 
+				<li><h5><strong><a href="customerListA">일반회원</a></strong></h5></li> 
 				<li><select name="sort" > 
 		   				<option value="이름" selected>이름</option>
 		   				<option value="아이디">아이디</option>
@@ -121,6 +126,173 @@
 				<li>가입일</li> 
 			</ul>
 		</div>  
+		
+		 
+			<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li> 홍길동</li>
+				<li><a href="회원정보?">id</a></li>
+				<li>23</li>
+				<li>abc@email.com</li>  
+				<li>93-02-21</li>
+				<li>서울시 마포구 백범로</li>
+				<li>2021-02-16<br/></li> 
+			</ul> 
+		 
+
+
+ 
+		<!--  
 		<c:forEach var="data" items="${list}">
 			<ul class="noticeList">
 				<li><input type="checkbox" name="check" id="check"> </li>
@@ -132,7 +304,7 @@
 				<li>서울시 마포구 백범로</li>
 				<li>2021-02-16<br/></li> 
 			</ul>
-		</c:forEach>
+		</c:forEach>-->
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
@@ -190,19 +362,18 @@
 	 </ul>		
  -->
  
-	 <div>
-		<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-			<select name="searchKey">
-				<option value="subject" selected>제목</option>
-   				<option value="no">공지번호</option> 
-   				<option value="who">대상</option> 
-   				<option value="writedate">공지일</option> 
-			</select>			
-			<input type="text" name="searchWord" id="searchWord"/>
-			<input type="submit" value="검색"/> 
-		</form>
-		
-	</div>  
-		</div>
-</body>
+		 <div>
+			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<select name="searchKey">
+					<option value="subject" selected>제목</option>
+	   				<option value="no">공지번호</option> 
+	   				<option value="who">대상</option> 
+	   				<option value="writedate">공지일</option> 
+				</select>			
+				<input type="text" name="searchWord" id="searchWord"/>
+				<input type="submit" value="검색"/> 
+			</form> 
+		</div>  
+	</div>
+</div> 
 </html>

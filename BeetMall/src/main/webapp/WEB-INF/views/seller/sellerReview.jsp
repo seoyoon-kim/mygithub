@@ -280,7 +280,7 @@ function sortChange(result){
 	
 }
 
-//페이징
+//페이징,, DB 데이터 전부다 불러오는 기능이 들어가 있다
 function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate){
 	// 제한사항 걸러내기....
 	if(sortStr == undefined){
@@ -298,6 +298,12 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		endDate = "";
 	}
 	
+	console.log(pageNum);
+	console.log(sortStr);
+	console.log(mcatenumDataArr);
+	console.log(searchTxt);
+	console.log(startDate);
+	console.log(endDate);
 	
 	let url = "SellerReviewPaging";
 	let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord}+"&sortStr="+sortStr;
@@ -313,8 +319,8 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 				tag += "<li>평점</li>";
 				tag += "<li>포토</li>";
 				tag += "<li>리뷰 내용</li>";
-				tag += "<li>등록자</li>";
-				tag += "<li>등록일</li>";
+				tag += "<li>작성자</li>";
+				tag += "<li>작성일</li>";
 				tag += "<li>답변 여부</li>";
 
 			result2 = $(result[0]);
@@ -323,9 +329,9 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 				tag += "<li>" + vo.reviewscore + "</li>";
 				if(vo.reviewimg != null){
 					let data = vo.reviewimg;
-					tag += "<li style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )></li>";
+					tag += "<li value=\'"+data+"\' style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )><input type='hidden' value=\'"+data+"\'></li>";
 				} else {
-					tag += "<li>-</li>";
+					tag += "<li><input type='hidden' value=\'"+data+"\'>-</li>";
 				}
 				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a></li>";
 				tag += "<li>" + vo.userid + "</li>";
@@ -354,20 +360,20 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 
 			let pagingData = result[1];
 			if(pagingData.pageNum != 1){
-				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
-				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow prev" href="javascript:paging('+(pagingData.pageNum-1)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 			for(let i = pagingData.startPageNum; i <= pagingData.totalPage; i++){
 				if(pagingData.pageNum == i){
 					pagingTag += '<a class="active" href="#" onclick="return false;">'+(i)+'</a>';
 				} else {
-					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')">'+(i)+'</a>';
+					pagingTag += '<a class="arrow" href="javascript:paging('+(i)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')">'+(i)+'</a>';
 				}
 			}
 			
 			if(pagingData.totalPage != pagingData.pageNum){
-				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
-				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+','+mcatenumDataArr+',\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
+				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
 
 			$('.page_nation').html(pagingTag);
@@ -376,6 +382,355 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		}
 	})
 }
+
+/////////////////////////////////////////////// 팝업///////////////////////
+// 팝업창 만들기! 
+function popupOpen(data){
+	
+	// 상품명
+	let reviewnum = $(data).children().val();
+	let productname = $(data).parent().prev().prev().prev().text();
+	let reviewscore = $(data).parent().prev().prev().text();
+	let reviewcontent = $(data).text().trim();
+	let userid = $(data).parent().next().text();
+	let reviewwritedate = $(data).parent().next().next().text();
+	let reviewanswer = $(data).parent().next().next().next().text();
+	let reviewimg = $(data).parent().prev().children().val();
+	
+	if(reviewanswer == '답변 완료'){
+		reviewanswer = $(data).parent().next().next().next().children('input').val();
+	}
+	console.log(reviewanswer);
+	
+	let tag = '<div class="wrapContainer_Edit1">';
+		tag += '<form method="post" action="javascript:reviewAnswer()" id="popupFrm">';
+		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
+		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
+		tag += '<ul id="reviewManagement">';
+		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
+		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
+		tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
+		tag += '</ul>';	
+		tag += '<div>';
+		tag += '<br />';
+		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
+		tag += '<div id="reviewContent">';
+				if( reviewimg != ''){
+					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" id="repMenu_img" />';
+				}
+		tag += '<p>' + reviewcontent + '</p>';
+		tag += '</div>';
+		tag += '</div>';
+		tag += '<div id="reviewAnswer">';
+			if( reviewanswer == '미답변'){
+				tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
+			} else {
+				tag += '<div style="border-top:1px solid #ddd;">';
+				tag += '<p style="margin: 20px 10px ">' + reviewanswer + '<p>';
+				tag += '</div>';
+			}
+		tag += '<div id="popupBtnContainer">';
+			if( reviewanswer == '미답변'){
+				tag += '<input class="normalBtn" type="submit" value="등록" >';
+				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
+				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+			} else {
+				tag += '<input class="normalBtn" type="button" onclick="answerEdit(\''+ reviewnum+'\',\''+productname+'\',\''+reviewscore+'\',\''+reviewcontent+'\',\''+userid+'\',\''+reviewwritedate+'\',\''+reviewanswer+'\',\''+reviewimg +'\')" value="수정" >';
+				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
+				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+			}
+			tag += '</div>';
+		tag += '</div>';
+
+		tag += '</form>';
+		tag += '</div>';
+	
+	$('#popup').html(tag);
+	
+	let windowWidth = $(window).scrollLeft();
+	let windowHeight = $(window).scrollTop() + (window.innerHeight/2) - 250;
+	
+	$('body').css('overflow','hidden');
+	$('#modal').css('display','block').css('top', $(window).scrollTop() +"px").css('left',windowWidth+'px');
+	$('#popup').css('display','block').css('top',windowHeight+'px').css('left',windowWidth+'px');
+	
+}
+
+
+//팝업창 수정 만들기! 
+function answerEdit(reviewnum, productname, reviewscore, reviewcontent, userid, reviewwritedate, reviewanswer, reviewimg){
+	//$('body').css('overflow','auto');
+	//$('#modal').css('display','none');
+	//$('#popup').css('display','none');
+	
+	if(reviewanswer == '답변 완료'){
+		reviewanswer = $(data).parent().next().next().next().children('input').val();
+	}
+	console.log(reviewanswer);
+	
+	let tag = '<div class="wrapContainer_Edit1">';
+		tag += '<form method="post" action="javascript:reviewEdit()" id="popupFrm">';
+		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
+		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
+		tag += '<ul id="reviewManagement">';
+		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
+		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
+		tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
+		tag += '</ul>';	
+		tag += '<div>';
+		tag += '<br />';
+		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
+		tag += '<div id="reviewContent">';
+				if( reviewimg != ''){
+					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" id="repMenu_img" />';
+				}
+		tag += '<p>' + reviewcontent + '</p>';
+		tag += '</div>';
+		tag += '</div>';
+		tag += '<div id="reviewAnswer">';
+			tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;">'+reviewanswer+'</textarea>';
+		tag += '<div id="popupBtnContainer">';
+			tag += '<input class="normalBtn" type="submit" value="수정" >';
+			tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
+		tag += '</div>';
+		tag += '</div>';
+
+		tag += '</form>';
+		tag += '</div>';
+	
+	$('#popup').html(tag);
+	
+	let windowWidth = $(window).scrollLeft();
+	let windowHeight = $(window).scrollTop() + (window.innerHeight/2) - 250;
+	
+	$('body').css('overflow','hidden');
+	$('#modal').css('display','block').css('top', $(window).scrollTop() +"px").css('left',windowWidth+'px');
+	$('#popup').css('display','block').css('top',windowHeight+'px').css('left',windowWidth+'px');
+	
+}
+
+// 팝업창 닫기
+function popupClose(){
+	$('body').css('overflow','auto');
+	$('#modal').css('display','none');
+	$('#popup').css('display','none');
+}
+
+// 신고 창 띄우기
+function popupreport(reviewnum, userid){
+	
+	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto;">';
+		tag += '<form method="post" action="javascript:reportUpdate()" id="reportFrm">';
+		tag += '<input type="hidden" name="userid" value="' + userid + '" >';
+		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
+		tag += '<div class="wrapTitle">신고하기</div>';
+		tag += '<div id="reportReason">';
+		tag += '<p>신고사유</p>';
+		tag += '<select name="reportReason">';
+		tag += '<option>비방/욕설</option>';
+		tag += '<option>허위</option>';
+		tag += '<option>성희롱</option>';
+		tag += '<option>기타</option>';
+		tag += '</select>';
+		tag += '</div>';
+		tag += '<div>';
+		tag += '<textarea rows="10" cols="40" id="reportContent" name="reportContent"></textarea>';
+		tag += '</div>';
+		tag += '<div id="reportBtn">';
+		tag += '<input type="submit" class="normalBtn" value="보내기" />';
+		tag += '<input type="button" class="normalBtn" value="취소" onclick="reportClose()"/>';
+		tag += '</div>';
+		tag += '</form>';
+		tag += '</div>';
+		
+	$('#report').html(tag);
+	
+	
+	let windowWidth = $(window).scrollLeft();
+	let windowHeight = $(window).scrollTop() + (window.innerHeight/2)-100;
+	$('#report').css('display','block').css('left',windowWidth+"px").css('top',windowHeight+"px");
+}
+
+//신고창 닫기
+function reportClose(){
+	$('#report').css('display','none');
+}
+
+// 리뷰 답변 등록하기
+function reviewAnswer(){
+	let strLength = $('#reviewanswer').val().length;
+	
+	if( strLength > 300 ){
+		alert('글자수는 300자를 초과 할 수 없습니다');
+		return false;
+	}
+	
+	if( strLength == 0){
+		alert('내용을 입력해주시기 바랍니다.');	
+		return false;
+	}
+	
+	// 제한사항 걸러내기....
+	if(sortStr == undefined){
+		sortStr = 0;
+	}
+	if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
+		mcatenumDataArr = [0];
+	}
+	
+	if(searchTxt == undefined || searchTxt == "!$#@%"){
+		searchTxt = "";
+	}
+	if(startDate == undefined || startDate == "!$#@%"){
+		startDate = "";
+		endDate = "";
+	}
+	
+	if(startDate == null || startDate == '' ){
+		startDate = "!$#@%";
+		endDate = "!$#@%";
+	}
+	if(searchTxt == null || searchTxt == '' ){
+		searchTxt = "!$#@%";
+	}
+
+	
+	let url = "SellerReviewAnswer";
+	let param = $('#popupFrm').serialize();
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: param,
+		success:function(){
+			alert('답변이 성공적으로 등록되었습니다')
+			popupClose();
+			paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
+		} ,
+		error:function(){
+			alert('답변 등록이 실패하였습니다');
+		}
+	})
+}
+
+//리뷰 답변 수정 등록하기
+function reviewEdit(){
+	let strLength = $('#reviewanswer').val().length;
+	
+	if( strLength > 300 ){
+		alert('글자수는 300자를 초과 할 수 없습니다');
+		return false;
+	}
+	
+	if( strLength == 0){
+		alert('내용을 입력해주시기 바랍니다.');	
+		return false;
+	}
+	
+	// 제한사항 걸러내기....
+	if(sortStr == undefined){
+		sortStr = 0;
+	}
+	if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
+		mcatenumDataArr = [0];
+	}
+	
+	if(searchTxt == undefined || searchTxt == "!$#@%"){
+		searchTxt = "";
+	}
+	if(startDate == undefined || startDate == "!$#@%"){
+		startDate = "";
+		endDate = "";
+	}
+	
+	if(startDate == null || startDate == '' ){
+		startDate = "!$#@%";
+		endDate = "!$#@%";
+	}
+	if(searchTxt == null || searchTxt == '' ){
+		searchTxt = "!$#@%";
+	}
+
+	
+	let url = "SellerReviewAnswerEdit";
+	let param = $('#popupFrm').serialize();
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: param,
+		success:function(){
+			alert('답변이 성공적으로 수정되었습니다')
+			popupClose();
+			paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
+		} ,
+		error:function(){
+			alert('답변 수정이 실패하였습니다');
+		}
+	})
+}
+
+// 신고 접수
+function reportUpdate(){
+	let strLength = $('#reportContent').val().length;
+	
+	if( strLength > 300 ){
+		alert('글자수는 300자를 초과 할 수 없습니다');
+		return false;
+	}
+	
+	if( strLength == 0){
+		alert('내용을 입력해주시기 바랍니다.');	
+		return false;
+	}
+	
+	
+	// 제한사항 걸러내기....
+	if(sortStr == undefined){
+		sortStr = 0;
+	}
+	if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
+		mcatenumDataArr = [0];
+	}
+	
+	if(searchTxt == undefined || searchTxt == "!$#@%"){
+		searchTxt = "";
+	}
+	if(startDate == undefined || startDate == "!$#@%"){
+		startDate = "";
+		endDate = "";
+	}
+	
+	if(startDate == null || startDate == '' ){
+		startDate = "!$#@%";
+		endDate = "!$#@%";
+	}
+	if(searchTxt == null || searchTxt == '' ){
+		searchTxt = "!$#@%";
+	}
+
+	console.log()
+	
+	let url = "SellerReviewReport";
+	let param = $('#reportFrm').serialize();
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: param,
+		success:function(){
+			alert('신고가 접수되었습니다')
+			reportClose();
+			paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
+		} ,
+		error:function(){
+			alert('신고 접수에 실패하였습니다');
+		}
+	})
+}
+
+
+
+
 </script>
 
 <section>
@@ -470,18 +825,18 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 				<li>평점</li>
 				<li>포토</li>
 				<li>리뷰 내용</li>
-				<li>등록자</li>
-				<li>등록일</li>
+				<li>작성자</li>
+				<li>작성일</li>
 				<li>답변 여부</li>
 				<c:if test="${reviewList != null }">
 					<c:forEach var="result" items="${reviewList}" varStatus="i">
 						<li>${result.productname }</li>
 						<li>${result.reviewscore }</li>
 						<c:if test="${result.reviewimg != null }">
-							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )></li>
+							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )><input type="hidden" value="${result.reviewimg }"></li>
 						</c:if>
 						<c:if test="${result.reviewimg == null }">
-							<li>-</li>
+							<li><input type="hidden" value="${result.reviewimg }">-</li>
 						</c:if>
 						<li>
 							<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
@@ -535,227 +890,4 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 <div id="modal"></div>
 <div id="popup"></div>
 <div id="report"></div>
-<script>
-	// 팝업창 만들기! 
-	function popupOpen(data){
-		
-		// 상품명
-		let reviewnum = $(data).children().val();
-		let productname = $(data).parent().prev().prev().prev().text();
-		let reviewscore = $(data).parent().prev().prev().text();
-		let reviewcontent = $(data).text().trim();
-		let userid = $(data).parent().next().text();
-		let reviewwritedate = $(data).parent().next().next().text();
-		let reviewanswer = $(data).parent().next().next().next().text();
-		
-		console.log(reviewnum);
-		
-		if(reviewanswer == '답변 완료'){
-			reviewanswer = $(data).parent().next().next().next().children('input').val();
-		}
-		console.log(reviewanswer);
-		
-		let tag = '<div class="wrapContainer_Edit1">';
-			tag += '<form method="post" action="javascript:reviewAnswer()" id="popupFrm">';
-			tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-			tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
-			tag += '<ul id="reivewManagement">';
-			tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
-			tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>등록자</b> ' + userid + '</li>';
-			tag += '<li><b>등록일</b> ' + reviewwritedate + '</li>';
-			tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
-			tag += '</ul>';	
-			tag += '<div>';
-			tag += '<br />';
-			tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
-			tag += '<div id="reviewContent">';
-			tag += '<img src="<%=request.getContextPath() %>/resources/img/xprofile_img.png" id="repMenu_img" />';
-			tag += '<p>' + reviewcontent + '</p>';
-			tag += '</div>';
-			tag += '</div>';
-			tag += '<div id="reviewAnswer">';
-				if( reviewanswer == '미답변'){
-					tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
-				} else {
-					tag += '<div style="border-top:1px solid #ddd;">';
-					tag += '<p style="margin: 20px 10px ">' + reviewanswer + '<p>';
-					tag += '</div>';
-				}
-			tag += '<div id="popupBtnContainer">';
-				if( reviewanswer == '미답변'){
-					tag += '<input class="normalBtn" type="submit" value="확인" >';
-					tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
-					tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
-				} else {
-					tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
-					tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
-				}
-				tag += '</div>';
-			tag += '</div>';
-
-			tag += '</form>';
-			tag += '</div>';
-		
-		$('#popup').html(tag);
-		
-		let windowWidth = $(window).scrollLeft();
-		let windowHeight = $(window).scrollTop() + (window.innerHeight/2) - 250;
-		
-		$('body').css('overflow','hidden');
-		$('#modal').css('display','block').css('top', $(window).scrollTop() +"px").css('left',windowWidth+'px');
-		$('#popup').css('display','block').css('top',windowHeight+'px').css('left',windowWidth+'px');
-		
-	}
-	
-	// 팝업창 닫기
-	function popupClose(){
-		$('body').css('overflow','auto');
-		$('#modal').css('display','none');
-		$('#popup').css('display','none');
-	}
-	
-	// 신고 창 띄우기
-	function popupreport(reviewnum, userid){
-		
-		let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto;">';
-			tag += '<form method="post" action="javascript:reportUpdate()" id="reportFrm">';
-			tag += '<input type="hidden" name="userid" value="' + userid + '" >';
-			tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-			tag += '<div class="wrapTitle">신고하기</div>';
-			tag += '<div id="reportReason">';
-			tag += '<p>신고사유</p>';
-			tag += '<select name="reportReason">';
-			tag += '<option>비방/욕설</option>';
-			tag += '<option>허위</option>';
-			tag += '<option>성희롱</option>';
-			tag += '<option>기타</option>';
-			tag += '</select>';
-			tag += '</div>';
-			tag += '<div>';
-			tag += '<textarea rows="10" cols="40" id="reportContent" name="reportContent"></textarea>';
-			tag += '</div>';
-			tag += '<div id="reportBtn">';
-			tag += '<input type="submit" class="normalBtn" value="보내기" />';
-			tag += '<input type="button" class="normalBtn" value="취소" onclick="reportClose()"/>';
-			tag += '</div>';
-			tag += '</form>';
-			tag += '</div>';
-			
-		$('#report').html(tag);
-		
-		
-		let windowWidth = $(window).scrollLeft();
-		let windowHeight = $(window).scrollTop() + (window.innerHeight/2)-100;
-		$('#report').css('display','block').css('left',windowWidth+"px").css('top',windowHeight+"px");
-	}
-	
-	//신고창 닫기
-	function reportClose(){
-		$('#report').css('display','none');
-	}
-	
-	// 리뷰 답변 등록하기
-	function reviewAnswer(){
-		let strLength = $('#reviewanswer').val().length;
-		
-		if( strLength > 300 ){
-			alert('글자수는 300자를 초과 할 수 없습니다');
-		}
-		
-		
-		// 제한사항 걸러내기....
-		if(sortStr == undefined){
-			sortStr = 0;
-		}
-		if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
-			mcatenumDataArr = [0];
-		}
-		
-		if(searchTxt == undefined || searchTxt == "!$#@%"){
-			searchTxt = "";
-		}
-		if(startDate == undefined || startDate == "!$#@%"){
-			startDate = "";
-			endDate = "";
-		}
-		
-		if(startDate == null || startDate == '' ){
-			startDate = "!$#@%";
-			endDate = "!$#@%";
-		}
-		if(searchTxt == null || searchTxt == '' ){
-			searchTxt = "!$#@%";
-		}
-
-		
-		let url = "SellerReviewAnswer";
-		let param = $('#popupFrm').serialize();
-		$.ajax({
-			type: "POST",
-			url: url,
-			data: param,
-			success:function(){
-				alert('답변이 성공적으로 등록되었습니다')
-				popupClose();
-				paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
-			} ,
-			error:function(){
-				alert('답변 등록이 실패하였습니다');
-			}
-		})
-	}
-	
-	// 신고 접수
-	function reportUpdate(){
-		let strLength = $('#reportContent').val().length;
-		
-		if( strLength > 300 ){
-			alert('글자수는 300자를 초과 할 수 없습니다');
-		}
-		
-		
-		// 제한사항 걸러내기....
-		if(sortStr == undefined){
-			sortStr = 0;
-		}
-		if(mcatenumDataArr == undefined || mcatenumDataArr == ''){
-			mcatenumDataArr = [0];
-		}
-		
-		if(searchTxt == undefined || searchTxt == "!$#@%"){
-			searchTxt = "";
-		}
-		if(startDate == undefined || startDate == "!$#@%"){
-			startDate = "";
-			endDate = "";
-		}
-		
-		if(startDate == null || startDate == '' ){
-			startDate = "!$#@%";
-			endDate = "!$#@%";
-		}
-		if(searchTxt == null || searchTxt == '' ){
-			searchTxt = "!$#@%";
-		}
-
-		console.log()
-		
-		let url = "SellerReviewReport";
-		let param = $('#reportFrm').serialize();
-		$.ajax({
-			type: "POST",
-			url: url,
-			data: param,
-			success:function(){
-				alert('신고가 접수되었습니다')
-				reportClose();
-				paging( $('.active').text(), sortStr, mcatenumDataArr, searchTxt, startDate, endDate );
-			} ,
-			error:function(){
-				alert('신고 접수에 실패하였습니다');
-			}
-		})
-	}
-</script>
-
 

@@ -26,7 +26,6 @@ public class CustomInfoController {
 		@RequestMapping(value="/CustomInfoWriteOk", method=RequestMethod.POST)
 		public ModelAndView CustomInfoWriteOk(CustomInfoVO vo, HttpServletRequest req, HttpSession session) {
 			ModelAndView mav = new ModelAndView();
-			System.out.println("dd");
 			
 			int result = customInfoService.CustomInfoWrite(vo);
 			if(result>0) {

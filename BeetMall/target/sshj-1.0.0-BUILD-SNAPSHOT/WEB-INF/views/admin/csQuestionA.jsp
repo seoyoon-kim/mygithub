@@ -11,134 +11,249 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-<style>
-	/*맨 위 회색 top Bar*/
+ <style> 
+	 #container li{ 
+		 list-style-type:none; 
+		 float:left; 
+		 width:15%; 
+	 }  
+	#contentBox{ 
+		top:20px; 
+		margin-left:10px;
+	}
+	#contentBox li:nth-of-type(6n-5){ 
+		width:0%; 
+	}
+	#contentBox li:nth-of-type(4){ 
+		width:37%; 
+	}
+	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1){  
+		width:30%; 
+		padding-left:20px; 
+	}    
 	#topBar li:nth-of-type(2){
-		margin-left:60px;
+		margin-left:22px;
 	}  
+	#topBar li:nth-of-type(3){
+		width:12%;
+	} 
 	#topBar li:nth-of-type(4){
-		margin-left:60px;
-	}  
-	#topBar li:nth-of-type(5){
-		margin-left:-90px;
-	}  
-	#topBar li:nth-of-type(6){
-		position:relative;
-		left:-550px;
-		top:-10px;
-	}  
-	/*내용 전체 정렬*/
-	#topBar li:nth-of-type(7){
-		position:relative; left:-80px;
+		width:6%;
 	}   
-	#contentBox li:nth-of-type(9n-2) {
-    	width: 8%;
+	#content input, textarea, select, #noticeSearchFrm input{
+		border:1px solid lightgray; 
+		border-radius: 3px;
+	}#content li, label{
+		list-style-type:none; 
+		padding-bottom:10px;
 	}
-	#contentBox li:nth-of-type(9n+1) {
-    	width: 0%;
+	#content select{
+		height:28px;
 	} 
-	#container li:nth-of-type(4):not(#topBar li:nth-of-type(4)){
-		width:20%;	
-	}
-	#title>ul,.productList{
-		position:relative; left:-20px;
-	}
-	#container li:nth-of-type(2):not(#topBar li:nth-of-type(2)){
-		margin-left:20px;
+	/*버튼*/
+	#btns{ 
+		top:-115px; 
+		left:460px; 
 	} 
-	 
-	/* 본문 정렬*/
-	#container li{ 
-		width:11%; 
-		list-style-type:none;
-		float:left;
+	#btns a>button, button:nth-of-type(4){ 
+		margin-left:900px; 
 	} 
-	.productList:nth-of-type(1){ 
-		margin-top:10px;
-	}
-	#contentList>ul{
-		float:left;
-		margin-bottom:0px;
-	}
+	#topBar Button:nth-of-type(1),
+	#topBar Button:nth-of-type(2),
+	#topBar Button:nth-of-type(3),
+	#topBar Button:nth-of-type(4){
+		padding:2px 7px;
+	}  
 	
-	/*페이징 이미지 링크*/
+	/* 페이징처리부분 */ 
 	.page_nation .pprev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_pprev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
 	}
 	.page_nation .prev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_prev.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
 		margin-right:7px;
 	}
 	.page_nation .next {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_next.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
 	}
 	.page_nation .nnext {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/resources/img/kpage_nnext.png') no-repeat center center;
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
-	}  
-</style>
-<script>
- 
-</script>
-</head>
-<body>
+	}
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/* 페이징처리끝 */
+</style> 
 <%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %>
+<div id="body1">
 	<div id="container">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong>문의 목록</strong></h5></li> 
+				<li><h5><strong><a href="customerListA">고객 문의</a></strong></h5></li> 
 				<li><select name="sort" > 
-				<option value="전체" selected>전체</option>
+		   				<option value="전체" selected>전체</option>
 		   				<option value="미답변">미답변</option>
-		   				<option value="답변완료">답변완료</option>
-		   			</select>
-	   			</li> 
-	   			<li><select name="sortWho" > 
-				<option value="전체" selected>전체</option>
+		   				<option value="답변완료">답변완료</option>   
+			  		</select> 
+	   			</li>
+	   			<li><select name="sort" > 
+		   				<option value="전체" selected>전체</option>
 		   				<option value="소비자">소비자</option>
-		   				<option value="판매자">판매자</option>
-		   			</select>
-	   			</li> 
-	   			<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
+		   				<option value="판매자">판매자</option>   
+			  		</select> 
+	   			</li>   
+				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li> 
-	   			<li><button class="success" value="add" name="add" id="blind">비공개</button></li> 
+				<li><button class="success" value="del" name="del" id="delBtn">비공개</button></li>
 			</ul> 
 		</div>  
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
 				<li><input type="checkbox" name="check"></li>
-				<li>리뷰번호</li>
-				<li>게시판</li>
-				<li>내용</li>
-				<li>신고일</li>
-				<li>처리일</li>
-				<li>신고유형</li>
-				<li>신고인</li>
-				<li>신고받은이</li> 
+				<li>문의번호</li>
+				<li>문의주체</li>
+				<li>제목</li>
+				<li>작성자</li>
+				<li>등록일</li> 
 			</ul>
 		</div>  
-		<div id="contentList">
-			<c:forEach var="data" items="${list}">
-				<ul class="productList">
-					<li><input type="checkbox" name="check" id="check"> </li>
-					<li>productNo?</li>
-					<li>cate?</li>
-					<li><a href="제목?">title?</a></li>
-					<li>farm?</li>  
-					<li>userid?</li>
-					<li>cart?</li>
-					<li>hit?</li>
-					<li>writedate?</li>
-				</ul>
-			</c:forEach>
-			</div>
+		
+		 
+			<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 <ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul> 
+		 
+
+
+ 
+		<!--  
+		<c:forEach var="data" items="${list}">
+			<ul class="noticeList">
+				<li><input type="checkbox" name="check" id="check"> </li>
+				<li>1569723</li>
+				<li>소비자</li>
+				<li class="subjectLine"><a href="회원정보?">배송 문의 드려요</a></li>
+				<li>userid</li> <li>2021/02/20</li>
+			</ul>
+		</c:forEach>-->
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
@@ -158,7 +273,6 @@
 			   <a class="arrow nnext" href="#"></a>
 			</div>
 		 </div>
-
 
 	<!-- 
 	 <ul class="breadcrumb pagination-md">
@@ -197,19 +311,18 @@
 	 </ul>		
  -->
  
-	 <div>
-		<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-			<select name="searchKey">
-				<option value="subject" selected>제목</option>
-   				<option value="no">공지번호</option> 
-   				<option value="who">대상</option> 
-   				<option value="writedate">공지일</option> 
-			</select>			
-			<input type="text" name="searchWord" id="searchWord"/>
-			<input type="submit" value="검색"/> 
-		</form>
-		
-	</div>  
-		</div>
-</body>
+		 <div>
+			<form method="get" id="noticeSearchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+				<select name="searchKey">
+					<option value="subject" selected>제목</option>
+	   				<option value="no">공지번호</option> 
+	   				<option value="who">대상</option> 
+	   				<option value="writedate">공지일</option> 
+				</select>			
+				<input type="text" name="searchWord" id="searchWord"/>
+				<input type="submit" value="검색"/> 
+			</form> 
+		</div>  
+	</div>
+</div> 
 </html>

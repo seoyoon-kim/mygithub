@@ -7,9 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.CenterDAO;
-import com.beetmall.sshj.custom.dao.MemberDAO;
 import com.beetmall.sshj.custom.vo.CenterVO;
-import com.beetmall.sshj.custom.vo.MemberVO;
+import com.beetmall.sshj.custom.vo.PageSearchVO;
 
 @Service
 public class CenterServiceImp implements CenterService{
@@ -22,9 +21,9 @@ public class CenterServiceImp implements CenterService{
 		return centerDAO.centerWrite(vo);
 	}
 
-	public List<CenterVO> centerAllRecord() {
+	public List<CenterVO> centerAllRecord(PageSearchVO pageVO) {
 		
-		return centerDAO.centerAllRecord();
+		return centerDAO.centerAllRecord(pageVO);
 	}
 
 	public CenterVO centerSelect(int qmnum) {
@@ -37,6 +36,10 @@ public class CenterServiceImp implements CenterService{
 
 	public int centerEditOk(CenterVO vo) {
 		return centerDAO.centerEditOk(vo);
+	}
+
+	public int centerOnetotalRecord(PageSearchVO pageVO) {
+		return centerDAO.centerOnetotalRecord(pageVO);
 	}
 
 }

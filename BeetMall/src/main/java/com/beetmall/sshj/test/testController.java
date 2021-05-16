@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class testController {
 	
-	@RequestMapping("myfavoriForm")
-	public String myfavoriForm() {
-		return "mypages/myfavoriForm";
-	}
 	@RequestMapping("chargeAPI")
 	public String chargeAPI() {
 		return "mypages/chargeAPI";
@@ -65,11 +61,9 @@ public class testController {
 	}
 
 	
+
 	
-	@RequestMapping("/customproduct")
-	public String customproduct() {
-		return "custom/customproduct";
-	}
+
 	
 	@RequestMapping("/custompay")
 	public String custompay() {
@@ -89,11 +83,6 @@ public class testController {
 	@RequestMapping("searchPwd")
 	public String searchPwd() {	// 비밀번호 찾기
 		return "login/pwdSearch";	
-	}
-
-	@RequestMapping("infoView")
-	public String infoView() {	// 약관조회
-		return "info/infoView";
 	}
 	
 	@RequestMapping("myinfoEdit")
