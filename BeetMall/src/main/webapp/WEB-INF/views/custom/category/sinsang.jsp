@@ -441,7 +441,7 @@
 		<input type="hidden" id="pageNum" value="${pageVO.pageNum}"/>
 	</c:if>
 	<div class="main">
-		<div id="mainName"><h1>베스트 상품</h1></div>
+		<div id="mainName"><h1>신상품</h1></div>
 			<ul id="category">
 				<li><a href="categoryMain"><span id="categoryAll" style="cursor:pointer"><img src="/sshj/img/kmain.png"><br/><br/>전체</span></a></li>
 				<li><a href="categoryMain?item=Fruit"><span id="categoryFruit" style="cursor:pointer"><img src="/sshj/img/kfruit.png"><br/><br/>과일</span></a></li>
