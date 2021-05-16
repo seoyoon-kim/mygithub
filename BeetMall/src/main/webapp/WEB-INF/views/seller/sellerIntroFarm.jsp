@@ -12,11 +12,23 @@
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="info_container">
 				<div id="profile_box">
-					<img src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}"/>
-					<div id="farmname" name="farmname">${result.farmname }</div>
-					<div>
-						방문자수 : ${result.farmvisitor}명<br/>
-						농장 즐겨찾기수 : ${favorite}명
+					<div id="imgBox">
+						<img src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}"/>
+					</div>
+					<div id="basicInformation">
+						<div id="farmname" name="farmname">${result.farmname }</div>
+						<ul>
+							<li>
+								<img src="<%=request.getContextPath()%>/resources/img/visitors.png">
+								<div>농장 방문자수</div>
+								<div>${result.farmvisitor} 명</div>
+							</li>
+							<li>
+								<img src="<%=request.getContextPath()%>/resources/img/favoriteimg.png">
+								<div>농장 즐겨찾기수</div>
+								<div>${favorite} 명</div>
+							</li>
+						</ul>
 					</div>
 				</div><!-- profile_box 종료 -->
 				<hr/>
