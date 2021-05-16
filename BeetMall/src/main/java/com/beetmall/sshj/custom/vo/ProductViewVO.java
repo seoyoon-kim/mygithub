@@ -81,10 +81,53 @@ public class ProductViewVO {
 		
 		//리뷰 좋아요 누른 테이블
         private int reviewgood;
-		
-
+        
+        //상품 문의 테이블
+        private int qnum;
+        private String qcontent;
+        private String qwritedate;
+        private int qopen;
+        private String qanswer;
+        private String qtitle;
         
         
+        
+		public String getQtitle() {
+			return qtitle;
+		}
+		public void setQtitle(String qtitle) {
+			this.qtitle = qtitle;
+		}
+		public int getQnum() {
+			return qnum;
+		}
+		public void setQnum(int qnum) {
+			this.qnum = qnum;
+		}
+		public String getQcontent() {
+			return qcontent;
+		}
+		public void setQcontent(String qcontent) {
+			this.qcontent = qcontent;
+		}
+		public String getQwritedate() {
+			return qwritedate;
+		}
+		public void setQwritedate(String qwritedate) {
+			this.qwritedate = qwritedate;
+		}
+		public int getQopen() {
+			return qopen;
+		}
+		public void setQopen(int qopen) {
+			this.qopen = qopen;
+		}
+		public String getQanswer() {
+			return qanswer;
+		}
+		public void setQanswer(String qanswer) {
+			this.qanswer = qanswer;
+		}
 		public int getReviewgood() {
 			return reviewgood;
 		}

@@ -31,13 +31,13 @@ a:hover, a:active, a:visited, a:link {
 #productImgBox {
 	float: left;
 	margin-left:80px;
-	margin-top: 100px;
-	width: 350px;
+	margin-top: 130px;
+	width: 400px;
 	height: 500px; 
 }
 
 #productImgBox>img {
-	width: 350px;
+	width: 400px;
 	height: 500px;
 }
 
@@ -141,7 +141,7 @@ border-bottom:none;
 color:gray;
 font-size:17px;
 width: 50%;
-padding-left:10px;
+padding-left:20px;
 }
 
 
@@ -172,7 +172,7 @@ padding-left:10px;
 	height: 50px;
 	font-size:25px;
 	padding-left:280px;
-	margin-bottom:15px;
+	margin-bottom:25px;
 	font-weight:bold;
 
 	
@@ -302,7 +302,7 @@ padding-left:10px;
 }
 
 
-#productInfoPage2>#retitle {
+#productInfoPage2>#retitle,#qtitle {
 	width: 100%;
 	float: left;
 	margin-top: 30px;
@@ -329,11 +329,12 @@ color:gray;
 
 #reviewTitle, .reviewList {
 	width: 100%;
-	margin-bottom: 10px;
+	margin-bottom: 10px; 
+	line-height: 60px;
+	height: 60px;
 }
 
-.reviewList {
-	height: 60px;
+.reviewList { 
 	margin-bottom: 10px;
 	padding-bottom:10px;
 }
@@ -342,19 +343,17 @@ color:gray;
 	width: 10%;
 	float: left;
 	border-bottom: 1px solid #ddd;
-	height: 30px;
-	line-height: 30px;
-	padding-bottom:10px;
+	
 }
 
 #reviewTitle>li{
-height:35px;
-padding-bottom:3px;
+height:60px;
+padding-bottom:10px;
 }
 
 .reviewList>li {
 	height: 60px;
-	line-height: 50px;
+	line-height: 60px;
 	padding-bottom:10px;
 }
 
@@ -382,10 +381,12 @@ padding-bottom:3px;
 }
 
 
-#reviewViewbox{
+#reviewViewbox,#qnaViewbox{
 width:100%;
 float:left;
 padding-left:30px;
+padding-bottom:10px;
+border-bottom:1px solid #ddd;
 }
 
 /* 리뷰이미지 설정*/
@@ -402,13 +403,23 @@ padding-left:30px;
 }
 
 
-#reviewtxtbox {
+#reviewtxtbox,#qnatxtbox {
     padding-left:15px;
-	width:390px;
+	width:1050px;
 	height: 100px;
 	line-height: 100px;
 	float: left;
 	padding-left:50px;
+}
+
+#qnatxtbox2{
+   padding-left:15px;
+	width:1050px;
+	height: 100px;
+	line-height: 100px;
+	float: left;
+	padding-left:50px;
+	background-color:#eee;
 }
 
 #nonebox{
@@ -498,18 +509,22 @@ float:left;
 #productInfoPage3>#qtitle {
 	width: 100%;
 	float: left;
-	margin-bottom: 20px;
+	margin-top:30px;
+	margin-bottom: 50px;
 }
 
 #qnaTitle {
 	width: 100%;
-	margin-bottom: 3px;
+	margin-bottom: 10px;
+	color:gray;
 }
 
 
 #qnaList {
 	width: 100%;
-	margin-bottom: 30px;
+	height: 60px;
+	margin-bottom: 10px;
+	padding-bottom:10px;
 }
 
 #qnaTitle>li{
@@ -519,8 +534,9 @@ float:left;
 	width: 10%;
 	float: left;
 	border-bottom: 1px solid #ddd;
-	height: 30px;
-	line-height: 30px;
+	height: 60px;
+	line-height: 50px;
+	padding-bottom:10px;
 }
 
 #qnaTitle>li:nth-child(5n+1), #qnaList>li:nth-child(5n+1) {
@@ -703,348 +719,178 @@ td, .td{
 	width:930px; line-height:50px;
 }
 
-<!-- 리뷰 팝업창---------------------------------------- -->
-	#buyReviewView{
-		display: none;	
-	}
-	
-	.buyListDiv{
-		position:absolute;
-		top:1000px;
-		background-color: white;
-	}
-	
-	.buyListDiv, .buyListBar, .buyListContent{
-		width:300px;
-	}
-	
-	.buyListBar{		
-		height:40px;
-		background-color: rgb(252,118,45);
-		position:absolute;
-		color:white;
-		text-align: center;
-		line-height: 40px;
-	}
-	.buyListBarClose{
-		height:40px;
-		width:50px;
-		background-color: white;
-		position:absolute;
-		font-size:40px;
-		line-height:30px;
-		text-align:center;
-		left:630px;
-	}
-	.buyListContent{
-		height:700px;
-		
-	}
-	
-	.thumbsupYes{
-		background-image: url("/sshj/img/dthumbsupYes.png");
-		background-repeat:no-repeat;
-		background-size:contain;
-		height:28px;
-		width:28px;
-		float:left;
-		transition-duration:0.5s;
-		margin-right: 7px;
-	}
-	.thumbsupNo{
-		background-image: url("/sshj/img/dthumbsupNo.png");
-		background-repeat:no-repeat;
-		background-size:contain;
-		height:28px;
-		width:28px;
-		float:left;
-		transition-duration:0.5s;
-		margin-right: 7px;
-	}
-	.buyListContent>ul>li{
-	float:left;
-	}
-	
-	.buyListContent>ul>li:nth-child(2n+1){
-		float:left;
-		width:226px;
-		text-align: center;
-		font-size:17px;
-		line-height:28px;
-		height:30px;
-		margin-bottom:1px;
-	}
-	.buyListContent>ul>li:nth-child(2n){
-		float:left;
-		width:452px;
-		font-size:17px;
-		line-height:28px;
-		height:30px;
-		margin-bottom:1px;
-	}
-	.buyListContent>ul{
-		margin-bottom: 10px;
-	}
-	#buyReviewtxt{
-		width:660px;
-		height:467px;
-		overflow:auto;
-		margin-left:10px;
-		margin-right:10px;
-		background-color: white;
-		font-size: 18px;
-		padding:5px;
-		margin-bottom:15px;
-	}
-	.buyListContent>input:last-child{
-		margin-top:15px;
-	}
-	
-	#infoInput>li:nth-child(2n+1){
-		width:200px;
-		float:left;
-	}
-	#infoInput>li:nth-child(2n){
-		width:839px;
-		float:left;
-	}
-	
-	#buyListContent{
-	
-	}
-
+ 
+#pagelibtn{
+float:left;
+width:70px;
+height:50px;
+line-height:50px;
+margin-left:1010px;
+font-size:15px;
+color:black;
+}
 
 </style>
 <script>
-   
-    var pcount=1; //상품갯수
-    var ocount=1; //옵션갯수
-    var prtprice=parseInt(${pvo.productprice}); //상품본래가격
-    var dprtprice=parseInt(${Dprice}); //상품할인가격
-    var tprice=prtprice-dprtprice;
-    var submitprice = 0;
-    
-    
-	function pCount(){
-		pcount+=1;
-		$('#prtnum').text(pcount);
-		
-		optionstay();
-		opCount();
-		omCount();
-		
-
-		//alert(dprtprice);
-		
-		
-		//
-		
-	 
-		//var tprice=tpp*pcount;
-		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
-		//alert(tprice);
-		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
-		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
-		
-		submitprice=tprice;
-		//alert("총"+submitprice);
-		//alert(tprice);
-		
-		
-		
-	}
-	
-	function mCount(){
-		pcount-=1;
-		
-		if(pcount<=0){	
-			alert("1개이상 구매해 주세요");	
-			pcount+=1;
-		}
-		
-		$('#prtnum').text(pcount);
-		
-		
-		optionstay();
-		opCount();
-		omCount();
-
-		
-		//var tprice=tpp*pcount;
-		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
-		 
-		//alert(dprtprice);
-		//var tprice=tpp*pcount;
-		//var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
-		//alert(tprice);
-		
-		
-		document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
-		document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
-		
-		submitprice=tprice;
-		//alert("총"+submitprice);
-		//alert(tprice);
-	}
-	
-
 
 	
+	var pcount=1; //상품갯수
+	var ocount=1; //옵션갯수
+	var prtprice=0; //상품본래가격
+	var dprtprice=0; //상품할인가격
+	var tprice=0;
+	var submitprice = 0;
+	var optprice=0;
+	var optnum=0;
 	
-///////////////////////옵션가격 구하기///////////////////////////
-function optionstay(){
-		var opt=$('#selecOption').val();
-		var optArr=opt.split('&'); 
-		var optnum=optArr[0];   //옵션 숫자
-	    var optprice=parseInt(optArr[1]); //옵션 가격
-  }
+	$(function(){
+		prtprice=${pvo.productprice}; //상품본래가격
+		dprtprice=${Dprice}; //상품할인가격
+		submitprice=tprice=prtprice-dprtprice;
+		//alert("submit="+submitprice);
+		$("#spanTotalPrice").text(tprice);
+		//////		
+		//alert("prtprice="+prtprice+", dprtprice="+dprtprice+", tprice="+tprice+",optprice="+optprice);
+		//상품갯수구하기 +
+		$("#pCount").click(function(){ 	    	
+			
+    		pcount=parseInt($("#prtnum").text())+1;
+    		//alert("pcount="+pcount);
+    		$('#prtnum').text(pcount);	   			
 
+    		var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);			
+    		//alert("pcount="+pcount+"tprice="+tprice);
+    		$("#productTotalPrice").html("구매가격:"+tprice+"원");
+    		$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
+    		$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
+    		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
+    		submitprice=tprice;
+    		
+    	});
+		 ///////////////상품갯수 구하기 -////////////////
+    	$("#mCount").click(function(){
+    		
+    		pcount=parseInt($("#prtnum").text())-1;
+    	
+    		if(pcount<=0){	
+    			alert("1개이상 구매해 주세요");	
+    			pcount=parseInt($("#prtnum").text());
+    		}
+    		
+    		$('#prtnum').text(pcount);
 	
-function optionchange(){
-		 var opt=$('#selecOption').val();
-		 var optArr=opt.split('&'); 
-		 var optnum=parseInt(optArr[0]);   //옵션 숫자
-		 var optprice=parseInt(optArr[1]); //옵션 가격
-		 //ocount=1;
+    		tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+    		//alert("pcount="+pcount+"tprice="+tprice); 		 		
+    		$("#productTotalPrice").html("구매가격:"+tprice+"원");
+    		$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
+    		$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
+    		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
+    		
+    		submitprice=tprice;
+    		//alert("총"+submitprice);
+    		//alert(tprice);
+    	});		
 		 
-		
-		 
-		 $('#optnum').text(ocount);
-		 
-		 //alert(dprtprice);
-		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
-		 //alert(tprice);
-		 document.getElementById("productTotalPrice3").innerHTML="옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)";
-		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
-		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원";
-		 
-		 submitprice=tprice;
-		 //alert("총"+submitprice);
-		 //alert(tprice);
-
-};
-
-
-////////////////////////옵션갯수 구하기///////////////////////////////////
-	function opCount(){
-		ocount+=1;
-		
-		
-		 var opt=$('#selecOption').val();
-		 var optArr=opt.split('&');
-		 var optnum=parseInt(optArr[0]);   //옵션 숫자
-		 
-		 
-		 var optprice=parseInt(optArr[1]); //옵션 가격
-		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
-		 
-		 $('#optnum').text(ocount);
-		 
-		 document.getElementById("productTotalPrice3").innerHTML="옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)";
-		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		 document.getElementById("productTotalPrice4").innerHTML="상품"+prtprice+"원 x"+pcount+"개";
-		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
-	
-		 submitprice=tprice;
-		 //alert("총"+submitprice);
-		 //alert(tprice); 
-		 
-		
-		 
-	}
-		
-	
-	function omCount(){
-		ocount-=1;
-		
-		if(ocount<=0){	
-			ocount+=1;
-			}
-		$('#optnum').text(ocount);
-		
-		 var opt=$('#selecOption').val();
-		 var optArr=opt.split('&');
-		 var optnum=optArr[0];   //옵션 숫자
-		 var optprice=parseInt(optArr[1]); //옵션 가격
-		 var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
-		 
-		 document.getElementById("productTotalPrice3").innerHTML="옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)";
-		 document.getElementById("productTotalPrice").innerHTML="구매가격:"+tprice+"원";
-		 document.getElementById("productTotalPrice4").innerHTML="상품가격:"+prtprice+"원 x"+pcount+"개";
-		 document.getElementById("productTotalPrice2").innerHTML="할인된가격: - "+(dprtprice*pcount)+"원"
-		 
-		 submitprice=tprice;
-		 alert("총"+submitprice);
-		 //alert(tprice);
-	}	    
-
-///////////////////////총가격 변수에 저장해놓기
-function total(){
-	
-	var opt=$('#selecOption').val();
-	var optArr=opt.split('&');
-	var optnum=parseInt(optArr[0]);   //옵션 숫자
-	
-	 if(optnum<=0){
-			alert("옵션을 선택해 주세요");			
-			 }
-
-
-	optionchange();
-	alert("최종구매 가격은"+submitprice+"입니다.");
-	
-	
-}
-
-////////////////////////////리뷰글
-/* @@  */
-
-
-//선택한 faq tr열고 닫히기	 
-//수정할 것: this만 열리도록 고치기
-//function reviewView(r){
-	
-	//alert(r);속성값 가져옴 //r넘버임
-	
-	//리뷰아이디#reviewViewbtn 에서 값이 000인 값을 고르면, 해당 아이디reviewViewbox의 박스중에 값이 000인 것이 열림
-	//$('#reviewViewbox').val(ra).css("display", " "); 
-    // $('#reviewViewbox').val(ra).css("display", "hide"); 
+       ///옵션바뀔때마다 가격 계산해주기
+       $("#selectOption").change(function(){
+			var opt=$('#selectOption').val();
+			//alert("opt"+opt);
+			var optArr=opt.split('&'); 
+			
+			optnum=parseInt(optArr[0]);   //옵션 숫자
+			optprice=parseInt(optArr[1]); //옵션 가격
+			//ocount=1;
+			
+			
+			 
+			//$('#optnum').text(ocount);
+			 
+			//alert(dprtprice);
+			var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+			//alert("옵션바뀔때 가격"+optprice+",tprice="+tprice);
+			
+			$("#productTotalPrice").html("구매가격:"+tprice+"원");
+			$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
+			$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
+			$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
+			   
+			submitprice=tprice;
+	  });
  
-	//$(this).parent().next().toggle(
-	//			function(){
-	//				$('#reviewViewbox').val(r).parent().next().css("display", " "); 
-	//			},
-	//			function(){
-	//				$('#reviewViewbox').val(r).parent().next().css("display", "hide"); 
-	//			}
-	//		);
-    
-    
-  	//};	
-  	
-//$(document).on('click', ".reviewViewbtn>input.val()",function(){
+      ////옵션 갯수 늘리기+//////////////////////////////////////////
+      $("#opCount").click(function(){
+         ocount=parseInt($("#optnum").text())+1;
+		 $('#optnum').text(ocount);
 	
-//	console.log($(this).children().val());
-//})
+		 tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);    		 
 
-//$(document).on('click', ".reviewViewbtn>input.val()",function(){
-	
-//	console.log($(this).children().val());
-//})
+		 $("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
+		 $("#productTotalPrice").html("구매가격:"+tprice+"원");
+  		 $("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
+  		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
+		 submitprice=tprice;
+      }); 
+      
+      //옵션갯수 줄이기-////////////////////////////////////////////////
+      $("#omCount").click(function(){
+          ocount=parseInt($("#optnum").text())-1;
+          
+          if(ocount<=0){	
+  			ocount=parseInt($("#optnum").text());
+  		   }
+          
+ 		 $('#optnum').text(ocount);
+ 	
+ 		 tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);    		 
 
+ 		 $("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
+ 		 $("#productTotalPrice").html("구매가격:"+tprice+"원");
+   		 $("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
+   		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
-//선택한 faq tr열고 닫히기	 
-//수정할 것: this만 열리도록 고치기
-  
-
-
+ 		 submitprice=tprice;
+       });
+      
+      //////////총계산 값 저장해놓기/////////////////////////////////
+      
+      $("#totalbuy").click(function(){
+    	
+    	  alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum);
+      });
+      /////////////////////////리뷰보기/////////////////////////////////
+    
+    	$(".reviewViewbtn").click(function() {
+    		
+  			$(this).parent().next().toggle(
+  				function(){
+  					$(this).parent().next().css("display", " "); 
+  				},
+  				function(){
+  					$(this).parent().next().css("display", "hide"); 
+  				   
+  				}
+  			);
+  		});
+      
+     ///////////////////////////문의보기///////////////////////////////
+	$(".qnaViewbtn").click(function() {
+    		
+  			$(this).parent().next().toggle(
+  				function(){
+  					$(this).parent().next().css("display", " "); 
+  				},
+  				function(){
+  					$(this).parent().next().css("display", "hide"); 
+  				  
+  				}
+  			);
+  		});
+      
+      
+});
 </script>
 <body>
-
 	<div class="section" id="productPageDiv">
 		
 
@@ -1101,29 +947,25 @@ function total(){
 						    <c:if test="${pvo.wrapping==2}">냉동</c:if></li>  <!-- 10 -->
 						
 						<li>구매수량</li>  <!-- 11 -->
-						<li><input type="button" onclick="mCount()" class="pmbtn minibtn" value="-"/><span id="prtnum" name="prtnum">1</span><input type="button"  onclick="pCount()" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
+						<li><input type="button" id="mCount" class="pmbtn minibtn" value="-"/><span id="prtnum" name="prtnum">1</span><input type="button"  id="pCount" class="pmbtn minibtn" value="+"/></li>  <!-- 12 -->
 						<li>추가옵션</li>  <!-- 13 -->
 						<li><c:if test="${empty ovo}">해당 상품은 옵션이 없습니다. </c:if></li>  <!-- 14 -->
 						 
-						
-							<li><select name="selecOption" id="selecOption" onchange="optionchange()">
+						<c:if test="${not empty ovo}">
+							<li><select name="selectOption" id="selectOption">
 							   
-							    <c:if test="${empty ovo}">  
-							        <option value="1 & 0">- </option>
-							    </c:if>
-							    
-							    <c:if test="${not empty ovo}">
-							        <option value="0 & 0">옵션을 선택해 주세요</option>
-							    </c:if>		
-							    				    
+							   
+							        <option value="0&0">옵션 선택 안함</option>
+							   	    
 						   	 <c:forEach var="ovodata" items="${ovo}">						   	       
 								   <option value="${ovodata.optionnum}&${ovodata.optionprice}">${ovodata.optionnum}${ovodata.optionname}</option> <!-- -----옵션선택하기----- -->
 							 </c:forEach>
 							</select></li>
 						
 						<c:if test="${not empty ovo}">
-							<li><input type="button" onclick="omCount()" class="pmbtn minibtn"  value="-"/><span id="optnum">1</span><input type="button" onclick="opCount()" class="pmbtn minibtn"  value="+"/></li>  <!-- 16 -->
+							<li><input type="button" id="omCount" class="pmbtn minibtn"  value="-"/><span id="optnum">1</span><input type="button" id="opCount" class="pmbtn minibtn"  value="+"/></li>  <!-- 16 -->
 					    </c:if>
+					  </c:if>
 					    
 					</ul>
 				</div>
@@ -1131,12 +973,12 @@ function total(){
                 <div id=productTotalPrice4></div>
                 <div id=productTotalPrice2>할인된가격:- ${Dprice} 원</div>
                 <div id=productTotalPrice3>옵션가격:</div>
-				<div id=productTotalPrice>구매가격: <script>document.write(tprice)</script> 원</div>
+				<div id=productTotalPrice>구매가격: <span id="spanTotalPrice"></span> 원</div>
 				
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn"/>
 					<input type="button" value="장바구니 담기" class="btn"/>
-					<input type="button" value="구매하기"  class="btn" onclick="total()"/>
+					<input type="button" value="구매하기"  class="btn" id="totalbuy"/>
 				</div>
 			</div>
 			<!--pbox  -->
@@ -1212,6 +1054,7 @@ function total(){
 			<div id="productInfoPage2">
 				<div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
+					
 
 
 				<ul id="reviewTitle">
@@ -1225,14 +1068,14 @@ function total(){
                 <c:if test="${empty reviewlist}">
 		             <div id="noreview">작성된 후기가 없습니다.</div>
 		        </c:if>
-		        
+		       
               <c:forEach var="rlist" items="${reviewlist}">
                  	
 		          	
 					<ul class="reviewList">
 						<li>${rlist.reviewnum}</li>
 						<li id="reviewViewbtn" class="reviewViewbtn">
-							<input type="hidden" value="${rlist.reviewnum}"/><!-- onclick="reviewView('r${rlist.reviewnum}' -->
+							<input type="hidden" class="reviewconinput" value="${rlist.reviewnum}"/>
 							후기 자세히 보기 ▼
 						</li>
 						<li>${rlist.userid}</li>
@@ -1251,7 +1094,9 @@ function total(){
 					   </div>
 					   
                </c:forEach>
-    
+               
+               <div id="pagelibtn"><a href="/sshj/mybuyList">후기 작성</a></div>
+               
 		       <div id="nonebox">   </div>
 
                <c:if test="${not empty reviewlist}">
@@ -1294,6 +1139,7 @@ function total(){
 
 				<div id="qtitle">상품에 대한 문의를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
 					없이 담당 게시판으로 이동될 수 있습니다.</div>
+					
 
 				<ul id="qnaTitle">
 					<li><b>번호</b></li>
@@ -1303,41 +1149,62 @@ function total(){
 					<li><b>공개여부</b></li>
 				</ul>
 
+		   <c:if test="${empty faqlist}">
+		       <div id="noreview">작성된 문의가 없습니다.</div>
+		   </c:if>
+
+           <c:forEach var="qlist" items="${faqlist}">
 				<ul id="qnaList">
-					<li>123</li>
-					<li><a href="#">비공개 처리된 게시글 입니다.</a></li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li><img src="img/ciconlock2.png"></li>
-
-					<li>123</li>
-					<li><a href="#">비공개 처리된 게시글 입니다.</a></li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li><img src="img/ciconlock2.png"></li>
-
-					<li>123</li>
-					<li><a href="#">비공개 처리된 게시글 입니다.</a></li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li><img src="img/ciconlock2.png"></li>
-
-					<li>123</li>
-					<li><a href="#">비공개 처리된 게시글 입니다.</a></li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li><img src="img/ciconlock2.png"></li>
-
-					<li>123</li>
-					<li><a href="#">비공개 처리된 게시글 입니다.</a></li>
-					<li>goguma123</li>
-					<li>2020.01.23</li>
-					<li><img src="img/ciconlock2.png"></li>
-
+					 <li>${qlist.qnum}</li> <!-- 문의 숫자 -->
+					<c:if test="${qlist.qopen==0 && logId!=qlist.userid}"> <!-- 비공개일경우 제목표시 -->
+					 <li class="qnaViewbtn">비공개로 작성된 글입니다.</li>
+					</c:if>
+					<c:if test="${qlist.qopen==1 || logId==qlist.userid}"> <!-- 공개일경우 제목표시 -->
+					 <li class="qnaViewbtn">${qlist.qtitle}</li>
+					</c:if>
+					 <li>${qlist.userid}</li> <!-- 유저아이디 -->
+					 <li>${qlist.qwritedate}</li><!-- 날짜 -->
+				  <c:if test="${qlist.qopen==0}">	<!-- 비공개일경우 그림표시 -->
+					 <li><img src="img/ciconlock2.png"></li>
+				  </c:if>
+				  <c:if test="${qlist.qopen==1}">	 <!-- 공개일경우 그림표시 -->
+					 <li><img src="img/ciconlock.png"></li>
+				  </c:if>
 				</ul>
+				
+				<div id="qnaViewbox" style="display:none" >
+				<c:if test="${qlist.qopen==1 || logId==qlist.userid}">	<!-- 공개일경우 내용표시 -->	
+							<div id="qnatxtbox">				
+							     ${qlist.qcontent}
+							</div>
+						 <c:if test="${qlist.qanswer==null}"> <!-- 답변없을경우 -->	
+						    <div id="qnatxtbox2">	
+							  아직 작성된 답변이 없습니다.
+							</div>
+						 </c:if>
+						 
+						 <c:if test="${qlist.qanswer!=null}">
+						    <div id="qnatxtbox2">					
+							     ${qlist.qanswer}
+							</div>
+						</c:if>	
+				</c:if>	
+				
+				<c:if test="${qlist.qopen==0 && logId!=qlist.userid}">	
+				           <div id="qnatxtbox2">
+				                비공개로 작성된 글입니다.
+				           </div>
+				</c:if>	
+				
+				</div>
+				
+		  </c:forEach>	
 
+				<div id="pagelibtn"><a href="/sshj/mybuyList">문의 작성</a></div>
+				
 				<div id="nonebox">   </div>
 
+			<c:if test="${not empty faqlist}">
 				<!-- 페이징 표시--------- -->
 				<div class="page_wrap">
 					<div class="page_nation">
@@ -1348,7 +1215,7 @@ function total(){
 					</div>
 				</div>
 				<!-- 페이징 표시--------- -->
-
+  			</c:if>
 
 			</div>
 			<!--productInfoPage3  -->

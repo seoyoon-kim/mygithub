@@ -39,7 +39,7 @@ public class ProductViewController {
 		
 		//상품의 할인가격 구하기	-->${Dprice}가 마이너스 되는 가격임
 		mav.addObject("Dprice",productViewService.PDprice(productnum)); 
-		System.out.println(productViewService.PDprice(productnum)); //출력됨
+		//System.out.println(productViewService.PDprice(productnum)); //출력됨
 		
 		//상품의 옵션가격 구하기
 		//System.out.println("옵션번호"+req.getAttribute("optionnum"));
@@ -57,7 +57,8 @@ public class ProductViewController {
 		
 		//상품후기 구하기
 		mav.addObject("reviewlist",productViewService.ProductViewReview(productnum));
-		
+		//문의내역 구하기
+		mav.addObject("faqlist",productViewService.ProductViewFaq(productnum));
 		
 		
 		

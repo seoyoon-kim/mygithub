@@ -47,7 +47,11 @@
        where productnum=${param1} and reviewnum=${param2}
     </select>
     
-
+    <!--       상품문의 구하기        -->
+    <select id="ProductViewFaq" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+     select qnum,userid,qcontent,to_char(qwritedate,'MM-DD HH:MI')qwritedate,qopen,qanswer,qtitle
+     from userqboard where productnum=${param1}
+    </select>
    
     
   </mapper>

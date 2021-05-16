@@ -25,5 +25,8 @@ public interface ProductViewDAO {
 	////////////리뷰글 상세보기
 	public ProductViewVO reviewViewSelect(int pnum,int rnum);
 	
+	////////////상품문의 보기
+	public List<ProductViewVO> ProductViewFaq(int productnum);
+	
 	
 }

@@ -24,4 +24,6 @@ public interface ProductViewService {
 	////////////리뷰글 상세보기
 	public ProductViewVO reviewViewSelect(int pnum,int rnum);
 	
+	/////////////문의글 구하기 
+	public List<ProductViewVO> ProductViewFaq(int productnum);
 }

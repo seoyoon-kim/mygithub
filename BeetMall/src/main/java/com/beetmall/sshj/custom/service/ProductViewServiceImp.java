@@ -69,6 +69,14 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 
+	@Override
+	public List<ProductViewVO> ProductViewFaq(int productnum) {
+		
+		return productVeiwDAO.ProductViewFaq(productnum);
+	}
+
+
+
 
 
 
