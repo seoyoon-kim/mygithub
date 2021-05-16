@@ -42,7 +42,7 @@ public class ProductController {
 		  
 		 ModelAndView mav = new ModelAndView();
 		 vo.setUserid((String)session.getAttribute("logId"));
-		
+		sapvo.setUserid((String)session.getAttribute("logId"));
 			
 		//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
 		String reqPageNum = req.getParameter("pageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
@@ -52,16 +52,15 @@ public class ProductController {
 		//검색어
 		sapvo.setSearchWord(sapvo.getSearchWord());
 		
-		
-		//검색어와 페이징를 담기
-		mav.addObject("sapvo",sapvo);
-		mav.addObject("productList", productService.searchList(sapvo)); 
-
 		//총 레코드 수 구하기 
 		sapvo.setTotalRecord(productService.totalRecord(sapvo));
 		//상품목록 담기
 		mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
-				
+		//검색어와 페이징를 담기
+		mav.addObject("searchWord",sapvo.getSearchWord());
+		mav.addObject("sapvo",sapvo);
+		mav.addObject("productList", productService.searchList(sapvo)); 
+		
 		System.out.println("word=" + sapvo.getSearchWord());
 		  
 		  
@@ -183,31 +182,32 @@ public class ProductController {
 			System.out.println("wrapping -> "+ vo.getWrapping());
 			
 			
-//---------------------------이미지 등록 끝-----------------------------------------		
+//---------------------------insert & 조건-----------------------------------------		
 			//상품등록 
 			int result = productService.productInsert(vo);
 			System.out.println("상품 insert -> "+ result);
 		
-			//할인이 있을 때,
+			//할인선택이 있을 때, insert
 			if(vo.getSaleselect() == '1' || vo.getSaleselect() == 1) {
 				result2 = productService.discountInsert(dvo);
 				System.out.println("vo.getSaleSelect -> " + vo.getSaleselect());
 				System.out.println("할인 insert +" + result2);
 			}
-			// 옵션이 있을 때, 
+			// 옵션선택이 있을 때, insert
 			if(vo.getOptionselect() == '1' || vo.getOptionselect() == 1) {
 				result3 = productService.optionInsert(ovo);
 				System.out.println("vo.getOpionSelect ->" + vo.getOptionselect());
 				System.out.println("옵션 insert + "+ result3);
 			}
 			// 못난이 할인을 선택하지 않았을 때,
-			if(vo.getSaleb()!='1') {
+			if(vo.getSaleb()!='1' || vo.getSaleb()=='0') {
 				vo.setSaleb('0');
 			}
 			//배송옵션이 0이면 나머지 다 0으로 세팅
-			
-			 if(vo.getDeliveryoption()=="1") { vo.setPaymentoption("0");
-			 vo.setDeliveryprice(0); }
+			 if(vo.getDeliveryoption()=="1" || vo.getDeliveryoption().equals(1)) { 
+				 vo.setPaymentoption("0");
+				 vo.setDeliveryprice(0); 
+			}
 			 
 //---------------------------insert 결과 확인--------------------------------------
 			// 상품등록 확인
