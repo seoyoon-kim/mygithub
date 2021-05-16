@@ -127,7 +127,7 @@ footer{
 			</c:if>
 		</div>
 		<ul>
-			<li><a href="#" >Beetmall</a></li>
+			<li><a href="sellerMain" >Beetmall</a></li>
 			<li><a href="product_list">상품 관리</a></li>
 			<li><a href="product_regi">상품 등록</a></li>
 			<li><a href="order_management">주문 관리</a></li>
