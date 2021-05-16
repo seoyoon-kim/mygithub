@@ -206,66 +206,66 @@
 	    $("#pickup").change(function(){
 	        if($("#pickup").is(":checked")){
 	        	if($("#item").val() != null && $("#item").val()!='' && $("#type").val() != null && $("#type").val()!=''){//두개다 널이아닐때
-	        		location.href="/sshj/uglyItem?item="+$("#item").val()+"&type="+$("#type").val()	+"&pick=1"
+	        		location.href="/sshj/categoryMain?item="+$("#item").val()+"&type="+$("#type").val()	+"&pick=1"
 	        	}else if($("#item").val() != null && $("#item").val()!=''){//아이템만 널이아닐때
-	        		location.href="/sshj/uglyItem?item="+$("#item").val()+"&pick=1"
+	        		location.href="/sshj/categoryMain?item="+$("#item").val()+"&pick=1"
 	        	}else if($("#type").val() != null && $("#type").val()!=''){//타입만 널이아닐때
-	        		location.href="/sshj/uglyItem?type="+$("#type").val()+"&pick=1"
+	        		location.href="/sshj/categoryMain?type="+$("#type").val()+"&pick=1"
 	        	}else{
-	        		location.href="/sshj/uglyItem?&pick=1"
+	        		location.href="/sshj/categoryMain?&pick=1"
 	        	}
 	        }else{
 	        	if($("#item").val() != null && $("#item").val()!='' && $("#type").val() != null && $("#type").val()!=''){//두개다 널이아닐때
-	        		location.href="/sshj/uglyItem?&item="+$("#item").val()+"&type="+$("#type").val()	
+	        		location.href="/sshj/categoryMain?&item="+$("#item").val()+"&type="+$("#type").val()	
 	        	}else if($("#item").val() != null && $("#item").val()!=''){//아이템만 널이아닐때
-	        		location.href="/sshj/uglyItem?&item="+$("#item").val()
+	        		location.href="/sshj/categoryMain?&item="+$("#item").val()
 	        	}else if($("#type").val() != null && $("#type").val()!=''){//타입만 널이아닐때
-	        		location.href="/sshj/uglyItem?&type="+$("#type").val()
+	        		location.href="/sshj/categoryMain?&type="+$("#type").val()
 	        	}else{
-	        		location.href="/sshj/uglyItem"
+	        		location.href="/sshj/categoryMain"
 	        	}	
 	        }
 	    });
 	    $('#Sequence').change(function(){
 	   		if($('#Sequence option:selected').val() == "평점높은순"){
 	            if($("#item").val() != null && $("#item").val()!='' && $("#pick").val() != null && $("#pick").val()!=''){ //두개다 널이 아닐때
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=1&pick=1"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=1&pick=1"
 	            }else if($("#item").val() != null && $("#item").val()!=''){ //아이템만 널이아닐떄
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=1"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=1"
 	            }else if($("#pick").val() != null && $("#pick").val()!=''){ //픽업만 널이아닐때
-	            	location.href="/sshj/uglyItem?type=1&pick=1"
+	            	location.href="/sshj/categoryMain?type=1&pick=1"
 	            }else{//다 널일때
-	            	location.href="/sshj/uglyItem?type=1"
+	            	location.href="/sshj/categoryMain?type=1"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "평점낮은순"){
 	   			if($("#item").val() != null && $("#item").val()!='' && $("#pick").val() != null && $("#pick").val()!=''){ //두개다 널이 아닐때
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=2&pick=1"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=2&pick=1"
 	            }else if($("#item").val() != null && $("#item").val()!=''){ //아이템만 널이아닐떄
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=2"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=2"
 	            }else if($("#pick").val() != null && $("#pick").val()!=''){ //픽업만 널이아닐때
-	            	location.href="/sshj/uglyItem?type=2&pick=1"
+	            	location.href="/sshj/categoryMain?type=2&pick=1"
 	            }else{//다 널일때
-	            	location.href="/sshj/uglyItem?type=2"
+	            	location.href="/sshj/categoryMain?type=2"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰많은순"){
 	   			if($("#item").val() != null && $("#item").val()!='' && $("#pick").val() != null && $("#pick").val()!=''){ //두개다 널이 아닐때
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=3&pick=1"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=3&pick=1"
 	            }else if($("#item").val() != null && $("#item").val()!=''){ //아이템만 널이아닐떄
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=3"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=3"
 	            }else if($("#pick").val() != null && $("#pick").val()!=''){ //픽업만 널이아닐때
-	            	location.href="/sshj/uglyItem?type=3&pick=1"
+	            	location.href="/sshj/categoryMain?type=3&pick=1"
 	            }else{//다 널일때
-	            	location.href="/sshj/uglyItem?type=3"
+	            	location.href="/sshj/categoryMain?type=3"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰적은순"){
 	   			if($("#item").val() != null && $("#item").val()!='' && $("#pick").val() != null && $("#pick").val()!=''){ //두개다 널이 아닐때
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=4&pick=1"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=4&pick=1"
 	            }else if($("#item").val() != null && $("#item").val()!=''){ //아이템만 널이아닐떄
-	            	location.href="/sshj/uglyItem?item="+$("#item").val()+"&type=4"
+	            	location.href="/sshj/categoryMain?item="+$("#item").val()+"&type=4"
 	            }else if($("#pick").val() != null && $("#pick").val()!=''){ //픽업만 널이아닐때
-	            	location.href="/sshj/uglyItem?type=4&pick=1"
+	            	location.href="/sshj/categoryMain?type=4&pick=1"
 	            }else{//다 널일때
-	            	location.href="/sshj/uglyItem?type=4"
+	            	location.href="/sshj/categoryMain?type=4"
 	            }
 	   		}
  		});
@@ -288,7 +288,7 @@
 	
 	//이전페이지 가기
 	function prevPage(){
-		var loca = "/sshj/uglyItem?";
+		var loca = "/sshj/categoryMain?";
 		if($("#item").val() != null && $("#item").val()!=''){
 			loca += "item="+$("#item").val();
 		}
@@ -334,7 +334,7 @@
 	
 	//다음페이지 가기
 	function nextPage(){
-		var loca = "/sshj/uglyItem?";
+		var loca = "/sshj/categoryMain?";
 		if($("#item").val() != null && $("#item").val()!=''){
 			loca += "item="+$("#item").val();
 		}
@@ -380,7 +380,7 @@
 	
 	//클릭한 페이지 이동하기
 	function clickPage(click){
-		var loca = "/sshj/uglyItem?";
+		var loca = "/sshj/categoryMain?";
 		if($("#item").val() != null && $("#item").val()!=''){
 			loca += "item="+$("#item").val();
 		}
@@ -441,15 +441,15 @@
 		<input type="hidden" id="pageNum" value="${pageVO.pageNum}"/>
 	</c:if>
 	<div class="main">
-		<div id="mainName"><h1>못난이 할인</h1></div>
+		<div id="mainName"><h1>신상품</h1></div>
 			<ul id="category">
-				<li><a href="/sshj/uglyItem"><span id="categoryAll" style="cursor:pointer"><img src="/sshj/img/kmain.png"><br/><br/>전체</span></a></li>
-				<li><a href="/sshj/uglyItem?item=Fruit"><span id="categoryFruit" style="cursor:pointer"><img src="/sshj/img/kfruit.png"><br/><br/>과일</span></a></li>
-				<li><a href="/sshj/uglyItem?item=vegetable"><span id="categoryVege" style="cursor:pointer"><img src="/sshj/img/kvegetable.png"><br/><br/>채소</span></a></li>
-				<li><a href="/sshj/uglyItem?item=Rice"><span id="categorySall" style="cursor:pointer"><img src="/sshj/img/krice.png"><br/><br/>쌀/잡곡</span></a></li>
+				<li><a href="categoryMain"><span id="categoryAll" style="cursor:pointer"><img src="/sshj/img/kmain.png"><br/><br/>전체</span></a></li>
+				<li><a href="categoryMain?item=Fruit"><span id="categoryFruit" style="cursor:pointer"><img src="/sshj/img/kfruit.png"><br/><br/>과일</span></a></li>
+				<li><a href="categoryMain?item=vegetable"><span id="categoryVege" style="cursor:pointer"><img src="/sshj/img/kvegetable.png"><br/><br/>채소</span></a></li>
+				<li><a href="categoryMain?item=Rice"><span id="categorySall" style="cursor:pointer"><img src="/sshj/img/krice.png"><br/><br/>쌀/잡곡</span></a></li>
 			</ul>
 			<div id="search_container">
-				<form method="get" action="uglyItem" id="searchForm">
+				<form method="get" action="categoryMain" id="searchForm">
 					<span id="search_box">
 						<input type="text" id="searchWord" name="searchWord" placeholder="검색하기"><input type="submit" id="searchBtn" value="검색"/>
 					</span>
