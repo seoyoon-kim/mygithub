@@ -119,15 +119,15 @@ $(()=>{
 					<input type="file" id="farmprofile" name="farmprofile" style="display: none;" onchange="javascript:check(this)" accept="image/png, image/jpg, image/jpeg, image/gif" /> 
 					<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}" /></a><br /> 
 					*프로필 이미지 클릭시 파일첨부<br /> <input type="text" id="farmname" name="farmname" value="${result.farmname }" style="width: 100px; height: 25px" />
-					<div>
-						방문자수 : ${result.farmvisitor}명<br /> 농장 즐겨찾기수 : ${favorite}명
+					<div id="profileData">
+						방문 : ${result.farmvisitor}명 | 농장 즐겨찾기 : ${favorite}명
 					</div>
 				</div>
 				<!-- profile_box 종료 -->
 				<hr />
 				<div id="farm_info">
 					<div>INFO</div>
-					<textarea rows="5" cols="80" name="farmintro">${result.farmintro }</textarea>
+					<textarea name="farmintro">${result.farmintro }</textarea>
 				</div>
 				<!-- farm_info 종료 -->
 				<div id="farm_contact">
