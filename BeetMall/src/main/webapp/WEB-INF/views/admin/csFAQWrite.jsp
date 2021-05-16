@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ include file="/inc/top.jspf" %>
 <%@ include file="/inc/leftBar.jspf" %> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
   
@@ -148,11 +147,14 @@
 		color:black;
 	}
 </style>
-<div id="body1">
-<div class="container">
+	<div id="topBarContainer">
 	<div id="topBar">
 		<p><strong>자주 묻는 질문 등록</strong></p>   
 	</div>
+	</div>
+<div id="body1">
+<%@ include file="/inc/top.jspf" %>
+<div class="container">
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>

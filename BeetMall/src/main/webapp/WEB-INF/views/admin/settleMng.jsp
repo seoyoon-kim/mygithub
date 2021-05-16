@@ -5,6 +5,9 @@
 		border-radius:5px;
 	}
 	/*맨 위 top Bar*/ 
+	#topBar h5{  
+		padding-left:140px;
+	}
 	#topBar input::placeholder {
 	  color: lightgray; 
 	}  
@@ -152,15 +155,17 @@
 <script>
  
 </script>
-<div id="body1">
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="/settleMng">정산 관리</a></strong></h5></li> 
 			</ul> 
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="sortBox">
 			<ul>
 				<li><input type="date"/>   <span>~&nbsp;</span></li>

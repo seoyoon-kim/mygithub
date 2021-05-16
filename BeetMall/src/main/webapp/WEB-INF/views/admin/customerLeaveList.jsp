@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
+	#topBar h5{ 
+		padding-left:150px;
+	}
 	 #container li{ 
 		 list-style-type:none; 
 		 float:left; 
@@ -19,27 +22,27 @@
 	#title{
 		padding-top:0 !important;
 	} 
-#sortBox {
-	margin: 30px 0 0 20px;
-} 
-#sortBox>ul{
-	width:1110px !important;
-}
-#sortBox li:nth-of-type(2) {
-	width: 6%;
-}
-#sortBox li:nth-of-type(4) {
-	margin-right:45px;
-}
-#sortBox li:nth-of-type(6) {
-	margin-left:340px;
-}
-#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
-	width: 4%;
-}
-#fromTo{
-	margin-left:90px;
-}
+	#sortBox {
+		margin: 30px 0 0 20px;
+	} 
+	#sortBox>ul{
+		width:1110px !important;
+	}
+	#sortBox li:nth-of-type(2) {
+		width: 6%;
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:45px;
+	}
+	#sortBox li:nth-of-type(6) {
+		margin-left:340px;
+	}
+	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+		width: 4%;
+	}
+	#fromTo{
+		margin-left:90px;
+	}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
@@ -69,16 +72,18 @@
  
  
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="customerLeaveListA">탈퇴회원관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
-		</div>   
+		</div> 
+		</div>  
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="choose">
 			<a href="customerLeaveList"><button class="success" value="" name="" id="" style="background-color:lightgray;">일반회원</button></a>
 			<a href="sellerLeaveList"><button class="success" value="" name="" id="">판매자회원</button></a>

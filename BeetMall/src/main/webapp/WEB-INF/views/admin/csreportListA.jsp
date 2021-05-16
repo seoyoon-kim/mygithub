@@ -2,9 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style> 
 	/*맨 위 top Bar*/
-	#topBar h5{
-		margin-left:50px;
-		width:200px;
+	#topBar h5{  
+		padding-left:140px;
 	}
 	#topBar li:nth-of-type(1){
 	 	margin-left:10px;
@@ -171,16 +170,18 @@
  
 </script> 
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="/reportListA">신고 관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
 				<li><button class="success" value="del" name="del" id="edit">정지</button></li> 
 			</ul> 
-		</div>  
+		</div> 
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container"> 
 		<div id="sortBox">
 			<ul>
 				<li><select name="sort"   id="cateSort"> 

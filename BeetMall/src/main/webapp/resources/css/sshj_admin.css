@@ -9,12 +9,17 @@
 		margin:30px 0 0 30px;
 		font-size:14px;
 	}	 
+	body{
+		width:100%;
+	}
 	#body1{
-		width:1080px; 
+		width:1280px; 
 		padding:0; 
-		margin:0; 
+		margin:0 auto; 
 		font-family: 'Noto Sans KR', sans-serif;
 		font-size:14px;
+		position:relative;
+		top:-50px;
 	}
 	#topBar, #topBar form, .searchFrm, #title, button, #contentBox, input[type=checkbox]{ 
 		position:relative; 
@@ -33,8 +38,8 @@
 		letter-spacing:2px;
 	} 
 	#container{ 
-		position:absolute; 
-		top:200px; 
+		position:relative; 
+		top:-470px; 
 		left:190px; 
 		width:1080px; 
 		padding:0; 
@@ -48,6 +53,7 @@
 	}
 	#ascBtn, #descBtn{  
 		width:30px;
+		padding:0;
 	} 
 	#contentBox ul{
 		margin-left:30px;
@@ -60,12 +66,20 @@
 	} 
 	
 	/*남색 topBar*/
+	#topBarContainer{
+		background-color:rgb(40,40,100); 
+		width:100%; 
+		height:50px; 
+	}
+	#topBar{ 
+		text-align:center;
+		padding:10px 0 0 0px; 
+		margin:0 auto; 
+	}  
 	#topBar h5{
 		margin-top:3px;
 		color:white; 
 		width:400px;
-		position:relative;
-		left:-95px;
 	} 
 	#topBar>ul{
 		margin:0 auto;
@@ -74,14 +88,6 @@
 	#topBar a{
 		color:white;
 	}
-	#topBar{ 
-		background-color:rgb(40,40,100); 
-		float:left; 
-		height:50px; 
-		padding:10px 0 0 0px;  
-		width:1920px;
-		left:-200px;
-	}  
 	#topBar button{
 		border-radius:2.5px;
 	}  
@@ -157,10 +163,10 @@
 		position:absolute;
 		width:100px;
 		top:11px;
-		left:1470px;
+		left:1310px;
 	}
 	#addBtn{
-		left:1350px;
+		left:1195px;
 	}
 	#editBtn{
 		left:950px;

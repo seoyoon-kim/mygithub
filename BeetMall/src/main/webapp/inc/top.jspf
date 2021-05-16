@@ -34,7 +34,7 @@
 	#topBox{ 
 		height:200px; 
 		margin:0; 
-		width:1920px;  
+		width:100%;  
 	}
 	#top{ 
 		padding:5px 0px 0px 20px; 

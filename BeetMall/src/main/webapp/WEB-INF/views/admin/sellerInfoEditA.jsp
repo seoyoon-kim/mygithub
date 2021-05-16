@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
 <style> 
 	#topBar>h5{
-		margin-left:270px !important;
+    	padding-left: 300px;
+    	width: 600px !important; 
 	}
 	 #contentBox{
 	 	height:1780px;
@@ -78,13 +79,15 @@
 </style>
 <script>
 </script>
-<div id="body1">
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<h5><strong>판매자 정보 수정</strong></h5>
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
    		<div id="contentBox">
 		 	<div id="companyBox">
 		 	<div id="companyTitle"><p>사업자 정보</p></div>

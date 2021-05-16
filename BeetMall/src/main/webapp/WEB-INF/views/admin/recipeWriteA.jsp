@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
  
 <!-- include summernote css/js -->
@@ -12,7 +11,10 @@
 	#mypageMenubar{
 		display:block;
 	}
-	
+	#topBar>h5{
+		padding-left: 350px;
+	    width: 500px !important;
+    }
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; }
 
 	a:hover, a:active, a:visited, a:link {
@@ -180,11 +182,14 @@ $(document).ready(function(){
 	    }); 
 	}); 
 </script>
-<div id="body1">
-<div class="container">
+	<div id="topBarContainer">
 	<div id="topBar">
-		<p><strong>레시피 작성</strong></p>   
+		<h5><strong>레시피 작성</strong></h5>   
 	</div>
+	</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %> 
+<div class="container">
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>

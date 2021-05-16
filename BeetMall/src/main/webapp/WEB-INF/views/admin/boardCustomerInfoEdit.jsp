@@ -3,10 +3,9 @@
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
 <style>
 	/*맨 위 top Bar*/
-	#topBar>h5{
-		margin-left:15px;
-		width:200px;
-		color:white;
+	#topBar>h5{   
+    	padding-left: 300px;
+    	width: 600px !important; 
 	} 
 	#contentBox{
 		height:3200px;
@@ -399,14 +398,15 @@
 		margin-right:0;
 	}
 </style>
-<%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
- 
+<%@ include file="/inc/top.jspf" %> 
+<div id="topBarContainer">
+	<div id="topBar">			
+		<h5><strong>일반회원 정보수정</strong></h5>			
+	</div>  
+</div> 
 <div id="body1">
-<div id="container">
-		<div id="topBar">			
-			<h5><strong>일반회원 정보수정</strong></h5>			
-		</div>  
+	<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="contentBox"> 
 		
 		<!-- 회원정보 파트 -->

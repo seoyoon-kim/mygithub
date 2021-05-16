@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
  
 <!-- include summernote css/js -->
@@ -154,6 +153,8 @@
 	}
 </style>
 <div id="body1">
+	<div id="topBarContainer">
+<%@ include file="/inc/leftBar.jspf" %> 
 <div class="container">
 	<div id="topBar">
 		<p><strong>상품 문의 보기</strong></p>   
@@ -270,6 +271,7 @@
 			</div>
 		</form>
 		</div>
+</div>
 </div>
 </div>
 <script>

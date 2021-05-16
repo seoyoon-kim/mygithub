@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
 <html> 
 <style>
-	body{
+	#body1{
 		font-size:14px; 
 		font-family: 'Noto Sans KR', sans-serif;
 	}
@@ -36,8 +33,8 @@
 		left:-15px;
 	}
 	#total{
-		position:absolute; 
-		top:240px; 
+		position:relative; 
+		top:-430px; 
 		left:175px; 
 		width:1080px; 
 		margin-left:20px;
@@ -104,9 +101,9 @@
 		padding:5px 20px;
 	}
 </style> 
-	<%@ include file="/inc/top.jspf" %>
-	<%@ include file="/inc/leftBar.jspf" %>
+	<%@ include file="/inc/top.jspf" %> 
 <div id="body1"> 
+	<%@ include file="/inc/leftBar.jspf" %>
 	<div id="total">   
 		<div id="deli"> 
 			<p>주문/배송</p><br/> 

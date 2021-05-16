@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style> 
 	/*맨 위 회색 top Bar*/
+	#topBar h5{  
+		padding-left:140px;
+	}
 	#topBar li{
 		width:12%;
 	} 
@@ -318,15 +321,17 @@
 <script>
  
 </script>
-<div id="body1">
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="salesListA">판매 내역</a></strong></h5></li> 
 			</ul> 
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="sortBox">
 			<ul>
 				<li><select name="sort" > 

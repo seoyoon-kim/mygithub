@@ -33,11 +33,11 @@
 	#sortBox>ul{
 		width:1110px !important;
 	} 
-	#sortBox li:nth-of-type(1) {
-		width: 10% !important;
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(3),#sortBox li:nth-of-type(4),#sortBox li:nth-of-type(5),#sortBox li:nth-of-type(4),#sortBox li:nth-of-type(6) {
+		width: 10%;
 	}
 	#sortBox li:nth-of-type(2) {
-		width: 6% !important;
+		width: 6%;
 	}
 	#sortBox li:nth-of-type(4) {
 		margin-right:45px;
@@ -80,16 +80,18 @@
  
  
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="/sellerListA">회원관리</a></strong></h5></li> 
 					<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
-		</div>   
+		</div>
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">   
 		<div id="choose">
 			<a href="customerListA"><button class="success" value="" name="" id="">일반회원</button></a>
 			<a href="sellerListA"><button class="success" value="" name="" id="" style="background-color:lightgray;">판매자회원</button></a>

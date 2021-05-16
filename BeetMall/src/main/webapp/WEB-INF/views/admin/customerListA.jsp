@@ -2,130 +2,131 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-#container {
-	height: 1200px;
-}
-
-#container li {
-	float: left;
-	width: 10%;
-}
-
-#contentBox li:nth-of-type(8n-7) {
-	width: 0%;
-	margin-top: 3px;
-}
-
-#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1) {
-	width: 30%;
-	padding-left: 20px;
-}
-
-#topBar li:nth-of-type(3) {
-	width: 5.5%;
-}
-
-#topBar li:nth-of-type(4) {
-	width: 14%;
-}
-
-#content input, textarea, select, #noticeSearchFrm input {
-	border: 1px solid lightgray;
-	border-radius: 3px;
-}
-
-#content li, label {
-	list-style-type: none;
-	padding-bottom: 10px;
-}
-
-#content select {
-	height: 28px;
-}
-
-.searchFrm {
-	margin:30px 0 30px 300px;
-}
-/*버튼*/
-#btns {
-	top: -115px;
-	left: 460px;
-}
-
-#btns a>button, button:nth-of-type(4) {
-	margin-left: 900px;
-}
-
-#topBar Button:nth-of-type(1), #topBar Button:nth-of-type(2), #topBar Button:nth-of-type(3),
-	#topBar Button:nth-of-type(4) {
-	padding: 2px 7px;
-}
-
-#title {
-	padding-top: 0 !important;
-}
-
-#sortBox {
-	margin: 30px 0 0 20px;
-} 
-#sortBox>ul{
-	width:1110px !important;
-}
-#sortBox li:nth-of-type(2) {
-	width: 6%;
-}
-#sortBox li:nth-of-type(4) {
-	margin-right:45px;
-}
-#sortBox li:nth-of-type(6) {
-	margin-left:340px;
-}
-#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
-	width: 4%;
-}
-#fromTo{
-	margin-left:90px;
-}
-/* 페이징처리부분 */
-.page_nation .pprev {
-	background: #f8f8f8
-		url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat
-		center center;
-	margin-left: 0;
-}
-
-.page_nation .prev {
-	background: #f8f8f8
-		url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat
-		center center;
-	margin-right: 7px;
-}
-
-.page_nation .next {
-	background: #f8f8f8
-		url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat
-		center center;
-	margin-left: 7px;
-}
-
-.page_nation .nnext {
-	background: #f8f8f8
-		url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat
-		center center;
-	margin-right: 0;
-}
-
-.page_nation a.active {
-	background-color: #42454c;
-	color: #fff;
-	border: 1px solid #42454c;
-}
-/* 페이징처리끝 */
+	#topBar h5{
+		padding-left: 140px;
+	}
+	#container {
+		height: 1200px;
+	}
+	
+	#container li {
+		float: left;
+		width: 10%;
+	}
+	
+	#contentBox li:nth-of-type(8n-7) {
+		width: 0%;
+		margin-top: 3px;
+	}
+	
+	#title li:nth-of-type(8n-1), #contentBox li:nth-of-type(8n-1) {
+		width: 30%;
+		padding-left: 20px;
+	}
+	
+	#topBar li:nth-of-type(3) {
+		width: 5.5%;
+	}
+	
+	#topBar li:nth-of-type(4) {
+		width: 14%;
+	}
+	
+	#content input, textarea, select, #noticeSearchFrm input {
+		border: 1px solid lightgray;
+		border-radius: 3px;
+	}
+	
+	#content li, label {
+		list-style-type: none;
+		padding-bottom: 10px;
+	}
+	
+	#content select {
+		height: 28px;
+	}
+	
+	.searchFrm {
+		margin:30px 0 30px 300px;
+	}
+	/*버튼*/
+	#btns {
+		top: -115px;
+		left: 460px;
+	}
+	
+	#btns a>button, button:nth-of-type(4) {
+		margin-left: 900px;
+	}
+	
+	#topBar Button:nth-of-type(1), #topBar Button:nth-of-type(2), #topBar Button:nth-of-type(3),
+		#topBar Button:nth-of-type(4) {
+		padding: 2px 7px;
+	}
+	
+	#title {
+		padding-top: 0 !important;
+	}
+	
+	#sortBox {
+		margin: 30px 0 0 20px;
+	} 
+	#sortBox>ul{
+		width:1110px !important;
+	}
+	#sortBox li:nth-of-type(2) {
+		width: 6%;
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:45px;
+	}
+	#sortBox li:nth-of-type(6) {
+		margin-left:340px;
+	}
+	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+		width: 4%;
+	}
+	#fromTo{
+		margin-left:90px;
+	}
+	/* 페이징처리부분 */
+	.page_nation .pprev {
+		background: #f8f8f8
+			url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat
+			center center;
+		margin-left: 0;
+	}
+	
+	.page_nation .prev {
+		background: #f8f8f8
+			url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat
+			center center;
+		margin-right: 7px;
+	}
+	
+	.page_nation .next {
+		background: #f8f8f8
+			url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat
+			center center;
+		margin-left: 7px;
+	}
+	
+	.page_nation .nnext {
+		background: #f8f8f8
+			url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat
+			center center;
+		margin-right: 0;
+	}
+	
+	.page_nation a.active {
+		background-color: #42454c;
+		color: #fff;
+		border: 1px solid #42454c;
+	}
+	/* 페이징처리끝 */
 </style>
 <%@ include file="/inc/top.jspf"%>
-<%@ include file="/inc/leftBar.jspf"%>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5>
@@ -135,6 +136,10 @@
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul>
 		</div>
+	</div>
+<div id="body1">
+	<%@ include file="/inc/leftBar.jspf"%>
+	<div id="container">
 		<div id="choose">
 			<a href="customerListA"><button class="success" value="" name=""
 					id="" style="background-color: lightgray;">일반회원</button></a> <a

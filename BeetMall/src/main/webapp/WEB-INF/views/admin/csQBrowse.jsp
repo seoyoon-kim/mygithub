@@ -5,12 +5,9 @@
 		 list-style-type:none; 
 		 float:left; 
 	 }   
-	#topBar h5{
-		width:300px; 
-	}
-	#topBar h5 a{
-		color:white;
-	}
+	#topBar h5{  
+		padding-left:140px;
+	} 
 	#contentBox li{ 
 		 width:16%; 
 	}
@@ -96,15 +93,17 @@
 	/* 페이징처리끝 */
 </style> 
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="customerListA">상품 문의</a></strong></h5></li> 
 				<li><button class="success" value="del" name="del" id="delBtn">비공개</button></li>
 			</ul> 
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="sortBox">
 			<ul>
 				<li><select name="sort" > 

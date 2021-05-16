@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %> 
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<%@ include file="/inc/leftBar.jspf" %>  
  
   
  
@@ -15,6 +12,9 @@
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
 <style> 
+	#topBar h5{  
+		padding-left:150px;
+	}
 	#contentBox {
 		height:4400px;
 	}
@@ -100,11 +100,14 @@ $(document).ready(function(){
 	  });
 	});
 </script>  
-<div id="body1">
-<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">			
 			<h5><strong>디자인 관리</strong></h5>			
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/top.jspf" %>
+<div id="container">
 		<div id="contentBox">  
 		<!----------------------- 랜덤룰렛 파트 ------------------>
 	   		<div id="randomBox">
