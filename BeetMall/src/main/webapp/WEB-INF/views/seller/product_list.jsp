@@ -24,7 +24,7 @@
 </head>
 
 <script>
-	
+	$('selectList')
 
 </script>	
 <style>
@@ -45,6 +45,7 @@
 		vertical-align:inherit;
 		font-weight:bold;	
     	color:#666666;	
+    	background:#f8faf7;
 		font-size:12px;
 		text-align:center;
 		
@@ -79,13 +80,14 @@
 	.product_table td:first-child{border-left:none}
 	/*테이블 폭 조정*/
 	.productCheck, .productNum, .product_table th:first-child, .product_table th:nth-child(2) {
-		width:4%;
+		width:2%;
 	}
-	.product_table th:nth-child(3){width:7%}
-	.product_table th:nth-child(4){width:7%}
+	.product_table th:nth-child(3){width:6%}
+	.product_table th:nth-child(4){width:6%}
 	.product_table th:nth-child(5){width:16%}
 	.product_table th:nth-child(12){width:4%}
 	.product_table th:nth-child(13){width:12%}
+	.product_table th:last-child{width:4%}
 	/*상품 이름*/
 	.productName a{color:gray; font-weight:bold; }
 	/*드롭메뉴와 삭제버튼*/
@@ -112,7 +114,7 @@
 	.btn{float:left;}
  	#remove_product{margin-right:10px;}
  	.option_wrap{margin:8px 0 20px 0;} 
- 	img{width:100px; height: 100px;}
+ 	img{width:100px; height: 100px; margin:5px 0 5px 0;}
 </style>
 <script>
 //체크박스 전체선택
@@ -187,7 +189,7 @@ $(document).ready(function(){
 						<th class="listMenu">상품이름</th>
 						<th class="listMenu" id="thumbImg">대표이미지</th>
 						<th class="listMenu">재고수량</th>
-						<th class="listMenu">판매시작일</th>
+						<th class="listMenu">판매기간</th>
 						<th class="listMenu">판매가</th>
 						<th class="listMenu">할인금액</th>
 						<th class="listMenu">할인판매가</th>
@@ -224,7 +226,7 @@ $(document).ready(function(){
 						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="custom/customproduct?productnum=${vo.productnum}">${vo.productname}</a></span></div></td>	
 						<td class="tbl_line_cell"><div id="thumbnail"><img src="<%=request.getContextPath()%>/resources/sellerProductImgs/${vo.thumbimg}"/></div></td>
 						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">${vo.nowstock}</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
-						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
+						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}~${ vo.sellfinish}</div></td>
 						<td class="tbl_line_cell"><div id="productprice"><span id="price_num">${vo.productprice }</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="saleprice"><span id="price_num">${vo.saleprice}</span><span id="won">원</span></div></td>
 						<td class="tbl_line_cell"><div id="sellprice"><span id="price_num">${vo.sellprice}</span><span id="won">원</span></div></td>

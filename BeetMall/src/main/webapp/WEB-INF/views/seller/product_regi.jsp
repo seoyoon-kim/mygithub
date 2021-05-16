@@ -29,6 +29,7 @@
 	li{margin-bottom:15px;}
 	li>span{line-height:30px;}
 	ul{margin-bottom:5px}
+	label{margin:0; line-height:30px;}
 	select{height:28px;}
 	input, textarea, select{
 		border:1px solid lightgray; 
@@ -38,6 +39,9 @@
 	input,select,button{height:30px;}
 	textarea{
 		width:100%;
+	}
+	input[type="radio"]{
+		margin-right:5px; height:10px;
 	}
 	/* div*/
 	.category_title{
@@ -55,13 +59,16 @@
 		padding:20px;
 		margin-bottom:10px;
 	}
+	.category_wrap li{
+		padding-left:10px;
+	}
 	 .category_wrap>div{margin-bottom:20px; font-size:15px;}
 	/* 리뷰 검색 */
 	/* 카테고리 검색 */
 	#categoryList{
 	   width: 90%;
 	   margin: 30px auto;
-	   border: 1px solid #aaa;
+	   border: 1px solid lightgray;
 	}
 	
 	#categoryListMiddle{
@@ -70,25 +77,30 @@
 	   display: flex;
 	   flex-basis: 1;
 	   margin-bottom: 5px;
-	   border-top:1px solid #aaa;
+	   border-top:1px solid lightgray;
 	}
 	
 	#categoryListMiddle ul{
-	   border-bottom: 1px solid #aaa;
+	   border-bottom: 1px solid lightgray;
 	   overflow: auto;
 	   flex: 1;
 	   display: flex;
 	   flex-direction: column;
+	   overflow-x:hidden;
+	   overflow-y:auto; 
+	   	width: 25px;
 	}
 	
 	#category{
-	   border-right: 1px solid #aaa;
+	   border-right: 1px solid lightgray;
 	   font-size:14px;
 	}
 	#category a{
 	   color: black;
 	}
-	
+	#category li{ 
+		margin:5px;
+	}
 	#categoryListMiddle li{
 	   width: 100%;
 	   text-indent: 0.4em;
@@ -133,6 +145,8 @@
 	}
 	th{
 		height: 30px;
+		font-size:13px;
+		text-align:center;
 	}
 	table,td {
 		border:1px solid lightgray;
@@ -209,6 +223,7 @@ $(function(){
     	  // 선택한 중분류 bold처리
     	  $('#mcategory>li').css('font-weight','normal');
           $(this).css('font-weight','bold');
+         
           // 선택한 목록의 중분류 이름, 번호 구하기
           let selectName = $(this).text();
           let selectNum = $(this).children().val();
@@ -388,8 +403,6 @@ $('#thumbimg').on('change',function(){
 
 //특정기간만 할인 날짜 가져오기
 
-//할인판매가 계산
-
 //기간설정하면 달력날짜 바꾸기
 
 //옵션 적용안함 이면 표 비활성화
@@ -421,15 +434,7 @@ $('#thumbimg').on('change',function(){
 	 	if($('#saleb').val()!='1'){
 	 		$('$saleb').val() =='0';
 	 	}
-// 상품정보 sellweight와 selloption 에서 DB로 값 넘어갈 때 ',' 제거하기
 
-	$('#sellweight').val().replace(/,/g, '');
-	$('#selloption').val().replace(/,/g, '');
-	$('input[name="sellweight"]').val().replace(/,/g, '');
-	$('select[name="sellweight"]').val().replace(/,/g, '');
-	$('input[name="selloption"]').val().replace(/,/g, '');
-	$('select[name="selloption"]').val().replace(/,/g, '');
-	
 //취소 버튼 클릭 시 뒤로 가기
 		$('#cancel_btn').click(function(){
 			history.back();
@@ -443,23 +448,27 @@ $('submit').click(function(){
 	//유효성검사 
 	//전체
 	//선택한 날짜가 오늘 이전일 경우 넘어가지 않기 메세지 띄우기
+	
 	//-------카테고리 선택-------
 	//카테고리가 선택되지 않은 경우
-	
+	if($('#categoryManagement>li').val()==null){
+		return alert('판매 상품 카테고리를 선택해주세요');
+	}
 	//-------상품명------------
 	//상품명이 공백일 경우
-	if($('#product_register_name').text('') && $('#product_register_name').val('')){
+	if($('#product_register_name').text('') || $('#product_register_name').val('')){
          return alert('상품명을 입력해주세요.'); 
          return false;
     }
 	//상품명이 100자가 넘는 경우
 	if($('#product_register_name').text().length>100){
-        return alert('상품명은 100'); 
+        return alert('상품명은 100자 이내로 작성해주세요.'); 
         return false;
    }
    //--------판매가격-------
    //판매가격이 입력되지 않은 경우
    		//할인 설정 설정안함  중 어느것도 선택하지 않은 경우
+   	
 	   //할인설정 
 	   //할인금액이 입력되지 않은 경우
 	   //특정기간 선택 후 기간을 입력하지 않은 경우
@@ -467,10 +476,16 @@ $('submit').click(function(){
 	   //판매기간 설정 설정안함  중 어느것도 선택하지 않은 경우
 	   //판매기간 설정
 	   //날짜를 입력하지 않은 경우
-	   
+	   if($('.start_date').val()==null || $('start_date').val()==''){
+		   return alert('판매 날짜를 입력해주세요');
+		   return false;
+	   }
 	//--------재고수량---------
 	//재고수량을 입력하지 않은 경우
-	
+	if($('#totalstock').test('') || $('#totalstock').val('')){
+		retrun alert('재고 수량을 입력해주세요.');
+		return false;
+	}
 	//-------옵션------------
 	//옵션 선택 후 값을 입력하지 않은 경우
 	
@@ -606,7 +621,7 @@ $(function(){
 			<ul>
 				<li><label for="">상품명</label>&nbsp;
 					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
-					<span class="notice">
+					<span class="notice" >
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.<br/>
 					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
 					상품명을 검색최적화 가이드에 잘 맞게 입력하면 검색 노출에 도움이 될 수 있습니다. <br/>
@@ -625,20 +640,8 @@ $(function(){
 			<li> 
 				<label>판매기간</label>&nbsp;&nbsp;
 			</li>
-		<div>
-		<ul >
-			<li id="date_group">&nbsp;&nbsp;<label>기간설정</label>
-				<div id="btn_group">
-					<input type="button" name="" class="btn" value="5일"/>
-					<input type="button" name="" class="btn" value="10일"/>
-					<input type="button" name="" class="btn" value="15일"/>
-					<input type="button" name="" class="btn" value="30일"/>
-					<input type="button" name="" class="btn" value="60일"/>
-				</div>
-			</li>
-			<li id="sell_start_finish">&nbsp;&nbsp;<label for="start_date">판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
-		</ul>	
-		</div>
+			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
+		
 			<li>
 				<label>할인여부 </label>&nbsp;
 				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정">설정</label>

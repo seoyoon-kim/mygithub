@@ -1,6 +1,8 @@
 package com.beetmall.sshj.seller.vo;
 
 public class SearchAndPageVO {
+	private String userid;
+	
 	//검색어와 검색키
 	private String searchKey;
 	private String searchWord;
@@ -133,6 +135,12 @@ public class SearchAndPageVO {
 	}
 	public void setSortRecord(String sortRecord) {
 		this.sortRecord = sortRecord;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	
 }
