@@ -28,5 +28,8 @@ public interface ProductViewDAO {
 	////////////상품문의 보기
 	public List<ProductViewVO> ProductViewFaq(int productnum);
 	
+	///////////장바구니에 넣기/////////////
+	public ProductViewVO customWishInsert(String id,int productnum,int optnum,int pcount,int ocount);
+	
 	
 }
