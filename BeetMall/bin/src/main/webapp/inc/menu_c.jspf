@@ -375,27 +375,8 @@
 			});
 			cate_top_menu += "</ul></li>";
 			$("#cateUl").append(cate_top_menu);
-		});
-		
-		
-		$("#menuListUl>li:first-child").hover(function(){
-			$("#categoriSelect").css("display","block");
-		},function(){
-			$("#categoriSelect").css("display","none");
-		});
-		
-		$("#categoriSelect").hover(function(){
-			$("#categoriSelect").css("display","block");
-		},function(){
-			$("#categoriSelect").css("display","none");
-		});
-		
-	})
-	
-	
-	
-	
-	
+		});		
+})
 </script>
 
 
@@ -492,10 +473,7 @@
             </div>
          </div>
          <!-- 고객센터왼쪽부분끝 -->
-		 <!-- 카테고리 선택 -->
-		 <div id="categoriSelect">
-			<ul id="cateUl"></ul>
-		 </div>
+		 
 		 <!-- 오른쪽 배너광고 -->
 		 <div id="rightNav">
        		<div id="reghtNav">

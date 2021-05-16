@@ -2,6 +2,7 @@ package com.beetmall.sshj.test;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class testController {
@@ -49,11 +50,6 @@ public class testController {
 	public String customInfoView() {
 		return "custom/custominfoView";
 	}
-
-	@RequestMapping("/customWish")
-	public String customWish() {
-		return "custom/customWish";
-	}
 	
 	@RequestMapping("/customBuyConfirm")
 	public String customBuyConfirm() {
@@ -89,16 +85,6 @@ public class testController {
 	public String myInfoEdit() {	// 내 정보
 		return "mypages/myInfoEdit";
 	}
-	@RequestMapping("myChatList")
-	public String myChatList() {	// 채팅내역
-		return "mypages/myChatList";
-	}
-	@RequestMapping("leaveMember")
-	public String leaveMember() {	// 회원탈퇴
-		return "mypages/leaveMember";
-	}
-	@RequestMapping("leaveMemberOk")
-	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
-		return "mypages/leaveMemberSuccess";
-	}
+	
+	
 }

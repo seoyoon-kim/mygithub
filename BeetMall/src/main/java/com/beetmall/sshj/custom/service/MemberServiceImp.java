@@ -48,4 +48,28 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.farmInsert(cvo);
 	}
 
+	@Override
+	public int selectDelOk(String userid) {
+		
+		return memberDAO.selectDelOk(userid);
+	}
+
+	@Override
+	public int deleteId(String userid) {
+		
+		return memberDAO.deleteId(userid);
+	}
+
+	@Override
+	public int selectId(String userid, String userpwd) {
+		
+		return memberDAO.selectId(userid, userpwd);
+	}
+
+	@Override
+	public String stopdate(String userid) {
+		
+		return memberDAO.stopdate(userid);
+	}
+
 }
