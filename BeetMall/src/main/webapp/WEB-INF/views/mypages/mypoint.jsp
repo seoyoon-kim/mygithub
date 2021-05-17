@@ -29,8 +29,6 @@
 		float:left;
 	}
 	#pointUl{
-		padding-top:40px;
-		padding-left:20px;
 		width:1050px;
 	}
 	#pointUl>li{
@@ -98,6 +96,58 @@
 		text-decoration: none;
 		color:black;
 	}
+	/* 페이징처리부분 */
+	.page_wrap {
+		text-align:center;
+		font-size:0;
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+	.page_nation {
+		display:inline-block;
+	}
+	.page_nation .none {
+		display:none;
+	}
+	.page_nation a {
+		display:block;
+		margin:0 3px;
+		float:left;
+		border:1px solid #e6e6e6;
+		width:35px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		background-color:#fff;
+		font-size:13px;
+		color:#999999;
+		text-decoration:none;
+	}
+	.page_nation .arrow {
+		border:1px solid #ccc;
+	}
+	.page_nation .pprev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
+		margin-left:0;
+	}
+	.page_nation .prev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
+		margin-right:7px;
+	}
+	.page_nation .next {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
+		margin-left:7px;
+	}
+	.page_nation .nnext {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
+		margin-right:0;
+	}
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/* 페이징처리끝 */
 </style>
 <script>
 	$(document).on('click','#allView',function(){
@@ -118,26 +168,36 @@
 		}
 	})
 	$(document).on('click', '#3monthView', function(){
-		if($("#type").val()!=null && $("type").val()!=''){
+		if($("#type").val()!=null && $("#type").val()!=''){
 			location.href="mypoint?month=3&type="+$("#type").val();
 		}else{
 			location.href="mypoint?month=3";
 		}
 	});
 	$(document).on('click', '#6monthView', function(){
-		if($("#type").val()!=null && $("type").val()!=''){
+		if($("#type").val()!=null && $("#type").val()!=''){
 			location.href="mypoint?month=6&type="+$("#type").val();
 		}else{
 			location.href="mypoint?month=6";
 		}
 	});
 	$(document).on('click', '#12monthView', function(){
-		if($("#type").val()!=null && $("type").val()!=''){
+		if($("#type").val()!=null && $("#type").val()!=''){
 			location.href="mypoint?month=12&type="+$("#type").val();
 		}else{
 			location.href="mypoint?month=12";
 		}
 	});
+	function pagelist(pagenum){
+		var lin = "mypoint?pageNum="+pagenum;
+		if($("#month").val()>0){
+			lin += "&month="+$("#month").val();
+		}
+		if($("#type").val()!=null && $("#type").val()!=''){
+			lin += "&month="+$("#type").val();
+		}
+		location.href=lin;
+	}
 </script>
 <div class="section" id="mypointListDiv">
 	<div id="mypointList">
@@ -165,7 +225,6 @@
 			<div class="btn" id="6monthView">6개월</div>
 			<div class="btn" id="12monthView">1년</div>
 		</div>
-		<div>
 			<ul id="pointUl">
 				<li>일시</li>
 				<li>상품</li>
@@ -189,32 +248,28 @@
 					<li><span class="pointresult">${vo.usedpoint}p</span></li>
 				</c:forEach>
 			</ul>
-			<ul id="pageUl">
-				<!-- 이전 페이지가 있을 때 -->
-				<c:if test="${pageVO.pageNum>1}">
-					<li><a href="mypoint?pageNum=${pageVO.pageNum-1}" style="color:black">이전</a></li>
-				</c:if>
-				<c:if test="${pageVO.pageNum==1}">
-					<li>이전</li>
-				</c:if>
-				<c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum+pageVO.onePageNum-1}"><!-- 페이징 -->
-					<c:if test="${p <=pageVO.totalPage}">
-						<c:if test="${p==pageVO.pageNum}">
-							<li><span style="color:red">${p}</span></li>
-						</c:if>
-						<c:if test="${p!=pageVO.pageNum}">
-							<li><a href="mypoint?pageNum=${p}" style="color:black">${p}</a></li>
-						</c:if>
-					</c:if>
-				</c:forEach>
-				<c:if test="${pageVO.pageNum<pageVO.totalPage}">
-					<li><a href="mypoint?pageNum=${pageVO.pageNum+1}" style="color:black">다음</a></li>
-				</c:if>
-				<c:if test="${pageVO.pageNum>=pageVO.totalPage}">
-					<li>다음</li>
-				</c:if>
-				
-			</ul>
-		</div>
+			
+			<!-- 페이징 -->
+		<div class="page_wrap">	
+			<div class="page_nation">
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelist(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
+	           </c:if>
+			</div>
+		 </div>
 	</div>
 </div>

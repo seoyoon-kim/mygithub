@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.custom.dao.MyBuyListDAO">
-	<select id="selectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO">
+	<select id="selectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select * from(
+		select * from(
 		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, del.invoice as invoice, pro.productnum, rev.ordernum as ordercnt
 		from ordertbl ord
 		    join orderdetail det
@@ -12,8 +14,13 @@
 		        on det.ordernum = del.ordernum
             left join review rev
                 on det.ordernum = rev.ordernum
-		where ord.userid=#{param1}
+		where ord.userid=#{userid}
+		<if test="month>0">and ord.orderdate >= to_char(add_months(sysdate,-#{month}),'YYYY/MM/DD')</if>
 		order by ord.orderdate desc, ord.ordernum desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by orderdate desc, ordernum desc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if> 
+		order by orderdate desc, ordernum desc
 	</select>
 	<update id="orderCommit">
 		update orderdetail set orderstatus = '구매완료' where ordernum=#{param1}
@@ -80,5 +87,12 @@
                 on det.ordernum = rev.ordernum
 		where ord.userid=#{param1} and ord.orderdate >= to_char(add_months(sysdate,-#{param2}),'YYYY/MM/DD')
 		order by ord.orderdate desc, ord.ordernum desc
+	</select>
+	<select id="returnPageRecord" resultType="Integer" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select count(*) from ordertbl where userid=#{param1}
+	</select>
+	<select id="returnPageRecordMonth" resultType="Integer" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select count(*) from ordertbl 
+		where userid=#{param1} and orderdate >= to_char(add_months(sysdate, -#{param2}),'YYYY/MM/DD')
 	</select>
 </mapper>

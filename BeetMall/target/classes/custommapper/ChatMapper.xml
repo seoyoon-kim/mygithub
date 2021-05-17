@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.ChatDAO">
+	<select id="selectChat" resultType="com.beetmall.sshj.custom.vo.ChatVO" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select * from(
+		select * from(
+		select * from oto o join (
+		select distinct roomcode, max(otonum) as b
+		from oto
+		where sender=#{userid} or receiver=#{userid}
+		group by roomcode) r
+		on o.otonum = r.b
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by otodate asc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if> 
+		order by otodate desc
+	</select>
+	<select id="getRecord" resultType="Integer">
+		select count(*) from oto o join (
+		select distinct roomcode, max(otonum) as b
+		from oto
+		where sender=#{param1} or receiver=#{param1}
+		group by roomcode) r
+		on o.otonum = r.b
+	</select>
+</mapper>

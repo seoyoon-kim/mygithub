@@ -11,4 +11,8 @@ public interface MemberDAO {
 	public String infoSelect(String infoname);	// 약관조회
 	public int sellerRegiFinishiOk(SellerMemberVO svo);
 	public int farmInsert(CategoryFarmVO cvo);
+	public int selectDelOk(String userid);
+	public int deleteId(String userid);
+	public int selectId(String userid, String userpwd);
+	public String stopdate(String userid);
 }

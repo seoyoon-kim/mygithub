@@ -205,28 +205,58 @@
 		left:301px;
 		text-align:left;
 	}
-	/*버튼*/
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-		width:70px;
+	/* 페이징처리부분 */
+	.page_wrap {
+		text-align:center;
+		font-size:0;
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+	.page_nation {
+		display:inline-block;
+	}
+	.page_nation .none {
+		display:none;
+	}
+	.page_nation a {
+		display:block;
+		margin:0 3px;
+		float:left;
+		border:1px solid #e6e6e6;
+		width:35px;
 		height:35px;
-		line-height:29px;
-		font-size:16px;
+		line-height:35px;
+		text-align:center;
+		background-color:#fff;
+		font-size:13px;
+		color:#999999;
+		text-decoration:none;
 	}
-	/*버튼*/
-	.btn:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
+	.page_nation .arrow {
+		border:1px solid #ccc;
 	}
+	.page_nation .pprev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
+		margin-left:0;
+	}
+	.page_nation .prev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
+		margin-right:7px;
+	}
+	.page_nation .next {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
+		margin-left:7px;
+	}
+	.page_nation .nnext {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
+		margin-right:0;
+	}
+	.page_nation a.active {
+		background-color:#42454c;
+		color:#fff;
+		border:1px solid #42454c;
+	}
+	/* 페이징처리끝 */
 </style>
 <script>
 	$(function(){
@@ -239,16 +269,16 @@
 		}
 		
 	})
+	$(document).on('click','input[value=조회]', function(){
+		var roomcode =$(this).prev().val();
+		console.log("roomcode="+roomcode);
+	});
 	
 </script>
 <div class="section">
 	<div id="mypointList">
-		<h2>김토끼님의 1:1대화 내역입니다. </h2>
-		<div id="pointSelectDate">
-			<div class="btn">3개월</div>
-			<div class="btn">6개월</div>
-			<div class="btn">1년</div>
-		</div>
+		<h2>${logId}님의 1:1대화 내역입니다. </h2>
+		
 		<div>
 			<ul id="pointUl">
 				<li>일시</li>
@@ -256,30 +286,43 @@
 				<li>&nbsp;</li>
 				
 				<!-- 구분용 -->
-				<li><span class="pointdate">2021-03-25 13:00</span></li>
-				<li>
-				<img src="/sshj/img/pi.gif"><span class="chatttitle wordcut">작은농부</span><span class="chatdetail wordcut">마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.마지막대화내용입니다.</span>
-				</li>
-				<li><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/></li>
+				
+				<c:forEach var="vo" items="${list}">
+					<li><span class="pointdate">${vo.otodate}</span></li>
+					<li>
+					<c:if test="${vo.receiver == logId}">
+						<span class="chatttitle wordcut">${vo.sender}</span><span class="chatdetail wordcut">${vo.otocontent}</span>
+					</c:if>
+					<c:if test="${vo.receiver != logId}">
+						<span class="chatttitle wordcut">${vo.receiver}</span><span class="chatdetail wordcut">${vo.otocontent}</span>
+					</c:if>
+					</li>
+					<li><input type="hidden" value="${vo.roomcode}"/><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/></li>
+				</c:forEach>
 			</ul>
+			
 		</div>
-		<div class="chatDiv">
-			<div class="chatDivRelative">
-				<div class="chatDivBar"></div>
-				<div class="chatDivTitle">내고향샵 실시간 채팅상담<span style="float:right;text-align:right;margin-right:10px;font-size:30px;line-height:30px;">&times;</span></div>
-				<div class="chatDivcontent">
-					<div class="chatPrint">
-						<div class="chatHeight"></div>
-						<div class="myChat" style="top:0px;">안녕하세요<div class="myChatTime">21-04-22 13:30</div></div>
-						<div class="theyChat" style="top:50px">안녕하세요<div class="theyChatTime">21-04-22 13:30</div></div>
-						<div class="myChat" style="top:100px;">물어볼게 있어서 그러는데요..<div class="myChatTime">21-04-22 13:30</div></div>
-					</div>
-				</div>
-				<div class="chatDivInputBox">
-					<div class="chatInput"><textarea></textarea></div>
-					<div class="chatSendBtn"><input type="button"/></div>
-				</div>
+		<!-- 페이징 -->
+		<div class="page_wrap">	
+			<div class="page_nation">
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="myChatList?pageNum=${pageVO.pageNum-1}"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="myChatList?pageNum=${p}">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="myChatList?pageNum=${pageVO.pageNum+1}"></a>
+	           </c:if>
 			</div>
-		</div>
+		 </div>
 	</div>
 </div>
