@@ -11,8 +11,8 @@
 		margin-left:10px;
 	}
 	/*남색 바*/ 
-	#topBar h5{
-		width:110px;
+	#topBar h5{ 
+    	padding-left: 150px; 
 	}
 	#topBar li:nth-of-type(1){   
 		position:relative;
@@ -31,15 +31,32 @@
 		width:13%; 
 	}  
 	#btns a>button, button:nth-of-type(4){ margin-left:900px; }  
+	
 	#sortBox {
-		margin-left:900px;
+		margin: 30px 0 0 20px;
+	} 
+	#sortBox>ul{
+		width:1110px !important;
 	}
-	#sortBox li:nth-of-type(1){
-		width:108px;
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5) {
+		width: 10%;
 	}
-	#sortBox li:nth-of-type(2){
-		width:38px;
-	}  
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 16%;
+	}
+	#sortBox li:nth-of-type(3) {
+		margin-right:12px;
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:307px;
+	} 
+	#sortBox li:nth-of-type(6),#sortBox li:nth-of-type(7){
+		width: 4%;
+	}
+	#fromTo{
+		margin-left:14px;
+	}
 	.searchFrm{
 		margin-left:150px ! important;
 	}
@@ -72,22 +89,34 @@
  
  
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/sellerBlackList">블랙리스트</a></strong></h5></li> 
+				<li><h5><strong><a href="sellerBlackList">블랙리스트</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="choose">
 			<a href="customerBlackList"><button class="success" value="" name="" id="">일반회원</button></a>
 			<a href="sellerBlackList"><button class="success" value="" name="" id="" style="background-color:lightgray;">판매자회원</button></a>
 		</div> 
 		<div id="sortBox">
-			<ul><li><select name="sort" > 
+			<ul>
+				<li>
+					<select name="searchDate">  
+						<option value="birthdate">신고일</option> 
+						<option value="regDate">처리일</option>
+					</select>  
+				</li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>  
+				<li><input type="submit" value="검색" /></li>
+				<li><select name="sort" > 
 		   				<option value="신고번호" selected>신고번호</option>
 		   				<option value="이름">이름</option>
 		   				<option value="아이디">아이디</option> 
@@ -249,8 +278,6 @@
 		 </div>  
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate">   
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

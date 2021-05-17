@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <style> 
+	#topBar h5{  
+		padding-left:120px;
+	}
 	 #container li{  
 		 float:left; 
 		 width:10%; 
 	 }   
+	#contentBox{
+		top:-40px;
+	} 
 	#contentBox li:nth-of-type(9n-8){ 
 		width:0%; 
 	}
@@ -17,17 +23,31 @@
 	#topBar li:nth-of-type(4){
 		width:6%;
 	}   
+	
 	#sortBox {
-		margin-left:800px;
+		margin: 110px 0 0 20px;
+	} 
+	#sortBox>ul{
+		width:1110px !important;
 	}
-	#sortBox li{
-		margin:30px 0 20px 0;
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5) {
+		width: 10%;
 	}
-	#sortBox li:nth-of-type(1){
-		width:108px;
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 16%;
 	}
-	#sortBox li:nth-of-type(3){
-		width:38px;
+	#sortBox li:nth-of-type(3) {
+		margin-right:44px;
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:233px;
+	} 
+	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+		width: 3.5%;
+	}
+	#fromTo{
+		margin-left:14px;
 	}
 	/*데이터 내용*/ 
 	.cartImg{
@@ -61,10 +81,7 @@
 	#topBar Button:nth-of-type(3),
 	#topBar Button:nth-of-type(4){
 		padding:2px 7px;
-	}  
-	.searchFrm{
-		margin-left:150px ! important;
-	} 
+	}   
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -90,19 +107,28 @@
 	/* 페이징처리끝 */
 </style> 
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="customerListA">상품 목록</a></strong></h5></li> 
+				<li><h5><strong><a href="productListA">상품 목록</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
 		</div>   
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="sortBox">
 			<ul>
-				<li><select name="sort" > 
+				<li>
+					<select name="searchDate">   
+						<option value="regDate">등록일</option>
+					</select>  
+				</li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>  
+				<li><input type="submit" value="검색" /></li><li><select name="sort" > 
 		   				<option value="카테고리" selected>카테고리</option>
 		   				<option value="과일">과일</option>  
 		   				<option value="건과류">건과류</option>   
@@ -308,8 +334,6 @@
  
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

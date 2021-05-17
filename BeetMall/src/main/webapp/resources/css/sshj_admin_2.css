@@ -20,19 +20,6 @@
 	  	left:400px;
 	  	padding-top:13px;
 	  }
-	  #companyTitle, #infoTitle, #reportTitle, #buyTitle, #randomTitle, #bannerTitle, #todayHeader, 
-	  #cateHeader, #popHeader, #useInfoHeader, #infoHandleHeader, #useTermsHeader, #financialHeader, 
-	  #sales1Title, #sales2Title, #salesCateTitle{
-	  	text-align:center;
-	  	font-weight:bold;
-	  	font-size:16px;
-	  	letter-spacing:2px;
-	  	border-bottom:1px solid lightgray;
-		border-radius: 10px 10px 0px 0px;
-	  	background-color:#FAF9F6;
-	  	height:40px;
-	  }
-	  
 	 /*좌상 법인 정보*/
 	#companyBox{
 	 	height:370px; 
@@ -50,10 +37,7 @@
 	 #companyHeader li:nth-of-type(5){
 	 	width:250px !important; 
 	 	padding-top:20px;
-	 } 
-	  #companyTitle>p{
-	  	top:-10px;
-	  }
+	 }  
 	  
 	 /*우상 개인정보*/
 	 #infoBox{
@@ -66,7 +50,7 @@
 	 	width:250px !important;
 	 }
 	 #infoTitle{
-	 	padding-top:10px; 
+	 	padding-top:20px; 
 	 }
 	 #infoBtns{
 	 	top:-230px;
@@ -80,7 +64,7 @@
 	 #reportHead{
 	 	width:200px;
 	 	position:relative;
-	 	top:-105px;
+	 	top:-120px;
 	 	margin-left:150px;
 	 }
 	 #report>li{
@@ -177,7 +161,8 @@
 		border:1px solid lightgray;
 	}
 	#modalBtns{
-		margin:25px 0 0 180px;
+		margin-top:25px;
+		text-align:center;
 	}
 	#modalBtns>button{
 		margin-right:15px;

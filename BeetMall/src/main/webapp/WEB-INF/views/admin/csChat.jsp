@@ -2,10 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style> 
 	/*맨 위 top Bar*/
-	#topBar h5{
-		margin-left:50px;
-		width:200px;
-	} 
+	#topBar h5{  
+		padding-left:130px;
+	}
 	#topBar li:nth-of-type(1){
 	 	margin-left:10px;
 	}
@@ -68,26 +67,42 @@
 	#title li:nth-of-type(8){
 		padding-bottom:10px;
 	}
-	#container li:nth-of-type(2):not(#topBar li:nth-of-type(2)){
+	#contentBox li:nth-of-type(2){
 		margin-left:20px;
 	} 
-	#container li:nth-of-type(5):not(#topBar li:nth-of-type(5)){
+	#contentBox li:nth-of-type(5){
 		width:11%;
 	} 
 	#sortBox {
-		margin-left:900px;
+		margin: 80px 0 0 20px;
 	}
 	#sortBox li{
 		margin-top:30px;
 	}
-	#sortBox li:nth-of-type(1){
-		width:108px;
+	#sortBox>ul{
+		width:1110px !important; 
 	}
-	#sortBox li:nth-of-type(2){
-		width:38px;
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5) {
+		width: 10%;
 	}
-	
-	 
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 17%;
+		margin-right:4px;
+	}
+	#sortBox li:nth-of-type(3) {
+		width:10%;
+		margin-right: 29px; 
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:333px;
+	}  
+	#sortBox li:nth-of-type(6),#sortBox li:nth-of-type(7){
+		width: 3.5%;
+	}
+	#fromTo{
+		margin:0 2px 0 26px;
+	}
 	/* 본문 정렬*/
 	#container li{ 
 		width:11%; 
@@ -105,13 +120,7 @@
 	} 
 	#contentList>ul{
 		float:left; 
-	}
-	/*데이터 내용*/
-	.wordCut{
-		white-space:nowrap; 
-		overflow:hidden;
-		text-overflow:ellipsis;
-	}
+	} 
 	/*하단 검색*/ 
 	#dateSearch{ 
 		margin:20px 0 0  200px;
@@ -121,10 +130,7 @@
 	} 
 	form input[type=text]{
 		width:300px
-	} 
-	.searchFrm{
-		margin-left:150px ! important;
-	}
+	}  
 	/*페이징 이미지 링크*/
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -147,7 +153,8 @@
 	#modal{
 		border:1px solid gray;
 		width:500px;
-		margin:400px 0 0 450px;
+		margin:490px 0 0 450px;
+		z-index:1;
 	}
 	#modalHeader{
 		background-color:lightgray;
@@ -202,18 +209,28 @@
  
 </script> 
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/reportListA">1:1 대화하기</a></strong></h5></li> 
+				<li><h5><strong><a href="csChat">1:1 대화하기</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
-				<li><button class="success" value="del" name="del" id="edit">정지</button></li> 
+				<li><button class="success" value="del" name="del" id="delBtn">정지</button></li> 
 			</ul> 
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="sortBox">
 			<ul>
+				<li>
+					<select name="searchDate">   
+						<option value="regDate">채팅일</option>
+					</select>  
+				</li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>		
+				<li><input type="submit" value="검색" /></li>		
 				<li><select name="sort"> 
 						<option value="채팅번호" selected>채팅번호</option>
 		   				<option value="주문번호">주문번호</option>
@@ -291,9 +308,7 @@
 		 </div>  
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate">  
-					<select name="searchKey">
+				 	<select name="searchKey">
 					<option value="" selected>채팅번호</option>
 	   				<option value="">주문번호</option> 
 	   				<option value="">구입상품</option> 
@@ -335,4 +350,5 @@
 			<button class="success" value="" name="" id="">보내기</button>
 			<button class="success" value="" name="" id="">닫기</button>
 		</div> 
+		</div>
 </html>

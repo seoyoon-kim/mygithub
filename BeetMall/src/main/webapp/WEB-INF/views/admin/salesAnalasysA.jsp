@@ -24,6 +24,9 @@
 	#topBar li{
 		width:12%;
 	}   
+	#topBar h5{  
+		padding-left:120px;
+	}
 	article{
 		width:1080px;
 		position:relative;
@@ -149,15 +152,17 @@
 <script>
  
 </script>
-<div id="body1">
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="salesAnalasysA">매출 분석</a></strong></h5></li> 
 			</ul> 
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
    		<div id="contentBox">
    			<section> 
 

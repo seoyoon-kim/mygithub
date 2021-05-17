@@ -20,6 +20,10 @@
 	<fmt:formatDate value="${today }" pattern="yyyy" />
 </c:set>
 <style>
+	#topBar h5{  
+		padding-left:190px;
+		width:450px !important;
+	}
 	#topBar li{
 		width:12%;
 	}   
@@ -33,11 +37,12 @@
 	.wrapContainer {
 		background-color:white;
 		border-radius:10px;
-		border-color:lightgray;
-	 	-webkit-box-shadow: 4px 6px 15px -7px #C4C4C4; 
-		box-shadow: 4px 6px 15px -7px #C4C4C4;
+		border-color:lightgray;  
 		margin:50px 30px;
 		width:95% !important;
+	} 
+	#salesCateContainer{
+		height:400px;
 	}
 	#pdfDown{
 		margin-right:20px;
@@ -53,7 +58,7 @@
 	}
 	#categorySearch_container{
 		position:relative;
-		top:-150px;
+		top:100px;
 		left:25px;
 	}
 	b{
@@ -63,10 +68,8 @@
 	#excelViewNum, #excelDown{
 		position:relative;
 		top:-135px;
-	}
-	#salesBox1{
-		width:100%;
-	}
+		margin:90px 20px 0 0;
+	} 
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -100,12 +103,21 @@
     	border-radius:0 10px 0 0 ;
     }
     
-    /*수익 매출분석 컨테이너*/
-    #salesBox1, #salesBox2{
-    	width:980px !important;
+    /*카테고리 선택, 수익, 매출분석 컨테이너*/
+    #salesBox1, #salesBox2, #salesCateBox{
+    	width:980px !important; 
     	margin-top:40px;
-    	height:630px;
+		margin-left:0 !important;
+		position:relative;
     } 
+    #salesCateBox{
+    	height:580px; 
+    }
+	#salesBox1, #salesBox2{ 
+		position:relative;
+		top:580px !important;
+    	height:630px; 
+	} 
     #sales1Title{
 	  	text-align:center;
 	  	font-weight:bold;
@@ -114,37 +126,36 @@
 	  	border-bottom:1px solid lightgray;
 		border-radius: 10px 10px 0px 0px;
 	  	background-color:#FAF9F6;
-	  	height:40px; 
-	  } 
-	  #sales1Title strong, #sales2Title strong{
-	  	position:relative;
-	  	top:-10px;
-	  }
+	  	height:60px; 
+	  }  
 	  #calendarApply>div{
 	  	position:relative;
 	  	top:-17px;
 	  }
 	  /*매출분석*/
-	#excelViewNum, #excelDown{
-		margin:70px 20px 0 0;
-	}  
 	#excelContainer{
 		position:relative;
-		top:-110px;
+		top:-70px;
+	} 
+	#salesCateTitle, #sales1Title, #sales2Title{
+		padding-top:0 !important;
 	}
+	
 </style>
 <script>
  
 </script>
-<div id="body1">
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="salesCateAnalasysA">카테고리별 매출 분석</a></strong></h5></li> 
 			</ul> 
 		</div>  
+	</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
    		<div id="contentBox">
    			<section> 
 
@@ -154,10 +165,10 @@
 			<!-- 카테고리 선택 -->
 			<div id="salesCateBox">
 				<div class="wrapTitle">
-					<div id="salesCateTitle"><p><strong>카테고리</strong></p></div> 
+					<div id="salesCateTitle">카테고리</div> 
 					
 			 
-			<div class="wrapContainer">
+			<div class="wrapContainer" id="salesCateContainer">
 				<div id="categoryList">
 					<div id="categoryListMiddle">
 						<!-- 대분류 카테고리!!!! -->
@@ -192,7 +203,7 @@
 							<option value="월별" selected>월별</option>
 							<option value="일별">일별</option>
 						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
+						<button id="calendarApply" style="margin-left: 10px;"><span style="position:relative; top:-17px;">날짜 적용</span></button>
 					</div>
 
 				</div>
@@ -240,15 +251,6 @@
 			<div id="salesBox2">
 				<div class="wrapTitle">
 					<div id="sales2Title"><p><strong>매출분석</strong></p></div>
-					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-						<div id="categorySearch_container">
-							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-								<option value="년별">년별</option>
-								<option value="월별" selected>월별</option>
-								<option value="일별">일별</option>
-							</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-							<button id="calendarApply" style="margin-left: 10px;"><div>날짜 적용</div></button>
-						</div>
 					<button class="normalBtn" id="excelDown">엑셀 저장</button>
 					<select id="excelViewNum">
 						<option selected="selected">10</option>

@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %> 
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+<%@ include file="/inc/top.jspf" %> 
  
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -11,10 +9,7 @@
 <style>
 	#mypageMenubar{
 		display:block;
-	}
-	
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; }
-
+	} 
 	a:hover, a:active, a:visited, a:link {
    		color: black;
     }
@@ -44,8 +39,8 @@
 	  	font-size:20px;
 	  	color:white;
   	}
-  	#topBar>p{
-  		padding-left:60px;
+  	#topBar strong{
+  		padding-left:355px;
   	}
   	input{
   		border:none;
@@ -54,11 +49,13 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:190px;
+	   	top:-80px;
 	   	left:210px;
 	   	width:1351px;
    }
-   
+   .menu{
+   		text-align:center;
+   }
    th, .th{
    		background-color:#E9E9E9;
 	}
@@ -66,7 +63,7 @@
 	  background-color:#F8F7F7;
 	} 
 	table{
-		width:770px;	
+		width:1080px;	
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
@@ -84,6 +81,9 @@
 	}
 	th:not(#smallTitle){
 	    border-right:1px solid lightgray;
+	}
+	#smallTitle{
+		text-align:center;
 	}
 	thead, .answer_content, .td{
 		border-bottom: 1px solid #ccc;
@@ -121,10 +121,7 @@
 		width:0;
 	}
 	#bottommm{ 
-		margin : 1771px 0 40px 0 ;
-		position:relative;
-		left:-650px;
-		width:1000px;
+		margin : 1771px 0 40px 0 ;  
 		display:flex;
 		top:20px;
 	}
@@ -152,12 +149,15 @@
 	.empty{
 		height:25px;
 	}
-</style>
-<div id="body1">
+</style> 
+	<div id="topBarContainer">
+		<div id="topBar">
+			<strong><a href="csQOpen">상품 문의 보기</a></strong> 
+		</div>
+	</div>	
+<div id="body1"> 
+<%@ include file="/inc/leftBar.jspf" %> 
 <div class="container">
-	<div id="topBar">
-		<p><strong>상품 문의 보기</strong></p>   
-	</div>
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>
@@ -190,7 +190,7 @@
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
-							2021/03/21
+							21/03/21
 						</div>
 					</td>
 				</tr>  
@@ -228,7 +228,7 @@
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
-							2021/06/21
+							21/06/21
 						</div>
 					</td>
 				</tr> 
@@ -251,7 +251,7 @@
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
-							2021/04/21
+							21/04/21
 						</div>
 					</td>
 				</tr> 
@@ -264,20 +264,20 @@
 		</table>
 			<div id="bottommm">
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시쓰기" class="btn write_btn id="reset_btn"/>
+				<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn"/>
 				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
 							
 			</div>
 		</form>
 		</div>
 </div>
-</div>
+</div> 
 <script>
 $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
-		  focus: true,
-		  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+		  focus: false,
+		  callbacks: {	//이미지를 첨부하는 부분
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0],this);
 				},
@@ -292,25 +292,5 @@ $(document).ready(function() {
 				}
 			}
 	  });
-	});
-/**
-* 이미지 파일 업로드
-*/
-function uploadSummernoteImageFile(file, editor) {
-	data = new FormData();
-	data.append("file", file);
-	$.ajax({
-		data : data,
-		type : "POST",
-		url : "/uploadSummernoteImageFile",
-		contentType : false,
-		processData : false,
-		success : function(data) {
-        	//항상 업로드된 파일의 url이 있어야 한다.
-			$(editor).summernote('insertImage', data.url);
-		}
-	});
-}
-
-
+	});  
 </script>

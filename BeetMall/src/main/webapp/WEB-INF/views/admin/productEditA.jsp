@@ -8,11 +8,9 @@
 	#contentBox{ 
 		margin-top:80px !important;		
 	}  
-	#topBar h5{
-		width:200px !important;
-		position:relative;
-		left:-25px;
-	} 
+	#topBar h5{  
+		padding-left:120px;
+	}
 	input, textarea, select{
 		border:1px solid lightgray; 
 		border-radius: 3px;
@@ -620,14 +618,16 @@ $(document).ready(function(){
 
 </script>
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="body1">
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="productDetailA">상품 수정</a></strong></h5></li>  
+				<li><h5><strong><a href="productEditA">상품 수정</a></strong></h5></li>  
 			</ul> 
-		</div>  
+		</div> 
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container"> 
    		<div id="contentBox">  
 	<div class="section" id="productPageDiv">
 		<div id="mainName"> 

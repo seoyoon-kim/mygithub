@@ -9,12 +9,17 @@
 		margin:30px 0 0 30px;
 		font-size:14px;
 	}	 
+	body{
+		width:100%;
+	}
 	#body1{
-		width:1080px; 
+		width:1280px; 
 		padding:0; 
-		margin:0; 
+		margin:0 auto; 
 		font-family: 'Noto Sans KR', sans-serif;
 		font-size:14px;
+		position:relative;
+		top:-50px;
 	}
 	#topBar, #topBar form, .searchFrm, #title, button, #contentBox, input[type=checkbox]{ 
 		position:relative; 
@@ -34,7 +39,7 @@
 	} 
 	#container{ 
 		position:absolute; 
-		top:200px; 
+		top:-30px; 
 		left:190px; 
 		width:1080px; 
 		padding:0; 
@@ -48,6 +53,7 @@
 	}
 	#ascBtn, #descBtn{  
 		width:30px;
+		padding:0;
 	} 
 	#contentBox ul{
 		margin-left:30px;
@@ -60,6 +66,16 @@
 	} 
 	
 	/*남색 topBar*/
+	#topBarContainer{
+		background-color:rgb(40,40,100); 
+		width:100%; 
+		height:50px; 
+	}
+	#topBar{ 
+		text-align:center;
+		padding:10px 0 0 0px; 
+		margin:0 auto; 
+	}  
 	#topBar h5{
 		margin-top:3px;
 		color:white; 
@@ -72,20 +88,12 @@
 	#topBar a{
 		color:white;
 	}
-	#topBar{ 
-		background-color:rgb(40,40,100); 
-		float:left; 
-		height:50px; 
-		padding:10px 0 0 0px;  
-		width:1920px;
-		left:-200px;
-	}  
 	#topBar button{
 		border-radius:2.5px;
 	}  
 	#blind{
 		top:10px; 
-		left:1040px; 
+		left:1196px; 
 		width:100px;
 	}
 	#edit{
@@ -126,8 +134,7 @@
 	  background:#fff;   
 	  color: gray;	  
 	  margin: 0;
-	  padding: 3px 10px;  
-	  font-size: 1rem;
+	  padding: 3px 10px;   
 	  font-weight: 400;
 	  text-align: center;
 	  text-decoration: none;	  
@@ -156,13 +163,13 @@
 		position:absolute;
 		width:100px;
 		top:11px;
-		left:1470px;
+		left:1310px;
 	}
 	#addBtn{
-		left:1350px;
+		left:1196px;
 	}
 	#editBtn{
-		left:950px;
+		left:1080px;
 	} 
 	#btns a>button, button:nth-of-type(4){ 
 		margin-left:900px; 
@@ -177,7 +184,7 @@
 		text-align:center;  
 		margin-top: 950px;
 		position:relative;
-		left:-700px;
+		left:-800px;
 		width:1000px;
 	}
 	.contentList{
@@ -262,10 +269,11 @@
 		margin-right:7px;
 	}
 	.page_nation .next {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
+		background-image::url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
+		background-color:#f8f8f8 
 	}
-	.page_nation .nnext {
+	.page_nation .nnext {  
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
@@ -277,7 +285,7 @@
 	/* 페이징처리끝 */
 	
 	/*컨테이너 별로 묶은 박스 공통*/	
-	 #companyBox, #infoBox, #buyHistory, #reportBox, #randomBox, #bannerContainer, #todayContainer, 
+	 #deli, #claim, #sta, #noti, #ques, #accept, #rep, #companyBox, #infoBox, #buyHistory, #reportBox, #randomBox, #bannerContainer, #todayContainer, 
 	 #cateContainer, #popContainer, #useInfoContainer, #infoHandleContainer, #useTermsContainer, 
 	 #financialContainer, #salesBox1, #salesBox2, #salesCateBox{ 
 	 	width:500px;
@@ -285,9 +293,23 @@
 	 	border-radius:10px; 
 	 	top:20px;
 	 	background-color:white;
-	 	-webkit-box-shadow: 4px 6px 15px -7px #C4C4C4; 
-		box-shadow: 4px 6px 15px -7px #C4C4C4;
+	 	box-shadow: 4px 6px 15px -7px #C4C4C4;
 	 }
+	 /*컨테이너 제목*/ 
+	  #deliTitle, #claimTitle, #staTitle, #notiTitle, #quesTitle, #acceptTitle, #repTitle, #companyTitle, #infoTitle, #reportTitle, #buyTitle, #randomTitle, #bannerTitle, #todayHeader, 
+	  #cateHeader, #popHeader, #useInfoHeader, #infoHandleHeader, #useTermsHeader, #financialHeader, 
+	  #sales1Title, #sales2Title, #salesCateTitle{
+	  	text-align:center;
+	  	font-weight:bold;
+	  	font-size:16px;
+	  	letter-spacing:2px;
+	  	border-bottom:1px solid lightgray;
+		border-radius: 10px 10px 0px 0px;
+	  	background-color:#FAF9F6;
+	  	height:60px;
+	  	padding-top:20px;
+	  }
+	  
 	  #companyBox li, #infoBox li, #report li, #buyHistory li, #randomBox li, #bannerContainer li, #todayContainer li{
 	  	padding-top:15px;
 	  } 
@@ -332,12 +354,7 @@
 	}  
 	.randomUl, .randomUl div, #randomBox ul, #bannerBox, form, #todayBox {
 		display:flex;
-	}
-	/*컨테이너 내 헤더*/
-	 #bannerTitle, #todayHeader, #cateHeader, #popHeader{
-	 	padding-top:10px;
-	 }
-	 
+	} 
 	/*========회원정보 전체=========*/
 	#infoBox, button, #infoTitle>p{
 		position:relative;
@@ -362,13 +379,14 @@
 	  	padding-top:15px;
 	} 
 	 #randomBox li:nth-of-type(2){
-		margin-right:10px;
+		margin-right:40px;
 	}
 	#randomBox input[type="file"]{
 		display:none;
 	}  
 	#randomBox button{
-		margin:0 5px !important; 
+		margin:0 10px !important;  
+	 	width:70px; 
 	}
 	.randomUl{ 
 	 	left:-40px;
@@ -574,19 +592,21 @@
 	 	width:1000px;
 	 	margin-left:0;
 	 	height:500px;
-	 }
-	 #useInfoHeader, #infoHandleHeader, #useTermsHeader, #financialHeader{
-	 	padding-top:10px;
-	 }
+	 } 
 	 .bottommm{
 	 	text-align:center;
 	 	margin:10px 0 30px 0;
 	 }
 	 /*회원관리*/
 	 #choose{
-	 	margin:70px 0 0 30px;
-	 	margin-left:340px; 
+	 	margin:90px 0 0 20px; 
+	 	width:1100px;
 	 }
 	 #choose button{
 	 	font-size:15px;
+	 	width:49%;
+	 	height:50px;
+	 	font-size:16px;
+	 	font-weight:bold;
+	 	color:dimgray;
 	 }

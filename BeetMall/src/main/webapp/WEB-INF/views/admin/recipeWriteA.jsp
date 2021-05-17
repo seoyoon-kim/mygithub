@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %> 
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+<%@ include file="/inc/top.jspf" %> 
  
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -12,15 +10,12 @@
 	#mypageMenubar{
 		display:block;
 	}
-	
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; }
-
+	#topBar a{
+		padding-left: 357px; 
+    } 
 	a:hover, a:active, a:visited, a:link {
    		color: black;
-    }
-    a{
-    	color:black;
-    }
+    } 
     #box{
     	height:600px;	
     }
@@ -45,11 +40,7 @@
 	  	top:200px;
 	  	left:-25px;
 	  	font-size:20px;
-  	}
-  	#topBar>p{
-  		padding-left:60px;
-  		color:white;
-  	}
+  	} 
   	input{
   		border:none;
   		font-weight:normal;
@@ -57,7 +48,7 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:200px;
+	   	top:-70px;
 	   	left:210px;
 	   	width:1351px;
    }   
@@ -71,7 +62,7 @@
 	  padding-left:10px;
 	} 
 	table{
-		width:770px;
+		width:1080px;
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
@@ -126,19 +117,16 @@
 		width:0;
 	}
 	#bottommm{
-		display:flex;
-		margin: 950px 0 40px 0;
-		position:relative;
-		left:-650px;
-		top:30px;
+		display:flex; 
+		left:-800px;
+		top:30px; 
 	}
 	#bottommm>input{
 		border:1px solid gray;
+		width:150px; 
 	}
 	.write_btn{
-		height:40px;
-	}
-	.write_btn{
+		height:40px; 
 		width:150px;
 	} 
 	input[type="submit"].btn:hover, input[type="button"].btn:hover{
@@ -180,11 +168,14 @@ $(document).ready(function(){
 	    }); 
 	}); 
 </script>
-<div id="body1">
-<div class="container">
+	<div id="topBarContainer">
 	<div id="topBar">
-		<p><strong>레시피 작성</strong></p>   
+		<strong><a href="recipeWriteA">레시피 작성</a></strong>   
 	</div>
+	</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %> 
+<div class="container">
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>
@@ -237,8 +228,8 @@ $(document).ready(function(){
 $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
-		  focus: true,
-		  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+		  focus: false,
+		  callbacks: {	//이미지를 첨부하는 부분
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0],this);
 				},

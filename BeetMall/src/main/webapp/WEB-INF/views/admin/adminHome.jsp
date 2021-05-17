@@ -1,20 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
 <html> 
 <style>
-	body{
+	#body1{
 		font-size:14px; 
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	div[id^=box],img,.last,#imgs,#claim,#secondBox,#imgs>li:nth-of-type(2),#sta,#noti,#deli,#claim {
 		position:relative; 
 	}
-	#claim,#secondBox{
-		top:-120px;
-	} 
 	#imgBox img{
 		height:75px;
 	}
@@ -37,7 +31,7 @@
 	}
 	#total{
 		position:absolute; 
-		top:240px; 
+		top:-10px; 
 		left:175px; 
 		width:1080px; 
 		margin-left:20px;
@@ -47,15 +41,14 @@
 		height:100px; 
 	}    
 	#deli, #claim, #sta, #noti, #ques, #accept, #rep{
-		border: gray 1px solid; 
-		width:48.5%; 
+		border: lightgray 1px solid; 
+		width:48.5% !important; 
 		height:350px; 
 		float:left; 
-		margin:7px; 
-		border-radius:1px;
+		margin:7px;  
 	}
 	#ques, #accept, #rep{
-		width:32%;
+		width:32% !important;
 	}
 	#total>div p{
 		border-bottom:gray 2px solid; 
@@ -92,24 +85,45 @@
 		width:300px;
 	}
 	#deli{
-		top:3px;
-	}
+		top:0 !important;
+		margin-left:10px !important;
+	} 
 	#claim{ 
-		top:-108px;
-	}
-	#sta,#noti{ 
-		top:7px;
+		top:-364px !important;
+		margin-left:550px !important;
+		z-index:-1;
 	} 
 	#notiContent{
 		padding:5px 20px;
 	}
+	#sta{
+		top:-240px !important;
+		margin-left:10px !important;
+	}
+	#noti{
+		top:-605px !important;
+		margin-left:550px !important;
+	}
+	#ques, #accept{
+		position:relative;
+		top:-605px !important;
+		margin-left:10px !important;
+	}
+	#rep{
+		position:relative;
+		top:-969px !important;
+		margin-left:730px !important;
+	}
+	#secondBox{
+		top:-120px;
+	} 
 </style> 
-	<%@ include file="/inc/top.jspf" %>
-	<%@ include file="/inc/leftBar.jspf" %>
+	<%@ include file="/inc/top.jspf" %> 
 <div id="body1"> 
+	<%@ include file="/inc/leftBar.jspf" %>
 	<div id="total">   
 		<div id="deli"> 
-			<p>주문/배송</p><br/> 
+			<div id="deliTitle">주문/배송</div><br/> 
 			   <div id="box0">신규 주문 <div>13</div> 건</div> 
 			  		<div id="box1">배송 준비 <div>3</div> 건<br/>
 			   			 배송 중 <div>7</div> 건<br/>
@@ -122,7 +136,7 @@
 			<li><img id="evenwon" src="<%=request.getContextPath()%>/img/y_won.png"/><br/></li>
 		</ul>
 		<div id="claim">
-			<p>클레임/매출</p><br/>
+			<div id="claimTitle">클레임/매출</div><br/>
 			   
 			    	<div id="box2">취소 요청 <div>0</div> 건<br/>
 			    	 	 반품 요청 <div>1</div> 건<br/>
@@ -134,11 +148,11 @@
 		</div>
 		<div id="secondBox">
 		<div id="sta">
-			   <p>매출 통계</p><br/>
+			   <div id="staTitle">매출 통계</div><br/>
 			   <img id="grape" src="<%=request.getContextPath()%>/img/y_grape.PNG" style="width:300px;"/>
 		</div>
 		<div id="noti">
-			 <p>공지사항</p><br/>
+			 <div id="notiTitle">공지사항</div><br/>
 			 <div id="notiContent">
 				 <span>  [시스템 공지]보안 업데이트로 인한 알림 21/05/02</span><br/>
 				 <span>  [시스템 공지]보안 업데이트로 인한 알림 21/05/02</span><br/>
@@ -147,19 +161,19 @@
 			 </div>
 		</div>
 		<div id="ques">
-			<p>미답변 문의/리뷰</p><br/>
+			<div id="quesTitle">미답변 문의/리뷰</div><br/>
 			  <img class="last" src="<%=request.getContextPath()%>/img/y_question.png"/> 
 			 		<div id="box4">미답변 문의 <div>12</div>건<br/>
 			  			 미답변 리뷰 <div>3</div>건</div>
 		</div>
 		<div id="accept">
-			<p>판매자 승인 요청</p><br/>
+			<div id="acceptTitle">판매자 승인 요청</div><br/>
 			   <img class="last" src="<%=request.getContextPath()%>/img/y_accept.png"/>
 			   		<div id="box5">승인 신청 건수 <div>6</div>건<br/> 
 			   			 미처리 건수 <div>7</div>건</div>
 		</div>
 		<div id="rep">
-			<p>신고내역</p><br/>
+			<div id="repTitle">신고내역</div><br/>
 			 <img class="last" src="<%=request.getContextPath()%>/img/y_report.png"/>
 			   		<div id="box6">접수 건수 <div>3</div>건<br/> 
 			   			 미처리 건수 <div>0</div>건</div>

@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style> 
 	/*맨 위 회색 top Bar*/
+	#topBar h5{  
+		padding-left:120px;
+	}
 	#topBar li{
 		width:12%;
 	} 
@@ -10,7 +13,7 @@
 	}  
 	/*정렬 컨테이너*/
 	#sortBox {
-		margin-left:900px;
+		margin:50px 0 0 900px;
 	}
 	#sortBox li{
 		margin-top:30px;
@@ -247,7 +250,7 @@
 	}
 	#searchBox{
 		position:relative;
-		left:-1075px;
+		left:-35px;
 		top:-10px;
 	}
 	#searchBox label{
@@ -295,6 +298,9 @@
 		position:relative;
 		left:-20px; 
 	}
+	#tblHead>th{
+		 text-align:center;
+	}
 	input[type=checkbox]{
 		background-color:lightgray; 
 		top:0px;	
@@ -318,15 +324,17 @@
 <script>
  
 </script>
-<div id="body1">
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="salesListA">판매 내역</a></strong></h5></li> 
 			</ul> 
 		</div>  
+		</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %>
+	<div id="container">
 		<div id="sortBox">
 			<ul>
 				<li><select name="sort" > 
@@ -423,7 +431,7 @@
 					<form>
 						<table class="management_table" >
 							<thead>
-								<tr >
+								<tr id="tblHead">
 									<th>NO</th>
 									<th>주문번호</th>
 									<th>상품명</th>
@@ -516,35 +524,7 @@
 			   <a class="arrow next" href="#"></a>
 			   <a class="arrow nnext" href="#"></a>
 			</div>
-		 </div>
-		<div id="searchBox">
-			<ul>
-				<li><select name="sort" > 
-						<optgroup label="전체" selected>	</optgroup>
-			   			<optgroup label="카테고리"> 
-			   				<option value="건과류">건과류</option> 
-			   				<option value="견과류">견과류</option> 
-			   				<option value="과일">과일</option> 
-			   				<option value="쌀">쌀</option> 
-			   				<option value="잡곡/혼합곡">잡곡/혼합곡</option> 
-			   				<option value="채소">채소</option> 
-			   				<option value="기타">기타</option> 
-			   			</optgroup>
-  						<optgroup label="주문현황" ></optgroup>
-  						<optgroup label="배송현황" ></optgroup>
-  						<optgroup label="상품명" ></optgroup>  						
-  						<optgroup label="구매자 아이디" ></optgroup>
-  						<optgroup label="법인명" ></optgroup>
-				  	</select> 
-		   		</li>
-		   		<li>
-		   			<input type="date"> &nbsp; ~ &nbsp;
-		   		</li>
-		   		<li>
-		   			<input type="date">
-		   		</li>
-	   		</ul>  
-		</div>	 
+		 </div>  
 		</div> 
 	<!-- 주문 상세정보 modal -->
 		<div class="detail_modal" id="my_modal">

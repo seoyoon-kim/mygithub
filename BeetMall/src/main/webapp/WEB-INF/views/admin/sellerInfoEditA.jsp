@@ -10,7 +10,11 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
 <style> 
 	#topBar>h5{
-		margin-left:270px !important;
+    	padding-left: 240px;
+    	width: 600px !important; 
+	}
+	#container{
+		left:170px !important;
 	}
 	 #contentBox{
 	 	height:1780px;
@@ -38,12 +42,10 @@
 	 	position:relative; 
 	 	top:0;
 	 	left:0;
-	 	width:500px;
-	 	padding-top:10px;
+	 	width:500px; 
 	 } 
 	 #reportHeader{
-	 	display:flex;
-	 	top:10px;
+	 	display:flex; 
 	 	left:-70px;
 	 	margin-left:100px !important;
 	 }
@@ -51,11 +53,11 @@
 	 	left:100px;
 	 }
 	 #report{
-	 	top:-35px;
+	 	top:-45px;
 	 	left:100px;
 	 }
 	 #reportBox button{
-	 	top:-105px;
+	 	top:-115px;
 	 	left:370px;
 	 }
 	 #sellerEdit{
@@ -78,13 +80,15 @@
 </style>
 <script>
 </script>
-<div id="body1">
 <%@ include file="/inc/top.jspf" %>
+	<div id="topBarContainer">
+		<div id="topBar">
+			<h5><strong><a href="sellerInfoEditA">판매자 정보 수정</a></strong></h5>
+		</div>  
+		</div>
+<div id="body1">
 <%@ include file="/inc/leftBar.jspf" %>
 	<div id="container">
-		<div id="topBar">
-			<h5><strong>판매자 정보 수정</strong></h5>
-		</div>  
    		<div id="contentBox">
 		 	<div id="companyBox">
 		 	<div id="companyTitle"><p>사업자 정보</p></div>
