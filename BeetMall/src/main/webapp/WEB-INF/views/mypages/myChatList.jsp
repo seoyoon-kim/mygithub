@@ -257,6 +257,55 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	#chatIframe{
+		position:absolute;
+		top:600px;
+		width:502px;
+		height:662px;
+		padding:1px;
+		background-color:rgb(250, 250, 250);
+		display:none;
+	}
+	#chatContainer{
+		width:500px;
+		height:590px;
+	}
+	#chatTop{
+		width:500px;
+		height:20px;
+		background-color:rgb(252,118,45);
+	}
+	#chatInfoTitle{
+		height:50px;
+		width:500px;
+		background-color:white;
+	}
+	#closedivBtn, #reportChat{
+		cursor: pointer;
+	}
+	#chatHeaderSpan{
+		line-height:50px;	
+	}
+	#chatInfoTitle{
+		text-align: center;
+		font-size:16px;
+	}
+	#reportChat{
+		color:red;
+		float:left;
+		margin-left:10px;
+	}
+	#closedivBtn{
+		float:right;
+		line-height:50px;
+		font-size:20px;
+		margin-right:10px;
+	}
+	#theyId{
+		font-weight:bold;
+		font-size:17px;
+		margin-right:5px;
+	}
 </style>
 <script>
 	$(function(){
@@ -271,14 +320,47 @@
 	})
 	$(document).on('click','input[value=조회]', function(){
 		var roomcode =$(this).prev().val();
-		console.log("roomcode="+roomcode);
+		var theyid = $(this).parent().prev().children().eq(0).text();
+		var myid = "${logId}";
+		console.log("logid="+myid);
+		$("#theyId").text(theyid);
+		$("#chatIframe").css("display","block");
+		$("#chatContainer").attr("src","http://192.168.0.47:12021/chatForm?sender="+myid+"&receiver="+theyid+"&roomcode="+roomcode);
 	});
-	
+	$(document).on('click','input[value=삭제]', function(){
+		if(confirm("해당대화를 삭제하시겠습니까? \n대화가 삭제되더라도 상대방에게는 남아있을 수 있습니다.\n삭제한 대화는 취소할 수 없습니다.")){
+			var roomcode = $(this).prev().prev().val();
+		url = "chatdel";
+		param = "roomcode="+roomcode;
+		$.ajax({
+			url:url,
+			data : param,
+			success : function(result){
+				console.log(result);
+				if(result == 1){
+					alert("해당 대화가 삭제되었습니다.");
+					location.href="myChatList";
+				}else{
+					alert('해당 대화를 삭제하는데 실패하였습니다.');
+				}
+			}, error : function(){
+				console.log('실패..');
+			}
+		});
+		}
+	});
+	$(document).on('click',"#closedivBtn",function(){
+		$("#chatIframe").css("display","none");
+	})
 </script>
 <div class="section">
 	<div id="mypointList">
 		<h2>${logId}님의 1:1대화 내역입니다. </h2>
-		
+		<div>
+			대화가 삭제되더라도 상대방에게는 남아있을 수 있습니다.<br>
+			삭제한 대화는 취소할 수 없습니다.<br/>
+			욕설, 비방, 비난 등의 이유로 신고가 누적될 경우 사이트 이용에 제한이 될 수 있습니다.<br/> 
+		</div>
 		<div>
 			<ul id="pointUl">
 				<li>일시</li>
@@ -297,11 +379,11 @@
 						<span class="chatttitle wordcut">${vo.receiver}</span><span class="chatdetail wordcut">${vo.otocontent}</span>
 					</c:if>
 					</li>
-					<li><input type="hidden" value="${vo.roomcode}"/><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/></li>
+					<li><input type="hidden" value="${vo.roomcode}"/><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/><input type="button" class="btn" value="신고하기"/></li>
 				</c:forEach>
 			</ul>
-			
 		</div>
+		
 		<!-- 페이징 -->
 		<div class="page_wrap">	
 			<div class="page_nation">
@@ -324,5 +406,10 @@
 	           </c:if>
 			</div>
 		 </div>
+	</div>
+	<div id ="chatIframe">
+				<div id="chatTop"></div>
+				<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span>님과의 채팅입니다.</span><span id="closedivBtn">&times;</span></div>
+				<iframe src="" id="chatContainer" frameborder="0" ></iframe>
 	</div>
 </div>
