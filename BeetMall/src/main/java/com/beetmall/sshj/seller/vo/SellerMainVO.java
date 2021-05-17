@@ -12,12 +12,36 @@ public class SellerMainVO {
 	private String orderstatus; // 주문 현재상태
 	private int ordercount; // 주문 현재상태 갯수
 	
-	
 	private String infotitle; // 공지 제목
 	private String infowritedate; // 공지 등록일
 	 
+	private String monthData; // 월 언제인가
+	private long payData; // 월 금액 합계
 	
 	
+	
+	
+	
+	
+	
+	public String getMonthData() {
+		return monthData;
+	}
+	public void setMonthData(String monthData) {
+		this.monthData = monthData;
+	}
+	public long getPayData() {
+		return payData;
+	}
+	public void setPayData(long payData) {
+		this.payData = payData;
+	}
+	public int getNewOrder() {
+		return newOrder;
+	}
+	public void setNewOrder(int newOrder) {
+		this.newOrder = newOrder;
+	}
 	public String getInfotitle() {
 		return infotitle;
 	}
@@ -30,12 +54,7 @@ public class SellerMainVO {
 	public void setInfowritedate(String infowritedate) {
 		this.infowritedate = infowritedate;
 	}
-	public int getNewOrder() {
-		return newOrder;
-	}
-	public void setNewOrder(int newOrder) {
-		this.newOrder = newOrder;
-	}
+	
 	public String getOrderstatus() {
 		return orderstatus;
 	}

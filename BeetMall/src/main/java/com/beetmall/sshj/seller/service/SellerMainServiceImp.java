@@ -32,9 +32,23 @@ public class SellerMainServiceImp implements SellerMainService {
 	}
 
 	@Override
-	public SellerMainVO getSales(SellerMainVO vo) {
+	public SellerMainVO getReview(SellerMainVO vo) {
 		// TODO Auto-generated method stub
-		return dao.getSales(vo);
+		return dao.getReview(vo);
 	}
+
+	@Override
+	public SellerMainVO getQboard(SellerMainVO vo) {
+		// TODO Auto-generated method stub
+		return dao.getQboard(vo);
+	}
+
+	@Override
+	public List<SellerMainVO> getPayData(int num,String userid) {
+		// TODO Auto-generated method stub
+		return dao.getPayData(num, userid);
+	}
+
+	
 	
 }

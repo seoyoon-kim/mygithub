@@ -11,7 +11,10 @@ public interface SellerMainDAO {
 	public List<SellerMainVO> getDeliveryStatus(SellerMainVO vo);
 	// 공지사항 불러오기
 	public List<SellerMainVO> getNotice(SellerMainVO vo);
-	// 리뷰, 문의 불러오기
-	public SellerMainVO getSales(SellerMainVO vo);
+	// 리뷰 불러오기
+	public SellerMainVO getReview(SellerMainVO vo);
+	// 문의 불러오기
+	public SellerMainVO getQboard(SellerMainVO vo);
 	// 매출 차트
+	public List<SellerMainVO> getPayData(int num,String userid);
 }
