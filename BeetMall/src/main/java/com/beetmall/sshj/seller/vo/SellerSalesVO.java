@@ -12,6 +12,10 @@ public class SellerSalesVO {
 	private String mcatename; // 중분류 이름
 	private int mcatesort; // 중분류 정렬기준
 	
+	// 오늘의 데이터
+	private long todayMoney; //오늘의 매출금액
+	private int todayNum; // 오늘의 건수
+	
 	// 차트에 들어갈 데이터?
 	private int[] resultData; // 뷰단에 존재하는 가져와야 할 데이터 목록[배열]
 	private int ordernum; // 주문번호
@@ -33,11 +37,25 @@ public class SellerSalesVO {
 	public String getProductname() {
 		return productname;
 	}
-
-
 	public void setProductname(String productname) {
 		this.productname = productname;
 	}
+	public long getTodayMoney() {
+		return todayMoney;
+	}
+	public void setTodayMoney(long todayMoney) {
+		this.todayMoney = todayMoney;
+	}
+	public long getTodayNum() {
+		return todayNum;
+	}
+
+
+
+	public void setTodayNum(int todayNum) {
+		this.todayNum = todayNum;
+	}
+
 
 
 	public String getStartCalendarDataValue() {

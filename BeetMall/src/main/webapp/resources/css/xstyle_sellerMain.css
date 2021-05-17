@@ -1,0 +1,138 @@
+@charset "UTF-8";
+/*================ 기본 설정 시작 =================*/
+section{
+	width: 100%;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+article{
+	width: 1280px;
+	border-bottom: #ddd;
+	padding: 50px 0;
+	margin: 120px auto 0 auto;
+}
+
+ul,li{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+a:hover,a:active,a:visited,a:link{
+	text-decoration: none; 
+	color: #aaa;
+}
+/*================ 본문 시작 =================*/
+/*           firstContainer              */
+.firstContainer{
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	width: 600px;
+	height: 300px;
+}
+
+#firstLine{
+	display: flex;
+	justify-content: space-around;
+}
+
+.firstContainer img, #review img{
+	width: 100px;
+	height: 100px;
+}
+
+.firstContainer>div:nth-child(1), .secondContainer>div:nth-child(1){
+	font-size: 18px;
+	font-weight: bold;
+	padding: 5px 10px;
+	border-bottom: 1px solid #ddd;
+	background-color: #45bb89;
+	overflow:hidden;
+	color:white;
+}
+
+.firstContainer>div:nth-child(2){
+	width:100%;
+	height: 90%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.firstContainer>div:nth-child(2)>div>ul{
+	font-size: 18px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.firstContainer>div:nth-child(2)>div>ul li{
+	display: flex;
+	padding-bottom: 10px;
+}
+
+#orderContainer, #deliveryContainer, #claimContainer, #salesContainer{
+	width:100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+/* 이미지와 건수 위치조정*/
+#orderContainer>ul>li{
+	margin:30px 0;
+}
+
+#deliveryContainer>img, #claimContainer>img{
+	margin:25px;
+}
+
+/*          secondContainer              */
+#secondLine{
+	display: flex;
+	justify-content: space-around;
+	margin: 30px 0;
+}
+
+.secondContainer{
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	width: 400px;
+	height: 300px;
+}
+
+#review>div:nth-child(2){
+	width:100%;
+	height: 90%;
+	display: flex;
+	justify-content: space-around;
+	align-content:center;
+	align-items: center;
+}
+
+#review>div:nth-child(2)>ul{
+	font-size: 18px;
+	text-align:center;
+	margin: 10px 0;
+}
+
+#review>div:nth-child(2)>ul li{
+	display: flex;
+	padding-bottom: 10px;
+}
+
+#notice>ul>li{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #eee;
+	margin: 10px;
+	padding: 0 0 10px 0;
+}
+
+#notice>ul>li>div:nth-child(1){
+	font-size: 14px;
+}
+#notice>ul>li>div:nth-child(2){
+	font-size: 12px;
+	font-weight: bold;
+}

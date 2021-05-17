@@ -119,6 +119,10 @@
 		update userqboard set qanswer = #{qanswer} where userid = #{userid} and qnum = ${qnum}
 	</update>
 	
+	<update id="askAnswerUpdate" parameterType="int">
+		update userqboard set qanswer = #{qanswer} where userid = #{userid} and qnum = ${qnum} 
+	</update>
+	
 	<insert id="reportInsert" parameterType="int">
 		insert into report(reportnum, userid, reporteduser 
 			,reportboard, reportboardnum, reportreason

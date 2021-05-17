@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerMainDAO">
+	<select id="getOrderSales" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
+        select count(realpayment) newOrder, sum(realpayment) realpayment from
+        (select ordernum from orderdetail where productnum in 
+        (select productnum from product where userid= #{userid})) a join ordertbl b 
+        on a.ordernum = b.ordernum where b.orderdate > to_char(sysdate, 'YYYY-MM-DD') 
+        group by realpayment
+	</select>
+	<select id="getDeliveryStatus" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
+		select orderstatus, count(orderstatus) ordercount from (
+        select ordernum, orderstatus from orderdetail where productnum in 
+        (select productnum from product where userid=#{userid})) a 
+        join ordertbl b on a.ordernum = b.ordernum 
+        where b.orderdate > to_char(sysdate, 'YYYY-MM-DD') group by orderstatus
+	</select>
+	<select id="getNotice" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
+    	select infotitle, to_char(infowritedate, 'YY-MM-DD') infowritedate 
+		from (select * from notice where infotype = 2 order by infowritedate desc) 
+		where rownum <![CDATA[<=]]> 6
+	</select>
+	<select id="getReview" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
+		select count(*) reviewanswer from review where productnum in 
+		(select productnum from product where userid=#{userid}) 
+        and reviewwritedate > to_char(sysdate, 'YYYY-MM-DD') 
+        and reviewanswer is null group by reviewanswer
+	</select>
+	<select id="getQboard" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
+		select count(*) qasnwer from userqboard where productnum in 
+		(select productnum from product where userid=#{userid})
+        and qwritedate > to_char(sysdate, 'YYYY-MM-DD') 
+        and qanswer is null group by qanswer
+	</select>
+	<select id="getPayData" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
+		select 
+		<if test="param1==0">
+        	to_char(add_months(LAST_DAY(SYSDATE)+1,-1),'yyyy-mm') monthData,
+        </if>
+        <if test="param1==1">
+        	to_char(add_months(LAST_DAY(SYSDATE)+1,-2),'yyyy-mm') monthData,
+        </if>
+        <if test="param1==2">
+        	to_char(add_months(LAST_DAY(SYSDATE)+1,-3),'yyyy-mm') monthData,
+        </if>
+		
+		sum(orderprice*orderquantity) payData from orderdetail a join 
+		(select productnum from product where userid=#{param2}) b 
+        on a.productnum = b.productnum 
+        where orderconfirm between 
+        <if test="param1==0">
+        	add_months(LAST_DAY(SYSDATE)+1,-1) and last_day(sysdate) 
+        </if>
+        <if test="param1==1">
+        	add_months(LAST_DAY(SYSDATE)+1,-2) and add_months(last_day(sysdate),-1)
+        </if>
+        <if test="param1==2">
+        	add_months(LAST_DAY(SYSDATE)+1,-3) and add_months(last_day(sysdate),-2)
+        </if>
+        and orderstatus = '구매확정' group by a.orderprice
+	</select>
+	
+</mapper>

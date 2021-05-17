@@ -37,8 +37,8 @@
 		
 		<choose>
 			<when test="searchTxt != '' ">
-				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
-				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				<if test="''.equals(searchTxt)">where userid like '%%'</if>
+				<if test="!''.equals(searchTxt)">where userid like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
 					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
@@ -101,8 +101,8 @@
 		
 		<choose>
 			<when test="searchTxt != '' ">
-				<if test="''.equals(searchTxt)">where reviewcontent like '%%'</if>
-				<if test="!''.equals(searchTxt)">where reviewcontent like '%'||#{searchTxt}||'%'</if>
+				<if test="''.equals(searchTxt)">where userid like '%%'</if>
+				<if test="!''.equals(searchTxt)">where userid like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
 					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'

@@ -7,9 +7,8 @@ section{
 
 article{
 	width: 1280px;
-	hegith: 100px;
 	border-bottom: #ddd;
-	padding: 50px;
+	padding: 50px 0;
 	margin: 120px auto 0 auto;
 }
 
@@ -30,19 +29,27 @@ a:hover,a:active,a:visited,a:link{
 	margin: 0 auto;
 }
 
+.marginDiv{
+	width:1280px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
 .wrapContainer{
 	width: 100%;
-	margin-bottom: 100px;
-	border: 1px solid #aaa;
+	margin-top: 20px;
+	margin-bottom: 50px;
 }
 
 .wrapTitle{
 	margin: 0 auto;
 	width: 100%;
-	height: 60px;
-	line-height: 60px;
+	height: 40px;
+	line-height: 40px;
 	color: black;
 	font-size: 16px;
+	border-bottom: 1px solid #bbb;
+	text-indent: 1em;
 }
 
 .seller_title{
@@ -52,17 +59,16 @@ a:hover,a:active,a:visited,a:link{
 	font-size: 20px;
 	font-weight: bold;
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 
 .normalBtn{
-	height: 25px;
-	line-height: 25px;
-	background-color: #fff;
-	margin: 15px 0 15px 0;
-	border: 1px solid #ccc;	
-	text-align: center;
-	padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+	background-color: #aaa;
+	color: white;
+	border: 1px solid #aaa;	
 }
 
 /*==================조회하기=================*/
@@ -71,13 +77,27 @@ a:hover,a:active,a:visited,a:link{
 }
 
 #searchingBtnContainer{
-	width: 100%;
-	text-align: center;
 	padding:0 5px;
 }
 
+#searchingBtnContainer input{
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+	background-color: #fff;
+	border: 1px solid #aaa;	
+}
 #searchingStandard, #searchingTerm{
 	margin-top: 30px;
+}
+
+#searchingTerm{
+	margin-bottom: 30px;
+}
+
+#searchingFrm{
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 #searchingFrm p{
@@ -115,13 +135,12 @@ a:hover,a:active,a:visited,a:link{
 
 table{
 	width: 100%;
-	border: 1px solid #bbb;
 	border-collapse: collapse;
 }
 
 table>thead>tr{
 	display: flex;
-	background-color: #ddd;
+	background-color: #eee;
 }
 
 table>tbody>tr{
@@ -131,7 +150,7 @@ table>tbody>tr{
 table>thead th, table>tbody td{
 	flex-basis: 12.5%;
 	text-align: center;
-	border: 1px solid #bbb;
+	border: 1px solid #ddd;
 	padding: 10px;
 }
 
@@ -142,9 +161,16 @@ table tr td{
 }
 
 #totalMoney{
-	float: right;
+	width:100%;
+	text-align: right;
+	margin: 5px 5px 5px 0;
 	font-weight: bold;
+	
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px;
 }
+
 
 /*================ 페이징처리부분 ===============*/
 .page_wrap {

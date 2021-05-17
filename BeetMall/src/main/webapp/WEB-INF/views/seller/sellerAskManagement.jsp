@@ -297,7 +297,7 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		startDate = "";
 		endDate = "";
 	}
-	
+	console.log('test');
 	
 	let url = "SellerAskPaging";
 	let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord}+"&sortStr="+sortStr;
@@ -309,28 +309,40 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		type: "post",
 		success: function(result){
 			// 데이터 불러와 table 형식으로 만들기
-			
-			let tag = "<li>상품명</li>";
-				tag += "<li>제목</li>";
-				tag += "<li>작성자</li>";
-				tag += "<li>작성일</li>";
-				tag += "<li>답변 여부</li>";
+			let tag = "<thead><tr>";
+				tag += "<th>상품명</th>";
+				tag += "<th>제목/문의내용</th>";
+				tag += "<th>작성자/작성일</th>";
+				tag += "<th>답변여부</th>";
+				tag += "</tr></thead>";
+				tag += "<tbody>";
 
 			result2 = $(result[0]);
 			result2.each( function (idx, vo){
-				tag += "<li>" + vo.productname + "</li>";
-				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'>";
-					tag += "<input type='hidden' name='qnum' value='"+vo.qnum+"' />"+vo.qtitle+"</a>";
-					tag += "<input type='hidden' name='qcontent' value='" + vo.qcontent + "'></li>";
-				tag += "<li>" + vo.userid + "</li>";
-				tag += "<li>" + vo.qwritedate + "</li>";
-				if(vo.qanswer != null){
-					tag += "<li><input type='hidden' value='"+vo.qanswer+"' >답변 완료</li>";
-				} else {
-					tag += "<li>미답변</li>";
-				}
+				tag += "<tr>";
+					tag += "<td>" + vo.productname +"</td>";
+					
+					tag += "<td>" ;
+						tag += "<div>" + vo.qtitle + "</div>";
+						tag += "<div>";
+						tag += "<a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='qnum' value='"+vo.qnum+"' />"+vo.qcontent+"</a>";
+						tag += "</div>";
+					tag += "</td>";
+					tag += "<td>"; 
+						tag += "<div>" + vo.userid + "</div><br>";
+						tag += "<div>" + vo.qwritedate + "</div>";
+					tag += "</td>";
+					
+					if(vo.qanswer != null){
+						tag += "<td><input type='hidden' value='"+vo.qanswer+"' ><p>답변완료</p></td>";
+					} else {
+						tag += "<td><p style='color:red;'>미답변</p></td>";
+					}
+				tag += "</tr>";
 			})
-			$('#askList').html(tag);
+				tag += "</tbody>";
+			$('table').html(tag);
+				
 	
 	
 			// 시작하기 전, startDate가 값이 없으면 paging 누를때 에러가 발생하기 때문에 임의의 특수문자로 설정해놓는다.
@@ -345,7 +357,7 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 			
 			// 페이징 처리	
 			let pagingTag = "";
-
+	
 			let pagingData = result[1];
 			if(pagingData.pageNum != 1){
 				pagingTag += '<a class="arrow pprev" href="javascript:paging(1,'+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
@@ -363,7 +375,7 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 				pagingTag += '<a class="arrow next" href="javascript:paging('+(pagingData.pageNum+1)+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 				pagingTag += '<a class="arrow nnext" href="javascript:paging('+pagingData.totalPage+','+sortStr+',\['+mcatenumDataArr+'\],\''+ searchTxt +'\',\''+startDate+'\',\''+ endDate+'\')"></a>';
 			}
-
+	
 			$('.page_nation').html(pagingTag);
 		}, error: function(){
 			console.log('페이징 실패');
@@ -377,15 +389,15 @@ function popupOpen(data){
 	
 	// 상품명
 	let qnum = $(data).children().val();
-	let productname = $(data).parent().prev().text();
-	let qtitle = $(data).text().trim();
-	let qcontent = $(data).next().val().trim();
-	let userid = $(data).parent().next().text();
-	let qwritedate = $(data).parent().next().next().text();
-	let qanswer = $(data).parent().next().next().next().text();
+	let productname = $(data).parent().parent().prev().text();
+	let qtitle = $(data).parent().prev().text().trim();
+	let qcontent = $(data).text().trim();
+	let userid = $(data).parent().parent().next().children('div:first-child').text();
+	let qwritedate = $(data).parent().parent().next().children('div:last-child').text();
+	let qanswer = $(data).parent().parent().next().next().children('p').text();
 	
-	if(qanswer == '답변 완료'){
-		qanswer = $(data).parent().next().next().next().children('input').val();
+	if(qanswer == '답변완료'){
+		qanswer = $(data).parent().parent().next().next().children('input').val();
 	}
 	console.log(qnum);
 	console.log(productname);
@@ -398,37 +410,32 @@ function popupOpen(data){
 	let tag = '<div class="wrapContainer_Edit1">';
 		tag += '<form method="post" action="javascript:qanswer()" id="popupFrm">';
 		tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
-		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 문의</div>';
+		tag += '<div class="wrapTitle" style="text-align: center; border:none;">문의 & 답변</div>';
 		tag += '<ul id="askManagement">';
-		tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
-		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
-		tag += '<li><b>작성일</b> ' + qwritedate + '</li>';
+			tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
+			tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+			tag += '<li><b>작성일</b> ' + qwritedate + '</li>';
 		tag += '</ul>';	
-		tag += '<div>';
-		tag += '<br />';
-		tag += '<b>&nbsp;&nbsp;&nbsp;문의 내용</b><br />';
-		tag += '<div id="qContent">';
+		tag += '<div class="popupContentTitle">문의 내용</div>';
+		tag += '<div id="qContent" style="height:auto">';
 		tag += '<p>' + qcontent + '</p>';
 		tag += '</div>';
-		tag += '</div>';
 		tag += '<div id="qAnswer">';
+		tag += '<div class="popupContentTitle">답글 내용</div>';
 			if( qanswer == '미답변'){
-				tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
+				tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:100%;"></textarea>';
 			} else {
-				tag += '<div style="border-top:1px solid #ddd; padding: 10px 0">';
-				tag += '<b>&nbsp;&nbsp;&nbsp;답변 내용</b><br />';
-				tag += '<p style="margin: 20px 10px ">' + qanswer + '<p>';
-				tag += '</div>';
+				tag += '<p>' + qanswer + '<p>';
 			}
 		tag += '<div id="popupBtnContainer">';
 			if( qanswer == '미답변'){
-				tag += '<input class="normalBtn" type="submit" value="등록" >';
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="answerBtn" type="submit" value="등록" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기"> ';
+				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
 			} else {
-				tag += '<input class="normalBtn" type="submit" onclick="answerEdit(\''+qnum+'\',\''productname+'\',\''qtitle+'\',\''qcontent+'\',\''userid+'\',\''qwritedate+'\',\''qanswer+'\')" value="수정" >';
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="answerBtn" type="submit" onclick="answerEdit(\''+qnum+'\',\''+productname+'\',\''+qtitle+'\',\''+qcontent+'\',\''+userid+'\',\''+qwritedate+'\',\''+qanswer+'\')" value="수정" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기"> ';
+				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+qnum+'\',\''+userid+'\')" value="신고">';
 			}
 			tag += '</div>';
 		tag += '</div>';
@@ -448,46 +455,33 @@ function popupOpen(data){
 }
 
 //팝업창 수정 만들기! 
-function popupOpen(qnum, productname, qtitle, qcontent, userid, qwritedate, qanswer){
-	
-	// 상품명
-	let qnum = $(data).children().val();
-	let productname = $(data).parent().prev().text();
-	let qtitle = $(data).text().trim();
-	let qcontent = $(data).next().val().trim();
-	let userid = $(data).parent().next().text();
-	let qwritedate = $(data).parent().next().next().text();
-	let qanswer = $(data).parent().next().next().next().text();
-	
-	if(qanswer == '답변 완료'){
-		qanswer = $(data).parent().next().next().next().children('input').val();
-	}
+function answerEdit(qnum, productname, qtitle, qcontent, userid, qwritedate, qanswer){
 
 	let tag = '<div class="wrapContainer_Edit1">';
-		tag += '<form method="post" action="javascript:qanswerEdit()" id="popupFrm">';
-		tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
-		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 문의</div>';
-		tag += '<ul id="askManagement">';
-		tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
-		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
-		tag += '<li><b>작성일</b> ' + qwritedate + '</li>';
-		tag += '</ul>';	
-		tag += '<div>';
-		tag += '<br />';
-		tag += '<b>&nbsp;&nbsp;&nbsp;문의 내용</b><br />';
-		tag += '<div id="qContent">';
-		tag += '<p>' + qcontent + '</p>';
-		tag += '</div>';
-		tag += '</div>';
+	tag += '<form method="post" action="javascript:qanswerEdit()" id="popupFrm">';
+	tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
+	tag += '<div class="wrapTitle" style="text-align: center; border:none;">문의 & 답변</div>';
+	tag += '<ul id="askManagement">';
+	tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
+	tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+	tag += '<li><b>작성일</b> ' + qwritedate + '</li>';
+	tag += '</ul>';	
+	tag += '<div class="popupContentTitle">문의 내용</div>';
+	tag += '<div id="qContent" style="height:auto">';
+	tag += '<p>' + qcontent + '</p>';
+	tag += '</div>';
+	tag += '<div id="qAnswer">';
+	tag += '<div class="popupContentTitle">답글 내용</div>';
 		tag += '<div id="qAnswer">';
-			tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:670px; margin:0 15px;">'+qanswer+'</textarea>';
+			tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:100%;">'+qanswer+'</textarea>';
 		tag += '<div id="popupBtnContainer">';
-			tag += '<input class="normalBtn" type="submit" value="수정" >';
-			tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기"> ';
+			tag += '<input class="answerBtn" type="submit" value="수정" >';
+			tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기"> ';
 		tag += '</div>';
-
-		tag += '</form>';
-		tag += '</div>';
+	tag += '</div>';
+	
+	tag += '</form>';
+	tag += '</div>';
 	
 	$('#popup').html(tag);
 	
@@ -510,11 +504,11 @@ function popupClose(){
 // 신고 창 띄우기
 function popupreport(qnum, userid){
 	
-	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto;">';
+	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto; padding:0; border: 1px solid #ddd">';
 		tag += '<form method="post" action="javascript:reportUpdate()" id="reportFrm">';
 		tag += '<input type="hidden" name="userid" value="' + userid + '" >';
 		tag += '<input type="hidden" name="qnum" value="' + qnum + '">';
-		tag += '<div class="wrapTitle">신고하기</div>';
+		tag += '<div class="wrapTitle" style="border:none;">신고하기</div>';
 		tag += '<div id="reportReason">';
 		tag += '<p>신고사유</p>';
 		tag += '<select name="reportReason">';
@@ -525,11 +519,11 @@ function popupreport(qnum, userid){
 		tag += '</select>';
 		tag += '</div>';
 		tag += '<div>';
-		tag += '<textarea rows="10" cols="40" id="reportContent" name="reportContent"></textarea>';
+		tag += '<textarea id="reportContent" name="reportContent"></textarea>';
 		tag += '</div>';
 		tag += '<div id="reportBtn">';
-		tag += '<input type="submit" class="normalBtn" value="보내기" />';
-		tag += '<input type="button" class="normalBtn" value="취소" onclick="reportClose()"/>';
+		tag += '<input type="submit" class="normalBtn" style="background-color:#0080ff" value="보내기" />';
+		tag += '<input type="button" class="normalBtn" style="background-color:#ddd;" value="취소" onclick="reportClose()"/>';
 		tag += '</div>';
 		tag += '</form>';
 		tag += '</div>';
@@ -728,112 +722,140 @@ function reportUpdate(){
 		<div class='seller_title'>문의관리</div>
 		<div class="wrap">
 			<!-- 문의 보기 -->
-			<div class="wrapTitle">문의보기</div>
-			<div class="wrapContainer">
+			<div class="wrapTitle" style="display:flex;border:none;">
+				<div style="flex-basis:48%; margin-right:23px; border-bottom: 1px solid #bbb">문의내역</div>
+				<div style="flex-basis:50%; border-bottom: 1px solid #bbb">카테고리 & 조회</div>
+			</div>
+			<div class="wrapContainer" style="display:flex;">
 
 				<ul id="askInfo">
-					<li style="font-weight: bold;">새 문의</li>
-					<li>${resultData.newAsk }건</li>
-					<li style="font-weight: bold;">미답변</li>
-					<li>${resultData.nullAsk }건</li>
-					<li style="font-weight: bold;">전체 문의 수</li>
-					<li>${resultData.totalAsk }건</li>
+					<li>
+						<img src="<%=request.getContextPath()%>/resources/img/newimg.png">
+						<p>새 문의</p>
+						<p>${resultData.newAsk } 건</p>	
+					</li>
+					
+					<li>
+						<img src="<%=request.getContextPath()%>/resources/img/review.png">
+						<p>미답변</p>
+						<p>${resultData.nullAsk } 건</p>
+					</li>
+					
+					<li>
+						<img src="<%=request.getContextPath()%>/resources/img/checklistimg.png">
+						<p>전체 문의 수</p>
+						<p>${resultData.totalAsk } 건</p>
+					</li>
 				</ul>
+				
+				<!-- 문의 검색 -->
+				<div id="categoryList">
+						<div id="categoryListMiddle">
+							<!-- 대분류 카테고리!!!! -->
+							<ul id="category">
+								<!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
+								<c:if test="${cateList!=null}">
+									<!-- 변수 i를 선언해주고 -->
+									<c:set var="i" value="1" />
+									<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
+												i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
+									<c:forEach var="categoryList" items="${cateList}">
+										<c:if test="${categoryList.catenum==i}">
+											<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+											<c:set var="i" value="${i+1 }" />
+										</c:if>
+									</c:forEach>
+									<c:remove var="i" />
+								</c:if>
+							</ul>
+	
+							<!-- 중분류 카테고리 -->
+							<ul id="mcategory"></ul>
+						</div>
+	
+						<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
+						<ul id="categoryManagement"></ul>
+	
+						<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+						<div id="categorySearch_container" style='display:flex; justify-content: space-between'>
+							<div>
+								<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+									<option value="년별">년별</option>
+									<option value="월별" selected>월별</option>
+									<option value="일별">일별</option>
+								</select> 
+								<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> 
+								<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> 
+								<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+							</div>
+							<div>
+								<input type="text" id="searchTxt" name="searchTxt" size="13em" placeholder="작성자"/>
+								<button id="searchingBtn" style='margin:0 10px'>조회</button>
+							</div>
+						</div>
+						
+	
+					</div>
+					<!-- categoryList 끝 -->
 			</div>
 			<!-- 문의 보기 끝 -->
-
-			<!-- 문의 검색 -->
-			<div class="wrapTitle">문의 검색</div>
-			<div class="wrapContainer">
-				<div id="categoryList">
-					<div id="categoryListMiddle">
-						<!-- 대분류 카테고리!!!! -->
-						<ul id="category">
-							<!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
-							<c:if test="${cateList!=null}">
-								<!-- 변수 i를 선언해주고 -->
-								<c:set var="i" value="1" />
-								<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
-											i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
-								<c:forEach var="categoryList" items="${cateList}">
-									<c:if test="${categoryList.catenum==i}">
-										<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
-										<c:set var="i" value="${i+1 }" />
-									</c:if>
-								</c:forEach>
-								<c:remove var="i" />
-							</c:if>
-						</ul>
-
-						<!-- 중분류 카테고리 -->
-						<ul id="mcategory"></ul>
-					</div>
-
-					<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
-					<ul id="categoryManagement"></ul>
-
-					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-					<div id="categorySearch_container" style='display:flex; justify-content: space-between'>
-						<div>
-							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-								<option value="년별">년별</option>
-								<option value="월별" selected>월별</option>
-								<option value="일별">일별</option>
-							</select> 
-							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> 
-							<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> 
-							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						</div>
-						<div>
-							<input type="text" id="searchTxt" name="searchTxt" placeholder="문의 내용"/>
-							<button id="searchingBtn" style='margin:0 10px'>조회</button>
-						</div>
-					</div>
-					
-
-				</div>
-				<!-- categoryList 끝 -->
-			</div>
-			<!-- 문의 검색 끝 -->
+			
 
 			<!-- 문의 출력 -->
-
-			<div id="sortContainer">
-				<select id="sortSelect" onchange="javascript:sortChange(this)">
-					<option selected="selected" value="최신순">최신순</option>
-					<option value="미답변">미답변</option>
-					<option value="답변완료">답변완료</option>
-				</select>
+			<div class="wrapTitle" style="display:flex;">
+				문의보기
+				<div id="sortContainer">
+					<select id="sortSelect" onchange="javascript:sortChange(this)">
+						<option selected="selected" value="최신순">최신순</option>
+						<option value="미답변">미답변</option>
+						<option value="답변완료">답변완료</option>
+					</select>
+				</div>
 			</div>
-
-			<ul id="askList">
-				<li>상품명</li>
-				<li>제목</li>
-				<li>작성자</li>
-				<li>작성일</li>
-				<li>답변 여부</li>
+			
+			<table>
+				<thead>
+					<tr>
+						<th>상품명</th>
+						<th>제목/문의내용</th>
+						<th>작성자/작성일</th>
+						<th>답변여부</th>
+					</tr>
+				</thead>
+				<tbody>
 				<c:if test="${askList != null }">
 					<c:forEach var="result" items="${askList}" varStatus="i">
-						<li>${result.productname }</li>
-						<li>
-							<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
-								<input type="hidden" name="qnum" value="${result.qnum }" />
-									${result.qtitle}
-							</a>
-							<input type='hidden' name='qcontent' value=' ${result.qcontent }'>
-						</li>
-						<li>${result.userid }</li>
-						<li>${result.qwritedate }</li>
-						<c:if test="${result.qanswer != null }">
-							<li><input type="hidden" value="${result.qanswer }" >답변 완료</li>
-						</c:if>
-						<c:if test="${result.qanswer == null }">
-							<li>미답변</li>
-						</c:if>
+						<tr>
+							<td>${result.productname }</td>
+							<td>
+								<div>${result.qtitle}</div>
+								<div>
+									<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
+										<input type="hidden" name="qnum" value="${result.qnum }" />
+										${result.qcontent}
+									</a>
+								</div>
+							</td>
+							<td>
+								<div>${result.userid }</div><br>
+								<div>${result.qwritedate }</div>
+							</td>
+							<td>
+								<c:if test="${result.qanswer != null }">
+									<input type="hidden" value="${result.qanswer }" >
+									<p>답변완료</p>
+								</c:if>
+								<c:if test="${result.qanswer == null }">
+									<p style="color:red;">미답변</p>
+								</c:if>
+							</td>
+						</tr>
 					</c:forEach>
 				</c:if>
-			</ul>
-			<!-- 문의 출력 끝 -->
+				</tbody>
+			</table>
+			
+			
 			<!--------------페이징 표시-------------------->
 			
 			<c:if test="${resultData != null }">

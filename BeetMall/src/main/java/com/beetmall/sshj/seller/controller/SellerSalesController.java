@@ -2,6 +2,7 @@ package com.beetmall.sshj.seller.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +37,15 @@ public class SellerSalesController {
 	SellerSalesService service;
 	
 	@RequestMapping("/sellerSales")
-	public ModelAndView seller_sales() {
+	public ModelAndView seller_sales(HttpSession session, SellerSalesVO vo) {
 		ModelAndView mav = new ModelAndView();
+		
+		vo.setUserid((String)session.getAttribute("logId"));
+		SellerSalesVO todayList = service.todayList(vo);
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		
+		mav.addObject("todayMoney", formatter.format(todayList.getTodayMoney()));
+		mav.addObject("todayNum", formatter.format(todayList.getTodayNum()));
 		
 		// 카테고리 리스트를 불러와서 리스트에 담는다
 		mav.addObject("cateList",service.allCategoryList());		
@@ -69,7 +77,7 @@ public class SellerSalesController {
 			// 셀 스타일
 			CellStyle style = xssfwb.createCellStyle();
 			style.setFont(font);
-			style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+			style.setFillForegroundColor(IndexedColors.LIME.getIndex());
 			style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			style.setVerticalAlignment(VerticalAlignment.CENTER);
 			style.setAlignment(HorizontalAlignment.CENTER);
@@ -149,8 +157,8 @@ public class SellerSalesController {
 				}
 			}
 		}
-		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"/Downloads/BEETMALL 매출관리.xlsx");
-		File file = new File(System.getProperty("user.home")+"/Downloads/BEETMALL 매출관리.xlsx");
+		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
+		File file = new File(System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
 		try {
 			// file의 경로로 엑셀 outputStream
 			FileOutputStream fos = new FileOutputStream(file);

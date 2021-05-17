@@ -24,4 +24,12 @@ public class SellerSalesServiceImp implements SellerSalesService {
 		return dao.salesDataList(vo);
 	}
 
+	@Override
+	public SellerSalesVO todayList(SellerSalesVO vo) {
+		// TODO Auto-generated method stub
+		return dao.todayList(vo);
+	}
+
+
+
 }

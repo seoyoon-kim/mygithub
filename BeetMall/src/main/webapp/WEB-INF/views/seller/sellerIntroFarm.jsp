@@ -15,11 +15,9 @@
 					<img src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}"/>
 					<div id="farmname" name="farmname">${result.farmname }</div>
 					<div>
-						방문자수 : ${result.farmvisitor}명<br/>
-						농장 즐겨찾기수 : ${favorite}명
+						방문 : ${result.farmvisitor}명 | 농장 즐겨찾기 : ${favorite}명
 					</div>
 				</div><!-- profile_box 종료 -->
-				<hr/>
 				<div id="farm_info">
 					<div>INFO</div>
 					<p name="farmintro">${result.farmintro }</p>

@@ -7,6 +7,12 @@
 		select a.catenum catenum, catename, catesort, cateimg, mcatenum, mcatename, mcatesort 
 		from category a join mcategory b on a.catenum = b.catenum order by catesort, mcatesort
 	</select>
+	<select id="todayList" resultType="com.beetmall.sshj.seller.vo.SellerSalesVO">
+		select count(realpayment) todayNum, SUM(realpayment) todayMoney
+		from ordertbl where ordernum in (select ordernum
+		from orderdetail where productnum in (select productnum from product where userid = '${userid}')) 
+    		and to_char(orderdate, 'YYYYMMDD') = to_char(sysdate,'YYYYMMDD')
+	</select>
 	<select id="salesDataList" resultType="com.beetmall.sshj.seller.vo.SellerSalesVO">
 		select ordernum, od.productnum productnum, productname, mc.mcatenum mcatenum, orderquantity, 
 		to_char(orderconfirm, 'YYYY-MM-DD') orderconfirm, orderprice, mc.mcatename mcatename

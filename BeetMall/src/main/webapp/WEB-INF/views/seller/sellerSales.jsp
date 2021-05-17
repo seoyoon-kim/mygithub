@@ -470,7 +470,6 @@ $(function(){
 		// 선택된 목록 추가 ( Management에서도 보여주고, 차트, 엑셀에도 추가가 되어야 한다.)
 		let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectName+">"+"<a href='#' onclick='return false'>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
 		$('#categoryManagement').append(tag);
-		
 		// append 된 selectName을 배열에 넣어서 저장해놓는다.
 		// 1. DB 에서 데이터 구할때 쓰이고
 		// 2. 나중에 지울때 써야한다.
@@ -780,7 +779,7 @@ $(function(){
 								// 지금 확인된 중분류 값이랑 li에 있는 중분류 값이랑 같으면 더해준다.
 								if(mcatenum == liNum){
 									//계산된 값을 계속해서 저장해준다.
-									resultsum += parseInt($('#excelList li:nth-child('+(12+(j*6))+')').text(), 10);
+									resultsum += parseInt(revertNumType($('#excelList li:nth-child('+(12+(j*6))+')').text()), 10);
 								}
 							}
 							
@@ -875,7 +874,7 @@ $(function(){
 							if( testCode1 == 0){ //첫번째 일 경우
 								
 								if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){//모든 값이 같으면 데이터를 넣는다.
-									let resultData = $('#excelList li:nth-child('+(12+(testVal*6))+')').text();
+									let resultData = revertNumType($('#excelList li:nth-child('+(12+(testVal*6))+')').text());
 									resultArr.push( parseInt(resultData, 10) );
 									testVal++;
 									orderconfirm = new Date($('#excelList li:nth-child('+(7+(testVal*6))+')').text());
@@ -919,7 +918,7 @@ $(function(){
 							if( testCode2 == 1 ) { // 두번째 일 경우. 즉, 반복일 경우
 								
 								if( minDate.getDate() == orderconfirm.getDate() && mcatenum == liNum ){ // 반복했는데, 날짜와 값이 모두 같을 경우 값을 더해준다.
-									let resultData = $('#excelList li:nth-child('+(12+(testVal*6))+')').text();
+									let resultData = revertNumType($('#excelList li:nth-child('+(12+(testVal*6))+')').text());
 									let saveData = resultArr[resultArr.length-1];
 									resultArr.pop();	
 									resultArr.push( saveData + parseInt(resultData, 10) );
@@ -1236,61 +1235,96 @@ function changeViewListNum(num){
 
 	<!-- 본문 시작 -->
 	<article>
+		<div class="seller_title">매출 관리</div>
 		<div class="wrap">
-			<div class="seller_title">매출 관리</div>
-			<!-- 카테고리 선택 -->
-			<div class="wrapTitle">카테고리</div>
-			<div class="wrapContainer">
-				<div id="categoryList">
-					<div id="categoryListMiddle">
-						<!-- 대분류 카테고리!!!! -->
-						<ul id="category">
-							<!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
-							<c:if test="${cateList!=null}">
-								<!-- 변수 i를 선언해주고 -->
-								<c:set var="i" value="1" />
-								<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
-											i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
-								<c:forEach var="categoryList" items="${cateList}">
-									<c:if test="${categoryList.catenum==i}">
-										<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
-										<c:set var="i" value="${i+1 }" />
-									</c:if>
-								</c:forEach>
-								<c:remove var="i" />
-							</c:if>
-						</ul>
-
-						<!-- 중분류 카테고리 -->
-						<ul id="mcategory"></ul>
-					</div>
-
-					<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
-					<ul id="categoryManagement"></ul>
-
-					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-					<div id="categorySearch_container">
-						<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-							<option value="년별">년별</option>
-							<option value="월별" selected>월별</option>
-							<option value="일별">일별</option>
-						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
-					</div>
-
+			<div class="marginDiv">
+				<!-- 카테고리 선택 -->
+				<div class="wrapTitle" style="display:flex;border:none;">
+					<div style="flex-basis:48%; margin-right:23px; border-bottom: 1px solid #bbb">오늘의 매출내역</div>
+					<div style="flex-basis:50%; border-bottom: 1px solid #bbb">카테고리</div>
 				</div>
-				<!-- categoryList 끝 -->
+				<div class="wrapContainer" style="display:flex; ">
+					<div id="performance">
+						<ul>
+							<li>
+								<img src="<%=request.getContextPath()%>/resources/img/newimg.png">
+								<br><br><p style="font-weight: bold;">오늘의 매출건수</p>
+								<p>
+ 									<c:if test="${todayNum !=null }">
+										${todayNum } 건
+									</c:if>
+									<c:if test="${todayNum ==null }">
+										0 건
+									</c:if>
+								</p>
+							</li>
+							<li>
+								<img src="<%=request.getContextPath()%>/resources/img/money.png">
+								<br><br><p style="font-weight: bold;">오늘의 매출금액</p>
+								<p>
+									<c:if test="${todayMoney !=null }">
+										${todayMoney } 원
+									</c:if>
+									<c:if test="${todayMoney ==null }">
+										0 원
+									</c:if> 
+								</p>
+							</li>
+						</ul>
+					</div>
+					<div id="categoryList">
+						<div id="categoryListMiddle">
+							<!-- 대분류 카테고리!!!! -->
+							<ul id="category">
+								<!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
+								<c:if test="${cateList!=null}">
+									<!-- 변수 i를 선언해주고 -->
+									<c:set var="i" value="1" />
+									<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
+												i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
+									<c:forEach var="categoryList" items="${cateList}">
+										<c:if test="${categoryList.catenum==i}">
+											<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+											<c:set var="i" value="${i+1 }" />
+										</c:if>
+									</c:forEach>
+									<c:remove var="i" />
+								</c:if>
+							</ul>
+	
+							<!-- 중분류 카테고리 -->
+							<ul id="mcategory"></ul>
+						</div>
+	
+						<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
+						<ul id="categoryManagement"></ul>
+	
+						<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+						<div id="categorySearch_container">
+							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+								<option value="년별">년별</option>
+								<option value="월별" selected>월별</option>
+								<option value="일별">일별</option>
+							</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+							<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
+						</div>
+	
+					</div>
+					<!-- categoryList 끝 -->
+				</div>
+				<!-- 카테고리 선택 끝 -->
 			</div>
-			<!-- 카테고리 선택 끝 -->
-
-			<!-- 수익 매출 분석 -->
-			<div class="wrapTitle">
-				수익 매출분석
-				<button class="normalBtn" id="pdfDown">PDF 저장</button>
-			</div>
-			<div class="wrapContainer">
-				<div id="chartContainer">
-					<canvas id="myChart" style="width: 400px; height: 200px;"></canvas>
+		</div>
+			
+		<div class="wrap">
+			<div class="marginDiv">
+				<!-- 수익 매출 분석 -->
+				<div class="wrapTitle">
+					수익 매출분석
+					<button class="normalBtn" id="pdfDown">PDF 저장</button>
+				</div>
+				<div class="wrapContainer">
+					<canvas id="myChart" style="width: 1280px; height: 500px;"></canvas>
 
 					<script> // 차트 선언, 카테고리, 날짜, 차트, 엑셀 관여하는 스크립트
 					
@@ -1302,6 +1336,7 @@ function changeViewListNum(num){
 							datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
 						},
 						options: {
+							responsive: false,
 							scales:{
 								y:{
 									beginAtZero: true // 차트 숫자는 0부터 표시
@@ -1314,39 +1349,42 @@ function changeViewListNum(num){
 					
 					</script>
 				</div>
+				<!-- 수익 매출분석 끝 -->
 			</div>
-			<!-- 수익 매출분석 끝 -->
-
-			<div class="wrapTitle">
-				카테고리별 매출분석
-				<button class="normalBtn" id="excelDown">엑셀 저장</button>
-				<select id="excelViewNum" onchange="javascript:changeViewListNum(this)">
-					<option selected="selected">10</option>
-					<option>50</option>
-					<option>100</option>
-				</select>
-			</div>
-			<div class="wrapContainer">
-				<div id="excelContainer">
-					<ul id="excelList">
-						<li>주문번호</li>
-						<li>매출일자</li>
-						<li>상품명</li>
-						<li>수량</li>
-						<li>단가</li>
-						<li>매출금액</li>
-					</ul>
+		</div>
+		
+		<div class="wrap">
+			<div class="marginDiv">
+				<div class="wrapTitle">
+					카테고리별 매출분석
+					<button class="normalBtn" id="excelDown">엑셀 저장</button>
+					<select id="excelViewNum" onchange="javascript:changeViewListNum(this)">
+						<option selected="selected">10</option>
+						<option>50</option>
+						<option>100</option>
+					</select>
 				</div>
-				<hr>
-				<div id="totalMoney"></div>
-				<!--------------페이징 표시-------------------->
-				<div class="page_wrap">
-					<div class="page_nation">
-						<a class="arrow pprev" href="#" onclick="return false;"></a> <a class="arrow prev" href="#" onclick="return false;"></a> <a class="active" href="#" onclick="return false;">1</a> <a class="arrow next" href="#" onclick="return false;"></a> <a class="arrow nnext" href="#" onclick="return false;"></a>
+				<div class="wrapContainer">
+					<div id="excelContainer">
+						<ul id="excelList">
+							<li>주문번호</li>
+							<li>매출일자</li>
+							<li>상품명</li>
+							<li>수량</li>
+							<li>단가</li>
+							<li>매출금액</li>
+						</ul>
+					</div>
+					<div id="totalMoney"></div>
+					<!--------------페이징 표시-------------------->
+					<div class="page_wrap">
+						<div class="page_nation">
+							<a class="arrow pprev" href="#" onclick="return false;"></a> <a class="arrow prev" href="#" onclick="return false;"></a> <a class="active" href="#" onclick="return false;">1</a> <a class="arrow next" href="#" onclick="return false;"></a> <a class="arrow nnext" href="#" onclick="return false;"></a>
+						</div>
 					</div>
 				</div>
+	
 			</div>
-
 		</div>
 	</article>
 

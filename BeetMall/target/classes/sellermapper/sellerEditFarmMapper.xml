@@ -15,6 +15,6 @@
 		join product d on c.productnum = d.productnum where c.userid='${userid}'
 	</select>
 	<select id="selectFavorite" resultType="int">
-		select sum(storenum) storenum from favorite where storenum=(select storenum from seller where userid='${userid}')
+		select count(storenum) storenum from favorite where storenum=(select storenum from seller where userid='${userid}')
 	</select>
 </mapper>

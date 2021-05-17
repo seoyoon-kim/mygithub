@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <style>
 /* 판매자 페이지는 header, footer 따로쓰기위해 display none */
 body{
@@ -19,7 +21,7 @@ nav{
 	width: 100%;
 	height: 120px;
 	padding: 0 20px;
-	box-shadow: 0px 0px 5px #bbb;
+	box-shadow: 0px 0px 5px #3a7a36;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -58,10 +60,17 @@ nav>ul>li{
 	text-align: center;
 }
 
-nav>ul>li:nth-child(1)>a{
-	color: black;
-	font-size: 28px;
+nav>ul>li>a:hover,#sellerHeaderSubMenu>li>a:hover{
+	color:black;
 	font-weight: bold;
+	font-size: 16px;
+}
+
+nav>ul>li:nth-child(1)>a{
+	color: #3a7a36;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'Lobster', cursive;
 }
 
 #sellerHeaderSubMenu{
@@ -72,6 +81,7 @@ nav>ul>li:nth-child(1)>a{
 	display: none;
 	background-color: #fff;
 }
+
 #sellerHeaderSubMenu>li:first-child{
 	border-bottom: 1px solid #ddd;
 }
@@ -117,7 +127,7 @@ footer{
 			</c:if>
 		</div>
 		<ul>
-			<li><a href="#">BEETMALL</a></li>
+			<li><a href="sellerMain" >Beetmall</a></li>
 			<li><a href="product_list">상품 관리</a></li>
 			<li><a href="product_regi">상품 등록</a></li>
 			<li><a href="order_management">주문 관리</a></li>

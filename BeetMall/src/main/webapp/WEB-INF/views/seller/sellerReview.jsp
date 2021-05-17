@@ -280,6 +280,16 @@ function sortChange(result){
 	
 }
 
+function starInsert(num){
+	let total = "";
+	
+	for( let i = 1; i < num; i++){
+		total += "★";
+	}
+	
+	return total;
+}
+
 //페이징,, DB 데이터 전부다 불러오는 기능이 들어가 있다
 function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate){
 	// 제한사항 걸러내기....
@@ -298,12 +308,6 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		endDate = "";
 	}
 	
-	console.log(pageNum);
-	console.log(sortStr);
-	console.log(mcatenumDataArr);
-	console.log(searchTxt);
-	console.log(startDate);
-	console.log(endDate);
 	
 	let url = "SellerReviewPaging";
 	let param = "pageNum="+pageNum+"&totalRecord="+${resultData.totalRecord}+"&sortStr="+sortStr;
@@ -315,34 +319,47 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		type: "post",
 		success: function(result){
 			// 데이터 불러와 table 형식으로 만들기
-			let tag = "<li>상품명</li>";
-				tag += "<li>평점</li>";
-				tag += "<li>포토</li>";
-				tag += "<li>리뷰 내용</li>";
-				tag += "<li>작성자</li>";
-				tag += "<li>작성일</li>";
-				tag += "<li>답변 여부</li>";
-
+			let tag = "<thead><tr>";
+				tag += "<th>평점</th>";
+				tag += "<th>상품명/리뷰내용</th>";
+				tag += "<th>작성자/작성일</th>";
+				tag += "<th>답변여부</th>";
+				tag += "</tr></thead>";
+				tag += "<tbody>";
 			result2 = $(result[0]);
 			result2.each( function (idx, vo){
-				tag += "<li>" + vo.productname + "</li>";
-				tag += "<li>" + vo.reviewscore + "</li>";
-				if(vo.reviewimg != null){
-					let data = vo.reviewimg;
-					tag += "<li value=\'"+data+"\' style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )><input type='hidden' value=\'"+data+"\'></li>";
-				} else {
-					tag += "<li><input type='hidden' value=\'"+data+"\'>-</li>";
-				}
-				tag += "<li><a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a></li>";
-				tag += "<li>" + vo.userid + "</li>";
-				tag += "<li>" + vo.reviewwritedate + "</li>";
-				if(vo.reviewanswer != null){
-					tag += "<li><input type='hidden' value='"+vo.reviewanswer+"' >답변 완료</li>";
-				} else {
-					tag += "<li>미답변</li>";
-				}
+				
+				tag += "<tr>";
+					tag += "<td>" + starInsert(vo.reviewscore) +"</td>";
+					
+					tag += "<td>" ;
+						if(vo.reviewimg != null){
+							let data = vo.reviewimg;
+							tag += "<div value=\'"+data+"\' style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )><input type='hidden' value=\'"+data+"\'></div>";
+						} else {
+							tag += "<div><input type='hidden' value=\'"+data+"\'>-</div>";
+						}
+						tag += "<div>";
+						tag += "<div>" + vo.productname + "</div>";
+						tag += "<div>"
+							tag += "<a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a>";
+							tag += "</div>";
+						tag += "</div>";
+						tag += "</td>";
+					tag += "<td>"; 
+						tag += "<div>" + vo.userid + "</div>";
+							tag += "<div>" + vo.reviewwritedate + "</div>";
+						tag += "</td>";
+					
+					if(vo.reviewanswer != null){
+						tag += "<td><input type='hidden' value='"+vo.reviewanswer+"' ><p>답변완료</p></td>";
+					} else {
+						tag += "<td><p style='color:red;'>미답변</p></td>";
+					}
+				tag += "</tr>";
 			})
-			$('#reviewList').html(tag);
+				tag += "</tbody>";
+			$('table').html(tag);
 	
 	
 			// 시작하기 전, startDate가 값이 없으면 paging 누를때 에러가 발생하기 때문에 임의의 특수문자로 설정해놓는다.
@@ -389,56 +406,51 @@ function popupOpen(data){
 	
 	// 상품명
 	let reviewnum = $(data).children().val();
-	let productname = $(data).parent().prev().prev().prev().text();
-	let reviewscore = $(data).parent().prev().prev().text();
 	let reviewcontent = $(data).text().trim();
-	let userid = $(data).parent().next().text();
-	let reviewwritedate = $(data).parent().next().next().text();
-	let reviewanswer = $(data).parent().next().next().next().text();
-	let reviewimg = $(data).parent().prev().children().val();
+	let productname = $(data).parent().prev().text();
+	let reviewscore = $(data).parent().parent().parent().prev().text().trim();
+	let userid = $(data).parent().parent().parent().next().children('div:first-child').text();
+	let reviewwritedate = $(data).parent().parent().parent().next().children('div:last-child').text();
+	let reviewanswer = $(data).parent().parent().parent().next().next().children('p').text();
+	let reviewimg = $(data).parent().parent().prev().children().val();
 	
-	if(reviewanswer == '답변 완료'){
-		reviewanswer = $(data).parent().next().next().next().children('input').val();
+	if(reviewanswer == '답변완료'){
+		reviewanswer = $(data).parent().parent().parent().next().next().children('input').val();
 	}
-	console.log(reviewanswer);
 	
 	let tag = '<div class="wrapContainer_Edit1">';
 		tag += '<form method="post" action="javascript:reviewAnswer()" id="popupFrm">';
 		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
+		tag += '<div class="wrapTitle" style="text-align: center; border:none;">리뷰 & 답변</div>';
 		tag += '<ul id="reviewManagement">';
-		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
-		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
-		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
-		tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
+			tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
+			tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
+			tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
+			tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
 		tag += '</ul>';	
-		tag += '<div>';
-		tag += '<br />';
-		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
-		tag += '<div id="reviewContent">';
-				if( reviewimg != ''){
-					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" id="repMenu_img" />';
-				}
+		tag += '<div class="popupContentTitle">리뷰 내용</div>';
+		tag += '<div id="reviewContent" style="height:auto">';
 		tag += '<p>' + reviewcontent + '</p>';
-		tag += '</div>';
+			if( reviewimg != ''){
+				tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" style="width:140px;height:140px;" id="repMenu_img" />';
+			}
 		tag += '</div>';
 		tag += '<div id="reviewAnswer">';
+		tag += '<div class="popupContentTitle">답글 내용</div>';
 			if( reviewanswer == '미답변'){
-				tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;"></textarea>';
+				tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:100%;"></textarea>';
 			} else {
-				tag += '<div style="border-top:1px solid #ddd;">';
-				tag += '<p style="margin: 20px 10px ">' + reviewanswer + '<p>';
-				tag += '</div>';
+				tag += '<p>' + reviewanswer + '<p>';
 			}
 		tag += '<div id="popupBtnContainer">';
 			if( reviewanswer == '미답변'){
-				tag += '<input class="normalBtn" type="submit" value="등록" >';
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="answerBtn" type="submit" value="등록" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
+				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			} else {
-				tag += '<input class="normalBtn" type="button" onclick="answerEdit(\''+ reviewnum+'\',\''+productname+'\',\''+reviewscore+'\',\''+reviewcontent+'\',\''+userid+'\',\''+reviewwritedate+'\',\''+reviewanswer+'\',\''+reviewimg +'\')" value="수정" >';
-				tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
-				tag += '<input class="normalBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
+				tag += '<input class="answerBtn" type="button" onclick="answerEdit(\''+ reviewnum+'\',\''+productname+'\',\''+reviewscore+'\',\''+reviewcontent+'\',\''+userid+'\',\''+reviewwritedate+'\',\''+reviewanswer+'\',\''+reviewimg +'\')" value="수정" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
+				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			}
 			tag += '</div>';
 		tag += '</div>';
@@ -460,41 +472,31 @@ function popupOpen(data){
 
 //팝업창 수정 만들기! 
 function answerEdit(reviewnum, productname, reviewscore, reviewcontent, userid, reviewwritedate, reviewanswer, reviewimg){
-	//$('body').css('overflow','auto');
-	//$('#modal').css('display','none');
-	//$('#popup').css('display','none');
-	
-	if(reviewanswer == '답변 완료'){
-		reviewanswer = $(data).parent().next().next().next().children('input').val();
-	}
-	console.log(reviewanswer);
 	
 	let tag = '<div class="wrapContainer_Edit1">';
 		tag += '<form method="post" action="javascript:reviewEdit()" id="popupFrm">';
 		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-		tag += '<div class="wrapTitle" style="text-align: center; font-weight: bold">고객 리뷰</div>';
+		tag += '<div class="wrapTitle" style="text-align: center; border:none;">리뷰 & 답변</div>';
 		tag += '<ul id="reviewManagement">';
-		tag += '<li><b>구매상품</b> <div>' + productname + '</div></li>';
+		tag += '<li><b>상품명</b> <div>' + productname + '</div></li>';
 		tag += '<li><input type="hidden" name="userid" value="'+ userid+'"><b>작성자</b> ' + userid + '</li>';
 		tag += '<li><b>작성일</b> ' + reviewwritedate + '</li>';
 		tag += '<li><b>평점</b><div> ' + reviewscore + '</div></li>';
 		tag += '</ul>';	
-		tag += '<div>';
-		tag += '<br />';
-		tag += '<b>&nbsp;&nbsp;&nbsp;리뷰 내용</b><br />';
-		tag += '<div id="reviewContent">';
-				if( reviewimg != ''){
-					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" id="repMenu_img" />';
-				}
+		tag += '<div class="popupContentTitle">리뷰 내용</div>';
+		tag += '<div id="reviewContent" style="height:auto">';
 		tag += '<p>' + reviewcontent + '</p>';
-		tag += '</div>';
+				if( reviewimg != ''){
+					tag += '<img src="<%=request.getContextPath() %>/resources/img/'+reviewimg+'" style="width:140px;height:140px;" id="repMenu_img" />';
+				}
 		tag += '</div>';
 		tag += '<div id="reviewAnswer">';
-			tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:670px; margin:0 15px;">'+reviewanswer+'</textarea>';
-		tag += '<div id="popupBtnContainer">';
-			tag += '<input class="normalBtn" type="submit" value="수정" >';
-			tag += '<input class="normalBtn" type="button" onclick="popupClose()" value="닫기">';
-		tag += '</div>';
+		tag += '<div class="popupContentTitle">답글 내용</div>';
+			tag += '<textarea id="reviewanswer" name="reviewanswer" rows="5" cols="50" style="width:100%;">'+reviewanswer+'</textarea>';
+			tag += '<div id="popupBtnContainer">';
+				tag += '<input class="answerBtn" type="submit" value="등록" >';
+				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
+			tag += '</div>';
 		tag += '</div>';
 
 		tag += '</form>';
@@ -521,11 +523,11 @@ function popupClose(){
 // 신고 창 띄우기
 function popupreport(reviewnum, userid){
 	
-	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto;">';
+	let tag = '<div class="wrapContainer_Edit1" style="width:300px; height:auto; padding:0; border: 1px solid #ddd">';
 		tag += '<form method="post" action="javascript:reportUpdate()" id="reportFrm">';
 		tag += '<input type="hidden" name="userid" value="' + userid + '" >';
 		tag += '<input type="hidden" name="reviewnum" value="' + reviewnum + '">';
-		tag += '<div class="wrapTitle">신고하기</div>';
+		tag += '<div class="wrapTitle" style="border:none;">신고하기</div>';
 		tag += '<div id="reportReason">';
 		tag += '<p>신고사유</p>';
 		tag += '<select name="reportReason">';
@@ -536,11 +538,11 @@ function popupreport(reviewnum, userid){
 		tag += '</select>';
 		tag += '</div>';
 		tag += '<div>';
-		tag += '<textarea rows="10" cols="40" id="reportContent" name="reportContent"></textarea>';
+		tag += '<textarea id="reportContent" name="reportContent"></textarea>';
 		tag += '</div>';
 		tag += '<div id="reportBtn">';
-		tag += '<input type="submit" class="normalBtn" value="보내기" />';
-		tag += '<input type="button" class="normalBtn" value="취소" onclick="reportClose()"/>';
+		tag += '<input type="submit" class="normalBtn" style="background-color:#0080ff" value="보내기" />';
+		tag += '<input type="button" class="normalBtn" style="background-color:#ddd;" value="취소" onclick="reportClose()"/>';
 		tag += '</div>';
 		tag += '</form>';
 		tag += '</div>';
@@ -740,25 +742,39 @@ function reportUpdate(){
 		<div class='seller_title'>리뷰관리</div>
 		<div class="wrap">
 			<!-- 리뷰 보기 -->
-			<div class="wrapTitle">리뷰보기</div>
-			<div class="wrapContainer">
+			<div class="wrapTitle" style="display:flex;border:none;">
+				<div style="flex-basis:48%; margin-right:23px; border-bottom: 1px solid #bbb">리뷰내역</div>
+				<div style="flex-basis:50%; border-bottom: 1px solid #bbb">카테고리 & 조회</div>
+			</div>
+			<div class="wrapContainer" style="display:flex;">
 
 				<ul id="reviewInfo">
-					<li style="font-weight: bold;">새 리뷰</li>
-					<li>${resultData.newReview }건</li>
-					<li style="font-weight: bold;">미답변</li>
-					<li>${resultData.nullReview }건</li>
-					<li style="font-weight: bold;">사용자 총 평점</li>
-					<li>${resultData.totalScore }/5</li>
-					<li style="font-weight: bold;">전체 리뷰 수</li>
-					<li>${resultData.totalReview }건</li>
+					<li>
+						<img src="<%=request.getContextPath()%>/resources/img/newimg.png">
+						<p>새 리뷰</p>
+						<p>${resultData.newReview } 건</p>	
+					</li>
+					
+					<li>
+						<img src="<%=request.getContextPath()%>/resources/img/review.png">
+						<p>미답변</p>
+						<p>${resultData.nullReview } 건</p>
+					</li>
+					
+					<li>
+						<img src="<%=request.getContextPath()%>/resources/img/goodimg.png">
+						<p>총 평점</p>
+						<p>${resultData.totalScore } / 5 점</p>
+					</li>
+					
+					<li>
+						<img src="<%=request.getContextPath()%>/resources/img/checklistimg.png">
+						<p>전체 리뷰 수</p>
+						<p>${resultData.totalReview } 건</p>
+					</li>
+					
 				</ul>
-			</div>
-			<!-- 리뷰 보기 끝 -->
-
-			<!-- 리뷰 검색 -->
-			<div class="wrapTitle">리뷰 검색</div>
-			<div class="wrapContainer">
+				
 				<div id="categoryList">
 					<div id="categoryListMiddle">
 						<!-- 대분류 카테고리!!!! -->
@@ -799,62 +815,81 @@ function reportUpdate(){
 							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
 						</div>
 						<div>
-							<input type="text" id="searchTxt" name="searchTxt" placeholder="리뷰 내용"/>
+							<input type="text" id="searchTxt" name="searchTxt" size="13em" placeholder="작성자"/>
 							<button id="searchingBtn" style='margin:0 10px'>조회</button>
 						</div>
 					</div>
 					
 
 				</div>
-				<!-- categoryList 끝 -->
 			</div>
-			<!-- 리뷰 검색 끝 -->
+			<!-- 리뷰 보기 끝 -->
 
 			<!-- 리뷰 출력 -->
-
-			<div id="sortContainer">
-				<select id="sortSelect" onchange="javascript:sortChange(this)">
-					<option selected="selected" value="최신순">최신순</option>
-					<option value="평점높은순">평점높은순</option>
-					<option value="평점낮은순">평점낮은순</option>
-				</select>
+			<div class="wrapTitle" style="display:flex;">
+				리뷰보기
+				<div id="sortContainer">
+					<select id="sortSelect" onchange="javascript:sortChange(this)">
+						<option selected="selected" value="최신순">최신순</option>
+						<option value="평점높은순">평점높은순</option>
+						<option value="평점낮은순">평점낮은순</option>
+					</select>
+				</div>
 			</div>
+			
 
-			<ul id="reviewList">
-				<li>상품명</li>
-				<li>평점</li>
-				<li>포토</li>
-				<li>리뷰 내용</li>
-				<li>작성자</li>
-				<li>작성일</li>
-				<li>답변 여부</li>
+			<table>
+				<thead>
+					<tr>
+						<th>평점</th>
+						<th>상품명/리뷰내용</th>
+						<th>작성자/작성일</th>
+						<th>답변여부</th>
+					</tr>
+				</thead>
+				<tbody>
 				<c:if test="${reviewList != null }">
 					<c:forEach var="result" items="${reviewList}" varStatus="i">
-						<li>${result.productname }</li>
-						<li>${result.reviewscore }</li>
-						<c:if test="${result.reviewimg != null }">
-							<li style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )><input type="hidden" value="${result.reviewimg }"></li>
-						</c:if>
-						<c:if test="${result.reviewimg == null }">
-							<li><input type="hidden" value="${result.reviewimg }">-</li>
-						</c:if>
-						<li>
-							<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
-								<input type="hidden" name="reviewnum" value="${result.reviewnum }" />
-									${result.reviewcontent }
-							</a>
-							</li>
-						<li>${result.userid }</li>
-						<li>${result.reviewwritedate }</li>
-						<c:if test="${result.reviewanswer != null }">
-							<li><input type="hidden" value="${result.reviewanswer }" >답변 완료</li>
-						</c:if>
-						<c:if test="${result.reviewanswer == null }">
-							<li>미답변</li>
-						</c:if>
+						<tr>
+							<td>
+								<c:forEach var="star" begin="1" end="${result.reviewscore}">★</c:forEach>
+							</td>
+							<td>								
+								<c:if test="${result.reviewimg != null }">
+									<div style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )><input type="hidden" value="${result.reviewimg }"></div>
+								</c:if>
+								<c:if test="${result.reviewimg == null }">
+									<div><input type="hidden" value="${result.reviewimg }"></div>
+								</c:if>
+								<div>
+									<div>${result.productname}</div>
+									<div>
+										<a href="javascript:void(0)" onclick="javascript:popupOpen(this)">
+											<input type="hidden" name="reviewnum" value="${result.reviewnum }" />
+											${result.reviewcontent}
+										</a>
+									</div>
+									
+								</div>
+							</td>
+							<td>
+								<div>${result.userid }</div><br>
+								<div>${result.reviewwritedate }</div>
+							</td>
+							<td>
+								<c:if test="${result.reviewanswer != null }">
+									<input type="hidden" value="${result.reviewanswer }" >
+									<p>답변완료</p>
+								</c:if>
+								<c:if test="${result.reviewanswer == null }">
+									<p style="color:red;">미답변</p>
+								</c:if>
+							</td>
+						</tr>
 					</c:forEach>
 				</c:if>
-			</ul>
+				</tbody>
+			</table>
 			<!-- 리뷰 출력 끝 -->
 			<!--------------페이징 표시-------------------->
 			
