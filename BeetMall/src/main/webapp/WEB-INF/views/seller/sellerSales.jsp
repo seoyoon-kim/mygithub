@@ -1247,7 +1247,7 @@ function changeViewListNum(num){
 					<div id="performance">
 						<ul>
 							<li>
-								<img src="<%=request.getContextPath()%>/resources/img/newimg.png">
+								<img src="<%=request.getContextPath()%>/resources/img/new.png">
 								<br><br><p style="font-weight: bold;">오늘의 매출건수</p>
 								<p>
  									<c:if test="${todayNum !=null }">
@@ -1259,7 +1259,7 @@ function changeViewListNum(num){
 								</p>
 							</li>
 							<li>
-								<img src="<%=request.getContextPath()%>/resources/img/money.png">
+								<img src="<%=request.getContextPath()%>/resources/img/dash.png">
 								<br><br><p style="font-weight: bold;">오늘의 매출금액</p>
 								<p>
 									<c:if test="${todayMoney !=null }">

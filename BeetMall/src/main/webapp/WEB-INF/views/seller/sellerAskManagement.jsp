@@ -730,19 +730,19 @@ function reportUpdate(){
 
 				<ul id="askInfo">
 					<li>
-						<img src="<%=request.getContextPath()%>/resources/img/newimg.png">
+						<img src="<%=request.getContextPath()%>/resources/img/new.png">
 						<p>새 문의</p>
 						<p>${resultData.newAsk } 건</p>	
 					</li>
 					
 					<li>
-						<img src="<%=request.getContextPath()%>/resources/img/review.png">
+						<img src="<%=request.getContextPath()%>/resources/img/question.png">
 						<p>미답변</p>
 						<p>${resultData.nullAsk } 건</p>
 					</li>
 					
 					<li>
-						<img src="<%=request.getContextPath()%>/resources/img/checklistimg.png">
+						<img src="<%=request.getContextPath()%>/resources/img/review.png">
 						<p>전체 문의 수</p>
 						<p>${resultData.totalAsk } 건</p>
 					</li>

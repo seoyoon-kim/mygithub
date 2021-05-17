@@ -20,7 +20,7 @@ function reqularExpression(num){
 				<div>주문/배송</div>
 				<div>
 					<div id="orderContainer">
-						<img src="<%=request.getContextPath()%>/img/y_new.png">
+						<img src="<%=request.getContextPath()%>/resources/img/new.png">
 						<ul>
 							<c:if test="${newOrder != null && newOrder != ''}">
 								<li>신규주문 &nbsp;<p>${newOrder }</p> 건</li>
@@ -31,7 +31,7 @@ function reqularExpression(num){
 						</ul>
 					</div>
 					<div id="deliveryContainer">
-						<img src="<%=request.getContextPath()%>/img/y_truck.png">
+						<img src="<%=request.getContextPath()%>/resources/img/delivery.png">
 						<ul>
 							<c:if test="${ing != null && ing != '' }">
 								<li>배송중 &nbsp;<p>${ing}</p> 건</li>
@@ -54,7 +54,7 @@ function reqularExpression(num){
 				<div>클레임/매출</div>
 				<div>
 					<div id="claimContainer">
-						<img src="<%=request.getContextPath()%>/img/y_undo.png">					
+						<img src="<%=request.getContextPath()%>/resources/img/refund.png">					
 						<ul>
 							<c:if test="${cancel != null && ing != '' }">
 								<li>취소요청 &nbsp;<p>${cancel}</p> 건</li>
@@ -72,7 +72,7 @@ function reqularExpression(num){
 						</ul>
 					</div>
 					<div id="salesContainer">
-						<img src="<%=request.getContextPath()%>/img/y_won.png">
+						<img src="<%=request.getContextPath()%>/resources/img/dash.png">
 						<ul>
 							<li>매출 &nbsp;<p>${todayMoney}</p> 원</li>
 						</ul>
@@ -125,7 +125,7 @@ function reqularExpression(num){
 			<div class="secondContainer" id="review">
 				<div>미답변문의/리뷰</div>
 				<div>
-					<img src="<%=request.getContextPath()%>/img/y_question.png">
+					<img src="<%=request.getContextPath()%>/resources/img/question.png">
 					<ul>
 						<c:if test="${qboard !=null}">
 							<li>미답변 문의 &nbsp;<p>${qboard.qanswer}</p> 건</li>
