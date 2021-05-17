@@ -169,10 +169,9 @@ $(function(){
 		    <li><a href="sellerInfoEditA">판매자정보수정</a></li> 
 		    <li><a href="noticeBoardWrite">공지 작성</a></li> 
 		    <li><a href="csAnswerA">문의 답변 작성</a></li> 
-		    <li><a href="csQOpen">상품문의 열람, 답변</a></li> 
+		    <li><a href="csQOpen">상품문의 보기</a></li> 
 		    <li><a href="csFAQWrite">FAQ작성</a></li>
-		    <li><a href="recipeWriteA">레시피 작성</a></li>  
-		    <li><a href="">상세판매내역(아직)</a></li>  
+		    <li><a href="recipeWriteA">레시피 작성</a></li>   
 		  </ul>
 </div> 
 </div>

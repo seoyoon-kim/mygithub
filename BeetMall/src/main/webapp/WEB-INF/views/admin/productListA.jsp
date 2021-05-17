@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <style> 
 	#topBar h5{  
-		padding-left:150px;
+		padding-left:120px;
 	}
 	 #container li{  
 		 float:left; 
@@ -110,7 +110,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="customerListA">상품 목록</a></strong></h5></li> 
+				<li><h5><strong><a href="productListA">상품 목록</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 

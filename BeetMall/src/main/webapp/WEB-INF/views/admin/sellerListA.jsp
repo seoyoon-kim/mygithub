@@ -11,7 +11,7 @@
 	}
 	/*남색 바*/ 
 	#topBar h5{
-		width:110px !important;
+		 padding-left:130px;
 	}
 	#topBar li:nth-of-type(1){   
 		position:relative;
@@ -83,7 +83,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/sellerListA">회원관리</a></strong></h5></li> 
+				<li><h5><strong><a href="sellerListA">회원관리</a></strong></h5></li> 
 					<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 

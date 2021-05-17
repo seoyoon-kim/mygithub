@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ include file="/inc/leftBar.jspf" %> 
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-  
+<%@ include file="/inc/top.jspf" %>
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -10,10 +8,7 @@
 <style>
 	#mypageMenubar{
 		display:block;
-	}
-	
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; }
-
+	} 
 	a:hover, a:active, a:visited, a:link {
    		color: black;
     }
@@ -42,9 +37,8 @@
 	  	left:-25px;
 	  	font-size:20px;
   	}
-  	#topBar>p{
-  		padding-left:60px; 
-  		color:white;
+  	#topBar>a{
+  		padding-left:357px;
   	}
   	input{
   		border:none;
@@ -53,7 +47,7 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:180px;
+	   	top:-90px;
 	   	left:210px;
 	   	width:1351px;
 	   	height:1100px;
@@ -66,7 +60,7 @@
 	  background-color:#F8F7F7;
 	} 
 	table{
-		width:770px;	
+		width:1080px;	
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
@@ -122,10 +116,8 @@
 	}
 	#bottommm{ 
 		display:flex;
-		margin:950px 0 40px 0;
-		position:relative;
-		left:-650px;
-		width:1000px;
+		margin:950px 0 40px 0; 
+		left:-800px; 
 		top:50px;
 	}
 	#bottommm>input{
@@ -147,13 +139,13 @@
 		color:black;
 	}
 </style>
-	<div id="topBarContainer">
+<div id="topBarContainer">
 	<div id="topBar">
-		<p><strong>자주 묻는 질문 등록</strong></p>   
+		<a href="csFAQWrite"><strong>자주 묻는 질문 등록</strong></a>   
 	</div>
-	</div>
+</div>
 <div id="body1">
-<%@ include file="/inc/top.jspf" %>
+<%@ include file="/inc/leftBar.jspf" %>    
 <div class="container">
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
@@ -204,7 +196,7 @@
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
-							2021/02/23
+							21/02/23
 						</div>
 					</td>
 				</tr> 
@@ -220,7 +212,7 @@
 		</table>
 			<div id="bottommm">
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시 쓰기" class="btn write_btn" id="write_btn"/>	
+				<input type="reset" value="다시 쓰기" class="btn write_btn" id="reset_btn"/>	
 				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
 			</div>
 		</form>
@@ -231,7 +223,7 @@
 $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
-		  focus: true,
+		  focus: false,
 		  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0],this);

@@ -25,7 +25,7 @@
 		width:12%;
 	}   
 	#topBar h5{  
-		padding-left:140px;
+		padding-left:120px;
 	}
 	article{
 		width:1080px;

@@ -1,27 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/inc/leftBar.jspf" %>  
- 
+<%@ include file="/inc/top.jspf" %>
   
- 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
- <!-- css파일 -->
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+ <!-- css파일 --> 
 <link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
 <style> 
 	#topBar h5{  
-		padding-left:150px;
+		padding-left:190px;
+		width:600px !important;
 	}
 	#contentBox {
 		height:4400px;
+		margin-top:70px !important;
 	}
 	/*컨테이너 공통*/
 	#randomBox, #bannerContainer, #todayContainer{ 
 		position:relative;
-	 	width:1000px;
+	 	width:1000px !important;
 	 	height:300px;     
 	 }  
 	 .addBtn{
@@ -52,22 +51,29 @@
 	.page_nation .nnext {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
-	}
-	
+	} 
 	   .bottommm>input{
 	  	background-color:#eee;
 	  	height:30px;
 	  	border:1px solid lightgray;
-	  	width:100px; 
+	  	width:100px !important; 
 	  }
 	/*=================css 파일이 안먹어서 임시로 쓰는 곳. css 중복으로 먹으면 지우기====*/
- 	  
+ 	   
+	#randomBox button{
+		margin:0 10px !important;  
+	 	width:70px; 
+	}
+	/*컨테이너 내 헤더*/
+	 #randomTitle, #bannerTitle, #todayHeader, #cateHeader, #popHeader{
+	 	padding-top:20px;
+	 } 
 </style>
 <script>
 $(document).ready(function(){ 
 	/*이미지 파일명 추출*/
 	  var fileTarget = $('#file'); 
-	  fileTarget.on('change', function(){ // 값이 변경되면
+	  fileTarget.on('change', function(){ 
 		  if(window.FileReader){ //modern browser
 			  var filename = $(this)[0].files[0].name; 
 		  } else { // old IE 
@@ -82,31 +88,17 @@ $(document).ready(function(){
 	$(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 300,                  
-		  focus: true,
-		  callbacks: {	//이미지를 첨부하는 부분
-				onImageUpload : function(files) {
-					uploadSummernoteImageFile(files[0],this);
-				},
-				onPaste: function (e) {
-					var clipboardData = e.originalEvent.clipboardData;
-					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-						var item = clipboardData.items[0];
-						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-							e.preventDefault();
-						}
-					}
-				}
-			}
+		  focus: false,  
 	  });
 	});
 </script>  
 	<div id="topBarContainer">
 		<div id="topBar">			
-			<h5><strong>디자인 관리</strong></h5>			
+			<h5><strong><a href="boardDesignMng">디자인 관리</a></strong></h5>			
 		</div>  
-		</div>
+	</div>
 <div id="body1">
-<%@ include file="/inc/top.jspf" %>
+<%@ include file="/inc/leftBar.jspf" %>  
 <div id="container">
 		<div id="contentBox">  
 		<!----------------------- 랜덤룰렛 파트 ------------------>
@@ -419,7 +411,7 @@ $(document).ready(function(){
 				 	<div id="useInfoContainer">
 						<div id="useInfoHeader">이용안내 관리</div>
 					 	<div id="useInfoBox">	
-				 			<textarea name="summerContent" class="summernote" ></textarea>				 			 
+				 			<textarea name="summernote" class="summernote" ></textarea>				 			 
 				 		</div>
 				 		<div class="bottommm">
 				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
@@ -431,7 +423,7 @@ $(document).ready(function(){
 				 	<div id="infoHandleContainer">
 						<div id="infoHandleHeader">개인정보 처리방침 관리</div>
 					 	<div id="infoHandleBox">	 
-				 			<textarea name="summerContent" class="summernote" ></textarea>	
+				 			<textarea name="summernote" class="summernote" ></textarea>	
 				 		</div>
 				 		<div class="bottommm">
 				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
@@ -443,7 +435,7 @@ $(document).ready(function(){
 				 	<div id="useTermsContainer">
 						<div id="useTermsHeader">사이트 이용약관 관리</div>
 					 	<div id="useTermsBox">	
-				 			<textarea name="summerContent" class="summernote" ></textarea>	
+				 			<textarea name="summernote" class="summernote" ></textarea>	
 				 		</div>
 				 		<div class="bottommm">
 				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
@@ -455,7 +447,7 @@ $(document).ready(function(){
 				 	<div id="financialContainer">
 						<div id="financialHeader">전자금융거래 이용약관 관리</div>
 					 	<div id="financialBox">	
-				 			<textarea name="summerContent" class="summernote" ></textarea>	
+				 			<textarea name="summernote" class="summernote" ></textarea>	
 				 		</div>
 				 		<div class="bottommm">
 				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>

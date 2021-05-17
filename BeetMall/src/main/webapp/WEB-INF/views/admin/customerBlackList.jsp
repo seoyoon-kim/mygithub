@@ -87,7 +87,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/customerBlackList">블랙리스트</a></strong></h5></li> 
+				<li><h5><strong><a href="customerBlackList">블랙리스트</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 

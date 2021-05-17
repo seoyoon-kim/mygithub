@@ -9,8 +9,8 @@
 		margin-top:80px !important;		
 	}  
 	#topBar h5{  
-		padding-left:150px; 
-	} 
+		padding-left:120px;
+	}
 	input, textarea, select{
 		border:1px solid lightgray; 
 		border-radius: 3px;
@@ -621,7 +621,7 @@ $(document).ready(function(){
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="productDetailA">상품 수정</a></strong></h5></li>  
+				<li><h5><strong><a href="productEditA">상품 수정</a></strong></h5></li>  
 			</ul> 
 		</div> 
 		</div>

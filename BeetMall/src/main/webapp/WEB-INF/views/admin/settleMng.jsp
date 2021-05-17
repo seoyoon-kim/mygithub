@@ -6,7 +6,7 @@
 	}
 	/*맨 위 top Bar*/ 
 	#topBar h5{  
-		padding-left:140px;
+		padding-left:120px;
 	}
 	#topBar input::placeholder {
 	  color: lightgray; 
@@ -18,7 +18,7 @@
 		width:19%; 
 	}   
 	#sortBox {
-		margin-left:50px;
+		margin:70px 0 0 50px;
 	} 
 	#sortBox li{
 		margin-top:30px;
@@ -40,6 +40,9 @@
 	#container li{ 
 		list-style-type:none;
 		float:left;
+	}
+	#contentBox{
+		top:-20px;
 	}  
 	#contentBox li:nth-of-type(8){
 		width:14%;
@@ -48,8 +51,7 @@
 		height:28px;
 	} 
 	#contentList>ul{
-		float:left;
-		margin-bottom:0px;
+		float:left; 
 	}
 	#contentBox li{
 		width:11%;
@@ -159,7 +161,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/settleMng">정산 관리</a></strong></h5></li> 
+				<li><h5><strong><a href="settleMng">정산 관리</a></strong></h5></li> 
 			</ul> 
 		</div>  
 		</div>

@@ -6,7 +6,7 @@
 		 float:left; 
 	 }   
 	#topBar h5{ 
-		padding-left:180px; 
+		padding-left:170px; 
 	}
 	#contentBox li:nth-of-type(6n-5){ 
 		width:0%; 
@@ -58,21 +58,31 @@
 		padding:2px 7px;
 	}  
 	#sortBox {
-		margin-left:800px;
-	}
-	#sortBox li{
-		margin-top:30px;
-	}
-	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(2){
-		width:108px;
-	}
-	#sortBox li:nth-of-type(3){
-		width:38px;
+		margin: 110px 0 0 20px;
 	} 
-	.searchFrm{
-		margin-left:150px ! important;
+	#sortBox>ul{
+		width:1110px !important;
 	}
-	
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5), #sortBox li:nth-of-type(6) {
+		width: 10%;
+	}
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 16%;
+	}
+	#sortBox li:nth-of-type(3) {
+		width:10%;
+		margin-right:44px;
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:294px;
+	} 
+	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+		width: 3.5%;
+	}
+	#fromTo{
+		margin-left:14px;
+	} 
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -101,18 +111,26 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="customerListA">자주 묻는 질문</a></strong></h5></li> 
-				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li> 
+				<li><h5><strong><a href="csFAQ">자주 묻는 질문</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="editBtn">수정</button></li>
+				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li> 
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
 		</div>  
-		</div>
+	</div>
 <div id="body1">
 <%@ include file="/inc/leftBar.jspf" %>
 	<div id="container">
 		<div id="sortBox">
 			<ul>
+				<li>
+					<select name="searchDate">   
+						<option value="regDate">등록일</option>
+					</select>  
+				</li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>  
+				<li><input type="submit" value="검색" /></li>
 				<li><select name="sort" > 
 		   				<option value="구매자" selected>구매자</option>
 		   				<option value="판매자">판매자</option>  
@@ -246,9 +264,7 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate">  
-				<select name="searchKey">
+				 <select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
 	   				<option value="who">대상</option> 

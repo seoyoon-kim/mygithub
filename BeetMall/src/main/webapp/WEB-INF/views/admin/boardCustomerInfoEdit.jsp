@@ -4,7 +4,7 @@
 <style>
 	/*맨 위 top Bar*/
 	#topBar>h5{   
-    	padding-left: 300px;
+    	padding-left: 260px;
     	width: 600px !important; 
 	} 
 	#contentBox{
@@ -15,13 +15,16 @@
 		-webkit-box-shadow: 4px 6px 15px -7px #C4C4C4; 
 	}
 	/*회원정보 전체*/
+	#container{
+		top:-50px !important;
+	}
 	#infoBox, button, #infoTitle>p{
 		position:relative;
 	}
 	#infoBox{  
 		left:15px;
 		top:20px;
-		width:500px;
+		width:550px !important;
 		height:550px;
 		background-color:white;
 		border-radius:10px;
@@ -47,10 +50,7 @@
 	tr{
 		border-bottom:1px solid lightgray;
 	 	background-color:white;
-	}
-	#infoTitle>p{ 
-		top:-10px;
-	}
+	} 
 	 #info{
 	 	top:-383px;
 	 	left:-230px;
@@ -118,13 +118,10 @@
 	 	top:-550px !important;
 	 	left:555px;
 	 	height:320px;
-	 }
-	 #buyTitle{
-	 	padding-top:10px;
-	 }
+	 } 
 	 #buyBox{
 	 	position:relative;
-	 	top:-20px;
+	 	top:-40px;
 	 }
 	 #buyBox>div, #stopNum, #stopDays{
 	 	border:1px solid lightgray;
@@ -180,7 +177,7 @@
 	  }
 	   #reportsBox{
 	   	position:relative;
-	   	top:-30px;
+	   	top:-40px;
 	   }
 	  #stopNum, #stopDays{
 	  	display:flex;  
@@ -390,8 +387,9 @@
 		margin-right:7px;
 	}
 	.page_nation .next {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
+		background-image::url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
+		background-color:#f8f8f8 
 	}
 	.page_nation .nnext {  
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
@@ -401,7 +399,7 @@
 <%@ include file="/inc/top.jspf" %> 
 <div id="topBarContainer">
 	<div id="topBar">			
-		<h5><strong>일반회원 정보수정</strong></h5>			
+		<h5><strong><a href="boardCustomerInfoEdit">일반회원 정보수정</a></strong></h5>			
 	</div>  
 </div> 
 <div id="body1">

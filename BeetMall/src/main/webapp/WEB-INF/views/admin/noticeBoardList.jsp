@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <style> 
 	#topBar h5{  
-		padding-left:140px;
+		padding-left:120px;
 	}
 	 #container li{ 
 		 list-style-type:none; 
@@ -29,16 +29,36 @@
 		width:6%;
 	}     
 	#sortBox {
-		margin-left:770px;
+		margin: 80px 0 0 20px;
 	}
 	#sortBox li{
 		margin-top:30px;
 	}
-	#sortBox li:nth-of-type(1),#sortBox li:nth-of-type(2){
-		width:108px;
+	#sortBox>ul{
+		width:1110px !important;
 	}
-	#sortBox li:nth-of-type(3){
-		width:38px;
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5) {
+		width: 10%;
+	}
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 16%;
+	}
+	#sortBox li:nth-of-type(3) {
+		width:13%;
+		margin-right:11px;
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:120px;
+	} 
+	#sortBox li:nth-of-type(5),#sortBox li:nth-of-type(6)  {
+		width:108px;
+	} 
+	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8) {
+		width:4%;
+	} 
+	#fromTo{
+		margin-left:14px;
 	}
 	#content input, textarea, select, #noticeSearchFrm input{
 		border:1px solid lightgray; 
@@ -49,10 +69,7 @@
 	}
 	#content select{
 		height:28px;
-	} 
-	.searchFrm{
-		margin-left:150px ! important;
-	}
+	}  
 	/*버튼*/
 	#btns{ 
 		top:-115px; 
@@ -96,7 +113,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="customerListA">공지 목록</a></strong></h5></li> 
+				<li><h5><strong><a href="noticeBoardList">공지 목록</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
@@ -107,6 +124,14 @@
 	<div id="container">
 		<div id="sortBox">
 			<ul>
+				<li>
+					<select name="searchDate">   
+						<option value="regDate">등록일</option>
+					</select>  
+				</li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>		
+				<li><input type="submit" value="검색" /></li>		
 				<li><select name="sort" > 
 		   				<option value="전체" selected>전체</option>
 		   				<option value="판매자">판매자</option>
@@ -219,39 +244,7 @@
 				<li>판매자</li>
 				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
 				<li>2021/05/23</li> 
-			</ul> 
-		 <ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>판매자</li>
-				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
-				<li>2021/05/23</li> 
-			</ul> 
-		 <ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>판매자</li>
-				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
-				<li>2021/05/23</li> 
-			</ul> 
-		 <ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>판매자</li>
-				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
-				<li>2021/05/23</li> 
-			</ul> 
-		 <ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>판매자</li>
-				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
-				<li>2021/05/23</li> 
-			</ul> 
-		 
-
-
- 
+			</ul>  
 		<!--  
 		<c:forEach var="data" items="${list}">
 			<ul class="contentList">
@@ -283,8 +276,6 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate">  
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 

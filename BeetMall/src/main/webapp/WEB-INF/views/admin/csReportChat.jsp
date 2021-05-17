@@ -26,35 +26,41 @@
 		margin-left:40px;
 		height:29px;
 		border-radius:3px;
-	}
-	.searchFrm{
-		margin-left:150px ! important;
-	}
+	} 
 	#from{ 
-		margin-right:20px;
+		margin-right:14px;
 	}
 	#todate{ 
 		position:relative;
 		left:-15px;
 	}
-	#fromTo{
-		color:black;
-		position:relative;  
-		left:-15px;
-		margin:0 10px;
-	}
 	#sortBox {
-		margin-left:900px;
+		margin: 80px 0 0 20px;
 	}
 	#sortBox li{
-		margin:30px 0 5px 0;
+		margin-top:30px;
 	}
-	#sortBox li:nth-of-type(1){
-		width:108px;
+	#sortBox>ul{
+		width:1110px !important; 
 	}
-	#sortBox li:nth-of-type(2), #sortBox li:nth-of-type(3){
-		width:38px;
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5)  {
+		width: 10%;
 	}
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 17%;
+		margin-right:4px;
+	}
+	#sortBox li:nth-of-type(3) {
+		width:10%;
+		margin-right: 29px; 
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:333px;
+	}  
+	#sortBox li:nth-of-type(6),#sortBox li:nth-of-type(7){
+		width: 3.5%;
+	} 
 	
 	/*내용 전체 정렬*/
 	#title{
@@ -86,10 +92,10 @@
 	#title li:nth-of-type(8){
 		padding-bottom:10px;
 	}
-	#container li:nth-of-type(2):not(#topBar li:nth-of-type(2)){
+	#contentBox li:nth-of-type(2){
 		margin-left:20px;
 	} 
-	#container li:nth-of-type(5):not(#topBar li:nth-of-type(5)){
+	#contentBox li:nth-of-type(5){
 		width:11%;
 	} 
 	 
@@ -133,6 +139,7 @@
 		border:1px solid gray;
 		width:500px;
 		margin:500px 0 0 450px;
+		z-index:1;
 	}
 	#modalHeader{
 		background-color:lightgray;
@@ -190,9 +197,9 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/reportListA">신고 채팅 관리</a></strong></h5></li> 
+				<li><h5><strong><a href="csReportChat">신고 채팅 관리</a></strong></h5></li> 
 					<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
-				<li><button class="success" value="del" name="del" id="edit">정지</button></li> 
+				<li><button class="success" value="del" name="del" id="delBtn">정지</button></li> 
 			</ul> 
 		</div>  
 		</div>
@@ -201,6 +208,14 @@
 	<div id="container">
 		<div id="sortBox">
 			<ul>
+				<li>
+					<select name="searchDate">   
+						<option value="reportDate">신고일</option> 
+					</select>  
+				</li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>		
+				<li><input type="submit" value="검색" /></li>		
 				<li><select name="sort"> 
 						<option value="채팅번호" selected>채팅번호</option>
 		   				<option value="주문번호">주문번호</option>
@@ -279,9 +294,7 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate"> 
-			 	<select name="searchKey">
+				 <select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
 	   				<option value="who">대상</option> 

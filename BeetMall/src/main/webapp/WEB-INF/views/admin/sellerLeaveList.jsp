@@ -11,6 +11,9 @@
 		margin-left:10px;
 	}
 	/*남색 바*/  
+	#topBar h5{
+		padding-left:170px;
+	}
 	#topBar li:nth-of-type(1){   
 		position:relative;
 		left:-8px;
@@ -86,7 +89,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a hef="/sellerLeaveList">탈퇴회원관리</a></strong></h5></li> 
+				<li><h5><strong><a href="sellerLeaveList">탈퇴회원관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 

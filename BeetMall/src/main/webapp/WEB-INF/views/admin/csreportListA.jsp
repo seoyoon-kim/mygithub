@@ -3,7 +3,7 @@
 <style> 
 	/*맨 위 top Bar*/
 	#topBar h5{  
-		padding-left:140px;
+		padding-left:100px;
 	}
 	#topBar li:nth-of-type(1){
 	 	margin-left:10px;
@@ -24,31 +24,39 @@
 		border-radius:3px;
 	}
 	#from{ 
-		margin-right:20px;
+		margin-right:14px;
 	}
 	#todate{ 
 		position:relative;
 		left:-15px;
 	}
-	#fromTo{
-		color:black;
-		position:relative;  
-		left:-15px;
-		margin:0 10px;
-	}
 	#sortBox {
-		margin-left:800px;
+		margin: 80px 0 0 20px;
 	}
 	#sortBox li{
 		margin-top:30px;
 	}
-	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(2){
-		width:108px;
+	#sortBox>ul{
+		width:1110px !important; 
 	}
-	#sortBox li:nth-of-type(3){
-		width:38px;
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5),#sortBox li:nth-of-type(6)  {
+		width: 10%;
 	}
-	
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 17%;
+		margin-right:4px;
+	}
+	#sortBox li:nth-of-type(3) {
+		width:10%;
+		margin-right: 29px; 
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:221px;
+	}  
+	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+		width: 3.5%;
+	} 
 	/*내용 전체 정렬*/
 	#topBar li:nth-of-type(7){
 		position:relative; left:-80px;
@@ -68,7 +76,7 @@
 	#title>ul,.contentList{
 		position:relative; left:-20px;
 	}
-	#container li:nth-of-type(2):not(#topBar li:nth-of-type(2)){
+	#contentBox li:nth-of-type(2){
 		margin-left:20px;
 	} 
 	 
@@ -104,15 +112,13 @@
 	.page_nation .nnext {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
-	}  
-	.searchFrm{
-		margin-left:150px ! important;
-	}
+	}   
 	/*모달*/
 	#modal{
 		border:1px solid gray;
 		width:500px;
-		margin:300px 0 0 450px;
+		margin:400px 0 0 450px;
+		z-index:1;
 	}
 	#modalHeader, #modalPastHeader{
 		background-color:lightgray;
@@ -173,9 +179,9 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="/reportListA">신고 관리</a></strong></h5></li> 
+				<li><h5><strong><a href="csreportListA">신고 관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
-				<li><button class="success" value="del" name="del" id="edit">정지</button></li> 
+				<li><button class="success" value="del" name="del" id="delBtn">정지</button></li> 
 			</ul> 
 		</div> 
 		</div>
@@ -184,6 +190,15 @@
 	<div id="container"> 
 		<div id="sortBox">
 			<ul>
+				<li>
+					<select name="searchDate">   
+						<option value="reportDate">신고일</option>
+						<option value="processDate">처리일</option>
+					</select>  
+				</li>
+				<li><input type="date" id="from"><div id="fromTo">~</div></li>
+				<li><input type="date" id="todate"></li>		
+				<li><input type="submit" value="검색" /></li>		
 				<li><select name="sort"   id="cateSort"> 
 		   				<option value="카테고리" selected>카테고리</option>
 		   				<option value="건과류">건과류</option>		   				
@@ -272,9 +287,7 @@
 		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<input type="date" id="from"><div id="fromTo">~</div>
-				<input type="date" id="todate"> 
-			 	<select name="searchKey">
+				 <select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
 	   				<option value="who">대상</option> 

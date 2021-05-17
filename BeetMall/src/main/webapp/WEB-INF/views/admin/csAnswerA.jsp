@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ include file="/inc/top.jspf" %>
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
+<%@ include file="/inc/top.jspf" %> 
  
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -9,14 +8,14 @@
  
 <style>
 	#topBar>h5{
-		padding-left: 350px;
-	    width: 500px !important;
+		padding-left: 270px;
+	    width: 600px !important;
     }
 	#mypageMenubar{
 		display:block;
 	}
 	
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; }
+	*{margin:0px; padding:0px; list-style-type :none;}
 
 	a:hover, a:active, a:visited, a:link {
    		color: black;
@@ -57,7 +56,7 @@
    /*표*/ 
    form{
 	   	position:absolute;
-	   	top:70px;
+	   	top:-190px;
 	   	left:180px;
 	   	width:1351px;
    }
@@ -69,7 +68,7 @@
 	  background-color:#F8F7F7;
 	} 
 	table{
-		width:100%;	
+		width:1080px;	
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
@@ -124,12 +123,11 @@
 	.td{
 		width:0;
 	}
-	#bottommm{
-		text-align:center;  
-		margin: 1550px 0 40px 0;
-		position:relative;
-		left:-670px;
+	#bottommm{ 
+		margin: 1550px 0 40px 0; 
+		left:-800px;
 		top:-70px;
+		display:flex;
 	}
 	#bottommm>input{
 		border:1px solid gray;
@@ -167,7 +165,7 @@
 </style>
 	<div id="topBarContainer">
 	<div id="topBar">
-		<h5><strong>문의 답변 작성</strong></h5>   
+		<h5><strong><a href="csAnswerA">문의 답변 작성</a></strong></h5>   
 	</div>
 	</div>
 <div id="body1">
@@ -259,8 +257,8 @@
 $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
-		  focus: true,
-		  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+		  focus: false,
+		  callbacks: {	//이미지를 첨부하는 부분
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0],this);
 				},

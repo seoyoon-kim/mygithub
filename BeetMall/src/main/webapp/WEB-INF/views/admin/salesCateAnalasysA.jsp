@@ -21,7 +21,7 @@
 </c:set>
 <style>
 	#topBar h5{  
-		padding-left:200px;
+		padding-left:190px;
 		width:450px !important;
 	}
 	#topBar li{
@@ -136,19 +136,11 @@
 	#excelContainer{
 		position:relative;
 		top:-70px;
+	} 
+	#salesCateTitle, #sales1Title, #sales2Title{
+		padding-top:0 !important;
 	}
-	/**/ 
-	  #sales2Title, #salesCateTitle{
-	  	text-align:center;
-	  	font-weight:bold;
-	  	font-size:16px;
-	  	letter-spacing:2px;
-	  	border-bottom:1px solid lightgray;
-		border-radius: 10px 10px 0px 0px;
-	  	background-color:#FAF9F6;
-	  	height:60px;
-	  }
-	  
+	
 </style>
 <script>
  
@@ -160,7 +152,7 @@
 				<li><h5><strong><a href="salesCateAnalasysA">카테고리별 매출 분석</a></strong></h5></li> 
 			</ul> 
 		</div>  
-		</div>
+	</div>
 <div id="body1">
 <%@ include file="/inc/leftBar.jspf" %>
 	<div id="container">

@@ -26,8 +26,7 @@
 	#body1{ 
 		width:1280px; 
 		font-family: 'Noto Sans KR', sans-serif;
-		 
-	}
+	 }
 	h2{
 		font-size:30px;
 	}
@@ -44,8 +43,11 @@
 		display:flex;
 	}
 	#topCenter{
-		width:1280px;
+		width:100%;
 		margin:0 auto;
+	}
+	#homeGo{
+		padding-left:10px;
 	}
 	#back{
 		background-color:#eee; 
@@ -64,7 +66,7 @@
 	} 
 	#fromDot{
 		position:relative; 
-		left:950px;
+		left:1150px;
 	}
 	#logout{ 
 		background-color:black; 

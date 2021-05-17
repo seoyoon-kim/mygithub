@@ -75,7 +75,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="customerLeaveListA">탈퇴회원관리</a></strong></h5></li> 
+				<li><h5><strong><a href="customerLeaveList">탈퇴회원관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
