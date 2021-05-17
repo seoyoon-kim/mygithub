@@ -732,8 +732,7 @@ color:black;
 
 </style>
 <script>
-
-	
+    var productnump=${pvo.productnum};
 	var pcount=1; //상품갯수
 	var ocount=1; //옵션갯수
 	var prtprice=0; //상품본래가격
@@ -855,9 +854,34 @@ color:black;
       //////////총계산 값 저장해놓기/////////////////////////////////
       
       $("#totalbuy").click(function(){
+    	  if(${logId==null}){
+    		  alert("로그인후 이용해 주세요")
+    	  }
     	
-    	  alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum);
+    	  alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/할인가격="+dprtprice);
       });
+      ///////////////////////////장바구니에 등록하기/////////////////////////////
+      ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격
+		$("#wishbtn").click(function() {
+			var data= "id=${logId}&productnum=${pvo.productnum}&prtprice="+prtprice+"&optnum="+optnum+"&pcount="+pcount+"&dprtprice="+dprtprice+"&optprice="+optprice+"&ocount="+ocount+"&submitprice="+submitprice;
+			var url="customWishInsert";
+			//alert(data);
+			$.ajax({
+				url:url,
+				data:data,
+				success:function(result){
+					console.log('장바구니 등록 성공');
+					
+				},error:function(e){
+					console.log(e.responseText);
+					console.log("장바구니 등록 실패");
+				}
+			})
+			
+		
+		
+		});
+    
       /////////////////////////리뷰보기/////////////////////////////////
     
     	$(".reviewViewbtn").click(function() {
@@ -886,8 +910,10 @@ color:black;
   				}
   			);
   		});
-      
-      
+ 
+    
+    
+    
 });
 </script>
 <body>
@@ -977,7 +1003,7 @@ color:black;
 				
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn"/>
-					<input type="button" value="장바구니 담기" class="btn"/>
+					<input type="button" value="장바구니 담기" class="btn" id="wishbtn"/>
 					<input type="button" value="구매하기"  class="btn" id="totalbuy"/>
 				</div>
 			</div>

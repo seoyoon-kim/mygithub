@@ -89,9 +89,25 @@ public class ProductViewVO {
         private int qopen;
         private String qanswer;
         private String qtitle;
+        //
+        private int wishnum;
+        private int wishoptionnum;
         
         
         
+        
+		public int getWishnum() {
+			return wishnum;
+		}
+		public void setWishnum(int wishnum) {
+			this.wishnum = wishnum;
+		}
+		public int getWishoptionnum() {
+			return wishoptionnum;
+		}
+		public void setWishoptionnum(int wishoptionnum) {
+			this.wishoptionnum = wishoptionnum;
+		}
 		public String getQtitle() {
 			return qtitle;
 		}

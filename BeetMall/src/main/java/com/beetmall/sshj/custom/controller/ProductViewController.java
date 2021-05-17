@@ -81,6 +81,27 @@ public class ProductViewController {
 		return rvov;
 	}
 	
+	//////////////상품장바구니 페이지////////////////
+	@RequestMapping("customWishInsert")
+	@ResponseBody
+	public String customWishInsert(HttpServletRequest req) {
+		String id=req.getParameter("id");
+		int productnum= Integer.parseInt(req.getParameter("productnum"));		
+		int optnum=Integer.parseInt(req.getParameter("optnum"));
+		int pcount=Integer.parseInt(req.getParameter("pcount"));
+		int ocount=Integer.parseInt(req.getParameter("ocount"));
+		//System.out.println(id);
+		//System.out.println(productnum);
+		//System.out.println(pcount);
+		//System.out.println(optnum);
+		//System.out.println(ocount); 다 나오는거 확인함//넣기만 하면됨 
+		//System.out.println(productViewService.customWishInsert());
+		System.out.println(productViewService.customWishInsert(id,productnum,optnum,pcount,ocount));
+		
+		return id+","+productnum+","+optnum+","+pcount+","+ocount;
+				
+	}
+	
 	
 	
 	

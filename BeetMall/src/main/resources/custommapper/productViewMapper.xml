@@ -52,6 +52,10 @@
      select qnum,userid,qcontent,to_char(qwritedate,'MM-DD HH:MI')qwritedate,qopen,qanswer,qtitle
      from userqboard where productnum=${param1}
     </select>
-   
+    
+    <!-- 장바구니 처넣기 -->
+    <insert id="customWishInsert" parameterType="com.beetmall.sshj.custom.vo.ProductViewVO" >
+    insert into wish(userid,productnum,optionnum,wishnum,wishoptionnum) VALUES(#{param1},${param2},${param4},${param3},${param5})
+    </insert>
     
   </mapper>

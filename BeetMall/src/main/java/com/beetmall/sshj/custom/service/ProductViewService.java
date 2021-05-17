@@ -26,4 +26,7 @@ public interface ProductViewService {
 	
 	/////////////문의글 구하기 
 	public List<ProductViewVO> ProductViewFaq(int productnum);
+	
+	///////////장바구니에 넣기/////////////
+	public ProductViewVO customWishInsert(String id,int productnum,int optnum,int pcount,int ocount);
 }
