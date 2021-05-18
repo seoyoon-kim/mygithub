@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.RecipeDAO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 @Service
@@ -118,6 +119,12 @@ public class RecipeServiceImp implements RecipeService {
 	public int recikeepDelete(int num, String id) {
 		// TODO Auto-generated method stub
 		return RecipeDAO.recikeepDelete(num, id);
+	}
+
+	@Override
+	public int recipetotalRecord(PageRecipeVO pageVO) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.recipetotalRecord(pageVO);
 	}
 
 

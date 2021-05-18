@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.ProductViewDAO;
+import com.beetmall.sshj.custom.vo.PageProductVO;
+import com.beetmall.sshj.custom.vo.PageSearchVO;
 import com.beetmall.sshj.custom.vo.ProductViewVO;
 
 @Service
@@ -52,15 +54,6 @@ public class ProductViewServiceImp implements ProductViewService {
 	}
 
 
-
-	@Override
-	public List<ProductViewVO> ProductViewReview(int productnum) {
-
-		return productVeiwDAO.ProductViewReview(productnum);
-	}
-
-
-
 	@Override
 	public ProductViewVO reviewViewSelect(int pnum, int rnum) {
 		
@@ -70,16 +63,38 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 	@Override
-	public List<ProductViewVO> ProductViewFaq(int productnum) {
+	public List<ProductViewVO> ProductViewFaq(PageProductVO pageVO2) {
 		
-		return productVeiwDAO.ProductViewFaq(productnum);
+		return productVeiwDAO.ProductViewFaq(pageVO2);
 	}
 
 
 
 	@Override
-	public ProductViewVO customWishInsert(String id, int productnum, int pcount, int optnum, int ocount) {
+	public List<ProductViewVO> ProductViewReview(PageProductVO pageVO1) {
 		
+		return productVeiwDAO.ProductViewReview(pageVO1);
+	}
+
+
+
+	@Override
+	public int totalRecord(PageProductVO pageVO1) {
+		
+		return productVeiwDAO.totalRecord(pageVO1);
+	}
+	
+	@Override
+	public int totalRecord2(PageProductVO pageVO2) {
+		
+		return productVeiwDAO.totalRecord2(pageVO2);
+	}
+
+
+
+	@Override
+	public ProductViewVO customWishInsert(String id, int productnum, int optnum, int pcount, int ocount) {
+	
 		return productVeiwDAO.customWishInsert(id,productnum,optnum,pcount,ocount);
 	}
 

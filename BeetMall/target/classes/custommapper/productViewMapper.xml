@@ -5,7 +5,7 @@
   <mapper namespace="com.beetmall.sshj.custom.dao.ProductViewDAO">
   
     <select id="ProductViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-       select productnum,userid,sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
+       select productnum,saleselect,userid,sellfinish,thumbimg,productname,productprice,selloption,sellweight,deliveryoption,origin,wrapping,productcontent,productinfomation,prevention,deadline from product where productnum=#{param1}
     </select>
     
     <!--        농장 구하기           -->
@@ -28,7 +28,7 @@
     <!--        할인가격 구하기           -->
     
     <select id="PDprice" resultType="int">
-     select saleprice from discount where productnum=${param1}
+     select nvl(saleprice,0) as saleprice from product p left join discount d on d.productnum = p.productnum where p.productnum=#{param1}
     </select>
     
     <!--        옵션가격 구하기           -->
@@ -37,9 +37,24 @@
     </select>
     
     <!--        상품 리뷰 구하기           -->
-    <select id="ProductViewReview" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-    select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review where productnum=${param1}
+    <select id="ProductViewReview" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+    select * from(
+	    select * from(
+		    select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review where productnum=${productnum}
+		    order by reviewnum desc)
+		    where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reviewnum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
     </select>
+    
+    <!--        페이지 총 레코드 수 구하기           -->
+    <select id="totalRecord" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="int">
+		select count(reviewnum) totalRecord from review where productnum=${productnum}
+	</select>
+	
+	<select id="totalRecord2" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="int">
+		select count(qnum) totalRecord from userqboard where productnum=${productnum}
+	</select>
     
     <!--        해당 상품의, 해당 리뷰글 눌렀을때 뷰어 보기    -->    
     <select id="reviewViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
@@ -48,14 +63,19 @@
     </select>
     
     <!--       상품문의 구하기        -->
-    <select id="ProductViewFaq" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
-     select qnum,userid,qcontent,to_char(qwritedate,'MM-DD HH:MI')qwritedate,qopen,qanswer,qtitle
-     from userqboard where productnum=${param1}
+    <select id="ProductViewFaq" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+      select * from(
+	    select * from(
+		     select qnum,userid,qcontent,to_char(qwritedate,'MM-DD HH:MI')qwritedate,qopen,qanswer,qtitle from userqboard where productnum=${productnum}
+		     order by qnum desc)
+		     where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qnum)
+			 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
     </select>
     
     <!-- 장바구니 처넣기 -->
-    <insert id="customWishInsert" parameterType="com.beetmall.sshj.custom.vo.ProductViewVO" >
-    insert into wish(userid,productnum,optionnum,wishnum,wishoptionnum) VALUES(#{param1},${param2},${param4},${param3},${param5})
+    <insert id="customWishInsert" parameterType="com.beetmall.sshj.custom.vo.ProductViewVO">
+    insert into wish(userid,productnum,optionnum,wishnum,wishoptionnum) VALUES(#{param1},${param2},${param3},${param4},${param5})
     </insert>
     
   </mapper>

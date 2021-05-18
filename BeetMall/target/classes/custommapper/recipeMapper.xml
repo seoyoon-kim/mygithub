@@ -6,7 +6,7 @@
     <select id="RecipeAllList" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
         select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
-        order by recipenum desc     
+        order by recipenum desc
     </select>
     <insert id="recipeWriteOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
        insert into recipe 
@@ -26,17 +26,18 @@
     </select> 
     <select id="RecipeSelect" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
     select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param}
-    </select>   
-    <select id="recipeAllListHome" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-        select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
-        to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
-        order by recipenum desc     
+    </select>  
+     
+    <select id="recipeAllListHome" resultType="com.beetmall.sshj.custom.vo.RecipeVO" parameterType="com.beetmall.sshj.custom.vo.PageRecipeVO">
+	     select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
+         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
+         order by recipenum desc   
     </select>   
     
     <select id="recipeAllListHome2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
         select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
-        order by reciperecommend desc     
+        order by reciperecommend desc
     </select> 
  
     <select id="customMyrecipe" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
@@ -83,6 +84,11 @@
     <update id="recipeHit" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
        update recipe set recipehit=recipehit+1 where recipenum=#{param1}
     </update>
+    
+    <!--        페이지 총 레코드 수 구하기           -->
+    <select id="recipetotalRecord" parameterType="com.beetmall.sshj.custom.vo.RecipeVO" resultType="int">
+		select count(recipenum) totalRecord from recipe
+	</select>
     
     
     

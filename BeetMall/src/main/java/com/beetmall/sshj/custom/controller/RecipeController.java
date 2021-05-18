@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.RecipeService;
 import com.beetmall.sshj.custom.service.RecipeServiceImp;
+import com.beetmall.sshj.custom.vo.PageRecipeVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 	@Controller
@@ -54,10 +56,25 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 //////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	
 	
 	@RequestMapping("/recipeList")
-	public ModelAndView RecipeAllList() {
-		
+	public ModelAndView RecipeAllList(HttpServletRequest req, HttpServletResponse res) {
+
 		ModelAndView mav=new ModelAndView();
 		//////////1게시글 목록 뽑아내기
+       // String pageNumStr = req.getParameter("pageNum");
+		
+       // PageRecipeVO pageVO = new PageRecipeVO();
+		//if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+		//	pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		//}
+		
+		//검색어, 검색키
+		//pageVO.setSearchKey(req.getParameter("searchKey"));
+		//System.out.println("setSearchKey" + pageVO.getSearchKey());
+		//pageVO.setSearchWord(req.getParameter("searchWord"));
+		//pageVO.setTotalRecord(recipeService.recipetotalRecord(pageVO));
+		
+		//////////1게시글 목록 뽑아내기
+		//mav.addObject("pageVO",pageVO);
 		mav.addObject("list" , recipeService.RecipeAllList());			
 		mav.setViewName("custom/recipeList");
 		
@@ -163,12 +180,27 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 //////////////////////////////////////////////////////////레시피 홈///////////////////////////////////////////////////////////
 	@RequestMapping("/recipeHome")
-	public ModelAndView RecipeAllListHome() {
+	public ModelAndView RecipeAllListHome(HttpServletRequest req, HttpServletResponse res) {
 		
 		ModelAndView mav=new ModelAndView();
 		//////////1게시글 목록 뽑아내기
+        String pageNumStr = req.getParameter("pageNum");
+		
+        PageRecipeVO pageVO = new PageRecipeVO();
+		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
+			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		}
+		
+		//검색어, 검색키
+		pageVO.setSearchKey(req.getParameter("searchKey"));
+		System.out.println("setSearchKey" + pageVO.getSearchKey());
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		pageVO.setTotalRecord(recipeService.recipetotalRecord(pageVO));
+			
 		mav.addObject("list" , recipeService.recipeAllListHome());
         mav.addObject("list2" , recipeService.recipeAllListHome2());
+        mav.addObject("pageVO",pageVO);
+
         
 		mav.setViewName("custom/recipeHome");
 		

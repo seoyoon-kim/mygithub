@@ -2,6 +2,7 @@ package com.beetmall.sshj.custom.service;
 
 import java.util.List;
 
+import com.beetmall.sshj.custom.vo.PageRecipeVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 public interface RecipeService {
@@ -40,5 +41,7 @@ public interface RecipeService {
 	public int recipeEditeOk(RecipeVO vo);
 	
 	public int recipeHit(int data);
+	
+	public int recipetotalRecord(PageRecipeVO pageVO);
 
 }

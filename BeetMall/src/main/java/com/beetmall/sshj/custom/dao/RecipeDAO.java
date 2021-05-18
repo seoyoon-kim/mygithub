@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.beetmall.sshj.custom.vo.CenterVO;
+import com.beetmall.sshj.custom.vo.PageProductVO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 
@@ -46,4 +48,6 @@ public interface RecipeDAO {
 	public int recipeEditeOk(RecipeVO vo);
 	
 	public int recipeHit(int data);
+	
+	public int recipetotalRecord(PageRecipeVO pageVO);
 }
