@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.ChatServiceImp;
@@ -34,5 +35,33 @@ public class ChatController {
 		mav.addObject("pageVO", pageVO);
 		mav.setViewName("mypages/myChatList");
 		return mav;
+	}
+	@RequestMapping("chatdel")
+	@ResponseBody
+	public int chatDel(HttpServletRequest req, HttpSession session) {
+		int result = 0;
+		String userid = (String)session.getAttribute("logId");
+		String usertype = "";
+		int roomcode = 0;
+		if(req.getParameter("roomcode")!=null) {
+			roomcode = Integer.parseInt(req.getParameter("roomcode"));
+		}
+		
+		System.out.println("userid="+userid);
+		System.out.println("usertype="+usertype);
+		System.out.println("roomcode="+roomcode);
+		if(chatservice.outRoomSelect(userid, roomcode)>0) { 	// creator
+			usertype="cre_out";
+		}else {												// receiver
+			usertype="rec_out";
+		}
+		if(chatservice.chatRoomOut(roomcode, usertype)>0) {
+			result = 1;
+		}else {
+			result = -1;
+		}
+		chatservice.roomClean();
+		
+		return result;
 	}
 }
