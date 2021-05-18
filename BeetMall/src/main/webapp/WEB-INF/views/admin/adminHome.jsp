@@ -332,7 +332,7 @@ div[id^=box] {
 					<ul>
 						<c:if test="${notice !=null }">
 							<c:forEach var="data" items="${notice }">
-								<li style="display: flex; justify-content: space-between;"><div style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">${data.infotitle}</div>
+								<li style="display: flex; justify-content: space-between; padding:5px 10px 12px 10px;border-bottom: 1px solid #eee;"><div style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">${data.infotitle}</div>
 									<div>${data.infowritedate }</div></li>
 							</c:forEach>
 						</c:if>
