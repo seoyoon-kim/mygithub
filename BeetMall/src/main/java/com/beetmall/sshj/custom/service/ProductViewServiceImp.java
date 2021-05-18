@@ -100,6 +100,14 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 
+	@Override
+	public List<ProductViewVO> customWishView(PageProductVO pageVO1) {
+		
+		return productVeiwDAO.customWishView(pageVO1);
+	}
+
+
+
 
 
 

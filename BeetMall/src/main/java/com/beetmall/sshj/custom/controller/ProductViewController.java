@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -129,6 +130,38 @@ public class ProductViewController {
 		
 		return id+","+productnum+","+optnum+","+pcount+","+ocount;
 				
+	}
+	
+	//////////////////상품 장바구니 열람///////////////
+	@RequestMapping("customWish")
+	@ResponseBody
+	public ModelAndView customWishView(HttpSession session,HttpServletRequest req,PageProductVO pageVO,HttpServletResponse res){
+		ModelAndView mav = new ModelAndView();
+		String userid = (String)session.getAttribute("logId");
+		
+		
+		PageProductVO pageVO1=new PageProductVO();
+		pageVO1.setUserid(userid);
+		
+	//페이지
+			//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
+			String reqPageNum = req.getParameter("wpageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
+			
+			if(reqPageNum == null) {
+				pageVO.setPageNum(1);
+			}else if(reqPageNum != null) {
+				pageVO.setPageNum(Integer.parseInt(reqPageNum));
+			}
+			
+			//총 레코드 수 구하기 
+			pageVO1.setTotalRecord(productViewService.totalRecord(pageVO1));
+			//System.out.println("totalrecord ->" +  productViewService.totalRecord(pageVO1)); //여기까지 나옴
+			mav.addObject("pageVO1", pageVO1);
+				
+			///장바구니 내역 구하기
+			mav.addObject("wlist",productViewService.customWishView(pageVO1));
+			mav.setViewName("custom/customWish");
+			return mav;
 	}
 	
 	

@@ -19,6 +19,21 @@ public class PageProductVO {
 	
 	//
 	private int productnum;
+	
+	//
+	private String userid;
+	
+	
+
+
+	public String getUserid() {
+		return userid;
+	}
+
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 
 
 	public int getPageNum() {

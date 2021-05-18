@@ -36,6 +36,9 @@ public interface ProductViewService {
 	
 	///////////장바구니에 넣기/////////////
 	public ProductViewVO customWishInsert(String id,int productnum,int optnum,int pcount,int ocount);
+	
+	//////////장바구니 보기//////////////
+	public List<ProductViewVO> customWishView(PageProductVO pageVO1);
 
 
 

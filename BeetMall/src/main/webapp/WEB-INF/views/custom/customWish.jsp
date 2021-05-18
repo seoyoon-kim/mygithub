@@ -50,58 +50,43 @@
 	width: 100%;
 }
 
+.wishList>li>input{
+line-height:15px;
+height:15px;
+}
+
 .wishListTitle>li {
 	float: left;
 	line-height: 40px;
+	width:80px;
+	text-align:center;
 }
 
-.wishListTitle>li:nth-child(4n+1) {
-	width: 57%;
-	padding-left: 20%;
+.wishListTitle>li:nth-child(6n+1) {
+	padding-left: 150px;
+	width:450px;
 }
 
-.wishListTitle>li:nth-child(4n+2) {
-	width: 15%;
-}
-
-.wishListTitle>li:nth-child(4n+3) {
-	width: 5%;
-}
-
-.wishListTitle>li:nth-child(4n+4) {
-	width: 23%;
-}
 
 /*--------------------게시판 리스트들---------------------------*/
-.wishList {
-	margin-left: 2%;
-}
+
 
 .wishList>li {
 	float: left;
 	height: 60px;
-	width: 10%;
+	width: 95px;
 	line-height: 60px;
+	text-align:center;
 }
 
-.wishList>li:nth-child(7n+1), .wishList>li:nth-child(7n+1)>a {
-	width: 15%;
+.wishList>li:nth-child(9n+2) {
+   padding-left:30px;
+	width:350px;
+	text-align:left;
 }
 
-.wishList>li:nth-child(7n+2), .wishList>li:nth-child(7n+2)>a {
-	width: 40%;
-}
-
-.wishList>li:nth-child(7n+3) {
-	width: 15%;
-}
-
-.wishList>li:nth-child(7n+4) {
-	width: 5%;
-}
-
-.wishList>li:nth-child(7n+7) {
-	width: 5%;
+.wishList>li:nth-child(9n+5) {
+	width:40px;
 }
 
 .wishList>li>a>img {
@@ -131,7 +116,10 @@
 
 #wishCenterButton {
 	width: 100%;
-	text-align: center;
+	float:left;
+	padding-left:850px;
+	margin-top:30px;
+	margin-bottom:30px;
 }
 
 #wishPriceTitle {
@@ -207,22 +195,28 @@
 			<ul class="wishListTitle">
 				<li><b>상품</b></li>
 				<li><b>판매가</b></li>
-				<li><b>수량</b></li>
+				<li><b>상품수량</b></li>
+				<li><b>옵션</b></li>
+				<li><b>옵션수량</b></li>
 				<li><b>구매가격</b></li>
 			</ul>
 
-
+       <c:forEach var="wl" items="${wlist}">
+      
 			<ul class="wishList">
-				<c:forEach var="vo" items="${list}">
-					<li><a href=""><img src="img/cr3.jfif"></a></li>
-					<li><a href="">${vo.productname}</a></li>
-					<li>${vo.productprice}</li>
-					<li><input type="button" value="-"/>${vo.wishoptionnum}<input type="button" value="+"/></li>
-					<li>17,900</li>
+					<li><a href=""><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
+					<li><a href="">${wl.productname}</a></li><!-- 상품이름 -->
+					<li>${wl.productprice}</li><!-- 상품가격 -->
+					<li><input type="button" value="-"/>${wl.wishnum}<input type="button" value="+"/></li><!-- 상품수량 -->
+					<li>${wl.optionnum}</li><!-- 옵션번호 -->
+					<li><input type="button" value="-"/>${wl.wishoptionnum}<input type="button" value="+"/></li><!-- 옵션수량 -->
+					<li>17,900</li><!-- 총가격 -->
 					<li><input type="button" value="구매하기" id="getbutton" /></li>
 					<li><input type="checkbox" name="boardCheckBox" value="" /></li>
-				</c:forEach>
 			</ul>
+			
+		</c:forEach>
+		
 		</div>
 
 		<!-- ----------------게시판 밑에 버튼------------------------ -->

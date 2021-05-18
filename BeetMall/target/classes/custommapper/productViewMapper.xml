@@ -78,4 +78,20 @@
     insert into wish(userid,productnum,optionnum,wishnum,wishoptionnum) VALUES(#{param1},${param2},${param3},${param4},${param5})
     </insert>
     
+    <!-- 장바구니 보기 -->
+     <select id="customWishView" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+    select * from(
+	    select * from(
+		    select distinct w.userid, w.productnum, w.optionnum, w.wishnum, w.wishoptionnum, p.productname, p.productprice, p.thumbimg, to_char(p.productcontent) as productcontent, o.optionprice from wish w  
+				left join product p 
+				    on p.productnum = w.productnum 
+				left join optiontbl o
+				    on w.optionnum = o.optionnum
+				where w.userid = #{userid})
+					 where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord})
+					 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+		        							  <if test="pageNum!=totalPage">${onePageRecord}</if>				
+     </select>
+    
+    
   </mapper>
