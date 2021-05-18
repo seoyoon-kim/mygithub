@@ -155,7 +155,7 @@
 				<li>비방</li>
 				<li>2021-05-23</li>
 				<li>2021-02-16</li> 
-			</ul>  
+			</ul>
 		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 1236954</li>

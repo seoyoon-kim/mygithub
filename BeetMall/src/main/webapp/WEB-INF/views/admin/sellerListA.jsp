@@ -3,11 +3,20 @@
 <style> 
 	 #container li{  
 		 float:left; 
-		 width:13%; 
+		/*  width:13%;  */
 	 }   
 	 #contentBox{ 
-		top:20px; 
-		margin-left:10px;
+		/* top:20px; 
+		margin-left:10px; */
+		margin-left:0px !important;
+	}
+	#container{
+		width:1120px !important;
+		top:0px !important;
+		margin:0px !important;
+	}
+	#descBtn, #ascBtn{
+		top:100px !important;
 	}
 	/*남색 바*/ 
 	#topBar h5{
@@ -21,7 +30,7 @@
 		margin-left:98px; 
 	}
 	/*회색 바와 데이터 제목, 데이터 내용*/
-	#contentBox li:nth-of-type(8n+1){ width:0%; }  
+	/* #contentBox li:nth-of-type(8n+1){ width:0%; } */
  	 
 	#btns a>button, button:nth-of-type(4){ margin-left:900px; }  
 	#title{
@@ -29,12 +38,13 @@
 	} 
 	#sortBox {
 		margin: 30px 0 0 20px;
+		width:1080px;
 	} 
 	#sortBox>ul{
 		width:1110px !important;
 	} 
 	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(3),#sortBox li:nth-of-type(4),#sortBox li:nth-of-type(5),#sortBox li:nth-of-type(4),#sortBox li:nth-of-type(6) {
-		width: 10%;
+		width: 10%; 
 	}
 	#sortBox li:nth-of-type(2) {
 		width: 6%;
@@ -52,12 +62,22 @@
 		margin-left:90px;
 	} 
 	#ascBtn{
-		top:170px !important;
+		
 		left:1030px;
 	}
 	#descBtn{ 
-		top:170px !important;
+		
 		left:1070px;
+	}
+	.page_wrap{
+		height:100px;
+	}
+	.searchFrm{
+		height:100px;
+		margin-top:500px !important;
+	}
+	#choose{
+		margin-top:20px !important;
 	}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -75,12 +95,67 @@
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
-	.page_nation a.active {
+	.page_nation a.active { 
 		background-color:#42454c;
 		color:#fff;
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */ 
+	.reginone{
+		color:red;
+	}
+	.regiwait{
+		color:#b1aa52;
+	}
+	.regifin{
+		color:#68cc68;
+	}
+	.registop{
+		color:#b1aa52;
+	} 
+	.wordcut{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow:ellipsis;
+	}
+	.contentList{
+		margin:0px;
+	}
+	#contentBox li{
+		height:56px; 
+		
+		line-height:56px;
+		font-size:13px;
+		border-bottom:1px solid #eee;
+	}
+	
+	.contentList>li:nth-child(1), #contentBox li:nth-of-type(8n+1){
+		width:0%;
+		height:20px;
+		
+	} 
+	.contentList>li:nth-child(2), #contentBox li:nth-of-type(8n+2){
+		width:7%;
+	}
+	.contentList>li:nth-child(3), #contentBox li:nth-of-type(8n+3){
+		width:10%;
+	}
+	.contentList>li:nth-child(4), #contentBox li:nth-of-type(8n+4){
+		width:11%;
+	}
+	.contentList>li:nth-child(5), #contentBox li:nth-of-type(8n+5){
+		width:15%;
+	}
+	.contentList>li:nth-child(6), #contentBox li:nth-of-type(8n+6){
+		width:11%;
+	}
+	.contentList>li:nth-child(7), #contentBox li:nth-of-type(8n+7){
+		width:31%;
+	}
+	.contentList>li:nth-child(8), #contentBox li:nth-of-type(8n){
+		width:15%;
+	}
+	
 </style>
 <script>
  
@@ -132,113 +207,35 @@
 				</ul>
 			</div>
    		<div id="contentBox"> 	
-		<div id="title">
+		<div id="">
 			<ul>
-				<li><input type="checkbox" name="check"  ></li>
-				<li>이름</li> 
+				<li></li>
+				<li>농장번호</li> 
+				<li>판매자명</li>
 				<li>아이디</li>
-				<li>나이</li>
 				<li>이메일</li>
-				<li>생년월일</li>
+				<li>상호명</li>
 				<li>주소</li> 
-				<li>가입일</li> 
+				<li>인증여부</li> 
+				
+				<c:forEach var="vo" items="${list}">
+			
+				<li></li>
+				<li>${vo.storenum}</li>
+				<li><a href="${vo.userid}">${vo.sellername}</a></li>
+				<li>${vo.userid}</li>
+				<li>${vo.storeemail}</li>
+				<li>${vo.storename}</li>
+				<li class="wordcut">(${vo.storezipcode})${vo.storeaddr} ${vo.storedetailaddr}</li>
+				<li>
+					<c:if test="${vo.regiapproval == 0}"><span class="reginone">미등록</span></c:if>
+					<c:if test="${vo.regiapproval == 1}"><span class="regiwait">대기중</span></c:if>
+					<c:if test="${vo.regiapproval == 2}"><span class="regifin">완료</span><span class="regidate">(${vo.regiapprovaldate})</span></c:if>
+					<c:if test="${vo.regiapproval == 3}"><span class="registop">반려</span></c:if>
+				</li> 
+				</c:forEach>
 			</ul>
-		</div>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16</li> 
-			</ul>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16</li> 
-			</ul>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul>  
-		
-		 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		
-		<c:forEach var="data" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> name?</li>
-				<li><a href="회원정보?">id?</a></li>
-				<li>나이?</li>
-				<li>{member.email}</li>  
-				<li>{data.birthday}</li>
-				<li>{data.addr}</li>
-				<li>탈퇴일?<br/></li> 
-			</ul>
-		</c:forEach>
+		</div>
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">

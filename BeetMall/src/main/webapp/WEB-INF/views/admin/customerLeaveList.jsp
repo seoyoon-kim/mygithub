@@ -133,16 +133,18 @@
 				<li>탈퇴일</li> 
 			</ul>
 		</div>  
+		<c:forEach var="vo" items="${list}">
 		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul>  
+			<li><input type="checkbox" name="check" id="check"></li>
+			<li>${vo.username}</li>
+			<li><a href="회원정보?">${vo.userid}</a></li>
+			<li>${vo.age}</li>
+			<li>${vo.useremail}</li>
+			<li>${vo.point}</li>
+			<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
+			<li>${vo.joindate }<br /></li>
+		</ul>
+		</c:forEach>
 		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 홍길동</li>

@@ -33,7 +33,7 @@
 	     where (t.orderstatus in ('배송중', '배송완료') and m.userid=#{param1}) or (m.userid = #{param1} and p.sellfinish >= sysdate)
 	</select>
 	<update id="deleteId">
-		update member set usertype=4 where userid=#{param1}
+		update member set usertype=usertype+3 where userid=#{param1}
 	</update>
 	<select id="selectId" resultType="Integer">
 		select count(*) from member where userid=#{param1} and userpwd =#{param2}
@@ -41,4 +41,7 @@
 	<select id="stopdate" resultType="String">
 		select to_char(reportfin, 'YYYY/MM/DD') from reporttbl where userid=#{param1} and  rownum=1 order by reportfin desc
 	</select>
+	<insert id="member2Insert">
+		insert into member2(userid, exitdate) values(#{param1}, sysdate)
+	</insert>
 </mapper>

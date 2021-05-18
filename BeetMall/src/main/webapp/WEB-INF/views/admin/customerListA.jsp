@@ -131,6 +131,11 @@
 		border: 1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	.wordcut{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 </style>
 <%@ include file="/inc/top.jspf"%>
 	<div id="topBarContainer">
@@ -184,135 +189,30 @@
 			<div id="title">
 				<ul>
 					<li><input type="checkbox" name="check"></li>
+					<li>구분</li>
 					<li>이름</li>
 					<li>아이디</li>
-					<li>나이</li>
+					<!-- <li>나이</li> -->
 					<li>이메일</li>
-					<li>생년월일</li>
+					<li>포인트</li>
 					<li>주소</li>
 					<li>가입일</li>
 				</ul>
 			</div>
+			<c:forEach var="vo" items="${list}">
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
+				<li><c:if test="${vo.storenum<0}">구매자</c:if><c:if test="${vo.storenum>=0}">판매자</c:if></li>
+				<li>${vo.username}</li>
+				<li><a href="회원정보?">${vo.userid}</a></li>
+				<%-- <li>${vo.age}</li> --%>
+				<li>${vo.useremail}</li>
+				<li>${vo.point}</li>
+				<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
+				<li>${vo.joindate }<br /></li>
 			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br /></li>
-			</ul>
+			</c:forEach>
+			
 			<!--  
 		<c:forEach var="data" items="${list}">
 			<ul class="contentList">
