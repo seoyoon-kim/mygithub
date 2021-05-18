@@ -53,14 +53,12 @@
 	} 
 	 #info{
 	 	top:-383px;
-	 	left:-230px;
+	 	left:50px;
+	 	width:500px !important;
 	 }
 	 #contentBox li:nth-of-type(5) {
 	 	width:250px !important;
-	 }
-	 #contentBox ul {
-    	margin-left: 0 !important; 
-	}
+	 } 
 	/*회원정보 항목 */
 	#infoHeader{ 
 		top:11px;
@@ -71,7 +69,7 @@
 	}
 	  /*회원정보 내용 */
 	  #info li:nth-of-type(5){
-	 	padding-left:390px;
+	 	padding-left:100px;
 	 }
 	  #info li:nth-of-type(7)>input{
 	  	width:190px;
@@ -85,8 +83,8 @@
 	  }
 	  #addrBtn{
 	  	top:-42px;
-	  	left:125px;
-	  
+	  	left:115px; 
+	  	height: 26px !important;
 	  }
 	  button{
 	  	height:30px;
@@ -105,7 +103,7 @@
 	  	position:relative;
 	  	float:left;
 	  	top:-355px;
-		left:65px;
+		left:85px;
 	  	font-size:15px;  
 	  }
 	  .btns>button{

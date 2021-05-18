@@ -17,6 +17,9 @@
 	#topBar li:nth-of-type(8){
 		position:relative;
 		left:-80px;
+	}  
+	#contentBox{
+		top:-10px;
 	}
 	#search{
 		margin-left:40px;
@@ -31,7 +34,7 @@
 		left:-15px;
 	}
 	#sortBox {
-		margin: 80px 0 0 20px;
+		margin: 50px 0 0 20px;
 	}
 	#sortBox li{
 		margin-top:30px;

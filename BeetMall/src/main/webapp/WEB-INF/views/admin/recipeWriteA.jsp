@@ -130,7 +130,7 @@
 		width:150px;
 	} 
 	input[type="submit"].btn:hover, input[type="button"].btn:hover{
-   	  background: #b3b3b3;
+   	  background: #b3b3b3 !important;
 	  color:white;
 	  display: inline-block;
 	  outline: 0;

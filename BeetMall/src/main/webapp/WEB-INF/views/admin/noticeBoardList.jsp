@@ -9,6 +9,9 @@
 		 float:left; 
 		 width:20%; 
 	 }   
+	#contentBox{
+	 	top:-10px;
+	 }
 	#contentBox li:nth-of-type(5n-4){ 
 		width:0%; 
 	}
@@ -29,7 +32,7 @@
 		width:6%;
 	}     
 	#sortBox {
-		margin: 80px 0 0 20px;
+		margin: 50px 0 0 20px;
 	}
 	#sortBox li{
 		margin-top:30px;
@@ -49,7 +52,7 @@
 		margin-right:11px;
 	}
 	#sortBox li:nth-of-type(4) {
-		margin-right:120px;
+		margin-right:125px;
 	} 
 	#sortBox li:nth-of-type(5),#sortBox li:nth-of-type(6)  {
 		width:108px;
@@ -113,7 +116,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="noticeBoardList">공지 목록</a></strong></h5></li> 
+				<li><h5><strong><a href="noticeBoardList">공지 관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 

@@ -55,6 +55,12 @@
 	#fromTo{
 		margin-left:14px;
 	}
+	#ascBtn{
+		top:170px !important; 
+	}
+	#descBtn{ 
+		top:170px !important; 
+	}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
@@ -97,7 +103,7 @@
 <%@ include file="/inc/leftBar.jspf" %>
 	<div id="container">
 		<div id="choose">
-			<a href="customerBlackList"><button class="success" value="" name="" id="" style="background-color:lightgray;">일반회원</button></a>
+			<a href="customerBlackList"><button class="success" value="" name="" id="" style="background-color:lightgray; color:black;">일반회원</button></a>
 			<a href="sellerBlackList"><button class="success" value="" name="" id="">판매자회원</button></a>
 		</div> 
 		<div id="sortBox">

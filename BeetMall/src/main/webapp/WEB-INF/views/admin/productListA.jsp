@@ -25,7 +25,7 @@
 	}   
 	
 	#sortBox {
-		margin: 110px 0 0 20px;
+		margin: 80px 0 0 20px;
 	} 
 	#sortBox>ul{
 		width:1110px !important;
@@ -152,7 +152,7 @@
 				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
 		 	</ul>
-		</div>
+		</div> 
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>

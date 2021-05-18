@@ -8,6 +8,9 @@
 	#topBar h5{  
 		padding-left:120px;
 	} 
+	#contentBox{
+		top:-40px;
+	}
 	#contentBox li{ 
 		 width:16%; 
 	}
@@ -22,12 +25,7 @@
 	} 
 	#topBar li:nth-of-type(4){
 		width:14%;
-	}      
-	#subjectLine{
-		white-space:nowrap; 
-		overflow:hidden;
-		text-overflow:ellipsis;
-	}
+	}    
 	#content input, textarea, select, #noticeSearchFrm input{
 		border:1px solid lightgray; 
 		border-radius: 3px;
@@ -53,7 +51,7 @@
 		padding:2px 7px;
 	}
 	#sortBox {
-		margin: 110px 0 0 20px;
+		margin: 80px 0 0 20px;
 	} 
 	#sortBox>ul{
 		width:1110px !important;
