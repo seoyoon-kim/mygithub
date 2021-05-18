@@ -33,9 +33,9 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> recipeAllListHome() {
+	public List<RecipeVO> recipeAllListHome(PageRecipeVO pageVO) {
 		
-		return RecipeDAO.recipeAllListHome();
+		return RecipeDAO.recipeAllListHome(pageVO);
 	}
 
 	@Override
@@ -87,9 +87,9 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> recipeAllListHome2() {
+	public List<RecipeVO> recipeAllListHome2(PageRecipeVO pageVO) {
 		
-		return RecipeDAO.recipeAllListHome2();
+		return RecipeDAO.recipeAllListHome2(pageVO);
 	}
 
 	@Override
@@ -122,10 +122,12 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public int recipetotalRecord(PageRecipeVO pageVO) {
+	public int totalRecord4(PageRecipeVO pageVO) {
 		// TODO Auto-generated method stub
-		return RecipeDAO.recipetotalRecord(pageVO);
+		return RecipeDAO.totalRecord4(pageVO);
 	}
+
+
 
 
 	

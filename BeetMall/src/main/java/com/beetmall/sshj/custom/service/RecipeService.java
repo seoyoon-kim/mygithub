@@ -14,9 +14,9 @@ public interface RecipeService {
 
 	public int RecipeLastSelect(RecipeVO vo);
 	
-	public List<RecipeVO>recipeAllListHome();
+	public List<RecipeVO>recipeAllListHome(PageRecipeVO pageVO);
 	
-	public List<RecipeVO>recipeAllListHome2();
+	public List<RecipeVO>recipeAllListHome2(PageRecipeVO pageVO);
 	
 	public List<RecipeVO>customMyrecipe();
 	
@@ -42,6 +42,6 @@ public interface RecipeService {
 	
 	public int recipeHit(int data);
 	
-	public int recipetotalRecord(PageRecipeVO pageVO);
+	public int totalRecord4(PageRecipeVO pageVO);
 
 }

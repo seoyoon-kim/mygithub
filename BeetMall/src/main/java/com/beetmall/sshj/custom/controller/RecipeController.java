@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beetmall.sshj.custom.service.RecipeService;
 import com.beetmall.sshj.custom.service.RecipeServiceImp;
 import com.beetmall.sshj.custom.vo.PageRecipeVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
@@ -180,26 +179,56 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 //////////////////////////////////////////////////////////레시피 홈///////////////////////////////////////////////////////////
 	@RequestMapping("/recipeHome")
-	public ModelAndView RecipeAllListHome(HttpServletRequest req, HttpServletResponse res) {
+	public ModelAndView RecipeAllListHome(HttpServletRequest req, HttpServletResponse res,PageRecipeVO pageVO) {
 		
 		ModelAndView mav=new ModelAndView();
-		//////////1게시글 목록 뽑아내기
-        String pageNumStr = req.getParameter("pageNum");
 		
-        PageRecipeVO pageVO = new PageRecipeVO();
-		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
-			pageVO.setPageNum(Integer.parseInt(pageNumStr));
+		
+        PageRecipeVO pageVO1 = new PageRecipeVO();
+        PageRecipeVO pageVO2 = new PageRecipeVO();
+        
+        //////////1게시글 목록 뽑아내기
+        String reqPageNum = req.getParameter("pageNum");
+        
+        
+        if(reqPageNum == null) {
+			pageVO1.setPageNum(1);
+		}else if(reqPageNum != null) {
+			pageVO1.setPageNum(Integer.parseInt(reqPageNum));
+		}
+        
+        if(reqPageNum == null) {
+			pageVO2.setPageNum(1);
+		}else if(reqPageNum != null) {
+			pageVO2.setPageNum(Integer.parseInt(reqPageNum));
 		}
 		
+		
 		//검색어, 검색키
-		pageVO.setSearchKey(req.getParameter("searchKey"));
-		System.out.println("setSearchKey" + pageVO.getSearchKey());
-		pageVO.setSearchWord(req.getParameter("searchWord"));
-		pageVO.setTotalRecord(recipeService.recipetotalRecord(pageVO));
-			
-		mav.addObject("list" , recipeService.recipeAllListHome());
-        mav.addObject("list2" , recipeService.recipeAllListHome2());
-        mav.addObject("pageVO",pageVO);
+		pageVO1.setSearchKey(req.getParameter("searchKey"));
+		System.out.println("setSearchKey" + pageVO1.getSearchKey());
+		pageVO1.setSearchWord(req.getParameter("searchWord"));
+		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO1));
+		
+		//검색어, 검색키
+		pageVO1.setSearchKey(req.getParameter("searchKey"));
+		System.out.println("setSearchKey" + pageVO2.getSearchKey());
+		pageVO1.setSearchWord(req.getParameter("searchWord"));
+		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO2));
+	
+		//총 레코드 수 구하기 
+		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO1));
+		System.out.println("totalrecord 레시피 ->" +  recipeService.totalRecord4(pageVO1)); //여기까지 나옴
+		mav.addObject("pageVO1", pageVO1);
+		
+		//총 레코드 수 구하기 
+		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO2));
+		System.out.println("totalrecord 레시피2 ->" +  recipeService.totalRecord4(pageVO2)); //여기까지 나옴
+		mav.addObject("pageVO2", pageVO2);
+		
+		mav.addObject("list" , recipeService.recipeAllListHome(pageVO1));
+        mav.addObject("list2" , recipeService.recipeAllListHome2(pageVO2));
+        
 
         
 		mav.setViewName("custom/recipeHome");

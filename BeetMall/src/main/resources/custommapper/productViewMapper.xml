@@ -42,9 +42,10 @@
 	    select * from(
 		    select reviewnum,reviewimg,reviewcontent,userid,to_char(reviewwritedate,'MM-DD HH:MI')reviewwritedate,reviewscore from review where productnum=${productnum}
 		    order by reviewnum desc)
-		    where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reviewnum)
+		    where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reviewnum asc)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        	order by reviewnum desc						  
     </select>
     
     <!--        페이지 총 레코드 수 구하기           -->
@@ -72,9 +73,10 @@
 	    select * from(
 		     select qnum,userid,qcontent,to_char(qwritedate,'MM-DD HH:MI')qwritedate,qopen,qanswer,qtitle from userqboard where productnum=${productnum}
 		     order by qnum desc)
-		     where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qnum)
+		     where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qnum asc)
 			 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        	 order by qnum desc						  
     </select>
     
     <!-- 장바구니 처넣기 -->
