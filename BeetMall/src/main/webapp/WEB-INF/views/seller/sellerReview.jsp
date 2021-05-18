@@ -750,25 +750,25 @@ function reportUpdate(){
 
 				<ul id="reviewInfo">
 					<li>
-						<img src="<%=request.getContextPath()%>/resources/img/newimg.png">
+						<img src="<%=request.getContextPath()%>/resources/img/new.png">
 						<p>새 리뷰</p>
 						<p>${resultData.newReview } 건</p>	
 					</li>
 					
 					<li>
-						<img src="<%=request.getContextPath()%>/resources/img/review.png">
+						<img src="<%=request.getContextPath()%>/resources/img/question.png">
 						<p>미답변</p>
 						<p>${resultData.nullReview } 건</p>
 					</li>
 					
 					<li>
-						<img src="<%=request.getContextPath()%>/resources/img/goodimg.png">
+						<img src="<%=request.getContextPath()%>/resources/img/rating.png">
 						<p>총 평점</p>
 						<p>${resultData.totalScore } / 5 점</p>
 					</li>
 					
 					<li>
-						<img src="<%=request.getContextPath()%>/resources/img/checklistimg.png">
+						<img src="<%=request.getContextPath()%>/resources/img/review.png">
 						<p>전체 리뷰 수</p>
 						<p>${resultData.totalReview } 건</p>
 					</li>

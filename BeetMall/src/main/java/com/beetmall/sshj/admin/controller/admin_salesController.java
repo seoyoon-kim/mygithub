@@ -37,6 +37,10 @@ public class admin_salesController {
 	@RequestMapping("/salesCateAnalasysA")
 	public ModelAndView salesCateAnalasysA() {
 		ModelAndView mav = new ModelAndView(); 
+		
+		
+		
+		
 		mav.setViewName("/admin/salesCateAnalasysA");
 		return mav;
 	} 
