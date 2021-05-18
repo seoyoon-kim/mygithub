@@ -733,7 +733,56 @@ margin-left:1010px;
 font-size:15px;
 color:black;
 }
-
+/* 채팅 */
+#chatIframe{
+		position:absolute;
+		top:600px;
+		width:502px;
+		height:662px;
+		padding:1px;
+		background-color:rgb(250, 250, 250);
+		display:none;
+	}
+	#chatContainer{
+		width:500px;
+		height:590px;
+	}
+	#chatTop{
+		width:500px;
+		height:20px;
+		background-color:rgb(252,118,45);
+	}
+	#chatInfoTitle{
+		height:50px;
+		width:500px;
+		background-color:white;
+	}
+	#closedivBtn, #reportChat{
+		cursor: pointer;
+	}
+	#chatHeaderSpan{
+		line-height:50px;	
+	}
+	#chatInfoTitle{
+		text-align: center;
+		font-size:16px;
+	}
+	#reportChat{
+		color:red;
+		float:left;
+		margin-left:10px;
+	}
+	#closedivBtn{
+		float:right;
+		line-height:50px;
+		font-size:20px;
+		margin-right:10px;
+	}
+	#theyId{
+		font-weight:bold;
+		font-size:17px;
+		margin-right:5px;
+	}
 </style>
 <script>
     var productnump=${pvo.productnum};
@@ -890,11 +939,25 @@ color:black;
 					console.log("장바구니 등록 실패");
 				}
 			})
-			///////////////////////////////////채팅하기////////////////////
+			
 			
 			
 		
 		});
+       ///////////////////////////////////채팅하기////////////////////
+   
+     $(document).on('click','input[value="1:1대화하기"]', function(){
+		var roomcode =1;
+		var theyid = "${pvo.userid}";
+		var myid = "${logId}";
+		console.log("logid="+myid);
+		$("#theyId").text(theyid);
+		$("#chatIframe").css("display","block");/* 아이피 수정해야 할 곳 ^^^^^^ */
+		$("#chatContainer").attr("src","http://192.168.0.52:12021/chatForm?sender="+myid+"&receiver="+theyid+"&roomcode="+roomcode);
+	});
+    
+    
+    
     
       /////////////////////////리뷰보기/////////////////////////////////
     
@@ -1296,6 +1359,13 @@ color:black;
 		</div>
 		<!--productInfoPage  -->
 
+
+			<!-- 채팅창 -->
+         	<div id ="chatIframe">
+				<div id="chatTop"></div>
+				<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span>님과의 채팅입니다.</span><span id="closedivBtn">&times;</span></div>
+				<iframe src="" id="chatContainer" frameborder="0" ></iframe>
+			</div>									
 
 	</div>
 	<!-- section -->
