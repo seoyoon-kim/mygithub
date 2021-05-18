@@ -82,7 +82,7 @@
      <select id="customWishView" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
     select * from(
 	    select * from(
-		    select distinct w.userid, w.productnum, w.optionnum, w.wishnum, w.wishoptionnum, p.productname, p.productprice, p.thumbimg, to_char(p.productcontent) as productcontent, o.optionprice from wish w  
+		   select distinct w.userid, w.productnum, w.optionnum,nvl(o.optionname,' '), w.wishnum, w.wishoptionnum, p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent, o.optionprice from wish w  
 				left join product p 
 				    on p.productnum = w.productnum 
 				left join optiontbl o

@@ -58,41 +58,76 @@ height:15px;
 .wishListTitle>li {
 	float: left;
 	line-height: 40px;
-	width:80px;
+	width:180px;
 	text-align:center;
 }
 
 .wishListTitle>li:nth-child(6n+1) {
 	padding-left: 150px;
-	width:450px;
+	width:700px;
 }
 
 
 /*--------------------게시판 리스트들---------------------------*/
 
-
+.wishList{
+margin:0 auto;
+border-bottom:1px solid #eee;
+}
 .wishList>li {
 	float: left;
-	height: 60px;
-	width: 95px;
-	line-height: 60px;
-	text-align:center;
+	height: 150px;
+	width: 100px;
+	padding-top:20px;
+	padding-bottom:20px;
+	margin-right:10px;
+
 }
 
-.wishList>li:nth-child(9n+2) {
-   padding-left:30px;
-	width:350px;
-	text-align:left;
+.wishList>li:nth-child(7n+1) {
+  width: 200px;
+  padding-left:50px;
+  padding-right:50px;
 }
 
-.wishList>li:nth-child(9n+5) {
-	width:40px;
+.wishList>li:nth-child(7n+2) {
+  width: 400px;
 }
+
+.wishList>li:nth-child(7n+3) {
+  text-align:center;
+  line-height: 90px;
+}
+
+.wishList>li:nth-child(7n+4) {
+  text-align:center;
+  line-height: 90px;
+}
+
+.wishList>li:nth-child(7n+5) {
+  text-align:center;
+  line-height: 90px;
+}
+
+.wishList>li:nth-child(7n+6) {
+  text-align:center;
+  line-height: 90px;
+  width: 50px;
+}
+
+.wishList>li:nth-child(7n+7) {
+  text-align:center;
+  line-height: 90px;
+  width: 50px;
+}
+
+
+
 
 .wishList>li>a>img {
-	width: 60px;
-	height: 50px;
-	border-radius: 5px;
+	width: 100px;
+	height: 100px;
+	border-radius: 2px;
 }
 
 /*--------------------게시판 버튼들---------------------------*/
@@ -123,11 +158,16 @@ height:15px;
 }
 
 #wishPriceTitle {
-	padding-left: 80%;
-	float: right;
+    text-align:center;
+    background-color:#E8F1F4;
+	padding-left:50px;
+	float:left;
 	width: 100%;
 	margin-bottom: 50px;
+	height:150px;
 }
+
+
 
 /*버튼----------------------------------------------------------------*/
 #swishbtn, #twishbtn {
@@ -146,6 +186,14 @@ height:15px;
 	background: gray;
 	color: white;
 	display: inline-block;
+}
+
+#delbutton{
+border:none;
+width:15px;
+font-size:20px;
+background-color:white;
+color:gray;
 }
 
 #getbutton {
@@ -179,6 +227,37 @@ height:15px;
 #menuListUl{
 	font-size:14px;
 }
+
+
+#ptitle>a{
+font-size:19px;
+font-weight:bold;
+}
+
+#ptitleprice{
+color:gray;
+}
+
+#optitle{
+color:gray;
+font-weight:bold;
+
+}
+
+#wishone{
+font-size:30px;
+}
+
+#wishtotal{
+font-size:30px;
+}
+
+#pbtn,#mbtn{
+width:20px;
+height:20px;
+font-size:20px;
+}
+
 </style>
 	<div class="section" id="whisListPage">
 		<!-- 큰제목 ---------------------------------------------->
@@ -187,17 +266,19 @@ height:15px;
 			<b>${logId}님 의 장바구니 입니다.</b>
 		</div>
 
-		<input type="button" value="선택상품제거" id="nogetbutton" />
+		
 
 		<!-- ----------------게시판------------------------ -->
+		
+			
+		
+		<input type="button" value="선택상품제거" id="nogetbutton" />
+		
 		<div class="wishlistbox">
 
 			<ul class="wishListTitle">
-				<li><b>상품</b></li>
-				<li><b>판매가</b></li>
+				<li><b>상품정보</b></li>
 				<li><b>상품수량</b></li>
-				<li><b>옵션</b></li>
-				<li><b>옵션수량</b></li>
 				<li><b>구매가격</b></li>
 			</ul>
 
@@ -205,20 +286,33 @@ height:15px;
       
 			<ul class="wishList">
 					<li><a href=""><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
-					<li><a href="">${wl.productname}</a></li><!-- 상품이름 -->
-					<li>${wl.productprice}</li><!-- 상품가격 -->
-					<li><input type="button" value="-"/>${wl.wishnum}<input type="button" value="+"/></li><!-- 상품수량 -->
-					<li>${wl.optionnum}</li><!-- 옵션번호 -->
-					<li><input type="button" value="-"/>${wl.wishoptionnum}<input type="button" value="+"/></li><!-- 옵션수량 -->
+					
+					<li>
+					<div id="ptitle"><a href="">${wl.productname}</a></div><!-- 상품이름 -->
+					<div id="ptitleprice">${wl.productprice}</div><!-- 상품가격 -->
+				
+					<div id="optitle">${wl.optionname}옵션이름 x ${wl.wishoptionnum} 개</div><!-- 옵션이름 --><!-- 옵션 수량 -->
+					</li>
+				
+					<li><input type="button" ip="pbtn" value="-"/><span id="numbox">${wl.wishnum}</span><input type="button" ip="mbtn" value="+"/></li><!-- 상품수량 -->
+					
 					<li>17,900</li><!-- 총가격 -->
 					<li><input type="button" value="구매하기" id="getbutton" /></li>
 					<li><input type="checkbox" name="boardCheckBox" value="" /></li>
+					<li><input type="button" value="x" id="delbutton" /></li>
 			</ul>
 			
 		</c:forEach>
 		
 		</div>
+      <!-- ----------------총가격------------------------ -->
 
+		<div id="wishPriceTitle">
+		    <div id="wishone">상품 가격:</div>
+			<div id="wishtotal">총 구매가격:</div>
+		</div>
+		
+		
 		<!-- ----------------게시판 밑에 버튼------------------------ -->
 
 		<div id="wishCenterButton">
@@ -226,14 +320,12 @@ height:15px;
 				type="button" value="전체주문" id="twishbtn" />
 		</div>
 
-		<!-- ----------------게시판 밑에 총가격------------------------ -->
-
-		<div id="wishPriceTitle">
-			<h4>장바구니 현재 금액</h4>
-			<h2 style="color: red;">
-				<b>29,960</b>
-			</h2>
-		</div>
-		<div style="clear: both;"></div>
-	</div>
+	
+		
+		
+		
+		
+	   </div>
+	   
+	   <div style="clear: both;"></div>
 </html>
