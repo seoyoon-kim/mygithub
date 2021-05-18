@@ -44,19 +44,21 @@ public class SellerMainController {
 			if(status.size() != 0) {
 				for(int i =0; i< status.size(); i++) {
 					if(status.get(i).getOrderstatus().equals("배송준비중")) {
-						mav.addObject("ready", status.get(i).getOrdercount());
+						mav.addObject("ready", formatter.format(status.get(i).getOrdercount()));
 					} else if(status.get(i).getOrderstatus().equals("배송중")) {
-						mav.addObject("ing", status.get(i).getOrdercount());
+						mav.addObject("ing", formatter.format(status.get(i).getOrdercount()));
 					} else if(status.get(i).getOrderstatus().equals("환불")) {
-						mav.addObject("refund", status.get(i).getOrdercount());
+						mav.addObject("refund", formatter.format(status.get(i).getOrdercount()));
 					} else if(status.get(i).getOrderstatus().equals("취소")) {
-						mav.addObject("cancel", status.get(i).getOrdercount());
+						mav.addObject("cancel", formatter.format(status.get(i).getOrdercount()));
+					} else if(status.get(i).getOrderstatus().equals("배송완료")) {
+						mav.addObject("deliveryClear", formatter.format(status.get(i).getOrdercount()));
 					}
 				}
 			}
 			
 			mav.addObject("todayMoney", formatter.format(realpayment));
-			mav.addObject("newOrder", newOrder); 
+			mav.addObject("newOrder", formatter.format(newOrder)); 
 			mav.addObject("order", service.getOrderSales(vo));
 			mav.addObject("notice", service.getNotice(vo));
 			mav.addObject("review", service.getReview(vo));
@@ -76,8 +78,6 @@ public class SellerMainController {
 					String resultDate = result.get(j).getMonthData()+"월";
 					mav.addObject("resultStr"+j,resultSum);
 					mav.addObject("resultDate"+j,resultDate);
-					System.out.println(resultSum);
-					System.out.println(resultDate);
 				}
 			}
 		
