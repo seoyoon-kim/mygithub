@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerMainDAO">
 	<select id="getOrderSales" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
-        select count(realpayment) newOrder, sum(realpayment) realpayment from
+        select nvl(count(realpayment),0) newOrder, sum(realpayment) realpayment from
         (select ordernum from orderdetail where productnum in 
         (select productnum from product where userid= #{userid})) a join ordertbl b 
-        on a.ordernum = b.ordernum where b.orderdate > to_char(sysdate, 'YYYY-MM-DD') 
+        on a.ordernum = b.ordernum where b.orderdate >= to_char(sysdate, 'YYYY-MM-DD') 
         group by realpayment
 	</select>
 	<select id="getDeliveryStatus" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
@@ -15,7 +15,7 @@
         select ordernum, orderstatus from orderdetail where productnum in 
         (select productnum from product where userid=#{userid})) a 
         join ordertbl b on a.ordernum = b.ordernum 
-        where b.orderdate > to_char(sysdate, 'YYYY-MM-DD') group by orderstatus
+        group by orderstatus
 	</select>
 	<select id="getNotice" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
     	select infotitle, to_char(infowritedate, 'YY-MM-DD') infowritedate 
@@ -23,15 +23,15 @@
 		where rownum <![CDATA[<=]]> 6
 	</select>
 	<select id="getReview" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
-		select sum(count(*)) reviewanswer from review where productnum in 
+		select nvl(sum(count(*)),0) reviewanswer from review where productnum in 
 		(select productnum from product where userid=#{userid}) 
-        and reviewwritedate > to_char(sysdate, 'YYYY-MM-DD') 
+        and reviewwritedate >= to_char(sysdate, 'YYYY-MM-DD') 
         and reviewanswer is null group by reviewanswer
 	</select>
 	<select id="getQboard" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
-		select sum(count(*)) qasnwer from userqboard where productnum in 
+		select nvl(sum(count(*)),0) qasnwer from userqboard where productnum in 
 		(select productnum from product where userid=#{userid})
-        and qwritedate > to_char(sysdate, 'YYYY-MM-DD') 
+        and qwritedate >= to_char(sysdate, 'YYYY-MM-DD') 
         and qanswer is null group by qanswer
 	</select>
 	<select id="getPayData" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">

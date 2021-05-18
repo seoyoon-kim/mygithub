@@ -142,7 +142,6 @@ footer{
 					<li><a href="sellerAskManagement">문의 관리</a></li>
 				</ul>
 			</li>
-			<li><a href="#">회원정보수정</a></li>
 		</ul>
 	</nav>
 </div>
