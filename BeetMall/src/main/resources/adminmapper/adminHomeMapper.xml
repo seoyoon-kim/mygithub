@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_HomeDAO">
+	<select id="getDeliveryClaim" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select orderstatus, count(orderstatus) ordercount from orderdetail 
+			where orderconfirm > to_char(sysdate,'YYYY-MM-DD') group by orderstatus
+	</select>
+	<select id="getOrderSales" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select sum(realpayment) realpayment, sum(count(orderdate)) ordercount from ordertbl 
+			where orderdate > to_char(sysdate,'YYYY-MM-DD') group by realpayment, orderdate
+	</select>
+	<select id="getNotice" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select infotitle, to_char(infowritedate, 'YY-MM-DD') infowritedate from 
+			(select * from notice order by infowritedate desc) where rownum <![CDATA[<=]]> 6
+	</select>
+	<select id="getQuestion" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select sum(count(qmdate)) qmanswer from qmboard 
+			where qmanswer is null group by qmdate
+	</select>
+	<select id="getApprove" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select count(regiapproval) waiting from seller 
+			where regiapproval = 1
+	</select>
+	<select id="getApproveClear" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select count(regiapproval) regiapproval from seller 
+			where regiapproval = 2 
+				and regiapprovaldate > to_char(sysdate, 'YYYY-MM-DD')
+	</select>
+	<select id="getNewReport" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select sum(count(reportdate)) reportOver from report 
+			where reportdate > to_char(sysdate, 'YYYY-MM-DD') 
+				and reportselect =1 group by reportdate
+	</select>
+	<select id="getWaitingReport" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
+		select sum(count(reportdate)) reportWaiting from report 
+			where reportselect = 1 group by reportdate
+	</select>
+</mapper>

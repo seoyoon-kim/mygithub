@@ -5,7 +5,7 @@ public class Admin_HomeVO {
 	private int newOrder; // 신규주문
 	
 	private String reviewanswer; // 리뷰미답변
-	private String qanswer; // 문의미답변
+	private String qmanswer; // 문의미답변
 	
 	private String orderstatus; // 주문 현재상태
 	private int ordercount; // 주문 현재상태 갯수
@@ -22,7 +22,6 @@ public class Admin_HomeVO {
 	
 	private int reportOver; // 신고 접수 건수
 	private int reportWaiting; // 신고 처리 대기중
-	
 	
 	public int getRealpayment() {
 		return realpayment;
@@ -41,12 +40,6 @@ public class Admin_HomeVO {
 	}
 	public void setReviewanswer(String reviewanswer) {
 		this.reviewanswer = reviewanswer;
-	}
-	public String getQanswer() {
-		return qanswer;
-	}
-	public void setQanswer(String qanswer) {
-		this.qanswer = qanswer;
 	}
 	public String getOrderstatus() {
 		return orderstatus;
@@ -113,6 +106,12 @@ public class Admin_HomeVO {
 	}
 	public void setReportWaiting(int reportWaiting) {
 		this.reportWaiting = reportWaiting;
+	}
+	public String getQmanswer() {
+		return qmanswer;
+	}
+	public void setQmanswer(String qmanswer) {
+		this.qmanswer = qmanswer;
 	}
 	
 	

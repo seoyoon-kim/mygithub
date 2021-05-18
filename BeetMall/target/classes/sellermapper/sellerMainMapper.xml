@@ -23,13 +23,13 @@
 		where rownum <![CDATA[<=]]> 6
 	</select>
 	<select id="getReview" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
-		select count(*) reviewanswer from review where productnum in 
+		select sum(count(*)) reviewanswer from review where productnum in 
 		(select productnum from product where userid=#{userid}) 
         and reviewwritedate > to_char(sysdate, 'YYYY-MM-DD') 
         and reviewanswer is null group by reviewanswer
 	</select>
 	<select id="getQboard" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
-		select count(*) qasnwer from userqboard where productnum in 
+		select sum(count(*)) qasnwer from userqboard where productnum in 
 		(select productnum from product where userid=#{userid})
         and qwritedate > to_char(sysdate, 'YYYY-MM-DD') 
         and qanswer is null group by qanswer
