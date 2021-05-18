@@ -3,14 +3,14 @@
 <html> 
 <style>
 	#body1{
-		font-size:14px; 
+		font-size:15px !important; 
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	div[id^=box],img,.last,#imgs,#claim,#secondBox,#imgs>li:nth-of-type(2),#sta,#noti,#deli,#claim {
 		position:relative; 
 	}
 	#imgBox img{
-		height:75px;
+		height:68px;
 	}
 	#imgs{
 		list-style-type:none; 
@@ -35,6 +35,7 @@
 		left:175px; 
 		width:1080px; 
 		margin-left:20px;
+		height:1100px;
 	}
 	img{
 		width:100px; 
@@ -55,7 +56,7 @@
 		padding:10px 0 10px 20px;
 	}
 	#box0{ 
-		padding:160px 0 0 86px; 
+		padding:160px 0 0 70px; 
 	}
 	#box1,#box2{ 
 		top:-120px; 
@@ -124,10 +125,10 @@
 	<div id="total">   
 		<div id="deli"> 
 			<div id="deliTitle">주문/배송</div><br/> 
-			   <div id="box0">신규 주문 <div>13</div> 건</div> 
-			  		<div id="box1">배송 준비 <div>3</div> 건<br/>
-			   			 배송 중 <div>7</div> 건<br/>
-			   			 배송 완료 <div>13</div> 건 </div> 
+			   <div id="box0">신규 주문 <div style="font-weight:bold; color:red">13</div> 건</div> 
+			  		<div id="box1">배송 준비 <div style="font-weight:bold; color:orange">3</div> 건<br/>
+			   			 배송 중 <div style="font-weight:bold; color:green">7</div> 건<br/>
+			   			 배송 완료 <div style="font-weight:bold; color:blue">13</div> 건 </div> 
 		</div>
 		<ul id="imgs">
 			<li><img id="odd1" src="<%=request.getContextPath()%>/img/y_new.png"/></li>
@@ -138,13 +139,13 @@
 		<div id="claim">
 			<div id="claimTitle">클레임/매출</div><br/>
 			   
-			    	<div id="box2">취소 요청 <div>0</div> 건<br/>
-			    	 	 반품 요청 <div>1</div> 건<br/>
-			     		 교환 요청 <div>2</div> 건
+			    	<div id="box2">취소 요청 <div style="font-weight:bold; color:teal">0</div> 건<br/>
+			    	 	 반품 요청 <div style="font-weight:bold; color:purple">1</div> 건<br/>
+			     		  요청 <div style="font-weight:bold; color:olive">2</div> 건
 			     </div>
 			  
-			    	<div id="box3">매출 <div>3,000,000</div>원<br/>
-			    		 환불 <div>30,000</div>원</div>
+			    	<div id="box3">매출 <div style="font-weight:bold; color:fuchsia">3,000,000</div> 원<br/>
+			    		 환불 <div style="font-weight:bold; color:darksalmon">30,000</div> 원</div>
 		</div>
 		<div id="secondBox">
 		<div id="sta">
@@ -163,20 +164,20 @@
 		<div id="ques">
 			<div id="quesTitle">미답변 문의/리뷰</div><br/>
 			  <img class="last" src="<%=request.getContextPath()%>/img/y_question.png"/> 
-			 		<div id="box4">미답변 문의 <div>12</div>건<br/>
-			  			 미답변 리뷰 <div>3</div>건</div>
+			 		<div id="box4">미답변 문의 <div style="font-weight:bold; color:tomato">12</div> 건<br/>
+			  			 미답변 리뷰 <div style="font-weight:bold; color:teal">3</div> 건</div>
 		</div>
 		<div id="accept">
 			<div id="acceptTitle">판매자 승인 요청</div><br/>
 			   <img class="last" src="<%=request.getContextPath()%>/img/y_accept.png"/>
-			   		<div id="box5">승인 신청 건수 <div>6</div>건<br/> 
-			   			 미처리 건수 <div>7</div>건</div>
+			   		<div id="box5">승인 신청 건수 <div style="font-weight:bold; color:orange">6</div> 건<br/> 
+			   			 미처리 건수 <div style="font-weight:bold; color:red">7</div> 건</div>
 		</div>
 		<div id="rep">
 			<div id="repTitle">신고내역</div><br/>
 			 <img class="last" src="<%=request.getContextPath()%>/img/y_report.png"/>
-			   		<div id="box6">접수 건수 <div>3</div>건<br/> 
-			   			 미처리 건수 <div>0</div>건</div>
+			   		<div id="box6">접수 건수 <div style="font-weight:bold; color:green">3</div> 건<br/> 
+			   			 미처리 건수 <div style="font-weight:bold; color:blue">0</div> 건</div>
 			</div>
 		</div> 
 	</div> 

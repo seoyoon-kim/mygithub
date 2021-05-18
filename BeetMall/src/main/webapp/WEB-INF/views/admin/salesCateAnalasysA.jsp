@@ -30,9 +30,7 @@
 	article{
 		width:1080px;
 		position:relative;
-		top:-130px;
-		left:-20px; 
-		z-index:-1;
+		top:-130px; 
 	}
 	.wrapContainer {
 		background-color:white;
@@ -40,12 +38,9 @@
 		border-color:lightgray;  
 		margin:50px 30px;
 		width:95% !important;
-	} 
-	#salesCateContainer{
-		height:400px;
-	}
+	}  
 	#pdfDown{
-		margin-right:20px;
+		margin: 10px 20px 0 0;
 	}
 	button{
 		border-radius:5px;
@@ -63,13 +58,14 @@
 	}
 	b{
 		position:relative;
-		top:-18px;
+		top:-7px;
+		left:-6px;
 	}
 	#excelViewNum, #excelDown{
 		position:relative;
-		top:-135px;
+		top:-80px;
 		margin:90px 20px 0 0;
-	} 
+	}  
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -111,11 +107,11 @@
 		position:relative;
     } 
     #salesCateBox{
-    	height:580px; 
+    	height:500px; 
     }
 	#salesBox1, #salesBox2{ 
 		position:relative;
-		top:580px !important;
+		top:460px !important;
     	height:630px; 
 	} 
     #sales1Title{
@@ -130,7 +126,7 @@
 	  }  
 	  #calendarApply>div{
 	  	position:relative;
-	  	top:-17px;
+	  	top:-7px;
 	  }
 	  /*매출분석*/
 	#excelContainer{
@@ -138,7 +134,7 @@
 		top:-70px;
 	} 
 	#salesCateTitle, #sales1Title, #sales2Title{
-		padding-top:0 !important;
+		padding-top:10px !important;
 	}
 	
 </style>
@@ -203,7 +199,7 @@
 							<option value="월별" selected>월별</option>
 							<option value="일별">일별</option>
 						</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						<button id="calendarApply" style="margin-left: 10px;"><span style="position:relative; top:-17px;">날짜 적용</span></button>
+						<button id="calendarApply" style="margin-left: 10px;"><div>날짜 적용</div></button>
 					</div>
 
 				</div>

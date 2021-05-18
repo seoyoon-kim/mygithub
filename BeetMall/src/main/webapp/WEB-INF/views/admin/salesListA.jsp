@@ -13,13 +13,14 @@
 	}  
 	/*정렬 컨테이너*/
 	#sortBox {
-		margin:50px 0 0 900px;
+		margin:40px 0 0 900px;
 	}
 	#sortBox li{
 		margin-top:30px;
 	}
 	#sortBox li:nth-of-type(1){
 		width:108px;
+		margin-top:40px;
 	}
 	#sortBox li:nth-of-type(2){
 		width:38px;
@@ -33,11 +34,7 @@
 	}    
 	#title>ul,.productList{
 		position:relative; left:-40px;
-	} 
-	
-	#ascBtn, #descBtn{
-		width:40px;
-	} 
+	}  
 	/* 본문 정렬*/
 	#container li{ 
 		list-style-type:none;
@@ -203,6 +200,9 @@
 	}
 	#option_sel{width:120px;}
 	
+	table input[type=checkbox]{
+		top:0;
+	}
 /*주문상세 테이블 modal*/
  .detail_modal{display:none;}   
  .detail_modal{width:30%;}
@@ -251,7 +251,7 @@
 	#searchBox{
 		position:relative;
 		left:-35px;
-		top:-10px;
+		top:-20px;
 	}
 	#searchBox label{
 		background-color:white;

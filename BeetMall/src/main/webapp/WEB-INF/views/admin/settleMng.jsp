@@ -18,7 +18,7 @@
 		width:19%; 
 	}   
 	#sortBox {
-		margin:70px 0 0 50px;
+		margin:50px 0 0 30px;
 	} 
 	#sortBox li{
 		margin-top:30px;
@@ -42,7 +42,7 @@
 		float:left;
 	}
 	#contentBox{
-		top:-20px;
+		top:-10px;
 	}  
 	#contentBox li:nth-of-type(8){
 		width:14%;

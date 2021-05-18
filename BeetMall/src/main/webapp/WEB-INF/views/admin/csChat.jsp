@@ -43,7 +43,10 @@
 	}
 	#topBar li:nth-of-type(7){
 		position:relative; left:-80px;
-	}   
+	}     
+	#contentBox{
+		top:-10px;
+	}
 	#contentBox li:nth-of-type(9n-2) {
     	width: 8%;
 	}
@@ -74,7 +77,7 @@
 		width:11%;
 	} 
 	#sortBox {
-		margin: 80px 0 0 20px;
+		margin: 50px 0 0 20px;
 	}
 	#sortBox li{
 		margin-top:30px;

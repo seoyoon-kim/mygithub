@@ -51,6 +51,14 @@
 	#fromTo{
 		margin-left:90px;
 	} 
+	#ascBtn{
+		top:170px !important;
+		left:1030px;
+	}
+	#descBtn{ 
+		top:170px !important;
+		left:1070px;
+	}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
@@ -94,7 +102,7 @@
 	<div id="container">   
 		<div id="choose">
 			<a href="customerListA"><button class="success" value="" name="" id="">일반회원</button></a>
-			<a href="sellerListA"><button class="success" value="" name="" id="" style="background-color:lightgray;">판매자회원</button></a>
+			<a href="sellerListA"><button class="success" value="" name="" id="" style="background-color:lightgray; color:black;">판매자회원</button></a>
 		</div> 
 			<div id="sortBox">
 				<ul>

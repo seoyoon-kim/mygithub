@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">
-<!-- 차트 라이브러리 chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
-<!-- chart.js pdf 변환 -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
 
 <!-- 오늘의 날짜를 계산해서 오늘 기준으로 년도, 월, 일이 언제인지를 기준으로 값이 입력 될 수 있도록 한다. -->
 <c:set var='today' value="<%=new java.util.Date()%>" />
@@ -19,7 +13,17 @@
 <c:set var='yearCheck'>
 	<fmt:formatDate value="${today }" pattern="yyyy" />
 </c:set>
+ 
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">
+<!-- 차트 라이브러리 chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+<!-- chart.js pdf 변환 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
+
 <style>
+	#contentBox ul {
+    	margin-left: 0px !important; 
+	}
 	/*맨 위 top Bar*/
 	#topBar li{
 		width:12%;
@@ -30,7 +34,7 @@
 	article{
 		width:1080px;
 		position:relative;
-		top:-130px;
+		top:-100px;
 		left:-20px; 
 		z-index:-1;
 	}
@@ -44,7 +48,7 @@
 		width:95% !important;
 	}
 	#pdfDown{
-		margin-right:20px;
+		margin: 10px 20px 0 0;
 	}
 	button{
 		border-radius:5px;
@@ -62,7 +66,8 @@
 	}
 	b{
 		position:relative;
-		top:-18px;
+		top:-7px;
+		left:-6px;
 	}
 	#excelViewNum, #excelDown{
 		position:relative;
@@ -126,11 +131,11 @@
 	  }
 	  #calendarApply>div{
 	  	position:relative;
-	  	top:-17px;
+	  	top:-7px;
 	  }
 	  /*매출분석*/
 	#excelViewNum, #excelDown{
-		margin:70px 20px 0 0;
+		margin:90px 20px 0 0;
 	}  
 	#excelContainer{
 		position:relative;
@@ -249,4 +254,5 @@
 </section>
    		 	
 		 </div> 
+</div>
 </div>
