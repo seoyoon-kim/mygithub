@@ -148,14 +148,14 @@ public class ProductViewController {
 			String reqPageNum = req.getParameter("wpageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
 			
 			if(reqPageNum == null) {
-				pageVO.setPageNum(1);
+				pageVO1.setPageNum(1);
 			}else if(reqPageNum != null) {
-				pageVO.setPageNum(Integer.parseInt(reqPageNum));
+				pageVO1.setPageNum(Integer.parseInt(reqPageNum));
 			}
 			
 			//총 레코드 수 구하기 
-			pageVO1.setTotalRecord(productViewService.totalRecord(pageVO1));
-			//System.out.println("totalrecord ->" +  productViewService.totalRecord(pageVO1)); //여기까지 나옴
+			pageVO1.setTotalRecord(productViewService.totalRecord3(userid));
+			System.out.println("totalrecord 장바구니 ->" +  productViewService.totalRecord3(userid)); //여기까지 나옴
 			mav.addObject("pageVO1", pageVO1);
 				
 			///장바구니 내역 구하기

@@ -32,6 +32,8 @@ public interface ProductViewDAO {
 	
 	public int totalRecord2(PageProductVO pageVO2);
 	
+	public int totalRecord3(String userid);
+	
 	////////////상품문의 보기
 	public List<ProductViewVO> ProductViewFaq(PageProductVO pageVO2);
 	

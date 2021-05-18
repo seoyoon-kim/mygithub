@@ -28,6 +28,8 @@ public interface ProductViewService {
 	
 	public int totalRecord2(PageProductVO pageVO2);
 	
+	public int totalRecord3(String userid);
+	
 	////////////리뷰글 상세보기
 	public ProductViewVO reviewViewSelect(int pnum,int rnum);
 	

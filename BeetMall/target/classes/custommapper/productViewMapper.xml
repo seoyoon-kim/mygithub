@@ -55,6 +55,10 @@
 	<select id="totalRecord2" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="int">
 		select count(qnum) totalRecord from userqboard where productnum=${productnum}
 	</select>
+	
+	<select id="totalRecord3" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="int">
+		select count(*) from wish where userid=#{userid}
+	</select>
     
     <!--        해당 상품의, 해당 리뷰글 눌렀을때 뷰어 보기    -->    
     <select id="reviewViewSelect" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
@@ -82,16 +86,23 @@
      <select id="customWishView" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
     select * from(
 	    select * from(
-		   select distinct w.userid, w.productnum, w.optionnum,nvl(o.optionname,' '), w.wishnum, w.wishoptionnum, p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent, o.optionprice from wish w  
+		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,' ')optionname, w.wishnum, w.wishoptionnum, p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent, o.optionprice 
+				from wish w  
 				left join product p 
 				    on p.productnum = w.productnum 
 				left join optiontbl o
 				    on w.optionnum = o.optionnum
-				where w.userid = #{userid})
-					 where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord})
-					 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
-		        							  <if test="pageNum!=totalPage">${onePageRecord}</if>				
+				left join discount d
+				    on w.productnum = d.productnum
+				where w.userid = #{userid}
+				order by w.productnum)
+			 where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum desc)
+			 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        	order by productnum	asc					  				
      </select>
+     
+ 
     
     
   </mapper>

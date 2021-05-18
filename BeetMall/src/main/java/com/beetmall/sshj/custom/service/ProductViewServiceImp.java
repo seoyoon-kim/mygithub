@@ -108,6 +108,14 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 
+	@Override
+	public int totalRecord3(String userid) {
+		
+		return productVeiwDAO.totalRecord3(userid);
+	}
+
+
+
 
 
 
