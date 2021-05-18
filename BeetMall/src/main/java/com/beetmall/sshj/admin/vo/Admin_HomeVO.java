@@ -23,6 +23,41 @@ public class Admin_HomeVO {
 	private int reportOver; // 신고 접수 건수
 	private int reportWaiting; // 신고 처리 대기중
 	
+	private String salesMonth; // 매출 월
+	private double salesAdminSum; // 회사 수익합계
+	private long salesSellerSum; // 판매자 수익합계
+	private long salesTrend; // 구매추이
+	
+	
+	
+	
+	
+	public long getSalesSellerSum() {
+		return salesSellerSum;
+	}
+	public void setSalesSellerSum(long salesSellerSum) {
+		this.salesSellerSum = salesSellerSum;
+	}
+	public double getSalesAdminSum() {
+		return salesAdminSum;
+	}
+	public void setSalesAdminSum(double salesAdminSum) {
+		this.salesAdminSum = salesAdminSum;
+	}
+	public long getSalesTrend() {
+		return salesTrend;
+	}
+	public void setSalesTrend(long salesTrend) {
+		this.salesTrend = salesTrend;
+	}
+	public String getSalesMonth() {
+		return salesMonth;
+	}
+	public void setSalesMonth(String salesMonth) {
+		this.salesMonth = salesMonth;
+	}
+
+
 	public int getRealpayment() {
 		return realpayment;
 	}

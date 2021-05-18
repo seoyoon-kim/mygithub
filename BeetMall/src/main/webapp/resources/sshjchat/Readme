@@ -1,0 +1,17 @@
+이건 노드js파일인데 깃에 올릴 마땅한 방법이 없어 이렇게 첨부해서 올리게 되었습니다. 
+일단 노드js에서 켠 상태라면 
+http://127.0.0.1:12021/chatForm?sender=내아이디&receiver=상대방아이디&roomcode=아무숫자 또는
+http://ip주소:12021/chatForm?sender=내아이디&receiver=상대방아이디&roomcode=아무숫자
+이런 형태로 링크 연결하면 잘 들어갑니다. 
+
+roomcode는 db조회해서 가져오는 식이라서 아무 숫자나 넣어도 되니까 링크 연결할때 1 로 그냥 고정시켜도 됩니다. 
+가져오실 때 아이프레임으로 가져와서 출력하면 됩니다.
+
+만약 존재하지 않는 아이디로 연결하면 에러납니다. 
+채팅창 크기는 
+	width:500px; 
+	height:590px;
+입니다.
+
+채팅 아이피 바꿔야 하는 파일명
+WEB-INF/views/mypages/myChatList.jsp

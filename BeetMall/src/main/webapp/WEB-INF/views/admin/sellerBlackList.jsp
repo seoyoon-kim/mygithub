@@ -56,9 +56,12 @@
 	}
 	#fromTo{
 		margin-left:14px;
+	} 
+	#ascBtn{
+		top:170px !important; 
 	}
-	.searchFrm{
-		margin-left:150px ! important;
+	#descBtn{ 
+		top:170px !important; 
 	}
 	.page_nation .pprev {
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
@@ -103,7 +106,7 @@
 	<div id="container">
 		<div id="choose">
 			<a href="customerBlackList"><button class="success" value="" name="" id="">일반회원</button></a>
-			<a href="sellerBlackList"><button class="success" value="" name="" id="" style="background-color:lightgray;">판매자회원</button></a>
+			<a href="sellerBlackList"><button class="success" value="" name="" id="" style="background-color:lightgray; color:black;">판매자회원</button></a>
 		</div> 
 		<div id="sortBox">
 			<ul>

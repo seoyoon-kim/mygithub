@@ -33,6 +33,13 @@ function reqularExpression(num){
 					<div id="deliveryContainer">
 						<img src="<%=request.getContextPath()%>/resources/img/delivery.png">
 						<ul>
+							<c:if test="${ready != null && ready != '' }">
+								<li>배송준비중 &nbsp;<p>${ready }</p> 건</li>
+							</c:if>
+							<c:if test="${ready == null}">
+								<li>배송준비중 &nbsp;<p>0</p> 건</li>
+							</c:if>
+							
 							<c:if test="${ing != null && ing != '' }">
 								<li>배송중 &nbsp;<p>${ing}</p> 건</li>
 							</c:if>
@@ -40,11 +47,11 @@ function reqularExpression(num){
 								<li>배송중 &nbsp;<p>0</p> 건</li>
 							</c:if>
 							
-							<c:if test="${ready != null && ready != '' }">
-								<li>배송준비중 &nbsp;<p>${ready }</p> 건</li>
+							<c:if test="${deliveryClear != null && deliveryClear != '' }">
+								<li>배송완료 &nbsp;<p>${deliveryClear }</p> 건</li>
 							</c:if>
-							<c:if test="${ready == null}">
-								<li>배송준비중 &nbsp;<p>0</p> 건</li>
+							<c:if test="${deliveryClear == null}">
+								<li>배송완료 &nbsp;<p>0</p> 건</li>
 							</c:if>
 						</ul>
 					</div>

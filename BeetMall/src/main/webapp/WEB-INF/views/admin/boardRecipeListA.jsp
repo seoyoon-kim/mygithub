@@ -19,7 +19,10 @@
 	 #container li{ 
 		 list-style-type:none; 
 		 float:left;  
-	 }       
+	 }
+	#contentBox{
+		top:-10px;
+	}       
 	#contentBox li, #contentBox li:nth-of-type(5){ 
 		width:11%;
 	}
@@ -33,7 +36,7 @@
 		width:13%; 
 	}     
 	#sortBox {
-		margin: 80px 0 0 20px;
+		margin: 50px 0 0 20px;
 	}
 	#sortBox li{
 		margin-top:30px;
@@ -53,7 +56,7 @@
 		margin-right:11px;
 	}
 	#sortBox li:nth-of-type(4) {
-		margin-right:403px;
+		margin-right:405px;
 	} 
 	#sortBox li:nth-of-type(5) {
 		width:108px;
@@ -128,7 +131,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="boardRecipeListA">레시피 목록</a></strong></h5></li> 
+				<li><h5><strong><a href="boardRecipeListA">레시피 관리</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 

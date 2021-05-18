@@ -35,16 +35,17 @@
 		margin:0; 
 		width:100%;  
 	}
-	#top{ 
-		padding:5px 0px 0px 20px; 
+	#top{  
 		height:30px;
-		font-size:15px;
-		width:500px;
-		display:flex;
+		font-size:15px; 
+		float:right;
+		padding-right:20px;
 	}
 	#topCenter{
 		width:100%;
 		margin:0 auto;
+		height:30px;
+		padding:5px 0 0 20px;
 	}
 	#homeGo{
 		padding-left:10px;
@@ -65,8 +66,7 @@
 		width:20%;
 	} 
 	#fromDot{
-		position:relative; 
-		left:1150px;
+		position:relative;  
 	}
 	#logout{ 
 		background-color:black; 
@@ -95,8 +95,9 @@
 	<div id="topBox">
 	<div id="back">
 		<div id="topCenter">
+		<span id="homeGo"><a href="<%=request.getContextPath()%>/">비트몰 홈페이지</a></span>
+				
 			<div id="top">
-				<span id="homeGo"><a href="<%=request.getContextPath()%>/">비트몰 홈페이지</a></span>
 				<div id="fromDot">
 				 	관리자 님  
 				<span id="logout">로그아웃</span>

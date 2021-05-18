@@ -131,6 +131,9 @@ a:hover,a:active,a:visited,a:link{
 
 #notice>ul>li>div:nth-child(1){
 	font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 #notice>ul>li>div:nth-child(2){
 	font-size: 12px;

@@ -540,7 +540,7 @@
 						
 					</ul>
 				</div>
-					<div id="cateFooter"><div class="section"style="text-align:right;"><a href="#" id="recigogo">레시피 바로가기</a></div></div>
+					<div id="cateFooter"><div class="section"style="text-align:right;"><a href="recipeHome" id="recigogo">레시피 바로가기</a></div></div>
 				</div>
 			</div>
 			<div class="section" style="position:relative;">

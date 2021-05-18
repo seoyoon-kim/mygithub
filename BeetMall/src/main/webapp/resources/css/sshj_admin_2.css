@@ -17,7 +17,7 @@
 	}
 	  #company li:nth-of-type(5){
 	  	width:300px !important;
-	  	left:400px;
+	  	left:100px;
 	  	padding-top:13px;
 	  }
 	 /*좌상 법인 정보*/
@@ -26,7 +26,8 @@
 	}
 	 #company {
 	 	top:-265px;
-	 	left:-245px;
+	 	left:45px;
+	 	width:500px !important;
 	 }
 	 #companyHeader{
 	 	padding-top:10px;
@@ -53,8 +54,8 @@
 	 	padding-top:20px; 
 	 }
 	 #infoBtns{
-	 	top:-230px;
-	 	left:85px;
+	 	top:-200px;
+	 	left:75px;
 	 }
 	 #infoBtns button{
 	 	width:80px;

@@ -21,4 +21,6 @@ public interface Admin_HomeDAO {
 	public Admin_HomeVO getNewReport();
 	// 미처리 신고
 	public Admin_HomeVO getWaitingReport();
+	// 매출통계 3개월치
+	public List<Admin_HomeVO> getSalesData(int num);
 }

@@ -53,6 +53,8 @@ public class admin_Home {
 					mav.addObject("refund", formatter.format(status.getOrdercount()));
 				} else if(delivery.get(i).getOrderstatus().equals("취소")) {
 					mav.addObject("cancel", formatter.format(status.getOrdercount()));
+				} else if(delivery.get(i).getOrderstatus().equals("배송완료")) {
+					mav.addObject("deliveryClear", formatter.format(status.getOrdercount()));
 				}
 			}
 		} else {
@@ -77,6 +79,35 @@ public class admin_Home {
 		
 		// 신고 미처리건수
 		mav.addObject("waiting",service.getWaitingReport().getReportWaiting());
+		
+		// 매출 통계 3개월치
+		int num[] = {2,1,0};
+			
+		for(int i = 0; i< num.length; i++) {
+			List<Admin_HomeVO> result = service.getSalesData(num[i]);
+			long resultSellerSum = 0;
+			long resultAdminSum = 0;
+			if(result.size() != 0) {
+				for(int j=0; j<result.size();j++) {
+					resultSellerSum += result.get(j).getSalesSellerSum();
+					resultAdminSum += Math.round(result.get(j).getSalesAdminSum());
+				}
+				long resultSellerSales = resultSellerSum;
+				long resultAdminSales = resultAdminSum;
+				String resultDate = result.get(0).getSalesMonth() +"월";
+				long resultTrend = result.get(0).getSalesTrend();
+				mav.addObject("resultSeller"+i,resultSellerSales);
+				mav.addObject("resultAdminSales"+i,resultAdminSales);
+				mav.addObject("resultDate"+i,resultDate);
+				mav.addObject("resultTrend"+i,resultTrend);
+				System.out.println(resultSellerSales);
+				System.out.println(resultAdminSales);
+				System.out.println(resultDate);
+				System.out.println(resultTrend);
+			} 
+		}
+		
+		
 		
 		mav.setViewName("/admin/adminHome");
 		return mav;

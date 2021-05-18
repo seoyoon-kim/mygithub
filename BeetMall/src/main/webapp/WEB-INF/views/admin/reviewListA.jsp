@@ -12,6 +12,9 @@
 	 #container li:nth-of-type(6):not(#sortBox li:nth-of-type(6)){ 
 	 	padding:10px 0 10px 20px;
 	 } 
+	#contentBox{
+		top:-40px;
+	} 
 	#contentBox li:nth-of-type(9n-8){ 
 		width:0%; 
 	}
@@ -34,12 +37,7 @@
 	#topBar li:nth-of-type(4){
 		width:6%;
 	}   
-	/*데이터 내용*/
-	.subjectLine{
-		white-space:nowrap; 
-		overflow:hidden;
-		text-overflow:ellipsis;
-	}
+	/*데이터 내용*/ 
 	.cartImg{
 		margin-left:10px;
 		height:20%;
@@ -70,7 +68,7 @@
 		padding:2px 7px;
 	}  
 	#sortBox {
-		margin: 110px 0 0 20px;
+		margin: 80px 0 0 20px;
 	} 
 	#sortBox>ul{
 		width:1110px !important;
@@ -87,7 +85,7 @@
 		width: 13%;
 	}
 	#sortBox li:nth-of-type(4) {
-		margin-right:250px;
+		margin-right:243px;
 	} 
 	#sortBox li:nth-of-type(6) {
 		margin-right:12px;
@@ -245,7 +243,7 @@
 	#reasonBuyer, #reasonSeller{ 
 		position:relative;
 		height:30px;
-		background-color:yellow;
+		background-color:#f5f541ad;
 		padding:5px;
 		width:830px;
 	}
@@ -277,19 +275,26 @@
 		color:black;
 	}
 	#farmGo{	
-		margin: 10px 10px 0 625px;
+		margin: 10px 10px 0 560px;
 	}
 	#farmGo:hover, #closeBtn:hover{
 		background-color:white;
+	}
+	#blindBtn1{ 
+	    top: -124px;
+	    left: 750px; 
+	}
+	#blindBtn2{ 
+	    top: -40px;
+	    left: 750px; 
 	}
 </style> 
 <%@ include file="/inc/top.jspf" %>
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="reviewListA">소비자 리뷰</a></strong></h5></li> 
-				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
-				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
+				<li><h5><strong><a href="reviewListA">소비자 리뷰</a></strong></h5></li>  
+				<li><button class="success" value="del" name="del" id="delBtn">비공개</button></li>
 			</ul> 
 		</div>  
 		</div>
@@ -585,6 +590,7 @@
 					<div id="reasonBuyer">
 						신고사유 : 비방
 					</div>
+					<button class="success" value="blind" name="blind" id="blindBtn1">비공개</button>
 				</div>
 			</div>
 			<div id="replyPart">
@@ -600,6 +606,7 @@
 					<div id="reasonSeller">
 						신고사유 : 비방
 					</div>
+				<button class="success" value="blind" name="blind" id="blindBtn2">비공개</button>
 				<button class="success" value="" name="" id="farmGo">판매자 농장 방문</button>
 				<button class="success" value="" name="" id="closeBtn">닫기</button>
 			</div>

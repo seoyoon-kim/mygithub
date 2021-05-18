@@ -61,4 +61,10 @@ public class Admin_HomeServiceimp implements Admin_HomeService{
 		return dao.getWaitingReport();
 	}
 
+	@Override
+	public List<Admin_HomeVO> getSalesData(int num) {
+		// TODO Auto-generated method stub
+		return dao.getSalesData(num);
+	}
+
 }

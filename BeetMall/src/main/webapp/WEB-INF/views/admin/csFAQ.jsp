@@ -8,6 +8,9 @@
 	#topBar h5{ 
 		padding-left:170px; 
 	}
+	#contentBox{
+		top:-40px;
+	}
 	#contentBox li:nth-of-type(6n-5){ 
 		width:0%; 
 	}
@@ -58,7 +61,7 @@
 		padding:2px 7px;
 	}  
 	#sortBox {
-		margin: 110px 0 0 20px;
+		margin: 80px 0 0 20px;
 	} 
 	#sortBox>ul{
 		width:1110px !important;

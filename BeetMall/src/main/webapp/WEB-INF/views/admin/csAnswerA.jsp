@@ -56,7 +56,7 @@
    /*표*/ 
    form{
 	   	position:absolute;
-	   	top:-190px;
+	   	top:-205px;
 	   	left:180px;
 	   	width:1351px;
    }
@@ -143,7 +143,7 @@
 	}
 	
 	input[type="submit"].btn:hover, input[type="button"].btn:hover, input[type="reset"].btn:hover{
-   	  background: #b3b3b3;
+   	  background: #b3b3b3 !important;
 	  color:white;
 	  display: inline-block;
 	  outline: 0;
