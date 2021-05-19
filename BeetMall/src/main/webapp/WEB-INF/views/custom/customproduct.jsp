@@ -733,6 +733,7 @@ margin-left:1010px;
 font-size:15px;
 color:black;
 }
+
 /* 채팅 */
 #chatIframe{
 		position:absolute;
