@@ -53,9 +53,15 @@
     </select> 
  
     <select id="customMyrecipe" resultType="com.beetmall.sshj.custom.vo.RecipeVO" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
-        select  recipenum,recipetitle,userid,recipemainimg, 
-        to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
-        where userid=#{param} order by recipenum desc     
+        select * from(
+		    select * from(
+		        select  recipenum,recipetitle,userid,recipemainimg, 
+		        to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
+		        where userid=#{userid} order by recipenum desc)
+		         where <![CDATA[rownum<=]]>${pageNum2}*${onePageRecord2} order by recipenum asc)
+				 where <![CDATA[rownum<=]]><if test="pageNum2==totalPage2">${lastPageRecord2}</if>
+        							       <if test="pageNum2!=totalPage2">${onePageRecord2}</if>  
+        		 order by recipenum desc	     
     </select>  
     
     <update id="recigoodOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
@@ -86,11 +92,17 @@
     delete from favorite where recipenum=${param1} and userid=#{param2}
     </delete>
      
-    <select id="customMyrecipe2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-        select b.recipenum,b.recipetitle,b.userid,b.recipemainimg,b.reciperecommend,b.recipehit from 
-        (select r.recipenum,r.recipetitle,r.userid,r.recipemainimg,r.reciperecommend,
-        r.recipehit from recipe r join favorite f on r.recipenum=f.recipenum)b 
-        where b.userid=#{param}
+    <select id="customMyrecipe2" resultType="com.beetmall.sshj.custom.vo.RecipeVO" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
+         select * from(
+		    select * from(
+		        select r.recipenum as recipenum ,r.recipetitle,r.userid,r.recipecontent,r.recipemainimg,r.reciperecommend,r.recipehit from recipe r
+		        left join favorite f
+		        on r.recipenum=f.recipenum
+		         where f.userid=#{userid} order by r.recipenum desc)
+		         where <![CDATA[rownum<=]]>${pageNum2}*${onePageRecord2} order by recipenum asc)
+				 where <![CDATA[rownum<=]]><if test="pageNum2==totalPage2">${lastPageRecord2}</if>
+        							       <if test="pageNum2!=totalPage2">${onePageRecord2}</if>  
+        		 order by recipenum desc	     
     </select>  
     
     <update id="recipeHit" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
@@ -105,7 +117,17 @@
 	<select id="totalRecord5" parameterType="com.beetmall.sshj.custom.vo.RecipeVO" resultType="int">
 		select count(*) totalRecord from recipe
 	</select>
+	
+	<select id="totalRecord6" parameterType="com.beetmall.sshj.custom.vo.RecipeVO" resultType="int">
+		select count(*) from recipe where userid=#{userid}
+	</select>
     
+    <select id="totalRecord7" parameterType="com.beetmall.sshj.custom.vo.RecipeVO" resultType="int">
+		select count(r.recipenum) from recipe r
+        left join favorite f
+        on r.recipenum=f.recipenum
+        where f.userid=#{userid}
+	</select>
     
     
     

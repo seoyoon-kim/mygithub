@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.custom.service.RecipeServiceImp;
 import com.beetmall.sshj.custom.vo.PageRecipeVO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO2;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 	@Controller
@@ -185,7 +186,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		ModelAndView mav=new ModelAndView();
 		
 		
-        PageRecipeVO pageVO1 = new PageRecipeVO();
+		PageRecipeVO pageVO1 = new PageRecipeVO();
         PageRecipeVO pageVO2 = new PageRecipeVO();
         
         //////////1게시글 목록 뽑아내기
@@ -233,13 +234,47 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 //////////////////////////////////////////////////////////내가 작성한 레시피///////////////////////////////////////////////////////////	
 	@RequestMapping("/customMyrecipe")
 	@ResponseBody
-	public ModelAndView customMyrecipe(HttpSession session) {
+	public ModelAndView customMyrecipe(HttpSession session,HttpServletRequest req,PageRecipeVO2 pageVO,HttpServletResponse res) {
 		
 		ModelAndView mav = new ModelAndView();
 		String userid = (String)session.getAttribute("logId");
-		System.out.println(userid);
+	
+		
+		PageRecipeVO2 pageVO1=new PageRecipeVO2();
+		pageVO1.setUserid(userid);
+		
+		PageRecipeVO2 pageVO2=new PageRecipeVO2();
+		pageVO2.setUserid(userid);
+		
+		
+		//////////////////////////
+		String reqPageNum1 = req.getParameter("rpageNum1"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
+		
+		if(reqPageNum1 == null) {
+			pageVO1.setPageNum2(1);
+		}else if(reqPageNum1 != null) {
+			pageVO1.setPageNum2(Integer.parseInt(reqPageNum1));
+		}
+		
+
+		String reqPageNum2 = req.getParameter("rpageNum2"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
+		
+		if(reqPageNum2 == null) {
+			pageVO2.setPageNum2(1);
+		}else if(reqPageNum2 != null) {
+			pageVO2.setPageNum2(Integer.parseInt(reqPageNum2));
+		}
+		
+		//총 레코드 수 구하기 
+		pageVO1.setTotalRecord2(recipeService.totalRecord6(userid));
+		mav.addObject("pageVO1", pageVO1);
+		
+		pageVO2.setTotalRecord2(recipeService.totalRecord7(userid));
+		mav.addObject("pageVO2", pageVO2);
+		
 		//////////1게시글 목록 뽑아내기
-		mav.addObject("list" ,recipeService.customMyrecipe(userid));	
+		mav.addObject("list" ,recipeService.customMyrecipe(pageVO1));
+		mav.addObject("list2" ,recipeService.customMyrecipe2(pageVO2));
 		mav.setViewName("custom/customMyrecipe");
 		
 		return mav;
@@ -324,22 +359,6 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 }
 	
 	
- 
-	////////////////////////////////////장바구니 담은 레시피 선택/////////////////////////////////
-	
-	@RequestMapping("/customMyrecipe2")
-	@ResponseBody
-	public List<RecipeVO> customMyrecipe2(HttpServletRequest req) {
-		
-		
-		String id=req.getParameter("id");
-	    System.out.println(id);
-	    List<RecipeVO> list = recipeService.customMyrecipe2(id);
-	    
-	    return list;
-		
-	
-	}
 	
    ////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
 

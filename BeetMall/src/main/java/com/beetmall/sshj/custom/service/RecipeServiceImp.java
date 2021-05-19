@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.RecipeDAO;
 import com.beetmall.sshj.custom.vo.PageRecipeVO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO2;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 @Service
@@ -39,9 +40,9 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> customMyrecipe(String userid) {
+	public List<RecipeVO> customMyrecipe(PageRecipeVO2 pageVO1) {
 	
-		return RecipeDAO.customMyrecipe(userid);
+		return RecipeDAO.customMyrecipe(pageVO1);
 	}
 
 	@Override
@@ -69,8 +70,8 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> customMyrecipe2(String id){
-		return RecipeDAO.customMyrecipe2(id);
+	public List<RecipeVO> customMyrecipe2(PageRecipeVO2 pageVO2){
+		return RecipeDAO.customMyrecipe2(pageVO2);
 	}
 
 
@@ -131,6 +132,18 @@ public class RecipeServiceImp implements RecipeService {
 	public int totalRecord5(PageRecipeVO pageVO2) {
 		
 		return RecipeDAO.totalRecord4(pageVO2);
+	}
+
+	@Override
+	public int totalRecord6(String userid) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.totalRecord6(userid);
+	}
+
+	@Override
+	public int totalRecord7(String userid) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.totalRecord7(userid);
 	}
 
 

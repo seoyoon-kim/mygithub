@@ -4,7 +4,7 @@ public class PageRecipeVO2 {
 //	필요한정보를 세팅
 	private int pageNum2=1;//현재페이지
 	private int onePageNum2=5;//한페이지당 페이지 번호수
-	private int onePageRecord2=10;//한페이지당 레코드 수
+	private int onePageRecord2=9;//한페이지당 레코드 수
 	
 //	디비에서 가져오는 정보 
 	private int startPageNum2=1;//시작페이지-
@@ -16,9 +16,21 @@ public class PageRecipeVO2 {
 	private String searchKey2;//검색키
 	private String searchWord2;//검색어
 	
+	private String userid;
 	
 	
 	
+	
+	public String getUserid() {
+		return userid;
+	}
+
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+
 	//
 	private int productnum2;
 

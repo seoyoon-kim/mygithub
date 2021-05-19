@@ -16,8 +16,22 @@ public class PageRecipeVO {
 	private String searchKey;//검색키
 	private String searchWord;//검색어
 	
+	private String userid;
 	
 	
+	
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+
 	//
 	private int productnum;
 

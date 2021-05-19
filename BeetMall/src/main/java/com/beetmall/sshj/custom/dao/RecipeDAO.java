@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.beetmall.sshj.custom.vo.CenterVO;
 import com.beetmall.sshj.custom.vo.PageProductVO;
 import com.beetmall.sshj.custom.vo.PageRecipeVO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO2;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 
@@ -25,7 +26,7 @@ public interface RecipeDAO {
 	
 	public List<RecipeVO>recipeAllListHome2(PageRecipeVO pageVO2);
 	
-	public List<RecipeVO>customMyrecipe(String userid);
+	public List<RecipeVO>customMyrecipe(PageRecipeVO2 pageVO1);
 	
 	public int recigoodOk(int data);
 	
@@ -41,7 +42,7 @@ public interface RecipeDAO {
 	
 	public int recikeepOnly(int num,String id);
 	
-	public List<RecipeVO> customMyrecipe2(String id);
+	public List<RecipeVO> customMyrecipe2(PageRecipeVO2 pageVO2);
 	
 	public int recipeDelete(int recipenum);
 
@@ -51,6 +52,9 @@ public interface RecipeDAO {
 	
 	public int totalRecord4(PageRecipeVO pageVO1);	
 	public int totalRecord5(PageRecipeVO pageVO2);
+	
+	public int totalRecord6(String userid);
+	public int totalRecord7(String userid);
 	
 	
 	
