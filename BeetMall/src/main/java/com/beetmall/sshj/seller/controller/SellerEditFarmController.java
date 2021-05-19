@@ -158,7 +158,6 @@ public class SellerEditFarmController {
 				mav.setViewName("redirect:sellerEditFarm");
 			}
 			
-			System.out.println("1번");
 		} else {
 			// 새로운 이미지를 등록하지 않는다
 			// 업데이트문
@@ -173,8 +172,7 @@ public class SellerEditFarmController {
 				// 수정 실패
 				
 				mav.setViewName("redirect:sellerEditFarm");
-			}
-			System.out.println("2번");			
+			}		
 		}
 		
 		

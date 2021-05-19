@@ -21,7 +21,6 @@ public class SellerIntroController {
 		if(session.getAttribute("logId")!=null) {
 			String userid = (String)session.getAttribute("logId");
 			SellerIntroFarmVO vo = service.selectInfo(userid);
-			System.out.println(vo.getFarmprofile());
 			if((int)session.getAttribute("logType") == 2 ) {
 				mav.addObject("result", service.selectInfo(userid)); // 전체 데이터 불러오기
 				mav.addObject("result1",service.discountSelect(userid)); // 디스카운트 확인
