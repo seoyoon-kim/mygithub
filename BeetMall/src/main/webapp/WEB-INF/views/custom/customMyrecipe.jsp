@@ -398,7 +398,7 @@ $(document).ready(function(){
 		
 		<div id="recimainbox" >
 		   <c:forEach var="data" items="${list}">
-		       <c:if test="${logId==data.userid}"> 
+		     
 					<div id="recipebox">
 					      
 									<ul>
@@ -410,7 +410,7 @@ $(document).ready(function(){
 									</ul>
 						  
 					</div> 
-			   </c:if>
+			 
 			</c:forEach>
         
 		</div>

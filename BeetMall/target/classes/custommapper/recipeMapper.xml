@@ -40,16 +40,22 @@
         		 order by recipenum desc	
     </select>   
     
-    <select id="recipeAllListHome2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
-        select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
-        to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
-        order by reciperecommend desc
+    <select id="recipeAllListHome2" resultType="com.beetmall.sshj.custom.vo.RecipeVO" parameterType="com.beetmall.sshj.custom.vo.PageRecipeVO">
+       select * from(
+		    select * from(
+			     select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
+		         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
+		         order by reciperecommend desc )
+		         where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reciperecommend asc)
+				 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							       <if test="pageNum!=totalPage">${onePageRecord}</if>  
+        		 order by reciperecommend desc	
     </select> 
  
-    <select id="customMyrecipe" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
+    <select id="customMyrecipe" resultType="com.beetmall.sshj.custom.vo.RecipeVO" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
         select  recipenum,recipetitle,userid,recipemainimg, 
         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit from recipe
-        order by recipenum desc     
+        where userid=#{param} order by recipenum desc     
     </select>  
     
     <update id="recigoodOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
@@ -84,7 +90,7 @@
         select b.recipenum,b.recipetitle,b.userid,b.recipemainimg,b.reciperecommend,b.recipehit from 
         (select r.recipenum,r.recipetitle,r.userid,r.recipemainimg,r.reciperecommend,
         r.recipehit from recipe r join favorite f on r.recipenum=f.recipenum)b 
-        where b.userid=#{param1}
+        where b.userid=#{param}
     </select>  
     
     <update id="recipeHit" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
@@ -95,6 +101,11 @@
     <select id="totalRecord4" parameterType="com.beetmall.sshj.custom.vo.RecipeVO" resultType="int">
 		select count(*) totalRecord from recipe
 	</select>
+	
+	<select id="totalRecord5" parameterType="com.beetmall.sshj.custom.vo.RecipeVO" resultType="int">
+		select count(*) totalRecord from recipe
+	</select>
+    
     
     
     

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -204,26 +205,16 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		}
 		
 		
-		//검색어, 검색키
-		pageVO1.setSearchKey(req.getParameter("searchKey"));
-		System.out.println("setSearchKey" + pageVO1.getSearchKey());
-		pageVO1.setSearchWord(req.getParameter("searchWord"));
-		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO1));
-		
-		//검색어, 검색키
-		pageVO1.setSearchKey(req.getParameter("searchKey"));
-		System.out.println("setSearchKey" + pageVO2.getSearchKey());
-		pageVO1.setSearchWord(req.getParameter("searchWord"));
-		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO2));
+
 	
 		//총 레코드 수 구하기 
 		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO1));
-		System.out.println("totalrecord 레시피 ->" +  recipeService.totalRecord4(pageVO1)); //여기까지 나옴
+		//System.out.println("totalrecord 레시피 ->" +  recipeService.totalRecord4(pageVO1)); //여기까지 나옴
 		mav.addObject("pageVO1", pageVO1);
 		
 		//총 레코드 수 구하기 
-		pageVO1.setTotalRecord(recipeService.totalRecord4(pageVO2));
-		System.out.println("totalrecord 레시피2 ->" +  recipeService.totalRecord4(pageVO2)); //여기까지 나옴
+		pageVO2.setTotalRecord(recipeService.totalRecord5(pageVO2));
+		//System.out.println("totalrecord 레시피2 ->" +  recipeService.totalRecord5(pageVO2)); //여기까지 나옴
 		mav.addObject("pageVO2", pageVO2);
 		
 		mav.addObject("list" , recipeService.recipeAllListHome(pageVO1));
@@ -241,11 +232,14 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 //////////////////////////////////////////////////////////내가 작성한 레시피///////////////////////////////////////////////////////////	
 	@RequestMapping("/customMyrecipe")
-	public ModelAndView customMyrecipe(String userid) {
+	@ResponseBody
+	public ModelAndView customMyrecipe(HttpSession session) {
 		
-		ModelAndView mav=new ModelAndView();
+		ModelAndView mav = new ModelAndView();
+		String userid = (String)session.getAttribute("logId");
+		System.out.println(userid);
 		//////////1게시글 목록 뽑아내기
-		mav.addObject("list" ,recipeService.customMyrecipe());	
+		mav.addObject("list" ,recipeService.customMyrecipe(userid));	
 		mav.setViewName("custom/customMyrecipe");
 		
 		return mav;

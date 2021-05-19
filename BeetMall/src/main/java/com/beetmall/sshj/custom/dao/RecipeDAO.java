@@ -21,11 +21,11 @@ public interface RecipeDAO {
 	
 	public RecipeVO RecipeSelect(int recipenum);
 
-	public List<RecipeVO>recipeAllListHome(PageRecipeVO pageVO);
+	public List<RecipeVO>recipeAllListHome(PageRecipeVO pageVO1);
 	
-	public List<RecipeVO>recipeAllListHome2(PageRecipeVO pageVO);
+	public List<RecipeVO>recipeAllListHome2(PageRecipeVO pageVO2);
 	
-	public List<RecipeVO>customMyrecipe();
+	public List<RecipeVO>customMyrecipe(String userid);
 	
 	public int recigoodOk(int data);
 	
@@ -49,6 +49,9 @@ public interface RecipeDAO {
 	
 	public int recipeHit(int data);
 	
-	public int totalRecord4(PageRecipeVO pageVO);
+	public int totalRecord4(PageRecipeVO pageVO1);	
+	public int totalRecord5(PageRecipeVO pageVO2);
+	
+	
 	
 }
