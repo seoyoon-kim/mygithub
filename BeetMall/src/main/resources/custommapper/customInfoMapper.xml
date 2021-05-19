@@ -7,8 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="CustomInfoAllRecord" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
       select * from(
 	    select * from(
-		     select qnum,userid,qcontent,to_char(qwritedate,'MM-DD HH:MI')qwritedate,qopen,qanswer,qtitle from userqboard where userid=#{userid}
-		     order by qnum desc)
+		        select q.qnum as qnum,p.productname,q.userid,q.qcontent,to_char(q.qwritedate,'MM-DD HH:MI')qwritedate,q.qopen,q.qanswer,q.qtitle 
+            from userqboard q
+            left join product p 
+            on q.productnum = p.productnum
+            where q.userid=#{userid}
+            order by qnum desc)
 		     where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qnum asc)
 			 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
@@ -18,5 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="totalRecord8" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="int">
 		select count(*) from userqboard where userid=#{userid}
 	</select>
+	
+	<update id="lockinfo" parameterType="com.beetmall.sshj.custom.vo.PageProductVO">
+	 update userqboard SET qopen=0 where qnum=${param}
+	</update>
 	
 </mapper>

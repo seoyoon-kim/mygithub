@@ -346,7 +346,72 @@ border:none;
 
 <script>
 
+
+
 $(function(){
+	/*
+	var len = $("input[name='checkbox']:checked").length; //체크박스의 갯수
+	var checkArr = []; //배열만들기
+	if(len > 1){ //개수를 체크하고 2개부터는 each함수를 통해 각각 가져온다.
+	    $("input[name='checkbox']:checked").each(function(e){
+	        var value = $(this).val();
+	        checkArr.push(value);     
+	        
+            var oneArr=opt.split('&'); 
+			optnum=parseInt(oneArr[0]);   //상품가격
+			dprtprice=parseInt(oneArr[1]); //할인가격
+			optprice=parseInt(oneArr[2]);//옵션가격
+			ocount=parseInt(oneArr[3]);//옵션갯수
+			pcount=parseInt(oneArr[4]);//상품의갯수
+	        
+	    })
+	}
+	*/
+	/*
+	prtprice=${pvo.productprice}; //상품본래가격
+	
+	//상품할인가격
+    dprtprice=${Dprice};
+	
+	submitprice=tprice=prtprice-dprtprice;
+	
+	//상품갯수 추가하기/////////////
+	$(".pCount").click(function(){ 	    	
+		
+		pcount=parseInt($("#prtnum").text())+1;
+		//alert("pcount="+pcount);
+		$('#prtnum').text(pcount);	   			
+
+		var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);			
+		//alert("pcount="+pcount+"tprice="+tprice);
+		$("#oneproductTotalPrice").html("구매가격:"+tprice+"원");	
+		
+		submitprice=tprice;
+		totaldprtprice=dprtprice*pcount;
+		
+	});
+	 ///////////////상품갯수 빼기////////////////
+	$(".mCount").click(function(){
+		
+		pcount=parseInt($("#prtnum").text())-1;
+	
+		if(pcount<=0){	
+			alert("1개이상 구매해 주세요");	
+			pcount=parseInt($("#prtnum").text());
+		}
+		
+		$('#prtnum').text(pcount);
+
+		tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
+		//alert("pcount="+pcount+"tprice="+tprice); 		 		
+		$("#oneproductTotalPrice").html("구매가격:"+tprice+"원");	
+		
+		submitprice=tprice;
+		totaldprtprice=dprtprice*pcount;
+		
+	});		
+	
+	
 	
 	$("#totalbuy").click(function(){
 		  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
@@ -358,7 +423,7 @@ $(function(){
 	
 });
 
-
+*/
 
 
 
@@ -409,11 +474,11 @@ $(function(){
 					
 					</li>
 				
-					<li><input type="button" id="pbtn" value="-"/><span id="numbox">${wl.wishnum}</span><input type="button" id="mbtn" value="+"/></li><!-- 상품수량 -->
+					<li><input type="button" id="pbtn" class="mCount" value="-"/><span id="prtnum">${wl.wishnum}</span><input type="button" id="mbtn" class="pCount" value="+"/></li><!-- 상품수량 -->
 					
-					<li>17,900</li><!-- 총가격 -->
+					<li><span id="oneproductTotalPrice"></span></li><!-- 총가격 -->
 					<li></li>
-					<li><input type="checkbox" name="" value="" />${wl.wishcode}</li>
+					<li><input type="checkbox" name="checkbox" value="${wl.productprice}&${wl.saleprice}&${wl.optionprice}&${wl.wishoptionnum}&${wl.wishnum}"/></li>
 					<li><input type="button" value="x" id="delbutton" /></li>
 			</ul>
 			

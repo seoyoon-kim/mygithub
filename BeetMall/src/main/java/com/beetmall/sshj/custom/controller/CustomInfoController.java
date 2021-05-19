@@ -61,6 +61,19 @@ public class CustomInfoController {
 			mav.setViewName("custom/customInfoView");
 			return mav;
 		}
+		
+		//비공개처리하기
+		
+		@RequestMapping("/lockinfo")
+		@ResponseBody
+		public int lockinfo(HttpServletRequest req) {
+			int num= Integer.parseInt(req.getParameter("num"));
+			System.out.println(num);
+			customInfoService.lockinfo(num);
+			
+			return customInfoService.lockinfo(num);
+			
+		}
 	
 	
 	

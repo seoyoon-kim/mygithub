@@ -41,4 +41,9 @@ public class CustomInfoServiceImp implements CustomInfoService {
 		return customInfoDAO.totalRecord8(userid);
 	}
 
+	public int lockinfo(int num) {
+		return customInfoDAO.lockinfo(num);
+		
+	}
+
 }

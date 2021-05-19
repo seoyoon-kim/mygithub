@@ -92,10 +92,19 @@ public class ProductViewVO {
         //
         private int wishnum;
         private int wishoptionnum;
+        private int wishcode;
         
         
         
         
+        
+        
+		public int getWishcode() {
+			return wishcode;
+		}
+		public void setWishcode(int wishcode) {
+			this.wishcode = wishcode;
+		}
 		public int getWishnum() {
 			return wishnum;
 		}

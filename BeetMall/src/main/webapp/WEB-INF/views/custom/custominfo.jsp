@@ -389,10 +389,12 @@ float:left;
 	//답변완료 답변대기중 select 
 	
 $(function(){	
-	$(document).ready(function(){
+	
+	
+	
 		$(".qnaViewbtn").click(function() {
 		    		
-		  			$(this).parent().next().toggle(
+		  			$(this).parent().next().next().toggle(
 		  				function(){
 		  					$(this).parent().next().css("display", " "); 
 		  				},
@@ -402,8 +404,39 @@ $(function(){
 		  				}
 		  			);
 		  		});
+
+	
+	///////////////////비공개처리 업데이트////////////////
+	$(".lockbtn").click(function() {
+	
+		
+		if(confirm("게시글을 비공개 처리하시겠습니까?")){			
+			
+		var num=$(this).parent().next().val();
+		var url = "lockinfo";
+			
+			console.log(url,num);
+			
+			$.ajax({
+				url:url,
+				data:num,
+				success:function(result){
+					console.log('비공개처리 성공---> ');
+					alert(num);
+				},error:function(e){
+					console.log('비공개처리 실패---> ');
+				}
+			})
+		}
+		
+		
 	});
+	
+	
 });
+	
+	
+	
 	
 </script>
 
@@ -419,7 +452,7 @@ $(function(){
 		
 			<!--문의하기 버튼 -->
 			<a href="<%=request.getContextPath()%>/mybuyList" class="btn" id="ask_btn">문의하기</a>
-			<a href="<%=request.getContextPath()%>/" class="btn" id="ask_btn">문의삭제</a>
+			
 	
 			
 			
@@ -445,16 +478,17 @@ $(function(){
 
            <c:if test="${not empty faqlist}">
            <c:forEach var="qlist" items="${faqlist}">
+           
 				<ul id="qnaList">
 					 <li>${qlist.qnum}</li> <!-- 문의 숫자 -->		
-					 <li>상품이름</li><!-- 상품이름 -->	
+					 <li>${qlist.productname}</li><!-- 상품이름 -->	
 					 <li class="qnaViewbtn">${qlist.qtitle}</li>
 					 <li>${qlist.qwritedate}</li><!-- 날짜 -->
 				  <c:if test="${qlist.qopen==0}">	<!-- 비공개일경우 그림표시 -->
-					 <li><img src="img/ciconlock2.png"></li>
+					 <li class="unlockbtn"><img src="img/ciconlock2.png"></li>
 				  </c:if>
 				  <c:if test="${qlist.qopen==1}">	 <!-- 공개일경우 그림표시 -->
-					 <li><img src="img/ciconlock.png"></li>
+					 <li class="lockbtn"><img src="img/ciconlock.png"></li>
 				  </c:if>
 				  
 				    <c:if test="${qlist.qanswer==null}">
@@ -465,7 +499,7 @@ $(function(){
 				 		 <li>답변완료</li>
 				 	</c:if>
 				</ul>
-				
+				<input type="hidden" value="${qlist.qnum}">
 				<div id="qnaViewbox" style="display:none" >
 			
 							<div id="qnatxtbox">				

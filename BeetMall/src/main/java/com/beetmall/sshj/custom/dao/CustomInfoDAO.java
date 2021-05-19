@@ -15,4 +15,6 @@ public interface CustomInfoDAO {
 	
 	public int totalRecord8(String userid);
 
+	public int lockinfo(int num);
+
 }

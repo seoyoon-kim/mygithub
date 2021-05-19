@@ -16,4 +16,6 @@ public interface CustomInfoService {
 	
 	public int totalRecord8(String userid);
 	
+	public int lockinfo(int num);
+	
 }
