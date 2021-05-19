@@ -136,7 +136,54 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+	#listul{
+		padding-left:25px;
+	}
+	#listul>li{
+		margin:0;
+		padding-left:5px;
+		height:45px;
+		line-height: 45px;
+		font-size:13px;
+		border-bottom: 1px solid #ddd;
+	}
+	#listul>li:nth-child(1), #listul>li:nth-child(2), #listul>li:nth-child(3), #listul>li:nth-child(4), #listul>li:nth-child(5), #listul>li:nth-child(6), #listul>li:nth-child(7){
+		border-top:1px solid #ddd;
+		text-align:center;
+	}
+	#listul>li:nth-child(7n+1){
+		width:10%;
+		text-align:center;
+	}
+	#listul>li:nth-child(7n+2){
+		width:10%;
+		text-align:center;
+	}
+	#listul>li:nth-child(7n+3){
+		width:12%;
+		text-align:center;
+	}
+	#listul>li:nth-child(7n+4){
+		width:20%;
+	}
+	#listul>li:nth-child(7n+5){
+		width:6%;
+		text-align:right;
+	}
+	#listul>li:nth-child(7n+6){
+		width:29%;
+		padding-left:20px;
+	}
+	#listul>li:nth-child(7n){
+		width:12%;
+	}
 </style>
+<script>
+function pagelist(pagenum){
+	var lin = "customerListA?pageNum="+pagenum;
+	location.href=lin;
+}
+</script>
 <%@ include file="/inc/top.jspf"%>
 	<div id="topBarContainer">
 		<div id="topBar">
@@ -185,10 +232,9 @@
 						id="descBtn">▼</button></li>
 			</ul>
 		</div>
-		<div id="contentBox">
-			<div id="title">
-				<ul>
-					<li><input type="checkbox" name="check"></li>
+		<div id="">
+			<div id="">
+				<ul id="listul">
 					<li>구분</li>
 					<li>이름</li>
 					<li>아이디</li>
@@ -197,21 +243,18 @@
 					<li>포인트</li>
 					<li>주소</li>
 					<li>가입일</li>
+					<c:forEach var="vo" items="${list}">
+						<li><c:if test="${vo.storenum<0}">구매자</c:if><c:if test="${vo.storenum>=0}">판매자</c:if></li>
+						<li>${vo.username}</li>
+						<li><a href="boardCustomerInfoEdit?userid=${vo.userid}">${vo.userid}</a></li>
+						<li>${vo.useremail}</li>
+						<li>${vo.point}</li>
+						<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
+						<li>${vo.joindate }<br /></li>
+					</c:forEach>
 				</ul>
 			</div>
-			<c:forEach var="vo" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li><c:if test="${vo.storenum<0}">구매자</c:if><c:if test="${vo.storenum>=0}">판매자</c:if></li>
-				<li>${vo.username}</li>
-				<li><a href="회원정보?">${vo.userid}</a></li>
-				<%-- <li>${vo.age}</li> --%>
-				<li>${vo.useremail}</li>
-				<li>${vo.point}</li>
-				<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
-				<li>${vo.joindate }<br /></li>
-			</ul>
-			</c:forEach>
+			
 			
 			<!--  
 		<c:forEach var="data" items="${list}">
@@ -227,17 +270,27 @@
 			</ul>
 		</c:forEach>-->
 		</div>
-		<div class="page_wrap">
+		<div class="page_wrap">	
 			<div class="page_nation">
-				<a class="arrow pprev"
-					href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a> <a
-					class="arrow prev" href="#"></a> <a href="#" class="active">1</a> <a
-					href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-				<a href="#">6</a> <a href="#">7</a> <a href="#">8</a> <a href="#">9</a>
-				<a href="#">10</a> <a class="arrow next" href="#"></a> <a
-					class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelist(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
+	           </c:if>
 			</div>
-		</div>
+		 </div>
 		<div>
 			<form method="get" class="searchFrm"
 				action="<%=request.getContextPath()%>/board/noticeBoardList.jsp"> 

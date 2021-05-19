@@ -14,5 +14,10 @@ public interface Admin_MemberDAO {
 	public List<Admin_MemberVO> memberselectblack(Admin_Member_PageVO pageVO);
 	public int memberCountSeller(int usertype, int seltype);	// 판매자 정보
 	public List<Admin_MemberVO> memberselectSeller(Admin_Member_PageVO pageVO);
+	// 회원정보 부분
+	public Admin_MemberVO memberinfoSelect(String userid);
+	public List<Admin_MemberVO> orderinfoSelect(String userid);
+	public Admin_MemberVO reportinfoSelect(String userid);
+	public int orderstatusSelect(String userid, String status);
 	
 }

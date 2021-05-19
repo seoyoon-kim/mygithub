@@ -56,4 +56,24 @@ public class Admin_MemberServiceImp implements Admin_MemberService {
 		return memberdao.memberselectSeller(pageVO);
 	}
 
+	@Override
+	public Admin_MemberVO memberinfoSelect(String userid) {
+		return memberdao.memberinfoSelect(userid);
+	}
+
+	@Override
+	public List<Admin_MemberVO> orderinfoSelect(String userid) {
+		return memberdao.orderinfoSelect(userid);
+	}
+
+	@Override
+	public Admin_MemberVO reportinfoSelect(String userid) {
+		return memberdao.reportinfoSelect(userid);
+	}
+
+	@Override
+	public int orderstatusSelect(String userid, String status) {
+		return memberdao.orderstatusSelect(userid, status);
+	}
+
 }

@@ -31,8 +31,37 @@ public class Admin_MemberVO {
 	private String bank;
 	private String bankname;
 	private long bankaccount;
+	// -- 회원정보 수정때문에 추가한 부분 //
+	private int ordercount;
+	private String orderstatus;
 	
+	private int reportcount;
+	private int reportsum;
 	
+	public int getOrdercount() {
+		return ordercount;
+	}
+	public void setOrdercount(int ordercount) {
+		this.ordercount = ordercount;
+	}
+	public String getOrderstatus() {
+		return orderstatus;
+	}
+	public void setOrderstatus(String orderstatus) {
+		this.orderstatus = orderstatus;
+	}
+	public int getReportcount() {
+		return reportcount;
+	}
+	public void setReportcount(int reportcount) {
+		this.reportcount = reportcount;
+	}
+	public int getReportsum() {
+		return reportsum;
+	}
+	public void setReportsum(int reportsum) {
+		this.reportsum = reportsum;
+	}
 	public String getStorename() {
 		return storename;
 	}

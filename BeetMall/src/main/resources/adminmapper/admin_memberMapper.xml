@@ -49,4 +49,22 @@
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
 		order by sellername asc
 	</select>
+	<select id="memberinfoSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select userid, username, userphone, useremail, userzipcode, useraddr, 
+		userdetailaddr, birthday, joindate, usertype, point,userstop from member
+		where userid=#{param1}
+	</select>
+	<select id="orderinfoSelect"  resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select orderstatus, count(userid) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum
+		where userid = #{param1}
+		group by orderstatus
+		order by orderstatus
+	</select>
+	<select id="reportinfoSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select count(userid) as reportcount , sum(reportdate) as reportsum from reporttbl where userid = #{param1}
+	</select>
+	<select id="orderstatusSelect"  resultType="Integer">
+		select count(nvl(userid,0)) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum
+		where userid = #{param1} and orderstatus = #{param2}
+	</select>
 </mapper>

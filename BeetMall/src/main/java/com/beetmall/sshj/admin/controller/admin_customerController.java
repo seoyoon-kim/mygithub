@@ -1,5 +1,8 @@
 package com.beetmall.sshj.admin.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession; 
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beetmall.sshj.admin.service.Admin_MemberService;
 import com.beetmall.sshj.admin.service.Admin_MemberServiceImp;
 import com.beetmall.sshj.admin.service.Boardervice;
+import com.beetmall.sshj.admin.vo.Admin_MemberVO;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
 import com.beetmall.sshj.admin.vo.BoardVO; 
 
@@ -56,8 +60,19 @@ public class admin_customerController {
 	}
 	//회원정보 수정
 	@RequestMapping("/boardCustomerInfoEdit")
-	public ModelAndView boardCustomerInfoEdit() {
+	public ModelAndView boardCustomerInfoEdit(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView(); 
+		Admin_Member_PageVO pageVO = new Admin_Member_PageVO();
+		String userid = req.getParameter("userid");
+		System.out.println("조회하는 페이지의 유저아이디="+userid);
+		mav.addObject("ilist",memberservice.memberinfoSelect(userid));
+		
+		mav.addObject("olist1", memberservice.orderstatusSelect(userid, "결제완료"));
+		mav.addObject("olist2", memberservice.orderstatusSelect(userid, "구매확정"));
+		mav.addObject("olist3", memberservice.orderstatusSelect(userid, "배송중"));
+		mav.addObject("olist4", memberservice.orderstatusSelect(userid, "환불"));
+		mav.addObject("olist5", memberservice.orderstatusSelect(userid, "환불 진행중"));
+		mav.addObject("rlist",memberservice.reportinfoSelect(userid));
 		mav.setViewName("/admin/boardCustomerInfoEdit");
 		return mav;
 	}
