@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.ProductPayDAO">
+	<select id="productPay" resultType="com.beetmall.sshj.custom.vo.ProductPayVO">
+		select a.username, a.useremail, a.userphone, a.useraddr, a.userzipcode, a.userdetailaddr,a.point, b.deliveryprice, b.productnum
+		from member a
+		left outer join product b
+		on 1=1
+		where b.productnum=#{param2} and a.userid=#{param1}
+	</select>
+	<select id="productPaySame" resultType="com.beetmall.sshj.custom.vo.ProductPayVO">
+		select username, useremail, userphone, useraddr, userzipcode, userdetailaddr
+		from member where userid=#{param1}
+	</select>
+	<update id="PointUpdate">
+ 		update member set point = #{param1} where userid= #{param2}
+ 	</update>
+ 	<insert id="insertordertbl" parameterType="com.beetmall.sshj.custom.vo.ProductPayVO">
+  			insert into ordertbl 
+  			values(${ordernum}, #{userid}, sysdate, #{username}, #{userphone}, ${orderprice}, #{receiver}, 
+  			#{receiverphone}, ${deliveryzipcode}, #{deliveryaddr}, #{deliverydetailaddr}, ${deliveryprice}, 
+  			${deliveryoption}, #{deliverymemo}, sysdate, '카드', ${usedpoint}, ${realpayment}, ${optionnum})
+	</insert>
+	<insert id="inserOrderDetail" parameterType="com.beetmall.sshj.custom.vo.ProductPayVO">
+  			insert into orderdetail 
+  			values(${productnum}, ${ordernum}, ${orderquantity}, '결제완료', sysdate, ${orderprice}, 'N', null)
+	</insert>
+</mapper>
