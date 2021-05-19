@@ -37,6 +37,7 @@ public class SellerEditFarmController {
 
 			if((int)session.getAttribute("logType") == 2 ) {
 				mav.addObject("result", service.selectInfo(userid)); // 전체 데이터 불러오기
+				mav.addObject("result1",service.discountSelect(userid)); // 디스카운트 확인
 				mav.addObject("favorite", service.selectFavorite(userid)); // 즐겨찾기 수 불러오기
 				mav.setViewName("seller/sellerEditFarm");
 			}	else {
@@ -91,17 +92,17 @@ public class SellerEditFarmController {
 		// 저장위치를 구한다
 		String path = session.getServletContext().getRealPath("/upload");
 		
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		
-		if(vo.getFilename() != null && vo.getFilename() != "") {
+		MultipartFile mf = mr.getFile("filename");
+		
+		String orgName = mf.getOriginalFilename(); // 원래 파일명
+		if(mf.getSize() != 0 ) {
 			// farmprofile 새로운 이미지를 등록한다
 			
 			// db에 등록되어 있는 파일명을 가져온다
-			String checkImg = service.getImgName(vo.getUserid());
+			String checkImg = service.getImgName(vo.getStorenum());
 			
-			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-			
-			MultipartFile mf = mr.getFile("filename");
-			String orgName = mf.getOriginalFilename(); // 원래 파일명
 			
 			if(orgName != null && !orgName.equals("")) {
 				
@@ -130,43 +131,69 @@ public class SellerEditFarmController {
 			}
 			
 			// 업데이트문
+			int result1 = service.farmUpdate(vo);
+			int result2 = service.sellerUpdate(vo);
 			
-			
-			//기존에 있던 파일은 삭제한다.
-			try {
-				File delFile = new File(path,checkImg);
-				delFile.delete();
-			} catch(Exception e) {
-				e.printStackTrace();
+			if( result1>0 && result2>0) {
+				//수정 성공
+				
+				//기존에 있던 파일은 삭제한다.
+				try {
+					File delFile = new File(path,checkImg);
+					delFile.delete();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				mav.setViewName("redirect:sellerIntroFarm");
+			} else {
+				// 수정 실패
+				
+				try {
+					File delFile = new File(path,vo.getFarmprofile());
+					delFile.delete();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				mav.setViewName("redirect:sellerEditFarm");
 			}
 			
-			
-			
+			System.out.println("1번");
 		} else {
 			// 새로운 이미지를 등록하지 않는다
+			// 업데이트문
+			int result1 = service.farmUpdate(vo);
+			int result2 = service.sellerUpdate(vo);
 			
+			if( result1>0 && result2>0) {
+				//수정 성공
+				
+				mav.setViewName("redirect:sellerIntroFarm");
+			} else {
+				// 수정 실패
+				
+				mav.setViewName("redirect:sellerEditFarm");
+			}
+			System.out.println("2번");			
 		}
 		
 		
-		SellerEditFarmVO vo2 = new SellerEditFarmVO();
-		
-		
-		System.out.println("test= "+vo.getFilename());
-		System.out.println("test= "+vo.getFarmprofile());
-		System.out.println("test= "+vo.getFarmname());
-		System.out.println("test= "+vo.getFarmintro());
-		
-		System.out.println("test= "+vo.getUserid()); 
-		System.out.println("test= "+vo.getStorename());
-		System.out.println("test= "+vo.getSellername());
-
-		System.out.println("test= "+vo.getBank());
-		System.out.println("test= "+vo.getBankaccount());
-		System.out.println("test= "+vo.getBankname());
-		
-		System.out.println("test= "+vo.getStoreemail());
-		
-		System.out.println("test= "+vo.getProductnum());
+//		System.out.println("test= "+req.getParameter("filename"));
+//		System.out.println("test= "+vo.getFarmprofile());
+//		System.out.println("test= "+vo.getFarmname());
+//		System.out.println("test= "+vo.getFarmintro());
+//		
+//		System.out.println("test= "+vo.getUserid()); 
+//		System.out.println("test= "+vo.getStorename());
+//		System.out.println("test= "+vo.getSellername());
+//
+//		System.out.println("test= "+vo.getBank());
+//		System.out.println("test= "+vo.getBankaccount());
+//		System.out.println("test= "+vo.getBankname());
+//		
+//		System.out.println("test= "+vo.getStoreemail());
+//		
+//		System.out.println("test= "+vo.getProductnum());
 		
 		
 		

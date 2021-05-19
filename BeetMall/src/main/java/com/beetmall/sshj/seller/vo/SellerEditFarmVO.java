@@ -23,7 +23,6 @@ public class SellerEditFarmVO {
 	private String farmname; // 농장이름
 	private String farmintro; // 소개
 	private String farmprofile; //농장 이미지
-	private String filename; //이미지파일네임
 	private int farmvisitor; //방문자수
 	// 농장테이블에 상품번호 추가
 	
@@ -57,12 +56,6 @@ public class SellerEditFarmVO {
 	}
 	public void setCheckImg(String checkImg) {
 		this.checkImg = checkImg;
-	}
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
 	}
 	public int getSaleprice() {
 		return saleprice;

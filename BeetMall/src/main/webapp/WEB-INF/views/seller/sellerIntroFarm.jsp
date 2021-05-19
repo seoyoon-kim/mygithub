@@ -20,7 +20,7 @@
 				</div><!-- profile_box 종료 -->
 				<div id="farm_info">
 					<div>INFO</div>
-					<p name="farmintro">${result.farmintro }</p>
+					<div>${result.farmintro }</div>
 				</div><!-- farm_info 종료 -->
 				<div id="farm_contact">
 					<div>CONTACT</div>
@@ -45,10 +45,10 @@
 						<div>
 							<div>${result.productname }</div>
 							<div>
-								<c:if test="${result.saleselect != '0' && result.saleselect != null}">
-									판매금액 : <div>${ result.productprice - result.saleprice }</div>원
+								<c:if test="${result1.saleselect != '0' && result1.saleselect != null}">
+									판매금액 : <div>${ result.productprice - result1.saleprice }</div>원
 								</c:if>
-								<c:if test="${result.saleselect == '0' || result.saleselect == null }">
+								<c:if test="${result1.saleselect == '0' || result1.saleselect == null }">
 									판매금액 : <div>${ result.productprice }</div>원
 								</c:if>
 							</div>

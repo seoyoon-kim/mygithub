@@ -265,6 +265,7 @@ function imgChange(data){
 							<span class="spanstar">예금주</span><input type="text" name="bankname" id="bankname" value="${result.bankname }" />
 						</div>
 						<div>
+							<input type="hidden" id="checkEmailSellerResult" value="N"/>
 							<span class="spanstar">이메일</span><input type="text" name="storeemail" id="storeemail" style="margin-right: 5px;" value="${result.storeemail }" /><input type="button" value="인증코드 전송" id="storeemailBtn" class="btn" />
 						</div>
 						<div>
@@ -282,10 +283,10 @@ function imgChange(data){
 						<div>
 							<div id="openerProductname">${result.productname }</div>
 							<div>
-								<c:if test="${result.saleselect != '0' && result.saleselect != null}">
-									판매금액 : <div id="openerProductPrice">${ result.productprice - result.saleprice }</div>원
+								<c:if test="${result1.saleselect != '0' && result1.saleselect != null}">
+									판매금액 : <div id="openerProductPrice">${ result.productprice - result1.saleprice }</div>원
 								</c:if>
-								<c:if test="${result.saleselect == '0' || result.saleselect == null }">
+								<c:if test="${result1.saleselect == '0' || result1.saleselect == null }">
 									판매금액 : <div id="openerProductPrice">${result.productprice }</div>원
 								</c:if>
 							</div>

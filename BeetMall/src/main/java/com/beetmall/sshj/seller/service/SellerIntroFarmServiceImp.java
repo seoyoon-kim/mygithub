@@ -22,6 +22,12 @@ public class SellerIntroFarmServiceImp implements SellerIntroFarmService {
 	public int selectFavorite(String userid) {
 		return dao.selectFavorite(userid);
 	}
+
+	@Override
+	public SellerIntroFarmVO discountSelect(String userid) {
+		// TODO Auto-generated method stub
+		return dao.discountSelect(userid);
+	}
 	
 	
 }
