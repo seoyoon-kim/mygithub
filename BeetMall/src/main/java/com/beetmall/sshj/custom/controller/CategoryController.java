@@ -115,46 +115,38 @@ public class CategoryController {
 		}
 		
 		if(type != null && !type.equals("") && item != null && !item.equals("") && pick != null && !pick.equals("")) { // 다 널이아닐때
-			System.out.println("1");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setPick("1");
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}else if(type != null && !type.equals("") && item != null && !item.equals("")) { //타입이랑 품목만 널이아닐때
-			System.out.println("2");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}else if(item != null && !item.equals("") && pick != null && !pick.equals("")) { // 품목과 픽업여부만 널이아닐때
-			System.out.println("3");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setPick("1");
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}else if(type != null && !type.equals("") && pick != null && !pick.equals("")) { // 타입과 픽업여부가 널이아닐때
-			System.out.println("4");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			pageVO.setPick("1");
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}else if(type != null && !type.equals("")) { // 타입만 널이아닐때
-			System.out.println("5");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}else if(item != null && !item.equals("")) { // 품목만 널이아닐때
-			System.out.println("6");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}else if(pick != null && !pick.equals("")) { // 픽업여부만 널이아닐때
-			System.out.println("7");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			pageVO.setPick("1");
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}else { //전부다 널일때
-			System.out.println("8");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			mav.addObject("list", categoryService.categorylist(pageVO));
 		}
@@ -280,7 +272,6 @@ public class CategoryController {
 		}
 		
 		if(type != null && !type.equals("") && pay != null && !pay.equals("")) {
-			System.out.println("1");
 			pageVO.setTotalRecord(categoryService.categoryOnetotalRecord(pageVO));
 			pageVO.setType(type);
 			pageVO.setPay(pay);
@@ -361,46 +352,38 @@ public class CategoryController {
 		pageVO.setSearchWord(req.getParameter("searchWord"));
 		
 		if(type != null && !type.equals("") && item != null && !item.equals("") && pick != null && !pick.equals("")) { // 다 널이아닐때
-			System.out.println("1");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setPick("1");
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}else if(type != null && !type.equals("") && item != null && !item.equals("")) { //타입이랑 품목만 널이아닐때
-			System.out.println("2");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}else if(item != null && !item.equals("") && pick != null && !pick.equals("")) { // 품목과 픽업여부만 널이아닐때
-			System.out.println("3");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setPick("1");
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}else if(type != null && !type.equals("") && pick != null && !pick.equals("")) { // 타입과 픽업여부가 널이아닐때
-			System.out.println("4");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			pageVO.setPick("1");
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}else if(type != null && !type.equals("")) { // 타입만 널이아닐때
-			System.out.println("5");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}else if(item != null && !item.equals("")) { // 품목만 널이아닐때
-			System.out.println("6");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}else if(pick != null && !pick.equals("")) { // 픽업여부만 널이아닐때
-			System.out.println("7");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			pageVO.setPick("1");
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}else { //전부다 널일때
-			System.out.println("8");
 			pageVO.setTotalRecord(categoryService.uglycategoryOnetotalRecord(pageVO));
 			mav.addObject("list", categoryService.uglyItem(pageVO));
 		}
@@ -472,46 +455,38 @@ public class CategoryController {
 		}
 		
 		if(type != null && !type.equals("") && item != null && !item.equals("") && pick != null && !pick.equals("")) { // 다 널이아닐때
-			System.out.println("1");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setPick("1");
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}else if(type != null && !type.equals("") && item != null && !item.equals("")) { //타입이랑 품목만 널이아닐때
-			System.out.println("2");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}else if(item != null && !item.equals("") && pick != null && !pick.equals("")) { // 품목과 픽업여부만 널이아닐때
-			System.out.println("3");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			pageVO.setItem(item);
 			pageVO.setPick("1");
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}else if(type != null && !type.equals("") && pick != null && !pick.equals("")) { // 타입과 픽업여부가 널이아닐때
-			System.out.println("4");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			pageVO.setPick("1");
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}else if(type != null && !type.equals("")) { // 타입만 널이아닐때
-			System.out.println("5");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			pageVO.setType(type);
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}else if(item != null && !item.equals("")) { // 품목만 널이아닐때
-			System.out.println("6");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}else if(pick != null && !pick.equals("")) { // 픽업여부만 널이아닐때
-			System.out.println("7");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			pageVO.setPick("1");
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}else { //전부다 널일때
-			System.out.println("8");
 			pageVO.setTotalRecord(categoryService.BestcategoryOnetotalRecord(pageVO));
 			mav.addObject("list", categoryService.Bestcategory(pageVO));
 		}
