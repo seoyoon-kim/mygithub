@@ -72,4 +72,9 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.stopdate(userid);
 	}
 
+	@Override
+	public int member2Insert(String userid) {
+		return memberDAO.member2Insert(userid);
+	}
+
 }

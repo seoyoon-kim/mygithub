@@ -95,7 +95,8 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		MemberVO vo = memberservice.loginOk(userid, userpwd);
 		System.out.println(vo.getUserstop());
-		if(vo.getUserstop().equals("N ") && vo.getUsertype()!=4) {
+		
+		if(vo.getUserstop().equals("N ") && vo.getUsertype()!=4 && vo.getUsertype()!=5) {
 			if(vo.getUserid()!= null && !vo.getUserid().equals("")) {
 				session.setAttribute("logId",vo.getUserid());
 				session.setAttribute("logName", vo.getUsername());
@@ -105,8 +106,8 @@ public class MemberController {
 			}else {
 				mav.setViewName("redirect:login");
 			}
-		}else if(vo.getUsertype() == 4){
-			System.out.println("4로 넘어옴");
+		}else if(vo.getUsertype() == 4 || vo.getUsertype() == 5){
+			System.out.println("4또는 5로 넘어옴");
 			session.setAttribute("Type", "탈퇴");
 			mav.setViewName("redirect:login");
 		}else if(vo.getUserstop().equals("Y ")) {
@@ -381,9 +382,11 @@ public class MemberController {
 		int result2 = memberservice.selectId(userid, userpwd); // 아이디 비번 맞나 조회 0
 		int result3 = memberservice.selectDelOk(userid);	// 배송 중인지 아닌지 조회해서 0이 다음거 넘어감
 		int result4 = memberservice.deleteId(userid);		// 회원탈퇴처럼 수정하고 끝 1나와야댐
+		int result5 = memberservice.member2Insert(userid);
 		System.out.println("result2= "+result2); // 0
 		System.out.println("result3= "+result3); // 0 
 		System.out.println("result4= "+result4); // 1
+		System.out.println("result5= "+result5); // 1
 		if(result2 > 0) {
 			if(result3>0) {
 				result = -1;
