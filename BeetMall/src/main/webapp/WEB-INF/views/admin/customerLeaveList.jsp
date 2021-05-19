@@ -150,6 +150,7 @@ $(function(){
 				<li>생년월일</li>
 				<li>주소</li>
 				<li>탈퇴일</li> 
+				
 			</ul>
 		</div>  
 		<c:forEach var="vo" items="${list}">

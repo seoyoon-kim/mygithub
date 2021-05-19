@@ -70,8 +70,6 @@ public class admin_sellerController {
 			}else if(pageNumStr != null) {
 				pageVO.setPageNum(Integer.parseInt(pageNumStr));
 			}
-			
-			
 			//pageVO.setTotalRecord();
 			if(session.getAttribute("logType")!=null) {
 				logType = (int)session.getAttribute("logType");

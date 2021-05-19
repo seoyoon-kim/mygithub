@@ -85,6 +85,33 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	#sellerlistul>li{
+		line-height: 50px;
+		height:50px;
+		border-bottom: 1px solid #eee;
+	}
+	#sellerlistul>li:nth-child(7n+1){
+		width:7%;
+	}
+	#sellerlistul>li:nth-child(7n+2){
+		width:10%;
+	}
+	#sellerlistul>li:nth-child(7n+3){
+		width:10%;
+	}
+	#sellerlistul>li:nth-child(7n+4){
+		width:20%;
+	}
+	#sellerlistul>li:nth-child(7n+5){
+		width:18%;
+	}
+	#sellerlistul>li:nth-child(7n+6){
+		width:25%;
+	}
+	#sellerlistul>li:nth-child(7n){
+		width:10%;
+	}
+	
 </style>
 <script>
 	function pagelist(pagenum){
@@ -152,37 +179,31 @@
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
 			 </ul>
 		</div>
-   		<div id="contentBox"> 	
-		<div id="title">
-			<ul>
-				<li><input type="checkbox" name="check"  ></li>
-				<li>이름</li> 
+   		<div id=""> 	
+		<div style="overflow: auto;">
+			<ul id="sellerlistul">
+				<li>농장번호</li> 
+				<li>판매자명</li>
 				<li>아이디</li>
-				<li>나이</li>
 				<li>이메일</li>
-				<li>생년월일</li>
+				<li>상호명</li>
 				<li>주소</li> 
 				<li>탈퇴일</li> 
+				
+				<c:forEach var="vo" items="${list}">
+					<li>${vo.storenum}</li>
+					<li><a href="${vo.userid}">${vo.sellername}</a></li>
+					<li>${vo.userid}</li>
+					<li>${vo.storeemail}</li>
+					<li>${vo.storename}</li>
+					<li class="wordcut">(${vo.storezipcode})${vo.storeaddr} ${vo.storedetailaddr}</li>
+					<li>${vo.exitdate}</li>
+				</c:forEach>
 			</ul>
 		</div>  
-		<c:forEach var="vo" items="${list}">
-			<ul class="contentList">
-				<li></li>
-				<li>${vo.username}</li>
-				<li><a href="회원정보?">${vo.userid}</a></li>
-				<li>${vo.age}</li>
-				<li>${vo.useremail}</li>
-				<li>${vo.point}</li>
-				<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
-				<li>${vo.joindate }<br /></li>
-			</ul>
-			</c:forEach> 
-		
-			
-			<input type="hidden" id="searchKeyhidden"/>
-			<input type="hidden" id="searchWordhidden"/>
+		<input type="hidden" id="searchKeyhidden"/>
+		<input type="hidden" id="searchWordhidden"/>
 		 
-		
 		</div>	 
 		<div class="page_wrap">	
 			<div class="page_nation">
@@ -204,8 +225,7 @@
 	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
 	           </c:if>
 			</div>
-		 </div>
- 
+		 </div> 
  
 		 <div>
 			<form method="get" class="searchFrm">

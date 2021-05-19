@@ -38,12 +38,12 @@
 		order by username asc
 	</select>
 	<select id="memberCountSeller" resultType="Integer">
-		select count(*) from member where #{param1}=3 and usertype=#{param2} and userstop = 'N'
+		select count(*) from member where #{param1}=3 and usertype=#{param2} <if test="param2 > 3">and userstop = 'N'</if>
 	</select>
 	<select id="memberselectSeller" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
 		select * from(
-		select s.storenum, s.sellername, s.userid, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age, s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg  from member m join seller s on m.userid = s.userid
+		select s.storenum as storenum, s.sellername as sellername, s.userid as userid, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age, s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg <if test="#{userType>0}">, usertype</if><if test="#{userType==5}">, to_char(exitdate, 'YYYY/MM/DD') as exitdate</if>  from member m join seller s on m.userid = s.userid <if test="{userType==5}">join member2 m2 on m.userid = m2.userid</if><if test="#{userType>0}"> where usertype = 5</if>
 		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by sellername desc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>

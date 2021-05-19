@@ -38,6 +38,15 @@ public class Admin_MemberVO {
 	private int reportcount;
 	private int reportsum;
 	
+	// -- 탈퇴회원 부분 //
+	private String exitdate;
+	
+	public String getExitdate() {
+		return exitdate;
+	}
+	public void setExitdate(String exitdate) {
+		this.exitdate = exitdate;
+	}
 	public int getOrdercount() {
 		return ordercount;
 	}
