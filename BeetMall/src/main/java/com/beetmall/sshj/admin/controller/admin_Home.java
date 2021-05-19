@@ -100,10 +100,6 @@ public class admin_Home {
 				mav.addObject("resultAdminSales"+i,resultAdminSales);
 				mav.addObject("resultDate"+i,resultDate);
 				mav.addObject("resultTrend"+i,resultTrend);
-				System.out.println(resultSellerSales);
-				System.out.println(resultAdminSales);
-				System.out.println(resultDate);
-				System.out.println(resultTrend);
 			} 
 		}
 		

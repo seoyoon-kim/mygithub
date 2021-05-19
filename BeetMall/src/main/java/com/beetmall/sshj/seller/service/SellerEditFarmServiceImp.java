@@ -23,6 +23,12 @@ public class SellerEditFarmServiceImp implements SellerEditFarmService {
 		return dao.selectFavorite(userid);
 	}
 
+	@Override
+	public String getImgName(String userid) {
+		// TODO Auto-generated method stub
+		return dao.getImgName(userid);
+	}
+
 
 
 	

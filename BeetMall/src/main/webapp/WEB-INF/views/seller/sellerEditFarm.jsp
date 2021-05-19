@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerEditFarm.css">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	function selectImg(e){
 		$('#farmprofile').click();
@@ -60,6 +61,8 @@
 			return false;			
 		}
 	}
+	
+	
 $(()=>{
 		// 판매자 이메일 인증코드 전송
 		$("#storeemailBtn").click(function(){
@@ -104,7 +107,85 @@ $(()=>{
 			}
 		})
 		
+		
+		$("#sellerzipSearch").click(function(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		            $("#storezipcode").val(data.zonecode);
+		            $("#storeaddr").val(data.address);
+		            document.getElementById('storedetailaddr').focus();
+		        }
+		    }).open();
+		})
 })
+
+// 수정하기 누르면 업데이트
+function editCheck(){
+	let test = '한글자';
+	let eng = 'test';
+	// 이메일 검사
+	var emailreg = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+	// 이름 검사
+	var namereg = /^[가-힣]{2,4}$/;
+	// 계좌번호 검사
+	var accountreg = /^[0-9]{11,15}$/;
+	
+	
+	
+	console.log(test.charCodeAt(0));
+	console.log(eng.charCodeAt(0));
+	if( $('#sellername').val() == null || $('#sellername').val() == '' ){
+		alert('대표자 이름을 입력해주세요');
+		return false;
+	} else if ( $('#storename').val() == null || $('#storename').val() == '' ){
+		alert('상호명을 입력해주세요');
+		return false;
+	} else if ( $('#bankname').val() == null || $('#bankname').val() == '' ){
+		alert('예금주를 입력해주세요');
+		return false;
+	} else if ( $('#bankaccount').val() == null || $('#bankaccount').val() == '' ){
+		alert('계좌번호를 입력해주세요');
+		return false;
+	} else if ( $('#storeemail').val() == null || $('#storeemail').val() == '' ){
+		alert('이메일을 입력해주세요')
+		return false;
+	} else if ( $('#bank').val() == null || $('#bank').val() == '' ){
+		alert('은행을 선택해주세요');
+		return false;
+	}
+	
+	if( !namereg.test($('#sellername').val()) ){ // 대표자 검사
+		alert("이름은 2~4글자만 가능합니다.");
+	} else if($('#storename').val().length > 30){ // storename이 30자 이상이면 막는다.
+		alert('상호명은 30자 이하여야 합니다');
+		return false;
+	} else if( !namereg.test($('#bankname').val()) ){ // 예금주 검사
+		alert('이름은 4글자 이하여야 합니다')
+		return false;
+	} else if( !accountreg.test(parseInt($('#bankaccount').val(),10))){ // 계좌번호 검사
+		alert('올바른 계좌번호를 입력해주세요')
+		return false;
+	} else if( !emailreg.test( $('#storeemail').val()) ){ // 이메일 검사
+		alert('올바른 이메일을 입력해주세요')
+		return false;
+	}
+	
+	$('#updateFrm').submit();
+}
+
+// 대표메뉴 수정 누르면 window open 되는 함수
+function menuEditOpen(){
+	window.name = "농장수정";
+	
+	window.open("sellerEditFarmListView", "대표메뉴 선택창", "width=1200, height=600, resizable = no, scrollbars = no");
+}
+
+// 대표메뉴 선택시 이미지 변경하는 함수
+function imgChange(data){
+	console.log('test');
+	console.log(data);
+	$('#repMenu_content>img').attr('src',data);
+}
 </script>
 <section>
 	<%@include file="/WEB-INF/views/inc/sellerHeader.jsp"%>
@@ -112,11 +193,12 @@ $(()=>{
 	<article>
 		<div class="seller_title">농장소개 수정</div>
 
-		<form method="post" action="javascript:editCheck()">
+		<form method="post" action="sellerEditFarmUpdate" id="updateFrm" enctype="multipart/form-data">
 			<input type="hidden" name="storenum" value="${result.storenum}" />
 			<div id="info_container">
 				<div id="profile_box">
-					<input type="file" id="farmprofile" name="farmprofile" style="display: none;" onchange="javascript:check(this)" accept="image/png, image/jpg, image/jpeg, image/gif" /> 
+					<input type="hidden" name="farmprofile" value="${result.farmprofile}" >
+					<input type="file" id="farmprofile" name="filename" style="display: none;" onchange="javascript:check(this)" accept="image/png, image/jpg, image/jpeg, image/gif"/> 
 					<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}" /></a><br /> 
 					*프로필 이미지 클릭시 파일첨부<br /> <input type="text" id="farmname" name="farmname" value="${result.farmname }" style="width: 100px; height: 25px" />
 					<div id="profileData">
@@ -134,59 +216,6 @@ $(()=>{
 					<div>CONTACT</div>
 					<div id="contact_content">
 						<b>스토어 정보</b>
-						<script>
-								function editCheck(){
-									let test = '한글자';
-									let eng = 'test';
-									// 이메일 검사
-									var emailreg = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
-									// 이름 검사
-									var namereg = /^[가-힣]{2,4}$/;
-									// 계좌번호 검사
-									var accountreg = /^[0-9]{11,15}$/;
-									
-									
-									
-									console.log(test.charCodeAt(0));
-									console.log(eng.charCodeAt(0));
-									if( $('#sellername').val() == null || $('#sellername').val() == '' ){
-										alert('대표자 이름을 입력해주세요');
-										return false;
-									} else if ( $('#storename').val() == null || $('#storename').val() == '' ){
-										alert('상호명을 입력해주세요');
-										return false;
-									} else if ( $('#bankname').val() == null || $('#bankname').val() == '' ){
-										alert('예금주를 입력해주세요');
-										return false;
-									} else if ( $('#bankaccount').val() == null || $('#bankaccount').val() == '' ){
-										alert('계좌번호를 입력해주세요');
-										return false;
-									} else if ( $('#storeemail').val() == null || $('#storeemail').val() == '' ){
-										alert('이메일을 입력해주세요')
-										return false;
-									}
-									
-									if( !namereg.test($('#sellername').val()) ){ // 대표자 검사
-										alert("이름은 2~4글자만 가능합니다.");
-									} else if($('#storename').val().length > 30){ // storename이 30자 이상이면 막는다.
-										alert('상호명은 30자 이하여야 합니다');
-										return false;
-									} else if( !namereg.test($('#bankname').val()) ){ // 예금주 검사
-										alert('이름은 4글자 이하여야 합니다')
-										return false;
-									} else if( !accountreg.test(parseInt($('#bankaccount').val(),10))){ // 계좌번호 검사
-										alert('올바른 계좌번호를 입력해주세요')
-										return false;
-									} else if( !emailreg.test( $('#storeemail').val()) ){ // 이메일 검사
-										alert('올바른 이메일을 입력해주세요')
-										return false;
-									}
-									
-									
-								}
-								
-								
-						</script>
 						<div>
 							<span>상호명</span><input type="text" id="storename" name="storename" value="${result.storename }" style="width: 400px" />
 						</div>
@@ -195,15 +224,20 @@ $(()=>{
 						</div>
 						<div>
 							<span>사업자등록번호</span>
-							<p name="sellerreginum">${result.sellerreginum }</p>
+							<p>${result.sellerreginum }</p>
 						</div>
 						<div>
 							<span>사업장 소재지</span>
-							<p name="storeaddr">${result.storeaddr}${result.storedetailaddr }</p>
+							<div>
+								<input type="button"  id="sellerzipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
+								<input type="text" name="storezipcode" id="storezipcode" readonly  style="width:100px;"value="${result.storezipcode }"/>
+								<input type="text" name="storeaddr" id="storeaddr" style="margin-top:5px; width:302px;" readonly  placeholder="우편 번호 검색을 통해 입력해주세요"value="${result.storeaddr }" />
+								<input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top:5px; width:540px;" placeholder="상세 주소 입력" value="${result.storedetailaddr }"/>
+							</div>				
 						</div>
 						<div>
 							<span class="spanstar">은행</span>
-							<select name="bank" id="bankName">
+							<select name="bank" id="bank">
 								<option value="index" disabled selected>은행명선택</option>
 								<option value="국민">국민</option>
 								<option value="비씨">비씨</option>
@@ -241,85 +275,30 @@ $(()=>{
 				<!-- farm_contact 종료 -->
 				<!-- 대표메뉴 -->
 				<div id="farm_repMenu">
-					<input type="hidden" name="productnum" value="${result.productnum }" />
-					<div>대표메뉴</div>
+					<input type="hidden" id="productnum" name="productnum" value="${result.productnum }" />
+					<div>대표메뉴<br><input type="button" value="대표메뉴 수정" id="MenuEditBtn" onclick="javascript:menuEditOpen()"></div>
 					<div id="repMenu_content">
-						<img src="<%=request.getContextPath()%>/resources/img/${result.thumbimg}" name="thumbimg" />
+						<img src="<%=request.getContextPath()%>/resources/img/${result.thumbimg}" name="thumbimg"/>
 						<div>
+							<div id="openerProductname">${result.productname }</div>
 							<div>
-								<span name="saleselect">${result.saleselect }%</span>&nbsp;
-								<p name="productprice">${result.productprice }원</p>
+								<c:if test="${result.saleselect != '0' && result.saleselect != null}">
+									판매금액 : <div id="openerProductPrice">${ result.productprice - result.saleprice }</div>원
+								</c:if>
+								<c:if test="${result.saleselect == '0' || result.saleselect == null }">
+									판매금액 : <div id="openerProductPrice">${result.productprice }</div>원
+								</c:if>
 							</div>
-							<p name="productname">${result.productname }</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- info_container 종료 -->
 			<div style="margin:30px auto; width:100px;">
-				<input type="submit" id="edit_btn" value="수정하기" />
+				<input type="button" id="edit_btn" value="수정하기" onclick="editCheck()" />
 			</div>
 		</form>
 		
 		
-		<table class="product_table">
-				<thead>
-					<!-- table 메뉴 14개-->
-					<tr>
-						<th class="listMenu"><input type="checkbox" checked id="productCheck" name="" value=" title="판매상품 전체 선택"></th>
-						<th class="listMenu">상품번호</th>
-						<th class="listMenu">대분류</th>
-						<th class="listMenu">중분류</th>
-						<th class="listMenu">상품이름</th>
-						<th class="listMenu" id="thumbImg">대표이미지</th>
-						<th class="listMenu">재고수량</th>
-						<th class="listMenu">판매시작일</th>
-						<th class="listMenu">판매가</th>
-						<th class="listMenu">할인금액</th>
-						<th class="listMenu">할인적용판매가</th>
-						<th class="listMenu">할인율</th>
-						<th class="listMenu">할인기간</th>
-						<th class="listMenu">판매상태</th>
-					</tr>
-				</thead>
-				<!-- 전체보기 판매상품 리스트 -->
-				<!-- 판매상태: 판매중 or 판매완료 -->
-				<!-- 판매 완료는 회색처리 -->
-				<!-- 할인율은 할인가로 계산(내림)해서 넣기 -->
-				<!-- 페이징추가 -->
-				<tbody>
-					<!-- table 1 line -->
-					<c:forEach var="vo" items="${productList}">
-					<tr class="tbl_line">
-						<td  class="tbl_line_cell"><div id="productCheck"><input type="checkbox" checked id="oneItemCk" name="oneItemCk" checked="checked" title="상품 선택"></div></td>
-						<td class="tbl_line_cell"><div id="productNum"><span id="productNum">${vo.productnum}</span></div></td>
-						<!-- 대분류 번호 숨기기 -->
-						<td class="tbl_line_cell">	
-							<div id="mCategory">
-								<span id="mCateName">${vo.catename }</span>
-								<input type="hidden" value="${vo.catenum}"/>
-							</div>
-						</td>
-						<!-- 중분류 번호 숨기기 -->
-						<td class="tbl_line_cell">
-							<div id="category">
-								<span id="cateName">${vo.mcatename }</span>
-								<input type="hidden" value="${vo.mcatenum}"/>
-							</div>
-						</td>
-						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="">${vo.productname}</a></span></div></td>	
-						<td class="tbl_line_cell"><div id="thumbnail"><img src="${vo.thumbimg}"/></div></td>
-						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">90</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
-						<td class="tbl_line_cell"><div id="regiDate">${vo.sellstart}</div></td>
-						<td class="tbl_line_cell"><div id="productprice"><span id="price_num">${vo.productprice }</span><span id="won">원</span></div></td>
-						<td class="tbl_line_cell"><div id="saleprice"><span id="price_num">${vo.saleprice}</span><span id="won">원</span></div></td>
-						<td class="tbl_line_cell"><div id="sellprice"><span id="price_num">${vo.sellprice}</span><span id="won">원</span></div></td>
-						<td class="tbl_line_cell"><div id="salepercent"><span id="salepercent">${vo.salepercent}</span>%</div></td>
-						<td class="tbl_line_cell"><div id="saleperiod"><span id="salestart">${vo.salestart }</span> ~ <span id="salefinish">${vo.salefinish }</span></div></td>
-						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText">판매중</span></div></td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
 	</article>
 </section>

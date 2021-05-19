@@ -1,6 +1,8 @@
 package com.beetmall.sshj.seller.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +23,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.seller.service.ProductService;
-import com.beetmall.sshj.seller.vo.DiscountVO;
-import com.beetmall.sshj.seller.vo.OptionVO;
 import com.beetmall.sshj.seller.vo.ProductVO;
 import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 
@@ -36,12 +36,10 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 
-	//판매상품 목록
+//====================================== 판매상품 목록 ===================================================
 	  @RequestMapping("/product_list") 
 	  public ModelAndView product_list(ProductVO vo, SearchAndPageVO sapvo, HttpSession session, HttpServletRequest req) { 
-		  
-		 ModelAndView mav = new ModelAndView();
-		 vo.setUserid((String)session.getAttribute("logId"));
+		//로그인한 아이디가져오기
 		sapvo.setUserid((String)session.getAttribute("logId"));
 			
 		//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
@@ -51,26 +49,24 @@ public class ProductController {
 		}
 		//검색어
 		sapvo.setSearchWord(sapvo.getSearchWord());
-		
 		//총 레코드 수 구하기 
 		sapvo.setTotalRecord(productService.totalRecord(sapvo));
+		  
+		ModelAndView mav = new ModelAndView();
+		
 		//상품목록 담기
-		mav.addObject("productList", productService.productAllSelect(vo.getUserid()));
+		mav.addObject("productList", productService.productAllSelect(sapvo));
+					
 		//검색어와 페이징를 담기
 		mav.addObject("searchWord",sapvo.getSearchWord());
 		mav.addObject("sapvo",sapvo);
-		mav.addObject("productList", productService.searchList(sapvo)); 
-		
-		System.out.println("word=" + sapvo.getSearchWord());
-		  
-		  
+			
 		mav.setViewName("seller/product_list"); 
 		return mav; 
 	  }
+
 	
-	//판매상품 삭제 시 진행중인 주문있으면 불가능
-	
-	//상품등록페이지 
+//====================================== 상품 등록 ===================================================
 	//판매 상품등록페이지 대분류,중분류 카테고리 불러오기
 	@RequestMapping("/product_regi")
 	public ModelAndView category_select() {
@@ -82,13 +78,8 @@ public class ProductController {
 		return mav;
 	}
 	
-	//판매상품등록 (할인o, 옵션o)
-	/*
-	 * @RequestMapping("/transactionForm")
-	 * 
-	 * @Transactional(rollbackFor= {Exception.class, RuntimeException.class}) public
-	 * String frm() { return "seller/product_regi"; }
-	 */
+	//판매상품등록 (할인, 옵션 transaction)
+
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
 	@RequestMapping(value="/product_regi_ok", method=RequestMethod.POST)
 	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {
@@ -108,11 +99,6 @@ public class ProductController {
 		//session userid
 		vo.setUserid((String)session.getAttribute("logId"));
 		
-		//productVO가 insert될 때 함께 insert될 VO
-		//할인
-		DiscountVO dvo = new DiscountVO();
-		//옵션
-		OptionVO ovo = new OptionVO();
 		
 		System.out.println("컨트롤러 vo 통과");
 		//[commit을 도와주는 객체 생성]
@@ -160,6 +146,7 @@ public class ProductController {
 			vo.setThumbimg(orgName);
 			System.out.println("vo에 set해주는 이미지 이름 orgName -> "+orgName);
 			
+//------------------------확인----------------------------------------------------
 			
 			System.out.println("확인");
 			System.out.println("mcatenum -> "+ vo.getMcatenum());
@@ -183,31 +170,33 @@ public class ProductController {
 			
 			
 //---------------------------insert & 조건-----------------------------------------		
-			//상품등록 
-			int result = productService.productInsert(vo);
-			System.out.println("상품 insert -> "+ result);
-		
-			//할인선택이 있을 때, insert
-			if(vo.getSaleselect() == '1' || vo.getSaleselect() == 1) {
-				result2 = productService.discountInsert(dvo);
-				System.out.println("vo.getSaleSelect -> " + vo.getSaleselect());
-				System.out.println("할인 insert +" + result2);
-			}
-			// 옵션선택이 있을 때, insert
-			if(vo.getOptionselect() == '1' || vo.getOptionselect() == 1) {
-				result3 = productService.optionInsert(ovo);
-				System.out.println("vo.getOpionSelect ->" + vo.getOptionselect());
-				System.out.println("옵션 insert + "+ result3);
-			}
 			// 못난이 할인을 선택하지 않았을 때,
 			if(vo.getSaleb()!='1' || vo.getSaleb()=='0') {
 				vo.setSaleb('0');
 			}
 			//배송옵션이 0이면 나머지 다 0으로 세팅
 			 if(vo.getDeliveryoption()=="1" || vo.getDeliveryoption().equals(1)) { 
-				 vo.setPaymentoption("0");
-				 vo.setDeliveryprice(0); 
+				vo.setPaymentoption("0");
+				vo.setDeliveryprice(0); 
+			}			
+			
+			//상품등록 
+			int result = productService.productInsert(vo);
+			System.out.println("상품 insert -> "+ result);
+		
+			//할인선택이 있을 때, insert
+			if(vo.getSaleselect() == '1' || vo.getSaleselect() == 1) {
+				result2 = productService.discountInsert(vo);
+				System.out.println("vo.getSaleSelect -> " + vo.getSaleselect());
+				System.out.println("할인 insert +" + result2);
 			}
+			// 옵션선택이 있을 때, insert
+			if(vo.getOptionselect() == '1' || vo.getOptionselect() == 1) {
+				result3 = productService.optionInsert(vo);
+				System.out.println("vo.getOpionSelect ->" + vo.getOptionselect());
+				System.out.println("옵션 insert + "+ result3);
+			}
+			
 			 
 //---------------------------insert 결과 확인--------------------------------------
 			// 상품등록 확인
@@ -246,8 +235,32 @@ public class ProductController {
 
 	
 	
-	//수정하기
+//====================================== 삭제 ===================================================
+	//판매상품 삭제 시 진행중인 주문있으면 불가능	
+	@RequestMapping(value = "/productDelete" , method = {RequestMethod.GET, RequestMethod.POST})
+	public String productDelete(@RequestParam(value="valueArr") List<Integer> delList , String oneProductcheck, HttpServletRequest req) {
+		//ajax를 통해서 valArr에서 받은 delList를 하나씩 꺼내서 ArrayList에 넣음 
+		ArrayList<Integer> delArr = new ArrayList<Integer>();	
+		System.out.println("delList->"+delList);
+		for(int i = 0; i< delList.size(); i++) {
+			delArr.add(delList.get(i));
+			System.out.println("delArr->"+ delArr);
+		}
+		// ArrayList로 담은 것을 Mapper로 보내기
+		for( int i = 0;  i < delArr.size(); i++) {
+			int productnum = delArr.get(i);
+			System.out.println("delete productnum -> "+productnum);
+			productService.productDelete(productnum);
+		}
+
+		return "redirect:product_list";
+	}
 	
+//====================================== 수정 ===================================================
+	@RequestMapping("/product_edit")
+	public String product_edit() {
+		return "seller/product_edit";
+	}
 	
 	//판매자 주문관리
 	@RequestMapping("/order_management")

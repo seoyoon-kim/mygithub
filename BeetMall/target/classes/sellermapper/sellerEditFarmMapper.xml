@@ -4,17 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerEditFarmDAO">
 	<select id="selectInfo" resultType="com.beetmall.sshj.seller.vo.SellerEditFarmVO">
-		select productname, c.userid userid, storenum, storename, sellername, 
-			sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr,
-			storedetailaddr, storeemail, bank, bankname, bankaccount, farmname, farmintro, farmprofile, 
-			farmvisitor, c.productnum, saleselect, productprice, thumbimg
-		from (select b.storenum, farmname,farmintro, farmprofile, farmvisitor, productnum, userid, 
-			storename, sellername, sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, 
-			storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname, bankaccount 
-			from (select * from seller) a join farm b on a.storenum = b.storenum) c 
-		join product d on c.productnum = d.productnum where c.userid='${userid}'
+		select * from (
+            select storenum, farmname, farmprofile, farmvisitor, d.productnum productnum, farmintro, userid, storename, sellername, sellerreginum,
+                    sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname,
+                    bankaccount, saleprice from 
+                (select a.storenum storenum, farmname, farmprofile, farmvisitor, productnum, farmintro, userid, storename, sellername, sellerreginum,
+                    sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname,
+                    bankaccount from farm a join 
+                    (select * from seller where userid=#{userid}) b on a.storenum = b.storenum
+            ) c join discount d on c.productnum = d.productnum 
+        ) e join product f on e.productnum = f.productnum
 	</select>
 	<select id="selectFavorite" resultType="int">
 		select count(storenum) storenum from favorite where storenum=(select storenum from seller where userid='${userid}')
+	</select>
+	<select id="getImgName" resultType="String">
+		select thumbimg checkImg from farm a join (select * from product where userid=#{userid}) b on a.productnum = b.productnum group by thumbimg
 	</select>
 </mapper>

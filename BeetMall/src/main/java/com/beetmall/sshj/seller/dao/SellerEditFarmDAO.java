@@ -7,4 +7,6 @@ public interface SellerEditFarmDAO {
 	public SellerEditFarmVO selectInfo(String userid);
 	//Edit 접속시 즐겨찾기 수 가져오기
 	public int selectFavorite(String userid);
+	//저장된 이미지 꺼내오기
+	public String getImgName(String userid);
 }

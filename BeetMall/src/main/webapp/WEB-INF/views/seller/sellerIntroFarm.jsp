@@ -43,8 +43,15 @@
 					<div id="repMenu_content">
 						<img src="<%=request.getContextPath()%>/resources/img/${result.thumbimg}" name="thumbimg"/>
 						<div>
-							<div><span name="saleselect">${result.saleselect }%</span>&nbsp;<p name="productprice">${result.productprice }원</p></div>
-							<p name="productname">${result.productname }</p>
+							<div>${result.productname }</div>
+							<div>
+								<c:if test="${result.saleselect != '0' && result.saleselect != null}">
+									판매금액 : <div>${ result.productprice - result.saleprice }</div>원
+								</c:if>
+								<c:if test="${result.saleselect == '0' || result.saleselect == null }">
+									판매금액 : <div>${ result.productprice }</div>원
+								</c:if>
+							</div>
 						</div>
 					</div>
 				</div>

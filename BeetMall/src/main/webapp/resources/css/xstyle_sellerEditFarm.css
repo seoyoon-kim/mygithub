@@ -108,6 +108,18 @@ a:hover,a:active,a:visited,a:link{
 }
 
 /* 대표 메뉴 */
+#MenuEditBtn{
+	font-size: 14px;
+	font-weight: normal;
+	width: 110px;
+	background-color: #bbb;
+	color:#fff;
+	border: 0;
+	border-radius: 5px;
+	overflow:hidden;
+	padding:5px 10px;
+}
+
 #repMenu_content{
 	width: 90%;
 	display: flex;
@@ -119,18 +131,31 @@ a:hover,a:active,a:visited,a:link{
 	height: 150px;
 	float: left;
 }
-#repMenu_content>div>div{
+
+#repMenu_content>div{
 	display:flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#repMenu_content>div>div:nth-child(1){
+	display:flex;
+	font-size: 30px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 #repMenu_content>div>div{
 	margin: 10px;
 }
-#repMenu_content>div>p{
+
+#repMenu_content>div>div:nth-child(2){
 	margin: 0 10px 10px 10px;
 	font-weight: bold;
+	display: flex;
 }
 
-#repMenu_content span{
+#repMenu_content>div>div:nth-child(2)>div{
 	color: red;
 }
 
@@ -143,68 +168,9 @@ a:hover,a:active,a:visited,a:link{
 	margin: 0 auto;
 	padding: 5px 10px;
 	color: #fff;
-	background-color: #aaa;
-	border: 0px;
+	background-color: #bbb;
+	border: 0;
+	border-radius: 5px;
+	overflow:hidden;
 }
 
-
-/*---------- 본문 컨테이너 끝 -----------*/
-
-/* 테이블 */
-.product_table,.table_wrap{
-	width:100%
-}
-.product_table thead{
-	border-top: 1px solid lightgray;
-	border-bottom: 1px solid lightgray;
-}
-/*테이블 상단*/
-.product_table th{
-	width:1280px;
-	height:60px;
-	vertical-align:inherit;
-	font-weight:bold;	
-   	color:#666666;	
-	font-size:12px;
-	text-align:center;
-	
-}
-.product_table td{
-	font-size:12px;
-}
-.product_table, .tbl_line{
-	border-bottom: 1px solid lightgray;
-	padding:0px;
-}
-.product_table{
-	display: table-row;	
-	border-collapse: collapse;
-	empty-cells: show;
-	text-indent: initial;
-  		border-spacing: 2px;
-  		text-align:center;
-}
-
-.tbl_line{
-	vertical-align:inherit;
-	height: 50px; 	
-}
-.tbl_line_cell{
-	display: table-cell;
-	text-align:center;
-	font-size:12px;
-	padding:1px 5px 1px 5px;
-	/*border-left:1px solid lightgray;*/
-}
-.product_table td:first-child{border-left:none}
-/*테이블 폭 조정*/
-.productCheck, .productNum, .product_table th:first-child, .product_table th:nth-child(2) {
-	width:4%;
-}
-.product_table th:nth-child(3){width:7%}
-.product_table th:nth-child(4){width:7%}
-.product_table th:nth-child(5){width:16%}
-.product_table th:nth-child(12){width:4%}
-.product_table th:nth-child(13){width:12%}
-/*상품 이름*/
-.productName a{color:gray; font-weight:bold; }

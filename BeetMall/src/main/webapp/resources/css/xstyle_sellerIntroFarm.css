@@ -114,18 +114,31 @@ a:hover,a:active,a:visited,a:link{
 	height: 150px;
 	float: left;
 }
-#repMenu_content>div>div{
+
+#repMenu_content>div{
 	display:flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#repMenu_content>div>div:nth-child(1){
+	display:flex;
+	font-size: 30px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 #repMenu_content>div>div{
 	margin: 10px;
 }
-#repMenu_content>div>p{
+
+#repMenu_content>div>div:nth-child(2){
 	margin: 0 10px 10px 10px;
 	font-weight: bold;
+	display: flex;
 }
 
-#repMenu_content span{
+#repMenu_content>div>div:nth-child(2)>div{
 	color: red;
 }
 
