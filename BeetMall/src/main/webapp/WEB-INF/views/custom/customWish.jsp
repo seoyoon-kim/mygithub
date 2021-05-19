@@ -343,6 +343,29 @@ border:none;
 }
 
 </style>
+
+<script>
+
+$(function(){
+	
+	$("#totalbuy").click(function(){
+		  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
+		  alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+
+				"/옵션코드="+optnum+"/할인금액="+dprtprice+"/토탈가격="+toltalPrice);
+		  var totalCount = pcount+optprice;
+		  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+dprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
+	});
+	
+});
+
+
+
+
+
+</script>
+
+
+
 	<div class="section" id="whisListPage">
 		<!-- 큰제목 ---------------------------------------------->
 
@@ -390,7 +413,7 @@ border:none;
 					
 					<li>17,900</li><!-- 총가격 -->
 					<li></li>
-					<li><input type="checkbox" name="boardCheckBox" value="" /></li>
+					<li><input type="checkbox" name="" value="" />${wl.wishcode}</li>
 					<li><input type="button" value="x" id="delbutton" /></li>
 			</ul>
 			

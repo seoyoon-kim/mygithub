@@ -81,14 +81,14 @@
     
     <!-- 장바구니 처넣기 -->
     <insert id="customWishInsert" parameterType="com.beetmall.sshj.custom.vo.ProductViewVO">
-    insert into wish(userid,productnum,optionnum,wishnum,wishoptionnum) VALUES(#{param1},${param2},${param3},${param4},${param5})
+    insert into wish(userid,productnum,optionnum,wishnum,wishoptionnum,wishcode) VALUES(#{param1},${param2},${param3},${param4},${param5},wishsq.nextval)
     </insert>
     
     <!-- 장바구니 보기 -->
      <select id="customWishView" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
     select * from(
 	    select * from(
-		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,' ')optionname, w.wishnum, w.wishoptionnum, p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent, o.optionprice 
+		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,' ')optionname, w.wishnum, w.wishoptionnum, w.wishcode,p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent, o.optionprice 
 				from wish w  
 				left join product p 
 				    on p.productnum = w.productnum 
