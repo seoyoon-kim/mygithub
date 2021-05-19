@@ -19,5 +19,15 @@ public class MyfavoriFormServiceImp implements MyfavoriFormService{
 	public List<MyfavoriFormVO> myfavoriForm(String logId1) {
 		return myfavoriFormDAO.myfavoriForm(logId1);
 	}
+
+	@Override
+	public MyfavoriFormVO selectInfo2(int storenum) {
+		return myfavoriFormDAO.selectInfo2(storenum);
+	}
+
+	@Override
+	public int selectFavorite2(int storenum) {
+		return myfavoriFormDAO.selectFavorite2(storenum);
+	}
 	
 }

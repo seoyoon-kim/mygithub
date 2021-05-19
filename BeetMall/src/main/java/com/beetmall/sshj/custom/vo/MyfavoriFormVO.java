@@ -1,24 +1,28 @@
 package com.beetmall.sshj.custom.vo;
 
 public class MyfavoriFormVO {
-	/*
-	 * <img src="/sshj/img/${data.farmprofile}"><span
-	 * class="buyttitle wordcut">${data.farmname}</span><span
-	 * class="buydetail wordcut">${data.farmintro}</span> 172: </li> 173: <li><span
-	 * class="favprice">${data.storeaddr}</span></li> 174: <li
-	 * style="color: red;"><div class="like">${data.goodTotal}명</div></li>
-	 */
-	private int Storenum;
+	private int storenum;
 	private String farmprofile;
 	private String farmname;
 	private String farmintro;
 	private int goodTotal;
-	private String storeaddr;
+	private String storeaddr;	   
+	private String storename;
+	private long sellerreginum;
+	private String sellerregiimg;
+	private String storedetailaddr;
+	private String storeemail;
+	private String bankname;
+	private long bankaccount;
+	private String farmvisitor;
+	private String sellername;
+	private String bank;
+	
 	public int getStorenum() {
-		return Storenum;
+		return storenum;
 	}
 	public void setStorenum(int storenum) {
-		Storenum = storenum;
+		this.storenum = storenum;
 	}
 	public String getFarmprofile() {
 		return farmprofile;
@@ -50,6 +54,65 @@ public class MyfavoriFormVO {
 	public void setStoreaddr(String storeaddr) {
 		this.storeaddr = storeaddr;
 	}
-	
+	public String getStorename() {
+		return storename;
+	}
+	public void setStorename(String storename) {
+		this.storename = storename;
+	}
+	public long getSellerreginum() {
+		return sellerreginum;
+	}
+	public void setSellerreginum(long sellerreginum) {
+		this.sellerreginum = sellerreginum;
+	}
+	public String getSellerregiimg() {
+		return sellerregiimg;
+	}
+	public void setSellerregiimg(String sellerregiimg) {
+		this.sellerregiimg = sellerregiimg;
+	}
+	public String getStoredetailaddr() {
+		return storedetailaddr;
+	}
+	public void setStoredetailaddr(String storedetailaddr) {
+		this.storedetailaddr = storedetailaddr;
+	}
+	public String getStoreemail() {
+		return storeemail;
+	}
+	public void setStoreemail(String storeemail) {
+		this.storeemail = storeemail;
+	}
+	public String getBankname() {
+		return bankname;
+	}
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
+	public long getBankaccount() {
+		return bankaccount;
+	}
+	public void setBankaccount(long bankaccount) {
+		this.bankaccount = bankaccount;
+	}
+	public String getFarmvisitor() {
+		return farmvisitor;
+	}
+	public void setFarmvisitor(String farmvisitor) {
+		this.farmvisitor = farmvisitor;
+	}
+	public String getSellername() {
+		return sellername;
+	}
+	public void setSellername(String sellername) {
+		this.sellername = sellername;
+	}
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
 	
 }

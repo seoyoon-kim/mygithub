@@ -173,7 +173,7 @@
 	function click22(num){
 		var number = num;
 		console.log(number + " 클릭잘됨")
-		//location.href="";  //형꺼에 갖다가 붙이기
+		location.href="/sshj/customFarm?storenum="+number;  //형꺼에 갖다가 붙이기
 	}
 </script>
 <div class="section">

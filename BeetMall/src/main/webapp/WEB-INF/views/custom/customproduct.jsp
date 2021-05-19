@@ -741,7 +741,7 @@ color:black;
 	var tprice=0;
 	var submitprice = 0;
 	var optprice=0;
-	var optnum=0;
+	var optnum;
 	
 	$(function(){
 		prtprice=${pvo.productprice}; //상품본래가격
@@ -855,8 +855,11 @@ color:black;
       //////////총계산 값 저장해놓기/////////////////////////////////
       
       $("#totalbuy").click(function(){
-    	
-    	  alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum);
+    	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
+    	  alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+
+    			"/옵션코드="+optnum+"/할인금액="+dprtprice+"/토탈가격="+toltalPrice);
+    	  var totalCount = pcount+optprice;
+    	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+dprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
       });
       /////////////////////////리뷰보기/////////////////////////////////
     
