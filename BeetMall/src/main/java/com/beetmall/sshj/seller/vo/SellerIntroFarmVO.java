@@ -32,7 +32,17 @@ public class SellerIntroFarmVO {
 	private String productname;//상품명
 	private String thumbimg; // 썸네일 이미지
 	
+	// dicount
+	private int saleprice; // 할인액
 	
+	
+	
+	public int getSaleprice() {
+		return saleprice;
+	}
+	public void setSaleprice(int saleprice) {
+		this.saleprice = saleprice;
+	}
 	public String getUserid() {
 		return userid;
 	}

@@ -11,8 +11,16 @@
 		from (select b.storenum, farmname,farmintro, farmprofile, farmvisitor, productnum, userid, 
 			storename, sellername, sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, 
 			storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname, bankaccount 
-		from (select * from seller) a join farm b on a.storenum = b.storenum) c 
+			from (select * from seller) a join farm b on a.storenum = b.storenum) c 
 		join product d on c.productnum = d.productnum where c.userid='${userid}'
+	</select>
+	<select id="discountSelect" resultType="com.beetmall.sshj.seller.vo.SellerIntroFarmVO">
+		
+        select nvl(saleprice,0) saleprice from (
+        select productnum from (
+        select * from seller where userid=#{userid}) a join farm b on a.storenum = b.storenum
+        ) c join discount d on c.productnum = d.productnum(+)
+        
 	</select>
 	<select id="selectFavorite" resultType="int">
 		select count(userid) storenum from favorite where storenum=(select storenum from seller where userid='${userid}')

@@ -56,14 +56,14 @@ nav>ul{
 }
 
 nav>ul>li{
-	font-size: 16px;
+	font-size: 18px;
 	text-align: center;
 }
 
 nav>ul>li>a:hover,#sellerHeaderSubMenu>li>a:hover{
-	color:black;
+	color: #5c5c5c;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 19px;
 }
 
 nav>ul>li:nth-child(1)>a{
@@ -74,8 +74,8 @@ nav>ul>li:nth-child(1)>a{
 }
 
 #sellerHeaderSubMenu{
-	width: 100px;
-	height: 80px;
+	width: 130px;
+	height: 90px;
 	line-height: 40px;
 	border: 1px solid #aaa;
 	display: none;
@@ -132,7 +132,6 @@ footer{
 			<li><a href="product_regi">상품 등록</a></li>
 			<li><a href="order_management">주문 관리</a></li>
 			<li><a href="sale_management">판매 관리</a></li>
-			<li><a href="#">배송 관리</a></li>
 			<li><a href="sellerSales">매출 관리</a></li>
 			<li><a href="sellerSettle">정산 관리</a></li>
 			<li><a href="sellerIntroFarm">농장 관리</a></li>
@@ -142,7 +141,6 @@ footer{
 					<li><a href="sellerAskManagement">문의 관리</a></li>
 				</ul>
 			</li>
-			<li><a href="#">회원정보수정</a></li>
 		</ul>
 	</nav>
 </div>
