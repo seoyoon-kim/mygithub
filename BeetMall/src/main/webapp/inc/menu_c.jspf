@@ -426,7 +426,15 @@
                 $("#kareaMenu").css("display","block")
             }
         });
-        
+        $("#searchBtn").click(function(){
+   			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+   			if($('#searchInputbox').val()==""){
+   				alert("검색어를 입력하세요.");
+   				return false;
+   			}
+   			location.href="/sshj/categoryMain?searchWord="+$('#searchInputbox').val();
+   			return true;
+        });
   	 });
 	$(function(){
 		var cate_href = ["/sshj/categoryMain","/sshj/categoryCharge","/sshj/payCategory"]
@@ -507,8 +515,10 @@
 					<a href="mapping"><img src="/sshj/img/dmapBtn.png" class="menuImg" /></a>
 					<a href="카트아이콘"><img src="/sshj/img/dcartBtn.png"  class="menuImg"/></a>
 					<div id="searchbar">
-						<input type="text" placeholder="원하시는 상품을 검색해보세요!" id="searchInputbox"/>
-						<img src="/sshj/img/dzoomBtn.png">
+						<form method="get" action="categoryMain" id="searchForm">
+							<input type="text" placeholder="원하시는 상품을 검색해보세요!" id="searchInputbox" name="searchWord"/>
+							<img src="/sshj/img/dzoomBtn.png" id="searchBtn" style="cursor:pointer">
+						</form>
 					</div>
 				</div>
 				</div>

@@ -19,4 +19,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         		from seller) e
         on e.storenum=c.storenum
 	</select>
+	<select id="selectInfo2" resultType="com.beetmall.sshj.custom.vo.MyfavoriFormVO">
+		select a.storenum, a.storename, a.sellerreginum, a.sellerregiimg, a.storeaddr, a.storedetailaddr, a.storeemail, a.bank, a.bankname, a.bankaccount, a.sellername, 
+         	   b.farmname, b.farmintro, b.farmprofile, b.farmvisitor
+		from seller a
+		join farm b
+		    on a.storenum=b.storenum
+		where a.storenum= ${param1}
+	</select>
+	<select id="selectFavorite2" resultType="int">
+		select sum(storenum) storenum from favorite where storenum=(select storenum from seller where storenum=${param1})
+	</select>
 </mapper>
