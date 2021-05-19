@@ -30,9 +30,9 @@
 		padding-top:10px;
 	}
 	#menu{
-		width:1080px;
-		margin:0 auto;
+		
 		padding-top:40px;
+		z-index:50;
 	}
 	#logoImg{
 		text-align:center;
@@ -97,9 +97,9 @@
 		line-height: 40px;
 		display:none;
 		position: absolute;
+		cursor:pointer;
 	}
-	#rollInfo{
-	}
+	
 	.miniroll{
 		font-size:11px;
 	}
@@ -132,8 +132,12 @@
 			var scroll = window.scrollY;
 			if(scroll>255){
 				$("#menuBar").css("position","absolute").css("top",scroll).css("z-index","90");
+				$("#categoriList").css("top",scroll+40);
+				
+				
 			}else {
 				$("#menuBar").css("position","static");
+				$("#categoriList").css("top","285px")
 			}
 		});
 		
@@ -224,15 +228,16 @@
 	</div>
 	<header>
 	<div id= "menu">	<!-- 상단메뉴전체 div -->
+	<div class="loginBack"></div>
 	<c:if test="${logStatus != 'Y'}">
-		<div class="loginButtons">	<!-- 로그인 전 -->
+		<div class="loginButtons section">	<!-- 로그인 전 -->
 			<input type="button" value="회원가입" class="menuButtons btn"/>
 			<input type="button" value="로그인" class="menuButtons btn"/>
 			<input type="button" value="고객센터" class="menuButtons btn"/>
 		</div>
 	</c:if>
 	<c:if test="${logStatus == 'Y' }">
-		<div class="loginButtons">	<!-- 로그인 후 -->
+		<div class="loginButtons section">	<!-- 로그인 후 -->
 			<c:if test="${logType==2}">
 				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons btn"/>
 			</c:if>

@@ -8,65 +8,26 @@
 	#reportHeader>li:nth-of-type(2),
 	#report>li:nth-of-type(2), #reportBox button,#info_container{
 		position:relative;
+	} 
+	#companyHeader>li:nth-of-type(4){
+		padding-bottom:10px;
 	}
-	/*맨 위 남색 Bar*/	 
-	#topBar h5{
-		width:120px;
-		margin-left:45px;
-		color:white;
+	#company>li{
+		padding-bottom:5px;
 	}
-	/*내용 파트 전체*/
-	#contentBox{
-		background-color:rgb(243,244,239);
-		top:50px;
-		left:-20px;
-		width:1090px;
-		height:1650px;
-	}	
-	
-	/*상단 3개 박스(법인정보, 개인정보, 신고정보) 공통*/
-	 #companyBox, #infoBox, #reportBox{ 
-	 	width:500px;
-	 	margin-left:35px;
-	 	border-radius:10px; 
-	 	top:20px;
-	 	background-color:white;
-	 	-webkit-box-shadow: 4px 6px 15px -7px #C4C4C4; 
-		box-shadow: 4px 6px 15px -7px #C4C4C4;
-	 }
-	  #companyBox li, #infoBox li, #report li{
-	  	padding-top:15px;
-	  } 
-	 #companyHeader, #infoHeader, #reportHeader{ 
-	 	left:-40px;
-	 	width:250px !important;
-	 }
-	  #companyHeader li, #infoHeader li, #reportHeader li{
-	  	font-weight:bold;
-	  }
 	  #company li:nth-of-type(5){
-	  	width:300px;
-	  	left:400px;
+	  	width:300px !important;
+	  	left:100px;
 	  	padding-top:13px;
 	  }
-	  #companyTitle, #infoTitle, #reportTitle{
-	  	padding-left:200px;
-	  	font-weight:bold;
-	  	font-size:16px;
-	  	letter-spacing:2px;
-	  	border-bottom:1px solid gray;
-		border-radius: 10px 10px 0px 0px;
-	  	background-color:#FAF9F6;
-	  	height:40px;
-	  }
-	  
 	 /*좌상 법인 정보*/
 	#companyBox{
-	 	height:320px; 
+	 	height:370px; 
 	}
 	 #company {
-	 	top:-256px;
-	 	left:-245px;
+	 	top:-265px;
+	 	left:45px;
+	 	width:500px !important;
 	 }
 	 #companyHeader{
 	 	padding-top:10px;
@@ -75,88 +36,55 @@
 	 	padding-top:25px;
 	 }
 	 #companyHeader li:nth-of-type(5){
-	 	width:250px; 
+	 	width:250px !important; 
 	 	padding-top:20px;
-	 } 
-	  #companyTitle>p{
-	  	top:-40px;
-	  }
+	 }  
 	  
 	 /*우상 개인정보*/
 	 #infoBox{
-	 	top:-300px;
-	 	left:540px;
-	 	height:450px;
-	 	margin-left:20px;
+	 	top:-350px;
+	 	left:580px;
+	 	height:520px;
+	 	margin-left: 0 !important;
 	 } 
-	 #info {
-	 	top:-278px;
-	 	left:-250px;
-	 }
-	 #infoHeader{
-	 	padding-top:25px;
-	 	top:-5px;
-	 }
 	 #infoHeader li:nth-of-type(5){
-	 	width:250px;
-	 }
-	  #info li:nth-of-type(5){
-	 	padding-left:460px;
+	 	width:250px !important;
 	 }
 	 #infoTitle{
-	 	padding-top:10px; 
+	 	padding-top:20px; 
 	 }
 	 #infoBtns{
-	 	top:-230px;
-	 	left:45px;
+	 	top:-200px;
+	 	left:75px;
 	 }
 	 #infoBtns button{
 	 	width:80px;
 	 	margin-right:10px;
 	 	height:30px;
-	 }
-	 
-	 /*좌하 신고 정보*/
-	 #reportBox{
-	 	top:-410px;
-	 	height:110px;
-	 }
-	 #reportTitle{
-	 	padding-top:10px;
-	 }
-	 #reportHeader{
-	 	top:20px;
-	 	left:-70px;
-	 }
-	 #report{
-	 	top:-50px;
-	 	left:100px;
+	 } 
+	 #reportHead{
+	 	width:200px;
+	 	position:relative;
+	 	top:-120px;
+	 	margin-left:150px;
 	 }
 	 #report>li{
 	 	display:flex;
+	 }
+	 #report>li:nth-of-type(2){
+	 	top:-35px;
+	 	left:170px;
 	 }
 	 #reportNum,  #reportDays{
 	 	font-weight:bold;
 	 	color:red;
 	 	margin-right:5px;
 	 }
-	#reportHeader>li:nth-of-type(2){
-	 	top:-23px;
-	 	left:165px;
-	 }
-	 #report>li:nth-of-type(2){
-	 	top:-38px;
-	 	left:170px;
-	 }
-	 #reportBox button{
-	 	top:-125px;
-	 	left:370px;
-	 }
 	 
 	 
 	 /*===================판매자 농장 정보====================*/
 	 #farmInfo{
-	 	background-color:#182337;
+	 	background-color:rgb(40,40,100);
 	 	position:relative;
 	 	top:-350px; 
 	 	height:50px;
@@ -164,26 +92,16 @@
 	 }
 	 #farmInfo strong{
 	 	color:white;
-	 }
-	 #info_container{
-	 	top:-320px;
-	 }
+	 } 
 	 #profile_box {
 	 	height:220px !important;
-	 }
-	 
-	 
-	 
+	 } 
 	 
 	  /*버튼*/
 	  .success{
 	  	border:1px solid gray;
-	  	border-radius:5px;
-	  }
-	  #certiSee{
-	  	top:-25px;
-	  	left:60px; 
-	  }
+	  	border-radius:2px;
+	  } 
 	  #company button:hover{
 	   	  background: #b3b3b3;
 		  color:white;
@@ -212,11 +130,41 @@
 	}
 	.write_btn{
 		height:40px;
-	} 
-	
+	}  
 	input[type="submit"].btn:hover, input[type="button"].btn:hover, input[type="reset"].btn:hover{
    	  background: #b3b3b3;
 	  color:white;
 	  display: inline-block;
 	  outline: 0;
 	}
+	/*사업자 등록증*/
+	#modal{
+		margin-top:100px;
+		border:1px solid gray;
+		margin-left:20px;
+		z-index:1; 
+		background-color:#eee;
+		width:700px;
+		height:850px;
+	}
+	#modalHeader{
+		text-align:center;
+		background-color:#ddd;
+		font-weight:bold;
+		border-bottom:1px solid gray;
+		z-index:2;
+		height:30px;
+		letter-spacing:2px;
+		padding-top:5px;
+	}
+	#modal img{
+		margin:20px 0 0 100px;
+		border:1px solid lightgray;
+	}
+	#modalBtns{
+		margin-top:25px;
+		text-align:center;
+	}
+	#modalBtns>button{
+		margin-right:15px;
+	} 

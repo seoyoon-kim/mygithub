@@ -29,8 +29,8 @@
     	margin-left: 0px;
 		border-spacing: 0;
 		text-indent: initial;
-		border-top:2px solid lightgray;
-		border-bottom:2px solid lightgray;
+		border-top:1px solid lightgray;
+		border-bottom:1px solid lightgray;
 		font-size:13px;
 	}
 	th, .th{
@@ -45,8 +45,8 @@
    		/*#fcfcfc*/
 	}
 	thead, .answer_content{
-		border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	    border-top: 1px solid #ccc;
 	    width:100%;
 	}
 	tr{
@@ -74,7 +74,7 @@
 	.td, .th{ line-height:30px;}
 	.td{
 		width:30%; line-height:30px; 
-		border-bottom: 2px solid #ccc;
+		border-bottom: 1px solid #ccc;
 	}
 	/*이전글, 다음글*/
 	.prev_next_wrap{

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.MyfavoriFormDAO">
+	<select id="myfavoriForm" resultType="com.beetmall.sshj.custom.vo.MyfavoriFormVO">
+	    select  d.storenum as storenum , farmprofile, farmname, farmintro, c.goodTotal as goodTotal, e.storeaddr as storeaddr
+	    from (select a.storenum, farmprofile, farmname, farmintro
+	    	  from farm a  
+	    	  join favorite b  
+	    	  	on a.storenum=b.storenum   
+	    	  where b.userid=#{param1}) d         
+        join ( select storenum, count(storenum) as goodTotal
+                from (select * 
+                	  from favorite 
+                	  where storenum is not null) a group by storenum) c
+        on d.storenum=c.storenum
+        join (select storenum, storeaddr 
+        		from seller) e
+        on e.storenum=c.storenum
+	</select>
+	<select id="selectInfo2" resultType="com.beetmall.sshj.custom.vo.MyfavoriFormVO">
+		select a.storenum, a.storename, a.sellerreginum, a.sellerregiimg, a.storeaddr, a.storedetailaddr, a.storeemail, a.bank, a.bankname, a.bankaccount, a.sellername, 
+         	   b.farmname, b.farmintro, b.farmprofile, b.farmvisitor
+		from seller a
+		join farm b
+		    on a.storenum=b.storenum
+		where a.storenum= ${param1}
+	</select>
+	<select id="selectFavorite2" resultType="int">
+		select sum(storenum) storenum from favorite where storenum=(select storenum from seller where storenum=${param1})
+	</select>
+</mapper>

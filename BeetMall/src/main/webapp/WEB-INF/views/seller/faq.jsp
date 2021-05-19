@@ -24,6 +24,8 @@
 </head>
 
 <style>
+/*css 겹치는 부분은 basicStyle , CsStyle*/
+
 	.cs_wrapTitle{text-align:left; width:100%;}
 	table, fieldset{
 		width:100%;
@@ -55,13 +57,14 @@
 	/*답변*/
 	.answer{
 			display:none;	
+			background-color: #fcfcfc;
 	}
 	.answer_td{
 		padding: 20px 10px 20px 10px;
 		font-size:12px;
 	}
 	.answer_td:nth-child(1){
-		color:red;
+		color:rgb(224,102,102);
 		font-weight:bold;
 	}
 	.answer_td:nth-child(2){
@@ -71,15 +74,15 @@
 /* 검색하기 */
 	#cs_search_container{
 		width: 100%;
-	
 		float: center;
 		text-align:center;
 		margin:0 auto;
 	}
 	#cs_search_box{
 		border:none;
+
 	}
-	#search{
+	#searchWord{
 		height:40px;
 		width:400px;
 		text-indent: 0.2em;
@@ -87,7 +90,8 @@
 		float: center;
 		border:1px solid lightgray; 
 		border-radius: 0px 8px 8px 0px;
-		margin:30px 0px 60px -2px;		
+		margin:30px 0px 60px -2px;	
+		margin-right:320px;
 	}
 	#cs_search_q{
 		font-weight:bold;
@@ -126,17 +130,34 @@
   				}
   			);
   		});
-
+//검색어
+		$('#selectKey').change(function(){
+  			console.log($('#searchKey').val());
+  			$('#searchFrm').submit(); //input = submit 없이 submit 넘기기
+  			return true;
+  		})
+  		$("#searchWord").onkeyup(function(){
+  			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+  			console.log("검색어 -> ", $('#search').val());
+  			if($('#search').val()==""){
+  				alert("검색어를 입력하세요");
+  				return false;
+  			}
+  			$('#searchFrm').submit();
+  			return true;
+  		});
+  	
+  		
   	});
 //선택한 select option별로 보기
 //수정할 것 나머지 option선택에 대한 script 추가하기
   		
-  		$('#sel').change(function(){
+  		$('#searchKey').change(function(){
   			var option = $(this).val();
   			console.log(option);
-  			if(option=='total'){ //전체
+  			if(option=='전체'){ //전체
   				$('tr').css('display','');
-  			}	
+  			}
   		});
 
  
@@ -161,10 +182,11 @@
                   </c:if>
                   <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
                   <input type="button" value="로그아웃" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/notice'"/>
                </div>
             </c:if>
          </div>   
+         <!-- headerMember end -->
          <ul id="seller_cs_menu">
             <li><a href="#">BEETMALL</a></li>
             <li><a href="notice">공지사항</a></li>
@@ -172,25 +194,26 @@
             <li><a href="ask_admin_list">문의하기</a></li>
          </ul>
       </nav>
-   </div> 
 	<!-- 가운데 메인 div -->
 	<div id="article">
 		<div class="cs_wrapTitle">자주묻는 질문</div>
 		<!-- 검색하기 -->
 		<div id="cs_search_container">	
 			<span id="cs_search_q">자주묻는 질문을 검색해보세요.<br/></span>
-			<select id="sel">
-				<option value="total">전체</option>
-				<option value="product">상품</option>
-				<option value="member">회원/포인트</option>
-				<option value="sale">판매</option>
-				<option value="order">주문/결제</option>
-				<option value="delivary">배송</option>
-				<option value="claim">교환/반품/환불</option>
-			</select>
-			<span id="cs_search_box">
-				<input type="text" id="search" name="search" placeholder="궁금하신 내용을 입력해주세요.">
-			</span>
+			<form method="get" action="faq" id="searchFrm">
+				<select  name="searchKey" id="searchKey">
+					<option value="전체">전체</option>
+					<option value="상품">상품</option>
+					<option value="회원/포인트">회원/포인트</option>
+					<option value="판매">판매</option>
+					<option value="주문/결제">주문/결제</option>
+					<option value="배송">배송</option>
+					<option value="교환/반품/환불">교환/반품/환불</option>
+				</select>
+				<span id="cs_search_box">
+					<input type="text" name="searchWord" id="searchWord"  placeholder="궁금하신 내용을 입력해주세요.">
+				</span>
+			</form>
 		</div>
 		<!-- 자주묻는질문 테이블-->
 		<fieldset>
@@ -204,23 +227,16 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach var="faqvo" items="${faqList}">
 				<tr class="question">
-					<td class="number">1</td>  <!--a href="javascript:showHideFaq()"  -->
-					<td class="fa1_category">[상품]</td>
-					<td class="faq_td"><strong>상품등록은 어떻게 하나요?</strong></td>
+					<td class="number">${faqvo.faqnum}</td>  <!--a href="javascript:showHideFaq()"  -->
+					<td class="fa1_category">[${faqvo.faqcate}]</td>
+					<td class="faq_td"><strong>${faqvo.faqtitle}</strong></td>
 				</tr>
 				<tr class="answer">
 					<td class="answer_td">답변</td>
 					<td class="answer_td" colspan="3" >  
-						보다 자세한 매장의 안내는 아래 오프라인 페이지 이동을 통해 각 매장의 위치 또는 이벤트 진행상황을 확인하실 수 있습니다.<br/> 
-						<br/> 
-						상품등록은 어쩌구 저쩌구 <br/>
-						<br/> 
-						보다 자세한 매장의 안내는 아래 오프라인 페이지 이동을 통해 각 매장의 위치 또는 이벤트 진행상황을 확인하실 수 있습니다.<br/> 
-						<br/> 
-						상품등록은 어쩌구 저쩌구 <br/>
-						<br/> 
-						<a href="#" style="color:red">상픔등록 페이지 바로 가기 >></a>
+						${faqvo.faqcontent}
 						<br/> 
 						<p>
 							답변이 충분하지 않으시다면 관리자에게 문의하기를 이용해 주세요.
@@ -228,45 +244,42 @@
 						</p>
 					 </td>
 				</tr>
-				
-				<!-- 임시로 넣은 정보 삭제예정-->
-				<tr>
-					<td>2</td>
-					<td class="fa1_category">[회원]</td>
-					<td class="faq_td"><strong>농장 정보를 수정하고 싶어요.</strong></td>
-					
-				</tr>
-				<tr class="answer">
-					<td class="answer_td">답변</td>
-					<td class="answer_td" colspan="3" >  
-						레이아웃 확인 display : none 미적용<br/> 
-						<br/> 
-						script: click display none-> block적용 <br/>
-						<br/> 
-						<a href="#" style="color:red">농장정보 수정하기 바로 가기 >></a>
-						<br/> 
-						<p>
-							답변이 충분하지 않으시다면 관리자에게 문의하기를 이용해 주세요.
-							<a href="<%=request.getContextPath() %>/ask_admin_list" style="font-weight:bold"><span style="color:black">문의하기</span></a>
-						</p>
-					 </td>
-				</tr>
-				
+				</c:forEach>
 			</tbody>
 		</table>
-			<!-- 페이징-->
+		<!-------------- 페이징------------------>
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+				
+			  	<!--맨앞으로-->
+  				<a class="arrow_pprev" href="faq?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--앞으로-->
+        		<a class="arrow_prev" href="faq?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
+         		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
+	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
+	            	<c:if test="${p<=sapvo.totalPage}">  
+						<!--현재페이지 :  현재보고있는 페이지 표시 -->
+		               <c:if test="${p==sapvo.pageNum}">
+		                  <a class="on" href="faq?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+		               <!-- 현재페이지가 아닐 때 -->
+		               <c:if test="${p!=sapvo.pageNum}">
+		                  <a href="faq?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+	            	</c:if>
+        		</c:forEach>
+        		<!-- 다음 페이지가 있을 때 -->
+				<!--뒤로-->            
+	         	<a class="arrow next" href="faq?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--맨뒤로-->
+	         	<a class="arrow nnext" href="faq?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 			</div>
-		 </div>
+		 </div> 
+		 <!-------------- 페이징 끝 --------------->
 		</fieldset>
-		</div>
-	</div>
+		
+		</div><!-- article end -->
+	</div><!-- main end -->
 </body>
 </html>

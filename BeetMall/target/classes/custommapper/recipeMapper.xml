@@ -10,7 +10,7 @@
     </select>
     <insert id="recipeWriteOk" parameterType="com.beetmall.sshj.custom.vo.RecipeVO">
        insert into recipe 
-       values(recipesq.nextval,'tester',#{recipetitle},#{recipecontent},#{recipemainimg},sysdate,0,0)
+       values(recipesq.nextval,'qwer',#{recipetitle},#{recipecontent},#{recipemainimg},sysdate,0,0)
     </insert>
     
     <delete id="recipeDelete">
@@ -53,17 +53,25 @@
        insert into favorite(recipegoodnum,userid) VALUES(#{param1},#{param2})
     </insert>
 
-    <select id="recigoodOnly" resultType="com.beetmall.sshj.custom.vo.FavoriteVO">
+    <select id="recigoodOnly" resultType="int">
      select count(recipegoodnum) from favorite where userid=#{param2} and recipegoodnum=#{param1}
      </select>
+    
+    <delete id="recigoodDelete">
+    delete from favorite where recipegoodnum=${param1} and userid=#{param2}
+    </delete>
     
     <insert id="recikeepOk" parameterType="com.beetmall.sshj.custom.vo.FavoriteVO">
        insert into favorite(recipenum,userid) VALUES(#{param1},#{param2})
     </insert>
     
-    <select id="recikeepOnly" resultType="com.beetmall.sshj.custom.vo.FavoriteVO">
+    <select id="recikeepOnly" resultType="int">
      select count(recipenum) from favorite where userid=#{param2} and recipenum=#{param1}
      </select>
+     
+    <delete id="recikeepDelete" parameterType="com.beetmall.sshj.custom.vo.FavoriteVO">
+    delete from favorite where recipenum=${param1} and userid=#{param2}
+    </delete>
      
     <select id="customMyrecipe2" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
         select b.recipenum,b.recipetitle,b.userid,b.recipemainimg,b.reciperecommend,b.recipehit from 

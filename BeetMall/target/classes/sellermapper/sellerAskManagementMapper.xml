@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerAskManagementDAO">
+	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
+		select to_char(qwritedate,'yyyy-MM-dd') qwritedate, qanswer from (
+		select * from product a join mcategory b 
+		on a.mcatenum = b.mcatenum where a.userid='${userid}') c 
+		join userqboard d on c.productnum = d.productnum
+		
+	</select>
+	<select id="asklist" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
+		select * from ( 
+		select * from ( 
+		select qnum, d.productnum productnum, d.userid, qcontent, qtitle,
+				to_char(qwritedate, 'yyyy-MM-dd') qwritedate, qopen, qanswer, productname
+		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
+		
+		where 
+		
+		<choose>
+			<when test="mcatenumDataArr != ''">
+				<if test="mcatenumDataArr[0] != 0">
+					b.mcatenum in 
+					<foreach item="arr" open="(" close=")" separator="," 
+					collection="mcatenumDataArr">#{arr}</foreach>
+					 and
+			 	</if>
+			</when>
+		</choose>
+		
+		a.userid='${userid}') c join userqboard d on c.productnum = d.productnum
+		
+		<choose>
+			<when test="searchTxt != '' ">
+				<if test="''.equals(searchTxt)">where qtitle like '%%'</if>
+				<if test="!''.equals(searchTxt)">where qtitle like '%'||#{searchTxt}||'%'</if>
+				
+				<if test="startDate != ''">
+					and qwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+			<when test="searchTxt == ''">
+				<if test="startDate != ''">
+					where qwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+		</choose>
+		
+		
+		<choose>
+			<when test="sortStr == 0">order by qwritedate desc, qanswer desc , qtitle desc)</when>
+			<when test="sortStr == 1">order by qanswer desc, qwritedate desc)</when>
+			<when test="sortStr == 2">order by qanswer asc, qwritedate asc)</when>
+		</choose>
+		
+		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} 
+		
+		<choose>
+			<when test="sortStr == 0">order by qwritedate asc, qanswer asc, qtitle asc)</when>
+			<when test="sortStr == 1">order by qanswer asc, qwritedate asc)</when>
+			<when test="sortStr == 2">order by qanswer desc, qwritedate desc)</when>
+		</choose>
+
+		
+		<choose>
+			<when test="#{totalPage} == #{pageNum}">where rownum <![CDATA[ <= ]]> ${lastPageRecord} </when>
+			<when test="#{totalPage} != #{pageNum}">where rownum <![CDATA[ <= ]]> ${onePageRecord}</when>
+		</choose>
+		
+		<choose>
+			<when test="sortStr == 0">order by qwritedate desc, qanswer desc, qtitle desc</when>
+			<when test="sortStr == 1">order by qanswer desc, qwritedate desc</when>
+			<when test="sortStr == 2">order by qanswer asc, qwritedate asc</when>
+		</choose>
+
+	</select>
+	
+	<select id="asklistRecord" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
+		select qnum, d.productnum productnum, d.userid, qcontent, qtitle,
+				to_char(qwritedate, 'yyyy-MM-dd') qwritedate, qopen, qanswer, productname
+		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
+		
+		where 
+		
+		<choose>
+			<when test="mcatenumDataArr != ''">
+				<if test="mcatenumDataArr[0] != 0">
+					b.mcatenum in 
+					<foreach item="arr" open="(" close=")" separator="," 
+					collection="mcatenumDataArr">#{arr}</foreach>
+					 and
+			 	</if>
+			</when>
+		</choose>
+		
+		a.userid='${userid}') c join userqboard d on c.productnum = d.productnum
+		
+		<choose>
+			<when test="searchTxt != '' ">
+				<if test="''.equals(searchTxt)">where qtitle like '%%'</if>
+				<if test="!''.equals(searchTxt)">where qtitle like '%'||#{searchTxt}||'%'</if>
+				
+				<if test="startDate != ''">
+					and qwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+			<when test="searchTxt == ''">
+				<if test="startDate != ''">
+					where qwritedate BETWEEN '${startDate}' and '${endDate}'
+				</if>
+			</when>
+		</choose>
+
+	</select>
+
+	<update id="askUpdate" parameterType="int">
+		update userqboard set qanswer = #{qanswer} where userid = #{userid} and qnum = ${qnum}
+	</update>
+	
+	<update id="askAnswerUpdate" parameterType="int">
+		update userqboard set qanswer = #{qanswer} where userid = #{userid} and qnum = ${qnum} 
+	</update>
+	
+	<insert id="reportInsert" parameterType="int">
+		insert into report(reportnum, userid, reporteduser 
+			,reportboard, reportboardnum, reportreason
+			,reportcontent, reportdate, reportselect)
+		values (reportsq.nextval, #{sellerId}, #{userid}
+			, '문의', ${qnum}, #{reportReason}
+			, #{reportContent}, sysdate, 1)
+	</insert>
+	
+</mapper>

@@ -273,16 +273,16 @@
 	}
 	#homeVideo{
 		width:100%;
-		height:450px;
+		height:650px;
 		position: relative;
 	}
 	#videoPlay{
 		width:100%;
-		height:450px;
+		height:650px;
 	}
 	#videoModal{
 		width:100%;
-		height:450px;
+		height:650px;
 		background-color:black;
 		opacity: 50%;
 		position:absolute;
@@ -301,7 +301,7 @@
 	var maxRan = 7;	// 랜덤 범위(최대값 - 1)
 	var ran = parseInt(Math.random()*maxRan);	// 배너의 수에 따라 조절할 수 있어야함
 	var proWidth = 265; /* 상품 너비 */ 
-	$(function(){
+	$(function(){		
 		imgWidthSet()
 		function banner(idx){
 			var left= -(idx*wid100);
@@ -409,12 +409,17 @@
 	
 	$(window).resize(function(){
 		if(wid100>1080){
-			imgWidthSet();	
+			imgWidthSet();
 		}
-		if(wid100<1080){
+		if(wid100<=1080){
 			imgWidthMinSet();
+			$("body").css("overflow-x","hidden");
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+			window.resizeTo(1080,h);
 		}
 	});
+	
 	function imgWidthSet(){
 		wid100 = window.outerWidth;
 		$("#sliderImgs img").css("width",wid100);

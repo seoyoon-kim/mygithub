@@ -406,9 +406,9 @@
 				<div class="section">
 				<ul id="menuListUl">
 					<li><span><img src="/sshj/img/dmenu3.png" id="menuImg" class="menuImg"/>카테고리</span></li>
-					<li><a href="kangsan">신상품</a></li>
-					<li><a href="kangsan">베스트</a></li>
-					<li><a href="kangsan2">못난이할인</a></li>
+					<li><a href="categoryMain">신상품</a></li>
+					<li><a href="categoryMain">베스트</a></li>
+					<li><a href="uglyItem">못난이할인</a></li>
 					<li><a href="recipeHome">비트네</a></li>
 				</ul>
 				<div id="menuImgs">
@@ -446,32 +446,32 @@
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">상품 품목별</div>
-                  <div><a href="kangsan">전체</a></div>
-                  <div><a href="kangsan">과일</a></div>
-                  <div><a href="kangsan">채소</a></div>
-                  <div><a href="kangsan">쌀/잡곡</a></div>
+                  <div><a href="categoryMain">전체</a></div>
+                  <div><a href="categoryMain">과일</a></div>
+                  <div><a href="categoryMain">채소</a></div>
+                  <div><a href="categoryMain">쌀/잡곡</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">지역별</div>
-                  <div id="karea"><a href="#">지역별보기</a></div>
+                  <div id="karea"><a style="cursor:pointer">지역별보기</a></div>
                   <div style="display: none;" id="kareaMenu">
-                     <div><a href="kangsan3">전체</a></div>
-                     <div><a href="kangsan3">수도권</a></div>
-                     <div><a href="kangsan3">강원도</a></div>
-                     <div><a href="kangsan3">충청도</a></div>
-                     <div><a href="kangsan3">경상도</a></div>
-                     <div><a href="kangsan3">전라도</a></div>
-                     <div><a href="kangsan3">제주도</a></div>
+                     <div><a href="categoryCharge">전체</a></div>
+                     <div><a href="categoryCharge">수도권</a></div>
+                     <div><a href="categoryCharge">강원도</a></div>
+                     <div><a href="categoryCharge">충청도</a></div>
+                     <div><a href="categoryCharge">경상도</a></div>
+                     <div><a href="categoryCharge">전라도</a></div>
+                     <div><a href="categoryCharge">제주도</a></div>
                   </div>
                   <br/>
                   <div><a href="mapping">지도로 찾기</a></div>
                </div>
                <div id="kCateMain">
                   <div id="kmiddelname">가격대별</div>
-                  <div><a href="kangsan4">5,000원이하</a></div>
-                  <div><a href="kangsan4">10,000원 이하</a></div>
-                  <div><a href="kangsan4">50,000원 이하</a></div>
-                  <div><a href="kangsan4">50,000원 이상</a></div>
+                  <div><a href="payCategory">5,000원이하</a></div>
+                  <div><a href="payCategory">10,000원 이하</a></div>
+                  <div><a href="payCategory">50,000원 이하</a></div>
+                  <div><a href="payCategory">50,000원 이상</a></div>
                </div>
             </div>
          </div>
@@ -509,10 +509,10 @@
                   <div><a href="recipeHome">홈</a></div>
                </div>
                <div id="repcipevview">
-                  <div><a href="customMyrecipe">마이레시피</a></div>
+                  <div><a href="recipeList">목록보기</a></div>
                </div>
                <div id="repcipevview">
-                  <div><a href="recipeView">게시판보기</a></div>
+                  <div><a href="customMyrecipe">마이레시피</a></div>
                </div>
                 <div id="repcipevview">
                   <div><a href="recipeWrite">글쓰기</a></div>

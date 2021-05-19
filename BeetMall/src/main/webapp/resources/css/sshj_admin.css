@@ -2,15 +2,32 @@
 	header,footer{
 		display:none !important;
 	}
-	#body1{
-		width:1080px; 
-		padding:0; 
-		margin:0; 
-		font-family: 'Noto Sans KR', sans-serif;
-		font-size:15px;
+	/*내용 파트 전체*/
+	#contentBox{   
+		width:1090px;  
+		margin:30px 0 0 30px;
+		font-size:14px;
+	}	  
+	body{
+		width:100%;
 	}
-	#topBar, #topBar form, #noticeSearchFrm, #title, button, #contentBox, input[type=checkbox]{ 
+	#body1{
+		width:1280px; 
+		padding:0; 
+		margin:0 auto; 
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size:14px;
+		position:relative;
+		top:-50px;
+	}
+	#topBar, #topBar form, .searchFrm, #title, button, #contentBox, input[type=checkbox]{ 
 		position:relative; 
+	}
+	.searchFrm{
+		margin:20px 0 30px 300px;
+	}
+	.searchFrm>input[type=date]{
+		border-color:lightgray;
 	}
 	#blind, #edit{
 		position:absolute;
@@ -18,16 +35,14 @@
 	h5>strong{
 		font-size:20px;
 		letter-spacing:2px;
-	}
-	#topBar li>h5>strong>a{
-		color:white;
-	}
+	} 
 	#container{ 
 		position:absolute; 
-		top:200px; 
+		top:-30px; 
 		left:190px; 
 		width:1080px; 
 		padding:0; 
+		list-style-type:none; 
 	}
 	#container ul{ 
 		width:1080px; 
@@ -36,11 +51,17 @@
 		color:black;
 	}
 	#ascBtn, #descBtn{  
-		width:40px;
+		width:30px;
+		padding:0;
+		position:absolute;
 	} 
-	#contentBox{ 
-		top:20px; 
-		margin-left:10px;
+	#ascBtn{
+		top:80px;
+		left:1030px;
+	}
+	#descBtn{ 
+		top:80px;
+		left:1070px;
 	}
 	#contentBox ul{
 		margin-left:30px;
@@ -52,35 +73,35 @@
 		width:15%; 
 	} 
 	
-	/*회색 topBar*/
-	#topBar h5{
-		margin:3px 0 0 62px;
-		width:100px;
+	/*남색 topBar*/
+	#topBarContainer{
+		background-color:rgb(40,40,100); 
+		width:100%; 
+		height:50px; 
 	}
 	#topBar{ 
-		background-color:#182337; 
-		float:left; 
-		height:50px; 
-		padding:10px 0 0 0px;  
-		width:1280px;
-		left:-200px;
+		text-align:center;
+		padding:10px 0 0 0px; 
+		margin:0 auto; 
+	}  
+	#topBar h5{
+		margin-top:3px;
+		color:white; 
+		width:400px;
 	} 
-	#topBar>p{ 
+	#topBar>ul{
+		margin:0 auto;
+		width:1280px;
+	}
+	#topBar a{
 		color:white;
 	}
-	#topBar li:nth-of-type(2){ 
-		margin-left:130px; 
-		width:12%;
-	} 
-	#topBar li:nth-of-type(3){
-		width:5.5%;
-	} 
-	#topBar li:nth-of-type(4){
-		width:14%;
+	#topBar button{
+		border-radius:2.5px;
 	}  
 	#blind{
 		top:10px; 
-		left:1040px; 
+		left:1380px;
 		width:100px;
 	}
 	#edit{
@@ -92,7 +113,16 @@
 		width:100px;
 		height:30px;
 	}
-	 
+	 /*정렬 기능 컨테이너*/
+	 #sortBox{ 
+	 	margin-bottom:20px;
+	 	height:40px;
+	 }
+	 #sortBox>.success{
+	 	width:30px;
+	 	margin-right:20px;
+	 }
+	
 	/*버튼*/ 
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 	
@@ -112,13 +142,12 @@
 	  background:#fff;   
 	  color: gray;	  
 	  margin: 0;
-	  padding: 3px 10px;  
-	  font-size: 1rem;
+	  padding: 3px 10px;   
 	  font-weight: 400;
 	  text-align: center;
 	  text-decoration: none;	  
-	  border: none;	  
-	  border-radius: 4px;	  
+	  border: 1px solid gray; 
+	  border-radius: 5px;	  
 	  display: inline-block;
 	  width: auto;	   	  
 	  cursor: pointer;	  
@@ -142,13 +171,13 @@
 		position:absolute;
 		width:100px;
 		top:11px;
-		left:1170px;
+		left:1500px;
 	}
 	#addBtn{
-		left:1060px;
+		left:1380px;
 	}
 	#editBtn{
-		left:950px;
+		left:1255px;
 	} 
 	#btns a>button, button:nth-of-type(4){ 
 		margin-left:900px; 
@@ -159,31 +188,40 @@
 		padding:65px 0 25px 0; 
 		border-bottom:gray 1px solid;
 	}
-	.noticeList{
-		height:20px; 
+	#bottommm{
+		text-align:center;  
+		margin-top: 950px;
+		position:relative;
+		left:-800px;
+		width:1000px;
+	}
+	.contentList{
+		height:40px;
 		position:relative;  
 		margin-bottom:10px;
-		padding-top:5px;
-	}
-	.noticeList:nth-of-type(1){ 
-		margin-top:10px;
-	} 
-	#noticeSearchFrm{ 
+		padding-top:5px; 
+	}  
+	.contentList>li{
+		padding:10px 0;
+		border-bottom:1px solid #E8E8E8;
+	}	
+	#searchFrm{ 
 		top:30px; left:252px; 
-		} 
-	form {
-	  display: flex; 
+		}
+	#searchFrm input[type=submit]{
+		width:100px;
+		background-color:#CADBAE;
+	} 
+	#dateSearch{
+		margin:10px 0 0 0 200px;
+	}
+	form { 
 	  align-items: center; 
 	}
 	form>select, form>input{
 		margin-right:10px;
-	}
-	
-	input[type=text]{
-		width:408px;
-	}
-	input[type=checkbox] {
-		zoom: 1.8;
+	} 
+	input[type=checkbox] { 
 		top:-11px;		
 	}  
 	input[type=submit]{
@@ -198,16 +236,9 @@
 		border:1px solid lightgray; 
 		border-radius: 2px;
 	}
-	#content li, label{list-style-type:none; padding-bottom:10px;}
+	#content li, #content label{list-style-type:none; padding-bottom:10px;}
 	#content select{height:28px;}
-	#contentList{
-		margin-top:10px;
-	}
-	
-	
-	
-	
-	
+	 
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
@@ -215,7 +246,8 @@
 	}
 	.page_nation {
 		display:inline-block;
-		padding-top:60px;
+		padding-top:50px;
+		margin-bottom:15px;
 	}
 	.page_nation .none {
 		display:none;
@@ -236,26 +268,334 @@
 	}
 	.page_nation .arrow {
 		border:1px solid #ccc;
-	}
-	.page_nation .pprev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
-		margin-left:0;
-	}
-	.page_nation .prev {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
-		margin-right:7px;
-	}
-	.page_nation .next {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
-		margin-left:7px;
-	}
-	.page_nation .nnext {
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
-		margin-right:0;
-	}
+	} 
 	.page_nation a.active {
 		background-color:#42454c;
 		color:#fff;
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	
+	/*컨테이너 별로 묶은 박스 공통*/	
+	 #deli, #claim, #sta, #noti, #ques, #accept, #rep, #companyBox, #infoBox, #buyHistory, #reportBox, #randomBox, #bannerContainer, #todayContainer, 
+	 #cateContainer, #popContainer, #useInfoContainer, #infoHandleContainer, #useTermsContainer, 
+	 #financialContainer, #salesBox1, #salesBox2, #salesCateBox{ 
+	 	width:500px;
+	 	margin-left:35px;
+	 	border-radius:10px; 
+	 	top:20px;
+	 	background-color:white;
+	 	box-shadow: 4px 6px 15px -7px #C4C4C4;
+	 }
+	 /*컨테이너 제목*/ 
+	  #deliTitle, #claimTitle, #staTitle, #notiTitle, #quesTitle, #acceptTitle, #repTitle, #companyTitle, #infoTitle, #reportTitle, #buyTitle, #randomTitle, #bannerTitle, #todayHeader, 
+	  #cateHeader, #popHeader, #useInfoHeader, #infoHandleHeader, #useTermsHeader, #financialHeader, 
+	  #sales1Title, #sales2Title, #salesCateTitle{
+	  	text-align:center;
+	  	font-weight:bold;
+	  	font-size:16px;
+	  	letter-spacing:2px;
+	  	border-bottom:1px solid lightgray;
+		border-radius: 10px 10px 0px 0px;
+	  	background-color:#FAF9F6;
+	  	height:60px;
+	  	padding-top:20px;
+	  }
+	  
+	  #companyBox li, #infoBox li, #report li, #buyHistory li, #randomBox li, #bannerContainer li, #todayContainer li{
+	  	padding-top:15px;
+	  } 
+	 #companyHeader, #infoHeader, #reportHeader, #buyHeader{ 
+	 	left:-40px;
+	 	width:250px !important;
+	 }
+	  #companyHeader li, #infoHeader li, #reportHeader li, #buyHeader li{
+	  	font-weight:bold;
+	  	padding-top:20px;
+	  }
+	
+	/*섬머노트 버튼*/
+	
+	/*====================디자인 게시판========================*/
+	.randomUl{
+		position:relative;
+	}
+	/*첨부파일*/ 
+	.attach{
+		height:28px;
+		width:150px;
+		font-size:14px;
+		color:dimgray;
+		background-color:#eee;
+		padding:7px 0;
+		border:1px solid gray;
+		border-radius:3px;
+		margin-right:10px;
+		font-weight:normal;
+	}
+	input[type=text]{
+		border-color:lightgray;
+		border-radius:3px;	 
+		padding-left:5px;
+		width:300px;
+		font-weight:normal;
+	} 
+	.uploadFile{
+		width:220px;
+		font-weight:normal;
+	}  
+	.randomUl, .randomUl div, #randomBox ul, #bannerBox, form, #todayBox {
+		display:flex;
+	} 
+	/*========회원정보 전체=========*/
+	#infoBox, button, #infoTitle>p{
+		position:relative;
+	}  
+	#infoBox button{
+		color:black; 
+	  	height:30px;
+	  	width:100px; 
+	  } 
+	  
+	/*==========================랜덤 룰렛==========================*/
+	 #randomBox{
+	 	margin-top:30px;
+	 }
+	 #randomBox ul{
+	 	margin-left:80px;
+	 }
+	 #randomBox li{
+	  	padding-top:15px;
+	} 
+	 #randomBox li:nth-of-type(2){
+		margin-right:40px;
+	}
+	#randomBox input[type="file"]{
+		display:none;
+	}  
+	#randomBox button{
+		margin:0 10px !important;  
+	 	width:70px; 
+	}
+	.randomUl{ 
+	 	left:-40px;
+	 	width:250px !important; 
+	 }
+	.randomUl div{ 
+		width:400px;
+	}
+	.randomUl li{
+	  	font-weight:bold;
+	  	padding-top:20px;
+	  } 
+	  #randomTitle>div{
+	  	position:relative; 
+	  } 
+	  
+	 /*==========배너 이미지===========*/	 
+	 #bannerContainer{ 
+	 	top:50px; 
+	 } 
+	 #bannerContainer button{
+	 	width:70px;
+	 }
+	 #bannerBox{
+	 	margin-top:20px; 
+	 } 
+	  #bannerBox>ul{
+	  	margin-left:15px;
+	  }
+	 #bannerBox li{
+	 	width:170px;
+	 }  
+	 #bannerBox input[type=text]{
+	  	width:150px;
+	 } 
+	 #bannerBox button{
+	 	margin:7px 0;
+	 } 
+	 .bannerImg>img{
+	 	width:150px;
+	 	height:150px;
+	 }
+	 
+	 /*===========================오늘의 상품===========================*/
+	#todayContainer{
+		margin-top:60px;
+	}	
+	#todayContainer	img{
+		height:120px;
+		width:120px;
+	}  
+	#todayBox button{
+		width:58px;
+	}
+	#todayBox input{
+		width:130px;
+	}
+	
+	/*===========================카테고리 관리============================*/
+	#cateContainer{
+		margin:60px 0 0 0;
+		width:1000px;
+		height:650px;
+	}
+	#cateContainer label{
+		background-color:white;
+		text-align:center;
+		margin-top:20px;
+	} 
+	#cateContainer label:nth-of-type(1){
+		width:500px;
+		height:30px;
+	} 
+	.cateSmHeader>span:nth-of-type(1){
+		margin-left:110px;
+	}
+	.cateSmHeader>span:nth-of-type(2){
+		margin-left:50px;
+	}
+	#cateContainer li:nth-of-type(1)>input{
+		padding-left:10px;
+		width:30px;
+	}
+	#cateContainer li:nth-of-type(2)>input{
+		padding-left:10px;
+		width:150px;
+	}
+	#cateContainer .delBtn{
+		width:60px;
+	}
+	#cateContainer>section div, #cateContainer ul, #sectionBox>section{
+		width:500px;
+	}
+	#cateContainer ul{
+		display:flex;
+		margin:10px 0 10px 110px;
+	}
+	#cateContainer ul>li{
+		margin-right:10px;
+	}
+	.addCate{
+		margin:10px 0 30px 0;
+	}	
+	.addCate:nth-of-type(1){ 
+		margin: 20px 0 0 0;
+		display:flex;
+	} 
+	.addCate:nth-of-type(1)>*{
+		margin-right:15px;
+	}
+	.addCate:nth-of-type(1)>select{
+		width:100px;
+	}
+	.addCate:nth-of-type(1)>input{
+		width:220px;
+	}
+	.addCate:nth-of-type(2)>input{
+		width:220px;
+	}
+	.addCate:nth-of-type(3){ 
+		margin-left:30px;
+	}
+	#sectionBox{
+		display:flex;
+	}
+	#cateBox1>div, #cateBox2>div{
+		margin-top:20px;
+	}
+	.hr{
+		width:450px; 
+		margin:13px 0;
+	} 
+	.hr:nth-of-type(1){
+		padding-left:20px;
+	}
+	/*=======2차 카테고리 표=========*/
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-7eit{background-color:#ffffff;border-color:#ffffff;text-align:center;vertical-align:middle}
+ 	#cateBox2 th:nth-of-type(1)>input{
+ 		width:80px;
+ 	}
+ 	.cateMainName>input{
+ 		text-align:center;
+ 		padding-left:0;
+ 	}
+ 	.cateNum>input{
+ 		width:30px;
+ 		padding-left:10px;
+ 	}
+ 	.cateName>input{
+ 		width:130px;
+ 	} 
+ 	
+ 	/*====================팝업 관리========================*/
+ 	#popContainer{
+ 		margin:80px 0 0 0;
+ 		width:1000px; 
+   	 	height: 330px;
+	}
+	#popBox{
+		display:flex;
+	}
+	#popBox1,#popBox2{
+		margin:40px 0 0 140px;
+	}
+	#popBox1>img{
+		width:200px;
+		height:200px;
+	}
+	#popBox2{
+		margin-top:70px;
+	}
+	#popBox2 label{
+		text-align:center; 
+	}
+	#popBox2>div{
+		display:flex;
+	}
+	#popBox2>input{
+		border-color:gray;
+	}
+	#popBox2 input[type=file]{
+		display:none;
+	}
+	#popDate{
+		margin:20px 0;
+		color:gray;
+	}
+	#popBox2 input[type=date]{
+		width:174px;
+	}
+	#popBox2 input[type=text]{
+		width:380px;
+	}
+	
+	/*===================이용안내, 개인정보, 금융정보 등 관리===================*/
+	 #useInfoContainer, #infoHandleContainer, #useTermsContainer, #financialContainer{
+	 	margin-top:50px;
+	 	width:1000px;
+	 	margin-left:0;
+	 	height:500px;
+	 } 
+	 .bottommm{
+	 	text-align:center;
+	 	margin:10px 0 30px 0;
+	 }
+	 /*회원관리*/
+	 #choose{
+	 	margin:90px 0 0 20px; 
+	 	width:1100px;
+	 }
+	 #choose button{
+	 	font-size:15px;
+	 	width:49%;
+	 	height:50px;
+	 	font-size:16px;
+	 	font-weight:bold;
+	 	color:dimgray;
+	 }

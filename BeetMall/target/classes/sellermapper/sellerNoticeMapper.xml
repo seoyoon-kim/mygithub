@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerNoticeDAO">
+	<select id="sellerNoticeAllRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="com.beetmall.sshj.seller.vo.SellerNoticeVO">
+	select*from
+	(select*from
+	(select infonum, infotitle, infocontent, to_char(infowritedate, 'YY/MM/DD') as infowritedate, infohit, infotype, infoattach 
+	from notice 
+	<choose>
+		<when test = 'searchWord!=null'>
+			where infotitle like '%${searchWord}%' and infotype=2
+		</when>
+		<when test ="searchWord==null">
+			where infotype = 2
+		</when>
+	</choose>
+	order by infonum desc)
+	 <![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by infonum)
+        <![CDATA[where rownum<=]]>
+        <if test="pageNum==totalPage">${lastPageRecord}</if>
+        <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by infonum desc
+	</select>
+	<select id="sellerNoticeSelect" resultType="com.beetmall.sshj.seller.vo.SellerNoticeVO">
+		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach 
+		from notice 
+		where infotype=2 and infonum=#{param1}
+	</select>
+	<update id="countInfoHit" parameterType="com.beetmall.sshj.seller.vo.SellerNoticeVO">
+		update notice set infohit = infohit + 1  where infonum=#{param1}
+	</update>
+	<select id="lagLeadSelect" resultType="com.beetmall.sshj.seller.vo.SearchAndPageVO">
+		select * from
+			(select infonum, infotype,
+			lag(infonum, 1, 0) over (order by infonum desc) as prevNo,
+			lag(infotitle, 1, '이전글이 없습니다.') over (order by infonum desc) as prevSubject,
+			lead(infonum, 1, 0) over (order by infonum desc) as nextNo,
+			lead(infotitle, 1, '다음글이 없습니다.') over (order by infonum desc) as nextSubject
+			from notice order by infonum desc) 
+		where infonum = #{param1} and infotype=2
+	</select>
+	<select id="totalRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="int">
+		select count(infonum) totalRecord from notice where infotype=2
+	</select>
+</mapper>

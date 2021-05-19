@@ -2,14 +2,11 @@ package com.beetmall.sshj.test;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class testController {
 	
-	@RequestMapping("myfavoriForm")
-	public String myfavoriForm() {
-		return "mypages/myfavoriForm";
-	}
 	@RequestMapping("chargeAPI")
 	public String chargeAPI() {
 		return "mypages/chargeAPI";
@@ -53,11 +50,6 @@ public class testController {
 	public String customInfoView() {
 		return "custom/custominfoView";
 	}
-
-	@RequestMapping("/customWish")
-	public String customWish() {
-		return "custom/customWish";
-	}
 	
 	@RequestMapping("/customBuyConfirm")
 	public String customBuyConfirm() {
@@ -65,11 +57,9 @@ public class testController {
 	}
 
 	
+
 	
-	@RequestMapping("/customproduct")
-	public String customproduct() {
-		return "custom/customproduct";
-	}
+
 	
 	@RequestMapping("/custompay")
 	public String custompay() {
@@ -90,29 +80,11 @@ public class testController {
 	public String searchPwd() {	// 비밀번호 찾기
 		return "login/pwdSearch";	
 	}
-
-	@RequestMapping("infoView")
-	public String infoView() {	// 약관조회
-		return "info/infoView";
-	}
-	@RequestMapping("mypoint")
-	public String myPoint() {	// 마이포인트
-		return "mypages/mypoint";
-	}
+	
 	@RequestMapping("myinfoEdit")
 	public String myInfoEdit() {	// 내 정보
 		return "mypages/myInfoEdit";
 	}
-	@RequestMapping("myChatList")
-	public String myChatList() {	// 채팅내역
-		return "mypages/myChatList";
-	}
-	@RequestMapping("leaveMember")
-	public String leaveMember() {	// 회원탈퇴
-		return "mypages/leaveMember";
-	}
-	@RequestMapping("leaveMemberOk")
-	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
-		return "mypages/leaveMemberSuccess";
-	}
+	
+	
 }

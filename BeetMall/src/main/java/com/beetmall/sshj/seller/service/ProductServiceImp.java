@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.seller.dao.ProductDAO;
@@ -17,11 +18,6 @@ public class ProductServiceImp implements ProductService {
 	//dao 객체를 주입해야함
 	@Inject
 	ProductDAO productDAO;
-
-	
-	 @Override public List<ProductVO> searchList(SearchAndPageVO spvo) { 
-		 return productDAO.searchList(spvo); 
-	 }
 	 
 	@Override
 	public int productInsert(ProductVO vo) {
@@ -29,20 +25,38 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> productAllSelect(String userid) {
-		return productDAO.productAllSelect(userid) ;
+	public List<ProductVO> productAllSelect(SearchAndPageVO sapvo){
+		return productDAO.productAllSelect(sapvo);
+	}
+	@Override
+	public int totalRecord(SearchAndPageVO sapvo) {
+		return productDAO.totalRecord(sapvo);
 	}
 
 	@Override
-	public int totalProduct(SearchAndPageVO spvo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<ProductVO> onePageRecordSelect(SearchAndPageVO sapvo) {
+		return productDAO.onePageRecordSelect(sapvo);
 	}
 
 	@Override
-	public List<ProductVO> onePageRecordSelect(SearchAndPageVO spvo) {
+	public int discountInsert(ProductVO vo) {
+		return productDAO.discountInsert(vo);
+	}
+
+	@Override
+	public int optionInsert(ProductVO vo) {
+		return productDAO.optionInsert(vo);
+	}
+
+	@Override
+	public int productDelete(int productnum) {
+		return productDAO.productDelete(productnum);
+	}
+
+	@Override
+	public int productUpdate(ProductVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return productDAO.productUpdate(vo);
 	}
 
 

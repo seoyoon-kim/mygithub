@@ -15,6 +15,8 @@
 	}
 	.page_nation {
 		display:inline-block;
+		padding-left: 300px;
+    	padding-right: 300px;
 	}
 	.page_nation .none {
 		display:none;
@@ -78,9 +80,16 @@
 		height:198px;
 		border-radius: 10%;
 	}
+	#productDiv>ul>li{
+		width:200px;
+		padding-top: 3px;
+	}
 	#productDiv>ul>li:nth-child(5n+2){
-	    font-size: xx-large;
+	    font-size: x-large;
 	    font-weight: bold;
+	}
+	#productDiv>ul>li:nth-child(5n+1){
+	    padding-top:15px;
 	}
 	
 	#categoryAll>img, #categoryFruit>img, #categoryVege>img, #categorySall>img{
@@ -119,6 +128,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=675d2e2b842e770a2d48d54759ba1d32&libraries=services,clusterer,drawing"></script>
 <script>
 	var ajaax; //ajax를쓰기위한 Title값 받아오기
+	
 </script>
 <div class="section">
 	<div id="mainName"><h1>지도로 찾는 동네 농장</h1></div>
@@ -128,169 +138,8 @@
 	<div class="main">
 			<hr/>
 		<div id="productMain">
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k018.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k019.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k020.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k021.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k022.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k018.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k019.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k020.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k021.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k022.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k016.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
-			<div id="productDiv">
-				<ul>
-					<li><img src="/sshj/img/k017.png"></li>
-					<li>28,000원</li>
-					<li>제목제목제목제목제목제목</li>
-					<li>리뷰 50,000|4.8/5</li>
-					<li>판매지역 이강산</li>
-				</ul>
-			</div>
+			
 		</div>
-		<div class="page_wrap">
-			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
-			</div>
-		 </div>
 	</div>
 </div>
 
@@ -312,7 +161,7 @@
 		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 		
 		var marker = [];
-		<c:forEach items="${list}" var="data"> 
+		<c:forEach items="${list2}" var="data"> 
 		geocoder.addressSearch('${data.storeaddr}', function(result, status) {
 			// 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
@@ -370,7 +219,23 @@
 				kakao.maps.event.addListener(marker${data.storenum}, 'click', function() {
 				      console.log(marker${data.storenum}.getTitle());
 				      ajaax = marker${data.storenum}.getTitle();
+				      console.log(ajaax)
+				      var params = "name="+ajaax;
+				      $.ajax({
+				    	  url: "/sshj/mapclick",
+				    	  data: params,
+				    	  success:function(result){
+							  console.log("성공");
+							  $("#productMain").empty();
+							  $("#productMain").html(result);
+						  },error:function(e){
+							  console.log(e.responseText);
+							  console.log("가져오기 실패");
+						  }		    	  
+				      });
 				      overlay.setMap(map);
+				      
+				      
 				});
 				////////////마커 클릭이벤트끝////////////////////////////////
 		     }
@@ -547,11 +412,9 @@
 		            drawingOverlay.setMap(map);
 		            
 		        } else { 
-		            
 		            drawingCircle.setMap(null);
 		            drawingLine.setMap(null);    
 		            drawingOverlay.setMap(null);
-		            
 		        }
 		    }     
 		});     
@@ -671,17 +534,17 @@
 		    // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
 		    var content = '<ul class="info2">';
 		    content += '    <li>';
-		    content += '        <span class="label2">총거리</span><span class="number2">' + distance + '</span>m';
-		    content += '    </li>';
+		    content += '        <span class="label2">총거리</span><span class="number2">' + distance + '</span>';
+		    content += '    </li><br/>';
 		    content += '    <li>';
 		    content += '        <span class="label2">도보</span>' + walkHour + walkMin;
-		    content += '    </li>';
+		    content += '    </li><br/>';
 		    content += '    <li>';
 		    content += '        <span class="label2">자전거</span>' + bycicleHour + bycicleMin;
-		    content += '    </li>';
+		    content += '    </li><br/>';
 		    content += '</ul>'
 		
 		    return content;
 		}
-	///////////////////////영역설정하기 끝///////////////////////////////////
+		///////////////////////영역설정하기 끝///////////////////////////////////
 </script>

@@ -1,28 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %> 
-<link rel ="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin.css" type="text/css"> 
-
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+<%@ include file="/inc/top.jspf" %> 
+ 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<!-- font -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
-
+ 
 <style>
+	#topBar>h5{
+		padding-left: 270px;
+	    width: 600px !important;
+    }
 	#mypageMenubar{
 		display:block;
 	}
 	
-	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif; }
+	*{margin:0px; padding:0px; list-style-type :none;}
 
 	a:hover, a:active, a:visited, a:link {
    		color: black;
@@ -60,10 +53,10 @@
   		border:none;
   		font-weight:normal;
   	}
-   /*표*/
+   /*표*/ 
    form{
 	   	position:absolute;
-	   	top:119px;
+	   	top:-205px;
 	   	left:180px;
 	   	width:1351px;
    }
@@ -75,12 +68,13 @@
 	  background-color:#F8F7F7;
 	} 
 	table{
-		width:100%;	
+		width:1080px;	
 		border-spacing: 0;
 		text-indent: initial;	
 		border-top:2px solid lightgray;
 		border-bottom:2px solid lightgray;
 		font-size:15px;
+		margin-left:30px; 
 	}
 	th, .th{
 		height:40px;
@@ -129,11 +123,11 @@
 	.td{
 		width:0;
 	}
-	#bottommm{
-		text-align:center;  
-		margin-top: 1350px;
-		position:relative;
-		left:-782px;
+	#bottommm{ 
+		margin: 1550px 0 40px 0; 
+		left:-800px;
+		top:-70px;
+		display:flex;
 	}
 	#bottommm>input{
 		border:1px solid gray;
@@ -144,14 +138,12 @@
 	#write_btn{
 		width:150px;
 	}
-	#cancel_btn{
-		position:relative;
-		top:-40px;
-		left:260px;
+	#cancel_btn{ 
+		margin-left:20px;
 	}
 	
 	input[type="submit"].btn:hover, input[type="button"].btn:hover, input[type="reset"].btn:hover{
-   	  background: #b3b3b3;
+   	  background: #b3b3b3 !important;
 	  color:white;
 	  display: inline-block;
 	  outline: 0;
@@ -165,12 +157,20 @@
 		height:300px;
 		padding:15px;
 	}
+	.empty{
+		background-color:white;
+		border-right:none !important;
+		height:25px;
+	}
 </style>
-<div id="body1">
-<div class="container">
+	<div id="topBarContainer">
 	<div id="topBar">
-		<p><strong>공지 작성</strong></p>   
+		<h5><strong><a href="csAnswerA">문의 답변 작성</a></strong></h5>   
 	</div>
+	</div>
+<div id="body1">
+<%@ include file="/inc/leftBar.jspf" %> 
+<div class="container">
 	<div id="box"> 	
 	<form method="post" action="noticeWriteOk">
 		<table>
@@ -215,13 +215,11 @@
 						</div>
 					</td>
 				</tr> 
-				<tr>
-					<th id="" colspan="4">문의 내용</th>
-				</tr>
-				<tr>
-					<th colspan="4" style="background-color:white;">
+				<tr class="tr_head">
+					<th class="menu">문의 내용</th>
+					<td  class="td">
 						<div id="qContent">
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
+							 배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
@@ -229,8 +227,13 @@
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
 							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.
 						</div>
-					</th>
-				</tr>
+					</td>
+				</tr>  
+				<tr class="tr_head empty">
+					<th class="menu empty"></th>
+					<td  class="td empty">
+					</td>
+				</tr> 
 				<tr>
 					<th id="smallTitle" colspan="4">답변 내용</th>
 				</tr>
@@ -245,8 +248,7 @@
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
 				<input type="reset" value="다시쓰기" class="btn write_btn id="reset_btn"/>
 				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-							
-			</div>
+			 </div>
 		</form>
 		</div>
 </div>
@@ -255,8 +257,8 @@
 $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
-		  focus: true,
-		  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+		  focus: false,
+		  callbacks: {	//이미지를 첨부하는 부분
 				onImageUpload : function(files) {
 					uploadSummernoteImageFile(files[0],this);
 				},

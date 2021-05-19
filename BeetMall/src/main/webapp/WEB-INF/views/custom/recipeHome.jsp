@@ -224,7 +224,7 @@ margin-top:3px;
 margin-left:3px;
 margin-bottom:3px;
 height:150px;
-
+border-bottom:1px solid #eee;
 }
 
 #recipeListul>li:nth-child(7n+1),#rtitleImg{
@@ -376,7 +376,6 @@ function new10(){
 		</span>
 	    
 	    </div>
-	    <div id="writebtndiv"><a href="<%=request.getContextPath() %>/recipeWrite"><input type="submit" id="writebtn" value="글 작성하러 가기"/></a></div>
 	
 <!-- -------------------------레시피 리스트들-------------------------------------- -->	
         
@@ -386,10 +385,10 @@ function new10(){
    <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
 		         <c:forEach var="data" items="${list}">   
 		             <ul id="recipeListul">
-		              <li><a href="recipeView?recipenum=${data.recipenum}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-		              <li><a href="recipeView?recipenum=${data.recipenum}">${data.recipetitle}</a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 		              <li>${data.userid}</li>
-		              <li><a href="recipeView?recipenum=${data.recipenum}"></a></li>
+		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"></a></li>
 		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} ${data.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  
@@ -402,10 +401,10 @@ function new10(){
    <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
 		         <c:forEach var="data2" items="${list2}">   
 		             <ul id="recipeListul">
-		              <li><a href="recipeView?recipenum=${data2.recipenum}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
-		              <li><a href="recipeView?recipenum=${data2.recipenum}">${data2.recipetitle}</a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 		              <li>${data2.userid}</li>
-		              <li><a href="recipeView?recipenum=${data2.recipenum}"></a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"></a></li>
 		              <li>★추천해요 ${data2.reciperecommend} 조회수${data2.recipehit} ${data2.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  

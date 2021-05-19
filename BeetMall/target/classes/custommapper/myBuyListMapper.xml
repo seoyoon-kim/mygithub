@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.custom.dao.MyBuyListDAO">
-	<select id="selectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO">
+	<select id="selectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select * from(
+		select * from(
 		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, del.invoice as invoice, pro.productnum, rev.ordernum as ordercnt
 		from ordertbl ord
 		    join orderdetail det
@@ -12,14 +14,20 @@
 		        on det.ordernum = del.ordernum
             left join review rev
                 on det.ordernum = rev.ordernum
-		where ord.userid=#{param1}
+		where ord.userid=#{userid}
+		<if test="month>0">and ord.orderdate >= to_char(add_months(sysdate,-#{month}),'YYYY/MM/DD')</if>
+		order by ord.orderdate desc, ord.ordernum desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by orderdate desc, ordernum desc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if> 
+		order by orderdate desc, ordernum desc
 	</select>
 	<update id="orderCommit">
 		update orderdetail set orderstatus = '구매완료' where ordernum=#{param1}
 	</update>
-	<update id="orderCancel">
-		select count(orderstatus) as orderstatus from orderdetail where orderstatus in('배송중', '배송완료') and ordernum = #{param1}
-	</update>
+	<select id="orderCancel" resultType="Integer">
+		select count(orderstatus) from orderdetail where orderstatus in('배송중', '배송완료') and ordernum = #{param1}
+	</select>
 	<update id="orderCancelOk">
 		update orderdetail set orderstatus ='취소' where orderstatus not in('배송중', '배송완료') and ordernum = #{param1}
 	</update>
@@ -33,4 +41,58 @@
 		insert into review(reviewnum, ordernum, productnum, reviewcontent, userid, reviewwritedate, reviewrecommend, reviewimg, reviewscore, reviewreport, reviewanswer)
 		values(reviewsq.nextval, #{ordernum}, #{productnum}, #{reviewcontent}, #{userid}, sysdate, 0, #{reviewimg}, #{reviewscore}, 0,  null)
 	</insert>
+	<select id="reviewSelect" resultType="com.beetmall.sshj.custom.vo.ReviewVO">
+		select reviewnum, reviewcontent, userid, reviewwritedate, 
+		(select count(reviewnum) from reviewlike
+		where reviewnum = (select reviewnum from review where ordernum=#{param1})) as reviewcount
+		from (select * from review where ordernum = #{param1})
+	</select>
+	<select id="reviewcheck" resultType="Integer">
+		select count(*) from reviewlike where reviewnum = #{param1} and userid=#{param2}
+	</select>
+	<delete id="reviewGoodCancel">
+		delete from reviewlike where reviewnum = #{param1} and userid=#{param2}
+	</delete>
+	<insert id="reviewGood">
+		insert into reviewlike(reviewnum, userid, reviewgood)
+		values(#{param1}, #{param2}, 1)
+	</insert>
+	<insert id="claimInsert" parameterType="com.beetmall.sshj.custom.vo.ClaimVO">
+		insert into claim(ordernum, productnum, claimkind, claimstatus, claimcontent, claimdate, delivery, invoice)
+		values(#{ordernum}, #{productnum}, #{claimkind}, #{claimstatus}, #{claimcontent}, sysdate, #{delivery}, #{invoice})
+	</insert>
+	<update id="claimUpdate">
+		update orderdetail set orderstatus = #{param2} where ordernum=#{param1}
+	</update>
+	<select id="returnSelect" resultType="com.beetmall.sshj.custom.vo.ClaimVO">
+		select ordernum, claimkind, claimstatus, claimcontent, claimdate, delivery, invoice from claim where ordernum=#{param1} 
+	</select>
+	<insert id="qboardInsert" parameterType="com.beetmall.sshj.custom.vo.UserQBoardVO">
+		insert into userqboard(qnum, productnum, userid, qcontent, qwritedate, qopen, qanswer, qtitle)
+		values(userqboardsq.nextval, #{productnum},#{userid} , #{qcontent}, sysdate, #{qopen}, null, #{qtitle})
+	</insert>
+	<update id="returnFinish">
+		update orderdetail set orderstatus = '환불' where ordernum = #{param1}
+	</update>
+	<select id="monthSelectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO">
+		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, del.invoice as invoice, pro.productnum, rev.ordernum as ordercnt
+		from ordertbl ord
+		    join orderdetail det
+		        on ord.ordernum = det.ordernum
+		    join product pro
+		        on det.productnum = pro.productnum
+		    join delivery del
+		        on det.ordernum = del.ordernum
+            left join review rev
+                on det.ordernum = rev.ordernum
+		where ord.userid=#{param1} and ord.orderdate >= to_char(add_months(sysdate,-#{param2}),'YYYY/MM/DD')
+		order by ord.orderdate desc, ord.ordernum desc
+	</select>
+	<select id="returnPageRecord" resultType="Integer" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select count(*) from ordertbl where userid=#{param1}
+	</select>
+	<select id="returnPageRecordMonth" resultType="Integer" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
+		select count(*) from ordertbl 
+		where userid=#{param1} and orderdate >= to_char(add_months(sysdate, -#{param2}),'YYYY/MM/DD')
+	</select>
 </mapper>

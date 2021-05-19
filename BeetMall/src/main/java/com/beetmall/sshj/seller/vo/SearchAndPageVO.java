@@ -1,6 +1,8 @@
 package com.beetmall.sshj.seller.vo;
 
 public class SearchAndPageVO {
+	private String userid;
+	
 	//검색어와 검색키
 	private String searchKey;
 	private String searchWord;
@@ -8,17 +10,27 @@ public class SearchAndPageVO {
 	//페이지
 	// 총레코드수가 발생하면, 총페이지수를 구하기 가능 -> 총페이지수가 나오면 마지막페이지에 레코드가 몇개 남았는지 확인 -> 그럼 시작페이지알수있음
 	private int pageNum=1;//현재페이지 					초기 세팅해줘야하는 값 3개
-	private int onePageNum=10;//한페이지당 페이지 번호수
-	private int onePageRecord=10;//한페이지당 레코드수
+	private int onePageNum=5;//한페이지당 페이지 번호수
+	private int onePageRecord=5;//한페이지당 레코드수
 	
 	private int totalRecord;//총 레코드 수 	(검색어에 해당하는)	
 	private int totalPage;//마지막페이지, 총 페이지 수 	
+	
 	private int startPageNum=1;//시작페이지 =3 이면 3페이지부터 시작
-
-	private int lastPageRecord=10;//마지막 페이지의 남은 레코드수
+	private int lastPageRecord=5;//마지막 페이지의 남은 레코드수
+	
+	//이전글 다음글
+	private int prevNo;//이전글번호
+	private String prevSubject;//이전글제목
+	private int nextNo;//다음글번호
+	private String nextSubject;//다음글제목
+	
+	// 정렬 
+	private String sortRecord;
 	
 	
 	//getter setter
+	//검색
 	public String getSearchKey() {
 		return searchKey;
 	}
@@ -31,6 +43,8 @@ public class SearchAndPageVO {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
+	
+	//페이징
 	public int getPageNum() {
 		return pageNum;
 	}
@@ -88,5 +102,45 @@ public class SearchAndPageVO {
 		this.lastPageRecord = lastPageRecord;
 	}
 	
+	//이전글 다음글
+	
+	
+	public int getPrevNo() {
+		return prevNo;
+	}
+	public void setPrevNo(int prevNo) {
+		this.prevNo = prevNo;
+	}
+	public String getPrevSubject() {
+		return prevSubject;
+	}
+	public void setPrevSubject(String prevSubject) {
+		this.prevSubject = prevSubject;
+	}
+	public int getNextNo() {
+		return nextNo;
+	}
+	public void setNextNo(int nextNo) {
+		this.nextNo = nextNo;
+	}
+	public String getNextSubject() {
+		return nextSubject;
+	}
+	public void setNextSubject(String nextSubject) {
+		this.nextSubject = nextSubject;
+	}
+	//정렬
+	public String getSortRecord() {
+		return sortRecord;
+	}
+	public void setSortRecord(String sortRecord) {
+		this.sortRecord = sortRecord;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	
 }

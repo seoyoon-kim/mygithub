@@ -58,9 +58,10 @@
 		background-color:white;
 		border:rgb(252,118,45);
 		color:black;
-		line-height:50px;
 		font-size:25px;
 		padding-left:10px;
+		line-height:30px;
+		overflow-x:hidden;
 	}
 	.btnClass{
 		background-color:rgb(252,118,45);

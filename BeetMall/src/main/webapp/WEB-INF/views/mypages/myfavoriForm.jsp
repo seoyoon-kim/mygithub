@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
+<!-- font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
+	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#cMyPageLeft{
 		display: block;
 	}
@@ -126,7 +130,14 @@
 	}
 	
 	#ttile{
+		padding-top: 30px;
 		overflow:auto;
+	    padding-bottom: 30px;
+	    font-size: 25px;
+	}
+	#subtitle{
+		margin-left:20px;
+		font-size: 14px;
 	}
 	#ttile h2{
 		float:left;
@@ -139,12 +150,36 @@
 		border: 2px solid #bcbcbc;
 		cursor: faver;
 	}
-	
+	.like{
+		height:20px;
+		width:20px;
+		background-size:20px 20px;
+		float:right;
+		margin-top: 20px;
+		margin-left: 25px;
+	}
+	.like{
+		background-image:url(/sshj/img/dlike.png);
+	}
+	#hh>div{
+		float:left
+	}
+	.hate{
+		height:20px;
+    	margin-left: 5px;
+	}
 </style>
+<script>
+	function click22(num){
+		var number = num;
+		console.log(number + " 클릭잘됨")
+		location.href="/sshj/customFarm?storenum="+number;  //형꺼에 갖다가 붙이기
+	}
+</script>
 <div class="section">
 	<div id="myfavList">
-		<div id="ttile" class="ttile"><h2>000</h2><h2>님이 즐겨찾는 농장입니다.</h2></div>
-		<div id="deletee"><input type="button" class="buybutton2" value="삭제하기"/></div>
+		<div id="ttile" class="ttile">즐겨찾기한 농장</div>
+		<div id="subtitle">당신이 즐겨찾기한 농장입니다.</div>
 		<div>
 			<ul id="favUl">
 				<li></li>
@@ -153,42 +188,15 @@
 				<li>즐겨찾기한 사용자</li>
 				<li>구경하기</li>
 				
-				<!-- 구분용 -->
-				<li><input type="checkbox" value="#"></li>
-				<li>
-					<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="favprice">서울 서대문구</span></li>
-				<li>531명</li>
-				<li><input type="button" class="buybutton" value="구경가기"/></li>
-				
-				<!-- 구분용 -->
-				<li><input type="checkbox" value="#"></li>
-				<li>
-					<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="favprice">서울 서대문구</span></li>
-				<li>531명</li>
-				<li><input type="button" class="buybutton" value="구경가기"/></li>
-				
-				<!-- 구분용 -->
-				<li><input type="checkbox" value="#"></li>
-				<li>
-					<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="favprice">서울 서대문구</span></li>
-				<li>531명</li>
-				<li><input type="button" class="buybutton" value="구경가기"/></li>
-				
-				<!-- 구분용 -->
-				<li><input type="checkbox" value="#"></li>
-				<li>
-					<img src="/sshj/img/pi.gif"><span class="buyttitle wordcut">맛깔나는귤</span><span class="buydetail wordcut">맛깔나는귤의 설명입니다. 맛깔나는귤의 설명입니다.</span>
-				</li>
-				<li><span class="favprice">서울 서대문구</span></li>
-				<li>531명</li>
-				<li><input type="button" class="buybutton" value="구경가기"/></li>
-				
+				<c:forEach var="data" items="${list}">
+					<li></li>
+					<li>
+						<img src="/sshj/img/${data.farmprofile}"><span class="buyttitle wordcut">${data.farmname}</span><span class="buydetail wordcut">${data.farmintro}</span>
+					</li>
+					<li><span class="favprice">${data.storeaddr}</span></li>
+					<li id="hh"><div class="like"></div><div class="hate">${data.goodTotal}명</div></li>
+					<li><input type="button" class="buybutton" value="구경가기" onclick="click22(${data.storenum})"/></li>
+				</c:forEach>				
 			</ul>
 		</div>
 	</div>

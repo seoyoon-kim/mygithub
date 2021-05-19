@@ -29,14 +29,19 @@
 	li{margin-bottom:15px;}
 	li>span{line-height:30px;}
 	ul{margin-bottom:5px}
+	label{margin:0; line-height:30px;}
 	select{height:28px;}
 	input, textarea, select{
 		border:1px solid lightgray; 
 		font-size:14px;
 	}
+	input{padding:2px}
 	input,select,button{height:30px;}
 	textarea{
 		width:100%;
+	}
+	input[type="radio"]{
+		margin-right:5px; height:10px;
 	}
 	/* div*/
 	.category_title{
@@ -54,13 +59,16 @@
 		padding:20px;
 		margin-bottom:10px;
 	}
+	.category_wrap li{
+		padding-left:10px;
+	}
 	 .category_wrap>div{margin-bottom:20px; font-size:15px;}
 	/* 리뷰 검색 */
 	/* 카테고리 검색 */
 	#categoryList{
 	   width: 90%;
 	   margin: 30px auto;
-	   border: 1px solid #aaa;
+	   border: 1px solid lightgray;
 	}
 	
 	#categoryListMiddle{
@@ -69,25 +77,30 @@
 	   display: flex;
 	   flex-basis: 1;
 	   margin-bottom: 5px;
-	   border-top:1px solid #aaa;
+	   border-top:1px solid lightgray;
 	}
 	
 	#categoryListMiddle ul{
-	   border-bottom: 1px solid #aaa;
+	   border-bottom: 1px solid lightgray;
 	   overflow: auto;
 	   flex: 1;
 	   display: flex;
 	   flex-direction: column;
+	   overflow-x:hidden;
+	   overflow-y:auto; 
+	   	width: 25px;
 	}
 	
 	#category{
-	   border-right: 1px solid #aaa;
+	   border-right: 1px solid lightgray;
 	   font-size:14px;
 	}
 	#category a{
 	   color: black;
 	}
-	
+	#category li{ 
+		margin:5px;
+	}
 	#categoryListMiddle li{
 	   width: 100%;
 	   text-indent: 0.4em;
@@ -132,6 +145,8 @@
 	}
 	th{
 		height: 30px;
+		font-size:13px;
+		text-align:center;
 	}
 	table,td {
 		border:1px solid lightgray;
@@ -191,7 +206,7 @@ $(function(){
          
          // 카테고리 리스트가 널이 아닐경우
          <c:if test="${cateList!=null }">
-            //  카테고리 넘버가 무엇인지에 따라서 불러온다, 카테고리 넘버가 1이면 중분류 카테고리 1번의 값들을 불러오기
+            //  카테고리 번호가 무엇인지에 따라서 불러온다, 카테고리 번호가 1이면 중분류 카테고리 1번의 값들을 불러오기
             <c:forEach var="mcateList" items="${cateList}">
                if(${mcateList.catenum}==cateNum){
                   tag += "<li value='${mcateList.catename}'>"
@@ -208,6 +223,7 @@ $(function(){
     	  // 선택한 중분류 bold처리
     	  $('#mcategory>li').css('font-weight','normal');
           $(this).css('font-weight','bold');
+         
           // 선택한 목록의 중분류 이름, 번호 구하기
           let selectName = $(this).text();
           let selectNum = $(this).children().val();
@@ -223,7 +239,7 @@ $(function(){
       
       //3. 선택한 중분류 삭제
       //append로 값을 동적으로 추가해줄 경우 새로 html이 실행 된 것이 아니기 때문에 html에서는 그 값을 읽지 못한다.
-      // 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제한다고 생각하면 된다.
+      // 그렇기 때문에 document를 사용해 다시 html을 읽기만 해서 싹 둘러보고 찾아서 삭제
       $(document).on('click','#categoryManagement>li',function(){
              
          // 삭제하기 위해서는 어떤 것이 선택되었는지?
@@ -248,6 +264,8 @@ $(function(){
 		e.stopPropagation();
 		return false;
 	});
+ 
+
 //상품명
 	//글자 수 입력에 대한 글자수 변경
 	//100자 넘으면 alert 
@@ -299,71 +317,95 @@ $(function(){
 		});
 	}	
 //썸네일 메인이미지 업로드 미리보기
+$('#thumbimg').on('change',function(){
+	console.log('함수 확인 이미지 ㅇ미ㅣ지')
+	readURL(this);
+});
 	function readURL(input) {
+		console.log('이미지 읽기 함수 이동 확인');
          if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function(event) {
-                    $('#thumb_image').attr('src', event.target.result);
+        	 		console.log('img 미리보기 확인');
+                    $('#thumbimg1').attr('src', event.target.result);
                 }
               reader.readAsDataURL(input.files[0]); //in
             }
         }
 //작은 썸네일 업로드 미리보기 (실패)
-	//함수들
+//등록페이지 
 	$(document).ready(function(){	
-	////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
-		$('#sale_check').click(function(){
+		$('.btn').click(function(){
+			$('btn').css('border','3px solid black');
+		})
+////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
+	
+	$('input[name="saleselect"]').change(function(){
+		if($('input[name="saleselect"]:checked').val()=="1"){
+			console.log($('input[name="saleselect"]:checked').val());
+			//세일 정보 입력 ul
 			$('#sale_ul').css('display','block');
-			$('#sale_period').css('display','none');
-		});
-		$('#sale_period_btn').click(function(){
-			$('#sale_period').css('display','block');
-		});
-		$('#sale_uncheck').click(function(){
+			
+		}
+		if($('input[name="saleselect"]:checked').val()=="0"){
+			console.log($('input[name="saleselect"]:checked').val());
+			//세일정보 입력ul 숨기기
 			$('#sale_ul').css('display','none');
-		});
-		//특정기간만 할인 클릭 시 날짜 선택 나오기 
-		
+		}
+	});
+	//특정기간할인 선택하기
+/* 	$('#sale_period_btn').click(function(){
+		$(this).css('background-color','lightgray')
+		//특정기간할인적용 날짜 
+		$('#sale_period').css('display','block');
+	});
+	 */
 
 //국내산, 수입산
 		$('#import').on('click',function(){
 			$('#import_wrap').css('display','block');
+			$(this).css('background-color','lightgray')
+			$('#domestic').css('background-color','white')
 		});
 		$('#domestic').click(function(){
+			$(this).css('background-color','lightgray')
+			$('#import').css('background-color','white')
 			$('#import_wrap').css('display','none');
 		}); //국내산,수입산 end
 		
+		$('input[name="origin"]').change(function(){
+			if($('input[name="origin"]:checked').val()=="수입산"){
+				console.log($('input[name="origin"]:checked').val());
+				//세일 정보 입력 ul
+				$('#import_wrap').css('display','block');
+				
+			}
+			if($('input[name="origin"]:checked').val()=="국내산"){
+				console.log($('input[name="origin"]:checked').val());
+				//세일정보 입력ul 숨기기
+				$('#import_wrap').css('display','none');
+			}
+		});
 //택배
-		$('#delivery').on('click',function(){
-			$('#delivery_option').css('display','block');
-		});
-		$('#pickup').click(function(){
-			$('#delivery_option').css('display','none');
-		}); //택배, 픽업 end
-		
-	
-//판매기간 설정
-			$('#sell_start_finish').css('display','none');
-			$('#date_group').css('display','none');
-		$('#sell_uncheck').on('click',function(){
-			$('#sell_start_finish').css('display','none');
-			$('#date_group').css('display','none');
-		});
-		$('#sell_check').on('click',function(){
-			$('#sell_start_finish').css('display','block');
-			$('#date_group').css('display','block');
-		});//판매기간 설정 설정안함 선택 end
-	
-//특정기간만 할인 날짜 가져오기
+		$('#deliverysel').change(function(){
+			var option = $(this).val();
 
-//할인판매가 계산
+			if(option=='1'){ //답변완료
+				$('#delivery_option').css('display','none');
+			}			
+			if(option=='2' || option=='3'){ //답변대기중
+				$('#delivery_option').css('display','block');
+			}
+		});
+	
+
+//판매기간 설정
+
+//특정기간만 할인 날짜 가져오기
 
 //기간설정하면 달력날짜 바꾸기
 
 //옵션 적용안함 이면 표 비활성화
-		if($('#select_option').val()=='적용안함'){
-			$('#regi_option_table').css('display','none');
-		}
 		$('#select_option').change(function(){
 			var option = $(this).val();
 			console.log(option);
@@ -375,35 +417,58 @@ $(function(){
 			}
 	
 		});// 옵션 선택 end
-		
+		$('input[name="optionselect"]').change(function(){
+			if($('input[name="optionselect"]:checked').val()=="1"){
+				console.log($('input[name="optionselect"]:checked').val());
+				//세일 정보 입력 ul
+				$('#add_option_ul').css('display','block');
+				
+			}
+			if($('input[name="optionselect"]:checked').val()=="0"){
+				console.log($('input[name="optionselect"]:checked').val());
+				//세일정보 입력ul 숨기기
+				$('#add_option_ul').css('display','none');
+			}
+		});// 옵션 선택 end
+// 못난이할인
+	 	if($('#saleb').val()!='1'){
+	 		$('$saleb').val() =='0';
+	 	}
+
 //취소 버튼 클릭 시 뒤로 가기
 		$('#cancel_btn').click(function(){
 			history.back();
 		});
-	
-	});// 함수들 end		
+
+	});// 등록페이지srcipt end		
+
 //submit 등록하기 전 유효성검사
 $('submit').click(function(){
+	
 	//유효성검사 
 	//전체
 	//선택한 날짜가 오늘 이전일 경우 넘어가지 않기 메세지 띄우기
+	
 	//-------카테고리 선택-------
 	//카테고리가 선택되지 않은 경우
-	
+	if($('#categoryManagement>li').val()==null){
+		return alert('판매 상품 카테고리를 선택해주세요');
+	}
 	//-------상품명------------
 	//상품명이 공백일 경우
-	if($('#product_register_name').text('') && $('#product_register_name').val('')){
+	if($('#product_register_name').text('') || $('#product_register_name').val('')){
          return alert('상품명을 입력해주세요.'); 
          return false;
     }
 	//상품명이 100자가 넘는 경우
 	if($('#product_register_name').text().length>100){
-        return alert('상품명은 100'); 
+        return alert('상품명은 100자 이내로 작성해주세요.'); 
         return false;
    }
    //--------판매가격-------
    //판매가격이 입력되지 않은 경우
    		//할인 설정 설정안함  중 어느것도 선택하지 않은 경우
+   	
 	   //할인설정 
 	   //할인금액이 입력되지 않은 경우
 	   //특정기간 선택 후 기간을 입력하지 않은 경우
@@ -411,10 +476,16 @@ $('submit').click(function(){
 	   //판매기간 설정 설정안함  중 어느것도 선택하지 않은 경우
 	   //판매기간 설정
 	   //날짜를 입력하지 않은 경우
-	   
+	   if($('.start_date').val()==null || $('start_date').val()==''){
+		   return alert('판매 날짜를 입력해주세요');
+		   return false;
+	   }
 	//--------재고수량---------
 	//재고수량을 입력하지 않은 경우
-	
+	if($('#totalstock').test('') || $('#totalstock').val('')){
+		retrun alert('재고 수량을 입력해주세요.');
+		return false;
+	}
 	//-------옵션------------
 	//옵션 선택 후 값을 입력하지 않은 경우
 	
@@ -433,6 +504,11 @@ $('submit').click(function(){
 	//-------상품내용-------------
 	//판매단위를 입력하지 않은 경우
 	//중량/용량 과 g/kg 중 하나라도 입력하지 않은 경우
+	$('input[name="sellweight"]').val($('input[name="sellweight"]').replace(/,/g, ''));
+	$('select[name="sellweight"]').val($('select[name="sellweight"]').val().replace(/,/g, ''));
+	$('input[name="selloption"]').val($('input[name="selloption"]').val().replace(/,/g, ''));
+	$('select[name="selloption"]').val($('select[name="selloption"]').val().replace(/,/g, ''));
+	
 	//원산지 선택하지 않은 경우
 	//보간/포장타입을 선택하지 않은 경우
 	//상품정보, 주의사항, 보관방법, 유통기한이 빈칸일 경우
@@ -444,9 +520,10 @@ $('submit').click(function(){
 
 //판매기간/ 할인기간 날짜 설정
 $(function(){
-	console.log('aa')
-	$('.start_date').datepicker({minDate:0});
-	 var dateFormat ="yyyy/mm/dd",
+/* 	$('.start_date').datepicker({dateFormat:'YY/MM/DD'});
+	$('.finish_date').datepicker({dateFormat:'YY/MM/DD'}); */
+	/* $('.start_date').datepicker({minDate:0}); */
+	 var dateFormat ="yy/mm/dd",
 	 from = $('.start_date').datepicker({
 		 showOn:"both",
 		 defalutDate:"+1w",
@@ -454,7 +531,9 @@ $(function(){
 		 numberOfMonths:2,
 		 changeMonth: true,
 	     changeYear: true,
-	     buttonText: "날짜선택"
+	     buttonText: "날짜선택",
+	     dateFormat: 'yy/mm/dd',
+	     language:'kr'
 	 });
 	 from = $('.start_date').on('change', function(){
 		 to.datepicker('option','minDate',getDate(this));
@@ -466,7 +545,9 @@ $(function(){
 		 numberOfMonths:2,
 		 changeMonth: true,
 	     changeYear: true,
-	     buttonText: "날짜선택"
+	     buttonText: "날짜선택",
+	     dateFormat: 'yy/mm/dd',
+	     language:'kr'
 	 })
 	 to=$('.finish_date').on('change',function(){
 		 from.datepicker('option','maxDate',getDate(this));
@@ -482,46 +563,11 @@ $(function(){
 	      return date;
 	    }
 });
+
+
 </script>
 <body>
 	<div class="main">
-	<!-- 가운데 content -->
-	<%--   <div id="seller_header">
-      <!-- 상단 메뉴 바 -->
-      <nav>
-         <div id="headerMember">
-            <c:if test="${logStatus != 'Y'}">
-               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
-                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
-                  <input type="button" value="로그인" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
-               </div>
-            </c:if>
-            <c:if test="${logStatus == 'Y' }">
-               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
-                  <c:if test="${logType==2}">
-                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
-                  </c:if>
-                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
-                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-               </div>
-            </c:if>
-         </div>   
-         <ul>
-            <li><a href="#">BEETMALL</a></li>
-            <li><a href="product_list">상품 관리</a></li>
-            <li><a href="product_regi">상품 등록</a></li>
-            <li><a href="order_management">주문 관리</a></li>
-            <li><a href="sale_manageement">판매 관리</a></li>
-            <li><a href="seller_sales">매출 관리</a></li>
-            <li><a href="#">정산 관리</a></li>
-            <li><a href="#">배송 관리</a></li>
-            <li><a href="seller_review">리뷰/문의 관리</a></li>
-            <li><a href="intro_farm">회원정보수정</a></li>
-         </ul>
-      </nav>
-   </div> --%>
 	<div id="article">
 	<div class="wrapTitle" style="font-size:20px">상품등록</div>
 		<!--검색하기 -->
@@ -536,7 +582,7 @@ $(function(){
 		<!-- 배송 -->
 		<!-- 상품내용 -->
 		<!-- 취소 저장하기 버튼 -->
-	<form method="post" name="product_regi_form" id="product_regi_form" action="product_regi_ok">
+	<form method="post" name="product_regi_form" id="product_regi_form" action="product_regi_ok" enctype="multipart/form-data">
 	<!------------------------------------------ 카테고리------------------------------------------------->
 	 <div class="category_title">카테고리</div>
 		<div class="category_wrap">
@@ -574,8 +620,8 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label for="">상품명</label>&nbsp;
-					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/><span id="count"></span>/<span id="max_count">100</span><br/>
-					<span class="notice">
+					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
+					<span class="notice" >
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.<br/>
 					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
 					상품명을 검색최적화 가이드에 잘 맞게 입력하면 검색 노출에 도움이 될 수 있습니다. <br/>
@@ -588,40 +634,36 @@ $(function(){
 	<div class="category_title">판매가격</div>
 	<div class="category_wrap">		
 		<ul>
-			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/><span>원</span></li>
+			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
 			<br/>
+			
+			<li> 
+				<label>판매기간</label>&nbsp;&nbsp;
+			</li>
+			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
+		
 			<li>
 				<label>할인여부 </label>&nbsp;
-				<input type="button" name="saleselect" class="btn" id="sale_check" value="설정">&nbsp;
-				<input type="button" name="saleselect"  class="btn" id="sale_uncheck" value="설정안함">
+				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정">설정</label>
+				<input type="radio" value="0" name="saleselect" id="sale_uncheck"><label for="설정안함">설정안함</label>
 			</li>
-			<ul id="sale_ul" style="display:none">
-				<li><label>전체할인 </label>&nbsp;<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" max="0"/><span>원</span>&nbsp;<span>할인</span></li>
-				<li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/><span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li>
+			<ul id="sale_ul" style="display:none; background-color:#fcfcfc;">
+				<li>
+					<label>전체할인 </label>&nbsp;
+					<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min="0"/>&nbsp;<span>원</span>&nbsp;<span>할인</span>
+				</li>
+				<!-- <li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/>&nbsp;<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li> -->
 				<li id="sale_period">
 					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
 					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
 				</li>
 				<li>
-					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >9000</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
+					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >--할인금액--</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
 					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
 				</li>
-				<li><input type="checkbox" name="saleb" id="saleb"/><span>못난이 할인 상품으로 등록</span></li>
+				<li><input type="checkbox" name="saleb" id="saleb" value="1"/><span>못난이 할인 상품으로 등록</span></li> 
+				<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
 			</ul>
-			<li>
-				<label>판매기간</label>&nbsp;&nbsp;
-				<input type="button" name="selldate" class="btn" id="sell_check"  value="설정"/ >&nbsp;
-				<input type="button" name="selldate" class="btn" id="sell_uncheck" value="설정안함"/>
-			</li>
-			<li id="date_group"><label>기간설정</label><div id="btn_group">
-				<input type="button" name="" class="btn" value="5일"/>
-				<input type="button" name="" class="btn" value="10일"/>
-				<input type="button" name="" class="btn" value="15일"/>
-				<input type="button" name="" class="btn" value="30일"/>
-				<input type="button" name="" class="btn" value="60일"/>
-				</div>
-			</li>
-			<li id="sell_start_finish"><label for="start_date">판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
 		</ul>
 		</div>
 	
@@ -629,7 +671,7 @@ $(function(){
 	 <div class="category_title">재고수량</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0"/><span>개</span></li>
+				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0"/>&nbsp;<span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
@@ -637,8 +679,13 @@ $(function(){
 	<div class="category_title">옵션</div>
 	<div class="category_wrap">
 			<ul class="regi_option_wrap">
+				<li>
+					<input type="radio" value="1" name="optionselect" id="add_option"><label for="옵션추가">옵션추가</label>
+					<input type="radio" value="0" name="optionselect" id="none_option"><label for="추가안함">추가안함</label>
+				</li>
+				<ul id="add_option_ul" style="display:none; background-color:#fcfcfc;">
 				<li><label>옵션 갯수</label>&nbsp;
-					<select id="select_option" name="selectoption">
+					<select id="select_option" name="option_count"> 
 						<option selected value='0'>적용안함</option>
 						<option value='1'>1</option>
 						<option value='2'>2</option>
@@ -685,6 +732,7 @@ $(function(){
 						</tbody>
 					</table>
 				</li>
+				</ul>
 				<li><span class="notice">상세페이지에 예시) 호박고구마 1kg (+3000원)으로 표기됩니다.</span></li>
 			</ul>
 			</div>
@@ -693,37 +741,36 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label>대표이미지</label><br/>
-					<img name="thumbimg" id="thumbimg"src="#" alt="image upload" style="width:400px;"/><br/>
-					<input type="file" id="thumbimg_upload" accept="img/*" onchange="readURL(this);" /></li>
-				<li>
-					<img name="addimg"   id="addimg" width="200" src="#" alt="image upload" />&nbsp;	
-					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" />&nbsp; 
-					<img name="addimg"   id="addimg"  width="200" src="#" alt="image upload" /></br>
-		 			<input type="file" id="thumb_image_uplaod" accept="img/*" multiple/>
-		 		</li>
+					<span class="notice">홈페이지에 연출되는 대표 이미지를 업로드해주세요.</span><br/>
+					<img name="thumbimg1" id="thumbimg1" src="#" alt="image upload" style="width:400px;"/><br/>
+					<input type="file" id="thumbimg" name ="file" accept="img/*" />
+				</li>
 		   </ul>	
 		</div>
  	<!-----------------------------------------------상세설명------------------------------------->
 	<div class="category_title">상세설명</div>
 	<div class="category_wrap">
-		<textarea id="summernote" name="editordata"></textarea>
+		<textarea id="summernote"  name="productcontent"></textarea> <!-- name="editordata" -->
 		</div>
 	<!-----------------------------------------------배송----------------------------------------->
 	<div class="category_title">배송</div>
 	<div class="category_wrap">
 			<ul>
 				<li><label>배송방법</label>&nbsp; 
-					<input type="button" name="deliveryoption" class="btn" id="delivery" value="택배"/>
-					<input type="button" name="deliveryoption" class="btn" id="pickup" value="픽업">
+					<select name="deliveryoption" id="deliverysel" >
+						<option value="1" id="pickup">픽업</option>
+						<option value="2" id="delivery">택배</option>
+						<option value="3" id="delandpick">택배/픽업</option>
+					</select>
 				</li>
-				<ul id="delivery_option">
+				<ul id="delivery_option" style="display:none; background-color:#fcfcfc;">
 					<li><label>배송비</label>&nbsp;
-						<input type="number" name="deliveryprice" id="delivery_price"/><span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
+						<input type="number" name="deliveryprice" id="deliveryprice"/>&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 					</li>
 					<li id="pay"><label>결제방식</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="착불"/><label for="착불">착불</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="선결제"/><label for="선결제">선결제</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option"  value="착불 또는 선결제"/><label for="착불또는선결제">착불 또는 선결제</label>
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="1"/><label for="착불">착불</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="2"/><label for="선결제">선결제</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option"  value="3"/><label for="착불또는선결제">착불 또는 선결제</label>
 					</li>
 				</ul>
 			</ul>
@@ -733,40 +780,44 @@ $(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><label for="">판매단위</label>&nbsp;
-					<input type="number" name="selloption" id="selloption"  min="0"/>
-					<select id="select_unit" name="selloption" >
-						<option value="단위없음">해당없음</option>
+					<input type="number" name="selloptionnum" id="selloption"  min="0" onchange="javascript:removeCommaReturn(this);"/>
+					<select id="select_unit" name="selloptionunit" onchange="javascript:removeCommaReturn(this);">
+						<option value=" ">해당없음</option>
 						<option value="팩">팩</option>
 						<option value="박스">박스</option>
 					</select>
+					<input type="hidden" name="selloption" id="selloption_hidden"/>
 				</li>
 				<li><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweight" id="sellweight" />
-					<select id="select_weight" name="sellweight" >
+					<input type="number" name="sellweightnum" id="sellweight" min="0" onchange="javascript:removeCommaReturn(this);"/>
+					<select id="select_weight" name="sellweightunit" onchange="javascript:removeCommaReturn(this);">
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>
+					<input type="hidden" name="sellweight" id="sellweight_hidden"/>
 				</li>
 				<li><label for="">원산지</label>&nbsp;
-					<input type="button" name="origin" class="btn" id="domestic" value="국내산"/> <input type="button" name="origin" class="btn" id="import" value="수입산"/>
-					<div id="import_wrap" style="display:none">
-						<input type="button" name="origin" id="china" class="btn" class="import_nation" value="중국산"/>
-						<input type="button" name="origin" id="japan" class="btn" class="import_nation" value="일본산"/>
-						<input type="button" name="origin"  id="malaysia" class="btn" class="import_nation" value="말레이시아산"/>
-						<input type="button" name="origin" id="philippines" class="btn" class="import_nation" value="필리핀산"/>
-						<input type="button" name="origin" id="vietnam" class="btn" class="import_nation" value="베트남산">
-						<input type="button" name="origin" id="chile" class="btn" class="import_nation" value="칠레산"> 
+					<input type="radio" value="국내산" name="origin" id="domestic"><label for="국내산">국내산</label>
+					<input type="radio" value="수입산" name="origin" id="import"><label for="수입산">수입산</label>
+					<div id="import_wrap" style="display:none; background-color:#fcfcfc;">
+						<input type="radio" value="중국산" name="origin" id="china"><label for="중국산">중국산</label>
+						<input type="radio" value="일본산" name="origin" id="japan"><label for="일본산">일본산</label>
+						<input type="radio" value="말레이시아산" name="origin" id="malaysia"><label for="말레이시아산">말레이시아산</label>
+						<input type="radio" value="필리핀산" name="origin" id="philippines"><label for="필리핀산">필리핀산</label>
+						<input type="radio" value="베트남산" name="origin" id="vietnam"><label for="베트남산">베트남산</label>
+						<input type="radio" value="칠레산" name="origin" id="chile"><label for="칠레산">칠레산</label>
 					</div>
 				</li>
+			
 				<li><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
 					<select id="select_packing" name="wrapping">
-						<option value='실온'>실온</option>
-						<option value='냉장'>냉장</option>
-						<option value='냉동'>냉동</option>
+						<option value='0'>실온</option>
+						<option value='1'>냉장</option>
+						<option value='2'>냉동</option>
 					</select>
 				</li>
 				<li><label for="">상품정보</label><br/>
-					<textarea placeholder="간략한 상품정보를 입력해주세요." name="productinformation"></textarea>
+					<textarea placeholder="간략한 상품정보를 입력해주세요." name="productinfomation"></textarea>
 				</li>
 				<li><label for="">주의사항</label><br/>
 					<textarea placeholder="주의사항을 입력해주세요." name="prevention"></textarea>

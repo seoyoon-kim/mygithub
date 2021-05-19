@@ -19,7 +19,7 @@
 
 .section {
 	width: 1080px;
-	background-color: white;
+	
 	margin: 0 auto;
 }
 
@@ -196,7 +196,7 @@
 		<!-- 큰제목 ---------------------------------------------->
 
 		<div id="wisht">
-			<b>*********의 장바구니 입니다.</b>
+			<b>${logId}님 의 장바구니 입니다.</b>
 		</div>
 
 		<input type="button" value="선택상품제거" id="nogetbutton" />
@@ -213,47 +213,15 @@
 
 
 			<ul class="wishList">
-				<li><a href=""><img src="img/cr3.jfif"></a></li>
-				<li><a href="">맛있는오렌지</a></li>
-				<li>17,900</li>
-				<li><select name="selectwish">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-				</select></li>
-				<li>17,900</li>
-				<li><input type="button" value="구매하기" id="getbutton" /></li>
-				<li><input type="checkbox" name="boardCheckBox" value="" /></li>
-
-
-
-				<li><a href=""><img src="img/cr3.jfif"></a></li>
-				<li><a href="">맛있는오렌지</a></li>
-				<li>17,900</li>
-				<li><select name="selectwish">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-				</select></li>
-				<li>17,900</li>
-				<li><input type="button" value="구매하기" id="getbutton" /></li>
-				<li><input type="checkbox" name="boardCheckBox" value="" /></li>
-
-
-
-
-				<li><a href=""><img src="img/cr3.jfif"></a></li>
-				<li><a href="">맛있는오렌지</a></li>
-				<li>17,900</li>
-				<li><select name="selectwish">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-				</select></li>
-				<li>17,900</li>
-				<li><input type="button" value="구매하기" id="getbutton" /></li>
-				<li><input type="checkbox" name="boardCheckBox" value="" /></li>
-
+				<c:forEach var="vo" items="${list}">
+					<li><a href=""><img src="img/cr3.jfif"></a></li>
+					<li><a href="">${vo.productname}</a></li>
+					<li>${vo.productprice}</li>
+					<li><input type="button" value="-"/>${vo.wishoptionnum}<input type="button" value="+"/></li>
+					<li>17,900</li>
+					<li><input type="button" value="구매하기" id="getbutton" /></li>
+					<li><input type="checkbox" name="boardCheckBox" value="" /></li>
+				</c:forEach>
 			</ul>
 		</div>
 

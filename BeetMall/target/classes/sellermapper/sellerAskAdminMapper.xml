@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.SellerAskAdminDAO">
+	<select id="askAllRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="com.beetmall.sshj.seller.vo.SellerAskAdminVO">
+		select qmnum, userid, qmtitle, qmcontent, to_char(qmdate,'MM-DD HH:MI') as qmdate, qmanswer, qmoption 
+		from qmboard 
+		where qmoption = 2 and userid = #{param1}
+		order by qmnum desc	
+	</select>
+	<select id="askSelect" resultType="com.beetmall.sshj.seller.vo.SellerAskAdminVO">
+		select qmnum, userid, qmtitle, qmcontent, to_char(qmdate,'YY/MM/DD HH:MI') as qmdate, qmanswer, qmoption, to_char(qmanserdate,'YY/MM/DD HH:MI') as qmanserdate 
+		from qmboard 
+		where qmnum=#{param2} and userid = #{param1}
+	</select>
+	<insert id="askWrite" parameterType="com.beetmall.sshj.seller.vo.SellerAskAdminVO">
+			insert into qmboard(qmnum, userid, qmtitle, qmContent, qmdate, qmanswer, qmoption)
+  			values(qmboardsq.nextval, #{userid}, #{qmtitle}, #{qmcontent}, sysdate, null, '2')
+	</insert>
+	<delete id="askDelete">
+		delete from qmboard where qmnum=#{param1}
+	</delete>
+	<update id="askEditOk" parameterType="com.beetmall.sshj.seller.vo.SellerAskAdminVO">
+		update qmboard set qmtitle=#{qmtitle}, qmcontent=#{qmcontent} 
+		where qmnum=#{qmnum}
+	</update>
+	<select id="totalRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="int">
+		select count(faqnum) totalRecord from qmboard where qmoption=2
+	</select>
+</mapper>

@@ -84,7 +84,6 @@ public class MemberController {
 	@ResponseBody
 	public String infoSelect(HttpServletRequest req) {
 		String info = req.getParameter("infoname");
-//		System.out.println(info);
 		String result = memberservice.infoSelect(info);
 		return result;
 	}
@@ -92,10 +91,11 @@ public class MemberController {
 	// 로그인
 	@RequestMapping(value="loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(String userid, String userpwd, HttpSession session) {
+		
 		ModelAndView mav = new ModelAndView();
 		MemberVO vo = memberservice.loginOk(userid, userpwd);
-		
-		if(!vo.getUserstop().equals("Y")) {
+		System.out.println(vo.getUserstop());
+		if(vo.getUserstop().equals("N ") && vo.getUsertype()!=4) {
 			if(vo.getUserid()!= null && !vo.getUserid().equals("")) {
 				session.setAttribute("logId",vo.getUserid());
 				session.setAttribute("logName", vo.getUsername());
@@ -105,11 +105,16 @@ public class MemberController {
 			}else {
 				mav.setViewName("redirect:login");
 			}
-		}else {
-			mav.addObject("logStop","Y");
+		}else if(vo.getUsertype() == 4){
+			System.out.println("4로 넘어옴");
+			session.setAttribute("Type", "탈퇴");
+			mav.setViewName("redirect:login");
+		}else if(vo.getUserstop().equals("Y ")) {
+			System.out.println("Y로 넘어옴");
+			session.setAttribute("logStop", "정지");
+			session.setAttribute("stopdate", memberservice.stopdate(userid));
 			mav.setViewName("redirect:login");
 		}
-		
 		return mav;
 	}
 	
@@ -162,7 +167,8 @@ public class MemberController {
 	@RequestMapping(value="/sregiFinish", method= RequestMethod.POST)
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
 	public ModelAndView dddd(MemberVO vo, SellerMemberVO svo, CategoryFarmVO cvo, @RequestParam MultipartFile file, HttpServletRequest req, HttpSession session) {
-		
+		String orgName = file.getOriginalFilename();
+		String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
 		ModelAndView mav = new ModelAndView();
 		String tel1 = req.getParameter("userphone1");
 		String tel2 = req.getParameter("userphone2");
@@ -202,10 +208,10 @@ public class MemberController {
 //			System.out.println("bankaccount-->"+svo.getBankaccount()); //ㅇㅇ
 			
 			//////////////////// 파일 업로드
-			String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
+			
 //			System.out.println("path="+path);
 			String paramName = file.getName();
-			String orgName = file.getOriginalFilename();
+			
 //			System.out.println(paramName+", "+orgName);
 			
 			try {
@@ -236,12 +242,12 @@ public class MemberController {
 			int result3 = memberservice.sellerRegiFinishiOk(svo);
 			
 			////////////////////등록 실패시 파일 삭제
-			if(result3 <=0) {
-				if(orgName != null) {
-					File delf = new File(path, orgName);
-					delf.delete();
-				}
-			}
+//			if(result3 <=0) {
+//				if(orgName != null) {
+//					File delf = new File(path, orgName);
+//					delf.delete();
+//				}
+//			}
 			////////////////////파일 삭제 end)
 			
 			transactionManager.commit(status);
@@ -255,6 +261,10 @@ public class MemberController {
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("트랜잭션 문제.. 되게 골치아프니 주의..");
+			if(orgName != null) {
+				File delf = new File(path, orgName);
+				delf.delete();
+			}
 			mav.setViewName("redirect:sregister");
 		}
 		return mav;
@@ -351,10 +361,50 @@ public class MemberController {
 		}
 	}
 	
-	
-	
 	@RequestMapping("regiFinish")
 	public String regiFinish() {	// 회원가입 완료
 		return "login/registerFinish";	
+	}
+	@RequestMapping("leaveMember")
+	public String leaveMember() {
+		return "mypages/leaveMember";
+	}
+	
+	@RequestMapping("leaveMemberOk")
+	@ResponseBody
+	public int leaveMemberOk(HttpSession session, HttpServletRequest req) {	// 회원탈퇴
+		String userpwd = req.getParameter("userpwd");
+		String userid = (String)session.getAttribute("logId");
+		System.out.println("userpwd="+userpwd+"\n userid="+userid);
+		
+		int result = 0;
+		int result2 = memberservice.selectId(userid, userpwd); // 아이디 비번 맞나 조회 0
+		int result3 = memberservice.selectDelOk(userid);	// 배송 중인지 아닌지 조회해서 0이 다음거 넘어감
+		int result4 = memberservice.deleteId(userid);		// 회원탈퇴처럼 수정하고 끝 1나와야댐
+		System.out.println("result2= "+result2); // 0
+		System.out.println("result3= "+result3); // 0 
+		System.out.println("result4= "+result4); // 1
+		if(result2 > 0) {
+			if(result3>0) {
+				result = -1;
+			}else {
+				if(result4>0) {
+					result = 1;
+				}else {
+					result = -2;
+				}
+			}
+		}else {
+			result = 0;
+		}
+		
+		System.out.println("result= "+result);
+		
+		return result;
+	}
+	
+	@RequestMapping("leaveMemberFin")
+	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
+		return "mypages/leaveMemberSuccess";
 	}
 }

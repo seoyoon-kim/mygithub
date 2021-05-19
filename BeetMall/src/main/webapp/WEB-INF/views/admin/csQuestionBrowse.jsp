@@ -88,8 +88,7 @@
 </head>
 <body>
 <%@ include file="/inc/top.jspf" %>
-<%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong>문의 열람</strong></h5></li> 
@@ -109,7 +108,10 @@
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li> 
 	   			<li><button class="success" value="add" name="add" id="blind">비공개</button></li> 
 			</ul> 
-		</div>  
+		</div> 
+		</div>
+<div id="container">
+	<%@ include file="/inc/leftBar.jspf" %> 
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>

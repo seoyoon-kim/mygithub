@@ -26,22 +26,6 @@ public class admin_boardController {
 	public String noticeBoardWrite() { 
 		 return "/admin/noticeBoardWrite"; 
 	}
-	//상품 목록 보기
-	@RequestMapping("/productListA")
-	public ModelAndView productListA() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/productListA");
-		return mav;
-	}
-	//상품 상세 보기
-	@RequestMapping("/productDetailA")
-	public ModelAndView productDetailA() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/productDetailA");
-		return mav;
-	}
 	//리뷰 목록보기
 	@RequestMapping("/reviewListA")
 	public ModelAndView reviewListA() {
@@ -51,11 +35,11 @@ public class admin_boardController {
 		return mav;
 	}
 	//레시피 목록 보기
-	@RequestMapping("/recipeListA")
-	public ModelAndView recipeListA() {
+	@RequestMapping("/boardRecipeListA")
+	public ModelAndView boardRecipeListA() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/recipeListA");
+		mav.setViewName("/admin/boardRecipeListA");
 		return mav;
 	}
 	//레시피 작성하기
@@ -66,15 +50,14 @@ public class admin_boardController {
 		mav.setViewName("/admin/recipeWriteA");
 		return mav;
 	}
-	//신고 목록 보기
-	@RequestMapping("/reportListA")
-	public ModelAndView reportListA() {
+	//디자인 관리
+	@RequestMapping("/boardDesignMng")
+	public ModelAndView boardDesignMng() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/reportListA");
+		mav.setViewName("/admin/boardDesignMng");
 		return mav;
-	} 
-	
+	}
 	
 	
 	
