@@ -396,7 +396,7 @@ $(function(){
 		    		
 		  			$(this).parent().next().next().toggle(
 		  				function(){
-		  					$(this).parent().next().css("display", " "); 
+		  					$(this).parent().next().css("display", "block"); 
 		  				},
 		  				function(){
 		  					$(this).parent().next().css("display", "hide"); 

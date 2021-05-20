@@ -333,7 +333,7 @@ float:left;
 					<option value="userid">작성자</option>
 				</select>
 				<span id="cs_search_box">
-					<input type="text" id="searchWord" name="searchWord" placeholder="내용을 입력해주세요." style="margin-right: 250px;">
+					<input type="text" id="searchWord" name="searchWord" placeholder="내용을 입력해주세요.">
 				    <input type="submit" value="검색"/> 
 				</span>
 				
