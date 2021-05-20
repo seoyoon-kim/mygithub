@@ -211,7 +211,6 @@
 				<li><b>구매가격</b></li>
 			</ul>
 
-
 			<ul class="wishList">
 				<c:forEach var="vo" items="${list}">
 					<li><a href=""><img src="img/cr3.jfif"></a></li>

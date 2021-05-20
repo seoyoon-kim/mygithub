@@ -56,9 +56,7 @@
 	 	left:50px;
 	 	width:500px !important;
 	 }
-	 #contentBox li:nth-of-type(5) {
-	 	width:250px !important;
-	 } 
+	 
 	/*회원정보 항목 */
 	#infoHeader{ 
 		top:11px;
@@ -333,7 +331,7 @@
 	/*장바구니*/
 	#cart{
 		position:relative;
-		top:-600px;
+		top:2300px;
 	}
 	#cartBar{ 
 	 	position:relative;
@@ -535,17 +533,16 @@
 		width:1080px;
 	}
 	#favUl>li{
-		width:120px;
 		height:60px;
 		line-height:60px;
 		margin:5px 0;
 		text-align:center;
 	}
-	#favUl>li:nth-child(1), #favUl>li:nth-child(2), #favUl>li:nth-child(3), #favUl>li:nth-child(4), #favUl>li:nth-child(5){
+	#favUl>li:nth-child(1), #favUl>li:nth-child(2), #favUl>li:nth-child(3), #favUl>li:nth-child(4){
 		border-bottom:1px solid #e06666;
 		
 	}
-	#favUl>li:nth-child(5n+3){
+	/* #favUl>li:nth-child(5n+3){
 		width:240px;
 	}
 	#favUl>li:nth-child(5n+2){
@@ -556,17 +553,18 @@
 	}
 	#favUl>li:nth-child(5n+1){
 		width:60px;
-	}
+	} */
 	.buyttitle, .buydetail{
-		line-height:30px;
+		line-height:30px; 
 		text-align:left;
 		float:left;
-		width:242px;
+		width:430px;
 	}
 	#favUl img{
 		height:58px;
 		width:58px;
 		float:left;
+		margin-right: 5px;
 	}
 	#cMyPageLeft{
 		display:block;
@@ -668,19 +666,24 @@
 	}
 	#favUl>li{
 		float:left;
+		height:60px;
+		line-height: 60px;
 	}
 	#favUl>li:nth-child(4n+1){
-		width:35%;
+		width:590px !important;
+		padding-left: 90px;
+		float: left;
 	}
 	#favUl>li:nth-child(4n+2){
-		width:25%;
+		width:240px;
 	}
 	#favUl>li:nth-child(4n+3){
-		width:15%;
+		width:120px;
 	}
 	#favUl>li:nth-child(4n){
-		width:25%;
+		width:120px;
 	}
+	/* 장바구니 */
 	
 </style>
 
@@ -870,28 +873,28 @@
 			</ul>
 			
 			<!-- 페이징 -->
-		<div class="page_wrap">	
-			<div class="page_nation">
-			   <c:if test="${pageVOA.pageNum>1}"><!-- 이전페이지가 있을때 -->
-			   		<a class="arrow prev" href="javascript:pagelistA(${pageVOA.pageNum-1})"></a>
-			   </c:if>
-			   <!-- 페이지 번호                   1                                    5                     -->
-	           <c:forEach var="p" begin="${pageVOA.startPageNum}" step="1" end="${pageVOA.startPageNum + pageVOA.onePageNum-1}">
-	              <c:if test="${p<=pageVOA.totalPage}">
-	                 <c:if test="${p==pageVOA.pageNum }"> <!-- 현재페이지일때 실행 -->
-	                    <a class="active">${p}</a>
-	                 </c:if>   
-	                 <c:if test="${p!=pageVOA.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
-	                    <a href="javascript:pagelistA(${p})">${p}</a>
-	                 </c:if>
-	              </c:if>
-	           </c:forEach>
-	           <c:if test="${pageVOA.pageNum < pageVOA.totalPage}">
-	              <a class="arrow next" href="javascript:pagelistA(${pageVOA.pageNum+1})"></a>
-	           </c:if>
-			</div>
-		 </div>
-	</div>
+			<div class="page_wrap">	
+				<div class="page_nation">
+				   <c:if test="${pageVOA.pageNum>1}"><!-- 이전페이지가 있을때 -->
+				   		<a class="arrow prev" href="javascript:pagelistA(${pageVOA.pageNum-1})"></a>
+				   </c:if>
+				   <!-- 페이지 번호                   1                                    5                     -->
+		           <c:forEach var="p" begin="${pageVOA.startPageNum}" step="1" end="${pageVOA.startPageNum + pageVOA.onePageNum-1}">
+		              <c:if test="${p<=pageVOA.totalPage}">
+		                 <c:if test="${p==pageVOA.pageNum }"> <!-- 현재페이지일때 실행 -->
+		                    <a class="active">${p}</a>
+		                 </c:if>   
+		                 <c:if test="${p!=pageVOA.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+		                    <a href="javascript:pagelistA(${p})">${p}</a>
+		                 </c:if>
+		              </c:if>
+		           </c:forEach>
+		           <c:if test="${pageVOA.pageNum < pageVOA.totalPage}">
+		              <a class="arrow next" href="javascript:pagelistA(${pageVOA.pageNum+1})"></a>
+		           </c:if>
+				</div>
+			 </div>
+		</div>
 	<!-- 여까지 포인트 -->
 		 	
 			<!-- 즐겨찾기 농장 파트 -->
@@ -940,80 +943,203 @@
 			</div>
 		 </div>
 	 		</div>
-	 		<div id="cart">
-	 		<div id="cartBar"><strong>회원 장바구니</strong></div>
-				<div id="cartTbl">
-					<table class="tgc" style="undefined;table-layout: fixed; width: 973px">
-					<colgroup>
-					<col style="width: 130px">
-					<col style="width: 93px">
-					<col style="width: 554px">
-					<col style="width: 196px">
-					</colgroup>
-					<thead>
-					  <tr>
-					    <th class="tg-yrou">일시</th>
-					    <th class="tg-7btt" colspan="2">상품</th>
-					    <th class="tg-yrou">판매가</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
-					    <td class="tg-hysb">2021-05-29<br>13:00</td>
-					    <td class="tg-0pky"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" width="80" height="80"></td>
-					    <td class="favoriteIntro">
-						    <div class="cartProduct wordCut" style="font-weight:bold">맛깔나는 귤</div>
-						    <div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리 싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
-						</td>
-					    <td class="tg-3hmd">17,960원</td>
-					  </tr>
-					  <tr>
-					    <td class="tg-hysb">2021-05-25<br>12:30</td>
-					    <td class="tg-0pky"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" width="80" height="80"></td>
-					    <td class="favoriteIntro">
-						    <div class="cartProduct wordCut" style="font-weight:bold">맛깔나는 귤</div>
-						    <div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리 싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
-						</td> <td class="tg-3hmd">28,650원</td>
-					  </tr>
-					  <tr>
-					    <td class="tg-hysb">2021-05-30<br>19:25</td>
-					    <td class="tg-0pky"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" width="80" height="80"></td>
-					     <td class="favoriteIntro">
-						    <div class="cartProduct wordCut" style="font-weight:bold">맛깔나는 귤</div>
-						    <div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리 싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
-						</td> <td class="tg-3hmd">85,620원</td>
-					  </tr>
-					  <tr>
-					    <td class="tg-hysb">2021-05-30<br>11:21</td>
-					    <td class="tg-0pky"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" width="80" height="80"></td>
-					     <td class="favoriteIntro">
-						    <div class="cartProduct wordCut" style="font-weight:bold">맛깔나는 귤</div>
-						    <div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리 싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
-						</td> <td class="tg-3hmd">26,600원</td>
-					  </tr>
-					</tbody>
-				</table> 
-			 </div>  
-			 <div class="page_wrap" id="cartpage">
-				<div class="page_nation">
-				   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-				   <a class="arrow prev" href="#"></a>
-				   <a href="#" class="active">1</a>
-				   <a href="#">2</a>
-				   <a href="#">3</a>
-				   <a href="#">4</a>
-				   <a href="#">5</a>
-				   <a href="#">6</a>
-				   <a href="#">7</a>
-				   <a href="#">8</a>
-				   <a href="#">9</a>
-				   <a href="#">10</a>
-				   <a class="arrow next" href="#"></a>
-				   <a class="arrow nnext" href="#"></a>
+			<div>
+				<div class="wishlistbox">
+
+					<ul class="wishListTitle">
+						<li><b>상품정보</b></li>
+						<li><b>상품수량</b></li>
+						<li><b>구매가격</b></li>
+					</ul>
+
+					<c:forEach var="wl" items="${wlist}">
+
+						<ul class="wishList">
+							<li><a href=""><img src="img/${wl.thumbimg}"></a></li>
+							<!-- 이미지 -->
+
+							<li>
+								<div id="ptitle">
+									<a href="">${wl.productname}</a>
+								</div>
+								<!-- 상품이름 -->
+								<div id="ptitleprice">원가: ${wl.productprice}원</div>
+								<!-- 상품가격 -->
+								<div id="ptitlediscount">할인가격: ${wl.saleprice}원</div>
+								<!-- 할인가격 --> <c:if test="${wl.optionnum>0}">
+									<div id="optitle">
+										추가옵션 :${wl.optionname}${wl.optionprice} x ${wl.wishoptionnum}
+										개 <span id="wishoptionCount"></span>
+									</div>
+									<!-- 옵션이름 -->
+									<!-- 옵션 수량 -->
+								</c:if> <c:if test="${wl.optionnum<=0}">
+									<div id="optitle">&nbsp;</div>
+									<!-- 옵션이름 -->
+									<!-- 옵션 수량 -->
+								</c:if>
+
+							</li>
+
+							<li><input type="button" id="mbtn" class="mCount" value="-" />
+								<input type="hidden"
+								value="${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}">
+								<span id="prtnum">${wl.wishnum}</span> <input type="button"
+								id="pbtn" class="pCount" value="+" /> <input type="hidden"
+								value="${wl.productprice}"> <input type="hidden"
+								value="${wl.saleprice}"> <input type="hidden"
+								value="${wl.wishnum}"> <input type="hidden"
+								value="${wl.optionprice}"> <input type="hidden"
+								value="${wl.wishoptionnum}"> <input type="hidden"
+								value="${wl.optionname}"> <input type="hidden"
+								value="${wl.productname}"></li>
+							<!-- 상품수량 -->
+
+							<!--                                          상품가격         할인가격   *     상품갯수      옵션가격      *      옵션갯수     -->
+							<li><span id="oneproductTotalPrice">${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}원</span></li>
+							<!-- 총가격 -->
+
+							<li></li>
+							<!-- <li><input type="checkbox" name="checkbox" value=""/></li> -->
+							<li><input type="button" name="paybtn" id="paybtn"
+								value="구매하기" /> <input type="hidden"
+								value="${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}">
+								<input type="hidden" value="${wl.productprice}"> <input
+								type="hidden" value="${wl.saleprice}"> <input
+								type="hidden" value="${wl.wishnum}"> <input
+								type="hidden" value="${wl.optionprice}"></li>
+							<li><input type="button" value="x" id="delbutton" /></li>
+
+						</ul>
+
+					</c:forEach>
+					<!-- 페이징 표시--------- -->
+					<div class="page_wrap">
+						<div class="page_nation">
+							<c:if test="${pageVO1.pageNum>1}">
+								<!-- 이전페이지가 있을때 -->
+								<a class="arrow prev"
+									href="/sshj/customWish?wpageNum=${pageVO1.pageNum-1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+							</c:if>
+							<!-- 페이지 번호                   1                                    5                     -->
+							<c:forEach var="p" begin="${pageVO1.startPageNum}" step="1"
+								end="${pageVO1.startPageNum + pageVO1.onePageNum-1}">
+								<c:if test="${p<=pageVO1.totalPage}">
+									<c:if test="${p==pageVO1.pageNum}">
+										<!-- 현재페이지일때 실행 -->
+										<a class="active">${p}</a>
+									</c:if>
+									<c:if test="${p!=pageVO1.pageNum}">
+										<!-- 현재페이지가 아닐때 실행 -->
+										<a
+											href="/sshj/customWish?wpageNum=${p}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>">${p}</a>
+									</c:if>
+								</c:if>
+							</c:forEach>
+							<c:if test="${pageVO1.pageNum < pageVO1.totalPage}">
+								<a class="arrow next"
+									href="/sshj/customWish?wpageNum=${pageVO1.pageNum+1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+							</c:if>
+						</div>
+					</div>
+					<div id="wishPriceTitle">
+						<div id="wishone">상품 가격:</div>
+						<div id="wishtotal">총 구매가격:</div>
+					</div>
+
 				</div>
-			 </div>  
- 		</div>
-	</div>  
-</div>
+				<div id="cart">
+					<div id="cartBar">
+						<strong>회원 장바구니</strong>
+					</div>
+					<div id="cartTbl">
+						<table class="tgc" style="table-layout: fixed; width: 973px">
+							<colgroup>
+								<col style="width: 130px">
+								<col style="width: 93px">
+								<col style="width: 554px">
+								<col style="width: 196px">
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="tg-yrou">일시</th>
+									<th class="tg-7btt" colspan="2">상품</th>
+									<th class="tg-yrou">판매가</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tg-hysb">2021-05-29<br>13:00
+									</td>
+									<td class="tg-0pky"><img
+										src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg"
+										width="80" height="80"></td>
+									<td class="favoriteIntro">
+										<div class="cartProduct wordCut" style="font-weight: bold">맛깔나는
+											귤</div>
+										<div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리
+											싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
+									</td>
+									<td class="tg-3hmd">17,960원</td>
+								</tr>
+								<tr>
+									<td class="tg-hysb">2021-05-25<br>12:30
+									</td>
+									<td class="tg-0pky"><img
+										src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg"
+										width="80" height="80"></td>
+									<td class="favoriteIntro">
+										<div class="cartProduct wordCut" style="font-weight: bold">맛깔나는
+											귤</div>
+										<div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리
+											싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
+									</td>
+									<td class="tg-3hmd">28,650원</td>
+								</tr>
+								<tr>
+									<td class="tg-hysb">2021-05-30<br>19:25
+									</td>
+									<td class="tg-0pky"><img
+										src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg"
+										width="80" height="80"></td>
+									<td class="favoriteIntro">
+										<div class="cartProduct wordCut" style="font-weight: bold">맛깔나는
+											귤</div>
+										<div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리
+											싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
+									</td>
+									<td class="tg-3hmd">85,620원</td>
+								</tr>
+								<tr>
+									<td class="tg-hysb">2021-05-30<br>11:21
+									</td>
+									<td class="tg-0pky"><img
+										src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg"
+										width="80" height="80"></td>
+									<td class="favoriteIntro">
+										<div class="cartProduct wordCut" style="font-weight: bold">맛깔나는
+											귤</div>
+										<div class="cartDetail wordCut">싱싱농산 귤은 언제나 맛있다! 우리
+											싱싱농장에서 정성으로 키운 싱싱한 귤을 빠른 배송으로 받아보세요!</div>
+									</td>
+									<td class="tg-3hmd">26,600원</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="page_wrap" id="cartpage">
+						<div class="page_nation">
+							<a class="arrow pprev"
+								href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a> <a
+								class="arrow prev" href="#"></a> <a href="#" class="active">1</a>
+							<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
+							<a href="#">6</a> <a href="#">7</a> <a href="#">8</a> <a href="#">9</a>
+							<a href="#">10</a> <a class="arrow next" href="#"></a> <a
+								class="arrow nnext" href="#"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 </div>
 </html>
