@@ -298,11 +298,10 @@
 	/*즐겨찾는 농장*/ 
 	 #favoriteFarm{
 		position:relative;
-		top:-600px;
+		top:1800px;
 	 }
 	 #favoriteFarmBar{ 
 	 	position:relative;
-	 	top:100px; 
 	 	height:50px;
 	 	padding: 10px 0 0 20px;
 	 }
@@ -395,6 +394,294 @@
 	#addrBtnd{
 		z-index:2;
 	}
+	
+	/* 포인트 */
+	#cMyPageLeft{
+		display: block;
+	}
+	#mypointList{
+		height:1080px;
+		position: absolute;
+		top: 620px;
+	}
+	.Pbuttons{
+		height:40px;
+		width:80px;
+		background-color: #e06666;
+		color:white;
+		line-height:40px;
+		text-align:center;
+		border-radius:7%;
+		margin-left:1px;
+	}
+	#pointSelect>div{
+		float:left;
+	}
+	#pointSelectDate{
+		float:right;
+	}
+	#pointSelectDate>div{
+		float:left;
+	}
+	#pointUl{
+		width:1080px;
+		margin-top: 54px;
+    	margin-left: 0px;
+	}
+	#pointUl>li{
+		width:11%;
+		height:60px;
+		margin:5px 0;
+		float:left;
+	}
+	#pointUl>li:nth-child(5n+2){
+		width:50%;
+	}
+	#pointUl>li:nth-child(5n+1){
+		width:16%;
+	}
+	#pointUl>li:nth-child(5n+1){
+		width: 150px;
+	}
+	#pointUl>li:nth-child(5n+2){
+		width: 442px;
+	}
+	#pointUl>li:nth-child(5n+5){
+		width: 200px;
+	}
+	
+	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4){
+		line-height:60px;
+	}
+	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3), #pointUl>li:nth-child(4), #pointUl>li:nth-child(5){
+		font-size:14px;
+		text-align:center;
+		padding-bottom:40px;
+	}
+	#pointUl>li:nth-child(5n+1), #pointUl>li:nth-child(5n+3), #pointUl>li:nth-child(5n+4), #pointUl>li:nth-child(5n){
+		text-align:center;
+	}
+	#pointUl>li:nth-child(5n+1), #pointUl>li:nth-child(5n+2), #pointUl>li:nth-child(5n+3), #pointUl>li:nth-child(5n+4), #pointUl>li:nth-child(5n){
+	}
+	.pointdate{
+		line-height:60px;
+	}
+	.pointtitle{
+		font-size:1.1em;
+	}
+	.pointdetail{
+		font-size:0.9em;
+		color:#999;
+	}
+	.pointprice{
+		line-height:60px;
+	}
+	.pointup, .pointdown{
+		font-size: 0.9em;
+		line-height:60px;
+	}
+	.pointup{
+		color:red;
+	}
+	.pointdown{
+		color:blue;
+	}
+	.pointresult{
+		font-weight:bold;
+		line-height:60px;
+	}
+	#pointUl img{
+		height:58px;
+		width:58px;
+		float:left;
+	}
+	#mypointListDiv{
+		overflow:auto;
+	}
+	#linkStop>a:link, #linkStop>a:active, #linkStop>a:visited, #linkStop>a:hover{
+		text-decoration: none;
+		color:black;
+	}
+	#mileBigBtn, #mileBtn, #mileTbl{
+		display:none;
+	}
+	/* 포인트 */
+	#favoriteFarm, #cart{
+		position: absolute;
+	}
+	/* 농장 css */
+	.Pbuttons{
+		height:40px;
+		width:80px;
+		background-color: #e06666;
+		color:white;
+		line-height:40px;
+		text-align:center;
+		border-radius:7%;
+		margin-left:1px;
+	}
+	#favSelect>div{
+		float:left;
+	}
+	#favSelectDate{
+		float:right;
+	}
+	#favSelectDate>div{
+		float:left;
+	}
+	#favUl{
+		padding:0px;
+		margin:0px;
+		width:1080px;
+	}
+	#favUl>li{
+		width:120px;
+		height:60px;
+		line-height:60px;
+		margin:5px 0;
+		text-align:center;
+	}
+	#favUl>li:nth-child(1), #favUl>li:nth-child(2), #favUl>li:nth-child(3), #favUl>li:nth-child(4), #favUl>li:nth-child(5){
+		border-bottom:1px solid #e06666;
+		
+	}
+	#favUl>li:nth-child(5n+3){
+		width:240px;
+	}
+	#favUl>li:nth-child(5n+2){
+		width:530px;
+		line-height:60px;
+		float:left;
+	    padding-left: 30px;
+	}
+	#favUl>li:nth-child(5n+1){
+		width:60px;
+	}
+	.buyttitle, .buydetail{
+		line-height:30px;
+		text-align:left;
+		float:left;
+		width:242px;
+	}
+	#favUl img{
+		height:58px;
+		width:58px;
+		float:left;
+	}
+	#cMyPageLeft{
+		display:block;
+	}
+	.buytitle{
+		font-size:1.1em;
+	}
+	.buydetail{
+		font-size:0.9em;
+		color:#999;
+	}
+	.wordcut{
+		overflow:hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.buybutton{
+		width:70px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		margin:1px;
+		padding:0px;
+		border: none;
+		background-color:#e06666;
+		color:white;
+		border-radius: 5px;
+	}
+	.buybutton2{
+		width:70px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		margin:1px;
+		padding:0px;
+		border: none;
+		background-color:#e06666;
+		color:white;
+		border-radius: 5px;
+	}
+	#deletee>input{
+		float:right;
+	}
+	#deletee{
+		overflow:auto;
+	}
+	.buybuttonNo{
+		width:70px;
+		height:35px;
+		line-height:35px;
+		text-align:center;
+		margin:1px;
+		padding:0px;
+		border: none;
+		background-color:#e06666;
+		color:white;
+		border-radius: 5px;
+		opacity:60%;
+	}
+	
+	#ttile{
+		padding-top: 30px;
+		overflow:auto;
+	    padding-bottom: 30px;
+	    font-size: 25px;
+	}
+	#subtitle{
+		margin-left:20px;
+		font-size: 14px;
+	}
+	#ttile h2{
+		float:left;
+	}
+	
+	input[type="checkbox"]{
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #bcbcbc;
+		cursor: faver;
+	}
+	.like{
+		height:20px;
+		width:20px;
+		background-size:20px 20px;
+		float:right;
+		margin-top: 20px;
+		margin-left: 25px;
+	}
+	.like{
+		background-image:url(/sshj/img/dlike.png);
+	}
+	#hh>div{
+		float:left
+	}
+	.hate{
+		height:20px;
+    	margin-left: 5px;
+	}
+	#favUl>li{
+		float:left;
+	}
+	#favUl>li:nth-child(4n+1){
+		width:35%;
+	}
+	#favUl>li:nth-child(4n+2){
+		width:25%;
+	}
+	#favUl>li:nth-child(4n+3){
+		width:15%;
+	}
+	#favUl>li:nth-child(4n){
+		width:25%;
+	}
+	
 </style>
 
 <%@ include file="/inc/top.jspf" %>
@@ -417,6 +704,54 @@
 			}
 		})
 	});
+	$(document).on('click','#allView',function(){
+		location.href="mypoint"
+	});
+	$(document).on('click','#saveView',function(){
+		if($("#month").val()!=null && $("#month").val()!=''){
+			location.href="mypoint?type=save&month="+$("#month").val();
+		}else{
+			location.href="mypoint?type=save"
+		}
+	})
+	$(document).on('click','#spendView',function(){
+		if($("#month").val()!=null && $("#month").val()!=''){
+			location.href="mypoint?type=spend&month="+$("#month").val();
+		}else{
+			location.href="mypoint?type=spend"
+		}
+	})
+	$(document).on('click', '#3monthView', function(){
+		if($("#type").val()!=null && $("#type").val()!=''){
+			location.href="mypoint?month=3&type="+$("#type").val();
+		}else{
+			location.href="mypoint?month=3";
+		}
+	});
+	$(document).on('click', '#6monthView', function(){
+		if($("#type").val()!=null && $("#type").val()!=''){
+			location.href="mypoint?month=6&type="+$("#type").val();
+		}else{
+			location.href="mypoint?month=6";
+		}
+	});
+	$(document).on('click', '#12monthView', function(){
+		if($("#type").val()!=null && $("#type").val()!=''){
+			location.href="mypoint?month=12&type="+$("#type").val();
+		}else{
+			location.href="mypoint?month=12";
+		}
+	});
+	function pagelistA(pagenum){
+		var lin = "mypoint?pageNum="+pagenum;
+		if($("#month").val()>0){
+			lin += "&month="+$("#month").val();
+		}
+		if($("#type").val()!=null && $("#type").val()!=''){
+			lin += "&month="+$("#type").val();
+		}
+		location.href=lin;
+	}
 </script> 
 <div id="topBarContainer">
 	<div id="topBar">			
@@ -484,186 +819,126 @@
 		 	</div>
 		 	
 		 	<!-- 마일리지 파트 -->
-			<div id="mileHistory">
-				<div id="mileBar"><div><strong>회원 마일리지 내역</strong></div></div>
-				<div id="mileBigBtn">
-					<button class="success" value="전체" name="" >전체</button>
-					<button class="success" value="적립" name="" >적립</button>
-					<button class="success" value="사용" name="" >사용</button>
-					<div id="mileBtn">
-						<button class="success" value="3개월" name="" >3개월</button>
-						<button class="success" value="6개월" name="" >6개월</button>
-						<button class="success" value="1년" name="" >1년</button>
-					</div>
-				</div>
-				<div id="mileTbl">  
-					<table class="tgr" style="undefined;table-layout: fixed; width: 912px">
-					<colgroup>
-					<col style="width: 83px">
-					<col style="width: 91px">
-					<col style="width: 398px">
-					<col style="width: 112px">
-					<col style="width: 115px">
-					<col style="width: 113px">
-					</colgroup>
-					<thead>
-					  <tr>
-					    <th class="mileTop">일시</th>
-					    <th class="mileTop" colspan="2">상품</th>
-					    <th class="mileTop">판매가</th>
-					    <th class="mileTop">마일리지</th>
-					    <th class="mileTop">잔여 마일리지</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
-					    <td class="mileRow">2021-03-25<br>13:00</td>
-					    <td class="mileRow"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" width="80" height="80"></td>
-					    <td class="mileSubject">
-					    	<div class="mileName" style="font-weight:bold">맛깔나는 귤</div> 
-					    	<div class="mileDetail" style="color:#9B9B9B">맛깔나는 귤의 설명입니다</div>
-					    </td>
-					    <td class="mileRow">17,980원</td>
-					    <td class="mileRow"><span style="color:#3531FF">17 p 적립</span></td>
-					    <td class="mileRow">230p</td>
-					  </tr>
-					  <tr>
-					    <td class="mileDate">2021-03-31<br>21:30</td>
-					    <td class="mileRow"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" alt="Image" width="69" height="80"></td>
-					    <td class="mileSubject">
-						    <div class="mileName" style="font-weight:bold">맛깔나는 쌀</div> 
-						    <div class="mileDetail" style="color:#9B9B9B">맛깔나는 쌀의 설명입니다</div>
-					    </td>
-					    <td class="mileRow">11,980원</td>
-					    <td class="tgr-vj7v">19p 적립</td>
-					    <td class="mileRow">213p</td>
-					  </tr>
-					  <tr>
-					    <td class="mileDate">2021-04-02<br>01:27</td>
-					    <td class="mileRow"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" alt="Image" width="69" height="80"></td>
-					    <td class="mileSubject">
-						    <div class="mileName" style="font-weight:bold">생일 축하 마일리지</div> 
-						    <div class="mileDetail" style="color:#9B9B9B">생일 축하합니다!</div>
-					    </td>
-					    <td class="mileRow">-</td>
-					    <td class="tgr-xpxz">1000p적립</td>
-					    <td class="mileRow">202p</td>
-					  </tr>
-					  <tr>
-					    <td class="mileDate">2021-04-13<br>19:24</td>
-					    <td class="mileRow"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" alt="Image" width="69" height="80"></td>
-					    <td class="mileSubject">
-						    <div class="mileName" style="font-weight:bold">포인트 사용</div> 
-						    <div class="mileDetail" style="color:#9B9B9B">결제시 포인트를 사용하여 할인받았습니다</div>
-					    </td>
-					    <td class="mileRow">-</td>
-					    <td class="tgr-0ok3">1000p 사용</td>
-					    <td class="mileRow">3000p</td>
-					  </tr>
-					  <tr>
-					    <td class="mileDate">2021-05-01<br>01:52</td>
-					    <td class="mileRow"><img src="<%=request.getContextPath()%>/img/dsweetpotato1.jpg" alt="Image" width="69" height="80"></td>
-					    <td class="mileSubject">
-						    <div class="mileName" style="font-weight:bold">맛깔나는 토마토</div> 
-						    <div class="mileDetail" style="color:#9B9B9B">맛깔나는 토마토 먹어보겠습니다</div>
-					    </td>
-					    <td class="mileRow">15,990원</td>
-					    <td class="tg-vj7v">519p 적립</td>
-					    <td class="mileRow">850p</td>
-					  </tr>
-					</tbody>
-					</table>
-				</div>
-			<div class="page_wrap">
-				<div class="page_nation" id="milepage">
-				   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-				   <a class="arrow prev" href="#"></a>
-				   <a href="#" class="active">1</a>
-				   <a href="#">2</a>
-				   <a href="#">3</a>
-				   <a href="#">4</a>
-				   <a href="#">5</a>
-				   <a href="#">6</a>
-				   <a href="#">7</a>
-				   <a href="#">8</a>
-				   <a href="#">9</a>
-				   <a href="#">10</a>
-				   <a class="arrow next" href="#"></a>
-				   <a class="arrow nnext" href="#"></a>
-				</div>
-			 </div>  				
-			</div>  
+	 	<div id="mypointList">
+	 	<div id="mileBar" style="top:0px;"><div><strong>회원 마일리지 내역</strong></div></div>
+		<c:if test="${type != null}">
+			<input type="hidden" id="type" value="${type}"/>
+		</c:if>
+		<c:if test="${month != null}">
+			<input type="hidden" id="month" value="${month}"/>
+		</c:if>
+		<h2>마이포인트</h2>
+		<h4>현재 포인트 : ${mypoint}p</h4>
+		<div style="margin-bottom:20px;">
+			<b style="font-size:15px;">${ilist.userid}</b>님의 포인트 적립 현황입니다.<br/>
+			저희 비트몰에서는 구매가격의 1%를 포인트로 적립해드리고 있습니다.<br/> 
+			포인트는 현금과 동일하게 사용하실 수 있으며, 구매시 사용하여 할인받을 수 있습니다.<br/>
+			오늘도 비트몰을 이용해주셔서 감사합니다. <br/>
+		</div>
+		<div id="pointSelect">
+			<div class="btn" id="allView">전체</div>
+			<div class="btn" id="saveView">적립</div>
+			<div class="btn" id="spendView">소비</div>
+		</div>
+		<div id="pointSelectDate">
+			<div class="btn" id="3monthView">3개월</div>
+			<div class="btn" id="6monthView">6개월</div>
+			<div class="btn" id="12monthView">1년</div>
+		</div>
+			<ul id="pointUl">
+				<li>일시</li>
+				<li>상품</li>
+				<li>판매가</li>
+				<li>마일리지</li>
+				<li>잔여<br/>마일리지</li>
+				<c:forEach var="vo" items="${listA}">
+					<li><span class="pointdate">${vo.orderdate}</span></li>
+					<li id="linkStop">
+						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"></a>
+						<a href="customproduct?no=${vo.productnum}"><span class="pointtitle wordcut">${vo.productname}</span><br/></a>
+						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail wordcut">${vo.productcontent }</span></a>
+					</li>
+					<li><span class="pointprice">${vo.orderprice}</span>원</li>
+					<c:if test="${vo.changepoint > 0}">
+						<li><span><span class="pointup">${vo.changepoint}p적립</span></span></li>
+					</c:if>
+					<c:if test="${vo.changepoint < 0}">
+						<li><span><span class="pointdown">${vo.changepoint * -1}p소비</span></span></li>
+					</c:if>
+					<li><span class="pointresult">${vo.usedpoint}p</span></li>
+				</c:forEach>
+			</ul>
 			
+			<!-- 페이징 -->
+		<div class="page_wrap">	
+			<div class="page_nation">
+			   <c:if test="${pageVOA.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelistA(${pageVOA.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVOA.startPageNum}" step="1" end="${pageVOA.startPageNum + pageVOA.onePageNum-1}">
+	              <c:if test="${p<=pageVOA.totalPage}">
+	                 <c:if test="${p==pageVOA.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVOA.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelistA(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVOA.pageNum < pageVOA.totalPage}">
+	              <a class="arrow next" href="javascript:pagelistA(${pageVOA.pageNum+1})"></a>
+	           </c:if>
+			</div>
+		 </div>
+	</div>
+	<!-- 여까지 포인트 -->
+		 	
 			<!-- 즐겨찾기 농장 파트 -->
 	 		<div id="favoriteFarm">
 				<div id="favoriteFarmBar"><strong>회원 즐겨찾기 농장</strong></div>
-				<div id="favoriteFarmTbl">
-					<table class="tga" style="undefined;table-layout: fixed; width: 1021px">
-						<colgroup>
-						<col style="width: 103px">
-						<col style="width: 465px">
-						<col style="width: 138px">
-						<col style="width: 181px">
-						<col style="width: 134px">
-						</colgroup>
-						<thead>
-						  <tr>
-						    <th class="favoriteTop" colspan="2">소개</th>
-						    <th class="favoriteTop">위치</th>
-						    <th class="favoriteTop">즐겨찾기 한 사용자</th>
-						    <th class="favoriteTop">샵 바로가기</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  <tr>
-						    <td class="tg-8goc"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3e%3cpath fill='%23000000' d='M120 72c0-39.765 32.235-72 72-72s72 32.235 72 72c0 39.764-32.235 72-72 72s-72-32.236-72-72zm254.627 1.373c-12.496-12.497-32.758-12.497-45.254 0L242.745 160H141.254L54.627 73.373c-12.496-12.497-32.758-12.497-45.254 0-12.497 12.497-12.497 32.758 0 45.255L104 213.254V480c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V368h16v112c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V213.254l94.627-94.627c12.497-12.497 12.497-32.757 0-45.254z'/%3e%3c/svg%3e" width="75" height="75"></td>
-						    <td class="favoriteIntro"><span style="font-weight:bold">작은 농부의 농장</span><br><span style="color:#9B9B9B">언제나 정직하게 판매하는 작은 농부입니다!</span><br><span style="color:#9B9B9B">항상 찾아주셔서 감사합니다.</span></td>
-						    <td class="tg-3hmd">충북 제천</td>
-						    <td class="tg-uron"><span style="color:#FE0000"><img src="<%=request.getContextPath()%>/img/y_heart.png" alt="Image" width="20" height="20"> 999+</span></td>
-						    <td class="tg-uron"><button class="success" value="이동" name="">이동</button></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-8goc"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3e%3cpath fill='%23000000' d='M120 72c0-39.765 32.235-72 72-72s72 32.235 72 72c0 39.764-32.235 72-72 72s-72-32.236-72-72zm254.627 1.373c-12.496-12.497-32.758-12.497-45.254 0L242.745 160H141.254L54.627 73.373c-12.496-12.497-32.758-12.497-45.254 0-12.497 12.497-12.497 32.758 0 45.255L104 213.254V480c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V368h16v112c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V213.254l94.627-94.627c12.497-12.497 12.497-32.757 0-45.254z'/%3e%3c/svg%3e" width="75" height="75"></td>
-						    <td class="favoriteIntro"><span style="font-weight:bold">아침 고요 농장</span><br><span style="color:#9B9B9B">느리지만 안심하고 먹을 수 있는 먹거리를 만듭니다</span></td>
-						    <td class="tg-3hmd">경북 예천</td>
-						    <td class="tg-uron"><span style="color:#FE0000"><img src="<%=request.getContextPath()%>/img/y_heart.png" alt="Image" width="20" height="20"> 777</span></td>
-						    <td class="tg-uron"><button class="success" value="이동" name="">이동</button></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-8goc"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3e%3cpath fill='%23000000' d='M120 72c0-39.765 32.235-72 72-72s72 32.235 72 72c0 39.764-32.235 72-72 72s-72-32.236-72-72zm254.627 1.373c-12.496-12.497-32.758-12.497-45.254 0L242.745 160H141.254L54.627 73.373c-12.496-12.497-32.758-12.497-45.254 0-12.497 12.497-12.497 32.758 0 45.255L104 213.254V480c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V368h16v112c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V213.254l94.627-94.627c12.497-12.497 12.497-32.757 0-45.254z'/%3e%3c/svg%3e" width="75" height="75"></td>
-						    <td class="favoriteIntro"><span style="font-weight:bold">우리 싱싱농장</span><br><span style="color:#9B9B9B">우리 손으로 직접 재배한 채소만 판매합니다</span></td>
-						    <td class="tg-3hmd">경기도 의정부</td>
-						    <td class="tg-uron"><span style="color:#FE0000"><img src="<%=request.getContextPath()%>/img/y_heart.png" alt="Image" width="20" height="20"> 32</span></td>
-						    <td class="tg-uron"><button class="success" value="이동" name="">이동</button></td>
-						  </tr>
-						  <tr>
-						    <td class="tg-8goc"><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3e%3cpath fill='%23000000' d='M120 72c0-39.765 32.235-72 72-72s72 32.235 72 72c0 39.764-32.235 72-72 72s-72-32.236-72-72zm254.627 1.373c-12.496-12.497-32.758-12.497-45.254 0L242.745 160H141.254L54.627 73.373c-12.496-12.497-32.758-12.497-45.254 0-12.497 12.497-12.497 32.758 0 45.255L104 213.254V480c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V368h16v112c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V213.254l94.627-94.627c12.497-12.497 12.497-32.757 0-45.254z'/%3e%3c/svg%3e" width="75" height="75"></td>
-						    <td class="favoriteIntro"><span style="font-weight:bold">언제나 유기농 농장</span><br><span style="color:#9B9B9B">모든 제품 유기농으로만, 최고급으로.</span></td>
-						    <td class="tg-3hmd">충남 태안</td>
-						    <td class="tg-uron"><span style="color:#FE0000"><img src="<%=request.getContextPath()%>/img/y_heart.png" alt="Image" width="20" height="20">156</span></td>
-						    <td class="tg-uron"><button class="success" value="이동" name="">이동</button></td>
-						  </tr>
-						</tbody>
-						</table>
+				<div id="myfavList">
+					<div id="ttile" class="ttile">즐겨찾기한 농장</div>
+					<div id="subtitle">${ilist.userid} 회원이 즐겨찾기한 농장입니다.</div>
+					<div>
+						<ul id="favUl">
+							<li>소개</li>
+							<li>위치</li>
+							<li>즐겨찾기한 사용자</li>
+							<li>구경하기</li>
+							
+							<c:forEach var="data" items="${listB}">
+								<li>
+									<img src="/sshj/img/${data.farmprofile}"><span class="buyttitle wordcut">${data.farmname}</span><span class="buydetail wordcut">${data.farmintro}</span>
+								</li>
+								<li><span class="favprice">${data.storeaddr}</span></li>
+								<li id="hh"><div class="like"></div><div class="hate">${data.goodTotal}명</div></li>
+								<li><input type="button" class="buybutton" value="구경가기" onclick="click22(${data.storenum})"/></li>
+							</c:forEach>				
+						</ul>
+					</div>
 				</div>
-				<div class="page_wrap" id="farmpage">
-				<div class="page_nation">
-				   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-				   <a class="arrow prev" href="#"></a>
-				   <a href="#" class="active">1</a>
-				   <a href="#">2</a>
-				   <a href="#">3</a>
-				   <a href="#">4</a>
-				   <a href="#">5</a>
-				   <a href="#">6</a>
-				   <a href="#">7</a>
-				   <a href="#">8</a>
-				   <a href="#">9</a>
-				   <a href="#">10</a>
-				   <a class="arrow next" href="#"></a>
-				   <a class="arrow nnext" href="#"></a>
-				</div>
-			 </div>  
+				<div class="page_wrap">	
+			<div class="page_nation">
+			   <c:if test="${pageVOB.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelistB(${pageVOB.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVOB.startPageNum}" step="1" end="${pageVOB.startPageNum + pageVOB.onePageNum-1}">
+	              <c:if test="${p<=pageVOB.totalPage}">
+	                 <c:if test="${p==pageVOB.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVOB.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelistB(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVOB.pageNum < pageVOB.totalPage}">
+	              <a class="arrow next" href="javascript:pagelistB(${pageVOB.pageNum+1})"></a>
+	           </c:if>
+			</div>
+		 </div>
 	 		</div>
 	 		<div id="cart">
 	 		<div id="cartBar"><strong>회원 장바구니</strong></div>

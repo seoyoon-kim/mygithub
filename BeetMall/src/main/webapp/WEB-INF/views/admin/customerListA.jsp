@@ -66,9 +66,9 @@
 		padding-top: 0 !important;
 	}
 	
-	#sortBox {
+	/* #sortBox {
 		margin: 30px 0 0 20px;
-	} 
+	}  */
 	#sortBox>ul{
 		width:1110px !important;
 	}
@@ -176,6 +176,15 @@
 	}
 	#listul>li:nth-child(7n){
 		width:12%;
+	}
+	#sortBox,#addBtn, #delBtn{
+		visibility: hidden;
+	}
+	#container{
+		top:0px;
+	}
+	#choose{
+		margin: 50px 0 0 20px !important;
 	}
 </style>
 <script>

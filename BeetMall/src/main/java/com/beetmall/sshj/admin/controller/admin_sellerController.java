@@ -46,10 +46,11 @@ public class admin_sellerController {
 			}else {
 				logType = 0;
 			}
+			logType=3;
 			int re = memberservice.memberCountSeller(logType,  selType);
 			pageVO.setTotalRecord(re);
-			
-			mav.addObject("list", memberservice.memberselectSeller(pageVO));
+			System.out.println("re="+re);
+			mav.addObject("list", memberservice.memberselectSellerAll(pageVO));
 			mav.addObject("pageVO", pageVO);
 			mav.setViewName("/admin/sellerListA");
 			return mav;

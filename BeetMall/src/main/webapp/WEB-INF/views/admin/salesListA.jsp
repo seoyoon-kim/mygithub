@@ -320,6 +320,7 @@
 		border:1px solid lightgray;
 		border-radius:5px;
 	}
+	
 </style>
 <script>
  
