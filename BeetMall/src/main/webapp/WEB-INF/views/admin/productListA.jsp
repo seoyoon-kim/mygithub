@@ -4,10 +4,10 @@
 	#topBar h5{  
 		padding-left:120px;
 	}
-	 #container li{  
+	#container li{  
 		 float:left; 
 		 width:10%; 
-	 }   
+	}   
 	#contentBox{
 		top:-40px;
 	} 
