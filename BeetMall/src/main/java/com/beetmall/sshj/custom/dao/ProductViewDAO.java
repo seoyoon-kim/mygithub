@@ -2,7 +2,9 @@ package com.beetmall.sshj.custom.dao;
 
 import java.util.List;
 
+import com.beetmall.sshj.custom.vo.PageProductVO;
 import com.beetmall.sshj.custom.vo.ProductViewVO;
+
 
 
 public interface ProductViewDAO {
@@ -20,13 +22,27 @@ public interface ProductViewDAO {
 	public String POprice(int optionnum);
 	
 	/////////////상품후기 구하기 REVIEW
-	public List<ProductViewVO> ProductViewReview(int productnum);
+	public List<ProductViewVO> ProductViewReview(PageProductVO pageVO1);
 	
 	////////////리뷰글 상세보기
 	public ProductViewVO reviewViewSelect(int pnum,int rnum);
 	
+	//총 레코드 수 구하기
+	public int totalRecord(PageProductVO pageVO1);
+	
+	public int totalRecord2(PageProductVO pageVO2);
+	
+	public int totalRecord3(String userid);
+	
 	////////////상품문의 보기
-	public List<ProductViewVO> ProductViewFaq(int productnum);
+	public List<ProductViewVO> ProductViewFaq(PageProductVO pageVO2);
+	
+	///////////장바구니에 넣기/////////////
+	public ProductViewVO customWishInsert(String id,int productnum,int optnum,int pcount,int ocount);
+	
+	////////////장바구니 보기/////////////
+	public List<ProductViewVO> customWishView(PageProductVO pageVO1);
+
 	
 	
 }

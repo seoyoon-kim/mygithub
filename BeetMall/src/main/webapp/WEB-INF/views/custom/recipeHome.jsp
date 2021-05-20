@@ -332,7 +332,6 @@ function new10(){
 
 
 
-
 </script>
 
 <body onload="top10()" >
@@ -354,11 +353,7 @@ function new10(){
 
 <!-- -------------------------탑서치부분-------------------------------------- -->		    
 	    <ul id="searchLine">
-	    <li><select name="selectOrder" id="selectOrder">
-	                   <option id="top10s">추천수순</option>
-	                   <option>조회수순</option>
-	                   <option id="new10s">최신순</option>
-	                </select></li>
+	    
 	     <li id="top10" onclick="top10()">TOP10</li>
 	     <li id="new10" onclick="new10()">NEW10</li>
 	     
@@ -366,13 +361,9 @@ function new10(){
 	    
 	    <div id="searchLine2">
 	   
-	    <select name="selectSearch" id="selectSearchid">
-	                   <option>제목</option>
-	                   <option>글쓴이</option>
-	                   <option>글내용</option>
-	                </select>
+	 
 	    <span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
+				
 		</span>
 	    
 	    </div>
@@ -392,7 +383,28 @@ function new10(){
 		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} ${data.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  
-		           
+		         
+		    <div class="page_wrap">
+					<div class="page_nation">
+					   <c:if test="${pageVO1.pageNum>1}"><!-- 이전페이지가 있을때 -->
+					   		<a class="arrow prev" href="/sshj/recipeHome?pageNum=${pageVO1.pageNum-1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+					   </c:if>
+					   <!-- 페이지 번호                   1                                    5                     -->
+			           <c:forEach var="p" begin="${pageVO1.startPageNum}" step="1" end="${pageVO1.startPageNum + pageVO1.onePageNum-1}">
+			              <c:if test="${p<=pageVO1.totalPage}">
+			                 <c:if test="${p==pageVO1.pageNum}"> <!-- 현재페이지일때 실행 -->
+			                    <a class="active">${p}</a>
+			                 </c:if>   
+			                 <c:if test="${p!=pageVO1.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+			                    <a href="/sshj/recipeHome?pageNum=${p}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>">${p}</a>
+			                 </c:if>
+			              </c:if>
+			           </c:forEach>
+			           <c:if test="${pageVO1.pageNum < pageVO1.totalPage}">
+			              <a class="arrow next" href="/sshj/recipeHome?pageNum=${pageVO1.pageNum+1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+			           </c:if>
+					</div>
+			 </div>       
 	
 	    </div>
 	    
@@ -409,28 +421,34 @@ function new10(){
 		            </ul>
 		         </c:forEach>  
 		           
-	
+			<div class="page_wrap">
+					<div class="page_nation">
+					   <c:if test="${pageVO2.pageNum>1}"><!-- 이전페이지가 있을때 -->
+					   		<a class="arrow prev" href="/sshj/recipeHome?pageNum=${pageVO2.pageNum-1}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+					   </c:if>
+					   <!-- 페이지 번호                   1                                    5                     -->
+			           <c:forEach var="p" begin="${pageVO2.startPageNum}" step="1" end="${pageVO2.startPageNum + pageVO2.onePageNum-1}">
+			              <c:if test="${p<=pageVO2.totalPage}">
+			                 <c:if test="${p==pageVO2.pageNum}"> <!-- 현재페이지일때 실행 -->
+			                    <a class="active">${p}</a>
+			                 </c:if>   
+			                 <c:if test="${p!=pageVO2.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+			                    <a href="/sshj/recipeHome?pageNum=${p}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>">${p}</a>
+			                 </c:if>
+			              </c:if>
+			           </c:forEach>
+			           <c:if test="${pageVO2.pageNum < pageVO2.totalPage}">
+			              <a class="arrow next" href="/sshj/recipeHome?pageNum=${pageVO2.pageNum+1}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+			           </c:if>
+					</div>
+				 </div>
+		 
+		 
 	    </div>
 	    
-	    	<div class="page_wrap">
-			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
-			</div>
-		 </div>
 	    
+		 
+		 
 	    <div style="clear:both;"></div>
 	    
 	 </div>   

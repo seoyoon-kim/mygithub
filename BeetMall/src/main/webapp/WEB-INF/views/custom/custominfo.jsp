@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/inc/menu_c.jspf"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- font -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
   #cMyPageLeft {
@@ -33,44 +25,256 @@
 	ul, li, a{
 		list-style: none; padding:0; margin:0;
 	}
+/* ---------------상세정보2 --------------------------------------------------------------------------------- */
+#productInfoPage2 {
+	width: 100%;
+}
 
-	/*표*/
-	table{
-		border-spacing: 0;
-		text-indent: initial;
-		margin-bottom:10px;
+
+#productInfoPage2>#retitle,#qtitle {
+	width: 100%;
+	float: left;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	padding-left:20px;
+	color:gray;
+	font-size:14px;
+}
+
+
+
+#qnaViewbox{
+width:100%;
+float:left;
+padding-left:30px;
+padding-bottom:10px;
+border-bottom:1px solid #ddd;
+}
+
+/* 리뷰이미지 설정*/
+#reviewImgbox {
+   width:100%;
+   float: left;
+   padding-left:50px;
+}
+
+#reviewImgbox>img {
+	width:600px;
+	height: 400px;
+	float: left;
+}
+
+
+#reviewtxtbox,#qnatxtbox {
+    padding-left:15px;
+	width:1050px;
+	height: 200px;
+	line-height: 100px;
+	float: left;
+	padding-left:50px;
+	overflow:auto;
+}
+
+#qnatxtbox2{
+   padding-left:15px;
+	width:1050px;
+	height: 200px;
+	line-height: 100px;
+	float: left;
+	padding-left:50px;
+	background-color:#eee;
+	overflow:auto;
+}
+
+#nonebox{
+float:left;
+ width:100%;
+ height:30px;
+ line-height:30px;
+ margin:10px;
+}
+	/* ---------------상세정보박스3시잗-------------------- */
+#productInfoPage3 {
+	width: 100%;
+}
+
+#productInfoPage3>#qtitle {
+	width: 100%;
+	float: left;
+	margin-top:30px;
+	margin-bottom: 50px;
+}
+
+#qnaTitle {
+	width: 100%;
+	margin-bottom: 10px;
+	color:gray;
+}
+
+
+#qnaList {
+	width: 100%;
+	height: 60px;
+	margin-bottom: 10px;
+	padding-bottom:10px;
+}
+
+#qnaTitle>li{
+	text-align: center;
+}
+#qnaTitle>li, #qnaList>li {
+	float: left;
+	border-bottom: 1px solid #ddd;
+	height: 60px;
+	line-height: 50px;
+	padding-bottom:10px;
+	
+}
+
+#qnaTitle>li:nth-child(6n+1), #qnaList>li:nth-child(6n+1) {
+	text-align:center;
+	width: 50px;
+}
+
+#qnaTitle>li:nth-child(6n+2), #qnaList>li:nth-child(6n+2) {
+	text-align:center;
+	width: 300px;
+}
+
+
+#qnaTitle>li:nth-child(6n+3){
+	text-align:center;
+}
+#qnaTitle>li:nth-child(6n+3), #qnaList>li:nth-child(6n+3) {
+	width: 430px;
+	
+}
+
+
+#qnaTitle>li:nth-child(6n+4), #qnaList>li:nth-child(6n+4) {
+	text-align:center;
+	width: 130px;
+}
+
+#qnaTitle>li:nth-child(6n+5), #qnaList>li:nth-child(6n+5) {
+	text-align:center;
+	width: 70px;
+}
+
+#qnaTitle>li:nth-child(6n+6), #qnaList>li:nth-child(6n+6) {
+	text-align:center;
+	width: 100px;
+}
+
+#qnaList a:link, #qnaList a:active, #qnaList a:visited, #qnaList a:hover{
+	color:black;
+}
+#qnaList>li>img {
+	width: 20px;
+	height: 20px;
+}
+
+<!-- 문의 후기 버튼 -->
+
+#reviewWriteBtn {
+	width:100%;
+	padding-left:980px;
+	padding-right:10px;
+}
+
+#reviewWriteBtn>input {
+	float: right;
+	width: 80px;
+	height: 25px;
+	line-height: 20px;
+	margin-left:1000px;
+	margin-bottom:20px;
+	
+	padding: 3px 5px;
+	color: #666666;
+	border-radius: 1px;
+	background:#eee;
+	text-align: center;
+ 	text-decoration: none;
+	display: inline-block;
+	border:1px solid #ddd;
+	
+}
+
+#qnaWriteBtn>input {
+	float: right;
+	width: 80px;
+	height: 25px;
+	line-height: 20px;
+}
+
+#productPageDiv {
+	font-size: 17px;
+}
+
+#productInfoPage {
+	padding-left: 0px;
+}
+
+	button, .btn{
+		padding: 3px 10px;
+		color: #666666;
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
 	}
-	th{
-		height:50px;
-		display: table-cell;
-	    vertical-align: inherit;
-	    font-weight: bold;
-	    text-align: -internal-center;
-	    border-bottom: 2px solid #ccc;
-	    border-top: 2px solid #ccc;
-   		background-color: #fcfcfc;
-   		font-size: 16px;
+	.minibtn{
+		padding: 3px 5px;
+		color: #666666;
+		border-radius: 8px;
+		background:#fff;
+		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		border:none;
 	}
-	td{
-		height:50px;
-		border-bottom:1px solid lightgray;
-	}
-	td:nth-child(1), td:nth-child(3){
-		text-align:center;
-		width:100px;
-	}
-	td:nth-child(2){
-		padding-left:30px;
-	}
-	td:nth-child(2) a, a{
+	/*버튼*/
+	.btn:hover, .minibtn:hover{
+		background-color:white;
 		color:black;
-		cursor: pointer;
+		display: inline-block;
 	}
-	#kwrite{
-		float:right;
-		margin-right:5px;
-		margin-bottom:10px;
+	
+	
+	#infoBtn1,#infoBtn2,#infoBtn3{
+	   border-radius: 1px;	 	
+	   background-color:#eee;	
 	}
+	
+	#infoBtn1:hover,#infoBtn2:hover,#infoBtn3:hover{
+	
+	background-color:#FF5430;	
+	color:white;
+	
+	}
+	
+	
+	
+	#infoBtn1>a:active,#infoBtn2>a:active,#infoBtn3>a:active{
+	outline: 0;
+	}
+	
+	#productBtn>.btn{
+	background-color:#eee;	
+	height:30px;
+	}
+	#productBtn>.btn:hover{
+	background-color:#FF5430;
+	color:white;
+	}
+
+
+#productBtn{
+    padding-left: 0px;
+}
+
 	/*페이징*/
 	.paging,th{
 		margin-top:30px;
@@ -180,29 +384,62 @@
 	}
 	/* 페이징처리끝 */
 </style>
+
 <script>
 	//답변완료 답변대기중 select 
-	$(document).ready(function(){
-		$('#sel').change(function(){
-			var option = $(this).val();
-			console.log(option);
-			
-			if(option=='answer'){ //답변완료
-				$('td:contains("답변완료")').parents('tr').css('display','');
-				$('td:contains("답변대기중")').parents('tr').css('display','none');
-			}			
-			if(option=='no_answer'){ //답변대기중
-				$('td:contains("답변대기중")').parents('tr').css('display','');
-				$('td:contains("답변완료")').parents('tr').css('display','none');
-			}
-			if(option=='total'){ //전체
-				$('tr').css('display','');
-		}
-		});
-	 		
-	});
+	
+$(function(){	
+	
+	
+	
+		$(".qnaViewbtn").click(function() {
+		    		
+		  			$(this).parent().next().next().toggle(
+		  				function(){
+		  					$(this).parent().next().css("display", "block"); 
+		  				},
+		  				function(){
+		  					$(this).parent().next().css("display", "hide"); 
+		  				  
+		  				}
+		  			);
+		  		});
 
+	
+	///////////////////비공개처리 업데이트////////////////
+	$(".lockbtn").click(function() {
+	
+		
+		if(confirm("게시글을 비공개 처리하시겠습니까?")){			
+			
+		var num=$(this).parent().next().val();
+		var url = "lockinfo";
+			
+			console.log(url,num);
+			
+			$.ajax({
+				url:url,
+				data:num,
+				success:function(result){
+					console.log('비공개처리 성공---> ');
+					alert(num);
+				},error:function(e){
+					console.log('비공개처리 실패---> ');
+				}
+			})
+		}
+		
+		
+	});
+	
+	
+});
+	
+	
+	
+	
 </script>
+
 <div class="section">
 	<div class="main">
 		<div class="wrapTitle">${logId}님의 문의 내역입니다.</div>
@@ -212,71 +449,114 @@
 				<br/>
 				고객님께서 비트몰에 문의하신 내용을 확인할 수 있습니다.<br/>
 		</div>
-		   <!-- 검색/ 문의하기 버튼 -->
-			<div id="search_container">
+		
 			<!--문의하기 버튼 -->
-			<a href="<%=request.getContextPath()%>/custominfoWrite" class="btn" id="ask_btn">문의하기</a>
-			<a href="<%=request.getContextPath()%>/customerCenterWrite" class="btn" id="ask_btn">문의삭제</a>
+			<a href="<%=request.getContextPath()%>/mybuyList" class="btn" id="ask_btn">문의하기</a>
+			
 	
-			<!-- 검색하기 -->
-				<span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><img id="search_icon" src="<%=request.getContextPath()%>/resources/img/xsearch_icon.png"/></a>
-				</span>
-			</div>
 			
-		<fieldset>
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>내용</th>
-					<th>문의날짜</th>
-					<th>상태</th> <!-- 답변 여부 -->
-					<th>답변보기</th>		
-				</tr>
-			</thead>
 			
-			<tbody>
-				<c:forEach var="data" items="${list}">
-				<tr>
-					<td class="number">${data.qnum}</td>
-					<td class=><a href="<%=request.getContextPath()%>/custominfoView?qnum=${data.qnum}">${data.qcontent}</a></td>
-					<td>${data.qwritedate}</td>
-					<td>
-						<c:if test="${data.qanswer==null}">
-							<span class="answer_span" id="no_answer"></span>
-						</c:if>
-						<c:if test="${data.qanswer != null}">
-							<span class="answer_span" id="answer"></span>
-				</c:if>
-					</td>				
-				</tr>
-				</c:forEach>
-			</tbody>
+				<!-- -------------------------------------상세정보박스3  시작-------------------------------------------------------- -->
+		<div id="productInfoPage">
+			<div id="productInfoPage3">
+
+				<div id="qtitle"> </div>
+					
+
+				<ul id="qnaTitle">
+					<li><b>번호</b></li>
+					<li><b>상품이름</b></li>
+					<li><b>제목</b></li>
+					<li><b>작성일</b></li>
+					<li><b>공개여부</b></li>
+					<li><b>답변여부</b></li>
+				</ul>
+
+		   <c:if test="${empty faqlist}">
+		       <div id="noreview">작성된 문의가 없습니다.</div>
+		   </c:if>
+
+           <c:if test="${not empty faqlist}">
+           <c:forEach var="qlist" items="${faqlist}">
+           
+				<ul id="qnaList">
+					 <li>${qlist.qnum}</li> <!-- 문의 숫자 -->		
+					 <li>${qlist.productname}</li><!-- 상품이름 -->	
+					 <li class="qnaViewbtn">${qlist.qtitle}</li>
+					 <li>${qlist.qwritedate}</li><!-- 날짜 -->
+				  <c:if test="${qlist.qopen==0}">	<!-- 비공개일경우 그림표시 -->
+					 <li class="unlockbtn"><img src="img/ciconlock2.png"></li>
+				  </c:if>
+				  <c:if test="${qlist.qopen==1}">	 <!-- 공개일경우 그림표시 -->
+					 <li class="lockbtn"><img src="img/ciconlock.png"></li>
+				  </c:if>
+				  
+				    <c:if test="${qlist.qanswer==null}">
+				  		<li>미답변</li>
+				  	</c:if>
+				  	
+				  	<c:if test="${qlist.qanswer!=null}">
+				 		 <li>답변완료</li>
+				 	</c:if>
+				</ul>
+				<input type="hidden" value="${qlist.qnum}">
+				<div id="qnaViewbox" style="display:none" >
 			
-		</table>
-		<div  id="select_container">
-				<!-- 답변 셀렉트 옵션 -->
-				<select id="sel">
-					<option value="total">전체</option>
-					<option value="answer">답변완료</option>
-					<option value="no_answer">답변대기중</option>
-				</select>
-		</div>
-			<!-- 페이징 by kangsan -->
-		<div class="page_wrap">
+							<div id="qnatxtbox">				
+							     ${qlist.qcontent}
+							</div>
+							
+						 <c:if test="${qlist.qanswer==null}"> <!-- 답변없을경우 -->	
+						    <div id="qnatxtbox2">	
+							  아직 작성된 답변이 없습니다.
+							</div>
+						 </c:if>	
+						 
+						 <c:if test="${qlist.qanswer!=null}">
+						    <div id="qnatxtbox2">					
+							     ${qlist.qanswer}
+							</div>
+						</c:if>	
+	
+				</div>
+
+		  </c:forEach>	
+		  </c:if>
+
+				
+				<div id="nonebox">   </div>
+
+			<c:if test="${not empty faqlist}">
+			
+				<!-- 페이징 표시--------- -->
+	<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="#"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO2.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/custominfo?fpageNum=${pageVO2.pageNum-1}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO2.startPageNum}" step="1" end="${pageVO2.startPageNum + pageVO2.onePageNum-1}">
+	              <c:if test="${p<=pageVO2.totalPage}">
+	                 <c:if test="${p==pageVO2.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO2.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/custominfo?fpageNum=${p}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO2.pageNum < pageVO2.totalPage}">
+	              <a class="arrow next" href="/sshj/custominfo?&fpageNum=${pageVO2.pageNum+1}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+	           </c:if>
 			</div>
-		 </div>
-		</fieldset>
+	 </div>
+				<!-- 페이징 표시--------- -->
+  			</c:if>
+
+			</div>
+			<!--productInfoPage3  -->
+
+		</div>
+		<!--productInfoPage  -->
 	</div>
 </div>

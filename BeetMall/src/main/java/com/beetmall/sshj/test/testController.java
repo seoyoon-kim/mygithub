@@ -35,7 +35,7 @@ public class testController {
 		return "custom/customMyrecipe";
 	}
 	
-*/	
+	
 	@RequestMapping("/custominfo")
 	public String customInfo() {
 		return "custom/custominfo";
@@ -50,7 +50,7 @@ public class testController {
 	public String customInfoView() {
 		return "custom/custominfoView";
 	}
-	
+	*/
 	@RequestMapping("/customBuyConfirm")
 	public String customBuyConfirm() {
 		return "custom/customBuyConfirm";

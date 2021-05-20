@@ -72,7 +72,7 @@ a:hover, a:active, a:visited, a:link {
 
 #sprofile {
 	float: left;
-	width: 30%;
+	width: 250px;
 	height: 40px;
 	line-height: 40px;
 	padding-left:20px;
@@ -355,6 +355,7 @@ padding-bottom:10px;
 	height: 60px;
 	line-height: 60px;
 	padding-bottom:10px;
+	
 }
 
 #reviewTitle>li:nth-child(5n+1), .reviewList>li:nth-child(5n+1) {
@@ -406,20 +407,22 @@ border-bottom:1px solid #ddd;
 #reviewtxtbox,#qnatxtbox {
     padding-left:15px;
 	width:1050px;
-	height: 100px;
+	height: 300px;
 	line-height: 100px;
 	float: left;
 	padding-left:50px;
+	overflow:auto;
 }
 
 #qnatxtbox2{
    padding-left:15px;
 	width:1050px;
-	height: 100px;
+	height: 300px;
 	line-height: 100px;
 	float: left;
 	padding-left:50px;
 	background-color:#eee;
+	overflow:auto;
 }
 
 #nonebox{
@@ -537,6 +540,7 @@ float:left;
 	height: 60px;
 	line-height: 50px;
 	padding-bottom:10px;
+	
 }
 
 #qnaTitle>li:nth-child(5n+1), #qnaList>li:nth-child(5n+1) {
@@ -730,10 +734,59 @@ font-size:15px;
 color:black;
 }
 
+/* 채팅 */
+#chatIframe{
+		position:absolute;
+		top:600px;
+		width:502px;
+		height:662px;
+		padding:1px;
+		background-color:rgb(250, 250, 250);
+		display:none;
+	}
+	#chatContainer{
+		width:500px;
+		height:590px;
+	}
+	#chatTop{
+		width:500px;
+		height:20px;
+		background-color:rgb(252,118,45);
+	}
+	#chatInfoTitle{
+		height:50px;
+		width:500px;
+		background-color:white;
+	}
+	#closedivBtn, #reportChat{
+		cursor: pointer;
+	}
+	#chatHeaderSpan{
+		line-height:50px;	
+	}
+	#chatInfoTitle{
+		text-align: center;
+		font-size:16px;
+	}
+	#reportChat{
+		color:red;
+		float:left;
+		margin-left:10px;
+	}
+	#closedivBtn{
+		float:right;
+		line-height:50px;
+		font-size:20px;
+		margin-right:10px;
+	}
+	#theyId{
+		font-weight:bold;
+		font-size:17px;
+		margin-right:5px;
+	}
 </style>
 <script>
-
-	
+    var productnump=${pvo.productnum};
 	var pcount=1; //상품갯수
 	var ocount=1; //옵션갯수
 	var prtprice=0; //상품본래가격
@@ -741,11 +794,15 @@ color:black;
 	var tprice=0;
 	var submitprice = 0;
 	var optprice=0;
-	var optnum;
+	var optnum=0;
+	var totaldprtprice=0;
 	
 	$(function(){
 		prtprice=${pvo.productprice}; //상품본래가격
-		dprtprice=${Dprice}; //상품할인가격
+		
+		//상품할인가격
+        dprtprice=${Dprice};
+		
 		submitprice=tprice=prtprice-dprtprice;
 		//alert("submit="+submitprice);
 		$("#spanTotalPrice").text(tprice);
@@ -765,6 +822,7 @@ color:black;
     		$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
     		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
     		submitprice=tprice;
+    		totaldprtprice=dprtprice*pcount;
     		
     	});
 		 ///////////////상품갯수 구하기 -////////////////
@@ -787,6 +845,7 @@ color:black;
     		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
     		
     		submitprice=tprice;
+    		totaldprtprice=dprtprice*pcount;
     		//alert("총"+submitprice);
     		//alert(tprice);
     	});		
@@ -815,6 +874,7 @@ color:black;
 			$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
 			   
 			submitprice=tprice;
+			totaldprtprice=dprtprice*pcount;
 	  });
  
       ////옵션 갯수 늘리기+//////////////////////////////////////////
@@ -830,6 +890,7 @@ color:black;
   		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
 		 submitprice=tprice;
+		 totaldprtprice=dprtprice*pcount;
       }); 
       
       //옵션갯수 줄이기-////////////////////////////////////////////////
@@ -850,17 +911,58 @@ color:black;
    		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
  		 submitprice=tprice;
+ 		 totaldprtprice=dprtprice*pcount;
        });
       
       //////////총계산 값 저장해놓기/////////////////////////////////
       
       $("#totalbuy").click(function(){
+    	  if(${logId==null}){
+    		  alert("로그인후 이용해 주세요")
+    	  }
     	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
     	  alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+
     			"/옵션코드="+optnum+"/할인금액="+dprtprice+"/토탈가격="+toltalPrice);
     	  var totalCount = pcount+optprice;
     	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+dprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
       });
+      ///////////////////////////장바구니에 등록하기/////////////////////////////
+      ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격
+		$("#wishbtn").click(function() {
+			alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice);
+			var data= "userid=${logId}&productnum=${pvo.productnum}&prtprice="+prtprice+"&optnum="+optnum+"&pcount="+pcount+"&optprice="+optprice+"&ocount="+ocount+"&submitprice="+submitprice+"&dprtprice="+dprtprice;
+			var url="customWishInsert";
+			//alert(data);
+			$.ajax({
+				url:url,
+				data:data,
+				success:function(result){
+					console.log('장바구니 등록 성공');
+				},error:function(e){
+					console.log(e.responseText);
+					console.log("장바구니 등록 실패");
+				}
+			})
+			
+			
+			
+		
+		});
+       ///////////////////////////////////채팅하기////////////////////
+   
+     $(document).on('click','input[value="1:1대화하기"]', function(){
+		var roomcode =1;
+		var theyid = "${pvo.userid}";
+		var myid = "${logId}";
+		console.log("logid="+myid);
+		$("#theyId").text(theyid);
+		$("#chatIframe").css("display","block");/* 아이피 수정해야 할 곳 ^^^^^^ */
+		$("#chatContainer").attr("src","http://192.168.0.52:12021/chatForm?sender="+myid+"&receiver="+theyid+"&roomcode="+roomcode);
+	});
+    
+    
+    
+    
       /////////////////////////리뷰보기/////////////////////////////////
     
     	$(".reviewViewbtn").click(function() {
@@ -889,8 +991,10 @@ color:black;
   				}
   			);
   		});
-      
-      
+ 
+    
+    
+    
 });
 </script>
 <body>
@@ -916,9 +1020,13 @@ color:black;
 				<div id=productMainTiltle>
 					<b>${pvo.productname}</b>   <!-- 상품명 -->
 				</div>
-				
-				<c:if test="${Dprice!=null}">
+			
+				<c:if test="${Dprice>0}">
 				<div id="yesdiscount">해당 상품은 할인이 적용중입니다.</div>
+				</c:if>
+				
+				<c:if test="${Dprice<=0}">
+				<div id="yesdiscount">해당 상품은 할인이 없습니다.</div>
 				</c:if>
 				
 				<div id=productPrice>원가: ${pvo.productprice}</div>  <!-- 가격 -->
@@ -979,8 +1087,8 @@ color:black;
 				<div id=productTotalPrice>구매가격: <span id="spanTotalPrice"></span> 원</div>
 				
 				<div id=productBtn>
-					<input type="button" value="1:1대화하기"  class="btn"/>
-					<input type="button" value="장바구니 담기" class="btn"/>
+					<input type="button" value="1:1대화하기"  class="btn" id="chatbtn"/>
+					<input type="button" value="장바구니 담기" class="btn" id="wishbtn"/>
 					<input type="button" value="구매하기"  class="btn" id="totalbuy"/>
 				</div>
 			</div>
@@ -1103,15 +1211,30 @@ color:black;
 		       <div id="nonebox">   </div>
 
                <c:if test="${not empty reviewlist}">
+               
 					<!-- 페이징 표시--------- -->
-					<div class="page_wrap">
-						<div class="page_nation">
-							<a class="arrow pprev" href="#"></a> <a class="arrow prev"
-								href="#"></a> <a href="#" class="active">1</a> <a href="#">2</a>
-							<a href="#">3</a> <a href="#">4</a> <a class="arrow next" href="#"></a>
-							<a class="arrow nnext" href="#"></a>
-						</div>
-					</div>
+		<div class="page_wrap">
+			<div class="page_nation">
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/customproduct?productnum=${pvo.productnum}&rpageNum=${pageVO.pageNum-1}#productInfoPage2<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/customproduct?productnum=${pvo.productnum}&rpageNum=${p}#productInfoPage2<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/customproduct?productnum=${pvo.productnum}&rpageNum=${pageVO.pageNum+1}#productInfoPage2<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	           </c:if>
+			</div>
+		 </div>
+		 
 					<!-- 페이징 표시--------- -->
               </c:if>
 
@@ -1208,15 +1331,29 @@ color:black;
 				<div id="nonebox">   </div>
 
 			<c:if test="${not empty faqlist}">
+			
 				<!-- 페이징 표시--------- -->
-				<div class="page_wrap">
-					<div class="page_nation">
-						<a class="arrow pprev" href="#"></a> <a class="arrow prev"
-							href="#"></a> <a href="#" class="active">1</a> <a href="#">2</a>
-						<a href="#">3</a> <a href="#">4</a> <a class="arrow next" href="#"></a>
-						<a class="arrow nnext" href="#"></a>
-					</div>
-				</div>
+	<div class="page_wrap">
+			<div class="page_nation">
+			   <c:if test="${pageVO2.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/customproduct?productnum=${pvo.productnum}&fpageNum=${pageVO2.pageNum-1}#productInfoPage3<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO2.startPageNum}" step="1" end="${pageVO2.startPageNum + pageVO2.onePageNum-1}">
+	              <c:if test="${p<=pageVO2.totalPage}">
+	                 <c:if test="${p==pageVO2.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO2.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/customproduct?productnum=${pvo.productnum}&fpageNum=${p}#productInfoPage3<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO2.pageNum < pageVO2.totalPage}">
+	              <a class="arrow next" href="/sshj/customproduct?productnum=${pvo.productnum}&fpageNum=${pageVO2.pageNum+1}#productInfoPage3<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+	           </c:if>
+			</div>
+	 </div>
 				<!-- 페이징 표시--------- -->
   			</c:if>
 
@@ -1226,6 +1363,13 @@ color:black;
 		</div>
 		<!--productInfoPage  -->
 
+
+			<!-- 채팅창 -->
+         	<div id ="chatIframe">
+				<div id="chatTop"></div>
+				<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span>님과의 채팅입니다.</span><span id="closedivBtn">&times;</span></div>
+				<iframe src="" id="chatContainer" frameborder="0" ></iframe>
+			</div>									
 
 	</div>
 	<!-- section -->

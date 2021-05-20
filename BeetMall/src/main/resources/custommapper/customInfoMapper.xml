@@ -3,15 +3,28 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.custom.dao.CustomInfoDAO">
-	<insert id="CustomInfoWrite" parameterType="com.beetmall.sshj.custom.vo.CustomInfoVO">
-  			insert into userqboard(qnum, productnum, userid, qcontent,qwritedate,qopen,qanswer)
-  			values(qmboardsq.nextval, #{productnum},'qwer' , #{qcontent}, sysdate,0,#{qanswer})
-	</insert>
-	
-	<select id="CustomInfoAllRecord" resultType="com.beetmall.sshj.custom.vo.CustomInfoVO">
-        select userid,qnum,productnum,qcontent, 
-        to_char(qwritedate,'MM-DD HH:MI')qwritedate,qanswer,qopen from recipe
-        order by qnum desc     
+
+	<select id="CustomInfoAllRecord" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
+      select * from(
+	    select * from(
+		        select q.qnum as qnum,p.productname,q.userid,q.qcontent,to_char(q.qwritedate,'MM-DD HH:MI')qwritedate,q.qopen,q.qanswer,q.qtitle 
+            from userqboard q
+            left join product p 
+            on q.productnum = p.productnum
+            where q.userid=#{userid}
+            order by qnum desc)
+		     where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qnum asc)
+			 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        	 order by qnum desc						  
     </select>
     
+    <select id="totalRecord8" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="int">
+		select count(*) from userqboard where userid=#{userid}
+	</select>
+	
+	<update id="lockinfo" parameterType="com.beetmall.sshj.custom.vo.PageProductVO">
+	 update userqboard SET qopen=0 where qnum=${param}
+	</update>
+	
 </mapper>
