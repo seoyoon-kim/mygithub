@@ -50,6 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from qmboard where qmnum=${param1}
 	</select>
 	<update id="csAnswerWriteOk" parameterType="com.beetmall.sshj.admin.vo.CsQuestionVO">
-		update qmboard set qmanswer=#{qmanswer} qmanserdate=sysdate where qmnum=${qmnum}
+		update qmboard set qmanswer=#{qmanswer} qmanserdate=sysdate where qmnum=#{qmnum}
 	</update>
 </mapper>

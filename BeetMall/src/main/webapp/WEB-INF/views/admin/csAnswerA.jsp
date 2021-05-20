@@ -240,7 +240,7 @@
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="답변내용을 입력해주세요."></textarea>
+						<textarea id="qmcontent" name="qmanswer" class="summernote" placeholder="답변내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
@@ -248,7 +248,7 @@
 			<div id="bottommm">
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
 				<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn"/>
-				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
+				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='/admin/csQuestionA'"/>
 			 </div>
 		</form>
 		</div>

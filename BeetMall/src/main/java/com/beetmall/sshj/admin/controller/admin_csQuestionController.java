@@ -5,9 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.CsQuestionService;
+import com.beetmall.sshj.admin.vo.CsQuestionVO;
 import com.beetmall.sshj.admin.vo.adminkPageSearchVO;
 
 @Controller
@@ -45,6 +47,19 @@ public class admin_csQuestionController {
 		
 		mav.addObject("vo", csquestionService.csAnswerWrite(qmnum));
 		mav.setViewName("/admin/csAnswerA");
+		return mav;
+	}
+	
+	@RequestMapping(value="/csAnswerWriteOk", method=RequestMethod.POST)
+	public ModelAndView csAnswerWrite(CsQuestionVO vo) {
+		ModelAndView mav = new ModelAndView();
+		
+		int result = csquestionService.csAnswerWriteOk(vo);
+		if(result>0) {
+			mav.setViewName("/admin/csQuestionA");
+		}else {
+			mav.setViewName("/admin/csAnswerA");
+		}
 		return mav;
 	}
 }

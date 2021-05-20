@@ -12,4 +12,6 @@ public interface CsQuestionDAO {
 	public int csQuestOnetotalRecord(adminkPageSearchVO pageVO);
 
 	public CsQuestionVO csAnswerWrite(int qmnum);
+
+	public int csAnswerWriteOk(CsQuestionVO vo);
 }
