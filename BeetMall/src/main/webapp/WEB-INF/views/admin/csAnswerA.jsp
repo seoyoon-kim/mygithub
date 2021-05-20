@@ -172,22 +172,27 @@
 <%@ include file="/inc/leftBar.jspf" %> 
 <div class="container">
 	<div id="box"> 	
-	<form method="post" action="noticeWriteOk">
+	<form method="post" action="csAnswerWriteOk">
 		<table>
 			<tbody> 
 				<tr class="tr_head">
 					<th class="menu" >문의 번호</th>
 					<td class="td" colspan="3">
 						<div id="qNum">
-							12369
+							${vo.qmnum}
 						</div>
 					</td>
 				</tr>
 				<tr class="tr_head">
-					<th class="menu" >작성자</th>
+					<th class="menu" >구분</th>
 					<td class="td" colspan="3">
 						<div id="who">
-							소비자
+							<c:if test="${vo.qmoption==1}">
+								소비자
+							</c:if>
+							<c:if test="${vo.qmoption==2}">
+								판매자
+							</c:if>
 						</div>
 					</td>
 				</tr>
@@ -195,7 +200,7 @@
 					<th class="menu" >아이디</th>
 					<td class="td" colspan="3">
 						<div id="writer">
-							aeuifhu093
+							${vo.userid }
 						</div>
 					</td>
 				</tr>
@@ -203,7 +208,7 @@
 					<th class="menu">제목</th>
 					<td  class="td">
 						<div id="qTitle">
-							배송지 변경 문의드려요
+							${vo.qmtitle}
 						</div>	
 					</td>
 				</tr>
@@ -211,7 +216,7 @@
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
-							2021/03/21
+							${vo.qmdate}
 						</div>
 					</td>
 				</tr> 
@@ -219,13 +224,7 @@
 					<th class="menu">문의 내용</th>
 					<td  class="td">
 						<div id="qContent">
-							 배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.
+							${vo.qmcontent }
 						</div>
 					</td>
 				</tr>  
@@ -246,7 +245,7 @@
 		</table>
 			<div id="bottommm">
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시쓰기" class="btn write_btn id="reset_btn"/>
+				<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn"/>
 				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
 			 </div>
 		</form>
@@ -292,6 +291,4 @@ function uploadSummernoteImageFile(file, editor) {
 		}
 	});
 }
-
-
 </script>

@@ -94,8 +94,6 @@ public class admin_salesController {
 				vo.setStartDate(startFormat);
 				vo.setEndDate(endFormat);
 				
-				System.out.println(vo.getStartDate());
-				System.out.println(vo.getEndDate());
 				Admin_SalesVO getData = salesService.getCompaySellerCustomerData(vo);
 				if(vo.getAccumulate() != null) {
 					// 누적 수익을 위한 + 대입
@@ -145,7 +143,6 @@ public class admin_salesController {
 					// 4) 누적수익, 회사수익, 판매자수익, 구매추이 여부 확인
 					vo.setStartDate(startFormat);
 					vo.setEndDate(endFormat);
-					
 					
 					Admin_SalesVO getData = salesService.getCompaySellerCustomerData(vo);
 					if(vo.getAccumulate() != null) {

@@ -29,5 +29,10 @@ public class MyfavoriFormServiceImp implements MyfavoriFormService{
 	public int selectFavorite2(int storenum) {
 		return myfavoriFormDAO.selectFavorite2(storenum);
 	}
+
+	@Override
+	public int farmHit(int storenum) {
+		return myfavoriFormDAO.farmHit(storenum);
+	}
 	
 }

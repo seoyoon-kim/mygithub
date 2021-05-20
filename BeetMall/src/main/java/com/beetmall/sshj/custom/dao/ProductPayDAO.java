@@ -13,5 +13,7 @@ public interface ProductPayDAO {
 	public void insertordertbl(ProductPayVO pro);
 
 	public void inserOrderDetail(ProductPayVO pro);
+
+	public void UpdatePoint(int orderprice, String userid);
 	
 }

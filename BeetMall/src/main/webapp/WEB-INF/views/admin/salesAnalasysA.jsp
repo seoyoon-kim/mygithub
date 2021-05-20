@@ -16,7 +16,9 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">
 <!-- 차트 라이브러리 chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.0/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- chart.js pdf 변환 -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
 
@@ -343,42 +345,130 @@ $(function(){
 			url:'salesAdminChartData',
 			data: $('#dataFrm').serialize(),
 			success: function(result){
-				// 가지고 있는 key값
-				let keys = Object.keys(result);
+				// 가지고 있는 key값 거꾸로 되어있으니 sort한다
+				let keys = Object.keys(result).sort();
+				let valueLength = Object.keys(result.ac).length;
+				let acInsertData = [];
+				let coInsertData = [];
+				let seInsertData = [];
+				let cuInsertData = [];
 				
-				console.log(result);
-				console.log(keys);
-				console.log(Object.keys(result.ac));
+				myChart.data.labels.splice(0,12);
+				myChart.data.datasets.splice(0,12);
+				myChart.update();
 				
-				keys.forEach(function(checkKey){
-					myChart.data.labels.push(checkKey);
-					myChart.update();
-				})
-				
-				console.log();
-				if(Object.keys(result) != null){
-					for()
-					let acData = {
-							label: '누적수익',
-							yAxisID: 'A',
-					}
-						
-					let coData = {
-						label: '회사수익',
-						yAxisID: 'A',
-					}
-					
-					let seData = {
-						label: '판매자수익',
-						yAxisID: 'A',
-					}
-					
-					let cuData = {
-						label: '구매추이',
-						yAxisID: 'B',
-						
+				// 차트 라벨 넣어야함
+				for( let i = 0; i < keys.length; i++){
+					if(keys[0] == 'ac'){
+						let labelData = Object.keys(result.ac).sort();
+						for(let j = 0 ; j < labelData.length; j++){
+							myChart.data.labels.push(labelData[j]);
+						}
+						break;
+					} else if(keys[0] == 'co'){
+						let labelData = Object.keys(result.co).sort();
+						for(let j = 0 ; j < labelData.length; j++){
+							myChart.data.labels.push(labelData[j]);
+						}
+						break;
+					} else if(keys[0] == 'se'){
+						let labelData = Object.keys(result.se).sort();
+						for(let j = 0 ; j < labelData.length; j++){
+							myChart.data.labels.push(labelData[j]);
+						}
+						break;
+					} else if(keys[0] == 'cu'){
+						let labelData = Object.keys(result.cu).sort();
+						for(let j = 0 ; j < labelData.length; j++){
+							myChart.data.labels.push(labelData[j]);
+						}
+						break;
 					}
 				}
+				
+				// 차트 데이터 넣기
+				keys.forEach(function(checkKey){
+					// key값이 있으면..
+					if(checkKey != null){
+						
+						// 키 값에 ac가 있으면..
+						if(checkKey == 'ac'){
+							for(let i = 0; i < valueLength; i++){
+								// hashmap 안의 value(hashmap)안의 값을 정렬한 키값을 구해서 값을 꺼낸다
+								let values = result.ac[ Object.keys(result.ac).sort()[i] ];
+								
+								acInsertData.push(values);
+							}
+							
+							let acData = {
+									label: '누적수익',
+									yAxisID: 'A',
+									data: acInsertData,
+									borderColor : '#5eaa5f',
+									fill: false
+							}
+							myChart.data.datasets.push(acData);
+						}
+						
+						// 키 값에 co가 있으면..
+						if(checkKey == 'co'){
+							for(let i = 0; i < valueLength; i++){
+								// hashmap 안의 value(hashmap)안의 값을 정렬한 키값을 구해서 값을 꺼낸다
+								let values = result.co[ Object.keys(result.co).sort()[i] ];
+								
+								coInsertData.push(values);
+							}
+							let coData = {
+									label: '회사수익',
+									yAxisID: 'A',
+									data: coInsertData,
+									borderColor : 'rgba(255, 70, 46,1)',
+									fill: false
+							}
+							myChart.data.datasets.push(coData);
+						}
+							
+						// 키 값에 cu가 있으면..
+						if(checkKey == 'cu'){
+							for(let i = 0; i < valueLength; i++){
+								// hashmap 안의 value(hashmap)안의 값을 정렬한 키값을 구해서 값을 꺼낸다
+								let values = result.cu[ Object.keys(result.cu).sort()[i] ];
+								
+								cuInsertData.push(values);
+							}
+							let cuData = {
+									type: 'bar',
+									label: '구매추이',
+									yAxisID: 'B',
+									data: cuInsertData,
+									backgroundColor : 'rgba(255,178,46,0.6)',
+									fill: false,
+							}
+							myChart.data.datasets.push(cuData);
+						}
+						
+						// 키 값에 se가 있으면..
+						if(checkKey == 'se'){
+							for(let i = 0; i < valueLength; i++){
+								// hashmap 안의 value(hashmap)안의 값을 정렬한 키값을 구해서 값을 꺼낸다
+								let values = result.se[ Object.keys(result.se).sort()[i] ];
+								
+								seInsertData.push(values);
+							}
+							let seData = {
+									label: '판매자수익',
+									yAxisID: 'A',
+									data: seInsertData,
+									borderColor : '#728ef0',
+									fill: false,
+							}
+							myChart.data.datasets.push(seData);
+						}
+					}
+				})
+				
+				
+				myChart.update();
 				
 				
 			}, error: function(){
@@ -386,177 +476,8 @@ $(function(){
 			}
 		})
 		
-		
-		/*
-		// 년도, 월별, 일별 어떤 조건인지 확인하고 이동한다.!!!
-		dateCheck = $('#categoryDate>option:selected').val();
-		
-		
-		if(dateCheck != "년별"){ // 년별이 아닐경우 스플릿 전역변수를 스플릿 해준다!
-			// 날짜 - 표시 스플릿해서 없애기
-			startSplit = startDateCheck.split("-");
-			endSplit = endDateCheck.split("-");
-		}
-		
-		// 차트에 새로운 값 업데이트 하기 전에 모두 지운다.
-		// 지우는건 제한사항으로 걸러 낸 다음에 한다.
-		let labelsLength = parseInt(Object.keys(myChart.data.labels).length);
-		myChart.data.labels.splice(0,labelsLength);
-		myChart.update();
-		
-		/* 생각하자..................
-		1. 년도, 월, 일 을 기준으로 endDate와 startDate의 차이를 비교해서 
-			년 차이가 있을 경우는 2가지다 ( 같은 년도가 같을 경우, 시작 년도가 작을경우)
-			월은 1월 12월 기준으로 변화된 값에 대한 계산
-			일은 해당 월의 일이 언제까지인지 계산해서 차이를 계산해야한다.
-		2. 해당 차이 값(날짜)을 구해서 차트 labels에 넣어주어야 한다.
-		3. "일". 그러니까 해당 월의 마지막 날을 구하는 것은 lastday가 언제인지 식으로 구해야한다.
-		//const startCheck = new Date(startDateCheck);
-		//const endCheck = new Date(endDateCheck).getFullYear();
-		//const gapCheck = new Date(startSplit[0], startSplit[1], 0).getDate();
-	
-		
-		
-		
-		// 월별, 년별, 일별 그리고 지정한 날짜에 따라 차트에 들어가지는 값이 달라진다.
-		if(dateCheck=="월별"){
-			// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
-			startSplit[0] = parseInt(startSplit[0],10);
-			startSplit[1] = parseInt(startSplit[1],10);
-			// 마지막 날짜 구하기
-			let lastDay = new Date(endSplit[0],endSplit[1],0).getDate();
-			
-			// 날짜의 차이(년)을 구한다.
-			if( startSplit[0] < endSplit[0] ){// 년도 차이가 있다! 
-				
-				gapResult = endSplit[1] - startSplit[1] +12; // "월" 계산된 값에 + 12를 해준다.
-				for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
-					// 차트에 넣는다
-					myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
-					
-					//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
-					if(i==0){
-						startCalendarDataValue = startSplit[0]+"-"+startSplit[1]+"-"+01;	
-						if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
-							endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
-						}
-					} else if(i==gapResult){
-						endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
-					}
-													
-					//////////// 12월 기준으로 날짜를 바꿔줘야 한다 /////////////
-					if(startSplit[1]!=12){
-						startSplit[1] += 1;
-					
-					} else { //startSplit[1]이 12월이 되면 년도와 월을 바꿔서 대입 해줘야 한다.
-						startSplit[0] += 1;
-						startSplit[1] = 1;
-					
-					}
-				}
-			} else { // 년도 차이가 없다!
-				
-				gapResult = endSplit[1] - startSplit[1];
-				for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
-					//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
-					if(i==0){
-						startCalendarDataValue = startSplit[0]+"-"+startSplit[1]+"-"+01;	
-						if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
-							endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
-						}
-					} else if(i==gapResult){
-						endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
-					}
-					
-					//차트에 넣는다.
-					myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
-					
-					startSplit[1] += 1;
-				}
-			}
-			
-			
-		} else if(dateCheck=="일별"){
-			// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
-			startSplit[0] = parseInt(startSplit[0],10);
-			startSplit[1] = parseInt(startSplit[1],10);
-			startSplit[2] = parseInt(startSplit[2],10);
-			
-			let startInstance = new Date(startDateCheck).getTime();
-			let endInstance = new Date(endDateCheck).getTime();
-			
-			// 시간으로 바꾼 날짜의 차이를 구한다. 밀리초는 1초를 1000으로 나눈것 + 60초 + 60분 + 24시간을 나누면 1일이 구해진다
-			gapResult = (endInstance-startInstance)/1000/60/60/24;
-			
-			/* 
-				일별에 대해 구하기 위해서는
-				1. 년도 차이가 있는지 확인
-					--> 년도 차이가 있으면 월과 일의 마지막 날에 변화가 되어야 하고
-				2. 월 차이가 있는지 확인
-					--> 월의 차이가 있을 경우 일의 마지막 날에 변화가 되어야 한다.
-				
-				------------ 위에것은 취소!
-				아래와 같이 date + 1만으로 년, 월 일 변화를 확인 할 수 있다.
-			
-			
-			// 날짜를 객체화 한다.
-			let dateCheck = new Date(startSplit);
-			
-			// 차트에 +1을 하며 넣어준다.
-			for(let i = 0; i <= gapResult; i++){
-				//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
-				if(i==0){
-					startCalendarDataValue = dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate();	
-					if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
-						endCalendarDataValue = dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate();
-					}
-				} else if(i==gapResult){
-					endCalendarDataValue = dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate();
-				
-				}
-				
-				//차트에 넣는다
-				myChart.data.labels.push(dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate());
-				
-				// 날짜 데이터에 +1일을 해준다!
-				dateCheck.setDate(dateCheck.getDate()+1);
-			}
-		} else if(dateCheck=="년별"){
-			gapResult = endDateCheck-startDateCheck;
-			
-			for(let i = 0; i <= gapResult; i++){
-				//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
-				if(i==0){
-					startCalendarDataValue = startDateCheck+"-"+01+"-"+01;	
-					if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
-						endCalendarDataValue = startDateCheck+"-"+12+"-"+31;	
-					}
-				} else if(i==gapResult){
-					endCalendarDataValue = startDateCheck+"-"+12+"-"+31;
-				
-				}
-				
-				//차트에 넣는다
-				myChart.data.labels.push(startDateCheck);
-				startDateCheck++;
-			}
-			
-		}
-		
-		
-		
-		//myChart에 담긴 것을 업데이트한다.
-		myChart.update();
-		
-		if($('#categoryManagement>li').length != 0){
-
-			//데이터 컨트롤러 실행, 차트, 엑셀 재설정
-			dataController();	
-		
-		}
-		*/
 	})
-	//////////////////// 수익 매출분석에 들어갈 labels 끝 /////////////////////
+	
 })
 
 
@@ -654,15 +575,56 @@ $( ()=>{
 												datasets : []
 											// 차트에 그려지는 데이터를 표시하는 데이터
 											},
-											options : {
-												scales : {
-													y : {
-														beginAtZero : true
-													// 차트 숫자는 0부터 표시
-													}
-
+											options: {
+												
+												//responsive: false,
+												tooltips: { 
+											           mode: 'label', 
+											           label: 'mylabel', 
+											           callbacks: { 
+											               label: function(tooltipItem, data) { 
+											                   return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }, }, 
+											        }, 
+											   /*      scaleLabel:
+											            function(label){return  '$' + label.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}, */
+												scales:{
+												      yAxes: [{
+												          id: 'A',
+												          type: 'linear',
+												          position: 'left',
+												          ticks: {
+												              fontColor: 'lightgray',
+												              userCallback(value, index, values) {
+												                  // return nf.format(value)
+												                  return value.toLocaleString()
+												          		}
+													      	
+												          },
+												          gridLines: {
+										                        color: "rgba(0, 0, 0, 0)",
+										                  }, 
+										                  beginAtZero:true
+											           
+												      		
+												        }, {
+												        
+												          id: 'B',
+												          type: 'linear',
+												          position: 'right',
+												          ticks: {
+											          	    fontColor: '#ffbaa2',
+											          	  	userCallback(value, index, values) {
+											                    // return nf.format(value)
+											                    return value.toLocaleString()
+										                  	
+											          	    }
+										                  	
+												          },
+												          beginAtZero:true
+												        
+												        }]
 												}
-
+												
 											}
 										});
 									</script>
@@ -702,11 +664,11 @@ $( ()=>{
 							<div class="wrapContainer">
 								<div id="excelContainer">
 									<ul id="excelList">
-										<li>주문번호</li>
-										<li>매출일자</li>
-										<li>상품명</li>
-										<li>수량</li>
-										<li>단가</li>
+										<li>분류기준</li>
+										<li>2021-1월</li>
+										<li>2021-2월</li>
+										<li>2021-3월</li>
+										<li>2021-4월</li>
 										<li>매출금액</li>
 									</ul>
 								</div>

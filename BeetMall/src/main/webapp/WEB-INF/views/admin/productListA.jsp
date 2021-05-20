@@ -4,10 +4,10 @@
 	#topBar h5{  
 		padding-left:120px;
 	}
-	 #container li{  
+	#container li{  
 		 float:left; 
 		 width:10%; 
-	 }   
+	}   
 	#contentBox{
 		top:-40px;
 	} 
@@ -104,6 +104,11 @@
 		color:#fff;
 		border:1px solid #42454c;
 	}
+	.page_nation{
+		display: inline-block;
+	    padding-top: 0px;
+	    margin-bottom: 15px;
+	}
 	/* 페이징처리끝 */
 </style> 
 <%@ include file="/inc/top.jspf" %>
@@ -111,8 +116,8 @@
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="productListA">상품 목록</a></strong></h5></li> 
-				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
-				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
+				<li><button class="success" value="add" name="add" id="addBtn" style="visibility: hidden;">추가</button></li>
+				<li><button class="success" value="del" name="del" id="delBtn" style="visibility: hidden;">삭제</button></li>
 			</ul> 
 		</div>   
 		</div>
@@ -128,7 +133,8 @@
 				</li>
 				<li><input type="date" id="from"><div id="fromTo">~</div></li>
 				<li><input type="date" id="todate"></li>  
-				<li><input type="submit" value="검색" /></li><li><select name="sort" > 
+				<li><input type="submit" value="검색" /></li>
+				<li><select name="sort" > 
 		   				<option value="카테고리" selected>카테고리</option>
 		   				<option value="과일">과일</option>  
 		   				<option value="건과류">건과류</option>   
@@ -142,10 +148,9 @@
 		   				<option value="정렬하기" selected>정렬하기</option>
 		   				<option value="상품번호">상품번호</option>
 		   				<option value="제목">제목</option>
-		   				<option value="법인명">법인명</option>
+		   				<option value="상호명">상호명</option>
 		   				<option value="판매자">판매자</option>
 		   				<option value="장바구니">장바구니</option>
-		   				<option value="조회수">조회수</option>
 		   				<option value="등록일">등록일</option> 
 			  		</select> 
 	   			</li> 
@@ -156,151 +161,50 @@
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
-				<li><input type="checkbox" name="check"></li>
+				<li><input type="checkbox" name="check" style="visibility: hidden;"></li>
 				<li>상품번호</li>
 				<li>카테고리</li>
-				<li>제목</li>
-				<li>법인명</li>
+				<li id="kktitle">제목</li>
+				<li>상호명</li>
 				<li>판매자</li>
 				<li>장바구니</li>
-				<li>조회수</li>
 				<li>등록일</li> 
 			</ul>
 		</div>  
-		
-		 
+		<c:forEach var="data" items="${list}">
 			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>채소</li>
-				<li><a href="회원정보?">싱싱농산의 유기농 토마토</a></li>
-				<li>tomatofarm</li>
-				<li>tomatolover</li>
-				<li>28<img class="cartImg" src="./img/y_cart.png" ></li>
-				<li>562</li>
-				<li>2021/04/26</li> 
+				<li><input type="checkbox" name="check" id="check" style="visibility: hidden;"> </li>
+				<li>${data.productnum}</li>
+				<li><c:if test="${data.mcatenum>=1 &&data.mcatenum<=7}">
+						건과류
+					</c:if>
+					<c:if test="${data.mcatenum>=8 &&data.mcatenum<=21}">
+						견과류
+					</c:if>
+					<c:if test="${data.mcatenum>=22 &&data.mcatenum<=50}">
+						과일
+					</c:if>
+					<c:if test="${data.mcatenum>=51 &&data.mcatenum<=68}">
+						쌀/잡곡
+					</c:if>
+					<c:if test="${data.mcatenum>=69 &&data.mcatenum<=104}">
+						야채
+					</c:if>
+				</li>
+				<li id="kktitle"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>
+				<li>${data.storename}</li>
+				<li>${data.sellername}</li>
+				<li>
+					<c:if test="${data.count == null}">
+						${data.count}<img class="cartImg" src="./img/y_cart.png" >
+					</c:if>
+					<c:if test="${data.count != null}">
+						${data.count}<img class="cartImg" src="./img/y_cart.png" >
+					</c:if>
+				</li>
+				<li>${data.sellstart}</li> 
 			</ul>  
+		</c:forEach>
 		<!--  
 		<c:forEach var="data" items="${list}">
 			<ul class="contentList">
@@ -314,26 +218,27 @@
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/productListA?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/productListA?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/productListA?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	           </c:if>
 			</div>
 		 </div>
- 
- 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="<%=request.getContextPath()%>/board/noticeBoardList.jsp">
 				<select name="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
@@ -346,4 +251,26 @@
 		</div>  
 	</div>
 </div> 
-</html>
+<style>
+	.page_nation {
+	    display: inline-block;
+	    padding-top: 0px;
+	    margin-bottom: 15px;
+	}
+	#title {
+        width: 1025px;
+	    font-weight: bold;
+	    padding: 65px 0 25px 0;
+	    border-bottom: gray 1px solid;
+	}
+	#kktitle{
+		width:30%;
+	}
+	#contentBox li:nth-of-type(4) {
+	    width: 30%;
+	    text-align: left;
+	}
+	#contentBox ul {
+	    margin-left: 0;
+	}
+</style>
