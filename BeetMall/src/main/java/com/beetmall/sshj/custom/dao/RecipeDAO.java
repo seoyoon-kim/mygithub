@@ -14,7 +14,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 
 public interface RecipeDAO {
 
-	public List<RecipeVO>RecipeAllList();
+	public List<RecipeVO>RecipeAllList(PageRecipeVO pageVO1);
 
 	public int recipeWriteOk(RecipeVO vo);
 	
@@ -55,6 +55,8 @@ public interface RecipeDAO {
 	
 	public int totalRecord6(String userid);
 	public int totalRecord7(String userid);
+
+	public int totalRecord8(PageRecipeVO pageVO1);
 	
 	
 	

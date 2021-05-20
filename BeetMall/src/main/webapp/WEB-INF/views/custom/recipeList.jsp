@@ -123,6 +123,7 @@ ul>li {
 	color: rgb(252, 118, 45);
 	height: 20px;
 	margin-top: 10px;
+	margin-bottom:40px;
 }
 
 /*  큰제목----------------------------------------------                 */
@@ -136,8 +137,8 @@ ul>li {
 /*  게시글 리스트----------------------------------------------                 */
 #slist {
 	width: 100%;
-	height: 150px;
-	margin-bottom: 100px;
+	height:500px;
+	margin-bottom: 30px;
 }
 
 #reciListT {
@@ -286,6 +287,26 @@ td, .td{
 }
 
 
+
+#searchKey{
+float:left;
+}
+
+#searchWord{
+float:left;
+margin-right:0px;
+border:1px solid #ddd;
+height:28px;
+width:170px;
+
+}
+
+#searb{
+width:100%;
+float:left;
+}
+
+
 </style>
 <script>
 
@@ -301,7 +322,24 @@ td, .td{
 		<div id="recipettile">
 			<b>레시피를 올리는 곳입니다.</b>
 		</div>
-		<!-- ------------------------게시글 리스트----------------------------------- -->
+		
+	<!-- ------------------------검색 기능----------------------------------- -->
+	
+	<div id="searb">
+	<form method="get" action="recipeList" id="searchFrm">
+				<select name="searchKey" id="searchKey">
+					<option value="recipetitle">제목</option>
+					<option value="recipecontent">내용</option>
+					<option value="userid">작성자</option>
+				</select>
+				<span id="cs_search_box">
+					<input type="text" id="searchWord" name="searchWord" placeholder="내용을 입력해주세요." style="margin-right: 250px;">
+				    <input type="submit" value="검색"/> 
+				</span>
+				
+	 </form>
+	 </div>
+<!-- ------------------------게시글 리스트----------------------------------- -->
 		<div>
 
 			<select name="selectOrder" style="float: right">
@@ -309,8 +347,8 @@ td, .td{
 				<option>추천순</option>
 				<option>조회수순</option>
 			</select>
-
-
+			
+<!-- ------------------------게시글 리스트----------------------------------- -->
 			<div id="slist">
 				<ul id="reciListT">
 					<li><b>번호</b></li>
@@ -342,13 +380,29 @@ td, .td{
 
 		<!-- -----------------------------페이지 표시----------------------------------------- -->
 
-
+	    <div class="page_wrap">
+					<div class="page_nation">
+					   <c:if test="${pageVO1.pageNum>1}"><!-- 이전페이지가 있을때 -->
+					   		<a class="arrow prev" href="/sshj/recipeList?pageNum=${pageVO1.pageNum-1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+					   </c:if>
+					   <!-- 페이지 번호                   1                                    5                     -->
+			           <c:forEach var="p" begin="${pageVO1.startPageNum}" step="1" end="${pageVO1.startPageNum + pageVO1.onePageNum-1}">
+			              <c:if test="${p<=pageVO1.totalPage}">
+			                 <c:if test="${p==pageVO1.pageNum}"> <!-- 현재페이지일때 실행 -->
+			                    <a class="active">${p}</a>
+			                 </c:if>   
+			                 <c:if test="${p!=pageVO1.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+			                    <a href="/sshj/recipeList?pageNum=${p}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>">${p}</a>
+			                 </c:if>
+			              </c:if>
+			           </c:forEach>
+			           <c:if test="${pageVO1.pageNum < pageVO1.totalPage}">
+			              <a class="arrow next" href="/sshj/recipeList?pageNum=${pageVO1.pageNum+1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+			           </c:if>
+					</div>
+			 </div>  
 	
-		<!-- ------------------------검색 기능----------------------------------- -->
-		<div id="searchbox">
-			<input type="text" name="search" placeholder="검색어를 입력하세요" /> <input
-				type="submit" id="searchbtn" value="Search" />
-		</div>
+	
 
 
 

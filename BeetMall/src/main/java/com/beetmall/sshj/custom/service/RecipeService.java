@@ -7,7 +7,7 @@ import com.beetmall.sshj.custom.vo.PageRecipeVO2;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 public interface RecipeService {
-	public List<RecipeVO>RecipeAllList();
+	public List<RecipeVO>RecipeAllList(PageRecipeVO pageVO1);
 	
 	public RecipeVO RecipeSelect(int recipenum);
 	
@@ -48,6 +48,7 @@ public interface RecipeService {
 	
 	public int totalRecord6(String userid);
 	public int totalRecord7(String userid);
+	public int totalRecord8(PageRecipeVO pageVO1);
 
 
 }

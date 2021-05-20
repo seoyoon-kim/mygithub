@@ -349,9 +349,26 @@ border:none;
 
 
 $(function(){
-	/*
+	
+	var prtprice=0; //상품본래가격
+	var dprtprice=0; //상품할인가격
+	var optprice=0;//옵션가격
+	var ocount=1; //옵션갯수
+	var pcount=1; //상품갯수
+
+	var tprice=0; //총가격
+	var submitprice = 0;//총가격
+	
+	var totaldprtprice=0;//전체할인가격
+	
+	var =${wlist};
+	
+	$("#oneproductTotalPrice").html("구매가격:"+tprice+"원");
+	
+
 	var len = $("input[name='checkbox']:checked").length; //체크박스의 갯수
 	var checkArr = []; //배열만들기
+	
 	if(len > 1){ //개수를 체크하고 2개부터는 each함수를 통해 각각 가져온다.
 	    $("input[name='checkbox']:checked").each(function(e){
 	        var value = $(this).val();
@@ -366,7 +383,7 @@ $(function(){
 	        
 	    })
 	}
-	*/
+	
 	/*
 	prtprice=${pvo.productprice}; //상품본래가격
 	
@@ -420,10 +437,10 @@ $(function(){
 		  var totalCount = pcount+optprice;
 		  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+dprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
 	});
-	
+*/	
 });
 
-*/
+
 
 
 
@@ -465,7 +482,7 @@ $(function(){
 					<div id="ptitlediscount">할인가격: ${wl.saleprice}원</div><!-- 할인가격 -->
 				
 				    <c:if test="${wl.optionnum>0}">
-					<div id="optitle">추가옵션 :${wl.optionname} x ${wl.wishoptionnum} 개  <span id="wishoptionCount"></span>  </div><!-- 옵션이름 --><!-- 옵션 수량 -->
+					<div id="optitle">추가옵션 :${wl.optionname}${wl.optionprice} x ${wl.wishoptionnum} 개  <span id="wishoptionCount"></span>  </div><!-- 옵션이름 --><!-- 옵션 수량 -->
 					</c:if>
 					
 					<c:if test="${wl.optionnum<=0}">
@@ -474,9 +491,10 @@ $(function(){
 					
 					</li>
 				
-					<li><input type="button" id="pbtn" class="mCount" value="-"/><span id="prtnum">${wl.wishnum}</span><input type="button" id="mbtn" class="pCount" value="+"/></li><!-- 상품수량 -->
+					<li><input type="button" id="pbtn" class="mCount" value="-"/><input type="hidden" value=""><span id="prtnum">${wl.wishnum}</span><input type="button" id="mbtn" class="pCount" value="+"/></li><!-- 상품수량 -->
 					
-					<li><span id="oneproductTotalPrice"></span></li><!-- 총가격 -->
+					<li><span id="oneproductTotalPrice">${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}원</span></li><!-- 총가격 -->
+					
 					<li></li>
 					<li><input type="checkbox" name="checkbox" value="${wl.productprice}&${wl.saleprice}&${wl.optionprice}&${wl.wishoptionnum}&${wl.wishnum}"/></li>
 					<li><input type="button" value="x" id="delbutton" /></li>

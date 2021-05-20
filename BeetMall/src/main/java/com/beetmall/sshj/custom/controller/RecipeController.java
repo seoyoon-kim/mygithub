@@ -54,33 +54,6 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		return mav;
 	}
 	
-//////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	
-	
-	@RequestMapping("/recipeList")
-	public ModelAndView RecipeAllList(HttpServletRequest req, HttpServletResponse res) {
-
-		ModelAndView mav=new ModelAndView();
-		//////////1게시글 목록 뽑아내기
-       // String pageNumStr = req.getParameter("pageNum");
-		
-       // PageRecipeVO pageVO = new PageRecipeVO();
-		//if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
-		//	pageVO.setPageNum(Integer.parseInt(pageNumStr));
-		//}
-		
-		//검색어, 검색키
-		//pageVO.setSearchKey(req.getParameter("searchKey"));
-		//System.out.println("setSearchKey" + pageVO.getSearchKey());
-		//pageVO.setSearchWord(req.getParameter("searchWord"));
-		//pageVO.setTotalRecord(recipeService.recipetotalRecord(pageVO));
-		
-		//////////1게시글 목록 뽑아내기
-		//mav.addObject("pageVO",pageVO);
-		mav.addObject("list" , recipeService.RecipeAllList());			
-		mav.setViewName("custom/recipeList");
-		
-		return mav;
-	}
 
 //////////////////////////////////////////////////////////레시피 작성///////////////////////////////////////////////////////////	
 	@RequestMapping("/recipeWrite")
@@ -177,6 +150,47 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		}
 		return mav;
 		
+	}
+//////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	
+		
+	@RequestMapping("/recipeList")
+	public ModelAndView RecipeAllList(HttpServletRequest req, HttpServletResponse res,PageRecipeVO pageVO) {
+	
+	ModelAndView mav=new ModelAndView();
+	
+	PageRecipeVO pageVO1 = new PageRecipeVO();
+	
+	 //////////1게시글 목록 뽑아내기
+    String reqPageNum = req.getParameter("pageNum");
+    
+    if(reqPageNum == null) {
+		pageVO1.setPageNum(1);
+	}else if(reqPageNum != null) {
+		pageVO1.setPageNum(Integer.parseInt(reqPageNum));
+	}
+	
+  //검색어, 검색키
+  	pageVO.setSearchKey(req.getParameter("searchKey"));
+  	System.out.println("setSearchKey" + pageVO.getSearchKey());
+  	System.out.println("setsearchWord" + pageVO.getSearchWord());
+  	pageVO.setSearchWord(req.getParameter("searchWord"));
+  	
+  	pageVO1.setSearchKey(pageVO.getSearchKey());
+  	pageVO1.setSearchWord(pageVO.getSearchWord());
+  	
+	System.out.println("setSearchKey1" + pageVO1.getSearchKey());
+  	System.out.println("setsearchWord1" + pageVO1.getSearchWord());
+
+	//총 레코드 수 구하기 
+	pageVO1.setTotalRecord(recipeService.totalRecord8(pageVO1));
+	//System.out.println("totalrecord 레시피 ->" +  recipeService.totalRecord4(pageVO1)); //여기까지 나옴
+	System.out.println("totalrecord8 레시피 ->" +  recipeService.totalRecord8(pageVO1));
+	mav.addObject("pageVO1", pageVO1);
+    
+	mav.addObject("list" , recipeService.RecipeAllList(pageVO1));			
+	mav.setViewName("custom/recipeList");
+	
+	return mav;
 	}
 	
 //////////////////////////////////////////////////////////레시피 홈///////////////////////////////////////////////////////////

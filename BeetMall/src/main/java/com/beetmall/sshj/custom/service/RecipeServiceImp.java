@@ -18,9 +18,9 @@ public class RecipeServiceImp implements RecipeService {
 	RecipeDAO RecipeDAO;
 	
 	@Override
-	public List<RecipeVO> RecipeAllList() {
+	public List<RecipeVO> RecipeAllList(PageRecipeVO pageVO1) {
 		
-		return RecipeDAO.RecipeAllList();
+		return RecipeDAO.RecipeAllList(pageVO1);
 	}
 
 	public int recipeWriteOk(RecipeVO vo) {
@@ -144,6 +144,11 @@ public class RecipeServiceImp implements RecipeService {
 	public int totalRecord7(String userid) {
 		// TODO Auto-generated method stub
 		return RecipeDAO.totalRecord7(userid);
+	}
+
+	public int totalRecord8(PageRecipeVO pageVO1) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.totalRecord8(pageVO1);
 	}
 
 
