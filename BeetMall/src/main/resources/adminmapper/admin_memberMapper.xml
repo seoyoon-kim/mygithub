@@ -220,4 +220,40 @@
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
 		order by storenum desc
 	</select>
+	<select id="wishCount" resultType="Integer">
+		select count(*) from(
+		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,' ')optionname,nvl(o.optionprice,0)optionprice, w.wishnum, w.wishoptionnum, w.wishcode,p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent 
+				from wish w  
+				left join product p 
+				    on p.productnum = w.productnum 
+				left join optiontbl o
+				    on w.optionnum = o.optionnum
+				left join discount d
+				    on w.productnum = d.productnum
+				where w.userid = #{param1}
+				order by w.productnum)
+	</select>
+	<select id="wishListSelect" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_WishVO">
+		select * from(
+	    select * from(
+		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,' ')optionname,nvl(o.optionprice,0)optionprice, w.wishnum, w.wishoptionnum, w.wishcode,p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent 
+				from wish w  
+				left join product p 
+				    on p.productnum = w.productnum 
+				left join optiontbl o
+				    on w.optionnum = o.optionnum
+				left join discount d
+				    on w.productnum = d.productnum
+				where w.userid = #{userid}
+				order by w.productnum
+		)where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum desc
+		)where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+       							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+       	order by productnum	asc
+	</select>
+	<update id="memberEdit">
+		update member 
+		set username = #{username}, userid=#{userid}, useremail=#{useremail}, userzipcode=#{userzipcode},
+		useraddr = #{useraddr}, userdetailaddr = #{userdetailaddr} where userid=#{userid}
+	</update>
 </mapper>

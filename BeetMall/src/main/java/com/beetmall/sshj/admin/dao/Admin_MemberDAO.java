@@ -5,6 +5,7 @@ import java.util.List;
 import com.beetmall.sshj.admin.vo.Admin_MemberVO;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
 import com.beetmall.sshj.admin.vo.Admin_PointVO;
+import com.beetmall.sshj.admin.vo.Admin_WishVO;
 import com.beetmall.sshj.admin.vo.Admin_farmVO;
 
 public interface Admin_MemberDAO {
@@ -22,6 +23,7 @@ public interface Admin_MemberDAO {
 	public List<Admin_MemberVO> orderinfoSelect(String userid);
 	public Admin_MemberVO reportinfoSelect(String userid);
 	public int orderstatusSelect(String userid, String status);
+	public int memberEdit(Admin_MemberVO vo);// 회원정보 수정
 	// 포인트 부분
 	public List<Admin_PointVO> selectPoint(Admin_Member_PageVO vo);
 	public List<Admin_PointVO> selectPointType(Admin_Member_PageVO vo);
@@ -35,5 +37,8 @@ public interface Admin_MemberDAO {
 	// 농장 부분
 	public int farmCount(String userid);
 	public List<Admin_farmVO> farmFavoriteList(Admin_Member_PageVO pageVO);
+	// 장바구니 부분
+	public int wishCount(String userid);
+	public List<Admin_WishVO> wishListSelect(Admin_Member_PageVO pageVO);
 	
 }

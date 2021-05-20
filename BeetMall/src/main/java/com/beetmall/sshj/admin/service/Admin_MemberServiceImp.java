@@ -10,6 +10,7 @@ import com.beetmall.sshj.admin.dao.Admin_MemberDAO;
 import com.beetmall.sshj.admin.vo.Admin_MemberVO;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
 import com.beetmall.sshj.admin.vo.Admin_PointVO;
+import com.beetmall.sshj.admin.vo.Admin_WishVO;
 import com.beetmall.sshj.admin.vo.Admin_farmVO;
 
 @Service
@@ -136,6 +137,21 @@ public class Admin_MemberServiceImp implements Admin_MemberService {
 	@Override
 	public List<Admin_farmVO> farmFavoriteList(Admin_Member_PageVO pageVO) {
 		return memberdao.farmFavoriteList(pageVO);
+	}
+
+	@Override
+	public int wishCount(String userid) {
+		return memberdao.wishCount(userid);
+	}
+
+	@Override
+	public List<Admin_WishVO> wishListSelect(Admin_Member_PageVO pageVO) {
+		return memberdao.wishListSelect(pageVO);
+	}
+
+	@Override
+	public int memberEdit(Admin_MemberVO vo) {
+		return memberdao.memberEdit(vo);
 	}
 
 }

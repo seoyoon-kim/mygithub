@@ -255,7 +255,7 @@ function pagelist(pagenum){
 					<c:forEach var="vo" items="${list}">
 						<li><c:if test="${vo.storenum<0}">구매자</c:if><c:if test="${vo.storenum>=0}">판매자</c:if></li>
 						<li>${vo.username}</li>
-						<li><a href="boardCustomerInfoEdit?userid=${vo.userid}">${vo.userid}</a></li>
+						<li><a href="boardCustomerInfoEdit?userid=${vo.userid}&prevPageNum=${pageVO.pageNum}">${vo.userid}</a></li>
 						<li>${vo.useremail}</li>
 						<li>${vo.point}</li>
 						<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
