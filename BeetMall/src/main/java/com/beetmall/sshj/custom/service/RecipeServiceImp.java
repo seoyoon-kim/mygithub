@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.RecipeDAO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO2;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 @Service
@@ -16,9 +18,9 @@ public class RecipeServiceImp implements RecipeService {
 	RecipeDAO RecipeDAO;
 	
 	@Override
-	public List<RecipeVO> RecipeAllList() {
+	public List<RecipeVO> RecipeAllList(PageRecipeVO pageVO1) {
 		
-		return RecipeDAO.RecipeAllList();
+		return RecipeDAO.RecipeAllList(pageVO1);
 	}
 
 	public int recipeWriteOk(RecipeVO vo) {
@@ -32,15 +34,15 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> recipeAllListHome() {
+	public List<RecipeVO> recipeAllListHome(PageRecipeVO pageVO1) {
 		
-		return RecipeDAO.recipeAllListHome();
+		return RecipeDAO.recipeAllListHome(pageVO1);
 	}
 
 	@Override
-	public List<RecipeVO> customMyrecipe() {
+	public List<RecipeVO> customMyrecipe(PageRecipeVO2 pageVO1) {
 	
-		return RecipeDAO.customMyrecipe();
+		return RecipeDAO.customMyrecipe(pageVO1);
 	}
 
 	@Override
@@ -68,8 +70,8 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> customMyrecipe2(String id){
-		return RecipeDAO.customMyrecipe2(id);
+	public List<RecipeVO> customMyrecipe2(PageRecipeVO2 pageVO2){
+		return RecipeDAO.customMyrecipe2(pageVO2);
 	}
 
 
@@ -86,9 +88,9 @@ public class RecipeServiceImp implements RecipeService {
 	}
 
 	@Override
-	public List<RecipeVO> recipeAllListHome2() {
+	public List<RecipeVO> recipeAllListHome2(PageRecipeVO pageVO2) {
 		
-		return RecipeDAO.recipeAllListHome2();
+		return RecipeDAO.recipeAllListHome2(pageVO2);
 	}
 
 	@Override
@@ -119,6 +121,37 @@ public class RecipeServiceImp implements RecipeService {
 		// TODO Auto-generated method stub
 		return RecipeDAO.recikeepDelete(num, id);
 	}
+
+	@Override
+	public int totalRecord4(PageRecipeVO pageVO1) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.totalRecord4(pageVO1);
+	}
+
+	@Override
+	public int totalRecord5(PageRecipeVO pageVO2) {
+		
+		return RecipeDAO.totalRecord4(pageVO2);
+	}
+
+	@Override
+	public int totalRecord6(String userid) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.totalRecord6(userid);
+	}
+
+	@Override
+	public int totalRecord7(String userid) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.totalRecord7(userid);
+	}
+
+	public int totalRecord8(PageRecipeVO pageVO1) {
+		// TODO Auto-generated method stub
+		return RecipeDAO.totalRecord8(pageVO1);
+	}
+
+
 
 
 	
