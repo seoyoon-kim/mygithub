@@ -85,11 +85,57 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	#sellerlistul>li{
+		line-height: 50px;
+		height:50px;
+		border-bottom: 1px solid #eee;
+	}
+	#sellerlistul>li:nth-child(7n+1){
+		width:7%;
+	}
+	#sellerlistul>li:nth-child(7n+2){
+		width:10%;
+	}
+	#sellerlistul>li:nth-child(7n+3){
+		width:10%;
+	}
+	#sellerlistul>li:nth-child(7n+4){
+		width:20%;
+	}
+	#sellerlistul>li:nth-child(7n+5){
+		width:18%;
+	}
+	#sellerlistul>li:nth-child(7n+6){
+		width:25%;
+	}
+	#sellerlistul>li:nth-child(7n){
+		width:10%;
+	}
+	
 </style>
 <script>
- 
+	function pagelist(pagenum){
+		var lin = "sellerLeaveList?pageNum="+pagenum;
+		
+		if($("#searchWordhidden").val()!=null && $("#searchWordhidden").val()!=''){
+			lin += "&searchKey="+$("#searchKeyhidden").val();
+			lin += "&searchWord="+$("#searchWordhidden").val();
+		}
+		location.href=lin;
+	}
+	$(function(){
+		$("#searchKeyhidden").val($("#searchKey").val());
+		$("#searchKey").change(function(){
+			console.log('searchKey바뀜');
+			$("#searchKeyhidden").val($("#searchKey").val());
+		});
+		$("#searchWord").keyup(function(){
+			console.log('searchWord바뀜');
+			$("#searchWordhidden").val($("#searchWord").val());
+		})
+	});
 </script>
- 
+
  
 <%@ include file="/inc/top.jspf" %>
 	<div id="topBarContainer">
@@ -133,179 +179,57 @@
 				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
 			 </ul>
 		</div>
-   		<div id="contentBox"> 	
-		<div id="title">
-			<ul>
-				<li><input type="checkbox" name="check"  ></li>
-				<li>이름</li> 
+   		<div id=""> 	
+		<div style="overflow: auto;">
+			<ul id="sellerlistul">
+				<li>농장번호</li> 
+				<li>판매자명</li>
 				<li>아이디</li>
-				<li>나이</li>
 				<li>이메일</li>
-				<li>생년월일</li>
+				<li>상호명</li>
 				<li>주소</li> 
 				<li>탈퇴일</li> 
+				
+				<c:forEach var="vo" items="${list}">
+					<li>${vo.storenum}</li>
+					<li><a href="${vo.userid}">${vo.sellername}</a></li>
+					<li>${vo.userid}</li>
+					<li>${vo.storeemail}</li>
+					<li>${vo.storename}</li>
+					<li class="wordcut">(${vo.storezipcode})${vo.storeaddr} ${vo.storedetailaddr}</li>
+					<li>${vo.exitdate}</li>
+				</c:forEach>
 			</ul>
 		</div>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16</li> 
-			</ul>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16</li> 
-			</ul>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul>  
-		
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>45</li>
-				<li>seller@abc.com</li>
-				<li>1963/02/23</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2020-02-16<br/></li> 
-			</ul>  
+		<input type="hidden" id="searchKeyhidden"/>
+		<input type="hidden" id="searchWordhidden"/>
 		 
-		
-		<c:forEach var="data" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> name?</li>
-				<li><a href="회원정보?">id?</a></li>
-				<li>나이?</li>
-				<li>{member.email}</li>  
-				<li>{data.birthday}</li>
-				<li>{data.addr}</li>
-				<li>탈퇴일?<br/></li> 
-			</ul>
-		</c:forEach>
 		</div>	 
-		<div class="page_wrap">
+		<div class="page_wrap">	
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelist(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
+	           </c:if>
 			</div>
-		 </div>
- 
+		 </div> 
  
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				<select name="searchKey">
+			<form method="get" class="searchFrm">
+				<select name="searchKey" id="searchKey">
 					<option value="subject" selected>제목</option>
 	   				<option value="no">공지번호</option> 
 	   				<option value="who">대상</option> 

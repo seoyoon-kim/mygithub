@@ -6,7 +6,7 @@
 		width:100%;
 		height:450px;
 		overflow:hidden;
-		position:relative;
+		position:relative; 
 	}
 	.slider>div:nth-child(2){
 		width:5760px;

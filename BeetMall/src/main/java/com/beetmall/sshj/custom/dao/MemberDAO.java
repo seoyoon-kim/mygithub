@@ -15,4 +15,5 @@ public interface MemberDAO {
 	public int deleteId(String userid);
 	public int selectId(String userid, String userpwd);
 	public String stopdate(String userid);
+	public int member2Insert(String userid);
 }

@@ -144,16 +144,18 @@
 				<li>처리일</li> 
 			</ul>
 		</div>  
+		<c:forEach var="vo" items="${list}">
 		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">customerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16</li> 
-			</ul>  
+			<li><input type="checkbox" name="check" id="check"></li>
+			<li>${vo.username}</li>
+			<li><a href="회원정보?">${vo.userid}</a></li>
+			<li>${vo.age}</li>
+			<li>${vo.useremail}</li>
+			<li>${vo.point}</li>
+			<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
+			<li>${vo.joindate }<br /></li>
+		</ul>
+		</c:forEach> 
 		<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"> </li>
 				<li> 1236954</li>
