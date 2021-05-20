@@ -154,6 +154,11 @@ public class ProductPayController {
 			//orderdetail테이블에 넣어주기
 			productPayService.inserOrderDetail(pro);
 			
+			orderprice = (int)Math.ceil(orderprice*0.1);
+			orderprice = orderprice+point;
+			//적립금 적립시켜주기
+			productPayService.UpdatePoint(orderprice, userid);
+			
 			//정상구현되면 commit 실행
 			transsactionManager.commit(status);
 		}catch(Exception e) {}

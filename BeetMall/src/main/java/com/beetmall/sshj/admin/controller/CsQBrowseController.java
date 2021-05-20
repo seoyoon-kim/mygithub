@@ -7,17 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beetmall.sshj.admin.service.CsQuestionService;
+import com.beetmall.sshj.admin.service.CsQBrowseService;
 import com.beetmall.sshj.admin.vo.adminkPageSearchVO;
 
 @Controller
-public class admin_csQuestionController {
+public class CsQBrowseController {
 	
 	@Inject
-	CsQuestionService csquestionService;
+	CsQBrowseService csQBrowseService;
 	
-	@RequestMapping("/csQuestionA")
-	public ModelAndView csQuestionA(HttpServletRequest req) {
+	@RequestMapping("/csQBrowse")
+	public ModelAndView csQBrowse(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		adminkPageSearchVO pageVO = new adminkPageSearchVO();
 		
@@ -29,22 +29,12 @@ public class admin_csQuestionController {
 		//검색어, 검색키
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
-		pageVO.setTotalRecord(csquestionService.csQuestOnetotalRecord(pageVO));
+		pageVO.setTotalRecord(csQBrowseService.csQBrowseOnetotalRecord(pageVO));
 		
-		mav.addObject("list",csquestionService.csQuestList(pageVO));
+		mav.addObject("list", csQBrowseService.csQBrowseList(pageVO));
 		mav.addObject("pageVO",pageVO);
 		
-		mav.setViewName("/admin/csQuestionA");
-		
+		mav.setViewName("/admin/csQBrowse");
 		return mav;
-	}
-	
-	@RequestMapping("/csAnswerA")
-	public ModelAndView csAnswerA(int qmnum) {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("vo", csquestionService.csAnswerWrite(qmnum));
-		mav.setViewName("/admin/csAnswerA");
-		return mav;
-	}
+	}	
 }
