@@ -202,6 +202,9 @@ b {
 }
 </style>
 <script>
+//선택된 날짜의 데이터를 저장해 높는 변수
+let startCalendarDataValue = "";
+let endCalendarDataValue = "";
 //날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
 let yearCheck="";
 //년별, 월별, 일별인지 체크하기 위한 변수 선언
@@ -243,14 +246,14 @@ function typeChange(e){
 	if(optionCheck=="년별"){
 		// 년별 넣을때 스타트와 엔드를 드롭박스로 만든다.
 		// start date
-		let start = "<select id='categoryCalendar_start'>";
+		let start = "<select id='categoryCalendar_start' name='categoryCalendar_start'>";
 			for(let i=2018; i<=${yearCheck};i++){
 				start += "<option>"+i+"</option>";
 			}
 			start += "</select>";
 		
 		// end date
-		let end = "<select id='categoryCalendar_end'>";
+		let end = "<select id='categoryCalendar_end' name='categoryCalendar_end'>";
 			for(let i=2018; i<=${yearCheck};i++){
 				//마지막 년도는 selected 하도록 한다.
 				if(i==${yearCheck}){
@@ -269,10 +272,10 @@ function typeChange(e){
 		// 년별을 눌렀었을 경우에는 태그가 변경 되었기 때문에 다시 치환해줘야 한다.
 		if(yearCheck=="년별"){
 			let start = "<input class='categorySearch_container_child' ";
-				start+= " type='month' min='2018-01' max='${monthPtn }' id='categoryCalendar_start'/>";
+				start+= " type='month' min='2018-01' max='${monthPtn }' id='categoryCalendar_start' name='categoryCalendar_start'/>";
 				
 			let end = "<input class='categorySearch_container_child' ";
-				end+= " type='month' min='2018-01' max='${monthPtn }' id='categoryCalendar_end'/>";
+				end+= " type='month' min='2018-01' max='${monthPtn }' id='categoryCalendar_end' name='categoryCalendar_end'/>";
 			
 			$("#categoryCalendar_start").replaceWith(start);
 			$("#categoryCalendar_end").replaceWith(end);
@@ -286,10 +289,10 @@ function typeChange(e){
 		// 년별을 눌렀었을 경우에는 태그가 변경 되었기 때문에 다시 치환해줘야 한다.
 		if(yearCheck=="년별"){
 			let start = "<input class='categorySearch_container_child' ";
-				start+= " type='date' min='2018-01-01' max='${datePtn }' id='categoryCalendar_start'/>";
+				start+= " type='date' min='2018-01-01' max='${datePtn }' id='categoryCalendar_start' name='categoryCalendar_start'/>";
 				
 			let end = "<input class='categorySearch_container_child' ";
-				end+= " type='date' min='2018-01-01' max='${datePtn }' id='categoryCalendar_end'/>";
+				end+= " type='date' min='2018-01-01' max='${datePtn }' id='categoryCalendar_end' name='categoryCalendar_end'/>";
 			
 			$("#categoryCalendar_start").replaceWith(start);
 			$("#categoryCalendar_end").replaceWith(end);
@@ -302,6 +305,259 @@ function typeChange(e){
 	}
 	
 }
+
+$(function(){
+	//////////////////// 수익 매출분석에 들어갈 labels 시작 /////////////////////
+	// 날짜 적용 버튼 클릭시,, labels 추가
+	$('#calendarApply').click(function(){
+		// 월별 일별에 사용될 스플릿 값 저장할 전역변수 생성!
+		let startSplit = null;
+		let endSplit = null;
+
+		// 차이값에 대한 계산 결과를 저장하는데 사용할 전역변수 생성!
+		let gapResult = 0;
+		
+		// startDate, endDate 선택된 값을 가져온다.
+		let startDateCheck = $('#categoryCalendar_start').val();
+		let endDateCheck = $('#categoryCalendar_end').val();
+		
+
+		//=======================제한사항 걸러내기 3가지 ===========================//
+		// 날짜 시작, 종료를 입력하지 않을 경우 걸러낸다.
+		if(startDateCheck == '' ||endDateCheck == ''){
+			alert('검색할 시작 날짜와 종료 날짜를 반드시 선택해야 합니다.');
+			return false;
+		}
+		
+		// 날짜 시작, 종료의 기준일을 반대로 누르는 사람 있으면 걸러야 한다..
+		if(startDateCheck > endDateCheck){
+			alert('검색 시작 날짜를 종료 날짜보다 미래로 지정 할 수 없습니다.');
+			return false;
+		}
+		
+		
+		//========================제한사항 걸러내기 끝 ===============================//
+		
+		$.ajax({
+			type: "POST",
+			url:'salesAdminChartData',
+			data: $('#dataFrm').serialize(),
+			success: function(result){
+				// 가지고 있는 key값
+				let keys = Object.keys(result);
+				
+				console.log(result);
+				console.log(keys);
+				console.log(Object.keys(result.ac));
+				
+				keys.forEach(function(checkKey){
+					myChart.data.labels.push(checkKey);
+					myChart.update();
+				})
+				
+				console.log();
+				if(Object.keys(result) != null){
+					for()
+					let acData = {
+							label: '누적수익',
+							yAxisID: 'A',
+					}
+						
+					let coData = {
+						label: '회사수익',
+						yAxisID: 'A',
+					}
+					
+					let seData = {
+						label: '판매자수익',
+						yAxisID: 'A',
+					}
+					
+					let cuData = {
+						label: '구매추이',
+						yAxisID: 'B',
+						
+					}
+				}
+				
+				
+			}, error: function(){
+				console.log('ajax 실패');
+			}
+		})
+		
+		
+		/*
+		// 년도, 월별, 일별 어떤 조건인지 확인하고 이동한다.!!!
+		dateCheck = $('#categoryDate>option:selected').val();
+		
+		
+		if(dateCheck != "년별"){ // 년별이 아닐경우 스플릿 전역변수를 스플릿 해준다!
+			// 날짜 - 표시 스플릿해서 없애기
+			startSplit = startDateCheck.split("-");
+			endSplit = endDateCheck.split("-");
+		}
+		
+		// 차트에 새로운 값 업데이트 하기 전에 모두 지운다.
+		// 지우는건 제한사항으로 걸러 낸 다음에 한다.
+		let labelsLength = parseInt(Object.keys(myChart.data.labels).length);
+		myChart.data.labels.splice(0,labelsLength);
+		myChart.update();
+		
+		/* 생각하자..................
+		1. 년도, 월, 일 을 기준으로 endDate와 startDate의 차이를 비교해서 
+			년 차이가 있을 경우는 2가지다 ( 같은 년도가 같을 경우, 시작 년도가 작을경우)
+			월은 1월 12월 기준으로 변화된 값에 대한 계산
+			일은 해당 월의 일이 언제까지인지 계산해서 차이를 계산해야한다.
+		2. 해당 차이 값(날짜)을 구해서 차트 labels에 넣어주어야 한다.
+		3. "일". 그러니까 해당 월의 마지막 날을 구하는 것은 lastday가 언제인지 식으로 구해야한다.
+		//const startCheck = new Date(startDateCheck);
+		//const endCheck = new Date(endDateCheck).getFullYear();
+		//const gapCheck = new Date(startSplit[0], startSplit[1], 0).getDate();
+	
+		
+		
+		
+		// 월별, 년별, 일별 그리고 지정한 날짜에 따라 차트에 들어가지는 값이 달라진다.
+		if(dateCheck=="월별"){
+			// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
+			startSplit[0] = parseInt(startSplit[0],10);
+			startSplit[1] = parseInt(startSplit[1],10);
+			// 마지막 날짜 구하기
+			let lastDay = new Date(endSplit[0],endSplit[1],0).getDate();
+			
+			// 날짜의 차이(년)을 구한다.
+			if( startSplit[0] < endSplit[0] ){// 년도 차이가 있다! 
+				
+				gapResult = endSplit[1] - startSplit[1] +12; // "월" 계산된 값에 + 12를 해준다.
+				for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
+					// 차트에 넣는다
+					myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
+					
+					//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
+					if(i==0){
+						startCalendarDataValue = startSplit[0]+"-"+startSplit[1]+"-"+01;	
+						if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
+							endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
+						}
+					} else if(i==gapResult){
+						endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
+					}
+													
+					//////////// 12월 기준으로 날짜를 바꿔줘야 한다 /////////////
+					if(startSplit[1]!=12){
+						startSplit[1] += 1;
+					
+					} else { //startSplit[1]이 12월이 되면 년도와 월을 바꿔서 대입 해줘야 한다.
+						startSplit[0] += 1;
+						startSplit[1] = 1;
+					
+					}
+				}
+			} else { // 년도 차이가 없다!
+				
+				gapResult = endSplit[1] - startSplit[1];
+				for(let i = 0; i <= gapResult; i++){ // gapResult 만큼 반복한다.
+					//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
+					if(i==0){
+						startCalendarDataValue = startSplit[0]+"-"+startSplit[1]+"-"+01;	
+						if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
+							endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
+						}
+					} else if(i==gapResult){
+						endCalendarDataValue =startSplit[0]+"-"+startSplit[1]+"-"+lastDay;
+					}
+					
+					//차트에 넣는다.
+					myChart.data.labels.push(startSplit[0]+"-"+startSplit[1]);
+					
+					startSplit[1] += 1;
+				}
+			}
+			
+			
+		} else if(dateCheck=="일별"){
+			// split 해 준 값을 계산하기 위해서 정수로 변환해준다.
+			startSplit[0] = parseInt(startSplit[0],10);
+			startSplit[1] = parseInt(startSplit[1],10);
+			startSplit[2] = parseInt(startSplit[2],10);
+			
+			let startInstance = new Date(startDateCheck).getTime();
+			let endInstance = new Date(endDateCheck).getTime();
+			
+			// 시간으로 바꾼 날짜의 차이를 구한다. 밀리초는 1초를 1000으로 나눈것 + 60초 + 60분 + 24시간을 나누면 1일이 구해진다
+			gapResult = (endInstance-startInstance)/1000/60/60/24;
+			
+			/* 
+				일별에 대해 구하기 위해서는
+				1. 년도 차이가 있는지 확인
+					--> 년도 차이가 있으면 월과 일의 마지막 날에 변화가 되어야 하고
+				2. 월 차이가 있는지 확인
+					--> 월의 차이가 있을 경우 일의 마지막 날에 변화가 되어야 한다.
+				
+				------------ 위에것은 취소!
+				아래와 같이 date + 1만으로 년, 월 일 변화를 확인 할 수 있다.
+			
+			
+			// 날짜를 객체화 한다.
+			let dateCheck = new Date(startSplit);
+			
+			// 차트에 +1을 하며 넣어준다.
+			for(let i = 0; i <= gapResult; i++){
+				//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
+				if(i==0){
+					startCalendarDataValue = dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate();	
+					if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
+						endCalendarDataValue = dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate();
+					}
+				} else if(i==gapResult){
+					endCalendarDataValue = dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate();
+				
+				}
+				
+				//차트에 넣는다
+				myChart.data.labels.push(dateCheck.getFullYear()+"-"+(dateCheck.getMonth()+1)+"-"+dateCheck.getDate());
+				
+				// 날짜 데이터에 +1일을 해준다!
+				dateCheck.setDate(dateCheck.getDate()+1);
+			}
+		} else if(dateCheck=="년별"){
+			gapResult = endDateCheck-startDateCheck;
+			
+			for(let i = 0; i <= gapResult; i++){
+				//////////// 데이터 계산을 위해 저장해 놓아야 하는 변수 //////////////
+				if(i==0){
+					startCalendarDataValue = startDateCheck+"-"+01+"-"+01;	
+					if(gapResult==0){// 만약 같은 날짜를 선택 했을 경우에는 엔드 날짜도 구해줘야 한다.
+						endCalendarDataValue = startDateCheck+"-"+12+"-"+31;	
+					}
+				} else if(i==gapResult){
+					endCalendarDataValue = startDateCheck+"-"+12+"-"+31;
+				
+				}
+				
+				//차트에 넣는다
+				myChart.data.labels.push(startDateCheck);
+				startDateCheck++;
+			}
+			
+		}
+		
+		
+		
+		//myChart에 담긴 것을 업데이트한다.
+		myChart.update();
+		
+		if($('#categoryManagement>li').length != 0){
+
+			//데이터 컨트롤러 실행, 차트, 엑셀 재설정
+			dataController();	
+		
+		}
+		*/
+	})
+	//////////////////// 수익 매출분석에 들어갈 labels 끝 /////////////////////
+})
 
 
 $( ()=>{
@@ -423,28 +679,25 @@ $( ()=>{
 									</p>
 								</div>
 								<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-								<div id="categorySearch_container">
-									<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-										<option value="년별">년별</option>
-										<option value="월별" selected>월별</option>
-										<option value="일별">일별</option>
-									</select> 
-									<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;~&nbsp;</b> 
-									<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-									<button id="calendarApply" style="margin-left: 10px;">
-										<div>날짜 적용</div>
-									</button>
-									<input type="checkbox" value="누적수익" name="accumulate" id="accumulate" checked="checked"><label for="accumulate">누적수익</label> 
-									<input type="checkbox" value="회사수익" name="company" id="company" checked="checked"><label for="company">회사수익</label> 
-									<input type="checkbox" value="판매자수익" name="seller" id="seller" checked="checked"><label for="seller">판매자수익</label> 
-									<input type="checkbox" value="구매추이" name="customer" id="customer" checked="checked"><label for="customer">구매추이</label>
-								</div>
-								<button class="normalBtn" id="excelDown">엑셀 저장</button>
-								<select id="excelViewNum">
-									<option selected="selected">10</option>
-									<option>50</option>
-									<option>100</option>
-								</select>
+								
+									<div id="categorySearch_container">
+										<form method="post" id="dataFrm">
+										<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+											<option value="년별" >년별</option>
+											<option value="월별" selected>월별</option>
+											<option value="일별">일별</option>
+										</select> 
+										<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" name="categoryCalendar_start"/> <b>&nbsp;~&nbsp;</b> 
+										<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" name="categoryCalendar_end"/>
+										<button id="calendarApply" style="margin-left: 10px; padding: 0; line-height:5px;" onclick="return false;">날짜 적용</button>
+										<input type="checkbox" value="누적수익" name="accumulate" id="accumulate" checked="checked"><label for="accumulate">누적수익</label> 
+										<input type="checkbox" value="회사수익" name="company" id="company" checked="checked"><label for="company">회사수익</label> 
+										<input type="checkbox" value="판매자수익" name="seller" id="seller" checked="checked"><label for="seller">판매자수익</label> 
+										<input type="checkbox" value="구매추이" name="customer" id="customer" checked="checked"><label for="customer">구매추이</label>
+										</form>
+									</div>
+									<button class="normalBtn" id="excelDown">엑셀 저장</button>
+								
 							</div>
 							<div class="wrapContainer">
 								<div id="excelContainer">
