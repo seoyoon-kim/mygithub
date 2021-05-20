@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_MemberDAO">
+	<select id="memberCountall" resultType="Integer">
+		select count(*) from member where #{param1}=3 and userstop='N' and userid!='master'
+	</select>
+	<select id="memberselectall" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select * from(
+		select * from(
+		select nvl(storenum, -1) as storenum ,m.userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age from member m left join seller s on m.userid=s.userid where userstop='N' and m.userid!='master' order by username asc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by username desc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by username asc
+	</select>
+	<select id="memberCount" resultType="Integer">
+		select count(*) from member where #{param1}=3 and usertype=#{param2} and userid!='master'
+	</select>
+	<select id="memberselect" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select * from(
+		select * from(
+		select userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age from member where usertype = #{userType} and userstop='N' and userid!='master' order by username asc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by username desc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by username asc
+	</select>
+	<select id="memberCountBlack" resultType="Integer">
+		select count(*) from member where #{param1}=3 and usertype=#{param2} and userstop = 'Y'
+	</select>
+	<select id="memberselectblack" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select * from(
+		select * from(
+		select userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age from member where usertype = #{userType} and userstop='Y' and userid!='master' order by username asc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by username desc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by username asc
+	</select>
+	<select id="memberCountSeller" resultType="Integer">
+		select count(*) from member where #{param1}=3 and usertype=#{param2} <if test="param2 > 3">and userstop = 'N'</if>
+	</select>
+	<select id="memberselectSeller" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select * from(
+		select * from(
+		select s.storenum as storenum, s.sellername as sellername, s.userid as userid, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age, s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg <if test="#{userType>0}">, usertype</if><if test="#{userType==5}">, to_char(exitdate, 'YYYY/MM/DD') as exitdate</if>  from member m join seller s on m.userid = s.userid <if test="{userType==5}">join member2 m2 on m.userid = m2.userid</if><if test="#{userType>0}"> where usertype = 5</if>
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by sellername desc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by sellername asc
+	</select>
+	<select id="memberinfoSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select userid, username, userphone, useremail, userzipcode, useraddr, 
+		userdetailaddr, birthday, joindate, usertype, point,userstop from member
+		where userid=#{param1}
+	</select>
+	<select id="orderinfoSelect"  resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select orderstatus, count(userid) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum
+		where userid = #{param1}
+		group by orderstatus
+		order by orderstatus
+	</select>
+	<select id="reportinfoSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select count(userid) as reportcount , sum(reportdate) as reportsum from reporttbl where userid = #{param1}
+	</select>
+	<select id="orderstatusSelect"  resultType="Integer">
+		select count(nvl(userid,0)) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum
+		where userid = #{param1} and orderstatus = #{param2}
+	</select>
+</mapper>

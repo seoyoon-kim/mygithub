@@ -81,8 +81,7 @@
 	  	border:1px solid lightgray;
 	  	width:100x; 
 	  }
-	  #addrBtn{
-	  	top:-42px;
+	  #addrBtnd{
 	  	left:115px; 
 	  	height: 26px !important;
 	  }
@@ -393,8 +392,32 @@
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
 		margin-right:0;
 	}
+	#addrBtnd{
+		z-index:2;
+	}
 </style>
-<%@ include file="/inc/top.jspf" %> 
+
+<%@ include file="/inc/top.jspf" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	//주소검색
+	$(function(){
+		$("#addrBtnd").click(function(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		            $("#userzipcode").val(data.zonecode);
+		            $("#useraddr").val(data.address);
+		            document.getElementById('userdetailaddr').focus();
+		        }
+		    }).open();
+		});
+		$("#useredit").click(function(){
+			if(confirm('해당 정보로 수정하시겠습니까?')){
+				
+			}
+		})
+	});
+</script> 
 <div id="topBarContainer">
 	<div id="topBar">			
 		<h5><strong><a href="boardCustomerInfoEdit">일반회원 정보수정</a></strong></h5>			
@@ -411,28 +434,30 @@
 		 		<ul id="infoHeader">
 		 			<li>이름</li>
 					<li>아이디</li>
-					<li>나이</li>
+					<li>이메일</li>
 					<li>생년월일</li>
 					<li>연락처</li>
-					<li>이메일</li>
+					<li>가입일</li>
+					<li><button type="button" class="success" id="addrBtnd">주소 검색</button></li>
 					<li>주소</li>
-					<li><button class="success" value="주소검색" name="" id="addrBtn">주소 검색</button></li>
-					<li>가입일</li> 
+					<li>상세주소</li> 
 		 		</ul>
-		 		<ul id="info">
-		 			<li><input type="text" value="홍길동"/></li>
-					<li><input type="text" value="singsing"/></li>
-					<li><input type="text" value="27"/></li>
-					<li><input type="text" value="1987/12/01"/></li>
-					<li><input type="text" value="010-7426-8542"/></li>
-					<li><input type="text" value="hongsing@google.com"/></li>
-					<li><input type="text" value="서울시 마포구 백범로"/></li>
-					<li><input type="text" value="563-3"/></li>
-					<li><input type="text" value="2021/11/01"/></li>  
-		 		</ul>
+	 			<form id="userinfoForm"  method="post" action="userinfoupdate">
+			 		<ul id="info">
+			 			<li><input type="text" value="${ilist.username}" name="username"/></li>
+						<li><input type="text" value="${ilist.userid}"name="userid"/></li>
+						<li><input type="text" value="${ilist.useremail}"name="useremail"/></li>
+						<li><input type="text" value="${ilist.birthday}"name="birthday"/></li>
+						<li><input type="text" value="${ilist.joindate}"name="joindate"/></li>
+						<li><input type="text" value="${ilist.userphone}"name="userphone"/></li>
+						<li><input type="text" value="${ilist.userzipcode}" id="userzipcode"name="userzipcode"/></li>
+						<li><input type="text" value="${ilist.useraddr}" id="useraddr"name="useraddr"/></li>
+						<li><input type="text" value="${ilist.userdetailaddr}" id="userdetailaddr"name="userdetailaddr"/></li>
+			 		</ul>
+				</form>  
 		 		<div class="btns">
 					<button class="success" value="회원 목록" name="customerList" >회원 목록</button>
-					<button class="success" value="수정" name="edit" >수정</button>
+					<button class="success" value="수정" id="useredit" >수정</button>
 					<button class="success" value="삭제" name="del" >삭제</button>
 				</div>
 		 	</div>
@@ -441,11 +466,11 @@
 	   		<div id="buyHistory">
 			 	<div id="buyTitle"><p>구매현황</p></div> 	
 			 	<section id="buyBox">		 
-					<div>구매 진행중 <br/><div id="buyINGfloat"><div id="buyING" style="color:red">6</div>건</div></div>
-					<div>구매 완료 <br/><span id="buyDone" style="color:green">24</span>건</div>
-					<div>취소 요청 <br/><span id="cancelReq" style="color:orange">2</span>건</div>
-					<div>반품 요청 <br/><span id="refundReq" style="color:blue">0</span>건</div>
-					<div>교환 요청 <br/><span id="changeReq" style="color:purple">1</span>건</div>	 
+					<div>결제 완료 <br/><div id="buyINGfloat"><div id="buyING" style="color:red">${olist1}</div>건</div></div>
+					<div>구매 확정 <br/><span id="buyDone" style="color:green">${olist2}</span>건</div>
+					<div>배송중 <br/><span id="cancelReq" style="color:orange">${olist3}</span>건</div>
+					<div>환불 <br/><span id="refundReq" style="color:blue">${olist4}</span>건</div>
+					<div>환불 진행중 <br/><span id="changeReq" style="color:purple">${olist5}</span>건</div>	 
 			 	</section> 	 
 		 	</div> 
 		 	
@@ -453,10 +478,10 @@
 		 	<div id="reportBox">
 			 	<div id="reportTitle"><div id="reportHead">신고내역</div></div> 	
 			 	<section id="reportsBox">		 
-					<div id="stopNum">정지 횟수 <div class="numSpace">2</div>회</div>
-					<div id="stopDays">정지 총 일수  <div class="numSpace">26</div>일</div>		
+					<div id="stopNum">정지 횟수 <div class="numSpace">${rlist.ordercount}</div>회</div>
+					<div id="stopDays">정지 총 일수  <div class="numSpace">${rlist.reportsum}</div>일</div>		
 			 	</section> 	 
-		 	</div> 
+		 	</div>
 		 	
 		 	<!-- 마일리지 파트 -->
 			<div id="mileHistory">

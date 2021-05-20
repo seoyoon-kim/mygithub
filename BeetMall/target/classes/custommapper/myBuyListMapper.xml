@@ -23,7 +23,7 @@
 		order by orderdate desc, ordernum desc
 	</select>
 	<update id="orderCommit">
-		update orderdetail set orderstatus = '구매완료' where ordernum=#{param1}
+		update orderdetail set orderstatus = '구매확정' where ordernum=#{param1}
 	</update>
 	<select id="orderCancel" resultType="Integer">
 		select count(orderstatus) from orderdetail where orderstatus in('배송중', '배송완료') and ordernum = #{param1}
