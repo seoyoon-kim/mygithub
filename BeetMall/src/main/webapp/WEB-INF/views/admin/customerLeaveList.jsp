@@ -73,7 +73,26 @@
 	/* 페이징처리끝 */
 </style>
 <script>
- 
+function pagelist(pagenum){
+	var lin = "customerLeaveList?pageNum="+pagenum;
+	
+	if($("#searchWordhidden").val()!=null && $("#searchWordhidden").val()!=''){
+		lin += "&searchKey="+$("#searchKeyhidden").val();
+		lin += "&searchWord="+$("#searchWordhidden").val();
+	}
+	location.href=lin;
+}
+$(function(){
+	$("#searchKeyhidden").val($("#searchKey").val());
+	$("#searchKey").change(function(){
+		console.log('searchKey바뀜');
+		$("#searchKeyhidden").val($("#searchKey").val());
+	});
+	$("#searchWord").keyup(function(){
+		console.log('searchWord바뀜');
+		$("#searchWordhidden").val($("#searchWord").val());
+	})
+});
 </script>
  
  
@@ -131,146 +150,49 @@
 				<li>생년월일</li>
 				<li>주소</li>
 				<li>탈퇴일</li> 
+				
 			</ul>
 		</div>  
+		<c:forEach var="vo" items="${list}">
 		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul>  
-		
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		</div>	 
-		<div class="page_wrap">
+			<li><input type="checkbox" name="check" id="check"></li>
+			<li>${vo.username}</li>
+			<li><a href="회원정보?">${vo.userid}</a></li>
+			<li>${vo.age}</li>
+			<li>${vo.useremail}</li>
+			<li>${vo.point}</li>
+			<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
+			<li>${vo.joindate }<br /></li>
+		</ul>
+		</c:forEach>
+		<div class="page_wrap">	
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelist(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
+	           </c:if>
 			</div>
-		 </div> 
+		 </div>
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<select name="searchKey">
-					<option value="" selected>이름</option>
-	   				<option value="">아이디</option> 
-	   				<option value="">이메일</option> 
-	   				<option value="">주소</option> 
+					<option value="username" selected>이름</option>
+	   				<option value="userid">아이디</option> 
+	   				<option value="useremail">이메일</option> 
+	   				<option value="useraddr">주소</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
@@ -278,5 +200,4 @@
 		</div>  
 	</div>
 </div>
-</body>
-</html>
+</div>
