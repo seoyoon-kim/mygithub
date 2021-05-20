@@ -462,6 +462,7 @@ $(function(){
 					let payAvg = 0;
 					// 매출합계 저장 변수
 					let paySum = 0;
+					// 데이터를 쉽표를 찍어서 넣는다.
 					for(let i = 0; i < valueLength; i++){
 						payAvg += valueData[index][i];
 						paySum += valueData[index][i];
@@ -472,12 +473,13 @@ $(function(){
 						}
 						
 					}
+					// 위ㅔ서 매출평균, 매출합계에 저장된 데이터를 이용해 데이터를 쉼표를 찍어서 넣는다.
 					if(labelName[index] != '구매추이'){
-						excelData += "<td>" + reqularExpression(Math.round(payAvg/valueLength)) + "원</td>";
-						excelData += "<td>" + reqularExpression(paySum) + "원</td>";
+						excelData += "<td style='font-weight:bold'>" + reqularExpression(Math.round(payAvg/valueLength)) + "원</td>";
+						excelData += "<td style='font-weight:bold; color:red;'>" + reqularExpression(paySum) + "원</td>";
 					} else {
-						excelData += "<td>" + reqularExpression(Math.round(payAvg/valueLength)) + "개</td>";
-						excelData += "<td>" + reqularExpression(paySum) + "개</td>";
+						excelData += "<td style='font-weight:bold'>" + reqularExpression(Math.round(payAvg/valueLength)) + "개</td>";
+						excelData += "<td style='font-weight:bold; color:red;'>" + reqularExpression(paySum) + "개</td>";
 					}
 					excelData += "</tr>";
 					
@@ -497,7 +499,6 @@ $(function(){
 				
 				// 차트에 데이터 삽입
 				excelData += "</tbody>";
-				console.log(excelData);
 				$('table').html(excelData);
 				
 				// chart update (push한 데이터로 수정한다);
@@ -561,6 +562,58 @@ $( ()=>{
 })
 
 
+$(()=>{
+	// 엑셀저장
+	$('#excelDown').click( () => {
+		if($('table>thead>tr>th:nth-child(1)').text() != '분류'){
+			alert('데이터를 조회 후 사용 가능합니다.');
+			return false;
+		}
+		// thead 컬럼의 갯수
+		let columnLength = $('table>thead>tr>th').length;
+		// tbody 행의 갯수
+		let rowLength = $('table>tbody>tr').length;
+		
+		
+		console.log($('table>thead>tr>th:nth-child(1)').text());
+		console.log($('table>thead>tr>th:nth-child(2)').text());
+		console.log($('table>tbody>tr:nth-child(1)>th').text());
+		console.log($('table>tbody>tr:nth-child(1)>td:nth-child(1)').text());
+		console.log($('table>tbody>tr:nth-child(1)>td:nth-child(2)').text());
+		console.log($('table>tbody>tr:nth-child(1)>td:nth-child(3)').text());
+		console.log($('table>tbody>tr:nth-child(1)>td:nth-child(4)').text());
+		console.log($('table>tbody>tr:nth-child(1)>td:nth-child(5)').text());
+		
+		let excelData = [];
+		// thead 데이터 먼저 넣기
+		for(let i = 1; i <= columnLength; i++){
+			excelData.push($('table>thead>tr>th:nth-child('+i+')').text());
+		}
+		for(let i = 1; i <= rowLength; i++){
+			excelData.push($('table>tbody>tr:nth-child('+i+')>th').text());
+			for(let j = 1; j <= columnLength-1; j++){
+				excelData.push($('table>tbody>tr:nth-child('+i+')>td:nth-child('+(j+1)+')').text());
+			}
+		}
+		
+		console.log(excelData);
+		
+		$.ajax({
+			type: "POST",
+			url: "adminSalesExcelDown",
+			traditional : true,
+			data: {
+				"excelData":excelData,
+				"rowLength": rowLength,
+				"columnLength": columnLength
+			}, success: function(result){
+				alert('BEETMALL 매출관리 엑셀파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
+			}, error: function(error){
+				alert('엑셀 다운로드 실패');
+			}
+		});
+	});
+})
 
 
 </script>

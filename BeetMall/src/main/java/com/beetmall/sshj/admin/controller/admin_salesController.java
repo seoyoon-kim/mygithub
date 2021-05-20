@@ -1,5 +1,7 @@
 package com.beetmall.sshj.admin.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +13,19 @@ import java.util.Map.Entry;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -185,6 +200,102 @@ public class admin_salesController {
 		
 		
 		return data;
+	}
+	
+	@RequestMapping("/adminSalesExcelDown")
+	@ResponseBody
+	public void excel_down(HttpServletRequest req) {
+		String[] excelData = req.getParameterValues("excelData");
+		int rowLength = Integer.parseInt(req.getParameter("rowLength"));
+		int columnLength = Integer.parseInt(req.getParameter("columnLength"));
+		
+		int i = 0;
+		// 엑셀파일 생성
+		XSSFWorkbook xssfwb =  new XSSFWorkbook();
+			// 폰트설정
+			XSSFFont font = xssfwb.createFont();
+			font.setFontName("나눔고딕");
+			font.setFontHeightInPoints((short)24);
+			font.setBold(true);
+			
+			// 셀 스타일
+			CellStyle style = xssfwb.createCellStyle();
+			style.setFont(font);
+			style.setFillForegroundColor(IndexedColors.LIME.getIndex());
+			style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			style.setVerticalAlignment(VerticalAlignment.CENTER);
+			style.setAlignment(HorizontalAlignment.CENTER);
+		
+		// 시트생성
+		XSSFSheet xssfsheet = xssfwb.createSheet("BEETMALL 매출관리");
+		// 컬럼 넓이 설정
+		for(int index = 0; index < columnLength; index++) {
+			xssfsheet.setColumnWidth(index, 6000);
+		}
+		
+		// 0 ~ 1행 : 2개 행,  0 ~ columnLength-1열 : 넘어온 값의 숫자 까지 병합한다.
+		xssfsheet.addMergedRegion(new CellRangeAddress(0,1,0,columnLength-1));
+		xssfsheet.autoSizeColumn(100);
+		
+		// 타이틀 생성
+		XSSFRow xssfrow = xssfsheet.createRow(i++);
+		XSSFCell xssfcell = xssfrow.createCell(0);
+		xssfcell.setCellStyle(style);
+		xssfcell.setCellValue("BEETMALL 매출내역");
+		
+		xssfsheet.createRow(i++);
+		xssfrow = xssfsheet.createRow(i++); // 빈행 추가
+			
+			//테이블 폰트 설정
+			XSSFFont tableFont = xssfwb.createFont();
+			tableFont.setFontHeightInPoints((short)14);
+			tableFont.setFontName("나눔고딕");
+			
+		// 테이블 스타일 설정
+		CellStyle tableStyle = xssfwb.createCellStyle();
+		XSSFDataFormat format = xssfwb.createDataFormat();
+		tableStyle.setDataFormat(format.getFormat("#,##0"));
+		tableStyle.setAlignment(HorizontalAlignment.CENTER);
+		tableStyle.setFont(tableFont);
+		tableStyle.setBorderBottom(BorderStyle.THIN);
+		tableStyle.setBorderLeft(BorderStyle.THIN);
+		tableStyle.setBorderRight(BorderStyle.THIN);
+		tableStyle.setBorderTop(BorderStyle.THIN);
+		
+		xssfrow = xssfsheet.createRow(i++);
+		// th 부분 입력
+		for(int index2 = 0; index2 < columnLength; index2++) {
+			xssfcell = xssfrow.createCell(index2);
+			xssfcell.setCellStyle(tableStyle);
+			xssfcell.setCellValue(excelData[index2]);
+		}
+		
+		// td 데이터 추출 몇번도냐? rowLength 행의 갯수만큼 반복한다
+		for(int index = 0; index < rowLength; index++) {
+			
+			xssfrow = xssfsheet.createRow(i++);// 한 행을 만든다.
+			
+			// 한 행당 column의 갯수만큼 돈다
+			for(int j = 0; j < columnLength; j++) {
+				xssfcell = xssfrow.createCell(j);
+				xssfcell.setCellStyle(tableStyle);
+				xssfcell.setCellValue(excelData[ ((index+1)*columnLength)+j ]);
+			}
+		}
+		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
+		File file = new File(System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
+		try {
+			// file의 경로로 엑셀 outputStream
+			FileOutputStream fos = new FileOutputStream(file);
+			// 파일출력
+			xssfwb.write(fos);
+			fos.close();
+			System.out.println("엑셀파일 생성 성공");
+		} catch(Exception e) {
+			System.out.println("엑셀파일 생성 오류");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	//카테고리별 매출 분석
