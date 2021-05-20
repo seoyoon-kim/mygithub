@@ -286,4 +286,23 @@
 		</div>  
 	</div>
 </div> 
-</html>
+<style>
+ 	.page_nation {
+	    display: inline-block;
+	    padding-top: 0px;
+	    margin-bottom: 15px;
+	}
+/* 	#title {
+        width: 1025px;
+	    font-weight: bold;
+	    padding: 65px 0 25px 0;
+	    border-bottom: gray 1px solid;
+	}
+	#kktitle{
+		width:30%;
+	}
+	#contentBox li:nth-of-type(4) {
+	    width: 30%;
+	    text-align: left;
+	} */
+</style>

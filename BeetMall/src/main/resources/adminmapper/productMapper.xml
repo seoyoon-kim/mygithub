@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.adminProductDAO">
+	<select id="productList" resultType="com.beetmall.sshj.admin.vo.adminProductVO" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO">
+		select * from(
+	    	select * from(
+				select a.productnum, a.mcatenum, a.productname, b.storename, b.sellername, c.count, to_char(a.sellstart, 'YYYY-MM-DD') sellstart
+				from product a
+				join seller b
+				    on a.userid = b.userid
+				left outer join (select count(productnum) count, productnum 
+				        from wish
+				        group by productnum) c
+				    on a.productnum = c.productnum 
+				where 1=1
+				<!-- <choose>
+					<when test ='searchKey!=null'>
+						and faqcate = '${searchKey}' 
+					</when>
+					<when test ='searchKey!=null and searchWord==null'>
+						where faqcate = '${searchKey}' and faqoption = 1
+					</when>
+					<when test ='searchWord!=null'>
+						where faqtitle like '%${searchWord}%' and faqoption = 1
+					</when>
+					<when test ='searchWord==null'>
+						where faqoption = 1
+					</when>
+				</choose> -->
+				order by productnum desc)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by productnum
+	</select>
+	<select id="productOnetotalRecord" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO" resultType="int">
+		select count(a.productnum)
+		from product a
+		join seller b
+		    on a.userid = b.userid
+		left outer join (select count(productnum) count, productnum 
+		        from wish
+		        group by productnum) c
+		    on a.productnum = c.productnum
+		order by a.productnum desc
+		<!-- <choose>
+			<when test = 'searchWord!=null and searchKey!=null'>
+				where faqtitle like '%${searchWord}%' and faqoption=1 and faqcate=${searchKey}
+			</when>
+			<when test = 'searchWord!=null'>
+				where faqtitle like '%${searchWord}%' and faqoption=1 
+			</when>
+			<when test = 'searchWord==null'>
+				where faqoption=1
+			</when>
+		</choose> -->
+	</select>
+</mapper>

@@ -12,4 +12,6 @@ public interface MyfavoriFormService {
 
 	public int selectFavorite2(int storenum);
 
+	public int farmHit(int storenum);
+
 }

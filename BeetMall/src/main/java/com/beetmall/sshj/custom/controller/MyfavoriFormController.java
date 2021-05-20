@@ -34,6 +34,9 @@ public class MyfavoriFormController {
 		ModelAndView mav = new ModelAndView();
 		int storenum=Integer.parseInt(req.getParameter("storenum"));
 		
+		//조회수증가
+		myfavoriFormservies.farmHit(storenum);
+		
 		mav.addObject("result", myfavoriFormservies.selectInfo2(storenum)); // 전체 데이터 불러오기
 		mav.addObject("favorite", myfavoriFormservies.selectFavorite2(storenum)); // 즐겨찾기 수 불러오기
 		mav.setViewName("mypages/customFarm");
