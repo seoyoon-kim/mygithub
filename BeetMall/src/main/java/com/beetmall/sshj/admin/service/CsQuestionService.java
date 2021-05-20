@@ -13,4 +13,6 @@ public interface CsQuestionService {
 
 	public CsQuestionVO csAnswerWrite(int qmnum);
 
+	public int csAnswerWriteOk(CsQuestionVO vo);
+
 }

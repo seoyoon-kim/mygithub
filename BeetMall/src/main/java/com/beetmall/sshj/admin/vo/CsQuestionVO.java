@@ -7,6 +7,7 @@ public class CsQuestionVO {
 	private String qmdate;
 	private int qmoption;
 	private String qmcontent;
+	private String qmanswer;
 	
 	public int getQmnum() {
 		return qmnum;
@@ -44,5 +45,10 @@ public class CsQuestionVO {
 	public void setQmcontent(String qmcontent) {
 		this.qmcontent = qmcontent;
 	}
-	
+	public String getQmanswer() {
+		return qmanswer;
+	}
+	public void setQmanswer(String qmanswer) {
+		this.qmanswer = qmanswer;
+	}
 }

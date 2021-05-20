@@ -30,4 +30,9 @@ public class CsQuestionServiceImp implements CsQuestionService {
 	public CsQuestionVO csAnswerWrite(int qmnum) {
 		return csquestionDAO.csAnswerWrite(qmnum);
 	}
+
+	@Override
+	public int csAnswerWriteOk(CsQuestionVO vo) {
+		return csquestionDAO.csAnswerWriteOk(vo);
+	}
 }
