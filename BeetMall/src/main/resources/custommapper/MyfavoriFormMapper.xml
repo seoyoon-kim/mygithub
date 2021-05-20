@@ -30,4 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectFavorite2" resultType="int">
 		select sum(storenum) storenum from favorite where storenum=(select storenum from seller where storenum=${param1})
 	</select>
+	<update id="farmHit">
+  		update farm set farmvisitor=farmvisitor+1 where storenum=#{param1}
+  	</update>
 </mapper>
