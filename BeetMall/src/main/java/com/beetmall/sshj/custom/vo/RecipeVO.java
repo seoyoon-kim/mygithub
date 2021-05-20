@@ -12,6 +12,7 @@ public class RecipeVO {
 	private int recipehit;
 	
 	
+	
 
 	
 	public int getRecipenum() {

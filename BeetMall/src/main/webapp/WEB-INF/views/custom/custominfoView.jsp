@@ -112,9 +112,11 @@
 		}
 		
 	};
+	
 </script>
 <div class="section">
 	<div class="main">
+	
 	<!-- 가운데 메인 div -->
 	<div id="article">
 		<!-- 문의하기 상단 메세지 -->	
@@ -123,74 +125,114 @@
 			<span id="notice">고객님께서 작성하신 질문은 판매자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 		</div>
 		<input type="hidden" value="${vo.qnum}"/>
-		<!-- 내글 보기 -->	
-		<fieldset>
-			<table>
-				<tbody>
-					<tr>
-						<th colspan="4">고객 문의</th>
-					</tr>
-					<tr class="tr_head">
-						<th class="menu" >상품명</th>
-						<td class="td" colspan="3" ><span >상품명</span></td>
-					</tr>
-					<tr class="tr_head">
-						<th class="menu">작성자</th>
-						<td class="td"><span >${vo.userid}</span></td>
-							<th class="menu">문의날짜</th>
-						<td class="td"><span>${vo.qwritedate}</span></td>
-					</tr>
+		
+			<div id="productInfoPage">
+			<div id="productInfoPage3">
+
+				<div id="qtitle">상품에 대한 문의를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
+					없이 담당 게시판으로 이동될 수 있습니다.</div>
+					
+
+				<ul id="qnaTitle">
+					<li><b>번호</b></li>
+					<li><b>내용</b></li>
+					<li><b>작성자</b></li>
+					<li><b>작성일</b></li>
+					<li><b>공개여부</b></li>
+				</ul>
+
+		   <c:if test="${empty faqlist}">
+		       <div id="noreview">작성된 문의가 없습니다.</div>
+		   </c:if>
+
+           <c:forEach var="qlist" items="${faqlist}">
+				<ul id="qnaList">
+					 <li>${qlist.qnum}</li> <!-- 문의 숫자 -->
+					<c:if test="${qlist.qopen==0 && logId!=qlist.userid}"> <!-- 비공개일경우 제목표시 -->
+					 <li class="qnaViewbtn">비공개로 작성된 글입니다.</li>
+					</c:if>
+					<c:if test="${qlist.qopen==1 || logId==qlist.userid}"> <!-- 공개일경우 제목표시 -->
+					 <li class="qnaViewbtn">${qlist.qtitle}</li>
+					</c:if>
+					 <li>${qlist.userid}</li> <!-- 유저아이디 -->
+					 <li>${qlist.qwritedate}</li><!-- 날짜 -->
+				  <c:if test="${qlist.qopen==0}">	<!-- 비공개일경우 그림표시 -->
+					 <li><img src="img/ciconlock2.png"></li>
+				  </c:if>
+				  <c:if test="${qlist.qopen==1}">	 <!-- 공개일경우 그림표시 -->
+					 <li><img src="img/ciconlock.png"></li>
+				  </c:if>
+				</ul>
 				
-					<tr>
-						<td class="question_content" colspan="4">
-							<span class="content" >
-								${vo.qcontent}
-							</span>
-						</td>	
-					</tr>
-				</tbody>
-				<!-- 답변 -->
-				</br>
-				<tbody style="margin-top:20px;">
-					<tr>
-						<th colspan="4">
-						답변
-						</th>
-					</tr>
-					<tr>
-						<td class="question_content" colspan="4">
-							<span class="content" >
-							
-							<c:if test="${vo.qanswer==null}">
-								<!-- qmanswer -->
-								판매자의 답변을 기다리는 중입니다.<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-								<br/>
-							</c:if>
-							<c:if test="${vo.qanswer!=null}">
-								${vo.qanswer}
-							</c:if>
-							</span>
-						</td>	
-					</tr>
-				</tbody>
-			</table>
-		</fieldset>
+				<div id="qnaViewbox" style="display:none" >
+				<c:if test="${qlist.qopen==1 || logId==qlist.userid}">	<!-- 공개일경우 내용표시 -->	
+							<div id="qnatxtbox">				
+							     ${qlist.qcontent}
+							</div>
+						 <c:if test="${qlist.qanswer==null}"> <!-- 답변없을경우 -->	
+						    <div id="qnatxtbox2">	
+							  아직 작성된 답변이 없습니다.
+							</div>
+						 </c:if>
+						 
+						 <c:if test="${qlist.qanswer!=null}">
+						    <div id="qnatxtbox2">					
+							     ${qlist.qanswer}
+							</div>
+						</c:if>	
+				</c:if>	
+				
+				<c:if test="${qlist.qopen==0 && logId!=qlist.userid}">	
+				           <div id="qnatxtbox2">
+				                비공개로 작성된 글입니다.
+				           </div>
+				</c:if>	
+				
+				</div>
+				
+		  </c:forEach>	
+
+				<div id="pagelibtn"><a href="/sshj/mybuyList">문의 작성</a></div>
+				
+				<div id="nonebox">   </div>
+
+			<c:if test="${not empty faqlist}">
+			
+			
+				<!-- 페이징 표시--------- -->
+	<div class="page_wrap">
+			<div class="page_nation">
+			   <c:if test="${pageVO2.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/customproduct?productnum=${pvo.productnum}&fpageNum=${pageVO2.pageNum-1}#productInfoPage3<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO2.startPageNum}" step="1" end="${pageVO2.startPageNum + pageVO2.onePageNum-1}">
+	              <c:if test="${p<=pageVO2.totalPage}">
+	                 <c:if test="${p==pageVO2.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO2.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/customproduct?productnum=${pvo.productnum}&fpageNum=${p}#productInfoPage3<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO2.pageNum < pageVO2.totalPage}">
+	              <a class="arrow next" href="/sshj/customproduct?productnum=${pvo.productnum}&fpageNum=${pageVO2.pageNum+1}#productInfoPage3<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
+	           </c:if>
+			</div>
+	 </div>
+				<!-- 페이징 표시--------- -->
+  			</c:if>
+  			
+  			
 			<div class="bottom_wrap">
 				<input type="button" value="확인" class="btn" id="btn" onClick="location.href='<%=request.getContextPath() %>/customerCenter'"/>
 				<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
 			</div>
 		</div>
 	</div>
+</div>
+
+
+</div>
 </div>
