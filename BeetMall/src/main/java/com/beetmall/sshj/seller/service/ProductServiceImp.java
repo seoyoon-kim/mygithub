@@ -34,8 +34,8 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> onePageRecordSelect(SearchAndPageVO sapvo) {
-		return productDAO.onePageRecordSelect(sapvo);
+	public List<ProductVO> onePageRecordSelect(int productnum) {
+		return productDAO.onePageRecordSelect(productnum);
 	}
 
 	@Override
@@ -51,12 +51,6 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public int productDelete(int productnum) {
 		return productDAO.productDelete(productnum);
-	}
-
-	@Override
-	public int productUpdate(ProductVO vo) {
-		// TODO Auto-generated method stub
-		return productDAO.productUpdate(vo);
 	}
 
 
