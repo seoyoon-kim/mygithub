@@ -17,6 +17,7 @@ public class SellerEditFarmVO {
 	private String bank; //은행명
 	private String bankname; // 예금주
 	private long bankaccount; // 판매자 계좌번호
+	private String checkImg; // 이미지 확인하기 위한
 	
 	// 농장 테이블
 	private String farmname; // 농장이름
@@ -32,7 +33,36 @@ public class SellerEditFarmVO {
 	private String productname;//상품명
 	private String thumbimg; // 썸네일 이미지
 	
+	// dicount
+	private int saleprice; // 할인액
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public String getCheckImg() {
+		return checkImg;
+	}
+	public void setCheckImg(String checkImg) {
+		this.checkImg = checkImg;
+	}
+	public int getSaleprice() {
+		return saleprice;
+	}
+	public void setSaleprice(int saleprice) {
+		this.saleprice = saleprice;
+	}
 	public String getUserid() {
 		return userid;
 	}

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!-- 에러페이지 출력 -->
+<%-- <%@ page errorPage = "../error/errorPage.jsp" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,6 +127,7 @@
 		$("input[value=로그아웃]").click(function(){
 			location.href="logout";
 		})
+		
 		/* 메뉴 바 내려오게 하기 */
 		$(document).on('scroll', function(){
 			var scroll = window.scrollY;
@@ -239,7 +240,10 @@
 	<c:if test="${logStatus == 'Y' }">
 		<div class="loginButtons section">	<!-- 로그인 후 -->
 			<c:if test="${logType==2}">
-				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons btn"/>
+				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/sellerMain'"/>
+			</c:if>
+			<c:if test="${logType==3}">
+				<input type="button" value="관리자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/adminHome'"/>
 			</c:if>
 			<a href="myinfoEdit">${logName}님</a><span id="usermypage">▼</span>
 			<input type="button" value="로그아웃" class="menuButtons btn"/>

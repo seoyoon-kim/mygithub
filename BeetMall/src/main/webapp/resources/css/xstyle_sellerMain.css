@@ -46,9 +46,9 @@ a:hover,a:active,a:visited,a:link{
 	font-weight: bold;
 	padding: 5px 10px;
 	border-bottom: 1px solid #ddd;
-	background-color: #45bb89;
+	background-color: #f8faf7;
 	overflow:hidden;
-	color:white;
+	color: #5c5c5c;
 }
 
 .firstContainer>div:nth-child(2){

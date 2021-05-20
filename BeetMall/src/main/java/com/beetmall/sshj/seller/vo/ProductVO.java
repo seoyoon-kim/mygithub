@@ -1,6 +1,8 @@
 package com.beetmall.sshj.seller.vo;
 
 public class ProductVO {
+	//상품목록의 체크박스에서 선택된 상품번호 배열을 담을 변수
+	private String[] oneProductCheck;
 	//category 대분류
 	private int catenum;
 	private String catename;
@@ -14,14 +16,14 @@ public class ProductVO {
 	private int mcatenum; // 중분류 카테고리 번호
 	private String productname; //상품명 
 	
-	private int productprice; //판매가격
+	private Integer productprice; //판매가격
 	private char saleselect; //할인여부
 	private char optionselect; //옵션여부
 	private char saleb; //b급 선택여부
 	private String sellstart;//판매시작일
 	private String sellfinish;//판매종료일
 	
-	private int totalstock;//총재고수량  
+	private Integer totalstock;//총재고수량  
 	private int nowstock;//현재재고수량 ( count(productnum) from orderdetail)
 	private int soldstock; //팔린 재고 (orderdetail에서 가져오기)
 	
@@ -30,7 +32,7 @@ public class ProductVO {
 	private String productcontent;//내용
 	
 	private String deliveryoption;//배송방법
-	private int deliveryprice;//배송비
+	private Integer deliveryprice;//배송비
 	private String paymentoption;//배송비 결제방식
 	
 	private String selloption;//판매단위
@@ -56,7 +58,7 @@ public class ProductVO {
 	private String optionprice; //옵션가격
 	
 	//할인
-	private int saleprice; //할인가격
+	private Integer saleprice; //할인가격
 	private String salestart; //할인 시작
 	private String salefinish; //할인 끝
 	//할인율
@@ -85,11 +87,32 @@ public class ProductVO {
 		this.mcatename = mcatename;
 	}
 	
+	
+	//상품목록의 체크박스에서 선택된 상품번호 배열을 담을 변수
+
+	public String[] getOneProductCheck() {
+		return oneProductCheck;
+	}
+	public void setOneProductCheck(String[] oneProductCheck) {
+		String productTemp = "";
+		if(oneProductCheck != null) {
+			for(int i = 0; i< oneProductCheck.length; i++) {
+				productTemp += oneProductCheck[i];
+				
+				if(i<oneProductCheck.length-1) {
+					productTemp+=",";
+				}
+			}
+		}
+		
+		this.oneProductCheck = productTemp.split(",");
+	}
+	
 	//상품
 	public int getProductnum() {
 		return productnum;
 	}
-	
+
 	public void setProductnum(int productnum) {
 		this.productnum = productnum;
 	}
@@ -111,10 +134,10 @@ public class ProductVO {
 	public void setProductname(String productname) {
 		this.productname = productname;
 	}
-	public int getProductprice() {
+	public Integer getProductprice() {
 		return productprice;
 	}
-	public void setProductprice(int productprice) {
+	public void setProductprice(Integer productprice) {
 		this.productprice = productprice;
 	}
 	public char getSaleselect() {
@@ -148,10 +171,10 @@ public class ProductVO {
 	public void setSellfinish(String sellfinish) {
 		this.sellfinish = sellfinish;
 	}
-	public int getTotalstock() {
+	public Integer getTotalstock() {
 		return totalstock;
 	}
-	public void setTotalstock(int totalstock) {
+	public void setTotalstock(Integer totalstock) {
 		this.totalstock = totalstock;
 	}
 	public int getNowstock() {
@@ -184,10 +207,10 @@ public class ProductVO {
 	public void setDeliveryoption(String deliveryoption) {
 		this.deliveryoption = deliveryoption;
 	}
-	public int getDeliveryprice() {
+	public Integer getDeliveryprice() {
 		return deliveryprice;
 	}
-	public void setDeliveryprice(int deliveryprice) {
+	public void setDeliveryprice(Integer deliveryprice) {
 		this.deliveryprice = deliveryprice;
 	}
 	public String getPaymentoption() {
@@ -279,6 +302,7 @@ public class ProductVO {
 	public void setOptionnum(int optionnum) {
 		this.optionnum = optionnum;
 	}
+
 	public String getOptionname() {
 		return optionname;
 	}
@@ -305,10 +329,10 @@ public class ProductVO {
 	}
 	
 	//할인
-	public int getSaleprice() {
+	public Integer getSaleprice() {
 		return saleprice;
 	}
-	public void setSaleprice(int saleprice) {
+	public void setSaleprice(Integer saleprice) {
 		this.saleprice = saleprice;
 	}
 	public String getSalestart() {
