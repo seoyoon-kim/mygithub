@@ -1080,7 +1080,7 @@ function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 		}
 		
 		excelPagingTag += '<a class="arrow next" href="javascript:void(0);" onclick="anext(this);"></a> <a class="arrow nnext" href="javascript:void(0);" onclick="annext(this);"></a>';
-		
+		 
 	} else {// 페이지 이동 ( 이전, 숫자, 다음 , 맨 마지막 시 ) 사용
 		// 만약, 1이 아닌
 		// 2 3 4 5 가 눌렸을때 그 페이지의 정보들을 보여줘야 한다.
