@@ -5,13 +5,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.beetmall.sshj.custom.vo.CenterVO;
+import com.beetmall.sshj.custom.vo.PageProductVO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO;
+import com.beetmall.sshj.custom.vo.PageRecipeVO2;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 
 
 public interface RecipeDAO {
 
-	public List<RecipeVO>RecipeAllList();
+	public List<RecipeVO>RecipeAllList(PageRecipeVO pageVO1);
 
 	public int recipeWriteOk(RecipeVO vo);
 	
@@ -19,11 +22,11 @@ public interface RecipeDAO {
 	
 	public RecipeVO RecipeSelect(int recipenum);
 
-	public List<RecipeVO>recipeAllListHome();
+	public List<RecipeVO>recipeAllListHome(PageRecipeVO pageVO1);
 	
-	public List<RecipeVO>recipeAllListHome2();
+	public List<RecipeVO>recipeAllListHome2(PageRecipeVO pageVO2);
 	
-	public List<RecipeVO>customMyrecipe();
+	public List<RecipeVO>customMyrecipe(PageRecipeVO2 pageVO1);
 	
 	public int recigoodOk(int data);
 	
@@ -39,11 +42,22 @@ public interface RecipeDAO {
 	
 	public int recikeepOnly(int num,String id);
 	
-	public List<RecipeVO> customMyrecipe2(String id);
+	public List<RecipeVO> customMyrecipe2(PageRecipeVO2 pageVO2);
 	
 	public int recipeDelete(int recipenum);
 
 	public int recipeEditeOk(RecipeVO vo);
 	
 	public int recipeHit(int data);
+	
+	public int totalRecord4(PageRecipeVO pageVO1);	
+	public int totalRecord5(PageRecipeVO pageVO2);
+	
+	public int totalRecord6(String userid);
+	public int totalRecord7(String userid);
+
+	public int totalRecord8(PageRecipeVO pageVO1);
+	
+	
+	
 }

@@ -2,10 +2,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
 
-	body{padding:0; margin:0 auto; font-family: 'Noto Sans KR', sans-serif; font-size:16px;}
 	.main{width:1280px; display:flex; margin: 0 auto;}
 	.detail_modal{width:1280px; margin: 0 auto;}
-	#article{margin-top:120px;}
 	/*카테고리 제목*/
 	.wrapTitle{
 		margin:40px 40px 40px 0px;
@@ -38,7 +36,7 @@
 	input, textarea, select{
 		border:1px solid lightgray; 
 	}
-	li, label{list-style-type:none;}
+	label{list-style-type:none;}
 	select{height:28px;}
 	/* 검색하기 */
 	#search_container{
@@ -120,7 +118,11 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
-
+	/*해당 목록에 대한 설명 또는 주의사항*/
+	.notice{
+		font-size:0.8em;
+		color:gray;
+	}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -131,4 +133,7 @@ input[type=number] {
 }
 input[type=button]{
 	border-radius:0;
+}
+input[type=text]{
+	padding-left:5px;
 }

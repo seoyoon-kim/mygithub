@@ -14,7 +14,7 @@ public interface ProductDAO {
 	//등록된 상품 갯수 ( 총 레코드 수)
 	public int totalRecord(SearchAndPageVO sapvo);
 	//한페이지에 해당하는 상품 갯수 선택 ( 레코드 선택)
-	public List<ProductVO> onePageRecordSelect(SearchAndPageVO sapvo);
+	public List<ProductVO> onePageRecordSelect(int productnum);
 	//상품 등록하기
 	public int productInsert(ProductVO vo);
 	//할인 등록하기

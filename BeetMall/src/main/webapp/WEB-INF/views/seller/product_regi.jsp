@@ -40,7 +40,7 @@
 	textarea{
 		width:100%;
 	}
-	input[type="radio"]{
+	input[type="radio"], input[type="checkbox"]{
 		margin-right:5px; height:10px;
 	}
 	/* div*/
@@ -129,7 +129,7 @@
 	
 /*해당 목록에 대한 설명 또는 주의사항*/
 	.notice{
-		font-size:0.7em;
+		font-size:0.75em;
 		color:gray;
 	}
 /*판매가격*/
@@ -295,7 +295,7 @@ $(function(){
 	          	}
 	          }  
 		  });
-		  $('#summernote').css('z-index','-1000px'); 
+		  $('#summernote').css('z-index','-100px'); 
 		  $('#summernote').summernote('enable');
 	});
 	
@@ -332,7 +332,7 @@ $('#thumbimg').on('change',function(){
               reader.readAsDataURL(input.files[0]); //in
             }
         }
-//작은 썸네일 업로드 미리보기 (실패)
+
 //등록페이지 
 	$(document).ready(function(){	
 		$('.btn').click(function(){
@@ -340,27 +340,23 @@ $('#thumbimg').on('change',function(){
 		})
 ////할인 설정, 설정안함 버튼에 따라 하위 선택 보이기 
 	
-	$('input[name="saleselect"]').change(function(){
-		if($('input[name="saleselect"]:checked').val()=="1"){
-			console.log($('input[name="saleselect"]:checked').val());
-			//세일 정보 입력 ul
-			$('#sale_ul').css('display','block');
-			
+		$('input[name="saleselect"]').change(function(){
+			if($('input[name="saleselect"]:checked').val()=="1"){
+				console.log($('input[name="saleselect"]:checked').val());
+				//세일 정보 입력 ul
+				$('#sale_ul').css('display','block');
+				
+			}
+			if($('input[name="saleselect"]:checked').val()=="0"){
+				console.log($('input[name="saleselect"]:checked').val());
+				//세일정보 입력ul 숨기기
+				$('#sale_ul').css('display','none');
+			}
+		});
+//못난이 할인 default 
+		if($('#saleb').val() != '1' || $('#saleb').val()==' '){
+			$('#saleb').val('0');
 		}
-		if($('input[name="saleselect"]:checked').val()=="0"){
-			console.log($('input[name="saleselect"]:checked').val());
-			//세일정보 입력ul 숨기기
-			$('#sale_ul').css('display','none');
-		}
-	});
-	//특정기간할인 선택하기
-/* 	$('#sale_period_btn').click(function(){
-		$(this).css('background-color','lightgray')
-		//특정기간할인적용 날짜 
-		$('#sale_period').css('display','block');
-	});
-	 */
-
 //국내산, 수입산
 		$('#import').on('click',function(){
 			$('#import_wrap').css('display','block');
@@ -398,25 +394,22 @@ $('#thumbimg').on('change',function(){
 			}
 		});
 	
-
-//판매기간 설정
-
-//특정기간만 할인 날짜 가져오기
-
-//기간설정하면 달력날짜 바꾸기
-
 //옵션 적용안함 이면 표 비활성화
-		$('#select_option').change(function(){
-			var option = $(this).val();
-			console.log(option);
-			$('#regi_option_table').css('display','');
-			for(var i = 1; i<option; i++){
-				console.log(option);
-				
-				$('#regi_option_table').children('tr').eq(i).css('display','');
-			}
 	
-		});// 옵션 선택 end
+		$('#select_option').change(function(){
+			var option=$(this).val();
+			var tag = '';
+			$('#option_tbody *').remove();
+			console.log(option);
+			for(var i = 0; i<option; i++){
+					tag="<tr id=tr"+i+"><td><input type='text' name='optionname' id='optionname' placeholder='상품명을 입력해주세요.'/></td>"
+					tag+="<td><input type='number' name='optionstock' id='optionstock' min='100' placeholder='개'/></td>"
+					tag+="<td><input type='number' name='optionprice' id='optionprice' placeholder='원'/></td></tr>"
+					$('#option_tbody').append(tag);
+			}
+		});
+
+
 		$('input[name="optionselect"]').change(function(){
 			if($('input[name="optionselect"]:checked').val()=="1"){
 				console.log($('input[name="optionselect"]:checked').val());
@@ -430,9 +423,11 @@ $('#thumbimg').on('change',function(){
 				$('#add_option_ul').css('display','none');
 			}
 		});// 옵션 선택 end
+		
 // 못난이할인
 	 	if($('#saleb').val()!='1'){
 	 		$('$saleb').val() =='0';
+	 		console.log('못난이할인 noncheck saleb value -> ',$('$saleb').val());
 	 	}
 
 //취소 버튼 클릭 시 뒤로 가기
@@ -441,6 +436,112 @@ $('#thumbimg').on('change',function(){
 		});
 
 	});// 등록페이지srcipt end		
+//입력 금액과 할인금액을 바로 보여주는 ajax
+$(function(){
+	$('#saleprice').keyup(function(){
+		if($("input[name=saleselect]:checked").val()==0){
+			$('#saleprice').val('');
+			console.log('saleselect value ->', $("input[name=saleselect]:checked").val());
+			console.log($('#saleprice').val());
+		}
+		priceAjax();
+		
+	})	
+	$('#productprice').keyup(function(){
+		priceAjax();
+	})	
+});
+function priceAjax(){
+	var productprice = $('#productprice').val();
+	var saleprice = $('#saleprice').val();
+	var totalprice = productprice - saleprice; 
+	var url = window.location.href;
+	if(productprice != ''){
+		$.ajax({
+			url: url,
+			type:"post",
+			data:{
+				'productprice' : productprice,
+				'saleprice' : saleprice,
+				'totalprice' : totalprice
+			},
+			success : function(data){
+				console.log('success');
+				$('#total_price').html(totalprice);
+				$('#discount_price').html(saleprice);
+				if($("input[name=saleselect]:checked").val()==0){
+					$('#saleprice').val('');
+				}
+			}, error: function(e){
+				console.log('ajax error :'+ e.status); }
+		});
+
+	}
+	}
+});//function end
+
+//판매기간/ 할인기간 날짜 설정
+
+$(function(){
+	//오늘 날짜 구하기
+	  var thisDate = new Date();
+      var thisYear = thisDate.getFullYear();        //해당 연
+      var thisMonth = thisDate.getMonth() + 1;    //해당 월
+	  var today = thisYear + "/" + thisMonth +"/"+ thisDate;
+
+     //datepicker 옵션 설정
+	 var dateFormat ="yy/mm/dd",
+	 from = $('.start_date').datepicker({
+		 showOn:"both",
+		 defalutDate:"+1w",
+		 changeMonth:true,
+		 numberOfMonths:2,
+		 changeMonth: true,//콤보박스에서 년 선택 가능
+	     changeYear: true, //콤보박스에서 월 선택 가능
+	     buttonText: "날짜선택",
+	     dateFormat: 'yy/mm/dd',
+	     language:'kr',
+	     minDate:0, //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전, 0: 오늘)
+	     showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+	     
+	 });
+	 from = $('.start_date').on('change', function(){
+		// 시작일(.start_date) datepicker가 닫힐때 최소 날짜(minDate)를 선택한 시작일로 지정
+		 to.datepicker('option','minDate',getDate(this));		
+	 }),
+	 to=$('.finish_date').datepicker({
+		 showOn:"both",
+		 dafaultDate:'+1w',
+		 changeMonth:true,
+		 numberOfMonths:2,
+		 changeMonth: true,
+	     changeYear: true,
+	     buttonText: "날짜선택",
+	     dateFormat: 'yy/mm/dd',
+	     language:'kr',
+	     maxDate: "+5Y" //최대 선택일자(+1D:하루후, +1M:한달후, +1Y:일년후)    
+	 })
+	 to=$('.finish_date').on('change',function(){
+		 from.datepicker('option','maxDate',getDate(this));
+	 });
+	//시작일의 초기값을 설정
+	$('.start_date').datepicker('setDate', 'today');
+	//판매일의 초기값을 설정
+	$('.finish_date').datepicker('setDate', '+5Y');	 //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
+	
+	function getDate( element ) {
+	      var date;
+	      try {
+	        date = $.datepicker.parseDate( dateFormat, element.value );
+	      } catch( error ) {
+	        date = null;
+	      }
+	      return date;
+	    }
+});
+$(function(){
+	
+
 
 //submit 등록하기 전 유효성검사
 $('submit').click(function(){
@@ -456,115 +557,129 @@ $('submit').click(function(){
 	}
 	//-------상품명------------
 	//상품명이 공백일 경우
-	if($('#product_register_name').text('') || $('#product_register_name').val('')){
-         return alert('상품명을 입력해주세요.'); 
-         return false;
-    }
+	if($('#product_register_name').text()=='' || $('#product_register_name').val()==null || $('#product_register_name').val() == '' ){
+       return alert('상품명을 입력해주세요.'); 
+       return false;
+  }
 	//상품명이 100자가 넘는 경우
 	if($('#product_register_name').text().length>100){
-        return alert('상품명은 100자 이내로 작성해주세요.'); 
-        return false;
-   }
-   //--------판매가격-------
-   //판매가격이 입력되지 않은 경우
-   		//할인 설정 설정안함  중 어느것도 선택하지 않은 경우
-   	
-	   //할인설정 
+      return alert('상품명은 100자 이내로 작성해주세요.'); 
+      return false;
+ }
+ //--------판매가격-------
+ //판매가격이 입력되지 않은 경우
+	if($("#productprice").val()==null || $("#productprice").val()=='' || $("#productprice").val()<0  || $("#productprice").text()==''){ 
+		alert("판매 금액을 입력해주세요."); 
+		return false;
+	} 
+ if($("input[name=saleselect]:checked").val() == ''){
+	   alert("할인 적용 여부를 선택해주세요."); 
+		return false;
+ }
+	//할인설정 
+	if($("input[name=saleselect]:checked").val() == 1){
 	   //할인금액이 입력되지 않은 경우
-	   //특정기간 선택 후 기간을 입력하지 않은 경우
-	   //기간설정 버튼과 하단에 날짜 입력이 동시에 설정되지 않도록 하기
-	   //판매기간 설정 설정안함  중 어느것도 선택하지 않은 경우
-	   //판매기간 설정
-	   //날짜를 입력하지 않은 경우
+		if($("#saleprice").val()==null || $("#saleprice").val()=='' || $("#saleprice").val()<0  || $("#saleprice").text()==''){ 
+			alert("할인 금액을 입력해주세요."); 
+			return false;
+		} 
+	 }
+	
+	//날짜를 입력하지 않은 경우
 	   if($('.start_date').val()==null || $('start_date').val()==''){
 		   return alert('판매 날짜를 입력해주세요');
 		   return false;
 	   }
 	//--------재고수량---------
 	//재고수량을 입력하지 않은 경우
-	if($('#totalstock').test('') || $('#totalstock').val('')){
-		retrun alert('재고 수량을 입력해주세요.');
+	if($('#totalstock').text('') || $('#totalstock').val()==null || $("#totalstock").val()<0 || $("#totalstock").text()==''){
+		return alert('재고 수량을 입력해주세요.');
 		return false;
 	}
 	//-------옵션------------
+	if($("input[name=optionselect]:checked").val() == ''||$("input[name=optionselect]:checked").val() == null){
+		return alert('옵션 적용 여부를 선택해주세요.');
+		return false;
+	}
 	//옵션 선택 후 값을 입력하지 않은 경우
-	
+	if($("input[name=optionselect]:checked").val() == '1'){
+		if($('#select_option').val()=='0'){
+			return alert('추가할 옵션 갯수을 선택해주세요.');
+			return false;
+		}
+		if($('#optionname').val()=='' && $('#optionstock').val()=='' && $('#optionprice').val()==''){
+			return alert('옵션 목록을 정확히 입력해주세요.');
+			return false;
+		}
+		
+	}
 	//------상품 이미지-------
 	//대표 이미지를 업로드 하지 않은 경우
-	
+	if($('#thumbimg').val()==null || $('#thumbimg').val()==''){
+		alert("대표 이미지를 설정해주세요.");
+		return false;
+	}
 	//------상세설명---------
 	//상세설명이 빈칸인 경우
-	
+	if($("#productcontent").val()==null || $("#username").val()==''){ 
+		alert("상품 상세 설명을 입력해주세요"); 
+		return false;
+	}
 	//-------배송-----------
 	//택배 또는 픽업 버튼 중 어느것도 선택하지 않은 경우
+	if($("#deliverysel").val()==null || $("#deliverysel").val()==''){ 
+		alert("배송방법을 입력해주세요"); 
+		return false;
+	}
 	//택비 설정
 	//배송비를 입력하지 않은 경우
+	if($("#deliveryprice").val()==null || $("#deliveryprice").val()=='' || $("#deliveryprice").val()<0 || $("#deliveryprice").text()==''){ 
+		alert("배송비를 입력해주세요"); 
+		return false;
+	}
 	//배송비 결제 방식을 선택하지 않은 경우
-	
+	if($("#deliveryoption").val()==null || $("#deliveryoption").val()=='' ){ 
+		alert("배송방법을 선택해주세요"); 
+		return false;
+	}
 	//-------상품내용-------------
 	//판매단위를 입력하지 않은 경우
+	if($("#selloption").val()==null || $("#selloption").val()==''){ 
+		alert("판매단위를 입력해주세요"); 
+		return false;
+	}
 	//중량/용량 과 g/kg 중 하나라도 입력하지 않은 경우
-	$('input[name="sellweight"]').val($('input[name="sellweight"]').replace(/,/g, ''));
-	$('select[name="sellweight"]').val($('select[name="sellweight"]').val().replace(/,/g, ''));
-	$('input[name="selloption"]').val($('input[name="selloption"]').val().replace(/,/g, ''));
-	$('select[name="selloption"]').val($('select[name="selloption"]').val().replace(/,/g, ''));
+	if($("#sellweight").val()==null || $("#selloption").val()==''){ 
+		alert("판매상품의 중량/용량을 입력해주세요"); 
+		return false;
+	}
 	
 	//원산지 선택하지 않은 경우
-	//보간/포장타입을 선택하지 않은 경우
+	if($("#origin").val()==null || $("#origin").val()==''){ 
+		alert("원산지를 선택해주세요"); 
+		return false;
+	}
+	//보관/포장타입을 선택하지 않은 경우
+	if($("#wrapping").val()==null || $("#wrapping").val()==''){ 
+		alert("보관/포장타입을 선택해주세요"); 
+		return false;
+	}
 	//상품정보, 주의사항, 보관방법, 유통기한이 빈칸일 경우
+	if($("#productinfomation").val()==null || $("#productinfomation").val()==''){ 
+		alert("상품정보를 입력해주세요"); 
+		return false;
+	}
+	if($("#prevention").val()==null || $("#prevention").val()==''){ 
+		alert("주의사항 입력해주세요"); 
+		return false;
+	}
+	if($("#deadline").val()==null || $("#deadline").val()==''){ 
+		alert("유통기한 입력해주세요"); 
+		return false;
+	}
 		return true;
 	}); //submit 유효성검사 end
-//취소 history back
-	
-});//function end
-
-//판매기간/ 할인기간 날짜 설정
-$(function(){
-/* 	$('.start_date').datepicker({dateFormat:'YY/MM/DD'});
-	$('.finish_date').datepicker({dateFormat:'YY/MM/DD'}); */
-	/* $('.start_date').datepicker({minDate:0}); */
-	 var dateFormat ="yy/mm/dd",
-	 from = $('.start_date').datepicker({
-		 showOn:"both",
-		 defalutDate:"+1w",
-		 changeMonth:true,
-		 numberOfMonths:2,
-		 changeMonth: true,
-	     changeYear: true,
-	     buttonText: "날짜선택",
-	     dateFormat: 'yy/mm/dd',
-	     language:'kr'
-	 });
-	 from = $('.start_date').on('change', function(){
-		 to.datepicker('option','minDate',getDate(this));
-	 }),
-	 to=$('.finish_date').datepicker({
-		 showOn:"both",
-		 dafaultDate:'+1w',
-		 changeMonth:true,
-		 numberOfMonths:2,
-		 changeMonth: true,
-	     changeYear: true,
-	     buttonText: "날짜선택",
-	     dateFormat: 'yy/mm/dd',
-	     language:'kr'
-	 })
-	 to=$('.finish_date').on('change',function(){
-		 from.datepicker('option','maxDate',getDate(this));
-	 });
-	function getDate( element ) {
-	      var date;
-	      try {
-	        date = $.datepicker.parseDate( dateFormat, element.value );
-	      } catch( error ) {
-	        date = null;
-	      }
-	 
-	      return date;
-	    }
 });
-
-
 </script>
 <body>
 	<div class="main">
@@ -634,11 +749,11 @@ $(function(){
 	<div class="category_title">판매가격</div>
 	<div class="category_wrap">		
 		<ul>
-			<li><label>판매가 </label>&nbsp;<input type="number" name="productprice" id="productprice" min="100" placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
+			<li><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
 			<br/>
 			
 			<li> 
-				<label>판매기간</label>&nbsp;&nbsp;
+				<label>판매기간</label>&nbsp;&nbsp;<span class="notice">판매 기간을 설정해주세요. 미선택시 판매시작일은 등록일, 판매종료일은 5년이내로 지정됩니다.</span>
 			</li>
 			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
 		
@@ -649,21 +764,24 @@ $(function(){
 			</li>
 			<ul id="sale_ul" style="display:none; background-color:#fcfcfc;">
 				<li>
-					<label>전체할인 </label>&nbsp;
-					<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min="0"/>&nbsp;<span>원</span>&nbsp;<span>할인</span>
+					<label>할인금액 </label>&nbsp;
+					<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min=0 />&nbsp;<span>원</span>&nbsp;<span>할인</span>
 				</li>
-				<!-- <li><input type="button"  id="sale_period_btn" class="btn" value="특정기간만 할인"/>&nbsp;<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요.</span></li> -->
+				<li>
+					<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요. 미선택시 할인시작일은 등록일, 할인종료일은 5년이내로 지정됩니다.</span>
+				</li>
 				<li id="sale_period">
 					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
 					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
 				</li>
-				<li>
-					<label for="">할인 판매가</label>&nbsp; <span id="total_price" >--할인금액--</span>&nbsp;원 &nbsp;(-<span id="discount_price">0</span>원 할인) 
-					<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
-				</li>
-				<li><input type="checkbox" name="saleb" id="saleb" value="1"/><span>못난이 할인 상품으로 등록</span></li> 
+				
+				<li><input type="checkbox" name="saleb" id="saleb" value="1"/><label for="saleb">못난이 할인 상품으로 등록</label></li> 
 				<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
 			</ul>
+			<li>
+				<label for="">최종 판매가격</label>&nbsp; <span id="total_price" ></span>&nbsp;원 &nbsp;(-<span id="discount_price"></span>원 할인) 
+				<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
+			</li>
 		</ul>
 		</div>
 	
@@ -671,7 +789,7 @@ $(function(){
 	 <div class="category_title">재고수량</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0"/>&nbsp;<span>개</span></li>
+				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min=0 value=0/>&nbsp;<span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
@@ -686,7 +804,7 @@ $(function(){
 				<ul id="add_option_ul" style="display:none; background-color:#fcfcfc;">
 				<li><label>옵션 갯수</label>&nbsp;
 					<select id="select_option" name="option_count"> 
-						<option selected value='0'>적용안함</option>
+						<option selected value='0'>옵션추가</option>
 						<option value='1'>1</option>
 						<option value='2'>2</option>
 						<option value='3'>3</option>
@@ -699,36 +817,13 @@ $(function(){
 						<thead>
 							<tr>
 								<th>옵션명</th>
-								<th>가격</th>
 								<th>재고수량</th>
+								<th>가격</th>
+								
 							</tr>
 						</thead>
 						<tbody id="option_tbody">
-							<tr id='tr1'>
-								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="optionstock" id="optionstock" min="100" placeholder="원"/></td>
-								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
-							</tr>
-							<tr id='tr2'>
-								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="optionstock" id="optionstock" min="100" placeholder="원"/></td>
-								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
-							</tr>
-							<tr id='tr3'>
-								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="optionstock" id="optionstock" min="100" placeholder="원"/></td>
-								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
-							</tr>
-							<tr id='tr4'>
-								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="optionstock" id="optionstock"  min="100" placeholder="원"/></td>
-								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
-							</tr>
-							<tr id='tr5'>
-								<td><input type="text" name="optionname" id="optionname" placeholder="상품명을 입력해주세요."/></td>
-								<td><input type="number" name="optionstock" id="optionstock"  min="100" placeholder="원"/></td>
-								<td><input type="number" name="optionprice" id="optionprice" placeholder="개"/></td>
-							</tr>
+							<!--  선택한 value 값 만큼 표 추가  -->
 						</tbody>
 					</table>
 				</li>
@@ -765,7 +860,7 @@ $(function(){
 				</li>
 				<ul id="delivery_option" style="display:none; background-color:#fcfcfc;">
 					<li><label>배송비</label>&nbsp;
-						<input type="number" name="deliveryprice" id="deliveryprice"/>&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
+						<input type="number" name="deliveryprice" id="deliveryprice" min=0  />&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 					</li>
 					<li id="pay"><label>결제방식</label>&nbsp;
 						<input type="radio" name="paymentoption" id="delivery_price_option" value="1"/><label for="착불">착불</label>&nbsp;
@@ -817,21 +912,21 @@ $(function(){
 					</select>
 				</li>
 				<li><label for="">상품정보</label><br/>
-					<textarea placeholder="간략한 상품정보를 입력해주세요." name="productinfomation"></textarea>
+					<textarea placeholder="간략한 상품정보를 입력해주세요." id ="productinfomation" name="productinfomation"></textarea>
 				</li>
 				<li><label for="">주의사항</label><br/>
-					<textarea placeholder="주의사항을 입력해주세요." name="prevention"></textarea>
+					<textarea placeholder="주의사항을 입력해주세요." id="prevention" name="prevention"></textarea>
 				</li>
 				<li><label for="">유통기한</label><br/>
-					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." name="deadline"></textarea>
+					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." id="deadline" name="deadline"></textarea>
 				</li>
 			</ul>
 		</div>
 		<hr/>
 	<!--------------------------------------------취소/ 저장하기 버튼---------------------------------------->
 		<div class="end_button_wrap">
-			<input type="button" id="cancel_btn" class="btn" value="취소">
-			<input type="submit" name="" value="저장하기" id="save_btn" class="btn"/>
+			<input type="button" id="cancel_btn" class="btn" value="취소" onclick="location.href='seller/product_list'">
+			<input type="submit" name="submit" value="등록하기" id="save_btn" class="btn"/>
 		</div>
 	</form>
 	</div><!-- article end -->

@@ -41,11 +41,11 @@
 				    	</when>
 				    </choose>
 			        
-			        group by  c.catenum,c.catename, m.mcatenum, m.mcatename, p.totalstock,p.productnum, p.productname, p.userid, o.ordernum, o.orderquantity, p.productprice, p.saleselect, p.optionselect, p.saleb,
+			       group by  c.catenum,c.catename, m.mcatenum, m.mcatename, p.totalstock,p.productnum, p.productname, p.userid, o.ordernum, o.orderquantity, p.productprice, p.saleselect, p.optionselect, p.saleb,
 			                    p.sellstart, p.sellfinish, p.thumbimg, d.saleprice, d.salestart, d.salefinish) 
-			group by catenum, catename, mcatenum, mcatename, productnum, userid,  productname, totalstock,  productprice, saleselect, optionselect, saleb, sellstart, sellfinish,
-			        thumbimg, saleprice, salestart, salefinish
-			order by productnum desc)
+				group by catenum, catename, mcatenum, mcatename, productnum, userid,  productname, totalstock,  productprice, saleselect, optionselect, saleb, sellstart, sellfinish,
+				        thumbimg, saleprice, salestart, salefinish
+				order by productnum desc)
 		<![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by productnum)
         <![CDATA[where rownum<=]]>
         <if test="pageNum==totalPage">${lastPageRecord}</if>

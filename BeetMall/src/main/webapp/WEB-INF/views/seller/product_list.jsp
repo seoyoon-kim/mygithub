@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
+<%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -22,13 +22,7 @@
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
-
-<script>
-	$('selectList')
-
-</script>	
 <style>
-	#article{margin:120px 0 0 0;}
 	#productName a{color:black; cursor:pointer;}
 	.table_wrap{margin-top:20px;}
 	.product_table,.table_wrap{
@@ -117,8 +111,50 @@
  	img{width:100px; height: 100px; margin:5px 0 5px 0;}
 </style>
 <script>
+//체크박스 삭제
+function productDel(){
+	var url = "productDelete"; //controller url
+	var valueArr = new Array();
+	var list = $('input[name=oneProductCheck]');
+	console.log('list.length ->', list.length);
+	console.log('list -> ', list);
+	for (var i = 0; i<list.length; i++){  
+		if(list[i].checked){ //선택된 값 배열에 저장
+			console.log('list[i].value->', list[i].value);
+			valueArr.push(list[i].value);
+			console.log('valueArr->',valueArr);
+		}
+	}
+	if(valueArr.length==0){
+		alert('선택된 상품이 없습니다.');
+	}else{
+		var msg = confirm('해당 상품을 삭제하시겠습니까?');
+		$.ajax({
+			url : url,
+			type :'POST',
+			traditional : true,
+			data: {
+				valueArr : valueArr
+			},
+			success: function(){
+				
+					alert('선택한 상품이 삭제되었습니다.');
+					location.replace('product_list');
+			},error :function(){
+				alert('삭제가 실패하였습니다.');
+			}
+		});
+		
+	}
+
+	
+};
+
 //체크박스 전체선택
 $(function(){
+	$('.product_table input[type=checkbox]').click(function(){
+		console.log('this checkbox value>>', $(this).val());
+	});
 	$('#productCheck').click(function(){
 		$('.product_table input[type=checkbox]').prop('checked',$('#productCheck').prop('checked'));
 	});
@@ -136,14 +172,13 @@ $(function(){
 });	
 //select 
 $(document).ready(function(){
+	var sort = document.getElementsByClassName('selectList');
+	var count = 0;
+	var sortquery = '';
 	$('#selectList').change(function(){
 		var option = $(this).val();
-		var price = $('#productprice>#price_num').val();
-		console.log(price);
 		console.log(option);
-		if(option=='전체보기'){ //전체
-			
-		}
+	
 		if(option =='판매중'){
 			$('td:contains("판매중")').parents('tr').css('display','');
 			$('td:contains("판매종료")').parents('tr').css('display','none');
@@ -152,8 +187,9 @@ $(document).ready(function(){
 			$('td:contains("판매종료")').parents('tr').css('display','');
 			$('td:contains("판매중")').parents('tr').css('display','none');
 		}
-		if(option='높은가격순'){
-			
+		if(option=='전체보기'){ //전체
+			$('td:contains("판매중")').parents('tr').css('display',' ');
+			$('td:contains("판매종료")').parents('tr').css('display',' ');
 		}
 		//누적판매순
 		//높은가격순
@@ -207,7 +243,7 @@ $(document).ready(function(){
 					<!-- table 1 line -->
 					<c:forEach var="vo" items="${productList}">
 					<tr class="tbl_line">
-						<td  class="tbl_line_cell"><div id="productCheck"><input type="checkbox" checked id="oneItemCk" name="oneItemCk" checked="checked" title="상품 선택"></div></td>
+						<td  class="tbl_line_cell"><div id="productCheck"><input type="checkbox"  id="oneProductCheck" name="oneProductCheck" checked="checked" title="${vo.productname}" value="${vo.productnum}"></div></td>
 						<td class="tbl_line_cell"><div id="productNum"><span id="productNum">${vo.productnum}</span></div></td>
 						<!-- 대분류 번호 숨기기 -->
 						<td class="tbl_line_cell">	
@@ -245,16 +281,16 @@ $(document).ready(function(){
 			<div class="option_wrap">
 			
 				<!-- select pull-down menu넣기 -->
-				<select id="selectList">
-				<option value="전체보기" selected>전체보기</option>
+				<select id="selectList" name="sortRecord">
+				<option value="전체" selected>전체보기</option>
 				<option value="판매중">판매중</option>
-				<option value="판매종료">판매중</option>
+				<option value="판매종료">판매종료</option>
 				<option value="누적판매순">누적판매순</option>
 				<option value="높은가격순">높은가격순</option>
 				<option value="낮은가격순">낮은가격순</option>
 				</select>
 				<!-- 버튼 -->
-				<input type="submit" value="판매상품 삭제" id="remove_product" class="btn"/>
+				<input type="button" value="판매상품 삭제" id="remove_product" class="btn" onClick="productDel()"/>
 				<input type="submit" value="판매상품 수정" id="edit_product"class="btn"/>
 				
 		
