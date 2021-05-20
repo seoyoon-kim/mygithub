@@ -117,7 +117,7 @@ public class admin_salesController {
 			}//년도 반복문 종료
 			
 		}else if(vo.getCategoryDate().equals("월별")) {// 1) 날짜 구분
-			// 2) 년도 확인
+			// 2) 년도, 월 확인
 			String startDate[] = vo.getCategoryCalendar_start().split("-");
 			String endDate[] = vo.getCategoryCalendar_end().split("-");
 			
