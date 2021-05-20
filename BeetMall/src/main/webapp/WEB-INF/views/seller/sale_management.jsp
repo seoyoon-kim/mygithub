@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="today" value="<%=new java.util.Date()%>"/>
+<c:set var="now"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/></c:set>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -18,192 +21,12 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
 
-	
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/orderSaleStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
 
-<style>
-	/*판매자 왼쪽 카테고리*/
-	.option_change, .page_wrap, table, .search, .management_container, .detail_modal {margin:0 auto;}
-	.search, .management_container, table, .option_change, .detail_modal{width:100%;}
 
-	/*테이블 페이징*/
-	a{  color: #555;}	
-	fieldset{width:100%;}
-	.search_btn, .save_excel{
-		width:85.7px;
-		height:30px;
-		margin-bottom:10px;
-		background:white;
-	}
-	button{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-		height:30px;
-	}	
-	/*판매관리 검색*/
-	select, input, .search_num, search_id, .save_excel, .search_btn{
-		color:gray;
-		height:30px;
-		border:0.8px solid lightgray;
-		width:100px;
-		border-radius: 5px;
-	}
-	.search{
-		margin-top:20px;
-		height:130px;
-		font-size:14px;
-	}
-	.search_num, .search_id{
-		width:170px;
-	}
-	.search_date, .search_category, .search_sub_category{
-		width:140px;
-	}
-	.search_date, .search_category, .search_sub_category, .search_num, .search_id{
-		font-size:12px;
-	}
-	label{
-		font-size:16px;
-		margin-bottom:18px;
-	}
-	.search_wrap>li{
-		margin-top:25px;
-		float:left;
-		width:18%;
-		text-align:center;
-	}
-	.search_wrap>li:first-child, .search_wrap li:nth-child(2) {
-		width:26%;
-	}
-	.search_wrap>li:last-child{
-		width:12%;
-	}
-	/*주문관리 탭*/
-	.management_category{
-		position:relative;
-		height:44px;
-	}
-	.management_category ul{padding:0;}
-	.management_category li{
-		padding:0px;
-		margin:0;
-		float: left;
-	    width: 12.5%;
-	    height: 42px;
-	    background-color: #f8f8f8;
-	    border: 1px solid #dfe2e6;
-	    border-right: 0;
-	    box-sizing: border-box;
-	}
-	
-	.management_category li.on{
-		border-color: #b7bfc8 !important;
-	    border-right: 1px solid #b7bfc8;
-	    margin-right: -1px;
-	    border-bottom: none;
-	}
-	.management_category li >a {
-		display:block;
-		height:28px;
-		padding-top:12px;
-		text-decoration:none;
-		font-family: "Nanum Gothic Bold";
-   		font-size: 15px;
-  		font-weight: bold;
-   		text-align: center;
-    	color: #6c7580;
-	}
-	.menu1{
-		    padding:18px 0;
-	}
-	/*주문관리 테이블*/
-	.table_wrap, form{
-		text-align:center;
-		margin-top:10px;
-	}
-	table{
-		empty-cells: show;
-		text-indent: initial;
-   		border-spacing: 2px;
-   		font-size:13px;
-   		border:1px solid lightgray;
-   		text-align:center;
-   		margin: 0 auto;
-	}
-	th{
-		height:50px;
-		text-align:center;	
-		font-size:14px;	
-	}
-	th:first-child{
-		width:35px;
-	}
-	thead{
-		border-bottom:1px solid lightgray;
-		background:#EEE;
-	}
-	tr{
-		border-bottom:1px solid lightgray;
-	}
-	td{
-		height:50px;
-	}
-	.table_checkbox, #listAllCheck{
-		width:17px;
-	}
-	td:last-child{
-		width:30px;
-	}
-	/*배송옵션 & 변경 버튼*/
-	.option_change{
-		margin-top:5px;
-	}
-	#option_sel{width:120px;}
-	
-/*주문상세 테이블 modal*/
- .detail_modal{display:none;}   
- .detail_modal{width:30%;}
-	.detail_table{
-		width:100%;
-		font-size:12px;
-	}
-
-	.detail_table td{
-		width:20%;
-		height:30px;
-	}
-	.detail_table td{
-		width:20%;
-		height:30px;
-	}
-	.detail_table th{
-		font-size:14px;
-		font-weight:bold;
-		height:30px;
-	}
-	.detail_table td{
-		border-left:1px solid lightgray;
-	}
-	.detail_menu{
-		font-weight: bold;
-	}
-	/*닫기버튼*/
-	#close{
-		font-weight:bold;
-		font-size:16px;
-		width:50px;
-		float:right;
-	}
-</style>
 	<!-- 판매자 주문관리 -->
 		<!-- 상단 검색 옵션 : 접수일/ 카테고리/ 주문번호/ 고객ID/ 검색 -->
 		<!-- 탭 : 전체/ 미입금/ 입금완료/ 배송준비/ 배송중/ 배송완료/ 픽업대기중/ 픽업완료 -->
@@ -216,6 +39,45 @@
 			$('.management_table input[type=checkbox]').prop('checked',$('#listAllCheck').prop('checked'));
 		});
 	});
+//체크박스 값 보내기 & 변경
+	function selectClaimStatusUpdate(){
+		var url = "claimStatusUpdate";
+		var orderNumArr = new Array();
+		var claimStatus = $('#option_sel').val(); //select한 주문정보	
+		var list = $('input[name=oneOrderCheck]'); //listAllCheck, oneOrderCheck
+		console.log('check num->', $('#oneOrderCheck').val());
+		console.log('list.length->', list.length);
+		console.log('list->',list);
+		console.log('option select->',$('#option_sel').val());
+		for(var i = 0; i < list.length; i++){
+			if(list[i].checked){
+				console.log('list[i].value->', list[i].value);
+				orderNumArr.push(list[i].value);
+				console.log('orderNumArr->',orderNumArr);
+			} //if end
+		}// for end
+		if(orderNumArr.length==0){
+			alert('선택된 주문번호가 없습니다.');
+		}else{
+			var msg = confirm('주문상태를 변경하시겠습니까?');
+			$.ajax({
+				url : url,
+				type : 'POST',
+				traditional : true,
+				data:{
+					orderNumArr : orderNumArr,
+					claimStatus : claimStatus
+				},
+				success : function(){
+					alert('주문상태가 변경되었습니다.');
+					location.replace('order_management');
+				}, error : function(){
+					alert('주문상태 변경이 취소되었습니다.');
+				}
+			}); //ajax end
+		}
+	}// function end
+    	
 //검색하기
 	//1. 카테고리 변경
 	$(function(){
@@ -271,50 +133,14 @@
 			}//if else end
 		});
 	});
-//클레임정보 변경
-	/* $(function(){
-		$('#option_sel').change(function(){
-			var option=$(this).val();
-			console.log(option);
-			var claim_option = ['취소요청','취소진행중','반품요청','반품진행중','반품완료'];
-			for(var i = 0; i < claim_option.length; i++){
-				if(option==claim_option[i]){
-					if( $('#change_option').click()){
-						$('.claim').text(claim_option[i]);
-					}
-				}
-			}
-		});
-	});
-	 */
-	 $(function(){
-		 $('#change_option').on('click',function(){
-			 console.log('change_option');
-			 $('#option_sel').change(function(){
-					var option=$(this).val();
-					console.log(option);
-					var claim_option = ['취소요청','취소진행중','반품요청','반품진행중','반품완료'];
-					for(var i = 0; i < claim_option.length; i++){
-						if(option==claim_option[i]){
-								$('.claim').text(claim_option[i]);
-							}// if end
-					}// for end
-				});
-		 });
-		
-	});
-	/* <option value="none">-</option>
-	<option value="취소요청">취소요청</option>
-	<option value="취소진행중">취소진행중</option>
-	<option value="반품요청">반품요청</option>
-	<option value="반품진행중">반품진행중</option>
-	<option value="반품완료">반품완료</option> */
+
+
 //모달
 	function modal(id) {
 		    var zIndex = 9999;
 		    var modal = $('#' + id);
 
-		    // 모달 div 뒤에 희끄무레한 레이어
+		    // 모달 div 뒤에 회색 레이어
 		    var bg = $('<div>')
 		        .css({
 		            position: 'fixed',
@@ -324,7 +150,7 @@
 		            width: '100%',
 		            height: '100%',
 		            overflow: 'auto',
-		            // 레이어 색갈은 여기서 바꾸면 됨
+		            // 레이어 색 
 		            backgroundColor: 'rgba(0,0,0,0.4)'
 		        })
 		        .appendTo('body');
@@ -338,7 +164,7 @@
 	            position: 'fixed',
 	            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 	            
-	            // 시꺼먼 레이어 보다 한칸 위에 보이기
+	            // 회색레이어 보다 한칸 위에 보이기
 	            zIndex: zIndex + 1,
 
 	            // div center 정렬
@@ -349,7 +175,7 @@
 	            webkitTransform: 'translate(-50%, -50%)'
 	        })
 	        .show()
-	        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+	        // 닫기 버튼 처리, 회색 레이어와 모달 div 지우기
 	        .find('.modal_close_btn')
 	        .on('click', function() {
 	            bg.remove();
@@ -368,7 +194,7 @@
 	 
 </script>		
 <body>
-	<div class="main" onkeyup="endModal()">
+<div class="main" >
 
 	<!-- 가운데 content -->
 	<div id="article">
@@ -378,7 +204,7 @@
 		<div class="search">
 			<ul class="search_wrap">
 				<li><label for="">주문접수일</label><br/>
-					<input type="date" name="" class="search_date"/>~<input type="date" name="" class="search_date" />
+					<input type="date" name="" class="search_date"max="${now}"/>~<input type="date" name="" class="search_date" max="${now}"/>
 				</li>
 				<li><label for="">카테고리</label><br/>
 					<select class="search_category">
@@ -438,90 +264,80 @@
 						<table class="management_table">
 							<thead>
 								<tr>
-									<th>NO</th>
 									<th>주문번호</th>
 									<th>상품명</th>
 									<th>수량</th>
 									<th>주문일</th>
 									<th>주문자명/ID</th>
 									<th>전화번호</th>
-									<th>배송요청</th>
 									<th>결제금액</th>
-									<th>클레임상태</th>
+									<th>클레임날짜</th>
 									<th>클레임정보</th>
 									<th><input type="checkbox"  id="listAllCheck" checked/></th>
 								</tr>
 							</thead>
 						<tbody>
+						<c:forEach var="list" items="${list}">
 							<tr>
-								<td>1</td>
-								<td><a href="javascript:modal();">2021041809090</a></td>
-								<td>햅쌀</td>
-								<td>10kg</td>
-								<td>21/04/18 09:10</td>
-								<td>김가지/ kim12</td>
-								<td>010-1234-5678</td>
-								<td>Y</td>
-								<td><span>30,000</span>원 </td>
-								<td><span>배송지연</span></td>
-								<td  class="claim"><span>취소진행중</span></td>
-								<td><input type="checkbox" checked name="" class="table_checkbox"/></td>
+								<td><a href="javascript:modal();">${list.ordernum}</a></td>
+								<td>${list.productname}</td>
+								<td>${list.orderquantity}</td>
+								<td>${list.orderdate}</td>
+								<td>${list.userid}<span>/</span>${list.username}</td>
+								<td>${list.userphone}</td>
+								<td><span>${list.orderprice}</span>원 </td>
+								<td><span>${list.claimdate}</span></td>
+								<td  class="claim"><span>${list.claimstatus}</span></td>
+								<td><input type="checkbox" checked title="${list.ordernum}" value="${list.ordernum}" id="oneOrderCheck" name="oneOrderCheck" class="table_checkbox"/></td>
 							</tr>	
-							<tr>
-								<td>1</td>
-								<td><a href="javascript:modal();">2021041809090</a></td>
-								<td>햅쌀</td>
-								<td>10kg</td>
-								<td>21/04/18 09:10</td>
-								<td>김가지/ kim12</td>
-								<td>010-1234-5678</td>
-								<td>Y</td>
-								<td><span>30,000</span>원 </td>
-								<td><span>상품파손</span></td>
-								<td  class="claim"><span>반품완료</span></td>
-								<td><input type="checkbox" checked name="" class="table_checkbox"/></td>
-							</tr>	
-								<tr>
-								<td></td>
-								<td><a href=""></a></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>N</td>
-								<td><span></span>원 </td>
-								<td><span></span></td>
-								<td class="claim"><span></span></td>
-								<td><input type="checkbox" checked name="" class="table_checkbox"/></td>
-							</tr>
+						</c:forEach>
 						</tbody>
 						</table>	
 					</form>
 				</div>
 		<!-- 클레임 정보 변경 -->
 				<div class="option_change"style="text-align:right;">
+				<span class="notice">선택상품의 클레임 상태를 변경하실 수 있습니다.  </span><br/>
 					<select id="option_sel">
-						<option value="none">-</option>
+						<option value=" ">-</option>
 						<option value="취소요청">취소요청</option>
 						<option value="취소진행중">취소진행중</option>
 						<option value="반품요청">반품요청</option>
 						<option value="반품진행중">반품진행중</option>
 						<option value="반품완료">반품완료</option>
 					</select>
-					<button >변경</button>
+					<input type="button" id="selBtn" value="변경" onClick="selectClaimStatusUpdate()"/>
 				</div>
+				
 		<!-- 페이징-->
-				<div class="page_wrap">
-					<div class="page_nation">
-					   <a class="arrow pprev" href="#"></a>
-					   <a class="arrow prev" href="#"></a>
-					   <a href="#" class="active">1</a>
-					   <a href="#">2</a>
-					   <a class="arrow next" href="#"></a>
-					   <a class="arrow nnext" href="#"></a>
-					</div>
-			 	</div>
+		<div class="page_wrap">
+			<div class="page_nation">
+			  	<!--맨앞으로-->
+  				<a class="arrow_pprev" href="sale_management?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--앞으로-->
+        		<a class="arrow_prev" href="sale_management?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
+         		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
+	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
+	            	<c:if test="${p<=sapvo.totalPage}">  
+						<!--현재페이지 :  현재보고있는 페이지 표시 -->
+		               <c:if test="${p==sapvo.pageNum}">
+		                  <a class="on" href="sale_management?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+		               <!-- 현재페이지가 아닐 때 -->
+		               <c:if test="${p!=sapvo.pageNum}">
+		                  <a href="sale_management?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+	            	</c:if>
+        		</c:forEach>
+        		<!-- 다음 페이지가 있을 때 -->
+				<!--뒤로-->            
+	         	<a class="arrow next" href="sale_management?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--맨뒤로-->
+	         	<a class="arrow nnext" href="sale_management?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+			</div>
+		 </div>
+		 <!-- 페이징 끝 -->
 			</fieldset>
 
 	<!-- 주문 상세정보 modal -->
