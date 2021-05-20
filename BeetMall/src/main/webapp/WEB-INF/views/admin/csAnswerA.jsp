@@ -156,6 +156,7 @@
 		font-weight:normal; 
 		height:300px;
 		padding:15px;
+		overflow: auto;
 	}
 	.empty{
 		background-color:white;
@@ -173,12 +174,13 @@
 <div class="container">
 	<div id="box"> 	
 	<form method="post" action="csAnswerWriteOk">
+		<input type="hidden" value="${vo.qmnum }"/>
 		<table>
 			<tbody> 
 				<tr class="tr_head">
 					<th class="menu" >문의 번호</th>
 					<td class="td" colspan="3">
-						<div id="qNum">
+						<div id="qNum" name="qmnum">
 							${vo.qmnum}
 						</div>
 					</td>
