@@ -155,7 +155,30 @@
 	.contentList>li:nth-child(8), #contentBox li:nth-of-type(8n){
 		width:15%;
 	}
-	
+	#inputsss{
+		flex-wrap:unset;
+		margin-top:30px;
+		display: inline;
+	}
+	#container{
+		height:1080px;
+		overflow:auto;
+		overflow-x: hidden;
+	}
+	#contentBox{
+		overflow: auto;
+	    height: 550px;
+	    overflow-x: hidden;
+	}
+	#addBtn, #delBtn{
+		visibility: hidden;
+	}
+	#sortBox{
+		display:none;
+	}
+	#contentBox>div>ul>li:nth-child(1), #contentBox>div>ul>li:nth-child(2), #contentBox>div>ul>li:nth-child(3), #contentBox>div>ul>li:nth-child(4), #contentBox>div>ul>li:nth-child(5), #contentBox>div>ul>li:nth-child(6), #contentBox>div>ul>li:nth-child(7), #contentBox>div>ul>li:nth-child(8) {
+		border-top:1px solid #eee;
+	}
 </style>
 <script>
 	function pagelist(pagenum){
@@ -240,7 +263,8 @@
 				</c:forEach>
 			</ul>
 		</div>
-		</div>	 
+		</div>	
+		
 		<div class="page_wrap">	
 			<div class="page_nation">
 			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
@@ -261,9 +285,10 @@
 	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
 	           </c:if>
 			</div>
+			
 		 </div> 
-		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+		 <div style="margin: 50px auto;width:550px" >
+			<form method="get" id="inputsss">
 				 <select name="searchKey">
 					<option value="" selected>이름</option>
 	   				<option value="">아이디</option> 
@@ -274,7 +299,7 @@
 				<input type="submit" value="검색"/> 
 			</form> 
 		</div>  
-	</div>
+		</div>
 </div>
 </body>
 </html>
