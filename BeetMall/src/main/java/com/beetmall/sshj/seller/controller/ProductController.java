@@ -22,7 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.beetmall.sshj.seller.service.ProductService;
+import com.beetmall.sshj.seller.vo.OrderSaleVO;
 import com.beetmall.sshj.seller.vo.ProductVO;
 import com.beetmall.sshj.seller.vo.SearchAndPageVO;
 
@@ -234,8 +236,7 @@ public class ProductController {
 	
 
 	
-	
-//====================================== 삭제 ===================================================
+//======================================판매상품 목록에서 삭제 ===================================================
 	//판매상품 삭제 시 진행중인 주문있으면 불가능	
 	@RequestMapping(value = "/productDelete" , method = {RequestMethod.GET, RequestMethod.POST})
 	public String productDelete(@RequestParam(value="valueArr") List<Integer> delList , String oneProductcheck, HttpServletRequest req) {
@@ -257,19 +258,21 @@ public class ProductController {
 	}
 	
 //====================================== 수정 ===================================================
+	//수정하기 뷰로 이동
+	@RequestMapping("oneRecordSelect")
+	public ModelAndView onePageRecordSelect(int productnum) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("productnum", productService.onePageRecordSelect(productnum));
+		mav.setViewName("seller/product_edit");
+		return mav;
+	}
+	// 수정하기 
 	@RequestMapping("/product_edit")
-	public String product_edit() {
-		return "seller/product_edit";
+	public ModelAndView product_edit(OrderSaleVO osvo) {
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
 	}
 	
-	//판매자 주문관리
-	@RequestMapping("/order_management")
-	public String order_management() {
-		return "seller/order_management";
-	}
-	//판매자 판매관리
-	@RequestMapping("/sale_management")
-	public String seller_management() {
-		return "seller/sale_management";
-	}
+
 }
