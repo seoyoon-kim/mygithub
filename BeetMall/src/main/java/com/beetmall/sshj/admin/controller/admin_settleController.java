@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.admin.service.Admin_BoardService;
 import com.beetmall.sshj.admin.service.Boardervice;
 import com.beetmall.sshj.admin.vo.BoardVO; 
 
 @Controller
 public class admin_settleController {
 	@Inject
-	Boardervice adminService;
+	Admin_BoardService adminService;
 	 
 	
 	@RequestMapping("/settleMng")
@@ -57,10 +58,7 @@ public class admin_settleController {
 	@RequestMapping(value="/boardWriteOk", method=RequestMethod.POST)
 	public ModelAndView boardWriteOk(BoardVO vo, HttpSession session, HttpServletRequest req) {
 		vo.setIp(req.getRemoteAddr());
-			
-		//vo.setUserid(((MemberVO)session.getAttribute("logVo")).getUserid()); 
-		//또는 MemberVO vo2 = (MemberVO)session.getAttribute("logVo");//id, 이름이 vo2에 저장
-		//vo.setUserid(vo2.getUserid());	
+			 
 		
 		ModelAndView mav = new ModelAndView();
 		if(adminService.boardInsert(vo)>0) { //글 등록 성공

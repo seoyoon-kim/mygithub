@@ -14,7 +14,7 @@ public interface Admin_BoardService {
 	public List<AdminBoardVO> noticeBoardList(Admin_Board_PageVO pageVO);   
 	public int noticeBoardWrite(AdminBoardVO vo); 
 	public int boardDelA(int infonum);  
-	public int boardUpdate(AdminBoardVO vo);
+	public int boardUpdateA(AdminBoardVO vo);
 	
 
 	 

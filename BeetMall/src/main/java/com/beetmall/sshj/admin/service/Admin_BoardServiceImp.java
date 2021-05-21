@@ -37,7 +37,7 @@ public class Admin_BoardServiceImp implements Admin_BoardService {
  
 
 	@Override
-	public int boardUpdate(AdminBoardVO vo) { 
+	public int boardUpdateA(AdminBoardVO vo) { 
 		return boardDAO.boardUpdateA(vo);
 	}
  

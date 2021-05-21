@@ -33,14 +33,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beetmall.sshj.admin.service.Admin_SalesService;
-import com.beetmall.sshj.admin.service.Boardervice;
+import com.beetmall.sshj.admin.service.Admin_BoardService;
+import com.beetmall.sshj.admin.service.Admin_SalesService; 
 import com.beetmall.sshj.admin.vo.Admin_SalesVO;
 
 @Controller
 public class admin_salesController {
 	@Inject
-	Boardervice adminService;
+	Admin_BoardService adminService;
 	////////////////////매출 관리////////////////////////////////
 	
 	@Autowired

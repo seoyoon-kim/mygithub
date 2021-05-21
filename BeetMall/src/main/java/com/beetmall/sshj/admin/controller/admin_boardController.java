@@ -62,33 +62,7 @@ public class admin_boardController {
 			mav.setViewName("/admin/noticeBoardWrite");		
 			return mav; 
 		}  
-	
-	 	@RequestMapping(value = "noticeWriteOk")
-	    public String requestupload1(MultipartHttpServletRequest mtfRequest) {
-	        String src = mtfRequest.getParameter("src");
-	        System.out.println("src value : " + src);
-	        MultipartFile mf = mtfRequest.getFile("file");
-
-	        String path = mtfRequest.getSession().getServletContext().getRealPath("resources/adminImg");
-
-	        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	        long fileSize = mf.getSize(); // 파일 사이즈
-
-	        System.out.println("originFileName : " + originFileName);
-	        System.out.println("fileSize : " + fileSize);
-
-	        String safeFile = path + System.currentTimeMillis() + originFileName;
-
-	        try {
-	            mf.transferTo(new File(safeFile));
-	        } catch (Exception e) { 
-	            e.printStackTrace();
-	        }  
-
-	        return "/admin/noticeBoardList";
-	    }
- 	 
-	 	
+	 
 	
 	//공지 작성하기
  	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
@@ -145,14 +119,14 @@ public class admin_boardController {
 		}
 		
 		
-		if(boardService.boardUpdate(vo)>0) { //글 등록 성공
+		if(boardService.noticeBoardWrite(vo)>0) { //글 등록 성공
 			transactionManager.commit(status); 
 			mav.setViewName("/admin/noticeBoardList");
 		}else {//글 등록 실패
 			mav.setViewName("/admin/noticeBoardWrite");
 		}
 		}catch(Exception e){
-			System.out.println("<<상품등록 트랜잭션 에러 발생>>");
+			System.out.println("<<공지등록 트랜잭션 에러 발생>>");
 			e.printStackTrace();
 		}
 			return mav; 

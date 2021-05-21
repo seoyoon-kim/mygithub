@@ -13,7 +13,9 @@ div[id^=box], img, .last, #imgs, #claim, #secondBox, #imgs>li:nth-of-type(2),
 	#sta, #noti, #deli, #claim {
 	position: relative;
 }
-
+#topBar h5{
+	width:100% !important;
+}
 #imgBox img {
 	height: 68px;
 }
@@ -21,7 +23,7 @@ div[id^=box], img, .last, #imgs, #claim, #secondBox, #imgs>li:nth-of-type(2),
 #imgs {
 	list-style-type: none;
 	display: flex;
-	top: 100px;
+	top: 130px;
 	left: -460px;
 }
 
@@ -112,12 +114,12 @@ div[id^=box] {
 }
 
 #deli {
-	top: 0 !important;
+	top: 33px !important;
 	margin-left: 10px !important;
 }
 
 #claim {
-	top: -364px !important;
+	top: -334px !important;
 	margin-left: 550px !important;
 	z-index: -1;
 }
@@ -127,24 +129,24 @@ div[id^=box] {
 }
 
 #sta {
-	top: -240px !important;
+	top: -210px !important;
 	margin-left: 10px !important;
 }
 
 #noti {
-	top: -605px !important;
+	top: -575px !important;
 	margin-left: 550px !important;
 }
 
 #ques, #accept {
 	position: relative;
-	top: -605px !important;
+	top: -575px !important;
 	margin-left: 10px !important;
 }
 
 #rep {
 	position: relative;
-	top: -969px !important;
+	top: -939px !important;
 	margin-left: 730px !important;
 }
 
@@ -153,6 +155,11 @@ div[id^=box] {
 }
 </style>
 <%@ include file="/inc/top.jspf"%>
+<div id="topBarContainer">
+	<div id="topBar">			
+		<h5><strong><a href="adminHome">Beetmall 관리</a></strong></h5>			
+	</div>  
+</div> 
 <div id="body1">
 	<%@ include file="/inc/leftBar.jspf"%>
 	<div id="total">
@@ -168,17 +175,17 @@ div[id^=box] {
 				<br>
 				<ul>
 					<c:if test="${ready != null && ready != '' }">
-						<li>배송준비중 &nbsp;<b style="font-weight: bold; color: orange">${ready }</b> 건</li>
+						<li>배송준비중 &nbsp;<b style="font-weight: bold; color: blue">${ready }</b> 건</li>
 					</c:if>
 					<c:if test="${ready == null}">
-						<li>배송준비중 &nbsp;<b style="font-weight: bold; color: orange">0</b> 건</li>
+						<li>배송준비중 &nbsp;<b style="font-weight: bold; color: blue">0</b> 건</li>
 					</c:if>
 
 					<c:if test="${ing != null && ing != '' }">
-						<li>배송중 &nbsp;<b style="font-weight: bold; color: green">${ing}</b> 건</li>
+						<li>배송중 &nbsp;<b style="font-weight: bold; color: blue">${ing}</b> 건</li>
 					</c:if>
 					<c:if test="${ing == null}">
-						<li>배송중 &nbsp;<b style="font-weight: bold; color: green">0</b> 건</li>
+						<li>배송중 &nbsp;<b style="font-weight: bold; color: blue">0</b> 건</li>
 					</c:if>
 
 					<c:if test="${deliveryClear != null && deliveryClear != '' }">
@@ -205,17 +212,17 @@ div[id^=box] {
 			<div id="box2">
 				<ul>
 					<c:if test="${cancel != null && ing != '' }">
-						<li>취소요청 &nbsp;<b style="font-weight: bold; color: teal">${cancel}</b> 건</li>
+						<li>취소요청 &nbsp;<b style="font-weight: bold; color: green">${cancel}</b> 건</li>
 					</c:if>
 					<c:if test="${cancel == null}">
-						<li>취소요청 &nbsp;<b style="font-weight: bold; color: teal">0</b> 건</li>
+						<li>취소요청 &nbsp;<b style="font-weight: bold; color: green">0</b> 건</li>
 					</c:if>
 
 					<c:if test="${refund != null && refund != '' }">
-						<li>환불요청 &nbsp;<b style="font-weight: bold; color: purple">${refund}</b> 건</li>
+						<li>환불요청 &nbsp;<b style="font-weight: bold; color: green">${refund}</b> 건</li>
 					</c:if>
 					<c:if test="${refund == null}">
-						<li>환불요청 &nbsp;<b style="font-weight: bold; color: purple">0</b> 건</li>
+						<li>환불요청 &nbsp;<b style="font-weight: bold; color: green">0</b> 건</li>
 					</c:if>
 				</ul>
 			</div>
@@ -355,7 +362,7 @@ div[id^=box] {
 					승인 신청 건수
 					<div style="font-weight: bold; color: orange">${approve }</div>
 					건<br /> 미처리 건수
-					<div style="font-weight: bold; color: red">${clear }</div>
+					<div style="font-weight: bold; color: orange">${clear }</div>
 					건
 				</div>
 			</div>
@@ -364,9 +371,9 @@ div[id^=box] {
 				<br /> <img class="last" src="<%=request.getContextPath()%>/img/y_report.png" />
 				<div id="box6">
 					접수 건수
-					<div style="font-weight: bold; color: green;">${report }</div>
+					<div style="font-weight: bold; color: green">${report }</div>
 					건<br /> 미처리 건수
-					<div style="font-weight: bold; color: blue">${waiting }</div>
+					<div style="font-weight: bold; color: green">${waiting }</div>
 					건
 				</div>
 			</div>

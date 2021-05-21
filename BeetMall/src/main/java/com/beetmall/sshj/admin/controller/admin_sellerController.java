@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.admin.service.Admin_BoardService;
 import com.beetmall.sshj.admin.service.Admin_MemberServiceImp;
 import com.beetmall.sshj.admin.service.Boardervice;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
@@ -18,7 +19,7 @@ import com.beetmall.sshj.admin.vo.BoardVO;
 @Controller
 public class admin_sellerController {
 	@Inject
-	Boardervice adminService;
+	Admin_BoardService adminService;
 	 
 	//////////////////////판매자 관리////////////////////////////////
 	@Inject
