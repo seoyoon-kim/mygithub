@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="today" value="<%=new java.util.Date()%>"/>
+<c:set var="now"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/></c:set>
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -19,191 +22,15 @@
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
 
 	
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/orderSaleStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
 </head>
 
-
-<style>
-	/*판매자 왼쪽 카테고리*/
-	.option_change, .page_wrap, table, .search, .management_container, .detail_modal {margin:0 auto;}
-	.search, .management_container, table, .option_change, .detail_table{width:100%;}
-
-	/*테이블 페이징*/
-	fieldset{width:100%;}
-	.search_btn, .save_excel{
-		width:85.7px;
-		height:30px;
-		margin-bottom:10px;
-		background:white;
-	}
-	button{
-		padding: 3px 10px;
-		color: #666666;
-		background:#fff;
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		height:30px;
-	}	
-	/*주문관리 검색*/
-	select, input, .search_num, search_id, .save_excel, .search_btn{
-		color:gray;
-		height:30px;
-		border:0.8px solid lightgray;
-		width:100px;
-		border-radius: 5px;
-	}
-	.search{
-		margin-top:20px;
-		height:130px;
-		font-size:14px;
-	}
-	.search_num, .search_id{
-		width:170px;
-	}
-	.search_date, .search_category, .search_sub_category{
-		width:140px;
-	}
-	.search_date, .search_category, .search_sub_category, .search_num, .search_id{
-		font-size:12px;
-	}
-	label{
-		font-size:16px;
-		margin-bottom:18px;
-	}
-	.search_wrap>li{
-		margin-top:25px;
-		float:left;
-		width:18%;
-		text-align:center;
-	}
-	.search_wrap>li:first-child, .search_wrap li:nth-child(2) {
-		width:26%;
-	}
-	.search_wrap>li:last-child{
-		width:12%;
-	}
-	/*주문관리 탭*/
-	.management_category{
-		position:relative;
-		height:44px;
-	}
-	.management_category ul{padding:0;}
-	.management_category li{
-		padding:0px;
-		margin:0;
-		float: left;
-	    width: 12.5%;
-	    height: 42px;
-	    background-color: #f8f8f8;
-	    border: 1px solid #dfe2e6;
-	    border-right: 0;
-	    box-sizing: border-box;
-	}
-	
-	.management_category li.on{
-		border-color: #b7bfc8 !important;
-	    border-right: 1px solid #b7bfc8;
-	    margin-right: -1px;
-	    border-bottom: none;
-	}
-	.management_category li >a {
-		display:block;
-		height:28px;
-		padding-top:12px;
-		text-decoration:none;
-   		font-size: 14px;
-  		font-weight: bold;
-   		text-align: center;
-    	color: #6c7580;
-	}
-	.menu1{
-		padding:18px 0;
-	}
-	/*주문관리 테이블*/
-	.table_wrap, form{
-		text-align:center;
-		margin-top:10px;
-	}
-	table{
-		empty-cells: show;
-		text-indent: initial;
-   		border-spacing: 2px;
-   		font-size:13px;
-   		border:1px solid lightgray;
-   		text-align:center;
-   		margin: 0 auto;
-	}
-	th{
-		height:50px;
-		text-align:center;	
-		font-size:14px;	
-	}
-	th:first-child{
-		width:35px;
-	}
-	thead{
-		border-bottom:1px solid gray;
-		background:#EEE;
-	}
-	tr{
-		border-bottom:1px solid lightgray;
-	}
-	td{
-		height:50px;
-	}
-	.table_checkbox, #listAllCheck{
-		width:17px;
-	}
-	td:last-child{
-		width:30px;
-	}
-	/*배송옵션 & 변경 버튼*/
-	.option_change{
-		margin-top:5px;
-	}
-	#option_sel{width:120px;}
-	
-/*주문상세 테이블 modal*/
- .detail_modal{display:none;}   
- .detail_modal{width:50%; background-color:white;}
-	.detail_table{
-		width:100%;
-		font-size:12px;
-		border-left:none;
-		border-right:none;
-	}
-	.detail_table td{
-		width:20%;
-		height:35px;
-		padding:3px;
-	}
-	.detail_table th{
-		font-size:15px;
-		font-weight:bold;
-		height:30px;
-	}
-/* 	.detail_table td{
-		border:1px solid lightgray;
-	} */
-	.detail_menu{
-		font-weight: bold;
-	}
-	/*닫기버튼*/
-	#close{
-		font-weight:bold;
-		font-size:16px;
-		width:50px;
-		float:right;
-		color:black;
-	}
-	#talk_customer{margin:10px;}
-</style>
 	<!-- 판매자 주문관리 -->
 		<!-- 상단 검색 옵션 : 접수일/ 카테고리/ 주문번호/ 고객ID/ 검색 -->
 		<!-- 탭 : 전체/ 미입금/ 입금완료/ 배송준비/ 배송중/ 배송완료/ 픽업대기중/ 픽업완료 -->
-		<!-- 표: no, 주문번호, 상품명, 수량, 주문일, 주문자명/Id, 전화번호, 배송요청, 결제금액, 주문상태, 배송정보, 체크박스 -->
+		<!-- 표: no, 주문번호, 상품번호,상품명, 수량, 주문일, 주문자명/Id, 전화번호, 결제금액, 주문상태, 배송정보, 체크박스 -->
 		<!-- 페이징, 배송상태드롭박스, 변경 버튼 -->
 <script>
 	//체크박스 전체선택
@@ -212,75 +39,56 @@
 			$('.management_table input[type=checkbox]').prop('checked',$('#listAllCheck').prop('checked'));
 		});
 	});
+	//체크박스 값 보내기
+	function selectOrderStatusUpdate(){
+		var url = "orderStatusUpdate";
+		var orderNumArr = new Array();
+		var orderStatus = $('#option_sel').val(); //select한 주문정보	
+		var list = $('input[name=oneOrderCheck]'); //listAllCheck, oneOrderCheck
+		console.log('check num->', $('#oneOrderCheck').val());
+		console.log('list.length->', list.length);
+		console.log('list->',list);
+		console.log('option select->',$('#option_sel').val());
+		for(var i = 0; i < list.length; i++){
+			if(list[i].checked){
+				console.log('list[i].value->', list[i].value);
+				orderNumArr.push(list[i].value);
+				console.log('orderNumArr->',orderNumArr);
+			} //if end
+		}// for end
+		if(orderNumArr.length==0){
+			alert('선택된 주문번호가 없습니다.');
+		}else{
+			var msg = confirm('주문상태를 변경하시겠습니까?');
+			$.ajax({
+				url : url,
+				type : 'POST',
+				traditional : true,
+				data:{
+					orderNumArr : orderNumArr,
+					orderStatus : orderStatus
+				},
+				success : function(){
+					alert('주문상태가 변경되었습니다.');
+					location.replace('order_management');
+				}, error : function(){
+					alert('주문상태 변경이 취소되었습니다.');
+				}
+			}); //ajax end
+		}
+	}// function end
+    	
 	//검색하기
 		//1. 카테고리 변경
-		$(function(){
-			
-			var dried_fruits = ['감말랭이', '건망고','건바나나','건자두', '건포도', '곶감', '기타건과류'];
-			var nut = ['대추','땅콩','마카다미아','밤','아몬드','은행','잣','캐슈너트','피스타치오','피칸','해바라기씨','호두','호박씨','기타견과류'];
-			var fruits = ['감', '감귤', '과일바구니','딸기','레몬','리치','망고','매실','바나나','배','복분자','복숭아','블루베리','사과','석류','수박','아보카도','오렌지','자두', '자몽','참외','천혜향 ','체리','키위/참다래', '토마토', '파인애플','포도','한라봉','혼합과일세트', '기타과일'];
-			var rice = ['기능성쌀','백미','찹쌀', '현미', '흑미'];
-			var multigrain = ['기장','기타잡곡','녹두','들깨','메밀','보리','수수','옥수수','율무','참깨','콩','팥','혼합곡'];
-			var vegetable =['감자','건나물','고구마','고추','기타채소류','단호박','당근','대파','더덕','도라지','마','마늘','무','배추','버섯','부추','브로콜리','산나물','삶은나물','상추','새싹채소','생강','시금치','쌈채소','아스파라거스','알로에','애호박','양배추','양파','연근','열무','오이','우엉','죽순','쪽파','피망/파프리카'];
-			 
-			$('.search_category').change(function(){
-				var option=$(this).val();
-				console.log(option);
-				//견과류
-				if(option=='nut'){
-					for(var i=0; i<nut.length; i++){
-						var tag; 
-						tag = "<option value='"+nut[i]+"'>"+nut[i]+"</option>"
-						$('.search_sub_category').append(tag);
-					} //for end
-				//건과류	
-				}else if(option=='dried_fruits'){
-					for(var i=0; i<dried_fruits.length; i++){
-						var tag; 
-						tag = "<option value='"+dried_fruits[i]+"'>"+dried_fruits[i]+"</option>"
-						$('.search_sub_category').append(tag);
-					}//for end
-				}else if(option=='fruits'){
-					for(var i=0; i<fruits.length; i++){
-						var tag; 
-						tag = "<option value='"+fruits[i]+"'>"+fruits[i]+"</option>"
-						$('.search_sub_category').append(tag);
-					}//for end
-				}else if(option=='rice'){
-					for(var i=0; i<rice.length; i++){
-						var tag; 
-						tag = "<option value='"+rice[i]+"'>"+rice[i]+"</option>"
-						$('.search_sub_category').append(tag);
-					}//for end
-				}else if(option=='multigrain'){
-					for(var i=0; i<multigrain.length; i++){
-						var tag; 
-						tag = "<option value='"+multigrain[i]+"'>"+multigrain[i]+"</option>"
-						$('.search_sub_category').append(tag);
-					}//for end
-				}else if(option=='vegetable'){
-					for(var i=0; i<dried_fruits.length; i++){
-						var tag; 
-						tag = "<option value='"+vegetable[i]+"'>"+vegetable[i]+"</option>"
-						$('.search_sub_category').append(tag);
-					}//for end
-				}//if else end
-			});
-		});
+	
 	//탭
-	$(function(){
-		var menu = $('.management_category').nth-child('this');
-		$('menu').click(function(){
-			
-		});
-	})
-	//배송정보 변경
+
 	//모달
 	function modal(id) {
 	    var zIndex = 9999;
 	    var modal = $('#' + id);
 
-	    // 모달 div 뒤에 희끄무레한 레이어
+	    // 모달 div 뒤에 회색 레이어
 	    var bg = $('<div>')
 	        .css({
 	            position: 'fixed',
@@ -290,7 +98,7 @@
 	            width: '100%',
 	            height: '100%',
 	            overflow: 'auto',
-	            // 레이어 색갈은 여기서 바꾸면 됨
+	            // 회색 레이어 색 
 	            backgroundColor: 'rgba(0,0,0,0.4)'
 	        })
 	        .appendTo('body');
@@ -304,7 +112,7 @@
             position: 'fixed',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)',
 
-            // 시꺼먼 레이어 보다 한칸 위에 보이기
+            // 회색 레이어 보다 한칸 위에 보이기
             zIndex: zIndex + 1,
 
             // div center 정렬
@@ -315,7 +123,7 @@
             webkitTransform: 'translate(-50%, -50%)'
         })
         .show()
-        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+        // 닫기 버튼 처리, 회색 레이어와 모달 div 지우기
         .find('.modal_close_btn')
         .on('click', function() {
             bg.remove();
@@ -328,13 +136,33 @@
 	    modal('my_modal');
 	    console.log('modaldmoadfa');
 	    $('my_modal').css('display','');
-	   /*  $("body").off('scroll touchmove mousewheel');  */
-	    
+	   /*  $("body").off('scroll touchmove mousewheel');  */    
 	});
- 
-
-    	
-</script>		
+// 검색
+//검색어 확인
+	$(function(){
+		$("#searchForm").submit(function(){
+			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+			if($('#searchWord').val()=="" || $('#searchWord').val()==null){
+				alert("검색어를 입력하세요.");
+				return false;
+			}
+			return true;
+		});
+	});
+	$(document).ready(function(){
+		$('management_category li').click(function(){
+			var tab_id = $(this).attr('data-tab');
+			$('management_category li').removeClass('current');
+			$('.menu').removeClass('current');
+	
+			$(this).addClass('current');
+			$("#"+tab_id).addClass('current');
+			});
+	
+	});
+</script>	
+	
 <body>
 	<div class="main" >
 
@@ -344,11 +172,11 @@
 	<div class="wrapTitle">주문관리</div>
 	
 		<!-- 상단 검색 옵션 : 접수일/ 카테고리/ 주문번호/ 고객ID/ 검색 -->
-		<form>
+		<form method="get" action="order_management" id="searchForm">
 		<div class="search">
 			<ul class="search_wrap">
 				<li><label for="">주문접수일</label><br/>
-					<input type="date" name="" class="search_date"/>~<input type="date" name="" class="search_date" />
+					<input type="date" name="" class="search_date" max="${now}"/>~<input type="date" name="" class="search_date" max="${now}"/>
 				</li>
 				<li><label for="">카테고리</label><br/>
 					<select class="search_category">
@@ -358,7 +186,7 @@
 						<option value="fruits">과일</option>
 						<option value="rice">쌀</option>
 						<option value="multigrain">잡곡/혼합곡</option>
-						<option value="vegetable">채소</option>
+						<option value="vegetable">채소</option> 
 						
 					</select>
 					<!-- 중뷴류 카테고리 선택 -->
@@ -374,14 +202,14 @@
 					<!-- 채소 -->
 				</li>
 				<li><label for="">주문번호</label><br/>
-					<input type="text" size="15" name="" class="search_num" placeholder="주문번호를 입력해주세요."/>
+					<input type="number" size="15" name="searchWord" class="search_num" placeholder="주문번호를 입력해주세요."/>
 				</li>
 				<li><label for="">구매자 ID</label><br/>
-					<input type="text" size="15" name="" class="search_id" placeholder="ID를 입력해주세요."/>
+					<input type="text" size="15" name="searchWord" class="search_id" placeholder="ID를 입력해주세요."/>
 				</li>
 				<li>
 					<input type="button" name="" class="save_excel" value="엑셀로 저장" onclick="save_excel()"/>
-					<input type="button" name="" class="search_btn" value="검색"/><br/>				
+					<input type="submit" name="searchBtn" class="search_btn" value="검색"/><br/>				
 				</li>
 			</ul>
 		
@@ -391,14 +219,14 @@
 		<!-- 탭 : 전체/ 미입금/ 입금완료/ 배송준비/ 배송중/ 배송완료/ 픽업대기중/ 픽업완료 -->
 		<div class="management_container">
 				<ul class="management_category">
-				<li class="menu1 on"><a href=""><span>전체</span></a></li>
-				<li class="menu2"><a href=""><span>미입금</span></a>
-				<li class="menu3"><a href=""><span>입금완료</span></a>
-				<li class="menu4"><a href=""><span>배송준비</span></a>
-				<li class="menu5"><a href=""><span>배송중</span></a>
-				<li class="menu6"><a href=""><span>배송완료</span></a>
-				<li class="menu7"><a href=""><span>픽업대기중</span></a>
-				<li class="menu8"><a href=""><span>픽업완료</span></a>
+				<li class="menu current" data-tab="tab1"><a href=""><span>전체</span></a></li>
+				<li class="menu" data-tab="tab2"><a href=""><span>미입금</span></a>
+				<li class="menu" data-tab="tab3"><a href=""><span>입금완료</span></a>
+				<li class="menu" data-tab="tab4"><a href=""><span>배송준비</span></a>
+				<li class="menu" data-tab="tab5"><a href=""><span>배송중</span></a>
+				<li class="menu" data-tab="tab6"><a href=""><span>배송완료</span></a>
+				<li class="menu" data-tab="tab7"><a href=""><span>픽업대기중</span></a>
+				<li class="menu" data-tab="tab8"><a href=""><span>픽업완료</span></a>
 			</ul>
 		</div>
 			<fieldset>
@@ -408,89 +236,80 @@
 						<table class="management_table" >
 							<thead>
 								<tr >
-									<th>NO</th>
 									<th>주문번호</th>
+									<th>상품번호</th>
 									<th>상품명</th>
 									<th>수량</th>
 									<th>주문일</th>
 									<th>주문자명/ID</th>
 									<th>전화번호</th>
-									<th>배송요청</th>
 									<th>결제금액</th>
 									<th>주문상태</th>
-									<th>배송정보</th>
+									
 									<th><input type="checkbox" checked id="listAllCheck"/></th>
 								</tr>
 							</thead>
 						<tbody>
+						<c:forEach var="list" items="${list}" >
 							<tr>
-								<td>1</td>
-								<td><a href="javascript:modal();" >2021041809090</a></td><!-- id="popup_open_btn" -->
-								<td>햅쌀</td>
-								<td>10kg</td>
-								<td>21/04/18 09:10</td>
-								<td>김가지/ kim12</td>
-								<td>010-1234-5678</td>
-								<td>Y</td>
-								<td><span>30,000</span>원 </td>
-								<td><span>배송지연</span></td>
-								<td><span>취소진행중</span></td>
-								<td><input type="checkbox" checked name="" class="table_checkbox"/></td>
+								<td><a href="javascript:modal()">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
+								<td>${list.productnum}</td>
+								<td>${list.productname}</td>
+								<td>${list.orderquantity}</td>
+								<td>${list.orderdate}</td>
+								<td>${list.userid}<span>/</span>${list.username}</td>
+								<td>${list.userphone}</td>
+								<td><span>${list.orderprice}</span>원 </td>
+								<td><span>${list.orderstatus}</span></td>
+								<td><input type="checkbox" checked title="${list.ordernum}" value="${list.ordernum}" id="oneOrderCheck" name="oneOrderCheck" class="table_checkbox"/></td>
 							</tr>	
-							<tr>
-								<td>1</td>
-								<td><a href="javascript:modal();">2021041809090</a></td>
-								<td>햅쌀</td>
-								<td>10kg</td>
-								<td>21/04/18 09:10</td>
-								<td>김가지/ kim12</td>
-								<td>010-1234-5678</td>
-								<td>Y</td>
-								<td><span>30,000</span>원 </td>
-								<td><span>상품파손</span></td>
-								<td><span>반품완료</span></td>
-								<td><input type="checkbox" checked name="" class="table_checkbox"/></td>
-							</tr>	
-								<tr>
-								<td></td>
-								<td><a href=""></a></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>N</td>
-								<td><span></span>원 </td>
-								<td><span></span></td>
-								<td><span></span></td>
-								<td><input type="checkbox" checked name="" class="table_checkbox"/></td>
-							</tr>
+						</c:forEach>
 						</tbody>
 						</table>	
 					</form>
 				</div>
 				<div class="option_change"style="text-align:right;">
+				<span class="notice">선택상품을 원하는 주문상태로 변경하실 수 있습니다. </span><br/>
 					<select id="option_sel">
-						<option value="">-</option>
+						<option value=" ">-</option>
 						<option value="배송준비중">배송준비중</option>
 						<option value="배송중">배송중</option>
 						<option value="배송완료">배송완료</option>
 						<option value="픽업대기중">픽업대기중</option>
 						<option value="픽업대기중">픽업완료</option>
 					</select>
-					<button id="selBtn">변경</button>
+					
+					<input type="button" id="selBtn" value="변경" onClick="selectOrderStatusUpdate()"/>
 				</div>
 			<!-- 페이징-->
-			<div class="page_wrap">
-				<div class="page_nation">
-				   <a class="arrow pprev" href="#"></a>
-				   <a class="arrow prev" href="#"></a>
-				   <a href="#" class="active">1</a>
-				   <a href="#">2</a>
-				   <a class="arrow next" href="#"></a>
-				   <a class="arrow nnext" href="#"></a>
-				</div>
-		 	</div>
+		<div class="page_wrap">
+			<div class="page_nation">
+			  	<!--맨앞으로-->
+  				<a class="arrow_pprev" href="order_management?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--앞으로-->
+        		<a class="arrow_prev" href="order_management?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
+         		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
+	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
+	            	<c:if test="${p<=sapvo.totalPage}">  
+						<!--현재페이지 :  현재보고있는 페이지 표시 -->
+		               <c:if test="${p==sapvo.pageNum}">
+		                  <a class="on" href="order_management?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+		               <!-- 현재페이지가 아닐 때 -->
+		               <c:if test="${p!=sapvo.pageNum}">
+		                  <a href="order_management?pageNum=${p}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>">${p}</a>
+		               </c:if>
+	            	</c:if>
+        		</c:forEach>
+        		<!-- 다음 페이지가 있을 때 -->
+				<!--뒤로-->            
+	         	<a class="arrow next" href="order_management?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				<!--맨뒤로-->
+	         	<a class="arrow nnext" href="order_management?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+			</div>
+		 </div>
+		 <!-- 페이징 끝 -->
 			</fieldset>
 
 	<!-- 주문 상세정보 modal -->
@@ -508,39 +327,41 @@
 				<tbody>
 					<tr class="detail_line1">
 						<td><span class="detail_menu">주문번호</span></td>
-						<td>202104190402</td>
+						<td>${oneList.ordernum}</td>
 						<td><span class="detail_menu">주문일</span></td>
-						<td>21/04/19 16:02</td>
+						<td>${oneList.orderdate}</td>
 					</tr>
 					<tr class="detail_line2">
 						<td><span class="detail_menu">주문상품명</span></td>
-						<td>햅쌀</td>
+						<td>${oneList.productname}</td>
 						<td><span class="detail_menu">결제일</span></td>
-						<td>21/04/19 16:02</td>
+						<td>${orderList.orderdate}</td>
 					</tr>
 					<tr class="detail_line3">
 						<td><span class="detail_menu">수량</span></td>
-						<td><span>1<span>kg</span></td>
+						<td>${oneList.orderquantity}</td>
 						<td><span class="detail_menu">결제금액</span></td>
-						<td>36,000<span class="won">원</span></td>
+						<td>${oneList.orderprice}<span class="won">원</span></td>
 					</tr>
 					<tr class="detail_line4">
-						<td><span class="detail_menu">옵션</span></td>
-						<td>-</td>
+						<td><span class="detail_menu">옵션</span></td><!-- 구매한 옵션의 수량은 어떻게 구하죠? -->
+						<td>${oneList.optionname}<span>|</span>${v.optionprice}</td>
 						<td><span class="detail_menu">포인트 사용</span></td>
-						<td>3,000<span class="point">.P</span></td>
+						<td>${oneList.usedpoint}<span class="point">.P</span></td>
 					</tr>
 					<tr class="detail_line5">
 						<td><span class="detail_menu">결제방법</span></td>
-						<td><span>무통장입금</span></td>
+						<td><span>${oneList.paymentoption}</span></td>
 						<td><span class="detail_menu">할인금액</span></td>
-						<td>1,000<span class="won">원</span></td>
+						<td>${oneList.saleprice}<span class="won">원</span></td>
 					</tr>
 					<tr class="detail_line6">
-						<td colspan="2"></td>
-						<td><span class="detail_menu">실결제금액</span></td>
-						<td>32,000<span class="won">원</span></td>
+						<td><span class="detail_menu">상품실결제금액</span></td>
+						<td>${oneList.realpayment}<span class="won">원</span></td>
+						<td><span class="detail_menu">배송비포함실결제금액</span></td>
+						<td>${oneList.realtotalpayment}<span class="won">원</span></td>
 					</tr>
+			
 				</tbody>
 				<thead class="detail_head2">
 					<tr>
@@ -551,34 +372,35 @@
 				<tbody>
 					<tr class="detail_line7">
 						<td><span class="detail_menu">받는분</span></td>
-						<td>한싱싱</td>
+						<td>${oneList.receiver}</td>
 						<td><span class="detail_menu">받는분 연락처</span></td>
-						<td>010-1234-5678</td>
+						<td>${oneList.receiverphone}</td>
 					</tr>
 					<tr class="detail_line8">
 						<td><span class="detail_menu">배송지</span></td>
-						<td>집</td>
+						<td>(${oneList.deliveryzipcode}) ${oneList.deliveryaddr}, ${oneList.deliverdetailaddr}</td>
 						<td><span class="detail_menu">베송 메모</span></td>
-						<td>부재시 경비실에 맡겨주세요.</td>
+						<td>${oneList.deliverymemo}</td>
 					</tr>
 					<tr class="detail_line10">
 						<td><span class="detail_menu">주문자명</span></td>
-						<td>한싱싱</td>
+						<td>${oneList.username}</td>
 						<td><span class="detail_menu">주문자 연락처</span></td>
-						<td>010-1234-5678</td>
+						<td>${oneList.userphone}</td>
 					</tr>
 					<tr class="detail_line11">
 						<td><span class="detail_menu">주문자 ID</span></td>
-						<td>singsing</td>
+						<td>${oneList.userid}</td>
 						<td><span class="detail_menu">택배사</span></td>
-						<td>대한통운</td>
+						<td>${oneList.deliverycompany}</td>
 					</tr>
 					<tr class="detail_line12">
 						<td><span class="detail_menu">송장번호</span></td>
-						<td>12345678</td>
+						<td>${oneList.invoice}</td>
 						<td><span class="detail_menu">배송비</span></td>
-						<td>무료배송</td>
+						<td>${oneList.deliveryprice}</td>
 					</tr>
+	
 				</tbody>
 				<thead class="detail_head3">
 					<tr>
@@ -587,21 +409,13 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach var="deliverynow" items="${oneList}">
 					<tr>
-						<td colspan="2">21/04/19 18:12</td>
-						<td colspan="2">배송준비중</td>
+						<td colspan="2">${deliverynow.deliverystatus}</td>
+						<td colspan="2">${deliverynow.deliverydate}</td>		
 					</tr>
-					<tr>
-						<td colspan="2">21/04/19 22:00</td>
-						<td colspan="2">배송출발</td>
-					</tr>
-					<tr>
-						<td colspan="2">21/04/20 15:12</td>
-						<td colspan="2">배송완료</td>
-					</tr>
-					<tr >
-						<td colspan="4" style="text-align:center"><button id="talk_customer">구매자와 대화하기</button></td>
-					</tr>
+					</c:forEach>
+					<tr><td colspan="4" style="text-align:center"><button id="talk_customer">구매자와 대화하기</button></td></tr>
 				</tbody>
 			</table>	
 		</div>

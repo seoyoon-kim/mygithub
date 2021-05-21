@@ -1046,6 +1046,7 @@ $(function(){
 })
 
 /////////////////////////////// 엑셀 기능 함수 /////////////////////////////////////
+//                   li갯수,    excelpageNum,  excel 1page당 보이는갯수 ,    excel last page
 function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 	// excelPaging 할때, html 변화를 render
 	let excelPagingTag = '<a class="arrow pprev" href="javascript:void(0);" onclick="apprev(this);"></a> <a class="arrow prev" href="javascript:void(0);" onclick="aprev(this);"></a>';
@@ -1055,11 +1056,12 @@ function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 	// num에는 li 갯수가 몇 개 있는지 들어있다.
 	// num을 10으로 나눈 값
 	MathNum = Math.ceil(num/excelViewListNum);
+	
 	//시작번호 ((excelPagingInit -1 / excelViewListNum*excelViewListNum)+1
 	let startPageNum = (Math.floor((excelPagingInit-1) / excelMaxPage)*excelMaxPage)+1;
 	
 	if(MathNum==1){// 초기화 총 페이지수가 1이면 실행한다.
-		if(num<excelViewListNum){ // num 갯수가 페이지 갯수보다 적으면
+		if(num<=excelViewListNum){ // num 갯수가 페이지 갯수보다 적으면
 			excelPagingTag += '<a class="active" href="javascript:void(0);" onclick="anum(this);">1</a>';  
 			for(let i = 1; i <= num; i++){
 				$('#excelList>li:nth-child(n+7):nth-child(-n+'+(6+(6 * num))+')').css('display','inline');
@@ -1078,7 +1080,7 @@ function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 		}
 		
 		excelPagingTag += '<a class="arrow next" href="javascript:void(0);" onclick="anext(this);"></a> <a class="arrow nnext" href="javascript:void(0);" onclick="annext(this);"></a>';
-		
+		 
 	} else {// 페이지 이동 ( 이전, 숫자, 다음 , 맨 마지막 시 ) 사용
 		// 만약, 1이 아닌
 		// 2 3 4 5 가 눌렸을때 그 페이지의 정보들을 보여줘야 한다.
@@ -1222,10 +1224,10 @@ $(()=>{
 	});
 })
 
-
+// 엑셀의 보는 갯수를 조정한다 10개, 50개 100개
 function changeViewListNum(num){
 	excelViewListNum = $('#excelViewNum option:selected').val();
-	excelPaging(excelListNum , 1, excelViewListNum, excelMaxPage);
+	excelPaging(excelListNum , 1, parseInt(excelViewListNum), excelMaxPage);
 }
 
 </script>

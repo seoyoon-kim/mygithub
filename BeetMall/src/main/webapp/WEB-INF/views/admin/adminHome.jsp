@@ -215,7 +215,7 @@ div[id^=box] {
 						<li>환불요청 &nbsp;<b style="font-weight: bold; color: purple">${refund}</b> 건</li>
 					</c:if>
 					<c:if test="${refund == null}">
-						<li>환불요청 &nbsp;<b style="font-weight: bold; color: purple">0</b>> 건</li>
+						<li>환불요청 &nbsp;<b style="font-weight: bold; color: purple">0</b> 건</li>
 					</c:if>
 				</ul>
 			</div>
