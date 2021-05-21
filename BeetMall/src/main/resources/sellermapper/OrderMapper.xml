@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.seller.dao.OrderDAO">
+<select id="orderList" resultType="com.beetmall.sshj.seller.vo.OrderSaleVO" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" >
+	select*from
+	(select*from
+	(select 
+	ordernum, productname, sellerid, productnum,orderquantity, userid, username, userphone,  orderprice, orderdate, orderstatus,deliverystatus
+	from
+	(select to_char(o.ordernum, '99999999999999') as ordernum, p.productname, p.userid as sellerid, od.productnum, o.userid as userid, o.username, o.userphone,
+	o.orderprice, o.orderdate,  od.orderquantity,od.orderstatus,dn.deliverystatus
+	from ordertbl o
+	left join orderdetail od on od.ordernum = o.ordernum
+	left join product p on od.productnum = p.productnum
+	left join discount d on d.productnum = od.productnum
+	left join optiontbl op on op.optionnum = o.optionnum
+	left join delivery de on de.ordernum = o.ordernum
+	left join deliverynow dn on dn.ordernum = o.ordernum
+	where p.userid='${userid}' )
+			order by ordernum desc )	
+	<![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by ordernum)
+        <![CDATA[where rownum<=]]>
+        <if test="pageNum==totalPage">${lastPageRecord}</if>
+        <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by ordernum desc
+</select>
+<select id="oneOrderSelect" resultType="com.beetmall.sshj.seller.vo.OrderSaleVO">
+	select 
+	ordernum, productname, sellerid, productnum, userid, username, userphone, deliverymemo, orderprice, orderdate, 
+	usedpoint, paymentoption, orderquantity, optionname, optionnum, optionprice, optionstock, orderstatus, saleprice
+	receiver, receiverphone, deliverynum ,deliveryzipcode, deliveryaddr, deliverydetailaddr, deliverycompany, invoice, deliveryprice,deliverystatus, deliverydate,
+	totalsaleprice, realpayment, realtotalpayment
+	from
+	(select to_char(o.ordernum, '99999999999999') as ordernum, p.productname, p.userid as sellerid, od.productnum, o.userid as userid, o.username, o.userphone, 
+	o.deliverymemo,o.orderprice, o.orderdate, nvl(o.usedpoint,0) as usedpoint, o.paymentoption, od.orderquantity,
+	op.optionname, op.optionnum, nvl(op.optionprice, 0) as optionprice, op.optionstock, 
+	od.orderstatus, nvl(d.saleprice,0) as saleprice,
+	o.receiver, o.receiverphone, o.deliveryzipcode, o.deliveryaddr,o.deliverydetailaddr, to_char(de.deliverynum, '999999999999')as deliverynum,
+	de.deliverycompany, to_char(de.invoice,'9999999999999') as invoice , o.deliveryprice, dn.deliverystatus, dn.deliverydate,
+	to_number(nvl(d.saleprice,0) * nvl(od.orderquantity, 0)) as totalsaleprice, 
+	to_number((o.orderprice - nvl(d.saleprice,0))*nvl(od.orderquantity,0) + nvl(op.optionprice, 0) - nvl(o.usedpoint, 0)) as realpayment,
+	to_number((o.orderprice - nvl(d.saleprice,0))*nvl(od.orderquantity,0) + nvl(op.optionprice, 0) - nvl(o.usedpoint, 0) + nvl(o.deliveryprice, 0)) as realtotalpayment
+	from ordertbl o
+	left join orderdetail od on od.ordernum = o.ordernum
+	left join product p on od.productnum = p.productnum
+	left join discount d on d.productnum = od.productnum
+	left join optiontbl op on op.optionnum = o.optionnum
+	left join delivery de on de.ordernum = o.ordernum
+	left join deliverynow dn on dn.ordernum = o.ordernum
+	where o.ordernum = '${param1}')
+	order by ordernum desc
+
+	</select>
+	<select id="totalRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="int">
+		select count(ordernum) totalRecord from orderdetail join product on product.productnum = orderdetail.productnum where product.userid='${userid}'
+	</select>
+	<update id="orderStatusUpdate" >
+		UPDATE orderdetail SET orderstatus = '${param2}' WHERE ordernum = ${param1}
+	</update>
+</mapper>

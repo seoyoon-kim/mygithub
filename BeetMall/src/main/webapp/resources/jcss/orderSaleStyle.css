@@ -1,0 +1,205 @@
+@charset "UTF-8";
+	/*판매자 왼쪽 카테고리*/
+	.option_change, .page_wrap, table, .search, .management_container, .detail_modal {margin:0 auto;}
+	.search, .management_container, table, .option_change, .detail_table{width:100%;}
+	/*테이블 페이징*/
+	fieldset{width:100%;}
+	.search_btn, .save_excel{
+		width:85.7px;
+		height:30px;
+		margin-bottom:10px;
+		background:white;
+	}
+	button{
+		padding: 3px 10px;
+		color: #666666;
+		background:#fff;
+		text-align: center;
+ 		text-decoration: none;
+		display: inline-block;
+		height:30px;
+	}	
+	/*주문관리 검색*/
+	select, input, .search_num, search_id, .save_excel, .search_btn{
+		color:gray;
+		height:30px;
+		border:0.8px solid lightgray;
+		width:100px;
+		border-radius: 4px;
+	}
+	/*검색, 변경 버튼*/
+	.search_btn, #selBtn{
+		border-radius: 0;
+		background:white;
+	}
+	#selBtn{
+		width:50px;
+	}
+	/*해당 목록에 대한 설명 또는 주의사항*/
+	.notice{
+		font-size:0.75em;
+		color:gray;
+		margin-bottom:5px;
+	}
+	.search{
+		margin-top:20px;
+		height:130px;
+		font-size:14px;
+	}
+	.search_num, .search_id{
+		width:170px;
+	}
+	.search_date, .search_category, .search_sub_category{
+		width:140px;
+	}
+	.search_date, .search_category, .search_sub_category, .search_num, .search_id{
+		font-size:12px;
+	}
+	label{
+		font-size:16px;
+		margin-bottom:18px;
+	}
+	.search_wrap>li{
+		margin-top:25px;
+		float:left;
+		width:18%;
+		text-align:center;
+	}
+	.search_wrap>li:first-child, .search_wrap li:nth-child(2) {
+		width:26%;
+	}
+	.search_wrap>li:last-child{
+		width:12%;
+	}
+	/*주문관리 탭*/
+	.management_container{
+		z-index:-10px;
+	}
+	.management_category{
+		position:relative;
+		height:44px;
+	}
+	.management_category ul{padding:0;}
+	.management_category li{
+		padding:0px;
+		margin:0;
+		float: left;
+	    width: 12.5%;
+	    height: 42px;
+	    background-color: #f8f8f8;
+	    border: 1px solid #dfe2e6;
+	    border-right: 0;
+	    box-sizing: border-box;
+	}
+	
+	.management_category li.on, .management_category li.current{
+		border-color: #b7bfc8 !important;
+	    border-right: 1px solid #b7bfc8;
+	    margin-right: -1px;
+	    border-bottom: none;
+	}
+	.management_category li.current{
+	display: inherit;
+}
+	.management_category li >a {
+		display:block;
+		height:28px;
+		padding-top:12px;
+		text-decoration:none;
+   		font-size: 14px;
+  		font-weight: bold;
+   		text-align: center;
+    	color: #6c7580;
+	}
+	.menu1{
+		padding:18px 0;
+	}
+	/*주문관리 테이블*/
+	.table_wrap, form{
+		text-align:center;
+		margin-top:10px;
+	}
+	table{
+		empty-cells: show;
+		text-indent: initial;
+   		border-spacing: 2px;
+   		font-size:13px;
+   		border:1px solid lightgray;
+   		text-align:center;
+   		margin: 0 auto;
+	}
+	th{
+		height:50px;
+		text-align:center;	
+		font-size:14px;	
+	}
+	th:first-child{
+		width:35px;
+	}
+	thead{
+		border-bottom:1px solid gray;
+		background:#EEE;
+	}
+	tr{
+		border-bottom:1px solid lightgray;
+	}
+	td{
+		height:50px;
+	}
+	.table_checkbox, #listAllCheck{
+		width:17px;
+	}
+	
+	td:last-child{
+		width:30px;
+	}
+	/*배송옵션 & 변경 버튼*/
+	.option_change{
+		margin-top:5px;
+	}
+	#option_sel{width:120px;}
+	
+/*주문상세 테이블 modal*/
+ .detail_modal{display:none;}   
+ .detail_modal{width: 40%; background-color:white;}
+	.detail_table{
+		width:100%;
+		font-size:12px;
+		border-left:none;
+		border-right:none;
+
+	}
+	.detail_table td{
+		width:20%;
+		height:35px;
+		padding:3px;
+	}
+	#close_th{background:#3a7a36; }
+
+	.detail_table th{
+		font-size:15px;
+		font-weight:bold;
+		height:30px;
+		background:#f8faf7;
+	}
+/* 	.detail_table td{
+		border:1px solid lightgray;
+	} */
+	.detail_menu{
+		font-weight: bold;
+	}
+	/*닫기버튼*/
+	#close{
+		font-weight:bold;
+		font-size:16px;
+		width:50px;
+		float:right;
+		color:white;
+	}
+	#talk_customer{margin:10px;}
+a:hover,a:active,a:visited,a:link{
+	text-decoration: none; 
+	color: #aaa;
+	margin-left:5px;
+
+}
