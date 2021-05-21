@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.AdminReviewDAO">
+ 	<select id="reviewListA" resultType="com.beetmall.sshj.admin.vo.AdminReviewVO">
+ 		select * from(
+    	select c.reviewnum, d.catenum, c.productname, c.sellerid, c.reviewcontent, c.reviewanswer, c.customerid, reviewwritedate from(
+        select a.reviewnum, b.mcatenum, b.productname, b.userid sellerid, a.reviewcontent, a.reviewanswer, a.userid customerid, to_char(a.reviewwritedate, 'YY/MM/DD') reviewwritedate
+        from review a
+        join product b
+            on a.productnum = b.productnum) c
+            join category d
+            on d.catenum = c.mcatenum
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reviewnum desc) e		 
+            where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if> order by reviewnum desc
+ 	</select> 
+</mapper>

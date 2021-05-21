@@ -2,17 +2,33 @@
 <!DOCTYPE mapper
   	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.beetmall.sshj.admin.dao.BoardDAO">
- 	<select id="noticeList" resultType="com.beetmall.sshj.admin.vo.BoardVO">
- 		select infonum, infotype, infotitle, to_char(infowritedate, 'MM-DD HH:MI') infowritedate from notice order by infonum desc
+<mapper namespace="com.beetmall.sshj.admin.dao.AdminBoardDAO">
+ 	<select id="noticeBoardList" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		select * from(
+	    	select * from(
+ 				select infonum, infotype, infotitle, to_char(infowritedate, 'YY/MM/DD') infowritedate from notice order by infonum desc
+			)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by infonum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by infonum
  	</select>
- 	<insert id="boardInsert" parameterType="com.beetmall.sshj.admin.vo.BoardVO">
+ 	<select id="noticeAllRecord" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		select min(infonum) from notice
+ 	</select>
+ 	<select id="getInfonum" resultType="int">
+ 		select max(infonum) from notice
+ 	</select>
+ 	<insert id="boardInsert" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
  		insert into board(no, subject, content, ip, userid) values(boardsq.nextval, #{subject}, #{content}, #{ip}, #{userid})
  	</insert>
- 	<select id="boardSelect" resultType="com.beetmall.sshj.admin.vo.BoardVO">
+ 	<select id="boardSelect" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
  		select no, userid, subject, content, hit, writedate from board where no=#{param1}
  	</select>
- 	<update id="boardUpdate" parameterType="com.beetmall.sshj.admin.vo.BoardVO">
+ 	<update id="boardUpdate" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
  		update board set subject=#{subject}, content=#{content} where no=#{no} and userid=#{userid} 
  	</update>
+ 	<select id="reviewListA" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		select infonum, infotype, infotitle, to_char(infowritedate, 'YY/MM/DD') infowritedate from notice order by infonum desc
+ 	</select>
 </mapper>
