@@ -60,4 +60,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose> -->
 	</select>
+	<select id="csQOpenSelect" resultType="com.beetmall.sshj.admin.vo.csQBrowseVO">
+		select a.qnum, a.productnum, a.userid as custom, seller, a.qtitle, to_char(a.qwritedate, 'YYYY-MM-DD') qwritedate, qcontent, qanswer, qanswerdate
+				from userqboard a
+				join (select productnum, userid as seller 
+				       from product) b
+				on a.productnum=b.productnum
+    	where qnum=${param1}
+	</select>
 </mapper>

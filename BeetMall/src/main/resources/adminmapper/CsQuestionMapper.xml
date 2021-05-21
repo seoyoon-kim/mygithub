@@ -46,10 +46,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose> -->
 	</select>
 	<select id="csAnswerWrite" resultType="com.beetmall.sshj.admin.vo.CsQuestionVO">
-		select qmnum, qmoption, userid, qmtitle, to_char(qmdate, 'YYYY-MM-DD') qmdate, qmcontent
+		select qmnum, qmoption, userid, qmtitle, to_char(qmdate, 'YYYY-MM-DD') qmdate, qmcontent, qmanswer
         from qmboard where qmnum=${param1}
 	</select>
 	<update id="csAnswerWriteOk" parameterType="com.beetmall.sshj.admin.vo.CsQuestionVO">
-		update qmboard set qmanswer=#{qmanswer} qmanserdate=sysdate where qmnum=#{qmnum}
+		update qmboard set qmanswer=#{qmanswer}, qmanserdate=sysdate where qmnum=${qmnum}
 	</update>
 </mapper>

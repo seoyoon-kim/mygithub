@@ -40,6 +40,7 @@ public class CenterController {
 	@RequestMapping(value="/cusomerCenterWriteOk", method=RequestMethod.POST)
 	public ModelAndView cusomerCenterWrite(CenterVO vo, HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		vo.setUserid((String)session.getAttribute("logId"));
 		
 		int result = centerService.centerWrite(vo);
 		if(result>0) {

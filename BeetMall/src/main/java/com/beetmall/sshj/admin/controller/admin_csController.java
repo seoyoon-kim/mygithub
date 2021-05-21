@@ -36,14 +36,7 @@ public class admin_csController {
 		mav.addObject("list", adminService.noticeList());
 		mav.setViewName("/admin/csFAQWrite");
 		return mav;
-	}	
- @RequestMapping("/csQOpen")
-	public ModelAndView csQOpen() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
-		mav.setViewName("/admin/csQOpen");
-		return mav;
-	}	 
+	}
 	//채팅 보기
 	@RequestMapping("/csChat")
 	public ModelAndView csChat() {

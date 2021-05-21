@@ -15,5 +15,9 @@ public interface ProductPayDAO {
 	public void inserOrderDetail(ProductPayVO pro);
 
 	public void UpdatePoint(int orderprice, String userid);
+
+	public void usedPoint(ProductPayVO pro);
+
+	public void savePoint(ProductPayVO pro);
 	
 }

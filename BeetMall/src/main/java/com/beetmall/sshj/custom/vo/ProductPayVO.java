@@ -34,6 +34,10 @@ public class ProductPayVO {
  	private int optionnum;
  	private int orderquantity;
  	//
+ 	
+ 	//포인트
+ 	private int changepoint;
+ 	
 	public String getUsername() {
 		return username;
 	}
@@ -190,4 +194,11 @@ public class ProductPayVO {
 	public void setOrderquantity(int orderquantity) {
 		this.orderquantity = orderquantity;
 	}
+	public int getChangepoint() {
+		return changepoint;
+	}
+	public void setChangepoint(int changepoint) {
+		this.changepoint = changepoint;
+	}
+	
 }

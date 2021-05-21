@@ -150,13 +150,13 @@
 				    buyer_postcode : '${vo.userzipcode}'
 				}, function(rsp) {
 				    if(rsp.success){
-				        var send = "?username=${vo.username}&username=${vo.username}&userphone=${vo.userphone}&orderprice="+tototaal;
+				        var send = "?username=${vo.username}&userphone=${vo.userphone}&orderprice="+tototaal;
 				        	send +="&receiver="+$("#username").val()+"&receiverphone="+$("#userphone").val();
 				        	send +="&deliveryzipcode="+$("#zipcode").val()+"&deliveryaddr="+$("#addr").val()+"&deliverydetailaddr="+$("#addrDetail").val();
 				        	send +="&deliveryprice="+$("#deliveryprice").val()+"&deliveryoption="+$("#deliveryoption").val();
 				        	send +="&deliverymemo="+$("#deliverymemo").val()+"&usedpoint="+point;
 				        	send +="&mypoint=${vo.point}&realpayment="+tototaal+"&optionnum="+$("#optionnum").val();
-				        	send +="&productnum="+$("#productnum").val()+"&orderquantity="+$("#orderquantity").val()+"&orderprice22="+orderprice22;
+				        	send +="&productnum="+$("#productnum").val()+"&orderquantity="+$("#orderquantity").val()+"&orderprice22="+orderprice22+"&hellopoint="+hellopoint;
 				        location.href="/sshj/productPayBuy"+send
 				    } else {
 				        var msg = '결제에 실패하였습니다.';

@@ -25,7 +25,14 @@
   			insert into orderdetail 
   			values(${productnum}, ${ordernum}, ${orderquantity}, '결제완료', sysdate, ${orderprice}, 'N', null)
 	</insert>
-	<update id="UpdatePoint" parameterType="com.beetmall.sshj.custom.vo.CenterVO">
+	<update id="UpdatePoint">
 		update member set point = #{param1} where userid= #{param2}
 	</update>
+	<insert id="usedPoint" parameterType="com.beetmall.sshj.custom.vo.ProductPayVO">
+		insert into point values(${productnum}, ${ordernum}, #{userid}, -${changepoint}, 0)
+	</insert>
+	<insert id="savePoint" parameterType="com.beetmall.sshj.custom.vo.ProductPayVO">
+		insert into point values(${productnum}, ${ordernum}, #{userid}, ${orderprice}, 0)
+	</insert>
+	
 </mapper>

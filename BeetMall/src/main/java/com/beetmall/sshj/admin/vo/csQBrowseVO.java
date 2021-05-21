@@ -8,6 +8,9 @@ public class csQBrowseVO {
 	private String qtitle;
 	private String qwritedate;
 	private int reportcount;
+	private String qcontent;
+	private String qanswer;
+	private String qanswerdate;
 	
 	public int getQnum() {
 		return qnum;
@@ -50,6 +53,24 @@ public class csQBrowseVO {
 	}
 	public void setReportcount(int reportcount) {
 		this.reportcount = reportcount;
+	}
+	public String getQcontent() {
+		return qcontent;
+	}
+	public void setQcontent(String qcontent) {
+		this.qcontent = qcontent;
+	}
+	public String getQanswer() {
+		return qanswer;
+	}
+	public void setQanswer(String qanswer) {
+		this.qanswer = qanswer;
+	}
+	public String getQanswerdate() {
+		return qanswerdate;
+	}
+	public void setQanswerdate(String qanswerdate) {
+		this.qanswerdate = qanswerdate;
 	}
 	
 }

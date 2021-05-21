@@ -56,9 +56,9 @@ public class admin_csQuestionController {
 		
 		int result = csquestionService.csAnswerWriteOk(vo);
 		if(result>0) {
-			mav.setViewName("/admin/csQuestionA");
+			mav.setViewName("redirect:csQuestionA");
 		}else {
-			mav.setViewName("/admin/csAnswerA");
+			mav.setViewName("redirect:csAnswerA");
 		}
 		return mav;
 	}

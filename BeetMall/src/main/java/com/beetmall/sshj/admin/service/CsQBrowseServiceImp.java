@@ -27,4 +27,9 @@ public class CsQBrowseServiceImp implements CsQBrowseService{
 		return csQBrowseDAO.csQBrowseOnetotalRecord(pageVO);
 	}
 
+	@Override
+	public csQBrowseVO csQOpenSelect(int qnum) {
+		return csQBrowseDAO.csQOpenSelect(qnum);
+	}
+
 }

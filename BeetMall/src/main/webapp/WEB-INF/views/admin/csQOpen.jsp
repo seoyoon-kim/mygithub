@@ -166,7 +166,7 @@
 					<th class="menu" >문의 번호</th>
 					<td class="td" colspan="3">
 						<div id="qNum">
-							12369
+							${vo.qnum }
 						</div>
 					</td>
 				</tr>
@@ -174,7 +174,7 @@
 					<th class="menu" >아이디</th>
 					<td class="td" colspan="3">
 						<div id="writer">
-							aeuifhu093
+							${vo.custom }
 						</div>
 					</td>
 				</tr>
@@ -182,7 +182,7 @@
 					<th class="menu">제목</th>
 					<td  class="td">
 						<div id="qTitle">
-							배송지 변경 문의드려요
+							${vo.qtitle }
 						</div>	
 					</td>
 				</tr>
@@ -190,21 +190,15 @@
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
-							21/03/21
+							${vo.qwritedate }
 						</div>
 					</td>
 				</tr>  
 				<tr class="tr_head">
 					<th class="menu">소비자 문의 내용</th> 
 					<td colspan="4" style="background-color:white;">
-						<div id="qContent">
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.<br/>
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다. 
-							배송지를 급하게 변경해야 하는데 판매자가 연락이 되지 않아 문의남깁니다.
+						<div id="qContent" style="overflow: auto;">
+							${vo.qcontent }
 						</div>
 					</td>
 				</tr> 
@@ -220,7 +214,7 @@
 					<th class="menu" >아이디</th>
 					<td class="td" colspan="3">
 						<div id="writer">
-							ihatecorona
+							${vo.seller }
 						</div>
 					</td>
 				</tr>
@@ -228,15 +222,25 @@
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
-							21/06/21
+							<c:if test="${vo.qanswerdate== null}">
+								테스트용이라서 없습니다
+							</c:if>
+							<c:if test="${vo.qanswerdate != null}">
+								${vo.qanswerdate}
+							</c:if>
 						</div>
 					</td>
 				</tr> 
 				<tr class="tr_head">
 					<th class="menu">판매자 답변 내용</th> 
 					<td colspan="4" style="background-color:white;">
-						<div id="aContent">
-							 죄송합니다 ㅠㅠㅠㅠ
+						<div id="aContent" style="overflow: auto;">
+							<c:if test="${vo.qanswer==null }">
+							 	답변 대기중입니다.
+							</c:if>
+							<c:if test="${vo.qanswer!=null }">
+							 	${vo.qanswer }
+							</c:if>
 						</div>
 					</td>
 				</tr> 
@@ -244,10 +248,10 @@
 					<th class="empty" colspan="4" style="background-color:white; border-right:white 1px solid"></th>
 				</tr> 
 				<!-- 관리자 답변 -->
-				<tr>
+				<tr style="display: none;">
 					<th id="smallTitle" colspan="4">답변 작성</th>
 				</tr>
-				<tr class="tr_head">
+				<tr class="tr_head" style="display: none;">
 					<th class="menu">등록일</th>
 					<td  class="td">
 						<div id="writedate">
@@ -255,42 +259,33 @@
 						</div>
 					</td>
 				</tr> 
-				<tr>
+				<tr style="display: none;">
 					<td class="question_content" colspan="4">
 						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="답변내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
-			<div id="bottommm">
-				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn"/>
-				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
+			<div id="bottommm" style="display: none;">
+				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn" style="visibility: hidden;"/>	
+				<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn" style="visibility: hidden;"/>
+				<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='javascript:history.back()'" style="visibility: hidden;"/>
 							
 			</div>
 		</form>
 		</div>
 </div>
 </div> 
-<script>
-$(document).ready(function() {
-	  $('.summernote').summernote({
-		  height: 500,                 // 에디터 높이 
-		  focus: false,
-		  callbacks: {	//이미지를 첨부하는 부분
-				onImageUpload : function(files) {
-					uploadSummernoteImageFile(files[0],this);
-				},
-				onPaste: function (e) {
-					var clipboardData = e.originalEvent.clipboardData;
-					if (clipboardData && clipboardData.items && clipboardData.items.length) {
-						var item = clipboardData.items[0];
-						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-							e.preventDefault();
-						}
-					}
-				}
-			}
-	  });
-	});  
-</script>
+<style>
+	table {
+	    width: 1080px;
+	    border-spacing: 0;
+	    text-indent: initial;
+	    border-top: 2px solid lightgray;
+	    border-bottom: 2px solid lightgray;
+	    font-size: 15px;
+	    position: absolute;
+	    top: 140px;
+	    /* height: 3000px; */
+	}
+</style>

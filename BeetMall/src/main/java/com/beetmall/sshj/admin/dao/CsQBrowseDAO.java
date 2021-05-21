@@ -11,4 +11,6 @@ public interface CsQBrowseDAO {
 
 	public int csQBrowseOnetotalRecord(adminkPageSearchVO pageVO);
 
+	public csQBrowseVO csQOpenSelect(int qnum);
+
 }

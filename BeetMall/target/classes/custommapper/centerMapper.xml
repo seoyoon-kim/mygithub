@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.beetmall.sshj.custom.dao.CenterDAO">
 	<insert id="centerWrite" parameterType="com.beetmall.sshj.custom.vo.CenterVO">
   			insert into qmboard(qmnum, userid, qmtitle, qmContent, qmdate, qmanswer, qmoption)
-  			values(qmboardsq.nextval, 'qwer', #{qmtitle}, #{qmcontent}, sysdate, null, 1)
+  			values(qmboardsq.nextval, #{userid}, #{qmtitle}, #{qmcontent}, sysdate, null, 1)
 	</insert>
 	<select id="centerAllRecord" resultType="com.beetmall.sshj.custom.vo.CenterVO" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO">
 		select * from(

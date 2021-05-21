@@ -37,4 +37,12 @@ public class CsQBrowseController {
 		mav.setViewName("/admin/csQBrowse");
 		return mav;
 	}	
+	
+	@RequestMapping("/csQOpen")
+	public ModelAndView csQOpen(int qnum) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", csQBrowseService.csQOpenSelect(qnum));
+		mav.setViewName("/admin/csQOpen");
+		return mav;
+	}	 
 }

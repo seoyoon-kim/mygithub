@@ -103,7 +103,7 @@ public class ProductPayController {
 		TransactionStatus status = transsactionManager.getTransaction(def);
 		
 		try {
-			//포인트 업데이트
+			//포인트 업데이트>쓴값으로 업데이트
 			productPayService.PointUpdate(point, userid);
 			
 			//주문번호 넣어주기
@@ -154,14 +154,31 @@ public class ProductPayController {
 			//orderdetail테이블에 넣어주기
 			productPayService.inserOrderDetail(pro);
 			
-			orderprice = (int)Math.ceil(orderprice*0.1);
-			orderprice = orderprice+point;
-			//적립금 적립시켜주기
+			int orderprice2 = (int)Math.ceil(orderprice*0.1);
+			orderprice = orderprice2+point;
+			
+			//적립금 적립시켜주기(멤버에 Update) > 사용금액에 10퍼센트 입력시켜주기
 			productPayService.UpdatePoint(orderprice, userid);
+			
+			//적립금 테이블에 넣어주기
+			pro.setProductnum(Integer.parseInt(req.getParameter("productnum")));
+			pro.setOptionnum(Integer.parseInt(req.getParameter("optionnum")));
+			pro.setUserid(userid);
+			pro.setChangepoint(Integer.parseInt(req.getParameter("usedpoint"))); //쓴포인트
+			
+			//적립금 쓴거 테이블에 넣어주고
+			productPayService.usedPoint(pro);
+			
+			
+			pro.setOrderprice(orderprice2);
+			//적립금 적립하는거 테이블에 넣어준다.
+			productPayService.savePoint(pro);
 			
 			//정상구현되면 commit 실행
 			transsactionManager.commit(status);
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println("트렌젝션 오류 => "+ e.getMessage());
+		}
 		
 		mav.addObject("vo", req.getParameter("receiver"));
 		mav.addObject("vo1", req.getParameter("deliveryaddr"));
