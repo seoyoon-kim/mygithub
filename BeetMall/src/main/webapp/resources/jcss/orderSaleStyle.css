@@ -92,12 +92,15 @@
 	    box-sizing: border-box;
 	}
 	
-	.management_category li.on{
+	.management_category li.on, .management_category li.current{
 		border-color: #b7bfc8 !important;
 	    border-right: 1px solid #b7bfc8;
 	    margin-right: -1px;
 	    border-bottom: none;
 	}
+	.management_category li.current{
+	display: inherit;
+}
 	.management_category li >a {
 		display:block;
 		height:28px;

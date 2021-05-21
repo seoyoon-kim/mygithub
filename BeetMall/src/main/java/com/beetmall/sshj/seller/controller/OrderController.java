@@ -20,13 +20,10 @@ public class OrderController {
 	OrderService orderService;
 	
 	@RequestMapping("/order_management")
-	public ModelAndView orderList(OrderSaleVO osvo, HttpSession session, SearchAndPageVO sapvo, HttpServletRequest req) {
+	public ModelAndView orderList( HttpSession session, SearchAndPageVO sapvo, HttpServletRequest req) {
+
+		sapvo.setUserid((String)session.getAttribute("logId"));
 		
-		
-		//sapvo.setUserid((String)session.getAttribute("logId"));
-		osvo.setUserid((String)session.getAttribute("logId"));
-		System.out.println("id->"+osvo.getUserid());
-		//
 		//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
 		String reqPageNum = req.getParameter("pageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
 		if(reqPageNum != null) {

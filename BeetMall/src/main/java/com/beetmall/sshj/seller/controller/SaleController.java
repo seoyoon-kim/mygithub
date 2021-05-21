@@ -33,7 +33,6 @@ public class SaleController {
 		if(reqPageNum != null) {
 			sapvo.setPageNum(Integer.parseInt(reqPageNum)); 
 		}
-				
 		//검색어
 		sapvo.setSearchWord(sapvo.getSearchWord());
 						

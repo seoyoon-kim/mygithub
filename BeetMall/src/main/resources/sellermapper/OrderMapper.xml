@@ -19,8 +19,7 @@
 	left join delivery de on de.ordernum = o.ordernum
 	left join deliverynow dn on dn.ordernum = o.ordernum
 	where p.userid='${userid}' )
-			order by ordernum desc )
-	
+			order by ordernum desc )	
 	<![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by ordernum)
         <![CDATA[where rownum<=]]>
         <if test="pageNum==totalPage">${lastPageRecord}</if>

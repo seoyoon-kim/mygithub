@@ -136,21 +136,33 @@
 	    modal('my_modal');
 	    console.log('modaldmoadfa');
 	    $('my_modal').css('display','');
-	   /*  $("body").off('scroll touchmove mousewheel');  */
-	    
+	   /*  $("body").off('scroll touchmove mousewheel');  */    
 	});
 // 검색
 //검색어 확인
 	$(function(){
 		$("#searchForm").submit(function(){
 			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
-			if($('#searchWord').val()=="" || #('#searchWord').val()==null){
+			if($('#searchWord').val()=="" || $('#searchWord').val()==null){
 				alert("검색어를 입력하세요.");
 				return false;
 			}
 			return true;
 		});
-</script>		
+	});
+	$(document).ready(function(){
+		$('management_category li').click(function(){
+			var tab_id = $(this).attr('data-tab');
+			$('management_category li').removeClass('current');
+			$('.menu').removeClass('current');
+	
+			$(this).addClass('current');
+			$("#"+tab_id).addClass('current');
+			});
+	
+	});
+</script>	
+	
 <body>
 	<div class="main" >
 
@@ -168,13 +180,13 @@
 				</li>
 				<li><label for="">카테고리</label><br/>
 					<select class="search_category">
-					<!-- 	<option value="choose">대분류 선택</option>
+						<option value="choose">대분류 선택</option>
 						<option value="nut">견과류</option>
 						<option value="dried_fruits">건과류</option>
 						<option value="fruits">과일</option>
 						<option value="rice">쌀</option>
 						<option value="multigrain">잡곡/혼합곡</option>
-						<option value="vegetable">채소</option> -->
+						<option value="vegetable">채소</option> 
 						
 					</select>
 					<!-- 중뷴류 카테고리 선택 -->
@@ -207,14 +219,14 @@
 		<!-- 탭 : 전체/ 미입금/ 입금완료/ 배송준비/ 배송중/ 배송완료/ 픽업대기중/ 픽업완료 -->
 		<div class="management_container">
 				<ul class="management_category">
-				<li class="menu1 on"><a href=""><span>전체</span></a></li>
-				<li class="menu2"><a href=""><span>미입금</span></a>
-				<li class="menu3"><a href=""><span>입금완료</span></a>
-				<li class="menu4"><a href=""><span>배송준비</span></a>
-				<li class="menu5"><a href=""><span>배송중</span></a>
-				<li class="menu6"><a href=""><span>배송완료</span></a>
-				<li class="menu7"><a href=""><span>픽업대기중</span></a>
-				<li class="menu8"><a href=""><span>픽업완료</span></a>
+				<li class="menu current" data-tab="tab1"><a href=""><span>전체</span></a></li>
+				<li class="menu" data-tab="tab2"><a href=""><span>미입금</span></a>
+				<li class="menu" data-tab="tab3"><a href=""><span>입금완료</span></a>
+				<li class="menu" data-tab="tab4"><a href=""><span>배송준비</span></a>
+				<li class="menu" data-tab="tab5"><a href=""><span>배송중</span></a>
+				<li class="menu" data-tab="tab6"><a href=""><span>배송완료</span></a>
+				<li class="menu" data-tab="tab7"><a href=""><span>픽업대기중</span></a>
+				<li class="menu" data-tab="tab8"><a href=""><span>픽업완료</span></a>
 			</ul>
 		</div>
 			<fieldset>
@@ -240,7 +252,6 @@
 						<tbody>
 						<c:forEach var="list" items="${list}" >
 							<tr>
-								<%-- <td>${list.index}</td> --%>
 								<td><a href="javascript:modal()">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
 								<td>${list.productnum}</td>
 								<td>${list.productname}</td>
@@ -250,7 +261,6 @@
 								<td>${list.userphone}</td>
 								<td><span>${list.orderprice}</span>원 </td>
 								<td><span>${list.orderstatus}</span></td>
-								<%-- <td><span>${list.deliverystatus }</span></td> --%>
 								<td><input type="checkbox" checked title="${list.ordernum}" value="${list.ordernum}" id="oneOrderCheck" name="oneOrderCheck" class="table_checkbox"/></td>
 							</tr>	
 						</c:forEach>
