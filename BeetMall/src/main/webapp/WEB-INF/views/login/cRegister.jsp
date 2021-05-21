@@ -4,23 +4,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-	}
-	/*버튼*/
-	.btn:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
-	}
+	
 	#formUl>li:nth-child(2n+1){
 		width:19%;
 		text-align:right;
@@ -47,14 +31,20 @@
 	}
 	#register{
 		font-size:20px;
+		padding-top:10px;
 	}
 	#userinputDiv{
-		height:500px;
+		height:400px;
 		background-color:white;
+		margin-bottom:10px;
+	}
+	#idCheckDibPop, #emailSend, #emailCheckBtn, #zipSearch{
+		padding:3px;
+		font-size:12px;
 	}
 	#infoView, #infoView2{
-		width:1050px;
-		height:500px;
+		width:1080px;
+		height:480px;
 		background-color:white;
 		border:rgb(252,118,45);
 		color:black;
@@ -94,28 +84,28 @@
 		widht:100px;
 	}
 	.idCheckDiv{
-		height:200px;
-		width:400px;
+		height:300px;
+		width:500px;
 		background-color:white;
 		border:10px solid rgb(252,118,45);
 		text-align:center;
 		position: absolute;
-		top:30%;
-		left:340px;
+		top:180px;
+		left:295px;
 		display:none;
 		padding-top:20px;
 	}
 	#idCheckFin{
 		display:none;
 		width:100px;		
-		margin-left:90px;
+		margin-left:150px;
 		float:left;
 	}
 	#popupcloseBtn{
 		display:block;
 		width:100px;
-		margin-top:85px;
-		margin-left:140px;
+		margin-top:200px;
+		margin-left:200px;
 		float:left;
 	}
 	.infoView{
@@ -141,6 +131,27 @@
 		width:100%;
 		height:100%;
 		display:none;
+	}
+	#formUl{
+		font-size:14px;
+		height:25px;
+		line-height: 25px;
+	}
+	.infotitles, .infoView{
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	.checkboxright{
+		float:right;
+		font-size:14px;
+		color:red;
+		padding-right:5px;
+	}
+	#userid2{
+		width:280px;
+	}
+	#idCheckResult>div:first-child{
+		margin-top:40px;
 	}
 </style>
 <script>
@@ -252,7 +263,7 @@
 			$("#modal").css("display","block");
 			$(document.body).css("overflow","hidden");
 			$(".idCheckDiv").css("display","block");
-			$("#popupcloseBtn").css("margin-left","140px").css("margin-top","85px");			
+			$("#popupcloseBtn").css("margin-left","200px").css("margin-top","150px");			
 		}
 		$("#idCheckDibPop").click(function(){
 			overlapIdCheck();
@@ -276,14 +287,15 @@
 							if(data>=1){
 								result = "<div><h3>"+$("#userid2").val()+"는 사용할 수 없습니다.</h3></div>";
 								result += "<div><h4>다른 아이디를 입력해주세요</h4></div>";
-								$("#popupcloseBtn").css("margin-left","140px").css("margin-top","0px");
+								$("#popupcloseBtn").css("margin-left","200px").css("margin-top","45px");
 								$("#idCheckFin").css("display","none");
 								
 							}else{
 								result = "<div><h3>"+$("#userid2").val()+"는 사용할 수 있습니다.</h3></div>";
 								result += "<div><h4>사용하시려면 아래 버튼을 눌러주세요</h4></div>";
 								/* result += "<div><input type='button' value='사용하기' id='idCheckSuccess'/></div>"; */
-								$("#popupcloseBtn").css("margin-left","5px").css("margin-right","85px").css('margin-top',"0px");
+								$("#popupcloseBtn").css("margin-left","5px").css("margin-right","85px").css('margin-top',"45px");
+								$("#idCheckFin").css('margin-top',"45px");
 								$("#idCheckFin").css("display","block");
 							}
 								$("#idCheckResult").empty();
@@ -450,11 +462,11 @@
 	}
 </script>
 
-<div class="section">
+<div class="section"id="regiclass">
 	<div id="register" style="position: relative;">
-		<div id="userinputDiv">
 		<h2>회원가입</h2><span class="spanstar">*</span>표시는 필수입력항목입니다
 		<hr/>
+		<div id="userinputDiv">
 		<form method="post" action="cregiFinish" id="regiFrm">
 		<input type="hidden" id="hinfocheck1" value="N"/>
 		<input type="hidden" id="hinfocheck2" value="N"/>
@@ -467,7 +479,7 @@
 				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
 				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
 				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;"/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
 				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
 							
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
@@ -501,12 +513,14 @@
 		</form>
 		</div>
 		<div id="infoCheckDiv">
-			<div id="infoView"class="radiusClass">▼이용약관</div>
-			<input type="checkbox" id="infocheck1" value="infocheck1" />&nbsp;동의합니다.<br/>
-			<div id="infoView2"class="radiusClass">▼개인정보 처리방침</div>
-			<input type="checkbox" id="infocheck2" value="infocheck2"/>&nbsp;동의합니다. <br/>
-			<input type="checkbox" id="infocheck3" value="infocheck3"/>본인은 만 14세 이상입니다.
-			<div style="margin-bottom:20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
+			<span class="infotitles">▼이용약관</span>
+			<div id="infoView"class="radiusClass"></div>
+			<input type="checkbox" id="infocheck1" value="infocheck1" class="checkboxright"/><span class="checkboxright">&nbsp;동의합니다.</span><br/>
+			<span class="infotitles">▼개인정보 처리방침</span>
+			<div id="infoView2"class="radiusClass"></div>
+			<input type="checkbox" id="infocheck2" value="infocheck2" class="checkboxright"/><span class="checkboxright">&nbsp;동의합니다.</span><br/>
+			<input type="checkbox" id="infocheck3" value="infocheck3" class="checkboxright"/><span class="checkboxright">본인은 만 14세 이상입니다.</span>
+			<div style="margin-bottom:60px;margin-top: 70px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
 		</div>
 		<div id="modal"></div>
 			<div class="idCheckDiv">

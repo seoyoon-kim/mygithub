@@ -40,10 +40,29 @@
 	<select id="memberCountSeller" resultType="Integer">
 		select count(*) from member where #{param1}=3 and usertype=#{param2} <if test="param2 > 3">and userstop = 'N'</if>
 	</select>
+	<select id="memberselectSellerAll" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		select * from(
+		select * from(
+		select s.storenum as storenum, s.sellername as sellername, s.userid as userid, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age, 
+		s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, 
+		to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg , usertype
+		from member m join seller s on m.userid = s.userid
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by sellername desc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by sellername asc
+	</select>
 	<select id="memberselectSeller" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
 		select * from(
-		select s.storenum as storenum, s.sellername as sellername, s.userid as userid, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age, s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg <if test="#{userType>0}">, usertype</if><if test="#{userType==5}">, to_char(exitdate, 'YYYY/MM/DD') as exitdate</if>  from member m join seller s on m.userid = s.userid <if test="{userType==5}">join member2 m2 on m.userid = m2.userid</if><if test="#{userType>0}"> where usertype = 5</if>
+		
+		select s.storenum as storenum, s.sellername as sellername, s.userid as userid, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age, 
+		s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, 
+		to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg , usertype
+		<if test="#{userType==5}">, to_char(exitdate, 'YYYY/MM/DD') as exitdate</if>  
+		from member m join seller s on m.userid = s.userid <if test="{userType==5}">join member2 m2 on m.userid = m2.userid</if>
+		<if test="#{userType==5}"> where usertype = 5</if>
+		
 		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by sellername desc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
@@ -67,4 +86,174 @@
 		select count(nvl(userid,0)) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum
 		where userid = #{param1} and orderstatus = #{param2}
 	</select>
+	
+	
+	<!-- point -->
+	<select id="selectPoint" resultType="com.beetmall.sshj.admin.vo.Admin_PointVO" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
+		select * from(
+		select * from(
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{userid} 
+		order by p.ordernum desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by ordernum asc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if> 
+		order by ordernum desc
+	</select>
+	<select id="countPoint" resultType="Integer">
+		select count(*)
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{param1} 
+		order by p.ordernum desc
+	</select>
+	<select id="selectPointType"  resultType="com.beetmall.sshj.admin.vo.Admin_PointVO">
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{param1} and changepoint ${param2} 0
+		order by p.ordernum desc
+	</select>
+	<select id="selectPointMonth" resultType="com.beetmall.sshj.admin.vo.Admin_PointVO">
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate,-#{param2}),'YYYY/MM/DD')
+		order by p.ordernum desc
+	</select>
+		<select id="selectPointTypeMonth"  resultType="com.beetmall.sshj.admin.vo.Admin_PointVO">
+		select * from(
+		select * from(
+		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+		from point p
+		    join ordertbl o
+		        on p.ordernum = o.ordernum
+		    join orderdetail d
+		        on d.ordernum = p.ordernum
+		    join product r
+		        on d.productnum = r.productnum
+		where p.userid=#{userid} 
+		<if test="type!=null">and changepoint ${type} 0 </if> 
+		<if test="month>0">and o.orderdate >= to_char(add_months(sysdate,-#{month}),'YYYY/MM/DD')</if>
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by ordernum asc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by ordernum desc
+	</select>
+	
+	<select id="countPointType" resultType="Integer">
+		select count(*) from point where userid=#{param1} and changepoint ${param2} 0
+	</select>
+	<select id="countPointMonth" resultType="Integer">
+		select count(*) from point p join ordertbl o on o.ordernum = p.ordernum 
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate, -#{param2}),'YYYY/MM/DD')
+	</select>
+	<select id="countPointTypeMonth" resultType="Integer">
+		select count(*) from point p join ordertbl o on o.ordernum = p.ordernum 
+		where p.userid=#{param1} and o.orderdate >= to_char(add_months(sysdate, -#{param3}),'YYYY/MM/DD') and changepoint ${param2} 0
+	</select>
+	<select id="myPointView" resultType="Integer">
+		select point from member where userid=#{param1}
+	</select>
+	<select id="farmCount" resultType="Integer">
+		select count(*) from(
+		select  d.storenum as storenum , farmprofile, farmname, farmintro, c.goodTotal as goodTotal, e.storeaddr as storeaddr
+	    from (select a.storenum, farmprofile, farmname, farmintro
+	    	  from farm a  
+	    	  join favorite b  
+	    	  	on a.storenum=b.storenum   
+	    	  where b.userid=#{param1}) d         
+        join ( select storenum, count(storenum) as goodTotal
+                from (select * 
+                	  from favorite 
+                	  where storenum is not null) a group by storenum) c
+        on d.storenum=c.storenum
+        join (select storenum, storeaddr 
+        		from seller) e
+        on e.storenum=c.storenum)
+	</select>
+	<select id="farmFavoriteList" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_farmVO">
+		select * from(
+		select * from(
+		select  d.storenum as storenum , farmprofile, farmname, farmintro, c.goodTotal as goodTotal, e.storeaddr as storeaddr
+	    from (select a.storenum, farmprofile, farmname, farmintro
+	    	  from farm a  
+	    	  join favorite b  
+	    	  	on a.storenum=b.storenum   
+	    	  where b.userid=#{userid}) d         
+        join ( select storenum, count(storenum) as goodTotal
+                from (select * 
+                	  from favorite 
+                	  where storenum is not null) a group by storenum) c
+        on d.storenum=c.storenum
+        join (select storenum, storeaddr 
+        		from seller) e
+        on e.storenum=c.storenum
+        )where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by storenum asc
+		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+								   <if test="pageNum!=totalPage">${onePageRecord}</if>
+		order by storenum desc
+	</select>
+	<select id="wishCount" resultType="Integer">
+		select count(*) from(
+		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,' ')optionname,nvl(o.optionprice,0)optionprice, w.wishnum, w.wishoptionnum, w.wishcode,p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent 
+				from wish w  
+				left join product p 
+				    on p.productnum = w.productnum 
+				left join optiontbl o
+				    on w.optionnum = o.optionnum
+				left join discount d
+				    on w.productnum = d.productnum
+				where w.userid = #{param1}
+				order by w.productnum)
+	</select>
+	<select id="wishListSelect" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_WishVO">
+		select * from(
+	    select * from(
+		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,' ')optionname,nvl(o.optionprice,0)optionprice, w.wishnum, w.wishoptionnum, w.wishcode,p.productname, p.productprice, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent 
+				from wish w  
+				left join product p 
+				    on p.productnum = w.productnum 
+				left join optiontbl o
+				    on w.optionnum = o.optionnum
+				left join discount d
+				    on w.productnum = d.productnum
+				where w.userid = #{userid}
+				order by w.productnum
+		)where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum desc
+		)where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+       							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+       	order by productnum	asc
+	</select>
+	<update id="memberEdit">
+		update member 
+		set username = #{username}, userid=#{userid}, useremail=#{useremail}, userzipcode=#{userzipcode},
+		useraddr = #{useraddr}, userdetailaddr = #{userdetailaddr} where userid=#{userid}
+	</update>
 </mapper>

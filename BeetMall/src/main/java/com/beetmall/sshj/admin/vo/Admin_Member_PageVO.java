@@ -15,7 +15,25 @@ public class Admin_Member_PageVO {
 	private String type;
 	private int month;
 	private int userType;
+	private String searchWord;
+	private String searchKey;
 	
+	public String getSearchWord() {
+		return searchWord;
+	}
+
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
+
+	public String getSearchKey() {
+		return searchKey;
+	}
+
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+
 	public int getUserType() {
 		return userType;
 	}

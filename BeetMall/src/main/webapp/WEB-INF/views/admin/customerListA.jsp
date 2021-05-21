@@ -66,9 +66,9 @@
 		padding-top: 0 !important;
 	}
 	
-	#sortBox {
+	/* #sortBox {
 		margin: 30px 0 0 20px;
-	} 
+	}  */
 	#sortBox>ul{
 		width:1110px !important;
 	}
@@ -177,6 +177,15 @@
 	#listul>li:nth-child(7n){
 		width:12%;
 	}
+	#sortBox,#addBtn, #delBtn{
+		visibility: hidden;
+	}
+	#container{
+		top:0px;
+	}
+	#choose{
+		margin: 50px 0 0 20px !important;
+	}
 </style>
 <script>
 function pagelist(pagenum){
@@ -246,7 +255,7 @@ function pagelist(pagenum){
 					<c:forEach var="vo" items="${list}">
 						<li><c:if test="${vo.storenum<0}">구매자</c:if><c:if test="${vo.storenum>=0}">판매자</c:if></li>
 						<li>${vo.username}</li>
-						<li><a href="boardCustomerInfoEdit?userid=${vo.userid}">${vo.userid}</a></li>
+						<li><a href="boardCustomerInfoEdit?userid=${vo.userid}&prevPageNum=${pageVO.pageNum}">${vo.userid}</a></li>
 						<li>${vo.useremail}</li>
 						<li>${vo.point}</li>
 						<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>

@@ -4,25 +4,11 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	#section{
-		height:2100px;
+		height:1900px;
 		overflow:auto;
 	}
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-	}
-	/*버튼*/
-	.btn:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
+	#sFrm>li{
+		font-size:14px;
 	}
 	#formUl>li:nth-child(2n+1), #sFrm>li:nth-child(2n+1){
 		width:19%;
@@ -41,6 +27,9 @@
 		padding-top:5px;
 		margin:0px;
 	}
+	#formUl{
+		margin-top: 20px;
+	}
 	#userinputDiv>h2{
 		padding-top: 20px;
 		padding-left: 20px;
@@ -48,18 +37,24 @@
 	#infoCheckDiv{
 		padding-top:20px;
 		/* padding-bottom:30px;
-		border-bottom: 1px solid rgb(252,118,45); */
+		border-bottom: 1px solid rgb(252,118,45); */ 
 	}
 	#register{
 		font-size:20px;
+		padding-top:10px;
 	}
 	#userinputDiv{
-		height:500px;
+		height:400px;
 		background-color:white;
+		margin-bottom: 10px;
+	}
+	#idCheckDibPop, #emailSend, #emailCheckBtn, #zipSearch, #sellerzipSearch, #storeemailBtn, #storeemailCheckBtn{
+		padding:3px;
+		font-size:12px;
 	}
 	#infoView, #infoView2{
-		width:1050px;
-		height:500px;
+		width:1080px;
+		height:4800px;
 		background-color:white;
 		border:rgb(252,118,45);
 		color:black;
@@ -105,28 +100,28 @@
 		widht:100px;
 	}
 	.idCheckDiv{
-		height:200px;
-		width:400px;
+		height:300px;
+		width:500px;
 		background-color:white;
 		border:10px solid rgb(252,118,45);
 		text-align:center;
 		position: absolute;
-		top:30%;
-		left:340px;
+		top:457px;
+		left:700px;
 		display:none;
 		padding-top:20px;
 	}
 	#idCheckFin{
 		display:none;
 		width:100px;		
-		margin-left:90px;
+		margin-left:150px;
 		float:left;
 	}
 	#popupcloseBtn{
 		display:block;
 		width:100px;
-		margin-top:85px;
-		margin-left:140px;
+		margin-top:200px;
+		margin-left:200px;
 		float:left;
 	}
 	.infoView{
@@ -153,6 +148,27 @@
 		height:100%;
 		display:none;
 	}
+	#formUl{
+		font-size:14px;
+		height:25px;
+		line-height: 25px;
+	}
+	.infotitles, .infoView{
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	.checkboxright{
+		float:right;
+		font-size:14px;
+		color:red;
+		padding-right:5px;
+	}
+	#userid2{
+		width:280px;
+	}
+	#idCheckResult>div:first-child{
+		margin-top:40px;
+	}
 	#imgPrev, #imgPrevInfo{
 		heigth:200px;
 		width:200px;
@@ -161,9 +177,10 @@
 	}
 	#imgPrev{
 		border: 1px solid #ddd;	
+		top:45px;
 	}
 	#imgPrevInfo{
-		top:160px;
+		top:210px;
 		font-size:13px;
 		text-align: center;
 		color:blue;
@@ -289,7 +306,7 @@
 			$("#modal").css("display","block");
 			$(document.body).css("overflow","hidden");
 			$(".idCheckDiv").css("display","block");
-			$("#popupcloseBtn").css("margin-left","140px").css("margin-top","85px");			
+			$("#popupcloseBtn").css("margin-left","200px").css("margin-top","150px");			
 		}
 		$("#idCheckDibPop").click(function(){
 			overlapIdCheck();
@@ -313,15 +330,15 @@
 							if(data>=1){
 								result = "<div><h3>"+$("#userid2").val()+"는 사용할 수 없습니다.</h3></div>";
 								result += "<div><h4>다른 아이디를 입력해주세요</h4></div>";
-								$("#popupcloseBtn").css("margin-left","140px").css("margin-top","0px");
+								$("#popupcloseBtn").css("margin-left","200px").css("margin-top","45px");
 								$("#idCheckFin").css("display","none");
 								
 							}else{
 								result = "<div><h3>"+$("#userid2").val()+"는 사용할 수 있습니다.</h3></div>";
 								result += "<div><h4>사용하시려면 아래 버튼을 눌러주세요</h4></div>";
 								/* result += "<div><input type='button' value='사용하기' id='idCheckSuccess'/></div>"; */
-								$("#popupcloseBtn").css("margin-left","5px").css("margin-right","85px").css('margin-top',"0px");
-								$("#idCheckFin").css("display","block");
+								$("#popupcloseBtn").css("margin-left","5px").css("margin-right","85px").css('margin-top',"45px");
+								$("#idCheckFin").css("display","block").css('margin-top','45px');
 							}
 								$("#idCheckResult").empty();
 								$("#idCheckResult").append(result);
@@ -583,9 +600,9 @@
 </script>
 <div class="section" id="section">
 	<div id="register">
-		<div id="userinputDiv">
 		<h2>회원가입</h2><span class="spanstar">*</span>표시는 필수입력항목입니다
 		<hr/>
+		<div id="userinputDiv">
 		<form method="post" action="sregiFinish" id="regiFrm" enctype="multipart/form-data">
 			<input type="hidden" name="idcheck" value="N"/>		
 			<input type="hidden" id="hinfocheck1" value="N"/>		
@@ -597,11 +614,11 @@
 				
 			<ul id="formUl">	
 				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" readonly/><input type="button" value="중복검사" class="btn" id="idCheckDibPop"/></li>
-				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd" value="123456"/></li>	
-				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left" value="123456"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
-				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username" value="테스타"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
-				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;" value="8b334c"/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
+				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
+				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"/></li>		
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value=""/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
+				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;" value=""/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
 							
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
 																			<option value="010">010</option>
@@ -623,37 +640,37 @@
 																			<option value="063">063</option>
 																			<option value="064">064</option>
 																			</select> -
-																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4" value="1234"/> -
-																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4" value="1234"/></li>
+																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4"/> -
+																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"/></li>
 				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
-																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;" value="12345"/>
-																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"value="12345"/>
-																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" placeholder="상세 주소 입력" value="상세 주소 입력하는 곳.."/></li>			
-				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday" value="1978-01-01"/></li>
+																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;"/>
+																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"/>
+																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" placeholder="상세 주소 입력"/></li>			
+				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday"/></li>
 			</ul>
 			
 			<div id="infoCheckDiv" style="padding-top:390px;">
-				<h4>▼이용약관</h4>
-				<div id="infoView" class="radiusClass">▼이용약관</div>
-				<input type="checkbox" id="infocheck1" value="infocheck1"  />&nbsp;동의합니다.<br/>
-				<h4>▼개인정보 처리방침</h4>
-				<div id="infoView2" class="radiusClass">▼개인정보 처리방침</div>
-				<input type="checkbox" id="infocheck2" value="infocheck2"/>&nbsp;동의합니다. <br/>
-				<input type="checkbox" id="infocheck3" value="infocheck3"/>본인은 만 14세 이상입니다.
+				<span class="infotitles">▼이용약관</span>
+				<div id="infoView" class="radiusClass"></div>
+				<input type="checkbox" id="infocheck1" value="infocheck1" class="checkboxright"/><span class="checkboxright">&nbsp;동의합니다.</span><br/>
+				<span class="infotitles">▼개인정보 처리방침</span>
+				<div id="infoView2" class="radiusClass"></div>
+				<input type="checkbox" id="infocheck2" value="infocheck2" class="checkboxright"/><span class="checkboxright">&nbsp;동의합니다.</span><br/>
+			<input type="checkbox" id="infocheck3" value="infocheck3" class="checkboxright"/><span class="checkboxright">본인은 만 14세 이상입니다.</span>
 			</div>
 			<div style="position: relative;">
 				<ul class="formUl" id="sFrm">
-					<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;" id="storename" value="씽씽농산물"/></li>
-					<li><span class="spanstar">*</span>대표자</li>				<li><input type="text" name="sellername" id="sellername" value="김씽씽"/></li>	
-					<li><span class="spanstar">*</span>사업장등록번호</li>		<li><input type="text" name="sellerreginum" id="sellerreginum" style="float:left" value="1234562487"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+					<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;" id="storename"/></li>
+					<li><span class="spanstar">*</span>대표자</li>				<li><input type="text" name="sellername" id="sellername"/></li>	
+					<li><span class="spanstar">*</span>사업장등록번호</li>		<li><input type="text" name="sellerreginum" id="sellerreginum" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
 					<li><span class="spanstar">*</span>사업자등록증 첨부</li>	<li><input type="file" name="file" id="sellerregiimg"/></li>
 					<li></li>								<li><div id="notice">※사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.<br/>
 																	※사업자등록증을 첨부해주세요. 관리 절차에 따라 가입이 승인됩니다.<br/>
 																	※인증이 되지 않을 경우 고객센터(02-111-1111)로 문의해주세요.</div></li>		
 					<li><span class="spanstar">*</span>사업장소재지</li>		<li><input type="button"  id="sellerzipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
-																			<input type="text" name="storezipcode" id="storezipcode" readonly  style="width:100px;"value="12345"/>
-																			<input type="text" name="storeaddr" id="storeaddr" style="margin-top:5px; width:302px;" readonly  placeholder="우편 번호 검색을 통해 입력해주세요"value="12345" />
-																			<input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top:5px; width:540px;" placeholder="상세 주소 입력" value="사업장 소재지 상세 주소"/></li>					
+																			<input type="text" name="storezipcode" id="storezipcode" readonly  style="width:100px;"/>
+																			<input type="text" name="storeaddr" id="storeaddr" style="margin-top:5px; width:302px;" readonly  placeholder="우편 번호 검색을 통해 입력해주세요"/>
+																			<input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top:5px; width:540px;" placeholder="상세 주소 입력"/></li>					
 					<li><span class="spanstar">*</span>은행</li>				<li><select name="bank" id="bankName">
 																				<option value="index" disabled selected>은행명선택</option>  
 																				<option value="국민">국민</option>  
@@ -674,10 +691,10 @@
 																				<option value="카카오뱅크">카카오뱅크</option>  
 																				<option value="케이뱅크">케이뱅크</option>  
 																			</select></li>			
-					<li><span class="spanstar">*</span>계좌번호</li>			<li><input type="text" name="bankaccount" id="bankaccount" value="111334455567"/></li>
-					<li><span class="spanstar">*</span>예금주</li>				<li><input type="text" name="bankname" id="bankname" value="최씽씽"/></li>
-					<li><span class="spanstar">*</span>이메일</li>				<li><input type="text" name="storeemail" id="storeemail" style="margin-right:5px;" value="ekqhxkq54@naver.com"/><input type="button" value="인증코드 전송" id="storeemailBtn" class="btn"/></li>
-					<li></li>													<li><input type="text" name="storeemailCheck" id="storeemailCheck" style="margin-right:5px;" value="7-cd58"/><input type="button" value="인증하기" id="storeemailCheckBtn" class="btn"/></li>
+					<li><span class="spanstar">*</span>계좌번호</li>			<li><input type="text" name="bankaccount" id="bankaccount" value=""/></li>
+					<li><span class="spanstar">*</span>예금주</li>				<li><input type="text" name="bankname" id="bankname" value=""/></li>
+					<li><span class="spanstar">*</span>이메일</li>				<li><input type="text" name="storeemail" id="storeemail" style="margin-right:5px;"/><input type="button" value="인증코드 전송" id="storeemailBtn" class="btn"/></li>
+					<li></li>													<li><input type="text" name="storeemailCheck" id="storeemailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" id="storeemailCheckBtn" class="btn"/></li>
 				</ul>
 				<img src="/sshj/img/dimgPrev.png" id="imgPrev"/>
 				<div id="imgPrevInfo"><span>위 이미지는 미리보기입니다.</span></div>

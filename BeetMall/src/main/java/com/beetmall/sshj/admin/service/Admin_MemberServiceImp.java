@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import com.beetmall.sshj.admin.dao.Admin_MemberDAO;
 import com.beetmall.sshj.admin.vo.Admin_MemberVO;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
+import com.beetmall.sshj.admin.vo.Admin_PointVO;
+import com.beetmall.sshj.admin.vo.Admin_WishVO;
+import com.beetmall.sshj.admin.vo.Admin_farmVO;
 
 @Service
 public class Admin_MemberServiceImp implements Admin_MemberService {
@@ -74,6 +77,81 @@ public class Admin_MemberServiceImp implements Admin_MemberService {
 	@Override
 	public int orderstatusSelect(String userid, String status) {
 		return memberdao.orderstatusSelect(userid, status);
+	}
+
+	@Override
+	public List<Admin_MemberVO> memberselectSellerAll(Admin_Member_PageVO pageVO) {
+		return memberdao.memberselectSellerAll(pageVO);
+	}
+
+	@Override
+	public List<Admin_PointVO> selectPoint(Admin_Member_PageVO vo) {
+		return memberdao.selectPoint(vo);
+	}
+
+	@Override
+	public List<Admin_PointVO> selectPointType(Admin_Member_PageVO vo) {
+		return memberdao.selectPointType(vo);
+	}
+
+	@Override
+	public List<Admin_PointVO> selectPointMonth(Admin_Member_PageVO vo) {
+		return memberdao.selectPointMonth(vo);
+	}
+
+	@Override
+	public List<Admin_PointVO> selectPointTypeMonth(Admin_Member_PageVO pageVOA) {
+		return memberdao.selectPointTypeMonth(pageVOA);
+	}
+
+	@Override
+	public int countPoint(String userid) {
+		return memberdao.countPoint(userid);
+	}
+
+	@Override
+	public int countPointType(String userid, String type) {
+		return memberdao.countPointType(userid, type);
+	}
+
+	@Override
+	public int countPointMonth(String userid, int month) {
+		return memberdao.countPointMonth(userid, month);
+	}
+
+	@Override
+	public int countPointTypeMonth(String userid, String type, int month) {
+		return memberdao.countPointTypeMonth(userid, type, month);
+	}
+
+	@Override
+	public int myPointView(String userid) {
+		return memberdao.myPointView(userid);
+	}
+
+	@Override
+	public int farmCount(String userid) {
+		return memberdao.farmCount(userid);
+	}
+
+	@Override
+	public List<Admin_farmVO> farmFavoriteList(Admin_Member_PageVO pageVO) {
+		return memberdao.farmFavoriteList(pageVO);
+	}
+
+	@Override
+	public int wishCount(String userid) {
+		return memberdao.wishCount(userid);
+	}
+
+	@Override
+	public List<Admin_WishVO> wishListSelect(Admin_Member_PageVO pageVO) {
+		return memberdao.wishListSelect(pageVO);
+	}
+
+	@Override
+	public int memberEdit(Admin_MemberVO vo) {
+		return memberdao.memberEdit(vo);
 	}
 
 }
