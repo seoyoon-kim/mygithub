@@ -265,7 +265,7 @@ let searchTxt =null;// 검색 데이터
 							전체
 						</c:if> 
 					</li>
-					<li><a href="boardEdit?no=${avo.infonum}">${avo.infotitle}</a></li>
+					<li class="wordCut"><a href="noticeBoardView?infonum=${avo.infonum}">${avo.infotitle}</a></li>
 					<li>${avo.infowritedate}</li> 
 				</ul>
 			</c:forEach> 

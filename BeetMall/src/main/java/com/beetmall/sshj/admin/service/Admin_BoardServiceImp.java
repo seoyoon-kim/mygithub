@@ -1,18 +1,17 @@
 package com.beetmall.sshj.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
- 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.admin.dao.AdminBoardDAO; 
 import com.beetmall.sshj.admin.vo.AdminBoardVO;
-import com.beetmall.sshj.admin.vo.Admin_Board_PageVO;
-import com.beetmall.sshj.admin.vo.Admin_MemberVO;
-import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
-import com.beetmall.sshj.custom.vo.CenterVO;
-import com.beetmall.sshj.custom.vo.PageSearchVO; 
+import com.beetmall.sshj.admin.vo.Admin_Board_PageVO; 
  
 @Service
 public class Admin_BoardServiceImp implements Admin_BoardService {
@@ -26,20 +25,26 @@ public class Admin_BoardServiceImp implements Admin_BoardService {
 	}
  
 	@Override
-	public int noticeBoardWrite(AdminBoardVO vo) { 
-		return boardDAO.noticeBoardWrite(vo);
+	public int noticeWriteOk(AdminBoardVO vo) { 
+		return boardDAO.noticeWriteOk(vo);
 	}
 
 	@Override
-	public int boardDelA(int infonum) { 
-		return boardDAO.boardDelA(infonum);
+	public AdminBoardVO noticeBoardView(int infonum) { 
+		return boardDAO.noticeBoardView(infonum);
+	}
+
+	@Override
+	public int noticeBoardDelete(int infonum) { 
+		return boardDAO.noticeBoardDelete(infonum);
 	}
  
-
+ 
 	@Override
-	public int boardUpdateA(AdminBoardVO vo) { 
-		return boardDAO.boardUpdateA(vo);
+	public int noticeBoardEditOk(AdminBoardVO vo) { 
+		return boardDAO.noticeBoardEditOk(vo);
 	}
+ 
  
   
 	  

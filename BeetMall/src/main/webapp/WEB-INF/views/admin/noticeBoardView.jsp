@@ -51,7 +51,7 @@
    /*표*/
    form{
 	   	position:absolute;
-	   	top:-70px;
+	   	top:-50px;
 	   	left:210px;
 	   	width:1351px;
    }   
@@ -172,8 +172,15 @@ $(document).ready(function(){
 }); 
 //파일명 추출
 $(document).ready(function(){ 
+	  function fn_downloadFile(obj){
+	        var idx = obj.parent().find("#infonum").val();
+	        var comSubmit = new ComSubmit();
+	        comSubmit.setUrl("<c:url value='/admin/downloadFile.do' />");
+	        comSubmit.addParam("infonum", infonum);
+	        comSubmit.submit();
+	    }
 	  var fileTarget = $('#file'); 
-	  fileTarget.on('change', function(){ // 값이 변경되면
+	  fileTarget.on('ready', function(){ // 값이 변경되면
 		  if(window.FileReader){ //modern browser
 			  var filename = $(this)[0].files[0].name; 
 		  } else { // old IE 
@@ -201,46 +208,60 @@ $(document).on('click',"#addBtn",function(){
 		}
 	});
 });
+$(()=>{
+	$("#boardDel").click(()=>{
+		if(confirm("삭제하시겠습니까?")){
+			location.href = "noticeBoardDelete?infonum=${vo.infonum}"
+			}
+	});	
+});
 </script>
 	<div id="topBarContainer">
 	<div id="topBar">
-		<h5><strong><a href="noticeBoardWrite">공지 작성</a></strong></h5>   
+		<h5><strong><a href="noticeBoardWrite">공지 보기</a></strong></h5>   
 	</div>
 	</div>
 <div id="body1">
 <%@ include file="/inc/leftBar.jspf" %> 
 <div class="container">
 	<div id="box"> 	
-		<form method="post" action="noticeWriteOk" enctype="multipart/form-data">
+		<form method="post" action="noticeBoardEdit?infonum=${vo.infonum}" enctype="multipart/form-data">
 			<table>
 				<tbody> 
 					<tr class="tr_head">
+						<th class="menu" >공지 번호</th>
+						<td class="td" colspan="3" id="infonum">${vo.infonum}</td>
+					</tr>
+					<tr class="tr_head">
 						<th class="menu">제목</th>
-						<td  class="td"><input type="text" name="infotitle" id="infotitle" placeholder="공지 제목을 입력하세요"/></td>
+						<td  class="td">${vo.infotitle}</td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">대상</th>
 						<td  class="td"> 
-							<select name="infotype">  
-								<option value="3">전체</option>  
-								<option value="1">소비자</option>  
-								<option value="2">판매자</option>  
-							</select>  
+							<c:if test="${vo.infotype==1}">
+								소비자
+							</c:if>
+							<c:if test="${vo.infotype==2}">
+								판매자
+							</c:if>
+							<c:if test="${vo.infotype==3}">
+								전체
+							</c:if>  
 						</td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">등록일</th>
-						<td  class="td" ><div id="infoWriteDate" name="infowritedate"></div></td>
+						<td  class="td" >${vo.infowritedate}</td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">첨부파일</th>
 						<td  class="td">
 							<div style="display:flex;">
-								<label for="infoattach" id="attach"> 
-									<div>파일 첨부하기</div>
+								<label for="infoattach" id="attach" style="display:none;">  
 								</label>
 								<input type="file" style="width: 500px;" name="file" id="infoattach">
-								<input class="uploadFile" style="width: 500px;" id="uploadFile" >
+								<input class="uploadFile" style="width: 500px;" id="uploadFile" readonly>
 							</div>
 						</td> 
 					</tr>
@@ -249,16 +270,16 @@ $(document).on('click',"#addBtn",function(){
 					</tr>
 					<tr>
 						<td class="question_content" colspan="4">
-							<textarea id="infocontent" name="infocontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+							<textarea id="infocontent" name="infocontent" class="summernote">${vo.infocontent}</textarea>
 						</td>	
 					</tr>
 				</tbody>
 			</table>
 	<div id="bottommm">
-		<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
-		<input type="reset" value="다시 쓰기" class="btn write_btn" id="reWrite_btn"/>	
-		<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/noticeBoardList'"/>
-	</div>
+		<input type="submit" value="수정하기" class="btn write_btn" id="write_btn" /> 
+		<a href="#" id="boardDel"><input type="button" value="삭제하기" class="btn write_btn" id="reWrite_btn"/></a>	
+		<input type="button" value="목록보기" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/noticeBoardList'"/>
+	</div> 
 		</form>
 	</div>
 

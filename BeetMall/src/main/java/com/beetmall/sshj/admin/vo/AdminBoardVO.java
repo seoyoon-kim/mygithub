@@ -8,8 +8,7 @@ public class AdminBoardVO {
 	private String infowritedate;
 	private int infohit;
 	private int infotype;
-	private String infoattach;
-	private int[] noList;
+	private String infoattach; 
 	
 	public int getInfonum() {
 		return infonum;
@@ -57,14 +56,6 @@ public class AdminBoardVO {
 		return userid;
 	}
 	public void setUserid(String userid) {
-		this.userid = userid;
+		this.userid = userid;  
 	}
-	public int[] getNoList() {
-		return noList;
-	}
-	public void setNoList(int[] noList) {
-		this.noList = noList;
-	}
-	
-	 
 }	 

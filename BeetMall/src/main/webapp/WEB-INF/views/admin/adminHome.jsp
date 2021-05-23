@@ -96,7 +96,7 @@ img {
 }
 
 #box4, #box5, #box6 {
-	top: 45px;
+	top: 65px;
 	left: 110px;
 }
 
@@ -157,7 +157,7 @@ div[id^=box] {
 <%@ include file="/inc/top.jspf"%>
 <div id="topBarContainer">
 	<div id="topBar">			
-		<h5><strong><a href="adminHome">Beetmall 관리</a></strong></h5>			
+		<h5><strong><a href="adminHome">관리 홈</a></strong></h5>			
 	</div>  
 </div> 
 <div id="body1">
@@ -351,7 +351,7 @@ div[id^=box] {
 				<br /> <img class="last" src="<%=request.getContextPath()%>/img/y_question.png" />
 				<div id="box4">
 					미답변 문의
-					<div style="font-weight: bold; color: tomato">${question }</div>
+					<div style="font-weight: bold; color: red">${question }</div>
 					건
 				</div>
 			</div>
@@ -360,9 +360,9 @@ div[id^=box] {
 				<br /> <img class="last" src="<%=request.getContextPath()%>/img/y_accept.png" />
 				<div id="box5">
 					승인 신청 건수
-					<div style="font-weight: bold; color: orange">${approve }</div>
+					<div style="font-weight: bold; color: blue">${approve }</div>
 					건<br /> 미처리 건수
-					<div style="font-weight: bold; color: orange">${clear }</div>
+					<div style="font-weight: bold; color: blue">${clear }</div>
 					건
 				</div>
 			</div>

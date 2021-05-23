@@ -11,18 +11,18 @@
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by infonum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
-        order by infonum
+        order by infonum desc
  	</select>
- 	<insert id="noticeBoardWrite" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
- 		insert into notice(infonum, infotitle, infowritedate, infoattach, infocontent) values(boardsq.nextval, #{infotitle}, sysdate, #{infoattach}, #{infocontent})
+ 	<insert id="noticeWriteOk" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		insert into notice(infonum, infotitle, infowritedate, infoattach, infocontent, infotype) values(noticesq.nextval, #{infotitle}, sysdate, #{infoattach}, #{infocontent}, #{infotype})
  	</insert>
- 	<select id="boardSelect" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
- 		select no, userid, subject, content, hit, writedate from board where no=#{param1}
- 	</select>
- 	<update id="boardUpdate" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
- 		update board set subject=#{subject}, content=#{content} where no=#{no} and userid=#{userid} 
+ 	<select id="noticeBoardView" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		select infonum, infotitle, infowritedate, infoattach, infocontent, infotype from notice where infonum=#{param1}
+ 	</select> 
+ 	<update id="noticeBoardEditOk" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		update notice set infocontent=#{infocontent}, infotitle=#{infotitle}, infotype=#{infotype}, infoattach=#{infoattach} where infonum=#{infonum} 
  	</update>
- 	<select id="reviewListA" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
- 		select infonum, infotype, infotitle, to_char(infowritedate, 'YY/MM/DD') infowritedate from notice order by infonum desc
- 	</select>
+	<delete id="noticeBoardDelete">
+		delete from notice where infonum=#{param1}
+	</delete>
 </mapper>

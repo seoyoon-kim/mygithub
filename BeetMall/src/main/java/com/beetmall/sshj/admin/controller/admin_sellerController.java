@@ -4,17 +4,14 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession; 
  
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.stereotype.Controller; 
+import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_BoardService;
-import com.beetmall.sshj.admin.service.Admin_MemberServiceImp;
-import com.beetmall.sshj.admin.service.Boardervice;
-import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
-import com.beetmall.sshj.admin.vo.BoardVO; 
+import com.beetmall.sshj.admin.service.Admin_MemberServiceImp; 
+import com.beetmall.sshj.admin.vo.Admin_Board_PageVO;
+import com.beetmall.sshj.admin.vo.Admin_Member_PageVO; 
 
 @Controller
 public class admin_sellerController {
@@ -121,7 +118,8 @@ public class admin_sellerController {
 		@RequestMapping("/sellerInfoEditA")
 		public ModelAndView sellerInfoEditA() {
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("list", adminService.noticeList());
+			Admin_Board_PageVO pageVO = new Admin_Board_PageVO();
+			mav.addObject("list", adminService.noticeBoardList(pageVO));
 			mav.setViewName("/admin/sellerInfoEditA");
 			return mav;
 		} 
