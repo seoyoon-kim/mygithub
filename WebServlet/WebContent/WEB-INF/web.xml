@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0"
+  metadata-complete="true">
+ <!-- 3/23 -->
+<!-- don't use Korean in the web.xml file -->
+  <display-name>Welcome to Tomcat</display-name>
+  <description>
+     Welcome to Tomcat
+  </description>
+  <!-- ServletTest.java -->
+	<servlet>
+		<servlet-name>home</servlet-name>
+		<servlet-class>com.bitcamp.home.ServletTest</servlet-class><!--3. home is here -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>home</servlet-name><!--2. execute home -->
+		<url-pattern>/test.do</url-pattern><!--1. if access to "test.do" -->
+	</servlet-mapping>
+	
+	<!-- InitParameterServlet.java -->
+	<servlet>
+		<servlet-name>init</servlet-name>
+		<servlet-class>com.bitcamp.home.InitParameterServlet</servlet-class>
+		<init-param>
+			<param-name>userid</param-name>
+			<param-value>testtest</param-value>
+		</init-param>
+		<init-param>
+			<param-name>userpwd</param-name>
+			<param-value>1234</param-value> 
+		</init-param>
+		<init-param>
+			<param-name>username</param-name>
+			<param-value>홍길동</param-value> 
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>init</servlet-name>
+		<url-pattern>/init.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Login.java -->
+	<servlet>
+		<servlet-name>login</servlet-name>
+		<servlet-class>com.bitcamp.home.Login</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>login</servlet-name>
+		<url-pattern>/login.do</url-pattern>
+	</servlet-mapping>
+
+</web-app>
+ 
