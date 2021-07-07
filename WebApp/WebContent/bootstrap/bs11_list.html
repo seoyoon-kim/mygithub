@@ -1,0 +1,49 @@
+<!--3/15-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<Title>List</Title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="lib/bootstrap.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="lib/bootstrap.js"></script>
+<script>
+	$(function(){
+		$(".container>div").eq(0).children('a').addClass("list-group-item");
+		
+		$(".container>div:last").addClass("list-group");
+		$(".container>div:last>div").addClass("list-group-item");
+	});
+</script>
+</head>
+<body>
+	<div class="container">
+		<!-- ul으로 목록 만들기 -->
+		<ul class="list-group">	<!-- list-group: 점, padding이 없어진다 -->
+			<li class="list-group-item">블록체인 기술을 접목한 디지털 자산 시장이 전세계적인 화두로 부상하면서 </li>
+			<li class="list-group-item list-group-item-secondary">국내 미술계에서도 이를 활용한 다양한 시도들이 전개되고 있어 주목된다.</li>
+			<li class="list-group-item">소수 자산가 중심의 폐쇄적 구조였던 미술품 시장을 온라인을 통해 누구나 쉽게 향유하고, 미술품도 몇번의 클릭만으로 그 권리를 사고팔 수 있도록 하는 변화의 움직임이 곳곳에서 관측되고 있는 것이다.</li>
+			<li class="list-group-item">영상, 사진, 그림, 조각품 등 형태에 상관없이 모든 콘텐츠를 블록체인 기반 토큰화해 글로벌 투자자들이 자유롭게 거래에 참여할 수 있도록 함으로써 예술작품의 유통창구를 전세계 단위로 확대하는 긍정적 변화들도 기대된다.</li>
+		</ul>	
+		<hr/>
+		<!-- a태그로 목록 만들기 -->
+		<div class="list-group">
+			<a href="#">15일 관련업계에 따르면 한국 미술기업들이 속속 미술품 디지털 자산 시장에 진출하고 있다.   </a>
+			<a href="#">미술품의 이미지와 작품 정보 등을</a>
+			<a href="#"><h1>블록체인 기반 토큰</h1>
+						<p>에 넣고 이를 토큰 마켓에서 거래할 수 있도록 하는 새로운 미술품 유통·판매 방식이다.</p></a>
+			<a href="#">일반적인 비디오 아트나 아티스트가 작품을 제작하는 일련의 과정을 담은 영상들도 하나의 토큰으로 가치를 갖고 거래될 수 있다.</a>
+		</div>	
+		<hr/>
+		<!-- div로 목록 만들기 -->
+		<div>
+			<div>지난해 6월 미술품 공동구매 서비스를 개시한 미술품 공유경제 플랫폼 기업인 피카프로젝트는 토큰화된 미술품을 판매하는 '디파인 아트 플랫폼'을 차주 선보일 예정이다. </div>
+			<div>자체 갤러리도 운영하고 있는 피카프로젝트에서 대중들이 투자할만한 가치가 있는 미술품을 직접 선별해 판매하는 식으로 운영된다. 피카프로젝트는 매달 2개 작품을 토큰화해 판매한다는 방침이다.</div>
+			<div>해당 토큰들은 블록체인 네트워크 위에서 발행된 대체불가능한토큰(Non-Fungible Token, NFT)으로 똑같이 블록체인 위에서 발행되는 비트코인 같은 일반적인 가상자산과는 속성이 다르다.</div>
+			<div>각각의 토큰이 가치가 같은 비트코인은 서로가 서로를 쉽게 대체할 수 있지만, NFT는 각각이 맞춤복처럼 대체될 수 없는 고유한 성질을 가진다.</div>
+		</div>
+	</div>
+</body>
+</html>
